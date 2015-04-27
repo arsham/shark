@@ -28,6 +28,11 @@ Plugin 'haya14busa/incsearch.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-expand-region'
 Plugin 'klen/python-mode'
+Plugin 'pangloss/vim-javascript'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'terryma/vim-multiple-cursors'
+
 " Plugin 'stuartherbert/vim-phix-colors'
 
 " Plugin 'mattn/webapi-vim'
@@ -81,10 +86,13 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
+set nowritebackup
 
 set clipboard=unnamed
 " Auto remove trailing spaces
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Mappings
 
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -99,6 +107,39 @@ vnoremap <Leader>s :sort<CR>
 
 vnoremap < <gv "Better Indention
 vnoremap > >gv "Better Indention
+
+" no <down> ddp
+" no <up> ddkP
+
+" nmap <C-Tab> :tabnext<CR>
+" nmap <C-S-Tab> :tabprevious<CR>
+" map <C-S-Tab> :tabprevious<CR>
+" map <C-Tab> :tabnext<CR>
+" imap <C-S-Tab> <ESC>:tabprevious<CR>
+" imap <C-Tab> <ESC>:tabnext<CR>
+" noremap <F7> :set expandtab!<CR>
+" nmap <Leader>h :tabnew %:h<CR>
+"
+" "custom comma motion mapping
+" nmap di, f,dT,
+" nmap ci, f,cT,
+" nmap da, f,ld2F,i,<ESC>l "delete argument
+" nmap ca, f,ld2F,i,<ESC>a "delete arg and insert
+"
+" upper or lowercase the current word
+" nmap g^ gUiW
+" nmap gv guiW
+" "open tag in new tab
+" map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"
+""quick pairs
+"imap <leader>' ''<ESC>i
+"imap <leader>" ""<ESC>i
+"imap <leader>( ()<ESC>i
+"imap <leader>[ []<ESC>i
+
+
+
 
 
 "==========================================================================="
