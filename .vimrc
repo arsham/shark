@@ -94,10 +94,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " Mappings
 
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
+map <C-j> <C-w>j # Jump to buttom pane
+map <C-k> <C-w>k # Jump to top pane
+map <C-l> <C-w>l # Jump to right pane
+map <C-h> <C-w>h # Jump to left pane
 
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
@@ -108,8 +108,8 @@ vnoremap <Leader>s :sort<CR>
 vnoremap < <gv "Better Indention
 vnoremap > >gv "Better Indention
 
-" no <down> ddp
-" no <up> ddkP
+no <C-j> ddp # Move line down
+no <C-k> ddkP # Move line up
 
 " nmap <C-Tab> :tabnext<CR>
 " nmap <C-S-Tab> :tabprevious<CR>
@@ -144,12 +144,12 @@ vnoremap > >gv "Better Indention
 
 "==========================================================================="
 "" Different search patterns
-let g:cpp_pattern = "*.{cpp,c,h,hpp}"
-let g:java_pattern = "*.{java}"
-let g:makefile_pattern = "Makefile*"
-let g:text_pattern = "*.{txt,text}"
+"let g:cpp_pattern = "*.{cpp,c,h,hpp}"
+"let g:java_pattern = "*.{java}"
+"let g:makefile_pattern = "Makefile*"
+"let g:text_pattern = "*.{txt,text}"
 let g:python_pattern = "*.{py}"
-let g:cpp_java_pattern = "*.{cpp,c,h.hpp,java}"
+"let g:cpp_java_pattern = "*.{cpp,c,h.hpp,java}"
 
 " Rope settings."
 inoremap <leader>j <ESC>:RopeGotoDefinition<cr>
@@ -161,18 +161,18 @@ au VimResized * :wincmd =
 
 " Wildmenu completion "
 set wildmenu
-set wildmode=list:longest
-set wildignore+=.hg,.git,.svn " Version Controls"
-set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
-set wildignore+=*.spl "Compiled speolling world list"
-set wildignore+=*.sw? "Vim swap files"
-set wildignore+=*.DS_Store "OSX SHIT"
-set wildignore+=*.luac "Lua byte code"
-set wildignore+=migrations "Django migrations"
-set wildignore+=*.pyc "Python Object codes"
-set wildignore+=*.orig "Merge resolution files"
+"set wildmode=list:longest
+"set wildignore+=.hg,.git,.svn " Version Controls"
+"set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
+"set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
+"set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
+"set wildignore+=*.spl "Compiled speolling world list"
+"set wildignore+=*.sw? "Vim swap files"
+"set wildignore+=*.DS_Store "OSX SHIT"
+"set wildignore+=*.luac "Lua byte code"
+"set wildignore+=migrations "Django migrations"
+"set wildignore+=*.pyc "Python Object codes"
+"set wildignore+=*.orig "Merge resolution files"
 
 " Make Sure that Vim returns to the same line when we reopen a file"
 augroup line_return
@@ -186,6 +186,7 @@ augroup END
 nnoremap g; g;zz
 
 ""====================================================================
+"""""""""""""" Check the following
 
 " Python mode settings
 map <Leader>g :call RopeGotoDefinition()<CR>
@@ -202,22 +203,21 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 let g:pymode_options_max_line_length = 95
 
 " Better navigation through omnicomplete option list
-set completeopt=longest,menuone
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
+"set completeopt=longest,menuone
+"function! OmniPopup(action)
+"    if pumvisible()
+"        if a:action == 'j'
+"            return "\<C-N>"
+"        elseif a:action == 'k'
+"            return "\<C-P>"
+"        endif
+"    endif
+"    return a:action
+"endfunction
+""
+"inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+"inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
-"""""""""""""" Check the following
 
 
 " " ================ ReplaceText function ============================
