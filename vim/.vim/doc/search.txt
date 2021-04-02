@@ -1,0 +1,13 @@
+*search_tips*
+
+Chaining search:
+/term1/;/term2/;/term3
+
+
+gv                     : re-highlight the previous highlighted lines from somewhere else.
+:noh                   : clear the search highlights
+
+
+:%s /foo/bar/g         : Change "foo" to "bar" on every line
+:s /foo/bar/g          : Change "foo" to "bar" on just the current line
+

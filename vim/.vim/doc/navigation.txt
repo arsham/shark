@@ -1,0 +1,35 @@
+*navigation_tips*
+
+
++                      : jump to begining of the next line!
+)                      : move forward one sentence
+                         }                      : move forward one paragraph
+
+H                      : move to the top of the screen
+M                      : move to the middle of the screen
+L                      : move to the bottom of the screen
+
+
+Ctrl-^                 : switch back and forth between two files.
+
+
+
+^U                     : move up half a screen
+^D                     : move down half a screen
+^F                     : page down
+^B                     : page up
+
+Ctrl-i                 : jump to your previous navigation location
+Ctrl-o                 : jump back to where you were
+
+^E                     : scroll up one line
+^Y                     : scroll down one line
+zt                     : put currnet cursor position top top of screen
+zz                     : put currnet cursor position top middle of screen
+zb                     : put currnet cursor position top bottom of screen
+
+
+'.                     : will go to the last edited line
+`.                     : will go to the last edited position
+
+:e#                    : switch to the previous buffer

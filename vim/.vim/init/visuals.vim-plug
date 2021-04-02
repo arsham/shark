@@ -1,0 +1,17 @@
+Plug 'fatih/molokai'
+Plug 'sonph/onehalf', {'rtp': 'vim'}
+Plug 'ryanoasis/vim-devicons'                          " awesome icons
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'adelarsq/vim-devicons-emoji'
+"Plug 'adelarsq/vim-emoji-icon-theme'
+Plug 'fmoralesc/molokayo'
+Plug 'mhartington/oceanic-next'
+Plug 'joshdick/onedark.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/CursorLineCurrentWindow'             " This plugin avoids the clutter of multiple highlighted screen lines with split windows by disabling the 'cursorline' setting for all but the current window.
+Plug 'Yggdroot/indentLine'                             " show tabs as vertical lines
+Plug 'dhruvasagar/vim-zoom'

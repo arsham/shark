@@ -1,0 +1,4 @@
+Plug 'junegunn/fzf', { 'dir': $HOME.'/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'gilsondev/searchtasks.vim'

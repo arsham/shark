@@ -1,0 +1,9 @@
+*language_tips*
+
+
+]s                 : Go to the next misspelled word
+[s                 : Go to the last misspelled word
+z=                 : When on a misspelled word, get some suggestions
+zg                 : Mark a misspelled word as correct
+zw                 : Mark a good word as misspelled
+

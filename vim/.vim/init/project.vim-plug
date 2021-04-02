@@ -1,0 +1,3 @@
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'

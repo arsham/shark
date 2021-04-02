@@ -1,0 +1,5 @@
+*misc_tips*
+
+:for i in range(1,255) | .put='10.0.0.'.i | endfor                 : put a series of IP ranges in the buffer
+
+

@@ -1,0 +1,48 @@
+*window_tips* *tabs_tips* *split_tips*
+
+
+" <C-W>v                : split vertically
+" <C-W>s                : split horizontally
+" <c-w>z                : zoom in and out of pane
+" <C-W>q                : quit a split (also q!)
+" <C-W>_                : maximizing height
+" <C-W>|                : maximizing width
+" <C-W>=                : make them equal again
+" <C-W>R                : swap panes
+" try: 20 ctrl+w +
+" :resize -10
+" :vertical resize -10
+
+:tabs                    : list open tabs
+:tabm 0                  : move current tab to first position
+:tabm                    : move current tab to last position
+:tabm [i]                : move current tab to position [i]
+
+:tabc                    : close current tab
+:tabo                    : close all other tabs
+
+<C-w>n (:new [file])     : split horizontaly
+<C-w>s (:split [file])   : split horizontaly
+<C-w>v  (:vsplit [file]) : split verticaly
+
+<C-w>r                   : rotate to the right
+<C-w>H                   : move to the left
+<C-w>J                   : move to the bottom
+<C-w>K                   : move to the top
+<C-w>L                   : move to the right
+<C-w>T                   : (:tab split) move split to new tab
+
+<C-w>c (:close)          : close split
+<C-w>q (:q)              : close split and quit file
+<C-w>o (:only)           : close all other splits
+
+:tab ter               : open terminal in new tab
+
+
+:tabnew                  : new blank tab
+:tabedit [file]          : open file in tab
+
+gt (:tabn)               : next tab
+                           gT (:tabp)               : previous tab
+                                                      [i]gt                    : go to tab [i]
+

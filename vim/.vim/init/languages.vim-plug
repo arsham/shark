@@ -1,0 +1,10 @@
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'dense-analysis/ale'
+Plug 'preservim/tagbar'                           " For setting up ctags
+
+Plug 'sheerun/vim-polyglot'
+Plug 'uarun/vim-protobuf', { 'for': 'proto' }
+Plug 'towolf/vim-helm', { 'for': 'helm' }
+
+" Plug 'sirver/ultisnips'
+" Plug 'honza/vim-snippets'

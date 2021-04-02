@@ -1,0 +1,3 @@
+Plug 'joereynolds/SQHell.vim'
+" Plug 'vim-scripts/SQLUtilities'  " requires the align plugin below
+" Plug 'vim-scripts/Align'       " conflicts with table mode pluing

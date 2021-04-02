@@ -1,0 +1,39 @@
+*editing_tips*
+
++---------+------------------+-------------+----------------------------------------------------------------------------------------------------------+
+| Mode    | Command          | Alternative | Notes                                                                                                    |
++=========+==================+=============+==========================================================================================================+
+| Normal  | r                |             | replace the one character under your cursor                                                              |
+| Normal  | R                |             | replace the character under your cursor, but just keep typing afterwards                                 |
+| Normal  | C                |             | change the current line from where you're at                                                             |
+| Normal  | s                |             | short for cl. Delete 3 chars and start editing will be 3s (equals to 3cl)                                |
+| Normal  | S                |             | substitute the entire current line                                                                       |
+| Normal  | gi               |             | Go to position where Insert mode was stopped last.                                                       |
+| Normal  | dw  , then 5.    |             | delete a word, then do this 5 times.                                                                     |
+| Normal  | ddp              |             | swap two lines                                                                                           |
+| Normal  | gqap             |             | format around paragraph.                                                                                 |
+| Normal  | 0i               |             | j0vG.               : put colon on every line.                                                           |
+| Normal  | qq0dwj@qq@q      |             | will delete the first word from every line until the end of the file.                                    |
+| Normal  | =%               |             | reformat in a block of code                                                                              |
+| Visual  | o                |             | go to the other end                                                                                      |
+| Command | :.,+10 normal @q |             | from this line to next 10 lines, execute the macro in q register                                         |
+| Command | :%s /foo/bar/g   |             | on every line                                                                                            |
+| Command | :s /foo/bar/g    |             | on current line                                                                                          |
++---------+------------------+-------------+----------------------------------------------------------------------------------------------------------+
+| Command | :earlier 15m     |             | Reverts the document back to how it was 15 minutes ago.                                                  |
+|         |                  |             | Can take various arguments for the amount of time you want to roll back, and is dependent on undolevels. |
+|         |                  |             | Can be reversed with the opposite command :later                                                         |
++---------+------------------+-------------+----------------------------------------------------------------------------------------------------------+
+| Command | :.! ls           |             | runs ls, and puts the output in the buffer. Try :.! date                                                 |
+| Command | :g/match/y A     |             | will yank all lines containing "match" into the "a/@a register.                                          |
++---------+------------------+-------------+----------------------------------------------------------------------------------------------------------+
+| Command | ~                |             | switch case                                                                                              |
+| Command | g~iw             |             | switch case of current word                                                                              |
+| Command | gUiw             |             | make current word uppercase                                                                              |
+| Command | guiw             |             | make current word lowercase                                                                              |
+| Command | gU$              |             | make uppercase until end of line                                                                         |
+| Command | gu$              |             | make lowercase until end of line                                                                         |
++---------+------------------+-------------+----------------------------------------------------------------------------------------------------------+
+| Command | CTRL-v-[         |             | to enter the <ESC> key                                                                                   |
++---------+------------------+-------------+----------------------------------------------------------------------------------------------------------+
+| Command | :10put x         |             | put the text after line 10 into x register                                                               |
