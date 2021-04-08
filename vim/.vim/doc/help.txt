@@ -1,8 +1,0 @@
-*help_tips*
-
-
-(in terminal) to list all command-mode commands:
-    vim +'redir! > cmds | sil com' +q && cut -b5- cmds | cut -d ' ' -f 1
-    vim +'redir! > cmds | sil com' +q && cut -b5- cmds | fzf
-:help s                : show what s does
-:help  CTRL-W_CTRL-I   : normal mode mapping for <C-w><C-i>

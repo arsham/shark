@@ -1,4 +1,0 @@
-Plug 'kana/vim-altercmd'
-Plug 'kana/vim-tabpagecd'
-Plug 'romainl/vim-qf'                     " quicklist/locallist manager
-Plug 'vim-scripts/LargeFile'              " enhances opening very large files

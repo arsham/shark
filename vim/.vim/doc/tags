@@ -1,10 +1,13 @@
+core_tips	core.txt	/*core_tips*
 editing_tips	editing.txt	/*editing_tips*
 help_tips	help.txt	/*help_tips*
 language_tips	language.txt	/*language_tips*
 locallist_tips	lists.txt	/*locallist_tips*
+misc_tips	misc.txt	/*misc_tips*
 navigation_tips	navigation.txt	/*navigation_tips*
 quickfix_tips	lists.txt	/*quickfix_tips*
 search_tips	search.txt	/*search_tips*
+split	windows.txt	/*split*
 split_tips	windows.txt	/*split_tips*
 tabs_tips	windows.txt	/*tabs_tips*
 window_tips	windows.txt	/*window_tips*
