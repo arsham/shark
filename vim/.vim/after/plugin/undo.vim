@@ -1,7 +1,22 @@
-" https://jovicailic.org/2017/04/vim-persistent-undo/
-set undofile
 if has('nvim')
-    set undodir=~/tmp/.vim/undodir/nvim
+    let s:undodir=expand("~/.cache/nvim/undodir")
+    let s:backdir=expand("~/.cache/nvim/backdir")
 else
-    set undodir=~/tmp/.vim/undodir/vim
+    let s:undodir=expand("~/.cache/vim/undodir")
+    let s:backdir=expand("~/.cache/vim/backdir")
 endif
+
+if !isdirectory(s:undodir)
+    call mkdir(s:undodir, 'p')
+endif
+if !isdirectory(s:backdir)
+    call mkdir(s:backdir, 'p')
+endif
+
+set undofile
+"set noswapfile
+"set nobackup
+
+execute 'set undodir=' . s:undodir
+execute 'set backupdir=' . s:backdir
+execute 'set directory=' . s:backdir

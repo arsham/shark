@@ -14,5 +14,6 @@ augroup VIMGO_MAPS
     " go to the implementation of an interface call (ctrl-h)
     autocmd FileType go nnoremap <buffer> gimpl :GoImplements<cr>
     autocmd FileType go nnoremap <buffer> <C-h> :GoImplements<cr>
-    autocmd FileType go nnoremap <buffer> gref :GoReferrers<cr>
+    autocmd Filetype go command! GoReload call :GoBuildTags ''
+    nnoremap <silent> <leader>ref :GoReferrers<CR>
 augroup END

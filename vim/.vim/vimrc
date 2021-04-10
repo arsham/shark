@@ -6,6 +6,7 @@ let with_fzf = 1
 let with_tagbar = 0
 let with_setcolour = 1
 let with_fugitive = 0
+let with_lualine = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Config
@@ -50,17 +51,22 @@ endfunction
 if has('nvim')
     call plug#begin(stdpath('data') . '/plugged')
 else
-    call plug#begin('~/tmp/.vim/plugged')
+    call plug#begin('~/tmp/vim/plugged')
 endif
 
     "{{{ Core/System utilities }}}
         Plug 'preservim/nerdtree', Cond(with_nerd_tree, { 'on':  'NERDTreeToggle' } )
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight', Cond(with_nerd_tree)
         Plug 'Xuyuanp/nerdtree-git-plugin', Cond(with_nerd_tree)
+        Plug 'kyazdani42/nvim-tree.lua', Cond(!with_nerd_tree)
         Plug 'vim-scripts/LargeFile'              " enhances opening very large files
+        let vimwiki_ext2syntax = {}
         Plug 'vimwiki/vimwiki'
         " Plug 'romainl/vim-qf'                     " quicklist/locallist manager
         Plug 'itchyny/vim-qfedit'                 " it's simplified version that only can delete stuff
+        Plug 'mhinz/vim-startify'
+        Plug 'gcmt/taboo.vim'
+        Plug 'tweekmonster/startuptime.vim'
 
     "{{{ SQL }}}
         Plug 'joereynolds/SQHell.vim'
@@ -75,26 +81,33 @@ endif
     "{{{ Visuals }}}
         Plug 'fatih/molokai'
         Plug 'sonph/onehalf', {'rtp': 'vim'}
-        Plug 'ryanoasis/vim-devicons'                          " awesome icons
-        Plug 'adelarsq/vim-devicons-emoji'
         "Plug 'adelarsq/vim-emoji-icon-theme'
         Plug 'fmoralesc/molokayo'
         Plug 'mhartington/oceanic-next'
-        Plug 'joshdick/onedark.vim'
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
+        " Plug 'joshdick/onedark.vim'
+        Plug 'rktjmp/lush.nvim'          " dependency for onedark.nvim
+        Plug 'olimorris/onedark.nvim'
+        Plug 'vim-airline/vim-airline', Cond(!with_lualine)
+        Plug 'vim-airline/vim-airline-themes', Cond(!with_lualine)
+        Plug 'hoob3rt/lualine.nvim', Cond(with_lualine)
+
+        Plug 'ryanoasis/vim-devicons', Cond(!with_lualine)
+        Plug 'adelarsq/vim-devicons-emoji' ", Cond(!with_lualine)
+        Plug 'kyazdani42/nvim-web-devicons', Cond(with_lualine)
+
         Plug 'edkolev/tmuxline.vim'
 
         Plug 'ntpeters/vim-better-whitespace'
         Plug 'jiangmiao/auto-pairs'
-        Plug 'vim-scripts/CursorLineCurrentWindow'             " This plugin avoids the clutter of multiple highlighted screen lines with split windows by disabling the 'cursorline' setting for all but the current window.
-        Plug 'Yggdroot/indentLine'                             " show tabs as vertical lines
+        " Plug 'Yggdroot/indentLine'                             " show tabs as vertical lines
+        Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
         Plug 'dhruvasagar/vim-zoom'
+
+        Plug 'kshenoy/vim-signature'
 
     "{{{ Editing }}}
         Plug 'mbbill/undotree'
-        Plug 'preservim/nerdcommenter'
-        "Plug 'tpope/vim-commentary'                       " see if nerdcommenter is better
+        Plug 'tpope/vim-commentary'
         Plug 'dhruvasagar/vim-table-mode'
         Plug 'tpope/vim-repeat'                           " add support for period (.) to unsupported plugins
         " Plug 'sirver/ultisnips'                         " sometimes buggy
@@ -111,7 +124,7 @@ endif
         Plug 'gilsondev/searchtasks.vim'
 
     "{{{ Languages }}}
-        " Plug 'neovim/nvim-lspconfig'
+        "Plug 'neovim/nvim-lspconfig'
         Plug 'fatih/vim-go', { 'for': 'go' }
         Plug 'dense-analysis/ale'
         Plug 'preservim/tagbar', Cond(with_tagbar)                          " For setting up ctags
@@ -121,16 +134,15 @@ endif
 
     "{{{ Text objects }}}
 
+        Plug 'tpope/vim-surround'                     " cs'<q>     cst"     ysiw]
         " see https://github.com/kana/vim-textobj-user/wiki
-        " Plug 'kana/vim-textobj-user'
-        " Plug 'glts/vim-textobj-comment'                  " comment (c)
+        Plug 'kana/vim-textobj-user'
+        Plug 'glts/vim-textobj-comment'                  " comment (c)
         " Plug 'austintaylor/vim-indentobject'
         " Plug 'kana/vim-textobj-datetime'
-        " Plug 'junegunn/vim-after-object'
-        " Plug 'tpope/vim-surround'
         " Plug 'kana/vim-textobj-line'
         " Plug 'bkad/CamelCaseMotion'
-        " Plug 'wellle/targets.vim'
+        Plug 'wellle/targets.vim'
 
         " Plug 'coderifous/textobj-word-column.vim'      " this is useful, but conflicts with the comments.
         " Plug 'lucapette/vim-textobj-underscore'       " this is a slow startup plugin
@@ -139,6 +151,10 @@ endif
         " Plug 'christoomey/vim-tmux-navigator'
         " https://github.com/kana/vim-submode
         " https://github.com/kana/vim-operator-user
+
+
+
+       " Plug '~/Projects/vim/testplug'
 
 call plug#end()
 filetype plugin indent on                              " required
@@ -152,13 +168,3 @@ set clipboard+=unnamed
 let mapleader = " "
 nnoremap g; g;zz
 set title
-
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-if has('persistent_undo') && isdirectory(expand('~').'/tmp/.vim/backups')
-    silent !mkdir ~/tmp/.vim/backups > /dev/null 2>&1
-    set undodir=~/tmp/.vim/backups
-    set undofile
-endif
-

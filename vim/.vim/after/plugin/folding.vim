@@ -1,3 +1,6 @@
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
+"fold based on indent
+set foldmethod=indent
+"deepest fold is 3 levels
+set foldnestmax=3
+"dont fold by default
+set nofoldenable

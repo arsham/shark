@@ -1,7 +1,5 @@
 " ]s                : Go to the next misspelled word
 " [s                : Go to the last misspelled word
-" gu                : Make lowercase
-" gU                : Make uppercase
 " <C-x><C-t>        : Thesaurus
 " <C-x><C-k>        : Dictionary
 " <C-x><C-s>        : Spelling ----> need vim-spell-uk package installed
@@ -9,8 +7,8 @@
 
 setlocal spelllang=en_gb
 " set spell
-nnoremap <leader>sp :set spell!<CR>
-nnoremap <leader>spf 1z=
+"nnoremap <leader>sp :set spell!<CR>
+"nnoremap <leader>spf 1z=
 set thesaurus+=~/.config/thesaurus/moby.txt
 
 augroup FILETYPES
@@ -23,4 +21,3 @@ augroup FILETYPES
   autocmd Filetype markdown setlocal spell
   autocmd Filetype gitcommit setlocal spell
 augroup END
-

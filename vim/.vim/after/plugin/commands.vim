@@ -1,7 +1,3 @@
-command! Reload execute "source ~/.vim/vimrc"
-command! Filename execute ":echo expand('%:p')"
-command! Config execute ":e $MYVIMRC"
-
 function! Increment() abort
   call search('\d\@<!\d\+\%#\d', 'b')
   call search('\d', 'c')

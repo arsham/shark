@@ -1,5 +1,3 @@
-" nmap bu :Buffers<CR>
-
 " Delete buffers
 " https://github.com/junegunn/fzf.vim/pull/733#issuecomment-559720813
 " function! s:list_buffers()

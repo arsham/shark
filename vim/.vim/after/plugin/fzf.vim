@@ -20,23 +20,14 @@ let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
 let g:fzf_buffers_jump = 1          " [Buffers] Jump to the existing window if possible
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
-
-" let $FZF_DEFAULT_OPTS = '--preview "bat --color=always --style=numbers --line-range=:500 {}"'
-
 command! -bang -nargs=* ArshamRg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 
-" command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
-
-" see if this one is any good
-" command! -bang -nargs=? Marks
-    \ call fzf#vim#marks({'options': ['--preview', 'cat -n {-1} | egrep --color=always -C 10 ^[[:space:]]*{2}[[:space:]]']})
-
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.local/share/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
 
 " ctrl+p -> @ and : implementation like sublime
 function! s:goto_def(lines) abort

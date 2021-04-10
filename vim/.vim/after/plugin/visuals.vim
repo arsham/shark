@@ -14,14 +14,8 @@ if exists('+termguicolors')
 endif
 set background=dark
 set fillchars+=vert:│
-
-" let g:rehash256 = 1
-
-" colorscheme molokai
-" colorscheme molokayo
-" colorscheme OceanicNext
-" colorscheme onedark
 colorscheme onehalfdark
+"colorscheme onedark_nvim
 
 augroup TEXTWRAP
     autocmd!
@@ -30,36 +24,21 @@ augroup END
 
 " required for vim-ctrlspace
 let g:CtrlSpaceDefaultMappingKey = "<C-space> "
-"nautocmd VimEnter * Tmuxline lightline
-hi VertSplit ctermbg=NONE guibg=NONE            " remove the background of the vertical splitter
-highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
-" highlight LineNr           ctermfg=8    ctermbg=none    cterm=none
-" highlight CursorLineNr     ctermfg=7    ctermbg=8       cterm=none
-" highlight VertSplit        ctermfg=0    ctermbg=8       cterm=none
-" highlight Statement        ctermfg=2    ctermbg=none    cterm=none
-" highlight Directory        ctermfg=4    ctermbg=none    cterm=none
-" highlight StatusLine       ctermfg=7    ctermbg=8       cterm=none
-" highlight StatusLineNC     ctermfg=7    ctermbg=8       cterm=none
-" highlight NERDTreeClosable ctermfg=2
-" highlight NERDTreeOpenable ctermfg=8
-" highlight Comment          ctermfg=4    ctermbg=none    cterm=italic
-" highlight Comment          ctermfg=4    ctermbg=none    cterm=italic
-" highlight Constant         ctermfg=12   ctermbg=none    cterm=none
-" highlight Special          ctermfg=4    ctermbg=none    cterm=none
-" highlight Identifier       ctermfg=6    ctermbg=none    cterm=none
-" highlight PreProc          ctermfg=5    ctermbg=none    cterm=none
-" highlight String           ctermfg=12   ctermbg=none    cterm=none
-" highlight Number           ctermfg=1    ctermbg=none    cterm=none
-" highlight Function         ctermfg=1    ctermbg=none    cterm=none
 
-" show hidden whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-" let g:better_whitespace_enabled=1
-" let g:better_whitespace_enabled = 0              " Dont' highlight whitespace in red
-" let g:strip_whitespace_on_save = 1
-" let g:strip_whitespace_confirm = 0               " Don't ask for confirmation when deleting whitespace
+" remove the background of the vertical splitter
+hi VertSplit ctermbg=NONE guibg=NONE
+hi Visual cterm=bold ctermbg=Blue ctermfg=NONE
+hi Search ctermfg=236 ctermbg=180 guifg=#282c34 guibg=#5992F0 gui=italic,underline,bold
+hi IncSearch guibg=#E388D5 ctermbg=green term=underline
+hi VertSplit ctermfg=237 guifg=#888822
+hi ExtraWhitespace ctermbg=red guibg=red
 
 " let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
 " let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
 " let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
-"let g:gitgutter_sign_modified_removed = "✂️'"
+let g:gitgutter_sign_modified_removed = "✂️'"
+
+" Fix Vim's ridiculous line wrapping model
+set ww=<,>,[,],h,l
+" vnoremap < <gv "Better Indention
+" vnoremap > >gv "Better Indention
