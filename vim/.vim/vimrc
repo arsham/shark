@@ -1,34 +1,21 @@
 " Use vim settings rather then vi.
 set nocompatible                " must be first.
 
-let with_nerd_tree = 0
-let with_fzf = 1
 let with_tagbar = 0
-let with_setcolour = 1
-let with_fugitive = 0
-let with_lualine = 1
+let with_setcolour = 0
+let with_fugitive = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set shortmess=filnxtToOFAI
-set number                      " line numbers
-set relativenumber              " relative line numbers
-set backspace=indent,eol,start  " allow backspace in insert mode
-set history=10000                " :cmdline history
-set showcmd                     " show commands at the bottom of the screen
-set showmode                    " show current mode down the bottom
-" set gcr=a:blinkon0              " disable cursor blink
-
 " auto reload file if changed, need the following two
-set autoread                    " reload files changed outside vim
-au FileChangedShell * echo "Warning: File changed on disk"
+" set autoread                    " reload files changed outside vim
+" au FileChangedShell * echo "Warning: File changed on disk"
 
-set hidden
-syntax on                       " syntax highlighting
+" syntax on                       " syntax highlighting
 
-filetype plugin on
-filetype indent on
+" filetype plugin on
+" filetype indent on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Config
@@ -55,16 +42,10 @@ else
 endif
 
     "{{{ Core/System utilities }}}
-        Plug 'preservim/nerdtree', Cond(with_nerd_tree, { 'on':  'NERDTreeToggle' } )
-        Plug 'tiagofumo/vim-nerdtree-syntax-highlight', Cond(with_nerd_tree)
-        Plug 'Xuyuanp/nerdtree-git-plugin', Cond(with_nerd_tree)
-        Plug 'kyazdani42/nvim-tree.lua', Cond(!with_nerd_tree)
+        Plug 'kyazdani42/nvim-tree.lua'
         Plug 'vim-scripts/LargeFile'              " enhances opening very large files
-        let vimwiki_ext2syntax = {}
-        Plug 'vimwiki/vimwiki'
-        " Plug 'romainl/vim-qf'                     " quicklist/locallist manager
-        Plug 'itchyny/vim-qfedit'                 " it's simplified version that only can delete stuff
-        Plug 'mhinz/vim-startify'
+        Plug 'itchyny/vim-qfedit'
+        Plug 'kevinhwang91/nvim-bqf'               " popup floating window on quickfix list
         Plug 'gcmt/taboo.vim'
         Plug 'tweekmonster/startuptime.vim'
 
@@ -75,77 +56,55 @@ endif
 
     "{{{ git }}}
         Plug 'tpope/vim-fugitive', Cond(with_fugitive)
-        Plug 'airblade/vim-gitgutter'
-        "Plug 'mattn/gist-vim'
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'lewis6991/gitsigns.nvim'
 
     "{{{ Visuals }}}
-        Plug 'fatih/molokai'
-        Plug 'sonph/onehalf', {'rtp': 'vim'}
-        "Plug 'adelarsq/vim-emoji-icon-theme'
-        Plug 'fmoralesc/molokayo'
-        Plug 'mhartington/oceanic-next'
-        " Plug 'joshdick/onedark.vim'
-        Plug 'rktjmp/lush.nvim'          " dependency for onedark.nvim
-        Plug 'olimorris/onedark.nvim'
-        Plug 'vim-airline/vim-airline', Cond(!with_lualine)
-        Plug 'vim-airline/vim-airline-themes', Cond(!with_lualine)
-        Plug 'hoob3rt/lualine.nvim', Cond(with_lualine)
-
-        Plug 'ryanoasis/vim-devicons', Cond(!with_lualine)
-        Plug 'adelarsq/vim-devicons-emoji' ", Cond(!with_lualine)
-        Plug 'kyazdani42/nvim-web-devicons', Cond(with_lualine)
-
-        Plug 'edkolev/tmuxline.vim'
-
+        Plug 'sainnhe/sonokai'
+        " Plug 'sickill/vim-monokai'
+        Plug 'hoob3rt/lualine.nvim'
+        Plug 'adelarsq/vim-devicons-emoji'
+        Plug 'kyazdani42/nvim-web-devicons'
         Plug 'ntpeters/vim-better-whitespace'
-        Plug 'jiangmiao/auto-pairs'
-        " Plug 'Yggdroot/indentLine'                             " show tabs as vertical lines
-        Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
         Plug 'dhruvasagar/vim-zoom'
-
-        Plug 'kshenoy/vim-signature'
+        Plug 'kshenoy/vim-signature'                           " Display and navigate marks
+        Plug 'simeji/winresizer'
 
     "{{{ Editing }}}
         Plug 'mbbill/undotree'
         Plug 'tpope/vim-commentary'
         Plug 'dhruvasagar/vim-table-mode'
         Plug 'tpope/vim-repeat'                           " add support for period (.) to unsupported plugins
+        Plug 'jiangmiao/auto-pairs'
         " Plug 'sirver/ultisnips'                         " sometimes buggy
         " Plug 'honza/vim-snippets'
         " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
     "{{{ Searching }}}
         Plug 'jremmen/vim-ripgrep'
-        Plug 'junegunn/fzf', Cond(with_fzf, { 'dir': $HOME.'/.fzf', 'do': './install --all' })
-        Plug 'junegunn/fzf.vim', Cond(with_fzf)
-        Plug 'nvim-lua/popup.nvim', Cond(!with_fzf)
-        Plug 'nvim-lua/plenary.nvim', Cond(!with_fzf)
-        Plug 'nvim-telescope/telescope.nvim', Cond(!with_fzf)
-        Plug 'gilsondev/searchtasks.vim'
+        Plug 'junegunn/fzf'                                ",  { 'dir': $HOME.'/.fzf', 'do': './install --all' }
+        Plug 'junegunn/fzf.vim'
 
     "{{{ Languages }}}
-        "Plug 'neovim/nvim-lspconfig'
-        Plug 'fatih/vim-go', { 'for': 'go' }
+        Plug 'neovim/nvim-lspconfig'
         Plug 'dense-analysis/ale'
+        Plug 'nvim-lua/completion-nvim'
         Plug 'preservim/tagbar', Cond(with_tagbar)                          " For setting up ctags
-        Plug 'sheerun/vim-polyglot'
+        Plug 'liuchengxu/vista.vim', Cond(! with_tagbar)
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        Plug 'nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'uarun/vim-protobuf', { 'for': 'proto' }
         Plug 'towolf/vim-helm', { 'for': 'helm' }
+        Plug 'mattn/vim-goimports', { 'for': 'go' }
 
     "{{{ Text objects }}}
 
         Plug 'tpope/vim-surround'                     " cs'<q>     cst"     ysiw]
-        " see https://github.com/kana/vim-textobj-user/wiki
         Plug 'kana/vim-textobj-user'
         Plug 'glts/vim-textobj-comment'                  " comment (c)
-        " Plug 'austintaylor/vim-indentobject'
-        " Plug 'kana/vim-textobj-datetime'
-        " Plug 'kana/vim-textobj-line'
+        Plug 'lucapette/vim-textobj-underscore'
+        Plug 'austintaylor/vim-indentobject'
         " Plug 'bkad/CamelCaseMotion'
-        Plug 'wellle/targets.vim'
-
-        " Plug 'coderifous/textobj-word-column.vim'      " this is useful, but conflicts with the comments.
-        " Plug 'lucapette/vim-textobj-underscore'       " this is a slow startup plugin
 
     "{{{ Misc }}}
         " Plug 'christoomey/vim-tmux-navigator'
@@ -153,18 +112,7 @@ endif
         " https://github.com/kana/vim-operator-user
 
 
-
        " Plug '~/Projects/vim/testplug'
 
 call plug#end()
 filetype plugin indent on                              " required
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Important Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set undolevels=10000
-set ttyfast
-set clipboard+=unnamed
-let mapleader = " "
-nnoremap g; g;zz
-set title

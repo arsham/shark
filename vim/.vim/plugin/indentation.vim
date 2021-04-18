@@ -15,10 +15,3 @@ set linebreak
 set list
 " set list lcs=tab:\┆\ " KEEP THIS SPACE      " needs to be here otherwise vim-go stops the indentLine
 set list listchars=tab:\ \ ,trail:·
-
-" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-" let g:indentLine_concealcursor = 'inc'
-" let g:indentLine_conceallevel = 1
-"let g:indent_blankline_char = '>'
- let g:indent_blankline_show_trailing_blankline_indent = v:false
-" set conceallevel=1

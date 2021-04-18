@@ -7,17 +7,9 @@ noremap <Leader>P "+P
 augroup TRAILING_SPACES
     autocmd!
     " Auto remove trailing spaces
-    autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * silent! :%s/\s\+$//e
 augroup END
 set updatetime=100
-
-" move highlighed lines up and down.
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-" Move line up and down
-nmap <M-j> ddp
-nmap <M-k> ddkP
 
 " select a text, and this will replace it with the " contents.
 vnoremap <leader>p "_dP
@@ -28,4 +20,23 @@ set completefunc=emoji#complete
 set matchpairs+=<:>
 set complete=.,w,b,u,t,i
 " can increment alphabetically too!
-set nrformats=bin,octal,hex,alpha
+set nrformats=bin,hex,alpha
+
+" make the regular expression less crazy
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
+
+"nnoremap <leader>, norm m`A,``
+
+" Moving lines with alt key.
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" mapping CTRL-a because inside tmux you can't!
+nnoremap <M-a> <C-a>

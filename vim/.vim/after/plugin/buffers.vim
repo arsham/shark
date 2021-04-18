@@ -1,20 +1,3 @@
-" Delete buffers
-" https://github.com/junegunn/fzf.vim/pull/733#issuecomment-559720813
-" function! s:list_buffers()
-"   redir => list
-"   silent ls
-"   redir END
-"   return split(list, "\n")
-" endfunction
-"
-" nmap bd :bd<CR>
-" nmap BD :Bdelete hidden<CR>
-" nmap <leader>w :w<CR>
-" nmap <leader>q :q<CR>
-" nmap <leader>Q :qa!<CR>
-" nmap <leader>d :w !diff % -<CR>
-" nmap mk :mks!<CR>
-
  " Make Sure that Vim returns to the same line when we reopen a file"
 augroup line_return
     au!
@@ -29,3 +12,19 @@ let g:LargeFile = 512                  " anything larger than 512MB is going to 
 " go to buffer
 nnoremap gb :ls<CR>:b<Space>
 
+function! s:list_buffers()
+    redir => list
+    silent ls
+    redir END
+    return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+            \ 'source': s:list_buffers(),
+            \ 'sink*': { lines -> s:delete_buffers(lines) },
+            \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+            \ }))

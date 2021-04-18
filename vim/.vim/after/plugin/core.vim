@@ -1,6 +1,3 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Important Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set undolevels=10000
 set ttyfast
 set clipboard+=unnamed
@@ -18,18 +15,15 @@ set showmode
 " reload files changed outside vim
 set autoread
 au FileChangedShell * echo "Warning: File changed on disk"
+" au FocusGained,BufEnter * : checktime
 
-set shortmess=a "filnxtToOFAI
+set shortmess=afilnxtToOFAI
 set hidden
 syntax on
 
 let mapleader = " "
 let g:indentLine_color_term = 239
 let g:indentLine_fileTypeExclude = ['nerdtree']
-augroup NERDTREE
-    autocmd!
-    autocmd FileType nerdtree setlocal conceallevel=2
-augroup END
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -42,7 +36,7 @@ inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
 set viewoptions+=localoptions
-set viewdir=$HOME/Projects/vim/views
+set viewdir=$HOME/.cache/vim/views
 
 " better diff view. This will make sure the inserted part is separated, rather
 " than mangled in the previous blob.

@@ -1,9 +1,8 @@
 set incsearch
 set ignorecase
-if has('nvim')
-    " allow for live substitution
-    set inccommand=nosplit
-endif
+set nohlsearch
+" allow for live substitution
+set inccommand=nosplit
 set smartcase
 " Searches current directory recursively.
 set path=.,**,~/Projects/**
