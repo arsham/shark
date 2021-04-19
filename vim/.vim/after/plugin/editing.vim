@@ -4,11 +4,12 @@ vnoremap . :norm.<CR>
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 noremap <Leader>P "+P
-augroup TRAILING_SPACES
-    autocmd!
-    " Auto remove trailing spaces
-    autocmd BufWritePre * silent! :%s/\s\+$//e
-augroup END
+" For now we are testing the whitespace plugin.
+" augroup TRAILING_SPACES
+"     autocmd!
+"     " Auto remove trailing spaces
+"     autocmd BufWritePre * silent! :%s/\s\+$//e
+" augroup END
 set updatetime=100
 
 " select a text, and this will replace it with the " contents.
@@ -40,3 +41,11 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " mapping CTRL-a because inside tmux you can't!
 nnoremap <M-a> <C-a>
+inoremap <M-a> <C-a>
+
+" Re-indent the whole file.
+nnoremap g= gg=Gg``
+
+" insert empty lines with motions
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>

@@ -31,8 +31,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+    let opts = get(a:000, 0, {})
+    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
 if has('nvim')
@@ -73,9 +73,11 @@ endif
     "{{{ Editing }}}
         Plug 'mbbill/undotree'
         Plug 'tpope/vim-commentary'
-        Plug 'dhruvasagar/vim-table-mode'
+        " Plug 'dhruvasagar/vim-table-mode'
         Plug 'tpope/vim-repeat'                           " add support for period (.) to unsupported plugins
         Plug 'jiangmiao/auto-pairs'
+        Plug 'arthurxavierx/vim-caser'
+        Plug 'junegunn/vim-easy-align'
         " Plug 'sirver/ultisnips'                         " sometimes buggy
         " Plug 'honza/vim-snippets'
         " Plug 'mg979/vim-visual-multi', {'branch': 'master'}

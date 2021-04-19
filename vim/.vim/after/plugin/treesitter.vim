@@ -33,7 +33,9 @@ treesitter_configs.setup {
         ['al'] = '@loop.outer',
         ['il'] = '@loop.inner',
         ['am'] = '@call.outer',
-        ['im'] = '@call.inner'
+        ['im'] = '@call.inner',
+        ['ab'] = '@block.outer',
+        ['ib'] = '@block.inner',
       },
     },
     move = {

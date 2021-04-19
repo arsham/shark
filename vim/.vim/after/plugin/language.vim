@@ -13,11 +13,11 @@ set thesaurus+=~/.config/thesaurus/moby.txt
 " install words-insane package
 set dictionary+=/usr/share/dict/words-insane
 
-let s:spellfile=expand("~/.config/nvim/spell/en.utf-8.add")
+let s:spellfile=expand("~/.config/nvim/spell")
 if !isdirectory(s:spellfile)
     call mkdir(s:spellfile, 'p')
 endif
-execute 'set spellfile=' . s:spellfile
+execute 'set spellfile=' . s:spellfile . "/en.utf-8.add"
 
 augroup FILETYPES
   autocmd!
@@ -32,8 +32,9 @@ augroup END
 
 " auto correct spelling and jump back.
 function! FixLastSpellingError()
+    let l:currentspell=&spell
     setlocal spell
-    normal! mm[s1z=`m
-    setlocal spell<
+    normal! [s1z=``
+    let &l:spell=l:currentspell
 endfunction
 nnoremap <leader>sp :call FixLastSpellingError()<cr>

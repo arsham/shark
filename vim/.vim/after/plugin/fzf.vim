@@ -22,7 +22,7 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
 command! -bang -nargs=* ArshamRg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -- '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 

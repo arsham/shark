@@ -1,4 +1,4 @@
 " walk through tabs
-nnoremap <Tab> gt
+nnoremap <leader>tn gt
 " walk through tabs reversed
-nnoremap <S-Tab> gT
+nnoremap <leader>tp gT

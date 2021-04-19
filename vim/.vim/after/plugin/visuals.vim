@@ -1,18 +1,3 @@
-set laststatus=2
-set colorcolumn=80
-set autoindent
-set encoding=utf-8
-set tabstop=4 expandtab shiftwidth=4 softtabstop=4 "go-compatible tab setup
-"set foldlevelstart=99 "start file with all folds opened
-set relativenumber
-set cursorline
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-set fillchars+=vert:│
-
 set background=dark
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_style = 'andromeda'
@@ -40,15 +25,10 @@ hi ColorColumn ctermbg=52 guibg=#383035
 " let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
 let g:gitgutter_sign_modified_removed = "✂️'"
 
-" Fix Vim's ridiculous line wrapping model
-set ww=<,>,[,],h,l
-" vnoremap < <gv "Better Indention
-" vnoremap > >gv "Better Indention
-
 " popups
 hi Pmenu guibg=#3B404D ctermbg=236 guifg=#dcdfe4 ctermfg=188
 
 augroup YANK_HIGHLIGHTS
-	autocmd!
-	autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END

@@ -27,6 +27,32 @@ local on_attach = function(client, bufnr)
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+    vim.api.nvim_exec([[
+        " Use <Tab> and <S-Tab> to navigate through popup menu
+        inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+        " also see https://github.com/sparkcanon/nvim/blob/master/lua/lsp.lua
+        nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+        nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+        nnoremap <silent> gt <cmd>lua vim.lsp.buf.type_definition()<CR>
+        nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+        nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+        nnoremap <silent> <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
+        nnoremap <silent> <leader>gi <cmd>lua vim.lsp.buf.implementation()<CR>
+
+        inoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+        imap <tab> <Plug>(completion_smart_tab)
+        imap <s-tab> <Plug>(completion_smart_s_tab)
+        " imap <c-j> <Plug>(completion_next_source) "use <c-j> to switch to previous completion
+        " imap <c-k> <Plug>(completion_prev_source) "use <c-k> to switch to next completion
+
+        nnoremap <silent> <leader>dd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+        nnoremap <silent> <leader>dq <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+        nnoremap <silent> <leader>dn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+        nnoremap <silent> <leader>dp <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+    ]], false)
+
     local opts = { noremap=true, silent=true }
     if client.resolved_capabilities.document_formatting then
         buf_set_keymap("n", "gq", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
