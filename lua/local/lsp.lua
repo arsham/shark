@@ -1,15 +1,3 @@
---
--- npm -g i --prefix ~/.node_modules bash-language-server
--- npm -g i --prefix ~/.node_modules vim-language-server
--- npm -g i --prefix ~/.node_modules dockerfile-language-server-nodejs
--- npm -g i --prefix ~/.node_modules vscode-html-languageserver-bin
--- npm -g i --prefix ~/.node_modules vscode-json-languageserver
--- npm -g i --prefix ~/.node_modules pyright
--- npm -g i --prefix ~/.node_modules yaml-language-server
--- go install github.com/lighttiger2505/sqls@latest
--- yay -S lua-language-server-git
--- go get github.com/nametake/golangci-lint-langserver
-
 -- vim.lsp.set_log_level("debug")
 local lspconfig = require 'lspconfig'
 local completion = require 'completion'
@@ -21,15 +9,16 @@ lspconfig.html.setup{
     capabilities = capabilities,
 }
 
-local on_attach = function(client, bufnr)
-    completion.on_attach()
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+vim.api.nvim_exec([[
+    hi LspReferenceRead ctermbg=180 guibg=#43464F gui=bold
+    hi LspReferenceText ctermbg=180 guibg=#43464F gui=bold
+    hi LspReferenceWrite ctermbg=180 guibg=#43464F gui=bold
+]], false)
 
-    vim.api.nvim_exec([[
+function LspBufferMappings()
+    vim.cmd([[
         augroup LSP_MAPPINGS
-            autocmd! * <buffer>
+            autocmd!
             " Use <Tab> and <S-Tab> to navigate through popup menu
             inoremap <buffer> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
             inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -54,48 +43,54 @@ local on_attach = function(client, bufnr)
             nnoremap <buffer> <silent> <leader>dn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
             nnoremap <buffer> <silent> <leader>dp <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
         augroup END
-    ]], false)
+    ]])
+end
+
+local on_attach = function(client, bufnr)
+    completion.on_attach()
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    LspBufferMappings()
 
     local opts = { noremap=true, silent=true }
-    if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "gq", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-        -- vim.api.nvim_exec([[
-        --     augroup lsp_formatting
-        --         autocmd! * <buffer>
-        --         autocmd BufWritePre * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
-        --     augroup END
-        -- ]], false)
+
+    if client.resolved_capabilities.code_action then
+        vim.cmd([[
+        augroup LSP_ORGANISE_IMPORTS
+            autocmd! * <buffer>
+            autocmd BufWritePre <buffer> lua LspOrganiseImports()
+        augroup END
+        ]])
     end
+
+    if client.resolved_capabilities.document_formatting then
+        buf_set_keymap("n", "<leader>gq", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        vim.cmd([[
+            augroup LSP_FORMATTING
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
+            augroup END
+        ]])
+    end
+
     if client.resolved_capabilities.document_range_formatting then
         buf_set_keymap("v", "gq", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
-    vim.api.nvim_exec([[
-        hi LspReferenceRead ctermbg=180 guibg=#43464F gui=bold
-        hi LspReferenceText ctermbg=180 guibg=#43464F gui=bold
-        hi LspReferenceWrite ctermbg=180 guibg=#43464F gui=bold
-    ]], false)
+    -- require'local.util'.Dump(client.resolved_capabilities)
     if client.resolved_capabilities.document_highlight then
         -- vim.api.nvim_command [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-        vim.api.nvim_exec([[
-            augroup lsp_document_highlight
+        vim.cmd([[
+            augroup LSP_DOCUMENT_HIGHLIGHT
                 autocmd! * <buffer>
                 autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
                 autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
                 autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
                 autocmd CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
             augroup END
-        ]], false)
-    end
-
-    if client.resolved_capabilities.code_action then
-        vim.api.nvim_exec([[
-        augroup lsp_formatting
-            autocmd! * <buffer>
-            autocmd BufWritePre * silent! lua vim.lsp.buf.formatting_sync(nil, 1000)
-            autocmd BufWritePre <buffer> lua lsp_organize_imports()
-        augroup END
-        ]], false)
+        ]])
     end
 end
 
@@ -109,11 +104,11 @@ lspconfig.yamlls.setup{ on_attach = on_attach }
 lspconfig.jsonls.setup {
     on_attach = on_attach,
     commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
+        Format = {
+            function()
+                vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+            end
+        }
     }
 }
 
@@ -133,10 +128,12 @@ lspconfig.sumneko_lua.setup {
         -- Setup your lua path
         path = vim.split(package.path, ';'),
       },
+
       diagnostics = {
         -- Get the language server to recognize the `vim` global
         globals = {'vim'},
       },
+
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
@@ -144,6 +141,7 @@ lspconfig.sumneko_lua.setup {
           [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
         },
       },
+
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
@@ -156,6 +154,7 @@ lspconfig.sumneko_lua.setup {
 lspconfig.gopls.setup{
     on_attach = on_attach,
     cmd = {"gopls", "serve"},
+
     settings = {
         gopls = {
             analyses = {
@@ -178,28 +177,28 @@ lspconfig.gopls.setup{
 }
 
 
-function lsp_organize_imports()
-  local context = { source = { organizeImports = true } }
-  vim.validate { context = { context, "table", true } }
+function LspOrganiseImports()
+    local context = { source = { organizeImports = true } }
+    vim.validate { context = { context, "table", true } }
 
-  local params = vim.lsp.util.make_range_params()
-  params.context = context
+    local params = vim.lsp.util.make_range_params()
+    params.context = context
 
-  local method = "textDocument/codeAction"
-  local timeout = 1000 -- ms
+    local method = "textDocument/codeAction"
+    local timeout = 1000 -- ms
 
-  local resp = vim.lsp.buf_request_sync(0, method, params, timeout)
-  if not resp then return end
+    local resp = vim.lsp.buf_request_sync(0, method, params, timeout)
+    if not resp then return end
 
-  for _, client in ipairs(vim.lsp.get_active_clients()) do
-    if resp[client.id] then
-      local result = resp[client.id].result
-      if not result or not result[1] then return end
+    for _, client in ipairs(vim.lsp.get_active_clients()) do
+        if resp[client.id] then
+            local result = resp[client.id].result
+            if not result or not result[1] then return end
 
-      local edit = result[1].edit
-      vim.lsp.util.apply_workspace_edit(edit)
+            local edit = result[1].edit
+            vim.lsp.util.apply_workspace_edit(edit)
+        end
     end
-  end
 end
 
 

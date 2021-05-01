@@ -2,13 +2,33 @@ command! Callers execute "lua vim.lsp.buf.incoming_calls()"
 command! References execute "lua vim.lsp.buf.references()"
 command! Rename execute "lua vim.lsp.buf.rename()"
 command! Implementation execute "lua vim.lsp.buf.implementation()"
+command! AddWorkspace execute "lua vim.lsp.buf.add_workspace_folder()"
+command! RemoveWorkspace execute "lua vim.lsp.buf.remove_workspace_folder()"
+command! ListWorkspace execute "lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"
+command! CodeAction execute "lua vim.lsp.buf.code_action()"
 
 command! Resize execute ":WinResizerStartResize"
 command! Reload execute "source $MYVIMRC"
 command! Filename execute ":echo expand('%:p')"
+command! YankFilename let @"=expand("%:t")
 command! Config execute ":e $MYVIMRC"
-command! -bang Notes call fzf#vim#files('~/Dropbox/Notes', <bang>0)
-command! -nargs=1 -bang Locate call fzf#run(fzf#wrap({'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
+
+
+function! s:install_dependencies() abort
+    execute "!npm -g install --prefix ~/.node_modules bash-language-server"
+    execute "!npm -g install --prefix ~/.node_modules vim-language-server"
+    execute "!npm -g install --prefix ~/.node_modules dockerfile-language-server-nodejs"
+    execute "!npm -g install --prefix ~/.node_modules vscode-html-languageserver-bin"
+    execute "!npm -g install --prefix ~/.node_modules vscode-json-languageserver"
+    execute "!npm -g install --prefix ~/.node_modules pyright"
+    execute "!npm -g install --prefix ~/.node_modules yaml-language-server"
+    execute "!npm -g install --prefix ~/.node_modules neovim"
+    execute "!go install github.com/lighttiger2505/sqls@latest"
+    execute "!go install github.com/nametake/golangci-lint-langserver@latest"
+    execute "!go install golang.org/x/tools/gopls@latest"
+    echo "Please run: yay -S lua-language-server-git"
+endfunction
+command! InstallDependencies :call <SID>install_dependencies()<CR>
 
 " This is an example how the increment function could have been implemented.
 " accepts a count, so that we can type 3<C-a> to add three to the next number.
@@ -43,17 +63,23 @@ function! s:todo() abort
         copen
     endif
 endfunction
-command! Todo call s:todo()
 
-command! -bang -nargs=* ArshamRg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+command! Todo call s:todo()
+command! -bang Notes call fzf#vim#files('~/Dropbox/Notes', <bang>0)
+command! -nargs=1 -bang Locate call fzf#run(fzf#wrap({'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
+" fix escape in fzf popup.
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.local/share/nvim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+    \ call fzf#vim#files(<q-args>, {'options': [
+    \ '--layout=reverse',
+    \ '--info=inline',
+    \ '--preview',
+    \ '~/.local/share/nvim/plugged/fzf.vim/bin/preview.sh {}'
+    \ ]}, <bang>0)
 
+nnoremap <silent> <C-p> :Files<CR>
 
 function! s:list_buffers()
     redir => list

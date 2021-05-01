@@ -1,4 +1,4 @@
-if exists("b:sql_plugin")
+if !exists("b:sql_plugin")
     finish
 endif
 let b:sql_plugin = 1

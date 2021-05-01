@@ -8,13 +8,11 @@ inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
-
 " Disable Ex mode
 nmap Q <Nop>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
@@ -23,8 +21,9 @@ nmap <Leader>ln <Plug>(ale_next_wrap)
 nmap <Leader>ll <Plug>(ale_lint)
 
 nnoremap g; g;zz
-" let the visual mode use the period. Try this to add : at the begining of all
-" lines: 0i:<ESC>j0vG.
+nnoremap g, g,zz
+" let the visual mode use the period. To add " at the begining of all lines:
+" I:<ESC>j0vG.
 vnoremap . :norm.<CR>
 
 noremap <Leader>y "+y
@@ -41,13 +40,22 @@ nnoremap ? ?\v
 vnoremap ? ?\v
 
 " Moving lines with alt key.
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
+" nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-j> :<c-u>execute 'm +'. v:count1<cr>==
+" nnoremap <A-k> :m .-2<CR>==
+nnoremap <A-k> :<c-u>execute 'm -1-'. v:count1<cr>==
+
+" inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-j> <Esc>:<c-u>execute 'm +'. v:count1<cr>==gi
+" inoremap <A-k> <Esc>:m .-2<CR>==gi
+inoremap <A-k> <Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi
+
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" Keep the visually selected area when indenting.
+xnoremap < <gv
+xnoremap > >gv
 
 " remapping CTRL-a because inside tmux you can't!
 nnoremap <M-a> <C-a>
@@ -61,20 +69,26 @@ nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 
 
-nnoremap <silent> <C-p> :Files<CR>
 nnoremap <leader>: :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
+
+command! -bang -nargs=* ArshamRg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
 nnoremap <silent> <leader>f :ArshamRg<CR>
 
+
 " auto correct spelling and jump back.
-function! FixLastSpellingError()
+function! s:FixLastSpellingError()
     let l:currentspell=&spell
     setlocal spell
     normal! [s1z=``
     let &l:spell=l:currentspell
 endfunction
-nnoremap <leader>sp :call FixLastSpellingError()<cr>
+nnoremap <leader>sp :call <SID>FixLastSpellingError()<cr>
 
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-j> <C-w><C-j>
@@ -82,7 +96,7 @@ nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
 
 if exists(':NvimTreeToggle')
-nmap <leader>tt :NvimTreeToggle<CR>
+    nmap <leader>tt :NvimTreeToggle<CR>
 endif
 
 nnoremap <silent> <leader>rg :Rg <C-R>=expand("<cword>")<CR><CR>
@@ -105,3 +119,14 @@ nnoremap <leader>tn gt
 nnoremap <leader>tp gT
 
 nnoremap <leader>@ :Vista finder nvim_lsp<cr>
+
+" Snippets
+nnoremap \html :-1read $HOME/.config/nvim/files/snippets/html/skelleton.txt<CR>3jwf>a
+
+" Terminal mappings.
+tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+tnoremap <C-w><C-h> <C-\><C-N><C-w>h
+tnoremap <C-w><C-j> <C-\><C-N><C-w>j
+tnoremap <C-w><C-k> <C-\><C-N><C-w>k
+tnoremap <C-w><C-l> <C-\><C-N><C-w>l

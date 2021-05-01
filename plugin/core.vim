@@ -6,31 +6,43 @@ set softtabstop=4
 set tabstop=4
 set expandtab
 set nowrap
+
 "Wrap lines at convenient points
 set linebreak
-set cursorline
+" set cursorline
+
 " set list lcs=tab:\┆\ " KEEP THIS SPACE      " needs to be here otherwise vim-go stops the indentLine
 set list listchars=tab:\ \ ,trail:·
-set undolevels=10000
 set ttyfast
 set clipboard+=unnamed
 set title
+set titlestring=%t
 set number
 set relativenumber
+
 " allow backspace in insert mode
 set backspace=indent,eol,start
 set history=10000
+
+set shada=!,'1000,<500,s10,h,f1,:100000,@100000,/100000
+
 " show commands at the bottom of the screen
 set showcmd
 set showmode
+
 " auto reload file if changed, need the following two
 " reload files changed outside vim
 set autoread
 au FileChangedShell * echo "Warning: File changed on disk"
 " au FocusGained,BufEnter * : checktime
+
 set shortmess=afilnxtToOFAI
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
 set hidden
 syntax on
+
 set viewoptions+=localoptions
 set viewdir=$HOME/.cache/vim/views
 
@@ -43,9 +55,11 @@ set suffixesadd+=.go,.py
 set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
+
 "stuff to ignore when tab completing
-set wildignore=*.o,*.obj,*~
+set wildignore=*.o,*.obj,*~,*.so
 set wildignore+=*vim/backups*
+set wildignore+=*.git/**,**/.git/**
 set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
 set wildignore+=vendor/rails/**
@@ -53,35 +67,33 @@ set wildignore+=vendor/cache/**
 set wildignore+=*.gem
 set wildignore+=*.pyc
 set wildignore+=log/**
-set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.zip,*.bg2,*.gz
 set wildignore+=*.db
 set wildignore+=**/node_modules/**
 set wildignore+=**/bin/**
-" set wildignore+=**/tmp/**
 set wildignore+=**/thesaurus/**
+
 " show possible completions.
 " set wildchar=<TAB>
 " To invoke: CTRL-X CTRL-O
 set omnifunc=syntaxcomplete#Complete
 set updatetime=100
+
 " adds <> to % matchpairs
 set matchpairs+=<:>
 set complete=.,w,b,u,t,i
+
 " can increment alphabetically too!
 set nrformats=bin,hex,alpha
 set foldmethod=manual
+
 "deepest fold is 3 levels
 set foldnestmax=3
+
 "dont fold by default
 set nofoldenable
 
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave * silent! mkview
-"   autocmd BufWinEnter * silent! loadview
-" augroup END
 set spelllang=en_gb
 set nospell
 set thesaurus+=~/.local/share/thesaurus/moby.txt
@@ -105,10 +117,15 @@ set nohlsearch
 set inccommand=nosplit
 set smartcase
 " Searches current directory recursively.
-set path=.,**,~/Projects/**
+set path=.,**,~/.config/nvim/**
 set showmatch
 
-set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden
+if executable("rg")
+    " set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden\ --glob\ \"!.git/*\"
+    set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
 
 set modelines=0
 set nomodeline
@@ -119,6 +136,7 @@ set fillchars+=vert:│
 
 set sessionoptions+=tabpages,globals
 
+set undolevels=10000
 let s:undodir=expand("~/.cache/nvim/undodir")
 let s:backdir=expand("~/.cache/nvim/backdir")
 
@@ -143,3 +161,10 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+
+let g:netrw_winsize = 20
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
