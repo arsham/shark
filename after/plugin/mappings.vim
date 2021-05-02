@@ -79,6 +79,7 @@ command! -bang -nargs=* ArshamRg
   \   fzf#vim#with_preview(), <bang>0)
 
 nnoremap <silent> <leader>f :ArshamRg<CR>
+nnoremap <silent> <leader>rg :ArshamRg <C-R>=expand("<cword>")<CR><CR>
 
 
 " auto correct spelling and jump back.
@@ -98,8 +99,6 @@ nnoremap <C-l> <C-w><C-l>
 if exists(':NvimTreeToggle')
     nmap <leader>tt :NvimTreeToggle<CR>
 endif
-
-nnoremap <silent> <leader>rg :Rg <C-R>=expand("<cword>")<CR><CR>
 
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>

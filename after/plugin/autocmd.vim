@@ -9,8 +9,6 @@ augroup END
 
 augroup FILETYPE_COMMANDS
     autocmd! * <buffer>
-    " autocmd BufNewFile,BufRead *.mkd,*.md,*.markdown setfiletype markdown
-    " autocmd BufNewFile,BufRead *.json setfiletype javascript
     autocmd Filetype python setlocal tabstop=4 softtabstop=4 shiftwidth=4
     autocmd Filetype make,automake setlocal noexpandtab
     autocmd Filetype markdown setlocal spell
@@ -25,24 +23,10 @@ augroup FILETYPE_COMMANDS
 
     " resize Split When the window is resized
     au VimResized * :wincmd =
-    " autocmd Filetype go <buffer> command! Goimports execute "!goimports -w %"
 augroup END
-
-" For now we are testing the whitespace plugin.
-" augroup TRAILING_SPACES
-"     autocmd!
-"     " Auto remove trailing spaces
-"     autocmd BufWritePre * silent! :%s/\s\+$//e
-" augroup END
 
 augroup AUTO_NUMBERS
     autocmd!
     autocmd WinEnter * set relativenumber
     autocmd WinLeave * set norelativenumber
 augroup END
-
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave * silent! mkview
-"   autocmd BufWinEnter * silent! loadview
-" augroup END

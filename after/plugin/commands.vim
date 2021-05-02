@@ -92,6 +92,7 @@ function! s:delete_buffers(lines)
     execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
 endfunction
 
+" Delete buffers interactivly with fzf.
 command! BD call fzf#run(fzf#wrap({
             \ 'source': s:list_buffers(),
             \ 'sink*': { lines -> s:delete_buffers(lines) },

@@ -48,7 +48,6 @@ let g:fzf_action = {
             \ ':': function('s:goto_line')
             \ }
 
-"let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
 " https://github.com/junegunn/fzf.vim/issues/162
 let g:fzf_commands_expect = 'enter'
 let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
@@ -76,10 +75,6 @@ let g:powerline#extensions#ale#enabled = 1
 let g:ale_set_loclist = 1
 " let g:ale_set_quickfix = 1
 let g:ale_open_list = 0
-
-" let g:ale_sign_error = '💣'
-" let g:ale_sign_warning = '❗'
-" let g:ale_sign_info = 'ℹ️'
 
 " anything larger than 512MB is going to be ignores by syntax highlighting, events, etc.
 let g:LargeFile = 512

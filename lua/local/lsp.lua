@@ -5,9 +5,6 @@ local completion = require 'completion'
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-lspconfig.html.setup{
-    capabilities = capabilities,
-}
 
 vim.api.nvim_exec([[
     hi LspReferenceRead ctermbg=180 guibg=#43464F gui=bold
@@ -95,14 +92,45 @@ local on_attach = function(client, bufnr)
 end
 
 
-lspconfig.bashls.setup{ on_attach = on_attach }
-lspconfig.vimls.setup{ on_attach = on_attach }
-lspconfig.dockerls.setup{ on_attach = on_attach }
-lspconfig.pyright.setup{ on_attach = on_attach }
-lspconfig.yamlls.setup{ on_attach = on_attach }
+lspconfig.bashls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.vimls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.dockerls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.pyright.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.yamlls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
+lspconfig.html.setup{
+    capabilities = capabilities,
+}
+
+-- lspconfig.sqls.setup{
+--     on_attach = function(client)
+--         client.resolved_capabilities.execute_command = true
+--         require'sqls'.setup{}
+--     end
+-- }
 
 lspconfig.jsonls.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     commands = {
         Format = {
             function()
@@ -119,40 +147,42 @@ local sumneko_binary = "/usr/bin/lua-language-server"
 
 lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = vim.split(package.path, ';'),
-      },
+    capabilities = capabilities,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';'),
+            },
 
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
 
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                },
+            },
+
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
         },
-      },
-
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
     },
-  },
 }
 
 --- gopls
 lspconfig.gopls.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = {"gopls", "serve"},
 
     settings = {
@@ -202,6 +232,7 @@ function LspOrganiseImports()
 end
 
 
+-- This is not used for the time being.
 function goimports(timeout_ms)
     local context = { source = { organizeImports = true } }
     vim.validate { context = { context, "t", true } }
@@ -231,16 +262,3 @@ function goimports(timeout_ms)
         vim.lsp.buf.execute_command(action)
     end
 end
-
--- vim.api.nvim_exec([[
---     augroup lsp_goimports
---         autocmd! * <buffer>
---         autocmd BufWritePre *.go lua goimports(1000)
---     augroup END
--- ]], false)
-
--- local servers = {"sumneko_lua",  "jsonls", "html", "yamlls", "pyright", "dockerls", "vimls", "bashls"}
--- -- local servers = {"sumneko_lua", "gopls", "jsonls", "html", "yamlls", "pyright", "dockerls", "vimls", "bashls"}
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup { on_attach = on_attach }
--- end
