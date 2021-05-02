@@ -1,11 +1,15 @@
 set autoindent
 set smartindent
+" smart auto-indent numbered lists.
+set formatoptions+=n
 set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
 set nowrap
+" let the h and l go out of the boundry of a line.
+set whichwrap+=h,l
 
 "Wrap lines at convenient points
 set linebreak
@@ -19,6 +23,7 @@ set title
 set titlestring=%t
 set number
 set relativenumber
+set lazyredraw
 
 " allow backspace in insert mode
 set backspace=indent,eol,start
@@ -82,11 +87,10 @@ set complete=.,w,b,u,t,i
 
 " can increment alphabetically too!
 set nrformats=bin,hex,alpha
-set foldmethod=manual
 
+set foldmethod=manual
 "deepest fold is 3 levels
 set foldnestmax=3
-
 "dont fold by default
 set nofoldenable
 
@@ -122,12 +126,12 @@ if executable("rg")
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-
+" let the visual block mode go over empty characters.
+set virtualedit=block
 set modelines=0
 set nomodeline
 
 set splitbelow splitright
-" Removes pipes | that act as seperators on splits
 set fillchars+=vert:│
 
 set sessionoptions+=tabpages,globals
