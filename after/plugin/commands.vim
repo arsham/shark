@@ -24,14 +24,14 @@ endfunction
 
 
 function! s:install_dependencies() abort
-    execute "!npm -g install --prefix ~/.node_modules bash-language-server"
-    execute "!npm -g install --prefix ~/.node_modules vim-language-server"
-    execute "!npm -g install --prefix ~/.node_modules dockerfile-language-server-nodejs"
-    execute "!npm -g install --prefix ~/.node_modules vscode-html-languageserver-bin"
-    execute "!npm -g install --prefix ~/.node_modules vscode-json-languageserver"
-    execute "!npm -g install --prefix ~/.node_modules pyright"
-    execute "!npm -g install --prefix ~/.node_modules yaml-language-server"
-    execute "!npm -g install --prefix ~/.node_modules neovim"
+    execute "!npm -g install --prefix ~/.node_modules bash-language-server@latest"
+    execute "!npm -g install --prefix ~/.node_modules vim-language-server@latest"
+    execute "!npm -g install --prefix ~/.node_modules dockerfile-language-server-nodejs@latest"
+    execute "!npm -g install --prefix ~/.node_modules vscode-html-languageserver-bin@latest"
+    execute "!npm -g install --prefix ~/.node_modules vscode-json-languageserver@latest"
+    execute "!npm -g install --prefix ~/.node_modules pyright@latest"
+    execute "!npm -g install --prefix ~/.node_modules yaml-language-server@latest"
+    execute "!npm -g install --prefix ~/.node_modules neovim@latest"
     execute "!go install github.com/lighttiger2505/sqls@latest"
     execute "!go install github.com/nametake/golangci-lint-langserver@latest"
     execute "!go install golang.org/x/tools/gopls@latest"
