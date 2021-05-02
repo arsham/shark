@@ -12,6 +12,15 @@ command! Reload execute "source $MYVIMRC"
 command! Filename execute ":echo expand('%:p')"
 command! YankFilename let @"=expand("%:t")
 command! Config execute ":e $MYVIMRC"
+command! MergeConflict :grep "<<<<<<< HEAD"
+
+
+" Insert lorem ipsum.
+command! LoremLines call s:lorem_line()
+function! s:lorem_line()
+    let l:len = input("How many lines? ")
+    execute ".!lorem -l ".l:len
+endfunction
 
 
 function! s:install_dependencies() abort
