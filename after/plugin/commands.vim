@@ -14,6 +14,8 @@ command! YankFilename let @"=expand("%:t")
 command! Config execute ":e $MYVIMRC"
 command! MergeConflict :grep "<<<<<<< HEAD"
 command! Todo silent! execute "grep todo|fixme **/*" | copen
+command! -bang Notes call fzf#vim#files('~/Dropbox/Notes', <bang>0)
+command! -nargs=1 -bang Locate call fzf#run(fzf#wrap({'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
 
 
 " Insert lorem ipsum.
@@ -51,24 +53,27 @@ command! InstallDependencies :call <SID>install_dependencies()<CR>
 "     exe "norm!" "\<C-a>"
 "     return ''
 " endfun
-
 "nnoremap <silent> <C-a> @=Increment()<cr>
 
-command! -bang Notes call fzf#vim#files('~/Dropbox/Notes', <bang>0)
-command! -nargs=1 -bang Locate call fzf#run(fzf#wrap({'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
 " fix escape in fzf popup.
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': [
-    \ '--layout=reverse',
-    \ '--info=inline',
-    \ '--preview',
-    \ '~/.local/share/nvim/plugged/fzf.vim/bin/preview.sh {}'
-    \ ]}, <bang>0)
+" Opens the fzf UI with ripgrep search.
+command! -bang -nargs=* ArshamRg
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview(), <bang>0)
 
-nnoremap <silent> <C-p> :Files<CR>
+" Show all files in the cwd in fzf UI.
+command! -bang -nargs=? -complete=dir Files
+            \ call fzf#vim#files(<q-args>, {'options': [
+            \ '--layout=reverse',
+            \ '--info=inline',
+            \ '--preview',
+            \ '~/.local/share/nvim/plugged/fzf.vim/bin/preview.sh {}'
+            \ ]}, <bang>0)
+
 
 function! s:list_buffers()
     redir => list

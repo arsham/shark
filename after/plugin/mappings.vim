@@ -73,12 +73,10 @@ nnoremap <leader>: :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
 
-command! -bang -nargs=* ArshamRg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
+nnoremap <silent> <C-p> :Files<CR>
+" Open the search tool.
 nnoremap <silent> <leader>f :ArshamRg<CR>
+" Search over current word.
 nnoremap <silent> <leader>rg :ArshamRg <C-R>=expand("<cword>")<CR><CR>
 
 
