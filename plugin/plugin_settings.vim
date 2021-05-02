@@ -20,9 +20,6 @@ let g:completion_chain_complete_list = [
 let g:nvim_tree_disable_netrw = 0
 let g:nvim_tree_hijack_netrw = 0
 
-let g:winresizer_vert_resize = 5
-let g:winresizer_horiz_resize = 1
-
 " better whitespace settings
 let g:strip_whitelines_at_eof = 1
 let g:strip_whitespace_on_save = 1

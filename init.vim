@@ -37,7 +37,6 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'dhruvasagar/vim-zoom'
     Plug 'kshenoy/vim-signature'       " Display and navigate marks
-    Plug 'simeji/winresizer'
 
 "{{{ Editing }}}
     Plug 'mbbill/undotree'
@@ -72,6 +71,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'austintaylor/vim-indentobject'
 
 "{{{ SQL }}}
+    " Plug 'nanotee/sqls.nvim'
     " Plug 'joereynolds/SQHell.vim'
     " Plug 'vim-scripts/SQLUtilities'  " requires the align plugin below
     " Plug 'vim-scripts/Align'       " conflicts with table mode pluing

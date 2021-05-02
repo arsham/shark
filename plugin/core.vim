@@ -26,7 +26,6 @@ set history=10000
 
 set shada=!,'1000,<500,s10,h,f1,:100000,@100000,/100000
 
-" show commands at the bottom of the screen
 set showcmd
 set showmode
 
@@ -74,9 +73,6 @@ set wildignore+=**/node_modules/**
 set wildignore+=**/bin/**
 set wildignore+=**/thesaurus/**
 
-" show possible completions.
-" set wildchar=<TAB>
-" To invoke: CTRL-X CTRL-O
 set omnifunc=syntaxcomplete#Complete
 set updatetime=100
 
