@@ -136,6 +136,7 @@ set fillchars+=vert:│
 
 set sessionoptions+=tabpages,globals
 
+set undofile
 set undolevels=10000
 let s:undodir=expand("~/.cache/nvim/undodir")
 let s:backdir=expand("~/.cache/nvim/backdir")
@@ -146,10 +147,6 @@ endif
 if !isdirectory(s:backdir)
     call mkdir(s:backdir, 'p')
 endif
-
-set undofile
-"set noswapfile
-"set nobackup
 
 execute 'set undodir=' . s:undodir
 execute 'set backupdir=' . s:backdir
