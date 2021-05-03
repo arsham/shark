@@ -121,7 +121,7 @@ nnoremap <leader>@ :Vista finder nvim_lsp<cr>
 nnoremap \html :-1read $HOME/.config/nvim/files/snippets/html/skelleton.txt<CR>3jwf>a
 
 " Terminal mappings.
-tnoremap <Esc> <C-\><C-n>
+tnoremap <leader><Esc> <C-\><C-n>
 tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 tnoremap <C-w><C-h> <C-\><C-N><C-w>h
 tnoremap <C-w><C-j> <C-\><C-N><C-w>j
