@@ -30,7 +30,6 @@ set backspace=indent,eol,start
 set history=10000
 
 set shada=!,'1000,<500,s10,h,f1,:100000,@100000,/100000
-
 set showcmd
 set showmode
 
@@ -40,9 +39,21 @@ set autoread
 au FileChangedShell * echo "Warning: File changed on disk"
 " au FocusGained,BufEnter * : checktime
 
-set shortmess=afilnxtToOFAI
-" Avoid showing message extra message when using completion
-set shortmess+=c
+set shortmess+=f	   " Use "(3 of 5)" instead of "(file 3 of 5)"
+set shortmess+=i	   " Use "[noeol]" instead of "[Incomplete last line]"
+set shortmess+=l	   " Use "999L, 888C" instead of "999 lines, 888 characters"
+set shortmess+=m       " Use "[+]" instead of "[Modified]"
+set shortmess+=n	   " Use "[New]" instead of "[New File]"
+set shortmess+=r	   " Use "[RO]" instead of "[readonly]"
+set shortmess+=x	   " Use "[dos]" instead of "[dos format]", "[unix]" instead of [unix format]" and "[mac]" instead of "[mac format]".
+" set shortmess+=a	   " All of the above abbreviations
+set shortmess+=o	   " Overwrite message for writing a file with subsequent message for reading a file (useful for ":wn" or when 'autowrite' on)
+set shortmess+=O	   " Message for reading a file overwrites any previous message.  Also for quickfix message (e.g., ":cn").
+set shortmess+=t       " Truncate file message at the start if it is too long to fit on the command-line, "<" will appear in the left most column.  Ignored in Ex mode.
+set shortmess+=T	   " Truncate other messages in the middle if they are too long to fit on the command line.  "..." will appear in the middle.  Ignored in Ex mode.
+set shortmess+=A	   " Don't give the "ATTENTION" message when an existing swap file is found.
+set shortmess+=I	   " Don't give the intro message when starting Vim |:intro|.
+set shortmess+=c       " Avoid showing message extra message when using completion
 
 set hidden
 syntax on
@@ -53,9 +64,11 @@ set viewdir=$HOME/.cache/vim/views
 " better diff view. This will make sure the inserted part is separated, rather
 " than mangled in the previous blob.
 set diffopt+=indent-heuristic
-set suffixesadd+=.go,.py
+set suffixesadd+=.go
+set suffixesadd+=.py
+set suffixesadd+=.lua
 
-"enable ctrl-n and ctrl-p to scroll thru matches
+"enable ctrl-n and ctrl-p to scroll through matches
 set wildmenu
 set wildmode=longest:full,full
 set wildignorecase
@@ -89,7 +102,6 @@ set complete=.,w,b,u,t,i
 set nrformats=bin,hex,alpha
 
 set foldmethod=manual
-"deepest fold is 3 levels
 set foldnestmax=3
 "dont fold by default
 set nofoldenable

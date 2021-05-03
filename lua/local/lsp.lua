@@ -6,11 +6,11 @@ local completion = require 'completion'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.api.nvim_exec([[
+vim.cmd([[
     hi LspReferenceRead ctermbg=180 guibg=#43464F gui=bold
     hi LspReferenceText ctermbg=180 guibg=#43464F gui=bold
     hi LspReferenceWrite ctermbg=180 guibg=#43464F gui=bold
-]], false)
+]])
 
 function LspBufferMappings()
     vim.cmd([[
@@ -78,7 +78,6 @@ local on_attach = function(client, bufnr)
 
     -- require'local.util'.Dump(client.resolved_capabilities)
     if client.resolved_capabilities.document_highlight then
-        -- vim.api.nvim_command [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
         vim.cmd([[
             augroup LSP_DOCUMENT_HIGHLIGHT
                 autocmd! * <buffer>
@@ -121,6 +120,7 @@ lspconfig.html.setup{
     capabilities = capabilities,
 }
 
+-- It causes vim to pause a second when it quits.
 -- lspconfig.sqls.setup{
 --     on_attach = function(client)
 --         client.resolved_capabilities.execute_command = true
@@ -140,8 +140,6 @@ lspconfig.jsonls.setup {
     }
 }
 
---- settings for sumneko lua lsp
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 local sumneko_root_path = '/usr/bin/lua-language-server'
 local sumneko_binary = "/usr/bin/lua-language-server"
 
@@ -149,17 +147,15 @@ lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+
     settings = {
         Lua = {
             runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
-                -- Setup your lua path
                 path = vim.split(package.path, ';'),
             },
 
             diagnostics = {
-                -- Get the language server to recognize the `vim` global
                 globals = {'vim'},
             },
 
