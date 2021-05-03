@@ -20,8 +20,6 @@ nmap <Leader>lp <Plug>(ale_previous_wrap)
 nmap <Leader>ln <Plug>(ale_next_wrap)
 nmap <Leader>ll <Plug>(ale_lint)
 
-nnoremap g; g;zz
-nnoremap g, g,zz
 " let the visual mode use the period. To add " at the begining of all lines:
 " I:<ESC>j0vG.
 vnoremap . :norm.<CR>
@@ -105,6 +103,8 @@ nnoremap <C-y> 2<C-y>
 nmap G Gzz
 nmap n nzz
 nmap N Nzz
+nnoremap g; g;zz
+nnoremap g, g,zz
 
 " Clear hlsearch
 nnoremap <silent> <Esc><Esc> :<C-u>:nohlsearch<CR>
@@ -127,3 +127,11 @@ tnoremap <C-w><C-h> <C-\><C-N><C-w>h
 tnoremap <C-w><C-j> <C-\><C-N><C-w>j
 tnoremap <C-w><C-k> <C-\><C-N><C-w>k
 tnoremap <C-w><C-l> <C-\><C-N><C-w>l
+
+" Add comma at the end of the line.
+inoremap <M-,> <Esc>m`A,<Esc>``a
+nnoremap <M-,> m`A,<Esc>``
+
+" Insert a pair of brackets and go into insert mode.
+inoremap <M-{> <Esc>A {<CR>}<Esc>O
+nnoremap <M-{> A {<CR>}<Esc>O
