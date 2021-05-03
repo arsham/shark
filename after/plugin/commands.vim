@@ -83,7 +83,7 @@ function! s:list_buffers()
 endfunction
 
 function! s:delete_buffers(lines)
-    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+    execute 'bd ' join(map(a:lines, {_, line -> split(line)[0]}))
 endfunction
 
 " Delete buffers interactivly with fzf.
