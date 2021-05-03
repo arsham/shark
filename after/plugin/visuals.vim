@@ -24,6 +24,24 @@ autocmd ColorScheme sonokai hi Pmenu guibg=#3B404D ctermbg=236 guifg=#dcdfe4 cte
 autocmd ColorScheme sonokai hi ALEError ctermbg=167 ctermfg=Black
 autocmd ColorScheme sonokai hi ALEWarning ctermbg=179 ctermfg=Black
 
+" Terminal colours.
+autocmd ColorScheme sonokai unlet g:terminal_color_0
+autocmd ColorScheme sonokai unlet g:terminal_color_1
+autocmd ColorScheme sonokai unlet g:terminal_color_2
+autocmd ColorScheme sonokai unlet g:terminal_color_3
+autocmd ColorScheme sonokai unlet g:terminal_color_4
+autocmd ColorScheme sonokai unlet g:terminal_color_5
+autocmd ColorScheme sonokai unlet g:terminal_color_6
+autocmd ColorScheme sonokai unlet g:terminal_color_7
+autocmd ColorScheme sonokai unlet g:terminal_color_8
+autocmd ColorScheme sonokai unlet g:terminal_color_9
+autocmd ColorScheme sonokai unlet g:terminal_color_10
+autocmd ColorScheme sonokai unlet g:terminal_color_11
+autocmd ColorScheme sonokai unlet g:terminal_color_12
+autocmd ColorScheme sonokai unlet g:terminal_color_13
+autocmd ColorScheme sonokai unlet g:terminal_color_14
+autocmd ColorScheme sonokai unlet g:terminal_color_15
+
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_style = 'andromeda'
 colorscheme sonokai

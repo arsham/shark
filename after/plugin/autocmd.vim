@@ -27,6 +27,12 @@ augroup END
 
 augroup AUTO_NUMBERS
     autocmd!
-    autocmd WinEnter,FocusGained,BufEnter,VimEnter * set relativenumber
-    autocmd WinLeave,FocusLost * set norelativenumber
+    autocmd WinEnter,FocusGained,BufEnter,VimEnter * setlocal relativenumber
+    autocmd WinLeave,FocusLost * setlocal norelativenumber
+augroup END
+
+augroup TERMINAL_GROUP
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd TermEnter * setlocal nonumber norelativenumber
 augroup END
