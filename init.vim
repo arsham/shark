@@ -17,13 +17,12 @@ endfunction
 call plug#begin(stdpath('data') . '/plugged')
 
 "{{{ Core/System utilities }}}
-    Plug 'kyazdani42/nvim-tree.lua'
     Plug 'vim-scripts/LargeFile'
-    Plug 'itchyny/vim-qfedit'
     Plug 'kevinhwang91/nvim-bqf'       " popup floating window on quickfix list
     Plug 'gcmt/taboo.vim'
     Plug 'tweekmonster/startuptime.vim'
     Plug 'nvim-lua/plenary.nvim'       " dependency for other plugins
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
 
 "{{{ git }}}
     Plug 'tpope/vim-fugitive'
@@ -49,7 +48,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'mg979/vim-visual-multi'
 
 "{{{ Searching }}}
-    Plug 'junegunn/fzf'                ",  { 'dir': $HOME.'/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
 
 "{{{ Languages }}}

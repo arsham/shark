@@ -127,3 +127,13 @@ let g:vista#renderer#icons = {
             \ }
 let g:vista_close_on_jump = 1
 let g:surround_no_insert_mappings = 1
+
+if has('g:firenvim_config')
+    let fc = g:firenvim_config['localSettings']
+    let fc['https?://twitter.com/'] = { 'takeover': 'never', 'priority': 1 }
+    let fc['.*'] = { 'selector': 'textarea' }
+    let fc['mail.google.com*'] = {
+        \ 'selector': 'div[role="textbox"]',
+        \ 'priority': 1,
+        \ }
+endif
