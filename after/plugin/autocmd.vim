@@ -1,4 +1,4 @@
-" Make Sure that Vim returns to the same line when we reopen a file"
+" Make Sure that Vim returns to the same line when we reopen a file.
 augroup LINE_RETURN
     autocmd! * <buffer>
     autocmd BufReadPost *
@@ -22,17 +22,11 @@ augroup FILETYPE_COMMANDS
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 
     " resize Split When the window is resized
-    au VimResized * :wincmd =
-augroup END
+    autocmd VimResized * :wincmd =
 
-augroup AUTO_NUMBERS
-    autocmd!
-    autocmd WinEnter,FocusGained,BufEnter,VimEnter * setlocal relativenumber
-    autocmd WinLeave,FocusLost * setlocal norelativenumber
-augroup END
+    " fix escape in fzf popup.
+    autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
-augroup TERMINAL_GROUP
-    autocmd!
-    autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd TermEnter * setlocal nonumber norelativenumber
+    " browser setup.
+    autocmd BufEnter github.com_*.txt set filetype=markdown
 augroup END

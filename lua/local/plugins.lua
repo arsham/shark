@@ -21,7 +21,7 @@ require("lualine").setup{
     sections = {
         lualine_a = {{'mode', {upper = true}}},
         lualine_b = {{'branch', {icon= ''}}},
-        lualine_c = {{'filename', { file_status = true, full_path = true}}},
+        lualine_c = {{'filename', { file_status = true, shorten = false, path = 2}}},
         lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location',  {'diagnostics', {sources= {'nvim_lsp', 'ale'}, color_error= '#aa0000', color_warn= '#aa0000'}}},

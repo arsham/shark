@@ -1,7 +1,6 @@
 set autoindent
 set smartindent
-" smart auto-indent numbered lists.
-set formatoptions+=n
+set formatoptions+=n              " smart auto-indent numbered lists.
 set smarttab
 set shiftwidth=4
 set softtabstop=4
@@ -11,8 +10,7 @@ set nowrap
 " let the h and l go out of the boundry of a line.
 set whichwrap+=h,l
 
-"Wrap lines at convenient points
-set linebreak
+set linebreak               " Wrap lines at convenient points
 " set cursorline
 
 " set list lcs=tab:\┆\ " KEEP THIS SPACE      " needs to be here otherwise vim-go stops the indentLine
@@ -25,8 +23,7 @@ set number
 set relativenumber
 set lazyredraw
 
-" allow backspace in insert mode
-set backspace=indent,eol,start
+set backspace=indent,eol,start                " allow backspace in insert mode
 set history=10000
 
 set shada=!,'1000,<500,s10,h,f1,:100000,@100000,/100000
@@ -97,14 +94,10 @@ set updatetime=100
 " adds <> to % matchpairs
 set matchpairs+=<:>
 set complete=.,w,b,u,t,i
-
-" can increment alphabetically too!
-set nrformats=bin,hex,alpha
-
+set nrformats=bin,hex,alpha           " can increment alphabetically too!
 set foldmethod=manual
 set foldnestmax=3
-"dont fold by default
-set nofoldenable
+set nofoldenable                      "dont fold by default
 
 set spelllang=en_gb
 set nospell
@@ -125,15 +118,13 @@ set sidescroll=1
 set incsearch
 set ignorecase
 set nohlsearch
-" allow for live substitution
-set inccommand=nosplit
+set inccommand=nosplit         " allow for live substitution
 set smartcase
 " Searches current directory recursively.
 set path=.,**,~/.config/nvim/**
 set showmatch
 
 if executable("rg")
-    " set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden\ --glob\ \"!.git/*\"
     set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif

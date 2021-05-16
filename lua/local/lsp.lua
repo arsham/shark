@@ -20,10 +20,8 @@ function LspBufferMappings()
             inoremap <buffer> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
             inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-            " also see https://github.com/sparkcanon/nvim/blob/master/lua/lsp.lua
             nnoremap <buffer> <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
             nnoremap <buffer> <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-            nnoremap <buffer> <silent> gt <cmd>lua vim.lsp.buf.type_definition()<CR>
             nnoremap <buffer> <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
             nnoremap <buffer> <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
             nnoremap <buffer> <silent> <leader>r <cmd>lua vim.lsp.buf.rename()<CR>

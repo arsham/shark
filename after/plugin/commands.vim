@@ -1,22 +1,25 @@
-command! Callers execute "lua vim.lsp.buf.incoming_calls()"
-command! References execute "lua vim.lsp.buf.references()"
-command! Rename execute "lua vim.lsp.buf.rename()"
-command! Implementation execute "lua vim.lsp.buf.implementation()"
-command! AddWorkspace execute "lua vim.lsp.buf.add_workspace_folder()"
+command! Callers         execute "lua vim.lsp.buf.incoming_calls()"
+command! Callees         execute "lua vim.lsp.buf.outgoing_calls()"
+command! References      execute "lua vim.lsp.buf.references()"
+command! Rename          execute "lua vim.lsp.buf.rename()"
+command! Implementation  execute "lua vim.lsp.buf.implementation()"
+command! AddWorkspace    execute "lua vim.lsp.buf.add_workspace_folder()"
 command! RemoveWorkspace execute "lua vim.lsp.buf.remove_workspace_folder()"
-command! ListWorkspace execute "lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"
-command! CodeAction execute "lua vim.lsp.buf.code_action()"
+command! ListWorkspace   execute "lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"
+command! CodeAction      execute "lua vim.lsp.buf.code_action()"
+command! TypeDefinition  execute "lua vim.lsp.buf.type_definition()"
+command! Definition      execute "lua vim.lsp.buf.definition()"
 
-command! Resize execute ":WinResizerStartResize"
-command! Reload execute "source $MYVIMRC"
-command! Filename execute ":echo expand('%:p')"
-command! YankFilename let @"=expand("%:t")
-command! Config execute ":e $MYVIMRC"
-command! MergeConflict :grep "<<<<<<< HEAD"
-command! Todo silent! execute "grep todo|fixme **/*" | copen
-command! -bang Notes call fzf#vim#files('~/Dropbox/Notes', <bang>0)
+command! Reload          execute "source $MYVIMRC"
+command! Filename        execute ":echo expand('%:p')"
+command! Config          execute ":e $MYVIMRC"
+command! Todo    silent! execute "grep todo|fixme **/*" | copen
+
+command! YankFilename    let @"=expand("%:t")
+command! YankFilepath    let @"=expand("%:p")
+command! MergeConflict   :grep "<<<<<<< HEAD"
+command! -bang Notes     call fzf#vim#files('~/Dropbox/Notes', <bang>0)
 command! -nargs=1 -bang Locate call fzf#run(fzf#wrap({'source': 'locate <q-args>', 'options': '-m'}, <bang>0))
-
 
 " Insert lorem ipsum.
 command! LoremLines call s:lorem_line()
@@ -24,7 +27,6 @@ function! s:lorem_line()
     let l:len = input("How many lines? ")
     execute ".!lorem -l ".l:len
 endfunction
-
 
 function! s:install_dependencies() abort
     execute "!npm -g install --prefix ~/.node_modules bash-language-server@latest"
@@ -55,10 +57,6 @@ command! InstallDependencies :call <SID>install_dependencies()<CR>
 " endfun
 "nnoremap <silent> <C-a> @=Increment()<cr>
 
-" fix escape in fzf popup.
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
-
-
 " Opens the fzf UI with ripgrep search.
 command! -bang -nargs=* ArshamRg
             \ call fzf#vim#grep(
@@ -74,7 +72,6 @@ command! -bang -nargs=? -complete=dir Files
             \ '~/.local/share/nvim/plugged/fzf.vim/bin/preview.sh {}'
             \ ]}, <bang>0)
 
-
 function! s:list_buffers()
     redir => list
     silent ls
@@ -87,8 +84,21 @@ function! s:delete_buffers(lines)
 endfunction
 
 " Delete buffers interactivly with fzf.
-command! BD call fzf#run(fzf#wrap({
+command! BDelete call fzf#run(fzf#wrap({
             \ 'source': s:list_buffers(),
             \ 'sink*': { lines -> s:delete_buffers(lines) },
             \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
             \ }))
+command! BufDelete BDelete
+
+function! s:delete_args(lines)
+    execute 'argd ' join(a:lines)
+endfunction
+
+" Delete args interactivly with fzf.
+command! ArgsDelete call fzf#run(fzf#wrap({
+            \ 'source': argv(),
+            \ 'sink*': { lines -> s:delete_args(lines) },
+            \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+            \ }))
+command! ArgDelete ArgsDelete
