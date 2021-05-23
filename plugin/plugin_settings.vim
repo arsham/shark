@@ -6,6 +6,8 @@ let g:completion_enable_snippet = 'UltiSnips'
 let g:UltiSnipsExpandTrigger="<c-s>"
 
 let g:completion_enable_auto_hover = 0
+let g:completion_enable_auto_popup = 1
+let g:completion_enable_auto_signature = 1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 let g:completion_trigger_keyword_length = 2 " default = 1
 let g:completion_auto_change_source = 1
@@ -129,8 +131,10 @@ let g:vista_close_on_jump = 1
 let g:surround_no_insert_mappings = 1
 
 if has('g:firenvim_config')
+    set laststatus = 0
     let fc = g:firenvim_config['localSettings']
     let fc['https?://twitter.com/'] = { 'takeover': 'never', 'priority': 1 }
+    let fc['https?://.*trello.com/'] = { 'takeover': 'never', 'priority': 1 }
     let fc['.*'] = { 'selector': 'textarea' }
     let fc['mail.google.com*'] = {
         \ 'selector': 'div[role="textbox"]',

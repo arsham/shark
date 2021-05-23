@@ -29,4 +29,5 @@ augroup FILETYPE_COMMANDS
 
     " browser setup.
     autocmd BufEnter github.com_*.txt set filetype=markdown
+    autocmd BufEnter play.golang.org_*.txt set filetype=go
 augroup END

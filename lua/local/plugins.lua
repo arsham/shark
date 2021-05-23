@@ -44,7 +44,7 @@ local treesitter_configs = require('nvim-treesitter.configs')
 
 treesitter_configs.setup {
     ensure_installed = "maintained",
-    indent = {enable = true},
+    indent = {enable = false},
     fold = {enable = true},
     highlight = {enable = true},
 

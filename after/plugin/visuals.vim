@@ -53,4 +53,4 @@ let g:sonokai_disable_italic_comment = 1
 let g:sonokai_style = 'andromeda'
 colorscheme sonokai
 
-set guifont=DejaVuSansMono\ Nerd\ Font:h21
+set guifont=DejaVuSansMono\ Nerd\ Font:h10
