@@ -9,11 +9,8 @@ set expandtab
 set nowrap
 " let the h and l go out of the boundry of a line.
 set whichwrap+=h,l
-
 set linebreak               " Wrap lines at convenient points
-" set cursorline
 
-" set list lcs=tab:\┆\ " KEEP THIS SPACE      " needs to be here otherwise vim-go stops the indentLine
 set list listchars=tab:\ \ ,trail:·
 set ttyfast
 set clipboard+=unnamed

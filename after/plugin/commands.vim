@@ -57,12 +57,6 @@ command! InstallDependencies :call <SID>install_dependencies()<CR>
 " endfun
 "nnoremap <silent> <C-a> @=Increment()<cr>
 
-" Opens the fzf UI with ripgrep search.
-command! -bang -nargs=* ArshamRg
-            \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
-            \   fzf#vim#with_preview(), <bang>0)
-
 " Show all files in the cwd in fzf UI.
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(<q-args>, {'options': [

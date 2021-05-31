@@ -25,14 +25,8 @@ vnoremap ? ?\v
 " Moving lines with alt key.
 nnoremap <A-j> :<c-u>execute 'm +'. v:count1<cr>==
 nnoremap <A-k> :<c-u>execute 'm -1-'. v:count1<cr>==
-" nnoremap <A-j> :m .+1<CR>==
-" nnoremap <A-k> :m .-2<CR>==
-
 inoremap <A-j> <Esc>:<c-u>execute 'm +'. v:count1<cr>==gi
 inoremap <A-k> <Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi
-" inoremap <A-j> <Esc>:m .+1<CR>==gi
-" inoremap <A-k> <Esc>:m .-2<CR>==gi
-
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
@@ -46,9 +40,6 @@ nnoremap g= gg=Gg``
 " insert empty lines with motions, can be 10[<space>
 nnoremap <silent> [<space>  :<c-u>put!=repeat([''],v:count)<bar>']+1<cr>
 nnoremap <silent> ]<space>  :<c-u>put =repeat([''],v:count)<bar>'[-1<cr>
-" Old version
-" nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
-" nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<gr>
 
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-j> <C-w><C-j>
@@ -82,11 +73,9 @@ tnoremap <C-w><C-j> <C-\><C-N><C-w>j
 tnoremap <C-w><C-k> <C-\><C-N><C-w>k
 tnoremap <C-w><C-l> <C-\><C-N><C-w>l
 
-" Add comma at the end of the line.
+" Add comma/period at the end of the line.
 inoremap <M-,> <Esc>m`A,<Esc>``a
 nnoremap <M-,> m`A,<Esc>``
-
-" Add period at the end of the line.
 inoremap <M-.> <Esc>m`A.<Esc>``a
 nnoremap <M-.> m`A.<Esc>``
 
@@ -101,7 +90,7 @@ noremap <Leader>P "+P
 " select a text, and this will replace it with the " contents.
 vnoremap <leader>p "_dP
 
-" let the visual mode use the period. To add " at the begining of all lines:
+" let the visual mode use the period. To add : at the begining of all lines:
 " I:<ESC>j0vG.
 vnoremap . :norm.<CR>
 
@@ -110,6 +99,12 @@ nnoremap <leader>@ :Vista finder nvim_lsp<cr>
 nnoremap <leader>: :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
+
+" Opens the fzf UI with ripgrep search.
+command! -bang -nargs=* ArshamRg
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,
+            \   fzf#vim#with_preview(), <bang>0)
 
 " Open the search tool.
 nnoremap <silent> <leader>f :ArshamRg<CR>
@@ -137,7 +132,3 @@ if exists(':ALEInfo')
     nmap <Leader>ln <Plug>(ale_next_wrap)
     nmap <Leader>ll <Plug>(ale_lint)
 endif
-
-" Copied from https://gist.github.com/romainl/db725db7babc84a9a6436180cedee188
-" Usage: 6. to repeat the . 6 times.
-" nnoremap . :<C-u>execute "norm! " . repeat(".", v:count1)<CR>
