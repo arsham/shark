@@ -1,15 +1,19 @@
+local util = require('util')
 require('astronauta.keymap')
 local keymap = vim.keymap
 
+-- vim.v.count
+-- vim.api.nvim_put(t, 'l', true, false)
+
 vim.g.mapleader = ' '
 
-keymap.noremap{'<Up>', '<Nop>'}
-keymap.noremap{'<Down>', '<Nop>'}
-keymap.noremap{'<Left>', '<Nop>'}
-keymap.noremap{'<Right>', '<Nop>'}
-keymap.inoremap{'<Up>', '<Nop>'}
-keymap.inoremap{'<Down>', '<Nop>'}
-keymap.inoremap{'<Left>', '<Nop>'}
+keymap.noremap{'<Up>',     '<Nop>'}
+keymap.noremap{'<Down>',   '<Nop>'}
+keymap.noremap{'<Left>',   '<Nop>'}
+keymap.noremap{'<Right>',  '<Nop>'}
+keymap.inoremap{'<Up>',    '<Nop>'}
+keymap.inoremap{'<Down>',  '<Nop>'}
+keymap.inoremap{'<Left>',  '<Nop>'}
 keymap.inoremap{'<Right>', '<Nop>'}
 -- " Disable Ex mode
 keymap.nmap{'Q', '<Nop>'}
@@ -37,10 +41,16 @@ keymap.vnoremap{'<A-k>', silent=true, [[:m '<-2<CR>gv=gv]]}
 keymap.xnoremap{'<', '<gv'}
 keymap.xnoremap{'>', '>gv'}
 
+keymap.nnoremap{'H', '^'}
+keymap.onoremap{'H', '^'}
+keymap.nnoremap{'L', '$'}
+keymap.onoremap{'L', '$'}
+
 -- Re-indent the whole file.
 keymap.nnoremap{'g=', 'gg=Gg``'}
 
 -- insert empty lines with motions, can be 10[<space>
+-- TODO: can we use nvim_buf_set_text?
 keymap.nnoremap{"[<space>", silent=true, ":<c-u>put!=repeat([''],v:count)<bar>']+1<cr>"}
 keymap.nnoremap{"]<space>", silent=true, ":<c-u>put =repeat([''],v:count)<bar>'[-1<cr>"}
 
@@ -71,13 +81,12 @@ keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
 
 keymap.nmap{'<C-W>z', '<Plug>(zoom-toggle)'}
 
-
--- " Terminal mappings.
--- tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
--- tnoremap <C-w><C-h> <C-\><C-N><C-w>h
--- tnoremap <C-w><C-j> <C-\><C-N><C-w>j
--- tnoremap <C-w><C-k> <C-\><C-N><C-w>k
--- tnoremap <C-w><C-l> <C-\><C-N><C-w>l
+-- Terminal mappings.
+keymap.tnoremap{'<C-R>', expr=true, [[<C-\><C-N>"'.nr2char(getchar()).'pi']]}
+keymap.tnoremap{'<C-w><C-h>', '<C-\\><C-N><C-w>h'}
+keymap.tnoremap{'<C-w><C-j>', '<C-\\><C-N><C-w>j'}
+keymap.tnoremap{'<C-w><C-k>', '<C-\\><C-N><C-w>k'}
+keymap.tnoremap{'<C-w><C-l>', '<C-\\><C-N><C-w>l'}
 
 -- Add comma/period at the end of the line.
 keymap.inoremap{'<M-,>', '<Esc>m`A,<Esc>``a'}
@@ -94,7 +103,6 @@ keymap.noremap{'<Leader>p', '"+p'}
 keymap.noremap{'<Leader>P', '"+P'}
 keymap.nnoremap{'Y', 'y$'}
 
-
 -- select a text, and this will replace it with the " contents.
 keymap.vnoremap{'<leader>p', '"_dP'}
 
@@ -102,54 +110,23 @@ keymap.vnoremap{'<leader>p', '"_dP'}
 -- I:<ESC>j0vG.
 keymap.vnoremap{'.', ':norm.<CR>'}
 
-keymap.nnoremap{'<leader>@', ':DocumentSymbols<cr>'}
-keymap.nnoremap{'<leader>:', ':Commands<CR>'}
-keymap.nnoremap{'<C-p>', silent=true, ':Files<CR>'}
-keymap.nnoremap{'<C-b>', silent=true, ':Buffers<CR>'}
-keymap.nnoremap{'<C-_>', silent=true, ':BLines<CR>'}
+keymap.nnoremap{'<leader>gw', ':silent grep <cword> % <CR>', silent=true}
 
-keymap.nnoremap{'<leader>fl', silent=true, function()
-    local term = vim.fn.input({prompt="Term: "})
-    local run = string.format("call fzf#vim#locate('%s', fzf#vim#with_preview())", term)
-    vim.cmd(run)
-end}
-keymap.nnoremap{'<leader>gg', silent=true, ':GGrep<CR>'}
-keymap.nnoremap{'<leader>gf', silent=true, ':GFiles<CR>'}-->
-keymap.nnoremap{'<leader>fh', silent=true, ':History<CR>'}
-
-keymap.nnoremap{']q', ':cnext<CR>'}-->>
-keymap.nnoremap{'[q', ':cprevious<CR>'}
-
--- Replace the default dictionary completion with fzf-based fuzzy completion>
-keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
-
-
--- auto correct spelling and jump back.
-local function fixLastSpellingError()
+-- auto correct spelling and jump bak.
+keymap.nnoremap{'<leader>sp', function()
     local spell = vim.wo.spell
     vim.wo.spell = true
-    local correction = require('util').termcodes("[s1z=``")
-    vim.api.nvim_feedkeys(correction, 'n', true)
+    util.normal('n', "[s1z=``")
     vim.schedule(function()
         vim.wo.spell = spell
     end)
-end
-keymap.nnoremap{'<leader>sp', fixLastSpellingError}--<<
-
--- Opens the fzf UI with ripgrep search.
-local command = {
-    "command! -bang -nargs=* ArshamRg ",
-    "call fzf#vim#grep(",
-    [['rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- '.shellescape(<q-args>), 1,]],
-    "fzf#vim#with_preview(), <bang>0)",
-}
-vim.cmd(table.concat(command, " "))
-
--- Open the search tool.
-keymap.nnoremap{"<leader>ff", ':ArshamRg<CR>'}
--- Search over current word.
-keymap.nnoremap{"<leader>rg", [[:ArshamRg <C-R>=expand("<cword>")<CR><CR>]]}
+end}
 
 keymap.nnoremap{'<leader>1', ':diffget LOCAL<CR>'}
 keymap.nnoremap{'<leader>2', ':diffget BASE<CR>'}
 keymap.nnoremap{'<leader>3', ':diffget REMOTE<CR>'}
+
+keymap.nnoremap{'<leader>jq', ":%!gojq '.'<CR>"}
+
+-- Show help for work under the cursor.
+keymap.nnoremap{'<leader>hh',  ":h <CR>"}

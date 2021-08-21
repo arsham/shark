@@ -1,15 +1,18 @@
+-- This is the 'arsham' color scheme.
+
 local palette = {
     name = 'arsham',
     base0 = '#232627',
     base1 = '#211F22',
-    base2 = '#26292C',
+    -- base2 = '#26292C',
+    base2 = '#2A2D30',
     base3 = '#2E323C',
     base4 = '#333842',
     base5 = '#4d5154',
     base6 = '#72696A',
     base7 = '#B1B1B1',
     border = '#A1B5B1',
-    brown = "#504945",
+    brown = "#6D3717",
     white = '#FFF1F3',
     grey = '#72696A',
     black = '#000000',
@@ -19,7 +22,11 @@ local palette = {
     yellow = '#FFD866',
     orange = '#FC9867',
     purple = '#AB9DF2',
+    darkred = 'darkred',
     red = '#FD6883',
+    blue = '#1981F0',
+    darkblue = '#213E5D',
+    paleblue = '#6EABEC',
     diff_add_fg = '#6A8F1F',
     diff_add_bg = '#3D5213',
     diff_remove_fg = '#4A0F23',
@@ -27,7 +34,9 @@ local palette = {
     diff_change_fg = '#7AA6DA',
     diff_change_bg = '#537196',
     color_column = '#2E2A2A',
-    none = 'NONE'
+    none = 'NONE',
+    -- TODO:
+    -- accent
 }
 
 local mappings = {
@@ -36,19 +45,19 @@ local mappings = {
         guibg = palette.base0,
     },
     NormalNC = {
-         -- normal text in non-current windows
+        -- normal text in non-current windows
         guifg =palette.fg,
         guibg = palette.bg,
     },
     NormalSB = {
-         -- normal text in non-current windows
+        -- normal text in non-current windows
         guifg =palette.fg_sidebar,
         guibg =palette.bg_sidebar,
     },
     NormalFloat = {
         -- normal text and background color for floating windows
         guifg = palette.none,
-        guibg = palette.base1,
+        guibg = palette.darkblue,
     },
     Pmenu = {
         -- Popup menu: normal item.
@@ -150,7 +159,7 @@ local mappings = {
     },
     Visual = {
         -- Visual mode selection
-        guibg = palette.base4,
+        guibg = palette.base5,
     },
     VisualNOS = {
         -- Visual mode selection when vim is "Not Owning the Selection".
@@ -191,7 +200,7 @@ local mappings = {
         style = 'bold',
     },
     MsgArea = {
-         -- Area for messages and cmdline
+        -- Area for messages and cmdline
         guifg =palette.fg_dark,
     },
     MoreMsg = {
@@ -214,6 +223,7 @@ local mappings = {
     },
     VertSplit = {
         guifg = palette.brown,
+        guibg = palette.base0,
     },
     LineNr = {
         guifg = palette.base5,
@@ -229,7 +239,7 @@ local mappings = {
         guifg = palette.fg_gutter,
     },
     Substitute = {
-         -- |:substitute| replacement text highlighting
+        -- |:substitute| replacement text highlighting
         guibg =palette.red,
         guifg =palette.black,
     },
@@ -248,7 +258,7 @@ local mappings = {
         style = palette.none,
     },
     TabLine = {
-         -- tab pages line, not active tab page label
+        -- tab pages line, not active tab page label
         guibg =palette.bg_statusline,
         guifg =palette.fg_gutter,
     },
@@ -654,6 +664,10 @@ local mappings = {
     markdownH3Delimiter = {
         guifg = palette.green,
     },
+    ExtraWhitespace = {
+        guibg = palette.darkred,
+        ctermbg = palette.darkred,
+    },
 }
 
 local plugin_syntax = {
@@ -889,6 +903,7 @@ local plugin_syntax = {
     LspDiagnosticsSignError = {
         -- used for "Error" diagnostic signs in sign column
         guifg = palette.red,
+        guibg = palette.base2,
     },
     LspDiagnosticsFloatingError = {
         -- used for "Error" diagnostic messages in the diagnostics float
@@ -897,6 +912,7 @@ local plugin_syntax = {
     LspDiagnosticsSignWarning = {
         -- used for "Warning" diagnostic signs in sign column
         guifg = palette.yellow,
+        guibg = palette.base2,
     },
     LspDiagnosticsFloatingWarning = {
         -- used for "Warning" diagnostic messages in the diagnostics float
@@ -904,6 +920,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsSignInformation = {
         -- used for "Information" diagnostic signs in sign column
+        guibg = palette.base2,
         guifg = palette.white,
     },
     LspDiagnosticsFloatingInformation = {
@@ -913,6 +930,7 @@ local plugin_syntax = {
     LspDiagnosticsSignHint = {
         -- used for "Hint" diagnostic signs in sign column
         guifg = palette.aqua,
+        guibg = palette.base2,
     },
     LspDiagnosticsFloatingHint = {
         -- used for "Hint" diagnostic messages in the diagnostics float
@@ -936,7 +954,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineError = {
         -- used to underline "Error" diagnostics.
-        style = 'undercurl',
+        -- style = 'undercurl',
         guisp = palette.red,
     },
     LspDiagnosticsDefaultWarning = {
@@ -945,7 +963,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineWarning = {
         -- used to underline "Warning" diagnostics.
-        style = 'undercurl',
+        -- style = 'undercurl',
         guisp = palette.yellow,
     },
     LspDiagnosticsDefaultInformation = {
@@ -954,7 +972,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineInformation = {
         -- used to underline "Information" diagnostics.
-        style = 'undercurl',
+        -- style = 'undercurl',
         guisp = palette.white,
     },
     LspDiagnosticsDefaultHint = {
@@ -963,7 +981,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineHint = {
         -- used to underline "Hint" diagnostics.
-        style = 'undercurl',
+        -- style = 'undercurl',
         guisp = palette.aqua,
     },
     LspSignatureActiveParameter = {
@@ -973,7 +991,7 @@ local plugin_syntax = {
         guifg =palette.comment,
     },
     LspFloatWinNormal = {
-        guibg =palette.bg_float,
+        guibg =palette.paleblue,
     },
     LspFloatWinBorder = {
         guifg =palette.border_highlight,
@@ -1037,9 +1055,11 @@ local plugin_syntax = {
 
     ALEErrorSign = {
         guifg =palette.error,
+        guibg = palette.base2,
     },
     ALEWarningSign = {
         guifg =palette.warning,
+        guibg = palette.base2,
     },
     DiagnosticError = {
         guifg = palette.error,
@@ -1122,68 +1142,67 @@ local plugin_syntax = {
     },
 
     GitSignsAdd = {
-        -- diff mode: Added line |diff.txt|
         guifg = palette.green,
+        guibg = palette.base2,
     },
     GitSignsAddNr = {
-        -- diff mode: Added line |diff.txt|
         guifg = palette.green,
+        guibg = palette.base2,
     },
     GitSignsAddLn = {
-        -- diff mode: Added line |diff.txt|
         guifg = palette.green,
+        guibg = palette.base2,
     },
     GitSignsChange = {
-        -- diff mode: Changed line |diff.txt|
         guifg = palette.blue,
+        guibg = palette.base2,
     },
     GitSignsChangeNr = {
-        -- diff mode: Changed line |diff.txt|
         guifg = palette.blue,
+        guibg = palette.base2,
     },
     GitSignsChangeLn = {
-        -- diff mode: Changed line |diff.txt|
         guifg = palette.blue,
+        guibg = palette.base2,
     },
     GitSignsDelete = {
-        -- diff mode: Deleted line |diff.txt|
         guifg = palette.red,
+        guibg = palette.base2,
     },
     GitSignsDeleteNr = {
-        -- diff mode: Deleted line |diff.txt|
         guifg = palette.red,
+        guibg = palette.base2,
     },
     GitSignsDeleteLn = {
-        -- diff mode: Deleted line |diff.txt|
         guifg = palette.red,
+        guibg = palette.base2,
     },
 }
 
+local setup = function()
+    require('util').profiler('setting up the theme', function()
+        vim.cmd('hi clear')
+        if vim.fn.exists('syntax_on') then
+            vim.cmd('syntax reset')
+        end
 
-return {
-    setup = function()
-        require('util').profiler('theme', function()
-            local highlight = require('util').highlight
-            vim.cmd('hi clear')
-            if vim.fn.exists('syntax_on') then
-                vim.cmd('syntax reset')
-            end
-            vim.g.colors_name = palette.name
-            for group, colors in pairs(mappings) do
+        local highlight = require('util').highlight
+        vim.g.colors_name = palette.name
+        for group, colors in pairs(mappings) do
+            highlight(group, colors)
+        end
+        local async_load_plugin = nil
+        async_load_plugin = vim.loop.new_async(vim.schedule_wrap( function()
+            for group, colors in pairs(plugin_syntax) do
                 highlight(group, colors)
             end
-            local async_load_plugin = nil
-            async_load_plugin = vim.loop.new_async(
-            vim.schedule_wrap(
-            function()
-                for group, colors in pairs(plugin_syntax) do
-                    highlight(group, colors)
-                end
-                async_load_plugin:close()
-            end
-            )
-            )
-            async_load_plugin:send()
-        end)
-    end
+            async_load_plugin:close()
+        end))
+        async_load_plugin:send()
+        vim.cmd[[ match ExtraWhitespace /\\s\\+$/ ]]
+    end)
+end
+
+return {
+    setup = setup
 }

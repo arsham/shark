@@ -28,16 +28,17 @@ gls.left = {
             provider = util.mode,
             icon = "  ",
             separator = " ",
-            highlight = {util.colors.red, util.colors.light_bg}
+            highlight = {util.colors.red, util.colors.statusline_bg},
+            separator_highlight = {util.colors.light_bg2, util.colors.statusline_bg},
         }
     },
 
     {
         ParentDir = {
             provider = util.parent_dir_name,
-            highlight = {util.colors.grey_fg, util.colors.light_bg2},
-            separator = " ",
+            separator = " ",
             icon = " ",
+            highlight = {util.colors.grey_fg, util.colors.statusline_bg},
             separator_highlight = {util.colors.light_bg2, util.colors.statusline_bg},
             condition = condition.hide_in_width,
         }
@@ -50,7 +51,7 @@ gls.left = {
                 return condition.hide_in_width() and condition.check_git_workspace()
             end,
             icon = "  ",
-            highlight = {util.colors.white, util.colors.statusline_bg}
+            highlight = {util.colors.white, util.colors.statusline_bg},
         }
     },
 
@@ -61,7 +62,7 @@ gls.left = {
                 return condition.hide_in_width() and condition.check_git_workspace()
             end,
             icon = "  ",
-            highlight = {util.colors.grey_fg, util.colors.statusline_bg}
+            highlight = {util.colors.grey_fg, util.colors.statusline_bg},
         }
     },
 
@@ -72,7 +73,15 @@ gls.left = {
                 return condition.hide_in_width() and condition.check_git_workspace()
             end,
             icon = "  ",
-            highlight = {util.colors.grey_fg, util.colors.statusline_bg}
+            highlight = {util.colors.grey_fg, util.colors.statusline_bg},
+        }
+    },
+
+    {
+        LeftAngle = {
+            provider = function() return "" end,
+            separator = "",
+            separator_highlight = {util.colors.statusline_bg, util.colors.mid_bg},
         }
     },
 }
@@ -93,16 +102,16 @@ gls.right = {
     {
         DiagnosticIcon = {
             provider = util.ale_lsp,
-            separator = ' ',
-            separator_highlight = {util.colors.statusline_bg, util.colors.statusline_bg},
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
+            separator = "",
+            separator_highlight = {util.colors.statusline_bg, util.colors.mid_bg},
         },
     },
 
     {
         AleStatus = {
             provider = util.ale_diagnostics,
-            highlight = {util.colors.yellow, util.colors.statusline_bg}
+            highlight = {util.colors.yellow, util.colors.statusline_bg},
         },
     },
 
@@ -119,7 +128,7 @@ gls.right = {
         DiagnosticError = {
             provider = "DiagnosticError",
             icon = "  ",
-            highlight = {util.colors.red, util.colors.statusline_bg}
+            highlight = {util.colors.red, util.colors.statusline_bg},
         }
     },
 
@@ -127,7 +136,7 @@ gls.right = {
         DiagnosticWarn = {
             provider = "DiagnosticWarn",
             icon = "  ",
-            highlight = {util.colors.yellow, util.colors.statusline_bg}
+            highlight = {util.colors.yellow, util.colors.statusline_bg},
         }
     },
 
@@ -161,6 +170,15 @@ gls.right = {
     },
 
     {
+        SearchResultsKey = {
+            provider = util.search_results,
+            separator = ' ',
+            separator_highlight = {util.colors.statusline_bg,util.colors.statusline_bg},
+            highlight = {util.colors.grey_fg, util.colors.statusline_bg},
+        },
+    },
+
+    {
         RightIcon = {
             provider = function() return " " end,
             separator = " ",
@@ -176,20 +194,20 @@ gls.right = {
                 if count == 0 then
                     return nil
                 end
-                return string.format(" ﰠ %d ", count)
+                return string.format("  %d ", count)
             end,
             highlight = {util.colors.red_dark, util.colors.green},
         },
     },
 
     {
-        LocListCount = {
+        LocalListCount = {
             provider = function()
                 local count = #vim.fn.getloclist(0)
                 if count == 0 then
                     return nil
                 end
-                return string.format("  %d ", count)
+                return string.format(" 塞%d ", count)
             end,
             highlight = {util.colors.purple, util.colors.green},
         },

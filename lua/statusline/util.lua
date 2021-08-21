@@ -3,18 +3,18 @@ local condition = require('galaxyline.condition')
 local M = {}
 
 M.colors = {
-    white = "#b5bcc9",
-    grey_fg = "#51585f",
-    red = "#ef8891",
-    red_dark = "#B31F1F",
-    green = "#9ce5c0",
-    nord_blue = "#9aa8cf",
-    yellow = "#fbdf90",
-    purple = "#A300ED",
+    white         = "#b5bcc9",
+    grey_fg       = "#51585f",
+    red           = "#ef8891",
+    red_dark      = "#B31F1F",
+    green         = "#9ce5c0",
+    nord_blue     = "#9aa8cf",
+    yellow        = "#fbdf90",
+    purple        = "#A300ED",
     statusline_bg = "#181f26",
-    light_bg = "#222930",
-    light_bg2 = "#1d242b",
-    mid_bg = "#26292C",
+    light_bg      = "#222930",
+    light_bg2     = "#1d242b",
+    mid_bg        = "#26292C",
 }
 
 M.mode_mappings = {
@@ -122,7 +122,7 @@ function M.ale_diagnostics()
         table.insert(ret, warning)
     end
     if info > 0 then
-        table.insert(ret, '')
+        table.insert(ret, '')
         table.insert(ret, info)
     end
 
@@ -165,10 +165,11 @@ end
 
 function M.get_git_branch()
     local cur_len = vim.fn.winwidth(0)
-    if cur_len < 30 then
+    if cur_len < 70 then
         return nil
     end
     local branch = require('galaxyline.provider_vcs').get_git_branch()
+    if branch == nil then return nil end
     local cut = 20
     if #branch < cut then
         return branch
@@ -238,6 +239,23 @@ end
 
 function M.parent_dir_name()
     return vim.fn.expand("%:h")
+end
+
+function M.search_results()
+    local lines = vim.api.nvim_buf_line_count(0)
+    if lines > 50000 then
+        return nil
+    end
+    local search_term = vim.fn.getreg('/')
+    local search_count = vim.fn.searchcount({recompute = 1, maxcount = -1})
+    local active = false
+    if vim.v.hlsearch and vim.v.hlsearch == 1 and search_count.total > 0 then
+        active = true
+    end
+
+    if active then
+        return '/' .. search_term .. '[' .. search_count.current .. '/' .. search_count.total .. ']'
+    end
 end
 
 return M

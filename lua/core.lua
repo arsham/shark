@@ -3,7 +3,8 @@ vim.opt.smartindent = true
 vim.opt.formatoptions:append("n") -- smart auto-indent numbered lists.
 vim.opt.textwidth = 79
 vim.opt.colorcolumn = "80,120"
-vim.opt.smarttab = true
+-- seems to be on by default.
+-- vim.opt.smarttab = true
 vim.opt.shiftwidth=4
 vim.opt.softtabstop=4
 vim.opt.tabstop=4
@@ -20,15 +21,17 @@ vim.opt.title = true
 vim.opt.titlestring:append("%t")
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.lazyredraw = true
-
-vim.opt.backspace = "indent,eol,start" -- allow backspace in insert mode
+vim.opt.lazyredraw = false
+vim.opt.synmaxcol = 256
+-- seems to be on by default.
+-- vim.opt.backspace = "indent,eol,start" -- allow backspace in insert mode
 vim.opt.history = 10000
 
 vim.opt.shada = "!,'1000,<500,s10,h,f1,:100000,@100000,/100000"
 vim.opt.showcmd = true
 vim.opt.showmode = true
-vim.opt.autoread = true
+-- seems to be on by default.
+-- vim.opt.autoread = true
 
 -- vim.opt.shortmess = vim.opt.shortmess + "f"	   -- Use "(3 of 5)" instead of "(file 3 of 5)"
 -- vim.opt.shortmess = vim.opt.shortmess + "i"	   -- Use "[noeol]" instead of "[Incomplete last line]"
@@ -48,7 +51,7 @@ vim.opt.autoread = true
 vim.opt.shortmess:append("filmnrxoOtTAIc")
 
 vim.opt.hidden = true
-vim.opt.syntax = "on"
+-- vim.opt.syntax = "on"
 
 vim.opt.viewoptions:append("localoptions")
 vim.opt.viewdir = vim.env.HOME .. "/.cache/vim/views"
@@ -61,7 +64,8 @@ vim.opt.suffixesadd:append(".py")
 vim.opt.suffixesadd:append(".lua")
 
 -- enable ctrl-n and ctrl-p to scroll through matches
-vim.opt.wildmenu = true
+-- seems to be on by default.
+-- vim.opt.wildmenu = true
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignorecase = true
 
@@ -100,7 +104,7 @@ vim.opt.thesaurus = vim.env.HOME .. "/.local/share/thesaurus/moby.txt"
 -- install words-insane package
 vim.opt.dictionary:append("/usr/share/dict/words-insane")
 
-local spellfile = ".config/nvim/spell"
+local spellfile = vim.env.HOME .. "/.config/nvim/spell"
 -- require('util').mkdir_home(spellfile)
 vim.opt.spellfile = spellfile .. "/en.utf-8.add"
 
@@ -108,7 +112,8 @@ vim.opt.scrolloff = 3         -- keep 3 lines visible while scrolling
 vim.opt.sidescrolloff = 15
 vim.opt.sidescroll = 1
 
-vim.opt.incsearch = true
+-- seems to be on by default.
+-- vim.opt.incsearch = true
 vim.opt.ignorecase = true
 -- vim.opt.nohlsearch
 vim.opt.inccommand = "nosplit"         -- allow for live substitution
@@ -153,7 +158,8 @@ vim.opt.termguicolors = true
 --     set termguicolors
 -- endif
 
-vim.cmd('filetype indent plugin on')
+-- seems to be on by default.
+-- vim.cmd('filetype indent plugin on')
 
 vim.g.netrw_winsize = 20
 vim.g.netrw_liststyle = 3
