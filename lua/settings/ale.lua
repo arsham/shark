@@ -26,10 +26,6 @@ vim.g.ale_sign_style_error = '🔥'
 vim.g.ale_sign_style_warning = '💩'
 vim.g.ale_sign_priority = 2
 
-vim.keymap.nnoremap{']l', silent=true, function()
-    util.cmd_and_centre("ALENextWrap")
-end}
-vim.keymap.nnoremap{'[l', silent=true, function()
-    util.cmd_and_centre("ALEPreviousWrap")
-end}
+vim.keymap.nnoremap{']l', silent=true, function() util.cmd_and_centre("ALENextWrap") end}
+vim.keymap.nnoremap{'[l', silent=true, function() util.cmd_and_centre("ALEPreviousWrap") end}
 vim.keymap.nnoremap{'<leader>ll', '<cmd>ALELint<CR>', silent=true}

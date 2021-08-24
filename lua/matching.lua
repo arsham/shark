@@ -1,3 +1,4 @@
+local util = require('util')
 require('astronauta.keymap')
 
 local mappings = {
@@ -14,7 +15,6 @@ local mappings = {
     { group = 'MatchingPaleblue' , color = '#6EABEC' },
 }
 
-local util = require('util')
 for _, mapping in pairs(mappings) do
     util.highlight(mapping['group'], {
         guifg = '#232627',

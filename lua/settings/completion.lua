@@ -50,7 +50,8 @@ vim.g.completion_chain_complete_list = {
     },
 }
 
---       ⌘ ⌂      
+--        ⌘ ⌂       ﲀ 練 ﴲ  ﰮ      ﳤ   
+--   ƒ    了   ﬌     <>
 vim.g.completion_customize_lsp_label = {
     Buffers       = ' [buff]',
     Class         = ' [class]',
@@ -70,6 +71,7 @@ vim.g.completion_customize_lsp_label = {
     Module        = 'ﴯ [module]',
     Operator      = ' [operator]',
     Path          = ' [path]',
+    Property      = "襁[property]",
     Reference     = ' [refrence]',
     Snippet       = ' [snippet]',
     Struct        = "פּ [struct]",

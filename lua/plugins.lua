@@ -26,16 +26,12 @@ local lspFiletypes = {
 }
 
 require('packer').startup({
-    function(use, use_rocks)
+    function(use)
 
         --{{{ Libraries }}}
         use {
             {'wbthomason/packer.nvim'},
             {'tjdevries/astronauta.nvim'},
-        }
-
-        use_rocks {
-            'moteus/lua-path',
         }
 
         --{{{ Core/System utilities }}}
@@ -58,12 +54,10 @@ require('packer').startup({
             { 'kyazdani42/nvim-web-devicons' },
             {
                 'kyazdani42/nvim-tree.lua',
-                -- requires = { 'kyazdani42/nvim-web-devicons', },
-                -- wants = 'nvim-web-devicons',
                 setup = function() require('settings').nvim_tree.setup() end,
                 config = function() require('settings').nvim_tree.config() end,
-                cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
-                keys = {'<leader>kb', '<leader>kf'},
+                -- cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
+                -- keys = {'<leader>kb', '<leader>kf'},
             },
             {
                 'tweekmonster/startuptime.vim',
@@ -100,17 +94,12 @@ require('packer').startup({
             {
                 'glepnir/galaxyline.nvim',
                 branch = 'main',
-                -- requires = { 'kyazdani42/nvim-web-devicons', },
-                -- wants = 'nvim-web-devicons',
                 config = function() require'statusline' end,
             },
             {
                 'dhruvasagar/vim-zoom',
+                event = { 'BufRead', 'BufNewFile' },
             },
-            -- {
-            --     'kshenoy/vim-signature',       -- Display and navigate marks
-            --     event = { 'BufRead', 'BufNewFile' },
-            -- },
             {
                 'norcalli/nvim-colorizer.lua',
                 event = { 'BufRead', 'BufNewFile' },
@@ -166,19 +155,11 @@ require('packer').startup({
                 'tommcdo/vim-exchange',
                 event = { 'BufRead', 'BufNewFile' },
             },
-            -- { -- try this maybe?
-            -- https://github.com/windwp/nvim-autopairs
-            -- https://github.com/disrupted/dotfiles/blob/master/.config/nvim/lua/conf/pears.lua
-            --     'steelsojka/pears.nvim',
-            ---- event = { 'BufRead' },
-            --     config = require('conf.pears').config,
-            -- },
             {
                 'windwp/nvim-autopairs',
                 event = {'BufNewFile', 'BufRead'},
                 config = function() require('settings').autopairs() end,
             },
-            -- use 'mbbill/undotree'
         }
 
         use {
@@ -214,11 +195,6 @@ require('packer').startup({
                 config = function() require('settings.ale') end,
                 opt = true,
                 ft = lspFiletypes,
-                -- requires = {
-                --     'adelarsq/vim-emoji-icon-theme',
-                --     opt = true,
-                --     ft = lspFiletypes,
-                -- },
             },
             {
                 'steelsojka/completion-buffers',
@@ -231,7 +207,13 @@ require('packer').startup({
                     {'junegunn/fzf.vim'},
                 },
                 ft = lspFiletypes,
-                config = function() require('lspfuzzy').setup{} end,
+                config = function()
+                    require('lspfuzzy').setup{
+                        fzf_preview = {
+                            'right:60%:+{2}-/2,nohidden',
+                        },
+                    }
+                end,
             },
             {
                 'nvim-treesitter/nvim-treesitter',
@@ -242,15 +224,28 @@ require('packer').startup({
                         'nvim-treesitter/nvim-treesitter-refactor',
                         after = 'nvim-treesitter',
                         config = function() require('settings').treesitter_refactor() end,
+                        event = { 'BufRead', 'BufNewFile' },
                     },
                     {
                         'nvim-treesitter/nvim-treesitter-textobjects',
                         branch = '0.5-compat',
                         after = 'nvim-treesitter',
+                        event = { 'BufRead', 'BufNewFile' },
                     },
                 },
                 run = ':TSUpdate',
                 config = function() require('settings.treesitter') end,
+            },
+            {
+                'David-Kunz/treesitter-unit',
+                requires = {
+                    'nvim-treesitter/nvim-treesitter',
+                    branch = '0.5-compat',
+                    event = { 'BufRead', 'BufNewFile' },
+                },
+                wants = 'nvim-treesitter',
+                event = { 'BufRead', 'BufNewFile' },
+                config = function() require('settings').treesitter_unit() end,
             },
             {
                 'uarun/vim-protobuf',
@@ -265,7 +260,6 @@ require('packer').startup({
         --{{{ Text objects }}}
         use {
             {
-                --  'tpope/vim-surround',
                 'blackCauldron7/surround.nvim',
                 event = { 'BufRead', 'BufNewFile' },
                 config = function() require('settings').surround() end,

@@ -77,7 +77,9 @@ require('nvim-treesitter.configs').setup {
 
 util.augroup{"TREESITTER_LARGE_FILES", {
     {"BufRead", "*", docs="large file enhancements", run=function()
-        if vim.fn.expand('%:t') == 'lsp.log' then return end
+        if vim.fn.expand('%:t') == 'lsp.log' or vim.bo.filetype == 'help' then
+            return
+        end
         local lines = vim.api.nvim_buf_line_count(0)
         if lines > 5000 then
             vim.wo.colorcolumn = ""

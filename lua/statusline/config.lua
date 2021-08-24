@@ -194,7 +194,7 @@ gls.right = {
                 if count == 0 then
                     return nil
                 end
-                return string.format("  %d ", count)
+                return ("  %d "):format(count)
             end,
             highlight = {util.colors.red_dark, util.colors.green},
         },
@@ -207,7 +207,7 @@ gls.right = {
                 if count == 0 then
                     return nil
                 end
-                return string.format(" 塞%d ", count)
+                return (" 塞%d "):format(count)
             end,
             highlight = {util.colors.purple, util.colors.green},
         },

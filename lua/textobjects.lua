@@ -19,10 +19,6 @@ vim.keymap.onoremap{'in', function() next_obj("i") end}
 -- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
 local chars = {'_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' }
 for char in table.values(chars) do
-    -- vim.keymap.xnoremap{'i' .. char, ':<C-u>normal! T' .. char .. 'vt' .. char .. '<CR>'}
-    -- vim.keymap.onoremap{'i' .. char, ':normal vi'      .. char .. '<CR>'}
-    -- vim.keymap.xnoremap{'a' .. char, ':<C-u>normal! F' .. char .. 'vf' .. char .. '<CR>'}
-    -- vim.keymap.onoremap{'a' .. char, ':normal va'      .. char .. '<CR>'}
     vim.keymap.xnoremap{'i' .. char, function()
         util.normal('xt', 'T' .. char .. 'ot' .. char)
     end}
@@ -62,6 +58,10 @@ local function in_indent()
 
     local first_line = cur_line
     for i = cur_line,0,-1 do
+        if cur_indent == 0 and #vim.fn.getline(i) == 0 then
+            -- If we are at column zero, we will stop at an empty line.
+            break
+        end
         if #vim.fn.getline(i) ~= 0 then
             local indent = vim.fn.indent(i)
             if indent < cur_indent then
@@ -73,6 +73,9 @@ local function in_indent()
 
     local last_line = cur_line
     for i = cur_line,total_lines,1 do
+        if cur_indent == 0 and #vim.fn.getline(i) == 0 then
+            break
+        end
         if #vim.fn.getline(i) ~= 0 then
             local indent = vim.fn.indent(i)
             if indent < cur_indent then
@@ -83,11 +86,15 @@ local function in_indent()
     end
 
     local sequence = string.format("%dGV%dG", first_line, last_line)
-    util.normal('x', sequence)
+    util.normal('xt', sequence)
+    -- local sequence = string.format("%dG0o%dG$", first_line, last_line)
+    -- util.normal('x', sequence)
 end
 
-vim.keymap.onoremap{'ii', in_indent, {silent = true}}
 vim.keymap.vnoremap{'ii', in_indent, {silent = true}}
+vim.keymap.onoremap{'ii', in_indent, {silent = true}}
+-- So, this makes the vii work, but a few other things stop functioning.
+-- vim.keymap.onoremap{'ii', function() util.normal('x', 'vii') end, {silent = true}}
 
 -- @param include (boolean): if true, will remove the backticks too.
 local function in_backticks(include)
@@ -98,14 +105,14 @@ local function in_backticks(include)
         motion = 'l'
     end
 
-    util.normal('x', motion .. 'v')
+    util.normal('x', motion .. 'o')
     vim.fn.search('`', '')
 
     if include then return end
     util.normal('x', 'h')
 end
 
-vim.keymap.onoremap{'i`', function() in_backticks(false) end, {silent = true}}
-vim.keymap.vnoremap{'i`', function() in_backticks(false) end, {silent = true}}
-vim.keymap.onoremap{'a`', function() in_backticks(true) end,  {silent = true}}
-vim.keymap.vnoremap{'a`', function() in_backticks(true) end,  {silent = true}}
+vim.keymap.vnoremap{'i`', function() in_backticks(false) end,     {silent = true}}
+vim.keymap.vnoremap{'a`', function() in_backticks(true) end,      {silent = true}}
+vim.keymap.onoremap{'i`', function() util.normal('x', 'vi`') end, {silent = true}}
+vim.keymap.onoremap{'a`', function() util.normal('x', 'va`') end, {silent = true}}

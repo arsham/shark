@@ -6,8 +6,10 @@ command{"Q", ':qa'}
 command{"Filename",     function()
     vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
 end}
-command{"YankFilename", function() vim.fn.setreg('"', vim.fn.expand '%:t') end}
-command{"YankFilepath", function() vim.fn.setreg('"', vim.fn.expand '%:p') end}
+command{"YankFilename",  function() vim.fn.setreg('"', vim.fn.expand '%:t') end}
+command{"YankFilenameC", function() vim.fn.setreg('+', vim.fn.expand '%:t') end}
+command{"YankFilepath",  function() vim.fn.setreg('"', vim.fn.expand '%:p') end}
+command{"YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end}
 
 command{"MergeConflict", ":grep '<<<<<<< HEAD'"}
 command{"JsonDiff",      [[vert ball | windo execute '.!gojq' | windo diffthis]]}

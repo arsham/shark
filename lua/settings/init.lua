@@ -72,6 +72,15 @@ M.nvim_tree = {
                 warning = "💩",
                 error = "🔥",
             },
+            git = {
+                deleted = "",
+                ignored = "◌",
+                renamed = "➜",
+                staged = "✓",
+                unmerged = "",
+                unstaged = "",
+                untracked = "★",
+            },
             folder = {
                 arrow_open = "▾",
                 arrow_closed = "▸",
@@ -95,6 +104,13 @@ function M.kommentary()
     -- vim.api.nvim_set_keymap("n", "gcc", "<Plug>kommentary_line_default", {})
     -- vim.api.nvim_set_keymap("n", "gc", "<Plug>kommentary_motion_default", {})
     -- vim.api.nvim_set_keymap("v", "gc", "<Plug>kommentary_visual_default<C-c>", {})
+end
+
+function M.treesitter_unit()
+    vim.api.nvim_set_keymap('x', 'iu', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
+    vim.api.nvim_set_keymap('x', 'au', ':lua require"treesitter-unit".select(true)<CR>', {noremap=true})
+    vim.api.nvim_set_keymap('o', 'iu', ':<c-u>lua require"treesitter-unit".select()<CR>', {noremap=true})
+    vim.api.nvim_set_keymap('o', 'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', {noremap=true})
 end
 
 return M

@@ -14,9 +14,13 @@ util.augroup{"SPECIAL_SETTINGS", {
     {"VimResized", "*", docs="resize split on window resize", run=":wincmd ="},
 
     {"BufRead", "*", docs="large file enhancements", run=function()
-        if vim.fn.expand('%:t') == 'lsp.log' then return end
+        if vim.fn.expand('%:t') == 'lsp.log' or vim.bo.filetype == 'help' then
+            return
+        end
+
         local lines = vim.api.nvim_buf_line_count(0)
-        if lines > 10000 then
+        if lines > 20000 then
+            vim.bo.undofile = false
             vim.wo.colorcolumn = ""
             vim.wo.relativenumber = false
             vim.bo.syntax = "off"
@@ -55,6 +59,10 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
             vim.cmd[[ setlocal spell ]]
         end},
 
+        {"BufWritePre", "COMMIT_EDITMSG,MERGE_MSG,gitcommit,*.tmp,*.log", function()
+            vim.bo.undofile = false
+        end},
+
         {"Filetype", "gitcommit", docs="commit messages", run=function()
             -- see #14670
             -- vim.bo.textwidth = 72
@@ -77,7 +85,7 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
         -- au FocusGained,BufEnter * : checktime
 
         {"BufRead,BufNewFile", "*", docs="signcolumn sizes", run=function()
-            vim.wo.signcolumn = 'auto:4'
+            vim.wo.signcolumn = 'auto:2'
         end}
     }}
 

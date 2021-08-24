@@ -247,6 +247,8 @@ function M.search_results()
         return nil
     end
     local search_term = vim.fn.getreg('/')
+    if search_term == "" then return nil end
+
     local search_count = vim.fn.searchcount({recompute = 1, maxcount = -1})
     local active = false
     if vim.v.hlsearch and vim.v.hlsearch == 1 and search_count.total > 0 then

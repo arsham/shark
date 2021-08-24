@@ -15,7 +15,7 @@ function M.profiler(name, fn)
     end
     local start = vim.loop.hrtime()
     fn()
-    local msg = string.format('%f: for running %s', (vim.loop.hrtime() - start)/1e6, name)
+    local msg = ('%f: for running %s'):format((vim.loop.hrtime() - start)/1e6, name)
     vim.notify(msg, "info", {
         title = "Duration",
     })
@@ -33,7 +33,7 @@ end
 -- Executes a normal command in mode.
 function M.normal(mode, motion)
     local sequence = vim.api.nvim_replace_termcodes(motion, true, false, false)
-    return vim.api.nvim_feedkeys(sequence, mode, true)
+    vim.api.nvim_feedkeys(sequence, mode, true)
 end
 
 -- mkdir_home creates a new folder in $HOME if not exists.
@@ -77,30 +77,30 @@ function M.highlight(group, opt)
     local guisp   = opt.guisp   and 'guisp = '   .. opt.guisp   or ''
     local ctermfg = opt.ctermfg and 'ctermfg = ' .. opt.ctermfg or ''
     local ctermbg = opt.ctermbg and 'ctermbg = ' .. opt.ctermbg or ''
-    local str     = string.format( [[highlight %s %s %s %s %s %s %s]],
+    local str     = ([[highlight %s %s %s %s %s %s %s]]):format(
         group, style, guifg, guibg, ctermfg, ctermbg, guisp
     )
     vim.cmd(str)
 end
 
-local command = {}
+local storage = {}
 
 -- Have to use a global to handle re-requiring this file and losing all of the
 -- commands.
-__CommandStore = __CommandStore or {}
-command._store = __CommandStore
+__ContextStorage = __ContextStorage or {}
+storage._store = __ContextStorage
 
-command._create = function(f)
-    table.insert(command._store, f)
-    return #command._store
+storage._create = function(f)
+    table.insert(storage._store, f)
+    return #storage._store
 end
 
-function M._exec_command(id)
-    command._store[id]()
+function M._exec_command(id, ...)
+    storage._store[id](...)
 end
-
 
 -- M.command{"Name", function() print(1) end}
+-- M.command{"Name", attrs="-nargs=*" function(a) print(a) end}
 -- M.command{"Name", "echo 'it works!'"}
 -- M.command{name="Name", run="echo 'it works!'"}
 -- M.command{"Name", "echo 'it works!'", silent=true}
@@ -113,11 +113,11 @@ end
 --    post_run : string
 function M.command(opts)
     local args = {}
-    local silent = ""
+
     for k, v in pairs(opts) do
         args[k] = v
         if k == 'silent' then
-            silent = ' silent! '
+            args.silent = 'silent!'
         end
     end
 
@@ -126,37 +126,23 @@ function M.command(opts)
     local attrs = args.attrs or ""
     local post_run = args.post_run or ""
     local docs =  args.docs or 'no documents'
+    local silent = args.silent or ""
 
     local command_str
     if type(run) == 'string' then
-        command_str = run
+        command_str = ('execute "%s"'):format(run)
     elseif type(run) == 'function' then
-        local func_id = command._create(run)
-        command_str = string.format(
-            [[lua require('util')._exec_command(%s) -- %s]], func_id, docs
-        )
+        local func_id = storage._create(run)
+        command_str = ([[lua require('util')._exec_command(%s, <q-args>) -- %s]]):format(func_id, docs)
     else
         error("Unexpected type to run (".. docs .. "):" .. tostring(run))
     end
 
-    local str = string.format([[command! %s %s %s execute "%s"]], attrs, name, silent, command_str)
+    local str = ([[command! %s %s %s %s]]):format(attrs, name, silent, command_str)
     if post_run ~= "" then
         str = str .. " | " .. post_run
     end
     vim.cmd(str)
-end
-
-local autocmd = {}
-__AutocmdStore = __AutocmdStore or {}
-autocmd._store = __AutocmdStore
-
-autocmd._create = function(f)
-    table.insert(autocmd._store, f)
-    return #autocmd._store
-end
-
-function M._exec_autocmd(id)
-    autocmd._store[id]()
 end
 
 -- M.autocmd{"GroupName", {
@@ -197,10 +183,10 @@ end
 --    silent=true
 --    run=string or function
 --    docs=string        : if the run is a function, you can give it a name.
-function M.autocmd(cmd)
+function M.autocmd(opts)
     local args = {}
 
-    for k, v in pairs(cmd) do
+    for k, v in pairs(opts) do
         args[k] = v
         if k == 'silent' and v then
             args.silent = 'silent!'
@@ -219,17 +205,15 @@ function M.autocmd(cmd)
 
     local autocmd_str
     if type(run) == 'string' then
-        autocmd_str = run
+        autocmd_str = ('execute "%s"'):format(run)
     elseif type(run) == 'function' then
-        local func_id = autocmd._create(run)
-        autocmd_str = string.format(
-            [[lua require('util')._exec_autocmd(%s) -- %s]], func_id, docs
-        )
+        local func_id = storage._create(run)
+        autocmd_str = ([[lua require('util')._exec_command(%s) -- %s]]):format(func_id, docs)
     else
         error("Unexpected type to run (" .. docs .. "): " .. tostring(run))
     end
 
-    local def = string.format([[%s %s %s %s execute "%s"]], events, targets, buffer, silent, autocmd_str)
+    local def = ([[%s %s %s %s %s]]):format(events, targets, buffer, silent, autocmd_str)
     vim.cmd(table.concat(vim.tbl_flatten { "autocmd", def }, " "))
 end
 
@@ -259,33 +243,6 @@ M.job_str = function(str)
     }):start()
 end
 
--- Returns the name of the struct, method or function.
-function M.get_current_node_name()
-    local ts_utils = require'nvim-treesitter.ts_utils'
-    local cur_node = ts_utils.get_node_at_cursor()
-    local type_patterns = {
-        method_declaration = 2,
-        function_declaration= 1,
-        type_spec = 0,
-    }
-    local stop = false
-    local index = 1
-    while cur_node do
-        for rgx, k in pairs(type_patterns) do
-            if cur_node:type() == rgx then
-                stop = true
-                index = k
-                break
-            end
-        end
-        if stop then break end
-        cur_node = cur_node:parent()
-    end
-
-    if not cur_node then return "" end
-    return (ts_utils.get_node_text(cur_node:child(index)))[1]
-end
-
 local popup_options = {
     border = {
         style = 'rounded',
@@ -309,7 +266,7 @@ function M.user_input(opts)
         end,
     }
 
-    conf = table.merge(conf, opts)
+    conf = vim.tbl_deep_extend("force", conf, opts)
     local input = require('nui.input')(popup_options, {
         prompt = conf.prompt,
         zindex = 10,
@@ -317,10 +274,7 @@ function M.user_input(opts)
     })
 
     input:mount()
-    input:map('i', '<esc>', function()
-        input.input_props.on_close()
-        require('util').normal('n', '')
-    end, { noremap = true })
+    input:map('i', '<esc>', input.input_props.on_close, { noremap = true })
     local event = require('nui.utils.autocmd').event
 
     input:on(event.BufHidden, function()
@@ -328,6 +282,21 @@ function M.user_input(opts)
             input:unmount()
         end)
     end)
+end
+
+-- Returns true if there is an active lsp server attached to current buffer.
+function M.lsp_attached()
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) ~= nil then
+        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+        for _, client in ipairs(clients) do
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return true
+            end
+        end
+    end
+    return false
 end
 
 return M

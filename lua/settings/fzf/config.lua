@@ -1,57 +1,75 @@
+local util = require('util')
 table.insert(vim.opt.rtp, "~/.fzf")
--- ctrl+p -> @, : and / to go to symbols, line and or search in lines.
-local command = {
-    {
-        [[ function! GotoDef(lines) abort                         ]],
-        [[     silent! exe 'e +BTags '.a:lines[0]                 ]],
-        [[     call timer_start(10, {-> execute('startinsert') }) ]],
-        [[ endfunction                                            ]],
-    }, {
-        [[ function! GotoLine(lines) abort                        ]],
-        [[     silent! exe 'e '.a:lines[0]                        ]],
-        [[     call timer_start(10, {-> feedkeys(':') })          ]],
-        [[ endfunction                                            ]],
-    }, {
-        [[ function! SearchFile(lines) abort                      ]],
-        [[     silent! exe 'e +Lines '.a:lines[0]                 ]],
-        [[     call timer_start(10, {-> execute('startinsert') }) ]],
-        [[ endfunction                                            ]],
-    }, {
-        [[ function! SetQFList(lines)                                     ]],
-        [[     call setqflist(map(copy(a:lines), '{ "filename": v:val }'))]],
-        [[     copen                                                      ]],
-        [[ endfunction                                                    ]],
-    }
-}
 
-for _, str in pairs(command) do
-    vim.cmd(table.concat(str, "\n"))
+local function goto_def(lines)
+    local file = lines[1]
+    vim.api.nvim_command(("e %s"):format(file))
+    if util.lsp_attached() then
+        pcall(vim.lsp.buf.document_symbol)
+    else
+        vim.api.nvim_command(":BTags")
+    end
 end
 
-local str = {
-    [[ let g:fzf_action = {                 ]],
-    [[     'ctrl-t': 'tab split',           ]],
-    [[     'ctrl-x': 'split',               ]],
-    [[     'ctrl-v': 'vsplit',              ]],
-    [[     'alt-q': function('SetQFList'),  ]],
-    [[     '@': function('GotoDef'),        ]],
-    [[     ':': function('GotoLine'),       ]],
-    [[     '/': function('SearchFile')      ]],
-    [[  }                                   ]],
+local function goto_line(lines)
+    local file = lines[1]
+    vim.api.nvim_command(("e %s"):format(file))
+    util.normal('n', ':')
+end
+
+local function search_file(lines)
+    local file = lines[1]
+    vim.api.nvim_command(("e +BLines %s"):format(file))
+end
+
+local function set_qf_list(files)
+    local item = {
+        lnum = 1,
+        col = 1,
+        text = "Added with fzf selection",
+    }
+    local lists = require('lists')
+    for _, filename in pairs(files) do
+        item.filename = filename
+        lists.insert_list(item, false)
+    end
+    vim.cmd[[copen]]
+end
+
+vim.g.fzf_action = {
+    ['ctrl-t'] = 'tab split',
+    ['ctrl-x'] = 'split',
+    ['ctrl-v'] = 'vsplit',
+    ['alt-q']  = set_qf_list,
+    ['@']      = goto_def,
+    [':']      = goto_line,
+    ['/']      = search_file,
 }
-vim.cmd(table.concat(str, " "))
 
 vim.g.fzf_commands_expect = 'enter'
-vim.g.fzf_layout = { window = { width = 0.95, height = 0.95 } }
+vim.g.fzf_layout = {
+    window = {
+        width = 1,
+        height = 0.5,
+        yoffset = 1,
+        highlight = "Comment",
+        border = 'none',
+    },
+}
+
 vim.g.fzf_buffers_jump = 1          -- [Buffers] Jump to the existing window if possible
-vim.g.fzf_preview_window = {'right:50%:+{2}-/2',  'ctrl-/'}
+vim.g.fzf_preview_window = {'right:50%:+{2}-/2', 'ctrl-/'}
 vim.g.fzf_commits_log_options = table.concat({
-    [[--graph --color=always                                       ]],
-    [[ --format="%C(yellow)%h%C(red)%d%C(reset)                    ]],
-    [[ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"   ]],
+    [[ --graph --color=always                                    ]],
+    [[ --format="%C(yellow)%h%C(red)%d%C(reset)                  ]],
+    [[ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)" ]],
 }, " ")
 
 -- fix escape in fzf popup.
 require('util').augroup{"FZF_FIXES", {
     {"FileType", "fzf", run="tnoremap <buffer> <esc> <c-c>"},
+    -- {"FileType", "fzf", run=function()
+    --     vim.cmd("set laststatus=0 noshowmode noruler")
+    --     require('util').autocmd{"BufLeave", buffer=true, run="set laststatus=2 showmode ruler"}
+    -- end},
 }}

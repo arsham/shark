@@ -45,6 +45,39 @@ local function lsp_organise_imports()
     end
 end
 
+-- Returns the name of the struct, method or function.
+local function get_current_node_name()
+    local ts_utils = require'nvim-treesitter.ts_utils'
+    local cur_node = ts_utils.get_node_at_cursor()
+    local type_patterns = {
+        method_declaration = 2,
+        function_declaration= 1,
+        type_spec = 0,
+    }
+    local stop = false
+    local index = 1
+    while cur_node do
+        for rgx, k in pairs(type_patterns) do
+            if cur_node:type() == rgx then
+                stop = true
+                index = k
+                break
+            end
+        end
+        if stop then break end
+        cur_node = cur_node:parent()
+    end
+
+    if not cur_node then
+        vim.notify("Test not found", vim.lsp.log_levels.WARN, {
+            title = "User Command",
+            timeout = 1000,
+        })
+        return ""
+    end
+    return (ts_utils.get_node_text(cur_node:child(index)))[1]
+end
+
 -- Attaches commands, mappings and autocmds to current buffer based on the
 -- client's capabilities.
 local function attach_mappings_commands(client)
@@ -122,7 +155,9 @@ local function attach_mappings_commands(client)
 
     if caps.document_symbol then
         util.command{"DocumentSymbol", buffer=true, vim.lsp.buf.document_symbol}
-        vim.keymap.nnoremap{'<leader>@', vim.lsp.buf.document_symbol, opts}
+        vim.keymap.nnoremap{'<leader>@', function()
+            util.call_and_centre(vim.lsp.buf.document_symbol)
+        end, opts}
     end
     if caps.workspace_symbol then
         util.command{"WorkspaceSymbols", buffer=true, vim.lsp.buf.workspace_symbol}
@@ -148,7 +183,7 @@ local function attach_mappings_commands(client)
     util.command{"Log", buffer=true, "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()"}
 
     util.command{"Test", docs="locate tests for a node", buffer=true, function()
-        local name = util.get_current_node_name()
+        local name = get_current_node_name()
         if name == "" then return nil end
 
         local pattern = "test" .. name

@@ -27,7 +27,7 @@ vim.opt.synmaxcol = 256
 -- vim.opt.backspace = "indent,eol,start" -- allow backspace in insert mode
 vim.opt.history = 10000
 
-vim.opt.shada = "!,'1000,<500,s10,h,f1,:100000,@100000,/100000"
+vim.opt.shada = "!,'10000,<1000,s100,h,f1,:100000,@10000,/1000"
 vim.opt.showcmd = true
 vim.opt.showmode = true
 -- seems to be on by default.
@@ -130,8 +130,8 @@ end
 
 -- let the visual block mode go over empty characters.
 vim.opt.virtualedit = "block"
-vim.opt.modelines = 0
-vim.opt.modeline = false
+-- vim.opt.modelines = 0
+vim.opt.modeline = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true

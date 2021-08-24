@@ -82,11 +82,11 @@ keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
 keymap.nmap{'<C-W>z', '<Plug>(zoom-toggle)'}
 
 -- Terminal mappings.
-keymap.tnoremap{'<C-R>', expr=true, [[<C-\><C-N>"'.nr2char(getchar()).'pi']]}
-keymap.tnoremap{'<C-w><C-h>', '<C-\\><C-N><C-w>h'}
-keymap.tnoremap{'<C-w><C-j>', '<C-\\><C-N><C-w>j'}
-keymap.tnoremap{'<C-w><C-k>', '<C-\\><C-N><C-w>k'}
-keymap.tnoremap{'<C-w><C-l>', '<C-\\><C-N><C-w>l'}
+-- keymap.tnoremap{'<C-R>', [[<C-\\><C-N>"'.nr2char(getchar()).'pi']]}
+-- keymap.tnoremap{'<C-w><C-h>', '<C-\\><C-N><C-w>h'}
+-- keymap.tnoremap{'<C-w><C-j>', '<C-\\><C-N><C-w>j'}
+-- keymap.tnoremap{'<C-w><C-k>', '<C-\\><C-N><C-w>k'}
+-- keymap.tnoremap{'<C-w><C-l>', '<C-\\><C-N><C-w>l'}
 
 -- Add comma/period at the end of the line.
 keymap.inoremap{'<M-,>', '<Esc>m`A,<Esc>``a'}
@@ -112,8 +112,11 @@ keymap.vnoremap{'.', ':norm.<CR>'}
 
 keymap.nnoremap{'<leader>gw', ':silent grep <cword> % <CR>', silent=true}
 
+-- ]s and [s to jump.
+-- zg to ignore.
+keymap.nnoremap{'<leader>sp', function() vim.wo.spell = not vim.wo.spell end}
 -- auto correct spelling and jump bak.
-keymap.nnoremap{'<leader>sp', function()
+keymap.nnoremap{'<leader>sf', function()
     local spell = vim.wo.spell
     vim.wo.spell = true
     util.normal('n', "[s1z=``")
@@ -122,6 +125,7 @@ keymap.nnoremap{'<leader>sp', function()
     end)
 end}
 
+-- mergetool mappings.
 keymap.nnoremap{'<leader>1', ':diffget LOCAL<CR>'}
 keymap.nnoremap{'<leader>2', ':diffget BASE<CR>'}
 keymap.nnoremap{'<leader>3', ':diffget REMOTE<CR>'}
