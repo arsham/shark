@@ -1,8 +1,6 @@
 local util = require('util')
 local command = util.command
 
-command{"Q", ':qa'}
-
 command{"Filename",     function()
     vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
 end}
@@ -27,9 +25,10 @@ command{"InstallDependencies", function()
         typescript = {"npm", "-g", "install", "--prefix", "~/.node_modules", "typescript@latest", "typescript-language-server@latest"},
         eslint     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "eslint@latest", "--save-dev"},
         unknown    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-langservers-extracted@latest"},
-        sqls       = {"go", "install", "github.com/lighttiger2505/sqls@latest"},
-        golangci   = {"go", "install", "github.com/nametake/golangci-lint-langserver@latest"},
         gopls      = {"go", "install", "golang.org/x/tools/gopls@latest"},
+        golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.40.0"},
+        gojq       = {"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
+        sqls       = {"go", "install", "github.com/lighttiger2505/sqls@latest"},
     }
 
     local total = table.length(commands)
@@ -43,7 +42,7 @@ command{"InstallDependencies", function()
             on_exit = function(j, exit_code)
                 local res = table.concat(j:result(), "\n")
                 local type = vim.lsp.log_levels.INFO
-                local timeout = 3000
+                local timeout = 2000
 
                 if exit_code ~=0 then
                     type = vim.lsp.log_levels.ERROR
@@ -58,10 +57,10 @@ command{"InstallDependencies", function()
 
                 count = count + 1
                 if count == total then
-                    local data = "All done!\n\nPlease run:\n    yay -S ripgrep bat lua-language-server"
+                    local data = "All done!\n\nPlease run:\n    yay -S ripgrep bat lua-language-server-git ccls words-insane"
                     vim.notify(data, vim.lsp.log_levels.INFO, {
                         title = "Installation Process",
-                        timeout = 5000,
+                        timeout = 3000,
                     })
                 end
             end,

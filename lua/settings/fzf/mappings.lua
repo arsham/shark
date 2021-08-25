@@ -44,7 +44,11 @@ keymap.nnoremap{'<C-_>', silent=true, function()
         options = '--layout reverse-list --with-nth=4.. --delimiter=":" --prompt="Current Buffer> "',
     }
     local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
-    local rg_cmd = 'rg --with-filename --column --line-number --no-heading --color=never --smart-case . ' .. vim.fn.fnameescape(vim.fn.expand('%'))
+    local rg_cmd = table.concat({
+        'rg --with-filename --column',
+        '   --line-number --no-heading --color=never --smart-case . ',
+        vim.fn.fnameescape(vim.fn.expand('%')),
+    }, " ")
     vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
 end}
 
@@ -72,7 +76,11 @@ local function do_rg(term)
         options = '--prompt="Search Files> " --preview-window nohidden',
     }
     local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
-    local rg_cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- ' .. vim.fn.shellescape(term)
+    local rg_cmd = table.concat({
+        'rg --column --line-number --no-heading',
+        '   --color=always --smart-case --hidden -g "!.git/" -- ',
+        vim.fn.shellescape(term),
+    }, " ")
     vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
 end
 -- Open the search tool.

@@ -3,9 +3,11 @@ local command = require('util').command
 command{"Notes",    "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
 command{"Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", attrs="-bang"}
 
--- command{"Todo",             "grep todo|fixme **/*", post_run="cw", silent=true}
 command{"Todo", function()
-    local cmd = 'rg --column --line-number --no-heading --color=always --smart-case --hidden -g "!.git/" -- "fixme|todo"'
+    local cmd = table.concat({
+        'rg --column --line-number --no-heading --color=always',
+        '   --smart-case --hidden -g "!.git/" -- "fixme|todo"',
+    }, " ")
     vim.fn["fzf#vim#grep"](cmd, 1, vim.fn["fzf#vim#with_preview"]())
 end}
 

@@ -20,16 +20,35 @@ util.augroup{"SPECIAL_SETTINGS", {
 
         local lines = vim.api.nvim_buf_line_count(0)
         if lines > 20000 then
+
+            local undofile       = vim.bo.undofile
+            local colorcolumn    = vim.wo.colorcolumn
+            local relativenumber = vim.wo.relativenumber
+            local hlsearch       = vim.opt.hlsearch
+            local lazyredraw     = vim.opt.lazyredraw
+            local showmatch      = vim.opt.showmatch
+
             vim.bo.undofile = false
             vim.wo.colorcolumn = ""
             vim.wo.relativenumber = false
-            vim.bo.syntax = "off"
-
-            -- TODO: see if BufWinLeave is a good choice to revive these
-            -- settings.
             vim.opt.hlsearch = false
             vim.opt.lazyredraw = true
             vim.opt.showmatch = false
+
+            util.autocmd{"BufDelete", buffer=true, run=function()
+                vim.bo.undofile       = undofile
+                vim.wo.colorcolumn    = colorcolumn
+                vim.wo.relativenumber = relativenumber
+                vim.opt.hlsearch      = hlsearch
+                vim.opt.lazyredraw    = lazyredraw
+                vim.opt.showmatch     = showmatch
+
+                vim.notify("Settings Restored", vim.lsp.log_levels.INFO, {
+                title = "Settings Change",
+                    timeout = 4000,
+                })
+            end}
+
             local message = "File was too large, had to disable some settings!"
             vim.notify(message, vim.lsp.log_levels.WARN, {
                 title = "Settings Change",
