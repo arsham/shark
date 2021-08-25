@@ -59,9 +59,11 @@ vim.opt.viewdir = vim.env.HOME .. "/.cache/vim/views"
 -- better diff view. This will make sure the inserted part is separated, rather
 -- than mangled in the previous blob.
 vim.opt.diffopt:append("indent-heuristic")
-vim.opt.suffixesadd:append(".go")
-vim.opt.suffixesadd:append(".py")
-vim.opt.suffixesadd:append(".lua")
+vim.opt.suffixesadd = {
+    ".go",
+    ".py",
+    ".lua",
+}
 
 -- enable ctrl-n and ctrl-p to scroll through matches
 -- seems to be on by default.
@@ -70,22 +72,32 @@ vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignorecase = true
 
 -- stuff to ignore when tab completing
-vim.opt.wildignore = "*.o,*.obj,*~,*.so"
-vim.opt.wildignore:append("*vim/backups*")
-vim.opt.wildignore:append("*.git/**,**/.git/**")
-vim.opt.wildignore:append("*sass-cache*")
-vim.opt.wildignore:append("*DS_Store*")
-vim.opt.wildignore:append("vendor/rails/**")
-vim.opt.wildignore:append("vendor/cache/**")
-vim.opt.wildignore:append("*.gem")
-vim.opt.wildignore:append("*.pyc")
-vim.opt.wildignore:append("log/**")
-vim.opt.wildignore:append("*.png,*.jpg,*.gif")
-vim.opt.wildignore:append("*.zip,*.bg2,*.gz")
-vim.opt.wildignore:append("*.db")
-vim.opt.wildignore:append("**/node_modules/**")
-vim.opt.wildignore:append("**/bin/**")
-vim.opt.wildignore:append("**/thesaurus/**")
+vim.opt.wildignore = {
+    "*~",
+    "*.o",
+    "*.obj",
+    "*.so",
+    "*vim/backups*",
+    "*.git/**",
+    "**/.git/**",
+    "*sass-cache*",
+    "*DS_Store*",
+    "vendor/rails/**",
+    "vendor/cache/**",
+    "*.gem",
+    "*.pyc",
+    "log/**",
+    "*.png",
+    "*.jpg",
+    "*.gif",
+    "*.zip",
+    "*.bg2",
+    "*.gz",
+    "*.db",
+    "**/node_modules/**",
+    "**/bin/**",
+    "**/thesaurus/**",
+}
 
 vim.opt.omnifunc = "syntaxcomplete#Complete"
 vim.opt.updatetime = 100
@@ -102,7 +114,9 @@ vim.opt.spelllang = "en_gb"
 vim.opt.spell = false
 vim.opt.thesaurus = vim.env.HOME .. "/.local/share/thesaurus/moby.txt"
 -- install words-insane package
-vim.opt.dictionary:append("/usr/share/dict/words-insane")
+vim.opt.dictionary = {
+    "/usr/share/dict/words-insane",
+}
 
 local spellfile = vim.env.HOME .. "/.config/nvim/spell"
 -- require('util').mkdir_home(spellfile)
@@ -135,7 +149,9 @@ vim.opt.modeline = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.fillchars:append("vert:│")
+vim.opt.fillchars = {
+    vert = "│",
+}
 
 vim.opt.sessionoptions:append("tabpages,globals")
 
