@@ -30,7 +30,9 @@ function M.cwr()
     return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 end
 
--- Executes a normal command in mode.
+-- Executes a normal command in normal mode.
+-- @param mode string: see feedkeys() documentation.
+-- @param motion string: what you mean to do in normal mode.
 function M.normal(mode, motion)
     local sequence = vim.api.nvim_replace_termcodes(motion, true, false, false)
     vim.api.nvim_feedkeys(sequence, mode, true)
@@ -46,8 +48,9 @@ function M.mkdir_home(dir)
     return true
 end
 
--- jump_and_centre pushes the current location to the jumplist and calls the fn
--- callback, then centres the cursor.
+-- Pushes the current location to the jumplist and calls the fn callback, then
+-- centres the cursor.
+-- @param fn callable: a lua function to be run.
 function M.call_and_centre(fn)
     M.normal('n', "m'")
     fn()
@@ -56,8 +59,9 @@ function M.call_and_centre(fn)
     end)
 end
 
--- cmd_and_centre pushes the current location to the jumplist and calls the
--- cmd, then centres the cursor. cmd should be a string.
+-- Pushes the current location to the jumplist and calls the cmd, then centres
+-- the cursor.
+-- @param cmd string
 function M.cmd_and_centre(cmd)
     M.normal('n', "m'")
     vim.cmd(cmd)
@@ -99,18 +103,14 @@ function M._exec_command(id, ...)
     storage._store[id](...)
 end
 
--- M.command{"Name", function() print(1) end}
--- M.command{"Name", attrs="-nargs=*" function(a) print(a) end}
--- M.command{"Name", "echo 'it works!'"}
--- M.command{name="Name", run="echo 'it works!'"}
--- M.command{"Name", "echo 'it works!'", silent=true}
--- M.command{"Name", "grep a", silent=true, post_run="cw"}
--- @param opt contain the following:
---    docs     : string
---    silent   : boolean
---    run      : string or function
---    attrs    : string
---    post_run : string
+-- Creates a command from provided specifics.
+-- @param opt table: contain the following:
+--    name|[1]       string: name of the command.
+--    run|[2]        string or function
+--    attrs optional string: command atts that land before the name.
+--    docs           string: is handy when you query verbose command.
+--    silent         boolean
+--    post_run       string: a post action.
 function M.command(opts)
     local args = {}
 
@@ -145,18 +145,10 @@ function M.command(opts)
     vim.cmd(str)
 end
 
--- M.autocmd{"GroupName", {
---      {"BufRead", "<buffer>", function() print(1) end},
---      {"BufRead", "*", run=function() print(1) end},
---      {targets="BufRead,BufReadPost", "*", "setlocal spell"},
--- }}
--- @param each opts contain the following:
---    events="E1,E2"    : or you can set the buffer to true
---    tergets="*.go"
---    buffer=true
---    silent=true
---    run=string or function
---    docs=string        : if the run is a function, you can give it a name.
+-- Creates an augroup with a set of autocmds.
+-- @param table: contain the following:
+--    name|[1] string: name of the group. Should be unique.
+--    cmds|[2] table: an array of autocmds. See M.autocmd.
 function M.augroup(opts)
     local name = opts.name or opts[1]
     if name == "" then
@@ -173,16 +165,15 @@ function M.augroup(opts)
     vim.cmd('augroup END')
 end
 
--- M.autocmd{"BufRead", "<buffer>", function() print(1) end}
--- M.autocmd{"BufRead", "*", run=function() print(1) end}
--- M.autocmd{targets="BufRead,BufReadPost", "*", "setlocal spell"}
--- @param each opts contain the following:
---    events="E1,E2"    : or you can set the buffer to true
---    tergets="*.go"
---    buffer=true
---    silent=true
---    run=string or function
---    docs=string        : if the run is a function, you can give it a name.
+-- Creates a single autocmd. You most likely want to use it in a context of an
+-- augroup.
+-- @param table: contain the following:
+--    events|[1]    string: "E1,E2"; or you can set the buffer to true
+--    tergets|[2]   string: "*.go"
+--    run|[3]       string or function
+--    docs          string: is handy when you query verbose command.
+--    buffer        boolean
+--    silent        boolean
 function M.autocmd(opts)
     local args = {}
 
@@ -255,6 +246,9 @@ local popup_options = {
     },
 }
 
+-- Takes the user input in a popup.
+-- @param opts table: to override the vim.notify config table. Try prompt or
+-- on_submit.
 function M.user_input(opts)
     local conf = {
         prompt = '> ',

@@ -41,12 +41,7 @@ keymap.vnoremap{'<A-k>', silent=true, [[:m '<-2<CR>gv=gv]]}
 keymap.xnoremap{'<', '<gv'}
 keymap.xnoremap{'>', '>gv'}
 
-keymap.nnoremap{'H', '^'}
-keymap.onoremap{'H', '^'}
-keymap.nnoremap{'L', '$'}
-keymap.onoremap{'L', '$'}
-
--- Re-indent the whole file.
+-- Re-indent the whole buffer.
 keymap.nnoremap{'g=', 'gg=Gg``'}
 
 -- insert empty lines with motions, can be 10[<space>

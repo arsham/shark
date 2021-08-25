@@ -64,7 +64,7 @@ keymap.nnoremap{'<leader>fl', silent=true, function()
     }
 end}
 
--- Replace the default dictionary completion with fzf-based fuzzy completion>
+-- Replace the default dictionary completion with fzf-based fuzzy completion.
 keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
 
 local function do_rg(term)

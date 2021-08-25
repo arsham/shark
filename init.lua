@@ -11,6 +11,7 @@
 -- profiler.wrap(require('matching'))
 -- profiler.wrap(require('lists'))
 
+-- Set to true to show the profile times on startup.
 vim.g.run_profiler = false
 local profiler = require('util').profiler
 profiler('plugins',  function() require('plugins')  end)
