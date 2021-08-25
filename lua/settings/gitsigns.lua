@@ -24,13 +24,14 @@ require('gitsigns').setup {
         ["+"] = "₊"
     },
     keymaps = {},
+    use_internal_diff = false,
 }
 
 keymap.nnoremap{']c', function() util.call_and_centre(require"gitsigns".next_hunk) end}
 keymap.nnoremap{'[c', function() util.call_and_centre(require"gitsigns".prev_hunk) end}
 keymap.nnoremap{'<leader>hb', function() require("gitsigns").blame_line(true) end}
 keymap.nnoremap{'<leader>hs', function() require("gitsigns").stage_hunk() end}
-keymap.vnoremap{'<leader>hs', function() require("gitsigns").stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end}
+keymap.vnoremap{'<leader>hS', function() require("gitsigns").stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end}
 keymap.nnoremap{'<leader>hu', function() require("gitsigns").undo_stage_hunk() end}
 keymap.nnoremap{'<leader>hr', function() require("gitsigns").reset_hunk() end}
 keymap.vnoremap{'<leader>hr', function() require("gitsigns").reset_hunk({vim.fn.line("."), vim.fn.line("v")}) end}
