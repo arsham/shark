@@ -26,6 +26,7 @@ local servers = {
     pyright = {},
     yamlls = {},
     html = {},
+    ccls = {},
 
     tsserver = {
         cmd = { "typescript-language-server", "--stdio" },
