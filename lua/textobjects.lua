@@ -17,7 +17,7 @@ vim.keymap.onoremap{'in', function() next_obj("i") end}
 
 -- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
 -- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
-local chars = {'_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '-', '#' }
+local chars = {'_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '-', '#' }
 for char in table.values(chars) do
     vim.keymap.xnoremap{'i' .. char, function()
         util.normal('xt', 'T' .. char .. 'ot' .. char)
@@ -116,3 +116,6 @@ vim.keymap.vnoremap{'i`', function() in_backticks(false) end,     {silent = true
 vim.keymap.vnoremap{'a`', function() in_backticks(true) end,      {silent = true}}
 vim.keymap.onoremap{'i`', function() util.normal('x', 'vi`') end, {silent = true}}
 vim.keymap.onoremap{'a`', function() util.normal('x', 'va`') end, {silent = true}}
+
+vim.keymap.onoremap{'H', '^'}
+vim.keymap.onoremap{'L', '$'}

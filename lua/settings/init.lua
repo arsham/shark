@@ -14,7 +14,7 @@ function M.surround()
     vim.g.surround_mappings_style = 'surround'
     vim.g.surround_pairs = {
         nestable = { { '(', ')' }, { '[', ']' }, { '{', '}' }, { '<', '>' } },
-        linear = { { '\'', '\'' }, { '"', '"' }, { '`', '`' } },
+        linear = { { '\'', '\'' }, { '"', '"' }, { '`', '`' }, { '*', '*' } },
     }
     vim.g.surround_brackets = { '(', '{', '[', '<' }
 
