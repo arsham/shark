@@ -71,9 +71,14 @@ end}
 -- Replace the default dictionary completion with fzf-based fuzzy completion.
 keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
 
+-- @param term string: if empty, the search will only happen on the content.
 local function do_rg(term)
+    local delimiter = ''
+    if term == '' then
+        delimiter = ' --delimiter : --nth 4..'
+    end
     local args = {
-        options = '--prompt="Search Files> " --preview-window nohidden',
+        options = '--prompt="Search Files> " --preview-window nohidden' .. delimiter,
     }
     local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
     local rg_cmd = table.concat({
