@@ -124,3 +124,18 @@ command{"History", attrs="-bang -nargs=*", function()
         options = '--no-sort',
     }))
 end}
+
+command{"Checkout", attrs="-bang -nargs=0", docs="checkout a branch", function()
+    local current = vim.fn.system('git symbolic-ref --short HEAD')
+    current = current:gsub("\n", "")
+    local current_escaped = current:gsub("/", "\\/")
+
+    local cmd = "git branch -r --no-color | sed -r -e 's/^[^/]*\\///' -e '/^" .. current_escaped .. "$/d' -e '/^HEAD/d' | sort -u"
+    local opts = {
+        sink = function(branch)
+            vim.fn.system('git checkout ' .. branch)
+        end,
+        options = {'--no-multi', '--header=' .. current}
+    }
+    vim.fn["fzf#vim#grep"](cmd, 0, opts)
+end}
