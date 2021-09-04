@@ -27,12 +27,14 @@ local palette = {
     blue = '#1981F0',
     darkblue = '#213E5D',
     paleblue = '#6EABEC',
-    diff_add_fg = '#6A8F1F',
+    diff_add_fg = '#B0C781',
     diff_add_bg = '#3D5213',
     diff_remove_fg = '#4A0F23',
     diff_remove_bg = '#A3214C',
     diff_change_fg = '#7AA6DA',
     diff_change_bg = '#537196',
+    diff_text_fg = '#000000',
+    diff_text_bg = '#73D2DE',
     color_column = '#2E2A2A',
     none = 'NONE',
     -- TODO:
@@ -346,8 +348,8 @@ local mappings = {
     },
     DiffText = {
         -- diff mode: Changed text within a changed line
-        guifg = palette.black,
-        guibg = palette.aqua,
+        guifg = palette.diff_text_fg,
+        guibg = palette.diff_text_bg,
     },
     diffAdded = {
         guifg = palette.green,
