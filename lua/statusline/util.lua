@@ -5,6 +5,7 @@ local M = {}
 M.colors = {
     white         = "#b5bcc9",
     grey_fg       = "#51585f",
+    short_bg      = "#34393D",
     red           = "#ef8891",
     red_dark      = "#B31F1F",
     green         = "#9ce5c0",

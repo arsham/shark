@@ -233,7 +233,7 @@ gls.short_line_left = {
     {
         SParentDir = {
             provider = util.parent_dir_name,
-            highlight = {util.colors.white, util.colors.mid_bg},
+            highlight = {util.colors.white, util.colors.short_bg},
             separator = "  ",
             icon = " ",
             separator_highlight = {util.colors.mid_bg, util.colors.mid_bg},
@@ -244,7 +244,7 @@ gls.short_line_left = {
         SFileName = {
             provider = {util.get_current_file_name, "FileIcon", "FileSize"},
             condition = condition.buffer_not_empty,
-            highlight = {util.colors.white, util.colors.mid_bg},
+            highlight = {util.colors.white, util.colors.short_bg},
             separator_highlight = {util.colors.mid_bg, util.colors.mid_bg},
         }
     },
