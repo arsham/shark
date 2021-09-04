@@ -72,7 +72,8 @@ end}
 keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
 
 -- @param term string: if empty, the search will only happen on the content.
-local function do_rg(term)
+local function do_rg(term, opts)
+    opts = opts or ''
     local delimiter = ''
     if term == '' then
         delimiter = ' --delimiter : --nth 4..'
@@ -83,16 +84,25 @@ local function do_rg(term)
     local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
     local rg_cmd = table.concat({
         'rg --column --line-number --no-heading',
-        '   --color=always --smart-case --hidden -g "!.git/" -- ',
+        '   --color=always --smart-case --hidden -g "!.git/" ',
+        opts,
+        ' -- ',
         vim.fn.shellescape(term),
     }, " ")
     vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
 end
+
 -- Open the search tool.
 keymap.nnoremap{"<leader>ff", function() do_rg("") end}
+-- Open the search tool.
+keymap.nnoremap{"<leader>fa", function() do_rg("", '-u') end}
 -- Search over current word.
 keymap.nnoremap{"<leader>rg", function()
     do_rg(vim.fn.expand("<cword>"))
+end}
+-- Search over current word, ignoring .gitignore.
+keymap.nnoremap{"<leader>ra", function()
+    do_rg(vim.fn.expand("<cword>"), '-u')
 end}
 
 keymap.nnoremap{'<leader>mm',  ":Marks<CR>"}

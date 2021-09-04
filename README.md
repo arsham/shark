@@ -250,7 +250,9 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>@`        | Search in ctags or LSP symbols (see note below).       |
 | `<leader>:`        | Commands                                               |
 | `<leader>ff`       | **F**ind in contents of all files in current folder.   |
+| `<leader>fa`       | **F**ind **A**ll disabling `.gitignore` handling.      |
 | `<leader>rg`       | Search (**rg**) with current word.                     |
+| `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
 | `<leader>fh`       | **F**ile **H**istory                                   |
 | `<leader>fl`       | File **locate** (requires mlocate)                     |
 | `<leader>gg`       | **GGrep**                                              |
@@ -324,6 +326,9 @@ mappings results. ALE also provides some mappings internally.
 | `<leader>dq`  | Fill the **Q**uicklist with **D**iagnostics |
 | `<leader>dw`  | Fill the local list with **D**iagnostics    |
 | `<leader>dr`  | Restart the LSP server (see below)          |
+
+Please note that the `<leader>@` binding will use the `LSP` symbols if is
+attached to the buffer, and `ctags` if not.
 
 Please see the code for all available mappings.
 </details>
