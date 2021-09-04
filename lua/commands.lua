@@ -19,7 +19,6 @@ command{"InstallDependencies", function()
         dockerfile = {"npm", "-g", "install", "--prefix", "~/.node_modules", "dockerfile-language-server-nodejs@latest"},
         html       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-html-languageserver-bin@latest"},
         json       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-json-languageserver@latest"},
-        python     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "pyright@latest"},
         yaml       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "yaml-language-server@latest"},
         neovim     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest"},
         typescript = {"npm", "-g", "install", "--prefix", "~/.node_modules", "typescript@latest", "typescript-language-server@latest"},
@@ -57,9 +56,18 @@ command{"InstallDependencies", function()
 
                 count = count + 1
                 if count == total then
-                    local data = "All done!\n\nPlease run:\n    yay -S ripgrep bat lua-language-server-git ccls words-insane"
+                    local str =  "yay -S ripgrep bat lua-language-server-git ccls words-insane ctags jedi-language-server"
+                    vim.schedule(function()
+                        vim.fn.setreg('+', str)
+                    end)
+                    local data = table.concat({
+                        "Please run:",
+                        "    " .. str,
+                        "",
+                        "The command has been yanked to your clickboard!",
+                    }, "\n")
                     vim.notify(data, vim.lsp.log_levels.INFO, {
-                        title = "Installation Process",
+                        title = "All done!",
                         timeout = 3000,
                     })
                 end
