@@ -10,7 +10,16 @@ command{"YankFilepath",  function() vim.fn.setreg('"', vim.fn.expand '%:p') end}
 command{"YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end}
 
 command{"MergeConflict", ":grep '<<<<<<< HEAD'"}
-command{"JsonDiff",      [[vert ball | windo execute '.!gojq' | windo diffthis]]}
+command{"JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]]}
+
+command{"CC", docs="close all floating windows", run=function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local config = vim.api.nvim_win_get_config(win)
+        if config.relative ~= "" then
+            vim.api.nvim_win_close(win, false)
+        end
+    end
+end}
 
 command{"InstallDependencies", function()
     local commands = {
