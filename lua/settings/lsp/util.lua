@@ -88,22 +88,21 @@ local function attach_mappings_commands(client)
         format = function() end,
         imports = function() end,
     }
-    local opts = {silent=true, buffer=true}
     local caps = client.resolved_capabilities
     if caps.code_action then
         nvim_command('command! -buffer -range CodeAction lua require("settings.lsp.util").code_action(<range> ~= 0, <line1>, <line2>)')
-        vim.keymap.nnoremap{'<leader>ca', vim.lsp.buf.code_action, opts}
+        vim.keymap.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
 
         -- Either is it set to true, or there is a specified set of
         -- capabilities.
         if caps.code_action == true or table.contains(caps.code_action.codeActionKinds, "source.organizeImports") then
-            vim.keymap.nnoremap{'<leader>i', lsp_organise_imports, opts}
+            vim.keymap.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
             pre_save.imports = lsp_organise_imports
         end
     end
 
     if caps.document_formatting then
-        vim.keymap.nnoremap{"<leader>gq", vim.lsp.buf.formatting, opts}
+        vim.keymap.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
         pre_save.format = function()
             vim.lsp.buf.formatting_sync(nil, 1000)
         end
@@ -118,46 +117,46 @@ local function attach_mappings_commands(client)
 
     if caps.document_range_formatting then
         nvim_command('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
-        vim.keymap.vnoremap{"gq", ':Format<CR>', opts}
+        vim.keymap.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
     end
 
     if caps.rename then
-        util.command{'Rename', buffer=true, vim.lsp.buf.rename}
+        util.command{'Rename', buffer=true, function() vim.lsp.buf.rename() end}
     end
 
     if caps.hover then
-        vim.keymap.nnoremap{'H', vim.lsp.buf.hover, opts}
+        vim.keymap.nnoremap{'H', vim.lsp.buf.hover, buffer=true, silent=true}
     end
     if caps.signature_help then
-        vim.keymap.nnoremap{'K',     vim.lsp.buf.signature_help, opts}
-        vim.keymap.inoremap{'<C-k>', vim.lsp.buf.signature_help, opts}
+        vim.keymap.nnoremap{'K',     vim.lsp.buf.signature_help, buffer=true, silent=true}
+        vim.keymap.inoremap{'<C-k>', vim.lsp.buf.signature_help, buffer=true, silent=true}
     end
 
     if caps.goto_definition then
         util.command{"Definition", buffer=true, vim.lsp.buf.definition}
-        vim.keymap.nnoremap{'gd', vim.lsp.buf.definition, opts}
+        vim.keymap.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
     end
     if caps.declaration then
-        vim.keymap.nnoremap{'gD', vim.lsp.buf.declaration, opts}
+        vim.keymap.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
     end
     if caps.type_definition then
         util.command{"TypeDefinition", buffer=true, vim.lsp.buf.type_definition}
     end
     if caps.implementation then
         util.command{"Implementation", buffer=true, vim.lsp.buf.implementation}
-        vim.keymap.nnoremap{'<leader>gi', vim.lsp.buf.implementation, opts}
+        vim.keymap.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true}
     end
 
     if caps.find_references then
         util.command{"References", buffer=true, vim.lsp.buf.references}
-        vim.keymap.nnoremap{'gr', vim.lsp.buf.references, opts}
+        vim.keymap.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true}
     end
 
     if caps.document_symbol then
         util.command{"DocumentSymbol", buffer=true, vim.lsp.buf.document_symbol}
         vim.keymap.nnoremap{'<leader>@', function()
             util.call_and_centre(vim.lsp.buf.document_symbol)
-        end, opts}
+        end, buffer=true, silent=true}
     end
     if caps.workspace_symbol then
         util.command{"WorkspaceSymbols", buffer=true, vim.lsp.buf.workspace_symbol}
@@ -166,7 +165,7 @@ local function attach_mappings_commands(client)
     if caps.call_hierarchy then
         util.command{"Callees", buffer=true, vim.lsp.buf.outgoing_calls}
         util.command{"Callers", buffer=true, vim.lsp.buf.incoming_calls}
-        vim.keymap.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, opts}
+        vim.keymap.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true}
     end
 
     util.command{"ListWorkspace", buffer=true, function()
@@ -190,20 +189,20 @@ local function attach_mappings_commands(client)
         vim.lsp.buf.workspace_symbol(pattern)
     end}
 
-    vim.keymap.inoremap{'<Tab>',   require("completion").smart_tab,   opts}
-    vim.keymap.inoremap{'<S-Tab>', require("completion").smart_s_tab, opts}
-    vim.keymap.inoremap{'<c-j>',   require("completion").nextSource,  opts} -- "use <c-j> to switch to next completion
-    vim.keymap.inoremap{'<c-k>',   require("completion").prevSource,  opts} -- "use <c-k> to switch to previous completion
+    vim.keymap.inoremap{'<Tab>',   require("completion").smart_tab,   buffer=true, silent=true}
+    vim.keymap.inoremap{'<S-Tab>', require("completion").smart_s_tab, buffer=true, silent=true}
+    vim.keymap.inoremap{'<c-j>',   require("completion").nextSource,  buffer=true, silent=true} -- "use <c-j> to switch to next completion
+    vim.keymap.inoremap{'<c-k>',   require("completion").prevSource,  buffer=true, silent=true} -- "use <c-k> to switch to previous completion
 
-    vim.keymap.nnoremap{'<leader>dd', vim.lsp.diagnostic.show_line_diagnostics, opts}
-    vim.keymap.nnoremap{'<leader>dq', vim.lsp.diagnostic.set_qflist,            opts}
-    vim.keymap.nnoremap{'<leader>dw', vim.lsp.diagnostic.set_loclist,           opts}
+    vim.keymap.nnoremap{'<leader>dd', vim.lsp.diagnostic.show_line_diagnostics, buffer=true, silent=true}
+    vim.keymap.nnoremap{'<leader>dq', vim.lsp.diagnostic.set_qflist,            buffer=true, silent=true}
+    vim.keymap.nnoremap{'<leader>dw', vim.lsp.diagnostic.set_loclist,           buffer=true, silent=true}
     vim.keymap.nnoremap{']d', function()
         util.call_and_centre(vim.lsp.diagnostic.goto_next)
-    end, opts}
+    end, buffer=true, silent=true}
     vim.keymap.nnoremap{'[d', function()
         util.call_and_centre(vim.lsp.diagnostic.goto_prev)
-    end, opts}
+    end, buffer=true, silent=true}
     util.command{"Diagnostics",       buffer=true, function() require('lspfuzzy').diagnostics(0) end}
     util.command{"DiagnosticsAll",    "LspDiagnosticsAll"}
 end
