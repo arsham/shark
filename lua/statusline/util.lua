@@ -249,6 +249,7 @@ function M.search_results()
     end
     local search_term = vim.fn.getreg('/')
     if search_term == "" then return nil end
+    if search_term:find("@") then return nil end
 
     local search_count = vim.fn.searchcount({recompute = 1, maxcount = -1})
     local active = false
