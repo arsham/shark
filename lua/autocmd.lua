@@ -105,7 +105,12 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
 
         {"BufRead,BufNewFile", "*", docs="signcolumn sizes", run=function()
             vim.wo.signcolumn = 'auto:2'
-        end}
+        end},
+
+        {"Filetype", "json", run=function()
+            vim.bo.softtabstop = 2
+            vim.bo.tabstop = 4
+        end},
     }}
 
     util.augroup{"TRIM_WHITE_SPACES", {
