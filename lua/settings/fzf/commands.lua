@@ -117,3 +117,10 @@ command{"ArgAdd", function()
     end
     vim.fn["fzf#run"](wrapped)
 end}
+
+-- Replacing the default ordering.
+command{"History", attrs="-bang -nargs=*", function()
+    vim.fn["fzf#vim#history"](vim.fn["fzf#vim#with_preview"]({
+        options = '--no-sort',
+    }))
+end}
