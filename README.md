@@ -124,6 +124,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **g**           | **G**o to, Jump to, run something that goes to or jumps to |
 | **m**           | **M**atch highlighting, marks                              |
 | **f**           | **F**ile, **F**ind                                         |
+| **y**           | **Y**ank                                                   |
 
 <details>
     <summary>Click to view the mappings</summary>
@@ -249,6 +250,8 @@ Most actions can apply to multiple selected items if possible.
 | `<Alt-/>`          | Search in lines of all open buffers.                   |
 | `<leader>@`        | Search in ctags or LSP symbols (see note below).       |
 | `<leader>:`        | Commands                                               |
+| `<leader>y`        | **Y**ank to `+` register (external clipboard)          |
+| `<leader>yh`       | List **Y**ank **H**istory)                             |
 | `<leader>ff`       | **F**ind in contents of all files in current folder.   |
 | `<leader>fa`       | **F**ind **A**ll disabling `.gitignore` handling.      |
 | `<leader>rg`       | Search (**rg**) with current word.                     |
@@ -263,7 +266,6 @@ Most actions can apply to multiple selected items if possible.
 
 When a file is selected, additional to what fzf provides out of the box, you
 can invoke one of these secondary actions:
-
 
 | Mapping | Description                        |
 | :---    | :---                               |
