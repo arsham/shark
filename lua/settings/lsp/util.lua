@@ -104,7 +104,7 @@ local function attach_mappings_commands(client)
     if caps.document_formatting then
         vim.keymap.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
         pre_save.format = function()
-            vim.lsp.buf.formatting_sync(nil, 1000)
+            vim.lsp.buf.formatting_sync(nil, 2000)
         end
     end
 
@@ -133,38 +133,38 @@ local function attach_mappings_commands(client)
     end
 
     if caps.goto_definition then
-        util.command{"Definition", buffer=true, vim.lsp.buf.definition}
+        util.command{"Definition", buffer=true, function() vim.lsp.buf.definition() end}
         vim.keymap.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
     end
     if caps.declaration then
         vim.keymap.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
     end
     if caps.type_definition then
-        util.command{"TypeDefinition", buffer=true, vim.lsp.buf.type_definition}
+        util.command{"TypeDefinition", buffer=true, function() vim.lsp.buf.type_definition() end}
     end
     if caps.implementation then
-        util.command{"Implementation", buffer=true, vim.lsp.buf.implementation}
+        util.command{"Implementation", buffer=true, function() vim.lsp.buf.implementation() end}
         vim.keymap.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true}
     end
 
     if caps.find_references then
-        util.command{"References", buffer=true, vim.lsp.buf.references}
+        util.command{"References", buffer=true, function() vim.lsp.buf.references() end}
         vim.keymap.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true}
     end
 
     if caps.document_symbol then
-        util.command{"DocumentSymbol", buffer=true, vim.lsp.buf.document_symbol}
+        util.command{"DocumentSymbol", buffer=true, function() vim.lsp.buf.document_symbol() end}
         vim.keymap.nnoremap{'<leader>@', function()
             util.call_and_centre(vim.lsp.buf.document_symbol)
         end, buffer=true, silent=true}
     end
     if caps.workspace_symbol then
-        util.command{"WorkspaceSymbols", buffer=true, vim.lsp.buf.workspace_symbol}
+        util.command{"WorkspaceSymbols", buffer=true, function() vim.lsp.buf.workspace_symbol() end}
     end
 
     if caps.call_hierarchy then
-        util.command{"Callees", buffer=true, vim.lsp.buf.outgoing_calls}
-        util.command{"Callers", buffer=true, vim.lsp.buf.incoming_calls}
+        util.command{"Callees", buffer=true, function() vim.lsp.buf.outgoing_calls() end}
+        util.command{"Callers", buffer=true, function() vim.lsp.buf.incoming_calls() end}
         vim.keymap.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true}
     end
 
@@ -191,8 +191,10 @@ local function attach_mappings_commands(client)
 
     vim.keymap.inoremap{'<Tab>',   require("completion").smart_tab,   buffer=true, silent=true}
     vim.keymap.inoremap{'<S-Tab>', require("completion").smart_s_tab, buffer=true, silent=true}
-    vim.keymap.inoremap{'<c-j>',   require("completion").nextSource,  buffer=true, silent=true} -- "use <c-j> to switch to next completion
-    vim.keymap.inoremap{'<c-k>',   require("completion").prevSource,  buffer=true, silent=true} -- "use <c-k> to switch to previous completion
+    vim.keymap.inoremap{'<M-n>',   require("completion").nextSource,  buffer=true, silent=true}
+    vim.keymap.inoremap{'<M-p>',   require("completion").prevSource,  buffer=true, silent=true}
+    vim.keymap.inoremap{'<C-j>',   '<C-n>',  buffer=true, silent=true}
+    vim.keymap.inoremap{'<C-k>',   '<C-p>',  buffer=true, silent=true}
 
     vim.keymap.nnoremap{'<leader>dd', vim.lsp.diagnostic.show_line_diagnostics, buffer=true, silent=true}
     vim.keymap.nnoremap{'<leader>dq', vim.lsp.diagnostic.set_qflist,            buffer=true, silent=true}

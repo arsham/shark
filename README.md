@@ -158,6 +158,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 
 </details>
 
+There are more specialised mappings provided, keep reading!
 
 ### Text Objects
 
@@ -257,7 +258,7 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>rg`       | Search (**rg**) with current word.                     |
 | `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
 | `<leader>fh`       | **F**ile **H**istory                                   |
-| `<leader>fl`       | File **locate** (requires mlocate)                     |
+| `<leader>fl`       | **F**ile **l**ocate (requires mlocate)                 |
 | `<leader>gg`       | **GGrep**                                              |
 | `<leader>gf`       | **GFiles**                                             |
 | `<leader>mm`       | **Marks**                                              |
@@ -300,6 +301,9 @@ When a LSP server is attached to a buffer, a bunch of mappings will be defined
 for that buffer. When possible, fzf will take over the results of the LSP
 mappings results. ALE also provides some mappings internally.
 
+Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
+`<Ctrl-k>` in completion menu in order to move up and down.
+
 <details>
     <summary>Click to view the mappings</summary>
 
@@ -322,12 +326,15 @@ mappings results. ALE also provides some mappings internally.
 | `<leader>gc`  | Show **C**allers                            |
 | `<Tab>`       | (insert mode) Next completion item          |
 | `<Shift-Tab>` | (insert mode) Previous completion item      |
-| `<Ctrl-j>`    | (insert mode) Next completion source        |
-| `<Ctrl-k>`    | (insert mode) Previous completion source    |
+| `<Ctrl-j>`    | (insert mode) Next completion item          |
+| `<Ctrl-k>`    | (insert mode) Previous completion item      |
+| `<Alt-n>`     | (insert mode) Next completion source        |
+| `<Alt-p>`     | (insert mode) Previous completion source    |
 | `<leader>dd`  | Show line **D**iagnostics                   |
 | `<leader>dq`  | Fill the **Q**uicklist with **D**iagnostics |
 | `<leader>dw`  | Fill the local list with **D**iagnostics    |
 | `<leader>dr`  | Restart the LSP server (see below)          |
+| `<leader>ca`  | **C**ode **A**ctions                        |
 
 Please note that the `<leader>@` binding will use the `LSP` symbols if is
 attached to the buffer, and `ctags` if not.
@@ -360,7 +367,7 @@ effects.
 
 ### Commands
 
-The following list of commands do not land into any specific categories.
+The following list of commands do not fit into any specific categories.
 
 <details>
     <summary>Click to view the commands</summary>

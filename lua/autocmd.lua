@@ -111,6 +111,10 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
             vim.bo.softtabstop = 2
             vim.bo.tabstop = 4
         end},
+
+        {"Filetype", "sql", docs="don't wrap me", run=function()
+            vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
+        end},
     }}
 
     util.augroup{"TRIM_WHITE_SPACES", {

@@ -3,8 +3,6 @@ vim.opt.smartindent = true
 vim.opt.formatoptions:append("n") -- smart auto-indent numbered lists.
 vim.opt.textwidth = 79
 vim.opt.colorcolumn = "80,120"
--- seems to be on by default.
--- vim.opt.smarttab = true
 vim.opt.shiftwidth=4
 vim.opt.softtabstop=4
 vim.opt.tabstop=4
@@ -16,22 +14,17 @@ vim.opt.linebreak = true  -- Wrap lines at convenient points
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '  ', trail = '.' }
-vim.opt.clipboard:append("unnamed")
 vim.opt.title = true
 vim.opt.titlestring:append("%t")
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.lazyredraw = false
 vim.opt.synmaxcol = 256
--- seems to be on by default.
--- vim.opt.backspace = "indent,eol,start" -- allow backspace in insert mode
 vim.opt.history = 10000
 
 vim.opt.shada = "!,'10000,<1000,s100,h,f1,:100000,@10000,/1000"
 vim.opt.showcmd = true
 vim.opt.showmode = true
--- seems to be on by default.
--- vim.opt.autoread = true
 
 -- vim.opt.shortmess = vim.opt.shortmess + "f"	   -- Use "(3 of 5)" instead of "(file 3 of 5)"
 -- vim.opt.shortmess = vim.opt.shortmess + "i"	   -- Use "[noeol]" instead of "[Incomplete last line]"
@@ -51,7 +44,6 @@ vim.opt.showmode = true
 vim.opt.shortmess:append("filmnrxoOtTAIc")
 
 vim.opt.hidden = true
--- vim.opt.syntax = "on"
 
 vim.opt.viewoptions:append("localoptions")
 vim.opt.viewdir = vim.env.HOME .. "/.cache/vim/views"
@@ -66,8 +58,6 @@ vim.opt.suffixesadd = {
 }
 
 -- enable ctrl-n and ctrl-p to scroll through matches
--- seems to be on by default.
--- vim.opt.wildmenu = true
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignorecase = true
 
@@ -126,10 +116,7 @@ vim.opt.scrolloff = 3         -- keep 3 lines visible while scrolling
 vim.opt.sidescrolloff = 15
 vim.opt.sidescroll = 1
 
--- seems to be on by default.
--- vim.opt.incsearch = true
 vim.opt.ignorecase = true
--- vim.opt.nohlsearch
 vim.opt.inccommand = "nosplit"         -- allow for live substitution
 vim.opt.smartcase = true
 -- Searches current directory recursively.
@@ -144,7 +131,6 @@ end
 
 -- let the visual block mode go over empty characters.
 vim.opt.virtualedit = "block"
--- vim.opt.modelines = 0
 vim.opt.modeline = true
 
 vim.opt.splitbelow = true
@@ -174,9 +160,6 @@ vim.opt.termguicolors = true
 --     set termguicolors
 -- endif
 
--- seems to be on by default.
--- vim.cmd('filetype indent plugin on')
-
 vim.g.netrw_winsize = 20
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
@@ -186,5 +169,3 @@ vim.opt.completeopt = "menuone,noinsert,noselect"
 
 vim.g.python3_host_prog = '/usr/bin/python3'
 vim.g.python_host_prog = '/usr/bin/python2'
-
--- https://github.com/wincent/wincent/blob/main/aspects/nvim/files/.config/nvim/init.lua

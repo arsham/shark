@@ -24,7 +24,9 @@ require('gitsigns').setup {
         ["+"] = "₊"
     },
     keymaps = {},
-    use_internal_diff = false,
+    diff_opts = {
+        internal = true,
+    },
 }
 
 keymap.nnoremap{']c', function() util.call_and_centre(require"gitsigns".next_hunk) end}
