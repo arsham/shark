@@ -2,17 +2,21 @@ local util = require('util')
 require('astronauta.keymap')
 
 local mappings = {
-    { group = 'MatchingBrown'    , color = "#6D3717" },
-    { group = 'MatchingPink'     , color = '#FF6188' },
-    { group = 'MatchingGreen'    , color = '#A9DC76' },
-    { group = 'MatchingAqua'     , color = '#78DCE8' },
-    { group = 'MatchingYellow'   , color = '#FFD866' },
-    { group = 'MatchingOrange'   , color = '#FC9867' },
-    { group = 'MatchingPurple'   , color = '#AB9DF2' },
-    { group = 'MatchingDarkred'  , color = 'darkred' },
-    { group = 'MatchingRed'      , color = '#FD6883' },
-    { group = 'MatchingBlue'     , color = '#1981F0' },
-    { group = 'MatchingPaleblue' , color = '#6EABEC' },
+    { group = 'MatchingA', color = "#6D3717" },
+    { group = 'MatchingB', color = '#FF6188' },
+    { group = 'MatchingC', color = '#A9DC76' },
+    { group = 'MatchingD', color = '#78DCE8' },
+    { group = 'MatchingE', color = '#FFD866' },
+    { group = 'MatchingF', color = '#FC9867' },
+    { group = 'MatchingG', color = '#AB9DF2' },
+    { group = 'MatchingH', color = 'darkred' },
+    { group = 'MatchingI', color = '#FD6883' },
+    { group = 'MatchingJ', color = '#1981F0' },
+    { group = 'MatchingK', color = '#6EABEC' },
+    { group = 'MatchingL', color = '#9261E2' },
+    { group = 'MatchingM', color = '#E261AB' },
+    { group = 'MatchingN', color = '#B7FC4F' },
+    { group = 'MatchingO', color = '#4FD9FC' },
 }
 
 for _, mapping in pairs(mappings) do
@@ -51,4 +55,6 @@ vim.keymap.nnoremap{'<leader>mp', function()
         end,
     }
 end}
+
+-- Clear all matches of the current buffer.
 vim.keymap.nnoremap{'<leader>mc', vim.fn.clearmatches}
