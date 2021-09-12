@@ -1,42 +1,42 @@
 -- This is the 'arsham' color scheme.
 
 local palette = {
-    name = 'arsham',
-    base0 = '#232627',
-    base1 = '#211F22',
-    -- base2 = '#26292C',
-    base2 = '#2A2D30',
-    base3 = '#2E323C',
-    base4 = '#333842',
-    base5 = '#4d5154',
-    base6 = '#72696A',
-    base7 = '#B1B1B1',
-    border = '#A1B5B1',
-    brown = "#6D3717",
-    white = '#FFF1F3',
-    grey = '#72696A',
-    black = '#000000',
-    pink = '#FF6188',
-    green = '#A9DC76',
-    aqua = '#78DCE8',
-    yellow = '#FFD866',
-    orange = '#FC9867',
-    purple = '#AB9DF2',
-    darkred = 'darkred',
-    red = '#FD6883',
-    blue = '#1981F0',
-    darkblue = '#213E5D',
-    paleblue = '#6EABEC',
-    diff_add_fg = '#B0C781',
-    diff_add_bg = '#3D5213',
+    name           = 'arsham',
+    base0          = '#232627',
+    base1          = '#211F22',
+    -- base2       = '#26292C',
+    base2          = '#2A2D30',
+    base3          = '#2E323C',
+    base4          = '#333842',
+    base5          = '#4d5154',
+    base6          = '#72696A',
+    base7          = '#B1B1B1',
+    border         = '#A1B5B1',
+    brown          = "#6D3717",
+    white          = '#FFF1F3',
+    grey           = '#72696A',
+    black          = '#000000',
+    pink           = '#FF6188',
+    green          = '#A9DC76',
+    aqua           = '#78DCE8',
+    yellow         = '#FFD866',
+    orange         = '#FC9867',
+    purple         = '#AB9DF2',
+    darkred        = 'darkred',
+    red            = '#FD6883',
+    blue           = '#1981F0',
+    darkblue       = '#213E5D',
+    paleblue       = '#6EABEC',
+    diff_add_fg    = '#B0C781',
+    diff_add_bg    = '#3D5213',
     diff_remove_fg = '#4A0F23',
     diff_remove_bg = '#A3214C',
     diff_change_fg = '#7AA6DA',
     diff_change_bg = '#537196',
-    diff_text_fg = '#000000',
-    diff_text_bg = '#73D2DE',
-    color_column = '#2E2A2A',
-    none = 'NONE',
+    diff_text_fg   = '#000000',
+    diff_text_bg   = '#73D2DE',
+    color_column   = '#2E2A2A',
+    none           = 'NONE',
     -- TODO:
     -- accent
 }
@@ -48,13 +48,13 @@ local mappings = {
     },
     NormalNC = {
         -- normal text in non-current windows
-        guifg =palette.fg,
+        guifg = palette.fg,
         guibg = palette.bg,
     },
     NormalSB = {
         -- normal text in non-current windows
-        guifg =palette.fg_sidebar,
-        guibg =palette.bg_sidebar,
+        guifg = palette.fg_sidebar,
+        guibg = palette.bg_sidebar,
     },
     NormalFloat = {
         -- normal text and background color for floating windows
@@ -261,8 +261,8 @@ local mappings = {
     },
     TabLine = {
         -- tab pages line, not active tab page label
-        guibg =palette.bg_statusline,
-        guifg =palette.fg_gutter,
+        guibg = palette.bg_statusline,
+        guifg = palette.fg_gutter,
     },
     StatusLineTerm = {
         -- status line of current terminal window
@@ -572,7 +572,7 @@ local mappings = {
         style = 'reverse',
     },
     qfFileName = {
-        guifg =palette.blue,
+        guifg = palette.blue,
     },
     Debug = {
         -- debugging statements
@@ -604,26 +604,26 @@ local mappings = {
         style = 'bold',
     },
     mkdCodeDelimiter = {
-        guibg =palette.terminal_black,
-        guifg =palette.fg,
+        guibg = palette.terminal_black,
+        guifg = palette.fg,
     },
     mkdCodeStart = {
-        guifg =palette.teal,
+        guifg = palette.teal,
         style = "bold",
     },
     mkdCodeEnd = {
-        guifg =palette.teal,
+        guifg = palette.teal,
         style = "bold",
     },
     markdownHeadingDelimiter = {
-        guifg =palette.orange,
+        guifg = palette.orange,
         style = "bold",
     },
     markdownCode = {
-        guifg =palette.teal,
+        guifg = palette.teal,
     },
     markdownCodeBlock = {
-        guifg =palette.teal,
+        guifg = palette.teal,
     },
     htmlH3 = {
         guifg = palette.green,
@@ -646,11 +646,11 @@ local mappings = {
         style = 'bold',
     },
     markdownLinkText = {
-        guifg =palette.blue,
+        guifg = palette.blue,
         style = "underline",
     },
     debugPC = {
-        guibg =palette.bg_sidebar,
+        guibg = palette.bg_sidebar,
     }, -- used for highlighting the current line in terminal-debug
     markdownH3 = {
         guifg = palette.green,
@@ -667,7 +667,7 @@ local mappings = {
         guifg = palette.green,
     },
     ExtraWhitespace = {
-        guibg = palette.darkred,
+        guibg   = palette.darkred,
         ctermbg = palette.darkred,
     },
 }
@@ -874,16 +874,16 @@ local plugin_syntax = {
         guifg = palette.purple
     },
     TSNote = {
-        guifg =palette.bg,
-        guibg =palette.info,
+        guifg = palette.bg,
+        guibg = palette.info,
     },
     TSWarning = {
-        guifg =palette.bg,
-        guibg =palette.warning,
+        guifg = palette.bg,
+        guibg = palette.warning,
     },
     TSDanger = {
-        guifg =palette.bg,
-        guibg =palette.error,
+        guifg = palette.bg,
+        guibg = palette.error,
     },
 
     LspDiagnosticsDefaultError = {
@@ -990,40 +990,40 @@ local plugin_syntax = {
         guifg =palette.orange,
     },
     LspCodeLens = {
-        guifg =palette.comment,
+        guifg = palette.comment,
     },
     LspFloatWinNormal = {
-        guibg =palette.paleblue,
+        guibg = palette.paleblue,
     },
     LspFloatWinBorder = {
-        guifg =palette.border_highlight,
+        guifg = palette.border_highlight,
     },
     LspSagaBorderTitle = {
-        guifg =palette.cyan,
+        guifg = palette.cyan,
     },
     LspSagaHoverBorder = {
-        guifg =palette.blue,
+        guifg = palette.blue,
     },
     LspSagaRenameBorder = {
-        guifg =palette.green,
+        guifg = palette.green,
     },
     LspSagaDefPreviewBorder = {
-        guifg =palette.green,
+        guifg = palette.green,
     },
     LspSagaCodeActionBorder = {
-        guifg =palette.blue,
+        guifg = palette.blue,
     },
     LspSagaFinderSelection = {
-        guifg =palette.bg_visual,
+        guifg = palette.bg_visual,
     },
     LspSagaCodeActionTitle = {
-        guifg =palette.blue1,
+        guifg = palette.blue1,
     },
     LspSagaCodeActionContent = {
-        guifg =palette.purple,
+        guifg = palette.purple,
     },
     LspSagaSignatureHelpBorder = {
-        guifg =palette.red,
+        guifg = palette.red,
     },
     LspLinesDiagBorder =	{
         guifg = palette.contrast,
@@ -1056,11 +1056,11 @@ local plugin_syntax = {
     },
 
     ALEErrorSign = {
-        guifg =palette.error,
+        guifg = palette.error,
         guibg = palette.base2,
     },
     ALEWarningSign = {
-        guifg =palette.warning,
+        guifg = palette.warning,
         guibg = palette.base2,
     },
     DiagnosticError = {
@@ -1076,10 +1076,10 @@ local plugin_syntax = {
         guifg = palette.purple,
     },
     illuminatedWord = {
-        guibg =palette.fg_gutter,
+        guibg = palette.fg_gutter,
     },
     illuminatedCurWord = {
-        guibg =palette.fg_gutter,
+        guibg = palette.fg_gutter,
     },
     CursorWord0 = {
         guibg = palette.white,
@@ -1139,8 +1139,8 @@ local plugin_syntax = {
         style = 'NONE',
     },
     NvimTreeNormal = {
-        guifg =palette.fg_sidebar,
-        guibg =palette.bg_sidebar,
+        guifg = palette.fg_sidebar,
+        guibg = palette.bg_sidebar,
     },
 
     GitSignsAdd = {

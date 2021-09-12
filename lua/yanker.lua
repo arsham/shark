@@ -10,6 +10,7 @@ util.augroup{"CLIPBOARD", {
         -- We are trying to make a set here, instead we will clean up when we
         -- read.
         table.insert(store, 1, vim.v.event)
+        _G.arsham = vim.v.event
     end},
 }}
 
@@ -20,14 +21,18 @@ local function make_unique()
     local unique = {}
     local seen = {}
     for _, v in pairs(store) do
-        local key = table.concat(v.regcontents, "\n")
-        if seen[key] == nil then
+        local key = table.concat(v.regcontents, "\n"):gsub('%s+', '')
+        if key == '' then
+        elseif seen[key] == nil then
             seen[key] = true
             table.insert(unique, v)
         end
     end
     store = unique
+    __Clipboard_storage = unique
 end
+
+util.highlight("YankerEmptySpace", {guibg = 'red'})
 
 -- Lists all yank history, and will set it to the unnamed register on
 -- selection.
@@ -35,13 +40,20 @@ vim.keymap.nnoremap{'<leader>yh', silent=true, function()
     make_unique()
     local yank_list = {}
     for i, v in pairs(store) do
-        local value = table.concat(v.regcontents, "\n")
-        table.insert(yank_list, i .. '\t' .. value)
+        local value = table.concat(v.regcontents, '<CR>')
+        local type = "BLOCK"
+        if v.regtype == "v" then
+            type = "visual"
+        elseif v.regtype == "V" then
+            type = "VISUAL"
+        end
+        table.insert(yank_list, i .. '\t' .. type .. '\t' .. value)
     end
+    _G.arsham = yank_list
 
     local wrapped = vim.fn["fzf#wrap"]({
         source = yank_list,
-        options = '--prompt "Preciously Yanked > "',
+        options = [[--prompt "Preciously Yanked > " -d '\t' --with-nth 2.. -n 2,2..3]],
     })
     wrapped["sink*"] = function(line)
         local index = string.gmatch(line[2], '%d+')()

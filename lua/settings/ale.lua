@@ -7,8 +7,8 @@ vim.g.ale_linters = {
 
 vim.g.ale_go_golangci_lint_options = '--fast --build-tags=integration,e2e'
 vim.g.ale_go_golangci_lint_package = 1
-vim.g.ale_sign_column_always = 1
-vim.g.ale_list_window_size = 5
+vim.g.ale_sign_column_always       = 1
+vim.g.ale_list_window_size         = 5
 
 vim.g.ale_echo_msg_format = '%severity%: %linter%: %s'
 -- vim.g.ale_lint_on_save = 1
@@ -19,12 +19,12 @@ vim.g.ale_set_loclist = 0
 -- vim.g.ale_set_quickfix = 1
 vim.g.ale_open_list = 0
 
-vim.g.ale_sign_error = '🔥'
-vim.g.ale_sign_warning = '💩'
-vim.g.ale_sign_info = '💬'
-vim.g.ale_sign_style_error = '🔥'
+vim.g.ale_sign_error         = '🔥'
+vim.g.ale_sign_warning       = '💩'
+vim.g.ale_sign_info          = '💬'
+vim.g.ale_sign_style_error   = '🔥'
 vim.g.ale_sign_style_warning = '💩'
-vim.g.ale_sign_priority = 2
+vim.g.ale_sign_priority      = 2
 
 vim.keymap.nnoremap{']l', silent=true, function() util.cmd_and_centre("ALENextWrap") end}
 vim.keymap.nnoremap{'[l', silent=true, function() util.cmd_and_centre("ALEPreviousWrap") end}

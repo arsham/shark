@@ -118,13 +118,16 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | Part of mapping | Description                                                |
 | :---            | :---                                                       |
 | **q**           | **quickfix** list mappings                                 |
-| **w**           | **local list** mappings                                    |
-| **d**           | LSP diagnostics                                            |
+| **w**           | **local list** mappings (because it's beside **q**)        |
+| **d**           | LSP **d**iagnostics                                        |
 | **l**           | ALE **l**inting                                            |
 | **g**           | **G**o to, Jump to, run something that goes to or jumps to |
-| **m**           | **M**atch highlighting, marks                              |
+| **m**           | **M**atch highlighting, **m**arks                          |
 | **f**           | **F**ile, **F**ind                                         |
 | **y**           | **Y**ank                                                   |
+| **a**           | **A**ll, or disabling certain constraints                  |
+
+The `leader` key is the `space`!
 
 <details>
     <summary>Click to view the mappings</summary>
@@ -132,7 +135,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | Mapping      | Description                                             |
 | :---         | :---                                                    |
 | `<leader>kb` | Toggles Neovim tree                                     |
-| `<leader>kf` | Finds current file in the Neovim tree                   |
+| `<leader>kf` | **F**inds current file in the Neovim tree               |
 | `<Alt-j>`    | Shifts line(s) down one line and format                 |
 | `<Alt-k>`    | Shifts line(s) up one line and format                   |
 | `<Alt-,>`    | Adds `,` at the end of current line without moving      |
@@ -158,7 +161,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 
 </details>
 
-There are more specialised mappings provided, keep reading!
+There are more specialised mappings provided, keep reading please!
 
 ### Text Objects
 
@@ -195,10 +198,11 @@ There are sets of **i*** and **a*** text objects, where `*` can be any of:
 There are a few tools for interacting with **quickfix** and **local** lists.
 Following mappings can be used for either cases, all you need to do it to
 substitute `w` for `q` or vice versa. Generally **q** is for **quickfix** list
-and **w** is for **local list**.
+and **w** is for **local list**. I chose **w** because it's beside **q** and it
+makes it easy to think about these two types of lists.
 
-After adding an item to the list, an indicator in the statusline will show you
-how many items you have in a list.
+After adding an item to the list, an indicator in the **statusline** will show
+you how many items you have in a list.
 
 <details>
     <summary>Click to view mappings for lists</summary>
@@ -219,7 +223,7 @@ rows from quickfix/local list buffer.
 
 ### Matching
 
-You can highlight words with random colours. We are using the `match`
+You can **highlight** words with random colours. We are using the `match`
 functionality, which means these groups are applied only to the current buffer.
 
 <details>
@@ -248,8 +252,8 @@ Most actions can apply to multiple selected items if possible.
 | `<Ctrl-b>`         | **B**uffer list.                                       |
 | `<Alt-b>`          | Delete **b**uffers from the buffer list.               |
 | `<Ctrl-/>`         | Search in lines on current buffer.                     |
-| `<Alt-/>`          | Search in lines of all open buffers.                   |
-| `<leader>@`        | Search in ctags or LSP symbols (see note below).       |
+| `<Alt-/>`          | Search in lines of **all open buffers**.               |
+| `<leader>@`        | Search in **ctags** or **LSP** symbols (see below).    |
 | `<leader>:`        | Commands                                               |
 | `<leader>y`        | **Y**ank to `+` register (external clipboard)          |
 | `<leader>yh`       | List **Y**ank **H**istory)                             |
@@ -262,11 +266,15 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>gg`       | **GGrep**                                              |
 | `<leader>gf`       | **GFiles**                                             |
 | `<leader>mm`       | **Marks**                                              |
-| `z=`               | Show spell recommendation                              |
+| `z=`               | Show spell recommendations                             |
 | `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
 
-When a file is selected, additional to what fzf provides out of the box, you
-can invoke one of these secondary actions:
+When you invoke `<leader>yh` you will be presented with a history of the
+**yanked** items. Upon choosing one, the item will be set to the unnamed
+register and you use **p** from there.
+
+When a file is selected, additional to what **fzf** provides out of the box,
+you can invoke one of these secondary actions:
 
 | Mapping | Description                        |
 | :---    | :---                               |
@@ -277,6 +285,11 @@ can invoke one of these secondary actions:
 
 Note that if a `LSP` server is not attached to the buffer, it will fall back to
 `ctags`.
+
+Sometimes when you list files and `sink` with **@**, the `LSP` might not be
+ready yet, therefore it falls back to `ctags` immediately. In this case you can
+cancel, which will land you to the file, and you can invoke `<leader>@` for
+**LSP** symbols.
 
 </details>
 
@@ -297,9 +310,9 @@ There are a few added commands to what fzf provides.
 
 ### LSP and ALE
 
-When a LSP server is attached to a buffer, a bunch of mappings will be defined
-for that buffer. When possible, fzf will take over the results of the LSP
-mappings results. ALE also provides some mappings internally.
+When a **LSP** server is attached to a buffer, a bunch of mappings will be
+defined for that buffer. When possible, **fzf** will take over the results of
+the **LSP** mappings results. **ALE** also provides some mappings internally.
 
 Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 `<Ctrl-k>` in completion menu in order to move up and down.
@@ -337,12 +350,13 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 | `<leader>ca`  | **C**ode **A**ctions                        |
 
 Please note that the `<leader>@` binding will use the `LSP` symbols if is
-attached to the buffer, and `ctags` if not.
+attached to the buffer, or `ctags` otherwise.
 
 Please see the code for all available mappings.
 </details>
 
-LSP and ALE define their own set of commands, I have added a few useful ones.
+**LSP** and **ALE** define their own set of commands, however I have added a
+few interesting additions.
 
 <details>
     <summary>Click to view the commands</summary>
@@ -477,10 +491,10 @@ util.user_input{
 
 #### Dump
 
-Unpacks and prints tables. This function is injected into the global variable.
+Unpacks and prints tables. This function is injected into the global scope.
 
 ```lua
-util.dump({name = "Arsham"})
+dump({name = "Arsham"})
 ```
 
 ## Folder Structure

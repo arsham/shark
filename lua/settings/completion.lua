@@ -1,12 +1,12 @@
 -- possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
 vim.g.completion_enable_snippet = 'UltiSnips'
 
-vim.g.completion_enable_auto_hover = 0
-vim.g.completion_enable_auto_popup = 1
-vim.g.completion_enable_auto_signature = 0
+vim.g.completion_enable_auto_hover      = 0
+vim.g.completion_enable_auto_popup      = 1
+vim.g.completion_enable_auto_signature  = 0
 vim.g.completion_matching_strategy_list = {'exact', 'substring', 'fuzzy', 'all'}
 vim.g.completion_trigger_keyword_length = 2 -- default = 1
-vim.g.completion_matching_smart_case = 1
+vim.g.completion_matching_smart_case    = 1
 
 -- with fuzzy set, it flickers. See #237
 -- vim.g.completion_auto_change_source = 1
@@ -20,31 +20,31 @@ vim.g.completion_chain_complete_list = {
     default = {
         default = {
             { complete_items = {'lsp', 'snippet'} },
-            { mode = 'omni'},
-            { mode = 'line'},
+            { mode           = 'omni'},
+            { mode           = 'line'},
             { complete_items = {'path'}, trigger_character = {'/'} },
             { complete_items = {'buffers'} },
-            { mode = 'ctrlp'},
-            { mode = 'ctrln'},
+            { mode           = 'ctrlp'},
+            { mode           = 'ctrln'},
         },
 
         comment = {
-            { mode = 'ctrlp'},
-            { mode = 'ctrln'},
+            { mode           = 'ctrlp'},
+            { mode           = 'ctrln'},
             { complete_items = {'buffers'} },
-            { mode = 'omni'},
-            { mode = 'dict'},
-            { mode = 'spell'},
+            { mode           = 'omni'},
+            { mode           = 'dict'},
+            { mode           = 'spell'},
             { complete_items = {'path'}, trigger_character = {'/'} },
-            { mode = 'line'},
+            { mode           = 'line'},
         },
 
         string = {
             { complete_items = {'buffers'} },
-            { mode = 'ctrlp'},
-            { mode = 'ctrln'},
-            { mode = 'dict'},
-            { mode = 'spell'},
+            { mode           = 'ctrlp'},
+            { mode           = 'ctrln'},
+            { mode           = 'dict'},
+            { mode           = 'spell'},
             { complete_items = {'path'}, trigger_character = {'/'} },
         },
     },

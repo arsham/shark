@@ -16,7 +16,7 @@ gls.left = {
 
     {
         StatusIcon = {
-            provider = function() return "  " end,
+            provider  = function() return "  " end,
             highlight = {util.colors.statusline_bg, util.colors.nord_blue},
             separator = ' ',
             separator_highlight = {util.colors.nord_blue, util.colors.light_bg},
@@ -25,8 +25,8 @@ gls.left = {
 
     {
         ViMode = {
-            provider = util.mode,
-            icon = "  ",
+            provider  = util.mode,
+            icon      = "  ",
             separator = " ",
             highlight = {util.colors.red, util.colors.statusline_bg},
             separator_highlight = {util.colors.light_bg2, util.colors.statusline_bg},
@@ -35,51 +35,51 @@ gls.left = {
 
     {
         ParentDir = {
-            provider = util.parent_dir_name,
+            provider  = util.parent_dir_name,
             separator = " ",
-            icon = " ",
+            icon      = " ",
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
-            separator_highlight = {util.colors.light_bg2, util.colors.statusline_bg},
             condition = condition.hide_in_width,
+            separator_highlight = {util.colors.light_bg2, util.colors.statusline_bg},
         }
     },
 
     {
         DiffAdd = {
-            provider = "DiffAdd",
+            provider  = "DiffAdd",
             condition = function()
                 return condition.hide_in_width() and condition.check_git_workspace()
             end,
-            icon = "  ",
+            icon      = "  ",
             highlight = {util.colors.white, util.colors.statusline_bg},
         }
     },
 
     {
         DiffModified = {
-            provider = "DiffModified",
+            provider  = "DiffModified",
             condition = function()
                 return condition.hide_in_width() and condition.check_git_workspace()
             end,
-            icon = "  ",
+            icon      = "  ",
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
         }
     },
 
     {
         DiffRemove = {
-            provider = "DiffRemove",
+            provider  = "DiffRemove",
             condition = function()
                 return condition.hide_in_width() and condition.check_git_workspace()
             end,
-            icon = "  ",
+            icon      = "  ",
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
         }
     },
 
     {
         LeftAngle = {
-            provider = function() return "" end,
+            provider  = function() return "" end,
             separator = "",
             separator_highlight = {util.colors.statusline_bg, util.colors.mid_bg},
         }
@@ -89,7 +89,7 @@ gls.left = {
 gls.mid = {
     {
         FileName = {
-            provider = {util.get_current_file_name, "FileIcon", "FileSize"},
+            provider  = {util.get_current_file_name, "FileIcon", "FileSize"},
             condition = condition.buffer_not_empty,
             highlight = {util.colors.white, util.colors.mid_bg},
             separator_highlight = {util.colors.mid_bg, util.colors.mid_bg},
@@ -101,7 +101,7 @@ gls.right = {
 
     {
         DiagnosticIcon = {
-            provider = util.ale_lsp,
+            provider  = util.ale_lsp,
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
             separator = "",
             separator_highlight = {util.colors.statusline_bg, util.colors.mid_bg},
@@ -110,39 +110,39 @@ gls.right = {
 
     {
         AleStatus = {
-            provider = util.ale_diagnostics,
+            provider  = util.ale_diagnostics,
             highlight = {util.colors.yellow, util.colors.statusline_bg},
         },
     },
 
     {
         LspProvider = {
-            provider = util.lsp_provider,
-            separator_highlight = {util.colors.statusline_bg, util.colors.statusline_bg},
+            provider  = util.lsp_provider,
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
             condition = condition.hide_in_width,
+            separator_highlight = {util.colors.statusline_bg, util.colors.statusline_bg},
         }
     },
 
     {
         DiagnosticError = {
-            provider = "DiagnosticError",
-            icon = "  ",
+            provider  = "DiagnosticError",
+            icon      = "  ",
             highlight = {util.colors.red, util.colors.statusline_bg},
         }
     },
 
     {
         DiagnosticWarn = {
-            provider = "DiagnosticWarn",
-            icon = "  ",
+            provider  = "DiagnosticWarn",
+            icon      = "  ",
             highlight = {util.colors.yellow, util.colors.statusline_bg},
         }
     },
 
     {
         SpellCheck = {
-            provider = function()
+            provider  = function()
                 if vim.wo.spell then return '暈' end
             end,
             highlight = {util.colors.yellow, util.colors.statusline_bg},
@@ -151,10 +151,10 @@ gls.right = {
     },
 
     {
-        BufferType = {
-            provider = util.buffer_type,
-            separator_highlight = {util.colors.statusline_bg,util.colors.statusline_bg},
+        BufferType    = {
+            provider  = util.buffer_type,
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
+            separator_highlight = {util.colors.statusline_bg,util.colors.statusline_bg},
         }
     },
 
@@ -171,19 +171,19 @@ gls.right = {
 
     {
         SearchResultsKey = {
-            provider = util.search_results,
+            provider  = util.search_results,
             separator = ' ',
-            separator_highlight = {util.colors.statusline_bg,util.colors.statusline_bg},
             highlight = {util.colors.grey_fg, util.colors.statusline_bg},
+            separator_highlight = {util.colors.statusline_bg,util.colors.statusline_bg},
         },
     },
 
     {
         RightIcon = {
-            provider = function() return " " end,
+            provider  = function() return " " end,
             separator = " ",
-            separator_highlight = {util.colors.green, util.colors.light_bg},
             highlight = {util.colors.light_bg, util.colors.green},
+            separator_highlight = {util.colors.green, util.colors.light_bg},
         }
     },
 
@@ -215,15 +215,15 @@ gls.right = {
 
     {
         LineInfo = {
-            provider = 'LineColumn',
-            separator_highlight = {util.colors.green, util.colors.light_bg},
+            provider  = 'LineColumn',
             highlight = {util.colors.light_bg, util.colors.green},
+            separator_highlight = {util.colors.green, util.colors.light_bg},
         },
     },
 
     {
         LineLocation = {
-            provider = util.line_location,
+            provider  = util.line_location,
             highlight = {util.colors.green, util.colors.light_bg},
         }
     },
@@ -232,17 +232,17 @@ gls.right = {
 gls.short_line_left = {
     {
         SParentDir = {
-            provider = util.parent_dir_name,
+            provider  = util.parent_dir_name,
             highlight = {util.colors.white, util.colors.short_bg},
             separator = "  ",
-            icon = " ",
+            icon      = " ",
             separator_highlight = {util.colors.mid_bg, util.colors.mid_bg},
         }
     },
 
     {
         SFileName = {
-            provider = {util.get_current_file_name, "FileIcon", "FileSize"},
+            provider  = {util.get_current_file_name, "FileIcon", "FileSize"},
             condition = condition.buffer_not_empty,
             highlight = {util.colors.white, util.colors.short_bg},
             separator_highlight = {util.colors.mid_bg, util.colors.mid_bg},
@@ -253,24 +253,24 @@ gls.short_line_left = {
 gls.short_line_right = {
     {
         SRightIcon = {
-            provider = function() return " " end,
+            provider  = function() return " " end,
             separator = " ",
-            separator_highlight = {util.colors.green, util.colors.mid_bg},
             highlight = {util.colors.mid_bg, util.colors.green},
+            separator_highlight = {util.colors.green, util.colors.mid_bg},
         }
     },
 
     {
         SLineInfo = {
-            provider = 'LineColumn',
-            separator_highlight = {util.colors.green, util.colors.light_bg},
+            provider  = 'LineColumn',
             highlight = {util.colors.light_bg, util.colors.green},
+            separator_highlight = {util.colors.green, util.colors.light_bg},
         },
     },
 
     {
         SLineLocation = {
-            provider = util.line_location,
+            provider  = util.line_location,
             highlight = {util.colors.green, util.colors.mid_bg},
         }
     },

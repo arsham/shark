@@ -58,31 +58,32 @@ end
 
 M.nvim_tree = {
     setup = function()
-        vim.g.nvim_tree_disable_netrw = 0
-        vim.g.nvim_tree_hijack_netrw = 0
-        vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
-        vim.g.nvim_tree_auto_close = 1
-        vim.g.nvim_tree_quit_on_open = 1
-        vim.g.nvim_tree_git_hl = 1
+        vim.g.nvim_tree_disable_netrw   = 0
+        vim.g.nvim_tree_hijack_netrw    = 0
+        vim.g.nvim_tree_ignore          = { '.git', 'node_modules', '.cache' }
+        vim.g.nvim_tree_auto_close      = 1
+        vim.g.nvim_tree_quit_on_open    = 1
+        vim.g.nvim_tree_git_hl          = 1
         vim.g.nvim_tree_lsp_diagnostics = 1
+
         vim.g.nvim_tree_icons = {
             lsp = {
-                hint = "💡",
-                info = "💬",
+                hint    = "💡",
+                info    = "💬",
                 warning = "💩",
-                error = "🔥",
+                error   = "🔥",
             },
             git = {
-                deleted = "",
-                ignored = "◌",
-                renamed = "➜",
-                staged = "✓",
-                unmerged = "",
-                unstaged = "",
+                deleted   = "",
+                ignored   = "◌",
+                renamed   = "➜",
+                staged    = "✓",
+                unmerged  = "",
+                unstaged  = "",
                 untracked = "★",
             },
             folder = {
-                arrow_open = "▾",
+                arrow_open   = "▾",
                 arrow_closed = "▸",
             },
         }

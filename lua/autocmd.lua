@@ -28,12 +28,12 @@ util.augroup{"SPECIAL_SETTINGS", {
             local lazyredraw     = vim.opt.lazyredraw
             local showmatch      = vim.opt.showmatch
 
-            vim.bo.undofile = false
-            vim.wo.colorcolumn = ""
+            vim.bo.undofile       = false
+            vim.wo.colorcolumn    = ""
             vim.wo.relativenumber = false
-            vim.opt.hlsearch = false
-            vim.opt.lazyredraw = true
-            vim.opt.showmatch = false
+            vim.opt.hlsearch      = false
+            vim.opt.lazyredraw    = true
+            vim.opt.showmatch     = false
 
             util.autocmd{"BufDelete", buffer=true, run=function()
                 vim.bo.undofile       = undofile

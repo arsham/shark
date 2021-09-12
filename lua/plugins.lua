@@ -23,6 +23,8 @@ local lspFiletypes = {
     'py',
     'html',
     'yaml',
+    'json',
+    'js',
 }
 
 require('packer').startup({
@@ -136,7 +138,7 @@ require('packer').startup({
             -- dash-case/kebab-case:   gs-/gsk
             -- Title-Dash/Title-Kebab: gsK
             -- dot.case:               gs.
-            'arthurxavierx/vim-caser',     -- case conversion
+            'arthurxavierx/vim-caser',
             event = { 'BufRead', 'BufNewFile' },
         }
 

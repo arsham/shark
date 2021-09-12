@@ -49,11 +49,11 @@ vim.g.fzf_action = {
 vim.g.fzf_commands_expect = 'enter'
 vim.g.fzf_layout = {
     window = {
-        width = 1,
-        height = 0.5,
-        yoffset = 1,
+        width     = 1,
+        height    = 0.5,
+        yoffset   = 1,
         highlight = "Comment",
-        border = 'none',
+        border    = 'none',
     },
 }
 
