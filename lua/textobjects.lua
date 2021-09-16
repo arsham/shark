@@ -91,8 +91,8 @@ local function in_indent()
     -- util.normal('x', sequence)
 end
 
-vim.keymap.vnoremap{'ii', in_indent, {silent = true}}
-vim.keymap.onoremap{'ii', in_indent, {silent = true}}
+vim.keymap.vnoremap{'ii', in_indent, silent = true}
+vim.keymap.onoremap{'ii', in_indent, silent = true}
 -- So, this makes the vii work, but a few other things stop functioning.
 -- vim.keymap.onoremap{'ii', function() util.normal('x', 'vii') end, {silent = true}}
 
@@ -112,10 +112,10 @@ local function in_backticks(include)
     util.normal('x', 'h')
 end
 
-vim.keymap.vnoremap{'i`', function() in_backticks(false) end,     {silent = true}}
-vim.keymap.vnoremap{'a`', function() in_backticks(true) end,      {silent = true}}
-vim.keymap.onoremap{'i`', function() util.normal('x', 'vi`') end, {silent = true}}
-vim.keymap.onoremap{'a`', function() util.normal('x', 'va`') end, {silent = true}}
+vim.keymap.vnoremap{'i`', function() in_backticks(false) end,     silent = true}
+vim.keymap.vnoremap{'a`', function() in_backticks(true) end,      silent = true}
+vim.keymap.onoremap{'i`', function() util.normal('x', 'vi`') end, silent = true}
+vim.keymap.onoremap{'a`', function() util.normal('x', 'va`') end, silent = true}
 
 vim.keymap.onoremap{'H', '^'}
 vim.keymap.onoremap{'L', '$'}

@@ -34,23 +34,27 @@ local function next_group()
     return mappings[last_group]['group']
 end
 
-vim.keymap.nnoremap{'<Plug>MatchAdd', function()
+local function do_match(name, exact)
     local term = vim.fn.expand("<cword>")
+    if exact then
+        term = "\\<" .. term .. "\\>"
+    end
     vim.fn.matchadd(next_group(), term)
-    local key = vim.api.nvim_replace_termcodes('<Plug>MatchAdd', true, false, true)
+    local key = vim.api.nvim_replace_termcodes(name, true, false, true)
     vim.fn["repeat#set"](key, vim.v.count)
-end}
+end
+
 -- Add any matches containing a word under the cursor.
+vim.keymap.nnoremap{'<Plug>MatchAdd', function()
+    do_match('<Plug>MatchAdd', false)
+end}
 vim.keymap.nmap{'<leader>ma', '<Plug>MatchAdd'}
 
-vim.keymap.nnoremap{'<Plug>MatchExact', function()
-    local term = "\\<" .. vim.fn.expand("<cword>") .. "\\>"
-    vim.fn.matchadd(next_group(), term)
-    local key = vim.api.nvim_replace_termcodes('<Plug>MatchExact', true, false, true)
-    vim.fn["repeat#set"](key, vim.v.count)
-end}
 -- Add any exact matches containing a word under the cursor.
-vim.keymap.nnoremap{'<leader>me', '<Plug>MatchExact'}
+vim.keymap.nnoremap{'<Plug>MatchExact', function()
+    do_match('<Plug>MatchExact', true)
+end}
+vim.keymap.nmap{'<leader>me', '<Plug>MatchExact'}
 
 -- Add any matches containing the input from user.
 vim.keymap.nnoremap{'<leader>mp', function()

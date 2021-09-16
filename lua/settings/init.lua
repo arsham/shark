@@ -89,8 +89,12 @@ M.nvim_tree = {
         }
     end,
     config = function()
-        vim.keymap.nmap{'<leader>kb', silent=true, ':NvimTreeToggle<CR>'}
-        vim.keymap.nmap{'<leader>kf', silent=true, ':NvimTreeFindFile<CR>'}
+        vim.keymap.nnoremap{'<leader>kb', function()
+            require'nvim-tree'.toggle()
+        end, silent=true}
+        vim.keymap.nnoremap{'<leader>kf', function()
+            require'nvim-tree'.find_file(true)
+        end, silent=true}
     end
 }
 
@@ -101,6 +105,9 @@ function M.kommentary()
     require('kommentary.config').configure_language('lua', {
         single_line_comment_string = '--',
         prefer_single_line_comments = true,
+    })
+    require('kommentary.config').configure_language('gomod', {
+        single_line_comment_string = '//',
     })
     -- vim.api.nvim_set_keymap("n", "gcc", "<Plug>kommentary_line_default", {})
     -- vim.api.nvim_set_keymap("n", "gc", "<Plug>kommentary_motion_default", {})
