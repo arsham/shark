@@ -4,7 +4,6 @@ local palette = {
     name           = 'arsham',
     base0          = '#232627',
     base1          = '#211F22',
-    -- base2       = '#26292C',
     base2          = '#2A2D30',
     base3          = '#2E323C',
     base4          = '#333842',
@@ -16,15 +15,15 @@ local palette = {
     white          = '#FFF1F3',
     grey           = '#72696A',
     black          = '#000000',
-    pink           = '#FF6188',
-    green          = '#A9DC76',
+    pink           = '#FF7899',
+    green          = '#AEDC80',
     aqua           = '#78DCE8',
-    yellow         = '#FFD866',
+    yellow         = '#FFDD7A',
     orange         = '#FC9867',
     purple         = '#AB9DF2',
     darkred        = 'darkred',
     red            = '#FD6883',
-    blue           = '#1981F0',
+    blue           = '#328EF0',
     darkblue       = '#213E5D',
     paleblue       = '#6EABEC',
     diff_add_fg    = '#B0C781',
@@ -36,9 +35,11 @@ local palette = {
     diff_text_fg   = '#000000',
     diff_text_bg   = '#73D2DE',
     color_column   = '#2E2A2A',
+    accent         = '#537196',
+    sidebar_bg     = '#202324',
+    error          = '#FD6883',
+    warning        = '#FC9867',
     none           = 'NONE',
-    -- TODO:
-    -- accent
 }
 
 local mappings = {
@@ -48,13 +49,13 @@ local mappings = {
     },
     NormalNC = {
         -- normal text in non-current windows
-        guifg = palette.fg,
-        guibg = palette.bg,
+        guifg = palette.white,
+        guibg = palette.base0,
     },
     NormalSB = {
         -- normal text in non-current windows
-        guifg = palette.fg_sidebar,
-        guibg = palette.bg_sidebar,
+        guifg = palette.white,
+        guibg = palette.sidebar_bg,
     },
     NormalFloat = {
         -- normal text and background color for floating windows
@@ -102,11 +103,11 @@ local mappings = {
         guibg = palette.base3,
     },
     ToolbarLine = {
-        guifg = palette.fg,
-        guibg = palette.bg_alt,
+        guifg = palette.white,
+        guibg = palette.base3,
     },
     ToolbarButton = {
-        guifg = palette.fg,
+        guifg = palette.white,
         guibg = palette.none,
         style = 'bold',
     },
@@ -136,7 +137,7 @@ local mappings = {
     },
     CommandMode = {
         -- Command mode message in the cmdline
-        guifg = palette.gray,
+        guifg = palette.grey,
         guibg = palette.none,
         style = 'reverse',
     },
@@ -237,8 +238,8 @@ local mappings = {
     },
     SignColumnSB = {
         -- column where |signs| are displayed
-        guibg = palette.bg_sidebar,
-        guifg = palette.fg_gutter,
+        guibg = palette.sidebar_bg,
+        guifg = palette.white,
     },
     Substitute = {
         -- |:substitute| replacement text highlighting
@@ -259,14 +260,9 @@ local mappings = {
         guibg = palette.base2,
         style = palette.none,
     },
-    TabLine = {
-        -- tab pages line, not active tab page label
-        guibg = palette.bg_statusline,
-        guifg = palette.fg_gutter,
-    },
     StatusLineTerm = {
         -- status line of current terminal window
-        guifg = palette.fg,
+        guifg = palette.white,
         guibg = palette.active,
     },
     StatusLineTermNC = {
@@ -274,18 +270,28 @@ local mappings = {
         -- to "StatusLine" Vim will use "^^^" in the status line of the current
         -- window.
         guifg = palette.text,
-        guibg = palette.bg,
+        guibg = palette.base0,
     },
-    Tabline = {
+    TabLine = {
+        -- tab pages line, not active tab page label
+        guibg = palette.base2,
+        guifg = palette.white,
         style = palette.none,
     },
     TabLineFill = {
         -- tab pages line, where there are no labels
+        guibg = palette.base4,
+        guifg = palette.base4,
         style = palette.none,
     },
     TabLineSel = {
         -- tab pages line, active tab page label
-        guibg = palette.base4,
+        guibg = palette.black,
+    },
+    Title = {
+        -- titles for output from ":set all", ":autocmd" etc.
+        guifg = palette.yellow,
+        style = 'bold',
     },
     SpellBad = {
         -- Word that is not recognized by the spellchecker. |spell| Combined
@@ -320,11 +326,6 @@ local mappings = {
         -- Unprintable characters: text displayed differently from what it
         -- really is.  But not 'listchars' whitespace. |hl-Whitespace|
         guifg = palette.pink,
-    },
-    Title = {
-        -- titles for output from ":set all", ":autocmd" etc.
-        guifg = palette.yellow,
-        style = 'bold',
     },
     Directory = {
         -- directory names (and other special names in listings)
@@ -367,7 +368,7 @@ local mappings = {
         guifg = palette.title,
     },
     diffFile = {
-        guifg = palette.gray,
+        guifg = palette.grey,
     },
     diffLine = {
         guifg = palette.cyan,
@@ -483,6 +484,7 @@ local mappings = {
         -- anything that needs extra attention; mostly the keywords TODO FIXME
         -- and XXX
         guifg = palette.orange,
+        -- todo TODO toDO TODOsk
         -- guifg = palette.yellow,
         guibg = palette.none,
         style = 'bold,italic',
@@ -605,7 +607,7 @@ local mappings = {
     },
     mkdCodeDelimiter = {
         guibg = palette.terminal_black,
-        guifg = palette.fg,
+        guifg = palette.white,
     },
     mkdCodeStart = {
         guifg = palette.teal,
@@ -650,7 +652,7 @@ local mappings = {
         style = "underline",
     },
     debugPC = {
-        guibg = palette.bg_sidebar,
+        guibg = palette.sidebar_bg,
     }, -- used for highlighting the current line in terminal-debug
     markdownH3 = {
         guifg = palette.green,
@@ -829,7 +831,7 @@ local plugin_syntax = {
     },
     TSUnderline = {
         -- For text to be represented with an underline.
-        guifg = palette.fg,
+        guifg = palette.white,
         guibg = palette.none,
         style = 'underline',
     },
@@ -841,7 +843,7 @@ local plugin_syntax = {
     },
     TSLiteral = {
         -- Literal text.
-        guifg = palette.fg,
+        guifg = palette.white,
     },
     TSURI = {
         -- Any URI like a link or email.
@@ -874,16 +876,21 @@ local plugin_syntax = {
         guifg = palette.purple
     },
     TSNote = {
-        guifg = palette.bg,
+        guifg = palette.orange,
         guibg = palette.info,
+        style = 'bold',
     },
     TSWarning = {
-        guifg = palette.bg,
+        -- TODO, HACK, WARNING
+        guifg = palette.black,
         guibg = palette.warning,
+        style = 'bold',
     },
     TSDanger = {
-        guifg = palette.bg,
+        -- FIXME, XXX, BUG
+        guifg = palette.black,
         guibg = palette.error,
+        style = 'bold',
     },
 
     LspDiagnosticsDefaultError = {
@@ -1051,7 +1058,7 @@ local plugin_syntax = {
         guibg = palette.active,
     },
     LspTroubleNormal = {
-        guifg = palette.fg,
+        guifg = palette.white,
         guibg = palette.sidebar,
     },
 
@@ -1076,10 +1083,10 @@ local plugin_syntax = {
         guifg = palette.purple,
     },
     illuminatedWord = {
-        guibg = palette.fg_gutter,
+        guibg = palette.white,
     },
     illuminatedCurWord = {
-        guibg = palette.fg_gutter,
+        guibg = palette.white,
     },
     CursorWord0 = {
         guibg = palette.white,
@@ -1139,8 +1146,8 @@ local plugin_syntax = {
         style = 'NONE',
     },
     NvimTreeNormal = {
-        guifg = palette.fg_sidebar,
-        guibg = palette.bg_sidebar,
+        guifg = palette.white,
+        guibg = palette.sidebar_bg,
     },
 
     GitSignsAdd = {
