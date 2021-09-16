@@ -234,6 +234,8 @@ rows from quickfix/local list buffer.
 You can **highlight** words with random colours. We are using the `match`
 functionality, which means these groups are applied only to the current buffer.
 
+`<leader>ma` and `<leader>me` are repeatable with **.**!
+
 <details>
     <summary>Click to view the mappings</summary>
 
