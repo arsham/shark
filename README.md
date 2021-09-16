@@ -22,9 +22,9 @@ But there are a few other **LSP** servers setup as well.
 * There are some handy **textobjects** such as **backticks** and **indents**.
 * You can make **notes** for files/lines in the **quickfix/local** lists.
 * You can **manipulate** quickfix/local lists.
+* Bindings for using the **cht.sh** service.
 * Statusline is configures with **galaxyline**.
-* The theme is inspired by Sonokai theme; However it is setup with Lua to take
-  advantage of its performance.
+* The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
@@ -158,6 +158,14 @@ The `leader` key is the `space`!
 | `]]`         | Jumps to the next function                              |
 | `[[`         | Jumps to the previous function                          |
 | `<leader>hh` | Opens the **help** for current word                     |
+| `<leader>cs` | Search for **C**heat**S**heets with cht.sh service      |
+| `<leader>cq` | **C**heat**S**heets with quotes                         |
+| `<leader>cn` | **C**heat**S**heet **N**ext example                     |
+
+To use the **C**heat**S**heet functionality, type your query in the buffer and
+invoke the key binding. The response will be inserted on the next lint in the
+buffer. The `<leader>cn` will append the next available `\N` value and runs the
+query again.
 
 </details>
 
