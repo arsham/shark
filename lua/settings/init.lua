@@ -34,13 +34,8 @@ end
 
 M.nvim_tree = {
     setup = function()
-        vim.g.nvim_tree_disable_netrw   = 0
-        vim.g.nvim_tree_hijack_netrw    = 0
-        vim.g.nvim_tree_ignore          = { '.git', 'node_modules', '.cache' }
-        vim.g.nvim_tree_auto_close      = 1
         vim.g.nvim_tree_quit_on_open    = 1
         vim.g.nvim_tree_git_hl          = 1
-        vim.g.nvim_tree_lsp_diagnostics = 1
 
         vim.g.nvim_tree_icons = {
             lsp = {
@@ -64,7 +59,27 @@ M.nvim_tree = {
             },
         }
     end,
+
     config = function()
+        require('nvim-tree').setup {
+            disable_netrw = false,
+            hijack_netrw  = false,
+            auto_close    = true,
+            diagnostics   = {
+                enable = true,
+                icons = {
+                    hint    = "",
+                    info    = "",
+                    warning = "",
+                    error   = "",
+                }
+            },
+            filters = {
+                dotfiles = false,
+                custom = { '.git', 'node_modules', '.cache' },
+            },
+        }
+
         vim.keymap.nnoremap{'<leader>kb', function()
             require'nvim-tree'.toggle()
         end, silent=true}

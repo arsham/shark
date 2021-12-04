@@ -57,10 +57,11 @@ require('packer').startup({
 
         use {
             'kyazdani42/nvim-tree.lua',
-            setup = function() require('settings').nvim_tree.setup() end,
+            setup  = function() require('settings').nvim_tree.setup() end,
             config = function() require('settings').nvim_tree.config() end,
-            -- cmd = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
-            -- keys = {'<leader>kb', '<leader>kf'},
+            event  = {'BufNewFile', 'BufRead'},
+            cmd    = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
+            keys   = {'<leader>kb', '<leader>kf'},
         }
 
         use {
