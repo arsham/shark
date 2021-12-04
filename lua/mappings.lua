@@ -15,19 +15,8 @@ keymap.inoremap{'<Up>',    '<Nop>'}
 keymap.inoremap{'<Down>',  '<Nop>'}
 keymap.inoremap{'<Left>',  '<Nop>'}
 keymap.inoremap{'<Right>', '<Nop>'}
--- " Disable Ex mode
+-- Disable Ex mode
 keymap.nmap{'Q', '<Nop>'}
-
--- Start interactive EasyAlign in visual mode (e.g. vipga)
-keymap.xmap{'ga', '<Plug>(EasyAlign)'}
--- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-keymap.nmap{'ga', '<Plug>(EasyAlign)'}
-
--- make the regular expression less crazy
-keymap.nnoremap{'/', '/\\v'}
-keymap.vnoremap{'/', '/\\v'}
-keymap.nnoremap{'?', '?\\v'}
-keymap.vnoremap{'?', '?\\v'}
 
 -- Moving lines with alt key.
 keymap.nnoremap{'<A-j>', silent=true, [[:<c-u>execute 'm +'. v:count1<cr>==]]}
@@ -73,8 +62,6 @@ keymap.nnoremap{'j', expr=true, [[(v:count > 2 ? "m'" . v:count : '') . 'j']]}
 
 -- Clear hlsearch
 keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
-
-keymap.nmap{'<C-W>z', '<Plug>(zoom-toggle)'}
 
 -- Terminal mappings.
 -- keymap.tnoremap{'<C-R>', [[<C-\\><C-N>"'.nr2char(getchar()).'pi']]}

@@ -93,6 +93,7 @@ require('packer').startup({
         }
 
         --{{{ Visuals }}}
+
         use {
             'glepnir/galaxyline.nvim',
             branch = 'main',
@@ -144,12 +145,10 @@ require('packer').startup({
 
         use {
             'junegunn/vim-easy-align',
-            event = { 'BufRead', 'BufNewFile' },
-        }
-
-        use {
-            'SirVer/ultisnips',
-            setup = function() vim.g.UltiSnipsExpandTrigger = "<c-s>" end,
+            config = function()
+                vim.keymap.xmap{'ga', '<Plug>(EasyAlign)'}
+                vim.keymap.nmap{'ga', '<Plug>(EasyAlign)'}
+            end,
             event = { 'BufRead', 'BufNewFile' },
         }
 
@@ -176,6 +175,7 @@ require('packer').startup({
             'windwp/nvim-autopairs',
             config = function() require('settings').autopairs() end,
             event = {'BufNewFile', 'BufRead'},
+            wants = "nvim-cmp",
         }
 
         use {
@@ -195,15 +195,33 @@ require('packer').startup({
         --{{{ Programming }}}
         use {
             'neovim/nvim-lspconfig',
-            wants = "completion-nvim",
+            wants = "nvim-cmp",
             config = function() require('settings.lsp') end,
             event = {'BufNewFile', 'BufRead'},
         }
 
         use {
-            'nvim-lua/completion-nvim',
-            setup = function() require('settings.completion') end,
+            'hrsh7th/nvim-cmp',
+            config = function() require('settings.cmp') end,
             event = {'BufNewFile', 'BufRead'},
+            requires = {
+                { 'hrsh7th/cmp-nvim-lsp'  , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lua'  , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-buffer'    , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-path'      , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-cmdline'   , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-calc'      , after = 'nvim-cmp' },
+                { "lukas-reineke/cmp-rg"  , after = 'nvim-cmp' },
+                -- { 'hrsh7th/cmp-copilot'   , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lsp-signature-help' , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-vsnip'     , after = 'nvim-cmp' },
+                { 'hrsh7th/vim-vsnip',
+                    config = function ()
+                        vim.g.vsnip_snippet_dir = vim.env.HOME .. "/.config/nvim/vsnip"
+                    end,
+                    after = 'nvim-cmp',
+                },
+            }
         }
 
         use {
@@ -212,11 +230,6 @@ require('packer').startup({
                 require('settings.ale') end,
             opt = true,
             ft = lspFiletypes,
-        }
-
-        use {
-            'steelsojka/completion-buffers',
-            event = {'BufNewFile', 'BufRead'},
         }
 
         use {
@@ -259,11 +272,6 @@ require('packer').startup({
 
         use {
             'David-Kunz/treesitter-unit',
-            requires = {
-                'nvim-treesitter/nvim-treesitter',
-                branch = '0.5-compat',
-                event = { 'BufRead', 'BufNewFile' },
-            },
             wants = 'nvim-treesitter',
             config = function() require('settings').treesitter_unit() end,
             event = { 'BufRead', 'BufNewFile' },

@@ -27,33 +27,9 @@ function M.autopairs()
         autopairs = {enable = true}
     }
 
-    _G.MUtils= {}
-    MUtils.completion_confirm = function()
-        if vim.fn.pumvisible() == 0  then
-            return autopairs.autopairs_cr()
-        end
-
-        local clients = vim.lsp.get_active_clients()
-        if next(clients) == nil then
-            if vim.fn.pumvisible() ~= 0  then
-                return autopairs.esc("<cr>")
-            end
-            return autopairs.autopairs_cr()
-        end
-
-        if vim.fn.complete_info()["selected"] ~= -1 then
-            require'completion'.confirmCompletion()
-            return autopairs.esc("<c-y>")
-        end
-
-        vim.api.nvim_select_popupmenu_item(0 , false , false ,{})
-        require'completion'.confirmCompletion()
-        return autopairs.esc("<c-n><c-y>")
-    end
-    -- TODO: why not enable?
-    -- vim.g.completion_confirm_key = "\\<C-y>"
-    -- vim.keymap.inoremap{'<CR>', MUtils.completion_confirm, {expr = true , noremap = true}}
-    -- vim.api.nvim_set_keymap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local cmp = require('cmp')
+    cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 end
 
 M.nvim_tree = {

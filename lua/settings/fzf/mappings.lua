@@ -94,7 +94,7 @@ end
 
 -- Open the search tool.
 keymap.nnoremap{"<leader>ff", function() do_rg("") end}
--- Open the search tool.
+-- Open the search tool, ignoring .gitignore.
 keymap.nnoremap{"<leader>fa", function() do_rg("", '-u') end}
 -- Search over current word.
 keymap.nnoremap{"<leader>rg", function()
