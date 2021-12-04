@@ -56,13 +56,27 @@ util.augroup{"SPECIAL_SETTINGS", {
             })
         end
     end},
+
+    {"BufWritePre", "COMMIT_EDITMSG,MERGE_MSG,gitcommit,*.tmp,*.log", function()
+        vim.bo.undofile = false
+    end},
+
+    {"Filetype", "gitcommit", docs="commit messages", run=function()
+        -- see #14670
+        -- vim.bo.textwidth = 72
+        -- vim.wo.colorcolumn = "50,72"
+        -- vim.wo.spell = true
+        vim.cmd[[ setlocal spell ]]
+        vim.cmd[[ setlocal textwidth=72 ]]
+        vim.cmd[[ setlocal colorcolumn="50,72" ]]
+    end},
 }}
 
 
 local async_load_plugin = nil
 async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
     util.augroup{"FILETYPE_COMMANDS", {
-        {events="Filetype", targets="python", run=function()
+        {events="Filetype", targets="python,proto", run=function()
             vim.bo.tabstop = 4
             vim.bo.softtabstop = 4
             vim.bo.shiftwidth = 4
@@ -76,20 +90,6 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
             -- see #14670
             -- vim.opt_local.spell = true
             vim.cmd[[ setlocal spell ]]
-        end},
-
-        {"BufWritePre", "COMMIT_EDITMSG,MERGE_MSG,gitcommit,*.tmp,*.log", function()
-            vim.bo.undofile = false
-        end},
-
-        {"Filetype", "gitcommit", docs="commit messages", run=function()
-            -- see #14670
-            -- vim.bo.textwidth = 72
-            -- vim.wo.colorcolumn = "50,72"
-            -- vim.wo.spell = true
-            vim.cmd[[ setlocal spell ]]
-            vim.cmd[[ setlocal textwidth=72 ]]
-            vim.cmd[[ setlocal colorcolumn="50,72" ]]
         end},
 
         {"BufNewFile,BufRead", ".*aliases", run=function() vim.bo.filetype = 'sh' end},
@@ -121,7 +121,7 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
         {"BufWritePre,FileWritePre,FileAppendPre,FilterWritePre", "*",
             docs="trim spaces",
             run=function()
-                if vim.bo.binary or vim.bo.filetype == 'diff' then
+                if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == 'diff' then
                     return
                 end
                 local save = vim.fn.winsaveview()

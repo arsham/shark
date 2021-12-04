@@ -103,6 +103,9 @@ require('packer').startup({
 
         use {
             'dhruvasagar/vim-zoom',
+            config = function()
+                vim.keymap.nmap{'<C-W>z', '<Plug>(zoom-toggle)'}
+            end,
             event = { 'BufRead', 'BufNewFile' },
         }
 

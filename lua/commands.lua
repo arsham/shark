@@ -34,7 +34,7 @@ command{"InstallDependencies", function()
         eslint     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "eslint@latest", "--save-dev"},
         unknown    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-langservers-extracted@latest"},
         gopls      = {"go", "install", "golang.org/x/tools/gopls@latest"},
-        golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1"},
+        golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
         gojq       = {"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
         sqls       = {"go", "install", "github.com/lighttiger2505/sqls@latest"},
     }
