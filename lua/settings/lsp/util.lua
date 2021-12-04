@@ -19,7 +19,7 @@ local function restart_lsp()
     vim.defer_fn(function() vim.cmd[[LspStart]] end, 1000)
 end
 util.command{"RestartLsp", buffer=true, restart_lsp}
-vim.keymap.nnoremap{'<leader>dr', restart_lsp, silent=true, buffer=true}
+vim.keymap.nnoremap{'<leader>dr', restart_lsp, silent=true}
 
 local function lsp_organise_imports()
     local context = { source = { organizeImports = true } }
@@ -189,31 +189,24 @@ local function attach_mappings_commands(client)
         vim.lsp.buf.workspace_symbol(pattern)
     end}
 
-    vim.keymap.inoremap{'<Tab>',   require("completion").smart_tab,   buffer=true, silent=true}
-    vim.keymap.inoremap{'<S-Tab>', require("completion").smart_s_tab, buffer=true, silent=true}
-    vim.keymap.inoremap{'<M-n>',   require("completion").nextSource,  buffer=true, silent=true}
-    vim.keymap.inoremap{'<M-p>',   require("completion").prevSource,  buffer=true, silent=true}
     vim.keymap.inoremap{'<C-j>',   '<C-n>',  buffer=true, silent=true}
     vim.keymap.inoremap{'<C-k>',   '<C-p>',  buffer=true, silent=true}
 
-    vim.keymap.nnoremap{'<leader>dd', vim.lsp.diagnostic.show_line_diagnostics, buffer=true, silent=true}
-    vim.keymap.nnoremap{'<leader>dq', vim.lsp.diagnostic.set_qflist,            buffer=true, silent=true}
-    vim.keymap.nnoremap{'<leader>dw', vim.lsp.diagnostic.set_loclist,           buffer=true, silent=true}
+    vim.keymap.nnoremap{'<leader>dd', vim.diagnostic.open_float, buffer=true, silent=true}
+    vim.keymap.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true}
+    vim.keymap.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true}
     vim.keymap.nnoremap{']d', function()
-        util.call_and_centre(vim.lsp.diagnostic.goto_next)
+        util.call_and_centre(vim.diagnostic.goto_next)
     end, buffer=true, silent=true}
     vim.keymap.nnoremap{'[d', function()
-        util.call_and_centre(vim.lsp.diagnostic.goto_prev)
+        util.call_and_centre(vim.diagnostic.goto_prev)
     end, buffer=true, silent=true}
     util.command{"Diagnostics",       buffer=true, function() require('lspfuzzy').diagnostics(0) end}
     util.command{"DiagnosticsAll",    "LspDiagnosticsAll"}
 end
 
 function M.on_attach(client, bufnr)
-    require('completion').on_attach()
-
-    -- vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-    vim.bo.omnifunc = 'v:lua.omnifunc_sync'
+    vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
     vim.api.nvim_buf_call(bufnr, function() attach_mappings_commands(client) end)
 
     util.augroup{"STOP_LSP_TYPES", {
@@ -246,52 +239,5 @@ end
 -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,
 --     { border = "single" }
 -- )
-
--- TODO: is this any better?
-local omnifunc_cache
-function _G.omnifunc_sync(findstart, base)
-    local pos = vim.api.nvim_win_get_cursor(0)
-    local line = vim.api.nvim_get_current_line()
-
-    if findstart == 1 then
-        -- Cache state of cursor line and position due to the fact that it will
-        -- change at the second call to this function (with `findstart = 0`). See:
-        -- https://github.com/vim/vim/issues/8510.
-        -- This is needed because request to LSP server is made on second call.
-        -- If not done, server's completion mechanics will operate on different
-        -- document and position.
-        omnifunc_cache = {pos = pos, line = line}
-
-        -- On first call return column of completion start
-        local line_to_cursor = line:sub(1, pos[2])
-        return vim.fn.match(line_to_cursor, '\\k*$')
-    end
-
-    -- Restore cursor line and position to the state of first call
-    vim.api.nvim_set_current_line(omnifunc_cache.line)
-    vim.api.nvim_win_set_cursor(0, omnifunc_cache.pos)
-
-    -- Make request
-    local bufnr  = vim.api.nvim_get_current_buf()
-    local params = vim.lsp.util.make_position_params()
-    local result = vim.lsp.buf_request_sync(bufnr, 'textDocument/completion', params, 2000)
-    if not result then return {} end
-
-    -- Transform request answer to list of completion matches
-    local items = {}
-    for _, item in pairs(result) do
-        if not item.err then
-            local matches = vim.lsp.util.text_document_completion_list_to_complete_items(item.result, base)
-            vim.list_extend(items, matches)
-        end
-    end
-
-    -- Restore back cursor line and position to the state of this call's start
-    -- (avoids outcomes of Vim's internal line postprocessing)
-    vim.api.nvim_set_current_line(line)
-    vim.api.nvim_win_set_cursor(0, pos)
-
-    return items
-end
 
 return M

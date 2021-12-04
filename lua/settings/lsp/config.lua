@@ -6,8 +6,7 @@ require('astronauta.keymap')
 local on_attach = require('settings.lsp.util').on_attach
 
 --Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local sumneko_root_path = '/usr/bin/lua-language-server'
 local sumneko_binary = "/usr/bin/lua-language-server"
@@ -52,7 +51,10 @@ local servers = {
                 },
 
                 diagnostics = {
-                    globals = {'vim'},
+                    globals = {
+                        'vim',
+                        'use',
+                    },
                 },
 
                 workspace = {
@@ -134,7 +136,7 @@ util.augroup{"GOPLS_GOMOD", {
 -- vim.cmd("let g:completion_expand_characters = [' ', '\t', '>', ';', ')']")
 lspconfig.gopls.setup{
     on_attach = on_attach,
-    -- capabilities = capabilities, -- causes weird argument listings
+    capabilities = capabilities,
     cmd = {"gopls", "serve"},
 
     settings = {
