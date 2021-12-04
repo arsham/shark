@@ -33,3 +33,22 @@ function table.contains(tbl, val)
     end
     return false
 end
+
+function table.reverse(t)
+    local reversedTable = {}
+    local itemCount = #t
+    for k, v in ipairs(t) do
+        reversedTable[itemCount + 1 - k] = v
+    end
+    return reversedTable
+end
+
+_ = math.randomseed(os.time())
+function table.shuffle(t)
+    local iterations = #t
+    local j
+    for i = iterations, 2, -1 do
+        j = math.random(i)
+        t[i], t[j] = t[j], t[i]
+    end
+end
