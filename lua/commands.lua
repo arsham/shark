@@ -12,6 +12,14 @@ command{"YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end}
 command{"MergeConflict", ":grep '<<<<<<< HEAD'"}
 command{"JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]]}
 
+command{"WatchLuaFileChanges", docs="watch changes on the lua file and reload", run=function()
+    util.augroup{"WATCH_LUA_FILE", {
+        {"BufWritePost", buffer=true, run=function()
+            vim.cmd[[:luafile %]]
+        end},
+    }}
+end}
+
 command{"CC", docs="close all floating windows", run=function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
         local config = vim.api.nvim_win_get_config(win)
