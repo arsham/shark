@@ -1,6 +1,6 @@
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
-local util = require('statusline.util')
+local util = require('statusline.galaxyline.util')
 local gls = gl.section
 
 gl.short_line_list = {'NvimTree'}
@@ -137,6 +137,22 @@ gls.right = {
             provider  = "DiagnosticWarn",
             icon      = "  ",
             highlight = {util.colors.yellow, util.colors.statusline_bg},
+        }
+    },
+
+    {
+        DiagnosticHint = {
+            provider  = "DiagnosticHint",
+            icon      = "  ",
+            highlight = {util.colors.green, util.colors.statusline_bg},
+        }
+    },
+
+    {
+        DiagnosticInfo = {
+            provider  = "DiagnosticInfo",
+            icon      = "  ",
+            highlight = {util.colors.nord_blue, util.colors.statusline_bg},
         }
     },
 

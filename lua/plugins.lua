@@ -27,6 +27,8 @@ local lspFiletypes = {
     'js',
 }
 
+local status_plugin = 'feline'
+
 require('packer').startup({
     function(use)
 
@@ -52,8 +54,6 @@ require('packer').startup({
             config = function() require('bqf').enable() end,
             event = { 'BufWinEnter quickfix' },
         }
-
-        use 'kyazdani42/nvim-web-devicons'
 
         use {
             'kyazdani42/nvim-tree.lua',
@@ -95,10 +95,19 @@ require('packer').startup({
 
         --{{{ Visuals }}}
 
+        use 'kyazdani42/nvim-web-devicons'
+
         use {
             'glepnir/galaxyline.nvim',
             branch = 'main',
-            config = function() require'statusline' end,
+            cond = status_plugin == 'galaxyline',
+            config = function() require('statusline.galaxyline') end,
+        }
+
+        use {
+            'famiu/feline.nvim',
+            cond = status_plugin == 'feline',
+            config = function() require('statusline.feline') end,
         }
 
         use {
