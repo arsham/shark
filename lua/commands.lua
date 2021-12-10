@@ -29,6 +29,12 @@ command{"CC", docs="close all floating windows", run=function()
     end
 end}
 
+command{"Scratch", docs="open a new scratch buffer", run=function()
+    vim.api.nvim_command("silent! new")
+    vim.bo.buftype = "nofile"
+    vim.bo.swapfile = false
+end}
+
 command{"InstallDependencies", function()
     local commands = {
         bash       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "bash-language-server@latest"},
