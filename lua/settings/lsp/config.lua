@@ -133,7 +133,6 @@ util.augroup{"GOPLS_GOMOD", {
 }}
 
 
--- vim.cmd("let g:completion_expand_characters = [' ', '\t', '>', ';', ')']")
 lspconfig.gopls.setup{
     on_attach = on_attach,
     capabilities = capabilities,

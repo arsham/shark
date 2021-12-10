@@ -1,4 +1,5 @@
 local cmp = require'cmp'
+local compare = require('cmp.config.compare')
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -9,6 +10,8 @@ local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+--        ⌘ ⌂       ﲀ 練 ﴲ  ﰮ      ﳤ   
+--   ƒ    了   ﬌     <>
 local kind_icons = {
     Buffers       = '',
     Class         = '',
@@ -58,7 +61,7 @@ cmp.setup({
 
         ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
-            select = true
+            select = false,
         }),
         ['<C-j>'] = cmp.mapping.select_next_item({
             behavior = cmp.SelectBehavior.Select
@@ -66,7 +69,6 @@ cmp.setup({
         ['<C-k>'] = cmp.mapping.select_prev_item({
             behavior = cmp.SelectBehavior.Select
         }),
-
 
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -80,11 +82,13 @@ cmp.setup({
             end
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function()
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif vim.fn["vsnip#jumpable"](-1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
+            else
+                fallback()
             end
         end, { "i", "s" }),
     },
@@ -97,18 +101,14 @@ cmp.setup({
         { name = 'vsnip' },
         { name = 'calc' },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'buffer', keyword_length = 3,
+        { name = 'buffer', keyword_length = 3, max_item_count = 10,
             option = {
                 get_bufnrs = function()
                     return vim.api.nvim_list_bufs()
                 end
             }
         },
-        { name = 'rg', keyword_length = 3, max_item_count = 20,
-            option = {
-                debounce = 500,
-            }
-        },
+        { name = 'rg', keyword_length = 3, max_item_count = 10 },
     }),
 
     formatting = {
@@ -128,6 +128,32 @@ cmp.setup({
             })[entry.source.name]
             return vim_item
         end
+    },
+
+    documentation = {
+        border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
+    },
+
+    sorting = {
+        comparators = {
+            -- keeps the suggestion on top. Alternative to PreselectMode.
+            -- function(entry1, entry2)
+            --     local preselect1 = entry1.completion_item.preselect or false
+            --     local preselect2 = entry2.completion_item.preselect or false
+            --     if preselect1 ~= preselect2 then
+            --         return preselect1
+            --     end
+            -- end,
+
+            compare.kind,
+            compare.recently_used,
+            compare.offset,
+            compare.exact,
+            compare.score,
+            compare.sort_text,
+            compare.length,
+            compare.order,
+        },
     },
 })
 

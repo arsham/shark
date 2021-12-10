@@ -186,9 +186,9 @@ require('packer').startup({
 
         use {
             'windwp/nvim-autopairs',
-            config = function() require('settings').autopairs() end,
-            event = {'BufNewFile', 'BufRead'},
             wants = "nvim-cmp",
+            config = function() require('settings').autopairs() end,
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -216,7 +216,7 @@ require('packer').startup({
         use {
             'hrsh7th/nvim-cmp',
             config = function() require('settings.cmp') end,
-            event = {'BufNewFile', 'BufRead'},
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
             requires = {
                 { 'hrsh7th/cmp-nvim-lsp'  , after = 'nvim-cmp' },
                 { 'hrsh7th/cmp-nvim-lua'  , after = 'nvim-cmp' },
