@@ -20,7 +20,9 @@ command{"Reload", function()
     })
     wrap["sink*"] = function(list)
         for _, name in pairs(list) do
-            vim.cmd(("luafile %s"):format(name))
+            if name ~= "" then
+                vim.cmd(("luafile %s"):format(name))
+            end
         end
     end
     vim.fn["fzf#run"](wrap)
