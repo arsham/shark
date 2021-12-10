@@ -3,10 +3,38 @@ local lspconfig = require('lspconfig')
 local util = require('util')
 require('astronauta.keymap')
 
-local on_attach = require('settings.lsp.util').on_attach
-
 --Enable (broadcasting) snippet capability for completion
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local on_attach = require('settings.lsp.util').on_attach
+
+local signs = {
+    Error = "🔥",
+    Warn  = "💩",
+    Info  = "💬",
+    Hint  = "💡",
+}
+
+for type in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  local nr = "DiagnosticLineNr" .. type
+    vim.fn.sign_define(hl, {
+        text   = "", -- or the icon
+        texthl = hl,
+        linehl = "",
+        numhl  = nr, -- or hl
+    })
+end
+
+vim.diagnostic.config({
+    virtual_text = {
+        prefix = "👈",
+    },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false,
+})
+
 
 local sumneko_root_path = '/usr/bin/lua-language-server'
 local sumneko_binary = "/usr/bin/lua-language-server"

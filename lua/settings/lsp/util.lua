@@ -4,16 +4,6 @@ local util = require('util')
 
 local M = {}
 
-util.highlight("LspReferenceRead",  {ctermbg=180, guibg='#43464F', style='bold'})
-util.highlight("LspReferenceText",  {ctermbg=180, guibg='#43464F', style='bold'})
-util.highlight("LspReferenceWrite", {ctermbg=180, guibg='#43464F', style='bold'})
-
-local signs = { Error = "🔥", Warning = "💩", Hint = "💡", Information = "💬" }
-for type, icon in pairs(signs) do
-    local hl = "LspDiagnosticsSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = 'SignColumn', numhl = "" })
-end
-
 local function restart_lsp()
     vim.cmd[[LspStop]]
     vim.defer_fn(function() vim.cmd[[LspStart]] end, 1000)
@@ -125,11 +115,12 @@ local function attach_mappings_commands(client)
     end
 
     if caps.hover then
-        vim.keymap.nnoremap{'H', vim.lsp.buf.hover, buffer=true, silent=true}
+        vim.keymap.nnoremap{'H',     vim.lsp.buf.hover, buffer=true, silent=true}
+        vim.keymap.inoremap{'<C-h>', vim.lsp.buf.hover, buffer=true, silent=true}
     end
     if caps.signature_help then
         vim.keymap.nnoremap{'K',     vim.lsp.buf.signature_help, buffer=true, silent=true}
-        vim.keymap.inoremap{'<C-k>', vim.lsp.buf.signature_help, buffer=true, silent=true}
+        vim.keymap.inoremap{'<C-l>', vim.lsp.buf.signature_help, buffer=true, silent=true}
     end
 
     if caps.goto_definition then
@@ -155,7 +146,7 @@ local function attach_mappings_commands(client)
     if caps.document_symbol then
         util.command{"DocumentSymbol", buffer=true, function() vim.lsp.buf.document_symbol() end}
         vim.keymap.nnoremap{'<leader>@', function()
-            util.call_and_centre(vim.lsp.buf.document_symbol)
+            vim.lsp.buf.document_symbol()
         end, buffer=true, silent=true}
     end
     if caps.workspace_symbol then
@@ -212,6 +203,19 @@ function M.on_attach(client, bufnr)
     util.augroup{"STOP_LSP_TYPES", {
         {events="BufReadPost,BufNewFile", targets="*/templates/*.yaml,*/templates/*.tpl", run="LspStop"},
     }}
+
+    local caps = client.resolved_capabilities
+    if caps.code_lens then
+        util.command{"CodeLensRefresh", buffer=true, function() vim.lsp.codelens.refresh() end}
+        util.command{"CodeLensRun", buffer=true,     function() vim.lsp.codelens.run() end}
+        vim.keymap.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true}
+
+        util.augroup{"CODE_LENSES", {
+            {"CursorHold,CursorHoldI,InsertLeave", buffer=true, run=function()
+                vim.lsp.codelens.refresh()
+            end},
+        }}
+    end
 end
 
 function M.format_command(range_given, line1, line2, bang)
