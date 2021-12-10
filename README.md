@@ -333,14 +333,16 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 | Mapping       | Description                                 |
 | :---          | :---                                        |
 | `<leader>ll`  | Run ALE **l**inters                         |
+| `<leader>ld`  | Run A**L**E show **D**etails                |
 | `]l`          | Go to next **l**inting issue                |
 | `[l`          | Go to previous **l**inting issue            |
 | `]d`          | Go to next **d**iagnostic issue             |
 | `[d`          | Go to previous **d**iagnostic issue         |
 | `<leader>gq`  | Format the buffer with LSP                  |
 | `H`           | **H**over popup                             |
-| `K`           | Show **Signature**                          |
-| `<Ctrl-k>`    | (insert mode) Show **Signature**            |
+| `<Ctrl-h>`    | (insert mode) Show **H**over popup          |
+| `K`           | Show **S**ignature                          |
+| `<Ctrl-l>`    | (insert mode) Show **S**ignature            |
 | `gd`          | **G**o to **D**efinition                    |
 | `gD`          | **G**o to **D**eclaration                   |
 | `<leader>gi`  | **G**o to **I**mplementation                |
@@ -358,6 +360,7 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 | `<leader>dw`  | Fill the local list with **D**iagnostics    |
 | `<leader>dr`  | Restart the LSP server (see below)          |
 | `<leader>ca`  | **C**ode **A**ctions                        |
+| `<leader>cr`  | **C**ode lens **R**un                       |
 
 Please note that the `<leader>@` binding will use the `LSP` symbols if is
 attached to the buffer, or `ctags` otherwise.
