@@ -44,7 +44,7 @@ util.augroup{"SPECIAL_SETTINGS", {
                 vim.opt.showmatch     = showmatch
 
                 vim.notify("Settings Restored", vim.lsp.log_levels.INFO, {
-                title = "Settings Change",
+                    title = "Settings Change",
                     timeout = 4000,
                 })
             end}

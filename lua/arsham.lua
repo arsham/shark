@@ -14,18 +14,20 @@ local palette = {
     brown          = "#6D3717",
     white          = '#FFF1F3',
     grey           = '#72696A',
+    grey_light     = '#DDDDDD',
     black          = '#000000',
-    pink           = '#FF7899',
-    green          = '#AEDC80',
-    aqua           = '#78DCE8',
-    yellow         = '#FFDD7A',
+    pink           = '#FF8FAB',
+    green          = '#B6DC8F',
+    green_dark     = '#4F6752',
+    aqua           = '#84DDE8',
+    yellow         = '#FFE087',
     orange         = '#FC9867',
-    purple         = '#AB9DF2',
+    purple         = '#B5A9F2',
     darkred        = 'darkred',
     red            = '#FD6883',
     blue           = '#328EF0',
-    darkblue       = '#213E5D',
-    paleblue       = '#6EABEC',
+    blue_dark      = '#213E5D',
+    blue_pale      = '#588DC4',
     diff_add_fg    = '#B0C781',
     diff_add_bg    = '#3D5213',
     diff_remove_fg = '#4A0F23',
@@ -40,6 +42,12 @@ local palette = {
     error          = '#FD6883',
     warning        = '#FC9867',
     none           = 'NONE',
+    bold           = 'bold',
+    bold_italic    = 'bold,italic',
+    undercurl      = 'undercurl',
+    underline      = 'underline',
+    italic         = 'italic',
+    reverse        = 'reverse',
 }
 
 local mappings = {
@@ -59,22 +67,22 @@ local mappings = {
     },
     NormalFloat = {
         -- normal text and background color for floating windows
-        guifg = palette.none,
-        guibg = palette.darkblue,
+        guifg = palette.grey_light,
+        guibg = palette.base4,
     },
     Pmenu = {
         -- Popup menu: normal item.
-        guifg = palette.white,
-        guibg = palette.base3,
+        guifg = palette.grey_light,
+        guibg = palette.base4,
     },
     PmenuSel = {
         -- Popup menu: selected item.
         guifg = palette.base4,
-        guibg = palette.orange,
+        guibg = palette.blue_pale,
     },
     PmenuSelBold = {
         guifg = palette.base4,
-        guibg = palette.orange,
+        guibg = palette.blue_pale,
     },
     PmenuThumb = {
         -- Popup menu: Thumb of the scrollbar.
@@ -89,7 +97,7 @@ local mappings = {
     Cursor = {
         guifg = palette.none,
         guibg = palette.none,
-        style = 'reverse'
+        style = palette.reverse,
     },
     ColorColumn = {
         --  used for the columns set with 'colorcolumn'
@@ -109,37 +117,37 @@ local mappings = {
     ToolbarButton = {
         guifg = palette.white,
         guibg = palette.none,
-        style = 'bold',
+        style = palette.bold,
     },
     NormalMode = {
         -- Normal mode message in the cmdline
         guifg = palette.accent,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     InsertMode = {
         -- Insert mode message in the cmdline
         guifg = palette.green,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     ReplacelMode = {
         -- Replace mode message in the cmdline
         guifg = palette.red,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     VisualMode = {
         -- Visual mode message in the cmdline
         guifg = palette.purple,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     CommandMode = {
         -- Command mode message in the cmdline
         guifg = palette.grey,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     healthError = {
         guifg = palette.error,
@@ -200,40 +208,40 @@ local mappings = {
         -- 'showmode' message (e.g., "-- INSERT -- ")
         guifg = palette.white,
         guibg = palette.none,
-        style = 'bold',
+        style = palette.bold,
     },
     MsgArea = {
         -- Area for messages and cmdline
-        guifg =palette.fg_dark,
+        guifg = palette.fg_dark,
     },
     MoreMsg = {
         -- |more-prompt|
         guifg = palette.white,
         guibg = palette.none,
-        style = 'bold',
+        style = palette.bold,
     },
     ErrorMsg = {
         -- error messages
         guifg = palette.red,
         guibg = palette.none,
-        style = 'bold',
+        style = palette.bold,
     },
     WarningMsg = {
         -- warning messages
         guifg = palette.yellow,
         guibg = palette.none,
-        style = 'bold',
+        style = palette.bold,
     },
     VertSplit = {
-        guifg = palette.brown,
+        guifg = palette.blue_pale,
         guibg = palette.base0,
     },
     LineNr = {
-        guifg = palette.base5,
+        guifg = palette.base6,
         guibg = palette.base2
     },
     SignColumn = {
-        guifg = palette.white,
+        guifg = palette.base5,
         guibg = palette.base2,
     },
     SignColumnSB = {
@@ -243,8 +251,8 @@ local mappings = {
     },
     Substitute = {
         -- |:substitute| replacement text highlighting
-        guibg =palette.red,
-        guifg =palette.black,
+        guibg = palette.red,
+        guifg = palette.black,
     },
     StatusLine = {
         -- status line of current window
@@ -274,45 +282,47 @@ local mappings = {
     },
     TabLine = {
         -- tab pages line, not active tab page label
-        guibg = palette.base2,
-        guifg = palette.white,
+        guibg = palette.blue_dark,
+        guifg = palette.blue_pale,
         style = palette.none,
     },
     TabLineFill = {
         -- tab pages line, where there are no labels
-        guibg = palette.base4,
+        guibg = palette.base0,
         guifg = palette.base4,
         style = palette.none,
     },
     TabLineSel = {
         -- tab pages line, active tab page label
-        guibg = palette.black,
+        guibg = palette.blue_pale,
+        guifg = palette.white,
+        style = palette.bold,
     },
     Title = {
         -- titles for output from ":set all", ":autocmd" etc.
         guifg = palette.yellow,
-        style = 'bold',
+        style = palette.bold,
     },
     SpellBad = {
         -- Word that is not recognized by the spellchecker. |spell| Combined
         -- with the highlighting used otherwise.
         guifg = palette.red,
         guibg = palette.none,
-        style = 'undercurl',
+        style = palette.undercurl,
     },
     SpellCap = {
         -- Word that should start with a capital. |spell| Combined with the
         -- highlighting used otherwise.
         guifg = palette.purple,
         guibg = palette.none,
-        style = 'undercurl',
+        style = palette.undercurl,
     },
     SpellRare = {
         -- Word that is recognized by the spellchecker as one that is hardly
         -- ever used.  |spell| Combined with the highlighting used otherwise.
         guifg = palette.aqua,
         guibg = palette.none,
-        style = 'undercurl',
+        style = palette.undercurl,
     },
     SpellLocal = {
         -- Word that is recognized by the spellchecker as one that is used in
@@ -320,7 +330,7 @@ local mappings = {
         -- otherwise.
         guifg = palette.pink,
         guibg = palette.none,
-        style = 'undercurl',
+        style = palette.undercurl,
     },
     SpecialKey = {
         -- Unprintable characters: text displayed differently from what it
@@ -484,10 +494,8 @@ local mappings = {
         -- anything that needs extra attention; mostly the keywords TODO FIXME
         -- and XXX
         guifg = palette.orange,
-        -- todo TODO toDO TODOsk
-        -- guifg = palette.yellow,
         guibg = palette.none,
-        style = 'bold,italic',
+        style = palette.bold_italic,
     },
     Comment = {
         guifg = palette.base6,
@@ -495,13 +503,13 @@ local mappings = {
     Underlined = {
         -- text that stands out, HTML links
         guifg = palette.none,
-        style = 'underline',
+        style = palette.underline,
     },
     Bold = {
-        style = "bold",
+        style = palette.bold,
     },
     Italic = {
-        style = "italic",
+        style = palette.italic,
     },
     Ignore = {
         -- left blank, hidden
@@ -529,23 +537,23 @@ local mappings = {
         -- the character under the cursor
         guifg = palette.none,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     iCursor = {
         guifg = palette.none,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     lCursor = {
         guifg = palette.none,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     CursorIM = {
         -- like Cursor, but used when in IME mode
         guifg = palette.none,
         guibg = palette.none,
-        style = 'reverse',
+        style = palette.reverse,
     },
     CursorColumn = {
         -- Screen-column at the cursor, when 'cursorcolumn' is set.
@@ -565,13 +573,13 @@ local mappings = {
         -- Current |quickfix| item in the quickfix window. Combined with
         -- |hl-CursorLine| when the cursor is there.
         guifg = palette.purple,
-        style = 'bold',
+        style = palette.bold,
     },
     qfLineNr = {
         -- Line numbers for quickfix lists
         guifg = palette.highlight,
         guibg = palette.title,
-        style = 'reverse',
+        style = palette.reverse,
     },
     qfFileName = {
         guifg = palette.blue,
@@ -595,15 +603,15 @@ local mappings = {
     },
     htmlLink = {
         guifg = palette.link,
-        style = 'underline',
+        style = palette.underline,
     },
     htmlH1 = {
         guifg = palette.cyan,
-        style = 'bold',
+        style = palette.bold,
     },
     htmlH2 = {
         guifg = palette.red,
-        style = 'bold',
+        style = palette.bold,
     },
     mkdCodeDelimiter = {
         guibg = palette.terminal_black,
@@ -611,15 +619,15 @@ local mappings = {
     },
     mkdCodeStart = {
         guifg = palette.teal,
-        style = "bold",
+        style = palette.bold,
     },
     mkdCodeEnd = {
         guifg = palette.teal,
-        style = "bold",
+        style = palette.bold,
     },
     markdownHeadingDelimiter = {
         guifg = palette.orange,
-        style = "bold",
+        style = palette.bold,
     },
     markdownCode = {
         guifg = palette.teal,
@@ -629,34 +637,34 @@ local mappings = {
     },
     htmlH3 = {
         guifg = palette.green,
-        style = 'bold',
+        style = palette.bold,
     },
     htmlH4 = {
         guifg = palette.yellow,
-        style = 'bold',
+        style = palette.bold,
     },
     htmlH5 = {
         guifg = palette.purple,
-        style = 'bold',
+        style = palette.bold,
     },
     markdownH1 = {
         guifg = palette.cyan,
-        style = 'bold',
+        style = palette.bold,
     },
     markdownH2 = {
         guifg = palette.red,
-        style = 'bold',
+        style = palette.bold,
     },
     markdownLinkText = {
         guifg = palette.blue,
-        style = "underline",
+        style = palette.underline,
     },
     debugPC = {
         guibg = palette.sidebar_bg,
     }, -- used for highlighting the current line in terminal-debug
     markdownH3 = {
         guifg = palette.green,
-        style = 'bold',
+        style = palette.bold,
     },
     markdownH1Delimiter = {
         -- character that needs attention like , or .
@@ -703,7 +711,7 @@ local plugin_syntax = {
         guifg = palette.green,
     },
     TSAttribute = {
-        guifg = palette.yellow ,
+        guifg = palette.yellow,
     },
     TSBoolean = {
         -- For booleans.
@@ -788,7 +796,7 @@ local plugin_syntax = {
     },
     TSProperty = {
         -- Same as `TSField`,accesing for struct members in C.
-        guifg = palette.green
+        guifg = palette.green,
     },
     TSPunctDelimiter = {
         -- For delimiters ie: `.`
@@ -827,19 +835,19 @@ local plugin_syntax = {
     },
     TSEmphasis = {
         -- For text to be represented with emphasis.
-        guifg = palette.paleblue,
+        guifg = palette.blue_pale,
     },
     TSUnderline = {
         -- For text to be represented with an underline.
         guifg = palette.white,
         guibg = palette.none,
-        style = 'underline',
+        style = palette.underline,
     },
     TSTitle = {
         -- Text that is part of a title.
         guifg = palette.title,
         guibg = palette.none,
-        style = 'bold',
+        style = palette.bold,
     },
     TSLiteral = {
         -- Literal text.
@@ -866,31 +874,37 @@ local plugin_syntax = {
     },
     TSException = {
         -- For exception related keywords.  try, catch, throw
-        guifg = palette.pink
+        guifg = palette.pink,
     },
     TSField = {
         -- For fields.
-        guifg = palette.white
+        guifg = palette.white,
     },
     TSFloat = {
-        guifg = palette.purple
+        guifg = palette.purple,
     },
     TSNote = {
         guifg = palette.orange,
         guibg = palette.info,
-        style = 'bold',
+        style = palette.bold,
     },
     TSWarning = {
         -- TODO, HACK, WARNING
         guifg = palette.black,
         guibg = palette.warning,
-        style = 'bold',
+        style = palette.bold,
     },
     TSDanger = {
         -- FIXME, XXX, BUG
         guifg = palette.black,
         guibg = palette.error,
-        style = 'bold',
+        style = palette.bold,
+    },
+    TSDefinitionUsage = {
+        guibg = palette.base5,
+    },
+    TSDefinition = {
+        guibg = palette.base5,
     },
 
     LspDiagnosticsDefaultError = {
@@ -904,7 +918,7 @@ local plugin_syntax = {
         guifg = palette.yellow,
     },
     LspDiagnosticsInformation = {
-        guifg = palette.paleblue,
+        guifg = palette.blue_pale,
     },
     LspDiagnosticsHint = {
         guifg = palette.purple,
@@ -934,7 +948,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsFloatingInformation = {
         -- used for "Information" diagnostic messages in the diagnostics float
-        guifg = palette.paleblue,
+        guifg = palette.blue_pale,
     },
     LspDiagnosticsSignHint = {
         -- used for "Hint" diagnostic signs in sign column
@@ -963,7 +977,7 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineError = {
         -- used to underline "Error" diagnostics.
-        -- style = 'undercurl',
+        -- style = palette.undercurl,
         guisp = palette.red,
     },
     LspDiagnosticsDefaultWarning = {
@@ -972,16 +986,16 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineWarning = {
         -- used to underline "Warning" diagnostics.
-        -- style = 'undercurl',
+        -- style = palette.undercurl,
         guisp = palette.yellow,
     },
     LspDiagnosticsDefaultInformation = {
         -- used for "Information" diagnostic virtual text
-        guifg = palette.paleblue,
+        guifg = palette.blue_pale,
     },
     LspDiagnosticsUnderlineInformation = {
         -- used to underline "Information" diagnostics.
-        -- style = 'undercurl',
+        -- style = palette.undercurl,
         guisp = palette.white,
     },
     LspDiagnosticsDefaultHint = {
@@ -990,17 +1004,17 @@ local plugin_syntax = {
     },
     LspDiagnosticsUnderlineHint = {
         -- used to underline "Hint" diagnostics.
-        -- style = 'undercurl',
+        -- style = palette.undercurl,
         guisp = palette.aqua,
     },
     LspSignatureActiveParameter = {
-        guifg =palette.orange,
+        guifg = palette.orange,
     },
     LspCodeLens = {
-        guifg = palette.comment,
+        guifg = palette.orange,
     },
     LspFloatWinNormal = {
-        guibg = palette.paleblue,
+        guibg = palette.blue_pale,
     },
     LspFloatWinBorder = {
         guifg = palette.border_highlight,
@@ -1032,7 +1046,7 @@ local plugin_syntax = {
     LspSagaSignatureHelpBorder = {
         guifg = palette.red,
     },
-    LspLinesDiagBorder =	{
+    LspLinesDiagBorder = {
         guifg = palette.contrast,
     },
     LspReferenceText = {
@@ -1062,7 +1076,40 @@ local plugin_syntax = {
         guibg = palette.sidebar,
     },
 
+    DiagnosticError = {
+        guifg = palette.error,
+    },
+    DiagnosticLineNrError = {
+        guifg = palette.base4,
+        guibg = palette.error,
+    },
+    DiagnosticWarning = {
+        guifg = palette.warning,
+    },
+    DiagnosticLineNrWarn = {
+        guifg = palette.base4,
+        guibg = palette.warning,
+    },
+    DiagnosticInformation = {
+        guifg = palette.green,
+    },
+    DiagnosticLineNrInfo = {
+        guifg = palette.base4,
+        guibg = palette.green,
+    },
+    DiagnosticHint = {
+        guifg = palette.blue_pale,
+    },
+    DiagnosticLineNrHint = {
+        guifg = palette.base4,
+        guibg = palette.blue_pale,
+    },
+
     ALEErrorSign = {
+        guifg = palette.error,
+        guibg = palette.base2,
+    },
+    ALEStyleErrorSign = {
         guifg = palette.error,
         guibg = palette.base2,
     },
@@ -1070,18 +1117,20 @@ local plugin_syntax = {
         guifg = palette.warning,
         guibg = palette.base2,
     },
-    DiagnosticError = {
-        guifg = palette.error,
+    ALEStyleWarningSign = {
+        guifg = palette.warning,
+        guibg = palette.base2,
     },
-    DiagnosticWarning = {
-        guifg = palette.yellow,
+    ALEInfoSign = {
+        guifg = palette.green,
+        guibg = palette.base2,
     },
-    DiagnosticInformation = {
-        guifg = palette.paleblue,
+    ALEDummySign = {
+        guifg = palette.blue_pale,
+        guibg = palette.base2,
     },
-    DiagnosticHint = {
-        guifg = palette.purple,
-    },
+
+
     illuminatedWord = {
         guibg = palette.white,
     },
@@ -1108,7 +1157,7 @@ local plugin_syntax = {
     },
     NvimTreeOpenedFolderName= {
         guifg = palette.accent,
-        style = 'italic',
+        style = palette.italic,
     },
     NvimTreeIndentMarker = {
         guifg = palette.disabled,
@@ -1143,7 +1192,7 @@ local plugin_syntax = {
     NvimTreeSpecialFile = {
         guifg = palette.white,
         guibg = palette.none,
-        style = 'NONE',
+        style = palette.none,
     },
     NvimTreeNormal = {
         guifg = palette.white,
@@ -1185,6 +1234,52 @@ local plugin_syntax = {
     GitSignsDeleteLn = {
         guifg = palette.red,
         guibg = palette.base2,
+    },
+
+    NotifyERRORBorder = {
+        guifg = palette.error,
+    },
+    NotifyWARNBorder = {
+        guifg = palette.warning,
+    },
+    NotifyINFOBorder = {
+        guifg = palette.green,
+    },
+    NotifyDEBUGBorder = {
+        guifg = palette.grey,
+    },
+    NotifyTRACEBorder = {
+        guifg = palette.pink,
+    },
+    NotifyERRORIcon = {
+        guifg = palette.error,
+    },
+    NotifyWARNIcon = {
+        guifg = palette.warning,
+    },
+    NotifyINFOIcon = {
+        guifg = palette.green,
+    },
+    NotifyDEBUGIcon = {
+        guifg = palette.grey,
+    },
+    NotifyTRACEIcon = {
+        guifg = palette.pink,
+    },
+    NotifyERRORTitle = {
+        guifg = palette.error,
+    },
+    NotifyWARNTitle = {
+        guifg = palette.warning,
+    },
+    NotifyINFOTitle = {
+        guifg = palette.green,
+    },
+    NotifyDEBUGTitle = {
+        guifg = palette.grey,
+    },
+    NotifyTRACETitle = {
+        guifg = palette.pink,
     },
 }
 

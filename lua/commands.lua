@@ -1,7 +1,7 @@
 local util = require('util')
 local command = util.command
 
-command{"Filename",     function()
+command{"Filename", function()
     vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
 end}
 command{"YankFilename",  function() vim.fn.setreg('"', vim.fn.expand '%:t') end}
