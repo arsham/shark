@@ -68,44 +68,46 @@ replacement or the requirement changes.
 <details>
     <summary>Click to view the plugin list</summary>
 
-* [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)
-* [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
-* [junegunn/fzf](https://github.com/junegunn/fzf)
-* [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-* [dense-analysis/ale](https://github.com/dense-analysis/ale)
-* [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and its related plugins.
-* [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)
-* [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-* [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)
-* [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
-* [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)
-* [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
-* [famiu/feline.nvim](https://github.com/famiu/feline.nvim) (default status-line)
-* [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)
-* [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)
-* [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)
-* [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
-* [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-* [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
-* [tpope/vim-repeat](https://github.com/tpope/vim-repeat)
-* [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)
-* [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)
-* [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-* [tommcdo/vim-exchange](https://github.com/tommcdo/vim-exchange)
-* [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
-* [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
-* [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
-* [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)
-* [towolf/vim-helm](https://github.com/towolf/vim-helm)
-* [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)
-* [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)
-* [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)
-* [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
-* [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)
-* [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)
-* [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
-* [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)
-* [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)
+| Plugin                                                                                                        | Description                       |
+| :---                                                                                                          | :---                              |
+| [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                                           | Package manager                   |
+| [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                                       | Fuzzy matching a lot of actions   |
+| [junegunn/fzf](https://github.com/junegunn/fzf)                                                               |                                   |
+| [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                             | LSP configuration                 |
+| [dense-analysis/ale](https://github.com/dense-analysis/ale)                                                   | Linter Plugin                     |
+| [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and its related plugins.                              | Completion                        |
+| [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions   |
+| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                         | Highlighting engine               |
+| [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)       |                                   |
+| [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) |                                   |
+| [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                                   |                                   |
+| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                                       | File explorer tree                |
+| [famiu/feline.nvim](https://github.com/famiu/feline.nvim) (default statusline)                                | Statusline                        |
+| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                                         | Statusline                        |
+| [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                                   | Fuzzy completion for command mode |
+| [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                                             | Better quickfix list manager      |
+| [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                                                   | git integration                   |
+| [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                                         | git signs in the gutter           |
+| [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                                             |                                   |
+| [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                                       |                                   |
+| [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                                         | Case conversion                   |
+| [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                                         | Text alignment                    |
+| [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                                           | Multiple cursors                  |
+| [tommcdo/vim-exchange](https://github.com/tommcdo/vim-exchange)                                               | Text exchange operator            |
+| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                                             |                                   |
+| [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                                               | Better notification UI            |
+| [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                                               | UI component                      |
+| [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                   |
+| [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                   |
+| [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)                               |                                   |
+| [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                                       |                                   |
+| [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                                             |                                   |
+| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)                               |                                   |
+| [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                                               |                                   |
+| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                                 |                                   |
+| [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)                         |                                   |
+| [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                   |
+| [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)                                     |                                   |
 
 </details>
 
