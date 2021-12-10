@@ -23,7 +23,7 @@ But there are a few other **LSP** servers setup as well.
 * You can make **notes** for files/lines in the **quickfix/local** lists.
 * You can **manipulate** quickfix/local lists.
 * Bindings for using the **cht.sh** service.
-* Statusline is configures with **galaxyline**.
+* Statusline is configures with **feline**.
 * The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
@@ -73,13 +73,14 @@ replacement or the requirement changes.
 * [junegunn/fzf](https://github.com/junegunn/fzf)
 * [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 * [dense-analysis/ale](https://github.com/dense-analysis/ale)
-* [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
+* [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and its related plugins.
 * [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)
 * [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 * [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)
 * [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 * [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)
 * [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
+* [famiu/feline.nvim](https://github.com/famiu/feline.nvim) (default status-line)
 * [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)
 * [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)
 * [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)
@@ -94,7 +95,6 @@ replacement or the requirement changes.
 * [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 * [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
 * [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)
-* [steelsojka/completion-buffers](https://github.com/steelsojka/completion-buffers)
 * [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)
 * [towolf/vim-helm](https://github.com/towolf/vim-helm)
 * [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)
@@ -104,7 +104,6 @@ replacement or the requirement changes.
 * [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)
 * [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)
 * [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
-* [SirVer/ultisnips](https://github.com/SirVer/ultisnips)
 * [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)
 * [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)
 
@@ -548,8 +547,9 @@ none of its associated mappings or commands are loaded.
 │   │   │   └── init.lua
 │   │   ├── treesitter.lua
 │   │   └── wilder.lua               # For fuzzy Ex commands.
-│   ├── statusline                   # Galaxyline config.
-│   │   └── init.lua
+│   ├── statusline
+│   │   ├── feline                   # Feline config.
+│   │   └── galaxyline               # Galaxyline config.
 │   ├── util
 │   │   └── init.lua                 # Common utilities.
 │   └── visuals.lua
