@@ -42,6 +42,7 @@ require('packer').startup({
             'junegunn/fzf.vim',
             requires = { 'junegunn/fzf' },
             config = function() require('settings.fzf') end,
+            keys   = {'<C-p>', '<M-p>'},
         }
 
         use {
@@ -59,7 +60,7 @@ require('packer').startup({
             'kyazdani42/nvim-tree.lua',
             setup  = function() require('settings').nvim_tree.setup() end,
             config = function() require('settings').nvim_tree.config() end,
-            event  = {'BufNewFile', 'BufRead'},
+            event  = { 'BufRead' },
             cmd    = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
             keys   = {'<leader>kb', '<leader>kf'},
         }
@@ -126,19 +127,19 @@ require('packer').startup({
 
         --{{{ Editing }}}
         use {
-            'b3nj5m1n/kommentary',
-            config = function() require('settings').kommentary() end,
+            'numToStr/Comment.nvim',
+            config = function() require('Comment').setup() end,
             event = { 'BufRead', 'BufNewFile' },
         }
 
         use {
             'tpope/vim-repeat',
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
             'bronson/vim-trailing-whitespace',
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -153,7 +154,7 @@ require('packer').startup({
             -- Title-Dash/Title-Kebab: gsK
             -- dot.case:               gs.
             'arthurxavierx/vim-caser',
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -162,7 +163,7 @@ require('packer').startup({
                 vim.keymap.xmap{'ga', '<Plug>(EasyAlign)'}
                 vim.keymap.nmap{'ga', '<Plug>(EasyAlign)'}
             end,
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -176,12 +177,12 @@ require('packer').startup({
             setup = function()
                 vim.g.VM_theme = 'ocean'
             end,
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
             'tommcdo/vim-exchange',
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -280,14 +281,14 @@ require('packer').startup({
             },
             config = function() require('settings.treesitter') end,
             run = ':TSUpdate',
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
             'David-Kunz/treesitter-unit',
             wants = 'nvim-treesitter',
             config = function() require('settings').treesitter_unit() end,
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -304,7 +305,7 @@ require('packer').startup({
         use {
             'blackCauldron7/surround.nvim',
             config = function() require('settings').surround() end,
-            event = { 'BufRead', 'BufNewFile' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {

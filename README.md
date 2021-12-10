@@ -85,7 +85,7 @@ replacement or the requirement changes.
 * [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)
 * [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 * [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-* [b3nj5m1n/kommentary](https://github.com/b3nj5m1n/kommentary)
+* [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
 * [tpope/vim-repeat](https://github.com/tpope/vim-repeat)
 * [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)
 * [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)
