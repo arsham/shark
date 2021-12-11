@@ -57,6 +57,9 @@ require('packer').startup({
 
         use {
             'kyazdani42/nvim-tree.lua',
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+            },
             setup  = function() require('settings').nvim_tree.setup() end,
             config = function() require('settings').nvim_tree.config() end,
             event  = { 'BufRead' },
@@ -130,6 +133,7 @@ require('packer').startup({
         }
 
         --{{{ Editing }}}
+
         use {
             'numToStr/Comment.nvim',
             config = function() require('Comment').setup() end,
@@ -274,13 +278,13 @@ require('packer').startup({
                     'nvim-treesitter/nvim-treesitter-refactor',
                     after = 'nvim-treesitter',
                     config = function() require('settings').treesitter_refactor() end,
-                    event = { 'BufRead', 'BufNewFile' },
+                    event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
                 },
                 {
                     'nvim-treesitter/nvim-treesitter-textobjects',
                     branch = '0.5-compat',
                     after = 'nvim-treesitter',
-                    event = { 'BufRead', 'BufNewFile' },
+                    event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
                 },
             },
             config = function() require('settings.treesitter') end,

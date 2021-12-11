@@ -229,6 +229,16 @@ you how many items you have in a list.
 
 </details>
 
+<details>
+    <summary>Click to view commands for lists</summary>
+
+| Command         | Description                                 |
+| :---            | :---                                        |
+| `Clearquickfix` | **Clear** the quickfix list.                |
+| `Clearloclist`  | **Clear** the local list of current buffer. |
+
+</details>
+
 Additional to [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf) bindings,
 you can do `<count>dd` in the quickfix/local list buffers to delete `<count>`
 rows from quickfix/local list buffer.
@@ -314,6 +324,7 @@ There are a few added commands to what fzf provides.
 
 | Command     | Description                                |
 | :---        | :---                                       |
+| Reload      | Reload one or more lua config files        |
 | ArgAdd      | Select and add files to the args list      |
 | ArgDelete   | Select and delete files from the args list |
 | GGrep       | Run **git grep**                           |
@@ -383,14 +394,21 @@ few interesting additions.
 | :---               | :---                                          |
 | `RestartLsp`       | Restart LSP with a delay.                     |
 | `Rename`           | Rename a symbol                               |
-| `Test`             | Find a test with the name of current function |
-| `Log`              | Show LSP logs                                 |
-| `TypeDefinition`   |                                               |
 | `WorkspaceSymbols` |                                               |
+| `DocumentSymbol`   |                                               |
 | `Callees`          |                                               |
 | `Callers`          |                                               |
+| `CodeLensRefresh`  |                                               |
+| `CodeLensRun`      |                                               |
 | `Diagnostics`      |                                               |
 | `DiagnosticsAll`   |                                               |
+| `Definition`       |                                               |
+| `TypeDefinition`   |                                               |
+| `Implementation`   |                                               |
+| `References`       |                                               |
+| `ListWorkspace`    |                                               |
+| `Test`             | Find a test with the name of current function |
+| `Log`              | Show LSP logs                                 |
 
 </details>
 
@@ -404,16 +422,19 @@ The following list of commands do not fit into any specific categories.
 <details>
     <summary>Click to view the commands</summary>
 
-| Command               | Description                           |
-| :---                  | :---                                  |
-| `Filename`            | View the filename                     |
-| `YankFilename`        | Yank the filename to `"` register     |
-| `YankFilenameC`       | Yank the filename to `+` register     |
-| `YankFilepath`        | Yank the file path to `"` register    |
-| `YankFilepathC`       | Yank the file path to `+` register    |
-| `MergeConflict`       | Search for merge conflicts            |
-| `JsonDiff`            | Diff json files after formatting them |
-| `InstallDependencies` | Install required dependencies         |
+| Command               | Description                                  |
+| :---                  | :---                                         |
+| `InstallDependencies` | Install required dependencies                |
+| `WatchLuaFileChanges` | Watch for changes in current file and reload |
+| `CC`                  | Close all floating windows                   |
+| `Scratch`             | Create a scratch buffer                      |
+| `Filename`            | View the filename                            |
+| `YankFilename`        | Yank the filename to `"` register            |
+| `YankFilenameC`       | Yank the filename to `+` register            |
+| `YankFilepath`        | Yank the file path to `"` register           |
+| `YankFilepathC`       | Yank the file path to `+` register           |
+| `MergeConflict`       | Search for merge conflicts                   |
+| `JsonDiff`            | Diff json files after formatting them        |
 
 After running `InstallDependencies` you will be notified to install some
 programs.
