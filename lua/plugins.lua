@@ -120,7 +120,12 @@ require('packer').startup({
 
         use {
             'norcalli/nvim-colorizer.lua',
-            config = function() require'colorizer'.setup() end,
+            config = function()
+                require'colorizer'.setup{
+                    'css', 'scss', 'sass', 'html',
+                    'lua',
+                }
+            end,
             event = { 'BufRead', 'BufNewFile' },
         }
 
