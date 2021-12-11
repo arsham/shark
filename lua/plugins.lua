@@ -139,6 +139,19 @@ require('packer').startup({
             event = { 'BufRead', 'BufNewFile' },
         }
 
+        use {
+            'rcarriga/nvim-notify',
+            config = function()
+                local async_load_plugin = nil
+                async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
+                    vim.notify = require("notify")
+                    async_load_plugin:close()
+                end))
+                async_load_plugin:send()
+            end,
+        }
+
+        use 'MunifTanjim/nui.nvim'
         --{{{ Editing }}}
 
         use {
@@ -207,19 +220,19 @@ require('packer').startup({
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
-        use {
-            'rcarriga/nvim-notify',
+        use({
+            'sQVe/sort.nvim',
             config = function()
-                local async_load_plugin = nil
-                async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-                    vim.notify = require("notify")
-                    async_load_plugin:close()
-                end))
-                async_load_plugin:send()
+                require("sort").setup({
+                    delimiters = {
+                        ',', '|', ';', ':',
+                        's', -- Space
+                        't'  -- Tab
+                    },
+                })
             end,
-        }
-
-        use 'MunifTanjim/nui.nvim'
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+        })
 
         --{{{ Programming }}}
         use {
