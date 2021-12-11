@@ -1,14 +1,15 @@
 local util = require('util')
 require('astronauta.keymap')
 local keymap = vim.keymap
+local gitsigns = require('gitsigns')
 
-require('gitsigns').setup {
+gitsigns.setup {
     signs = {
-        add          = {text = '░'},
-        change       = {text = '▒'},
-        delete       = {text = '░'},
-        topdelete    = {text = '▔'},
-        changedelete = {text = '▎'},
+        add          = {text = '░', show_count = true},
+        change       = {text = '▒', show_count = true},
+        delete       = {text = '░', show_count = true},
+        topdelete    = {text = '▔', show_count = true},
+        changedelete = {text = '▎', show_count = true},
     },
     sign_priority = 1,
     count_chars = {
@@ -29,17 +30,21 @@ require('gitsigns').setup {
     },
 }
 
-keymap.nnoremap{']c', function() util.call_and_centre(require"gitsigns".next_hunk) end}
-keymap.nnoremap{'[c', function() util.call_and_centre(require"gitsigns".prev_hunk) end}
-keymap.nnoremap{'<leader>hb', function() require("gitsigns").blame_line(true) end}
-keymap.nnoremap{'<leader>hs', function() require("gitsigns").stage_hunk() end}
-keymap.vnoremap{'<leader>hS', function() require("gitsigns").stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end}
-keymap.nnoremap{'<leader>hu', function() require("gitsigns").undo_stage_hunk() end}
-keymap.nnoremap{'<leader>hr', function() require("gitsigns").reset_hunk() end}
-keymap.vnoremap{'<leader>hr', function() require("gitsigns").reset_hunk({vim.fn.line("."), vim.fn.line("v")}) end}
-keymap.nnoremap{'<leader>hR', function() require("gitsigns").reset_buffer() end}
-keymap.nnoremap{'<leader>hp', function() require("gitsigns").preview_hunk() end}
+keymap.nnoremap{']c', function() util.call_and_centre(gitsigns.next_hunk) end}
+keymap.nnoremap{'[c', function() util.call_and_centre(gitsigns.prev_hunk) end}
+keymap.nnoremap{'<leader>hb', function() gitsigns.blame_line{full=true} end}
+keymap.nnoremap{'<leader>hs', function() gitsigns.stage_hunk() end}
+keymap.nnoremap{'<leader>hl', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
+keymap.vnoremap{'<leader>hs', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
+keymap.nnoremap{'<leader>hu', function() gitsigns.undo_stage_hunk() end}
+keymap.nnoremap{'<leader>hr', function() gitsigns.reset_hunk() end}
+keymap.vnoremap{'<leader>hr', function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
+keymap.nnoremap{'<leader>hR', function() gitsigns.reset_buffer() end}
+keymap.nnoremap{'<leader>hp', function() gitsigns.preview_hunk() end}
 
 -- Text objects
-keymap.onoremap{'ih', require"gitsigns.actions".select_hunk}
-keymap.xnoremap{'ih', require"gitsigns.actions".select_hunk}
+local actions = require('gitsigns.actions')
+keymap.onoremap{'ih', actions.select_hunk}
+keymap.xnoremap{'ih', actions.select_hunk}
+keymap.onoremap{'ah', actions.select_hunk}
+keymap.xnoremap{'ah', actions.select_hunk}

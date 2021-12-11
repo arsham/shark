@@ -152,6 +152,7 @@ The `leader` key is the `space`!
 | `[c`         | (gitsigns) Previous hunk                                |
 | `<leader>hb` | (gitsigns) **B**lame line                               |
 | `<leader>hs` | (gitsigns) **S**tage **h**unk                           |
+| `<leader>hl` | (gitsigns) **S**tage **l**ine                           |
 | `<leader>hu` | (gitsigns) **U**nstage **h**unk                         |
 | `<leader>hr` | (gitsigns) **R**eset staged **h**unk                    |
 | `<leader>hR` | (gitsigns) **R**eset buffer                             |
@@ -196,6 +197,8 @@ There are more specialised mappings provided, keep reading please!
 | `im`        | **I**n **M**ethod                          |
 | `ab`        | **A**round **B**lock                       |
 | `ib`        | **I**n **B**lock                           |
+| `ah`        | **A**round **H**unk (git changes)          |
+| `ih`        | **I**n **H**kunk (git changes)             |
 
 There are sets of **i*** and **a*** text objects, where `*` can be any of:
 **_ . : , ; | / \ * + - #**
