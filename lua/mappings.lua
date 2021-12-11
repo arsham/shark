@@ -38,10 +38,10 @@ keymap.nnoremap{'g=', 'gg=Gg``'}
 keymap.nnoremap{"[<space>", silent=true, ":<c-u>put!=repeat([''],v:count)<bar>']+1<cr>"}
 keymap.nnoremap{"]<space>", silent=true, ":<c-u>put =repeat([''],v:count)<bar>'[-1<cr>"}
 
-keymap.nnoremap{'<C-h>', '<C-w><C-h>'}
-keymap.nnoremap{'<C-j>', '<C-w><C-j>'}
-keymap.nnoremap{'<C-k>', '<C-w><C-k>'}
-keymap.nnoremap{'<C-l>', '<C-w><C-l>'}
+-- keymap.nnoremap{'<C-h>', '<C-w><C-h>'}
+-- keymap.nnoremap{'<C-j>', '<C-w><C-j>'}
+-- keymap.nnoremap{'<C-k>', '<C-w><C-k>'}
+-- keymap.nnoremap{'<C-l>', '<C-w><C-l>'}
 
 keymap.nnoremap{'<M-Left>',  silent=true, ':vert resize -2<CR>'}
 keymap.nnoremap{'<M-Right>', silent=true, ':vert resize +2<CR>'}

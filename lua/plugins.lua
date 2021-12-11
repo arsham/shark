@@ -80,6 +80,13 @@ require('packer').startup({
             run = ':UpdateRemotePlugins',
         }
 
+        use {
+            'numToStr/Navigator.nvim',
+            config = function()
+                require('settings').navigator()
+            end
+        }
+
         --{{{ git }}}
         use {
             'tpope/vim-fugitive',

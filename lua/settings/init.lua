@@ -112,4 +112,14 @@ function M.treesitter_unit()
     vim.api.nvim_set_keymap('o', 'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', {noremap=true})
 end
 
+function M.navigator()
+    local navigator = require('Navigator')
+    navigator.setup()
+
+    vim.keymap.nnoremap{"<C-h>", navigator.left, silent=true}
+    vim.keymap.nnoremap{"<C-k>", navigator.up, silent=true}
+    vim.keymap.nnoremap{"<C-l>", navigator.right, silent=true}
+    vim.keymap.nnoremap{"<C-j>", navigator.down, silent=true}
+end
+
 return M
