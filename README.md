@@ -144,7 +144,7 @@ The `leader` key is the `space`!
 | `<Alt-{>`    | Adds curly brackets at the end of line into insert mode |
 | `]<space>`   | Inserts [count] empty lines after                       |
 | `[<space>`   | Inserts [count] empty lines before                      |
-| `<leader>gw` | **G**reps for current **W**ord                          |
+| `<leader>gw` | **G**reps for current **W**ord in buffer. Sets qflist   |
 | `<leader>sp` | Toggles **Sp**elling on current buffer                  |
 | `<leader>sf` | Auto **f**ixes previous misspelled word                 |
 | `g=`         | Re-indents the hole buffer                              |
@@ -317,6 +317,7 @@ There are a few added commands to what fzf provides.
 | ArgAdd      | Select and add files to the args list      |
 | ArgDelete   | Select and delete files from the args list |
 | GGrep       | Run **git grep**                           |
+| Marks       | Show marks with preview                    |
 | MarksDelete | Delete marks                               |
 | Todo        | List **todo**/**fixme** lines              |
 

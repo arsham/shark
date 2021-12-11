@@ -42,7 +42,6 @@ require('packer').startup({
             'junegunn/fzf.vim',
             requires = { 'junegunn/fzf' },
             config = function() require('settings.fzf') end,
-            keys   = {'<C-p>', '<M-p>'},
         }
 
         use {

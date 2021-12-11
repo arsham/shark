@@ -72,6 +72,15 @@ command{"MarksDelete", function()
     vim.fn["fzf#run"](wrapped, vim.fn["fzf#vim#with_preview"]())
 end}
 
+command{"Marks", attrs="-bang -bar", docs="show marks", function()
+    local home = vim.fn["fzf#shellescape"](vim.fn.expand('%'))
+    local preview = vim.fn["fzf#vim#with_preview"]({
+        placeholder = '$([ -r $(echo {4} | sed "s#^~#$HOME#") ] && echo {4} || echo ' .. home .. '):{2}',
+        options = '--preview-window +{2}-/2',
+    })
+    vim.fn["fzf#vim#marks"](preview, 0)
+end}
+
 command{"GGrep", attrs="-bang -nargs=*", function(term)
     local preview = vim.fn["fzf#vim#with_preview"]({
         dir = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
