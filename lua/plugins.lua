@@ -197,15 +197,8 @@ require('packer').startup({
         use {
             'mg979/vim-visual-multi',
             branch = 'master',
-            -- config = function()
-            --     -- vim.g.VM_leader = 'alt'
-            --     vim.g.VM_maps = {}
-            --     vim.g.VM_maps['Align'] = '<M-a>'
-            -- end,
-            setup = function()
-                vim.g.VM_theme = 'ocean'
-            end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            config = function() require('settings').visual_multi() end,
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
