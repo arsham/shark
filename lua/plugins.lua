@@ -33,15 +33,17 @@ require('packer').startup({
     function(use)
 
         --{{{ Libraries }}}
+
         use 'wbthomason/packer.nvim'
         use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
 
         --{{{ Core/System utilities }}}
+
         use {
             'junegunn/fzf.vim',
             requires = { 'junegunn/fzf' },
-            config = function() require('settings.fzf') end,
+            config   = function() require('settings.fzf') end,
         }
 
         use {
@@ -57,50 +59,53 @@ require('packer').startup({
 
         use {
             'kyazdani42/nvim-tree.lua',
-            requires = {
-                'kyazdani42/nvim-web-devicons',
-            },
-            setup  = function() require('settings').nvim_tree.setup() end,
-            config = function() require('settings').nvim_tree.config() end,
-            event  = { 'BufRead' },
-            cmd    = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
-            keys   = {'<leader>kb', '<leader>kf'},
+            requires = { 'kyazdani42/nvim-web-devicons' },
+            setup    = function() require('settings').nvim_tree.setup() end,
+            config   = function() require('settings').nvim_tree.config() end,
+            event    = { 'BufRead' },
+            cmd      = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
+            keys     = { '<leader>kb', '<leader>kf' },
         }
 
         use {
             'tweekmonster/startuptime.vim',
             -- 'dstein64/vim-startuptime',
-            cmd = {'StartupTime'},
+            cmd = { 'StartupTime' },
         }
 
         -- { 'norcalli/profiler.nvim', },
+
         use {
             'gelguy/wilder.nvim',
             config = function() require('settings.wilder') end,
-            run = ':UpdateRemotePlugins',
+            run    = ':UpdateRemotePlugins',
         }
 
         use {
             'numToStr/Navigator.nvim',
-            config = function()
-                require('settings').navigator()
-            end
+            config = function() require('settings').navigator() end
         }
 
         --{{{ git }}}
+
         use {
             'tpope/vim-fugitive',
-            event = {'BufNewFile', 'BufRead'},
-            cmd = {'G', 'Git'},
+            event = { 'BufNewFile', 'BufRead' },
+            cmd   = { 'G', 'Git' },
         }
 
         use {
             'lewis6991/gitsigns.nvim',
-            requires = {
-                'nvim-lua/plenary.nvim',
-            },
-            config = function() require('settings.gitsigns') end,
-            event = {'BufNewFile', 'BufRead'},
+            requires = { 'nvim-lua/plenary.nvim' },
+            config   = function() require('settings.gitsigns') end,
+            event    = { 'BufNewFile', 'BufRead' },
+        }
+
+        use {
+            -- create ~/.gist-vim with this content: token xxxxx
+            'mattn/vim-gist',
+            requires = { 'mattn/webapi-vim' },
+            cmd      = { 'Gist' },
         }
 
         --{{{ Visuals }}}
@@ -110,20 +115,20 @@ require('packer').startup({
         use {
             'glepnir/galaxyline.nvim',
             branch = 'main',
-            cond = status_plugin == 'galaxyline',
+            cond   = status_plugin == 'galaxyline',
             config = function() require('statusline.galaxyline') end,
         }
 
         use {
             'famiu/feline.nvim',
-            cond = status_plugin == 'feline',
+            cond   = status_plugin == 'feline',
             config = function() require('statusline.feline') end,
         }
 
         use {
             'dhruvasagar/vim-zoom',
             config = function()
-                vim.keymap.nmap{'<C-W>z', '<Plug>(zoom-toggle)'}
+                vim.keymap.nmap{ '<C-W>z', '<Plug>(zoom-toggle)' }
             end,
             event = { 'BufRead', 'BufNewFile' },
         }
@@ -131,10 +136,7 @@ require('packer').startup({
         use {
             'norcalli/nvim-colorizer.lua',
             config = function()
-                require'colorizer'.setup{
-                    'css', 'scss', 'sass', 'html',
-                    'lua',
-                }
+                require'colorizer'.setup{ 'css', 'scss', 'sass', 'html', 'lua' }
             end,
             event = { 'BufRead', 'BufNewFile' },
         }
@@ -152,12 +154,23 @@ require('packer').startup({
         }
 
         use 'MunifTanjim/nui.nvim'
+
+        use {
+            'lukas-reineke/indent-blankline.nvim',
+            event = { 'BufRead', 'BufNewFile' },
+        }
+
+        use {
+            'stevearc/dressing.nvim',
+            config = function() require('settings').dressing() end,
+        }
+
         --{{{ Editing }}}
 
         use {
             'numToStr/Comment.nvim',
             config = function() require('Comment').setup() end,
-            event = { 'BufRead', 'BufNewFile' },
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -208,9 +221,9 @@ require('packer').startup({
 
         use {
             'windwp/nvim-autopairs',
-            wants = "nvim-cmp",
+            wants  = "nvim-cmp",
             config = function() require('settings').autopairs() end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use({
@@ -261,17 +274,15 @@ require('packer').startup({
 
         use {
             'dense-analysis/ale',
-            config = function()
-                require('settings.ale') end,
-            opt = true,
-            ft = lspFiletypes,
+            config = function() require('settings.ale') end, opt = true,
+            ft     = lspFiletypes,
         }
 
         use {
             'ojroques/nvim-lspfuzzy',
             requires = {
-                {'junegunn/fzf'},
-                {'junegunn/fzf.vim'},
+                { 'junegunn/fzf' },
+                { 'junegunn/fzf.vim' },
             },
             config = function()
                 require('lspfuzzy').setup{
@@ -307,14 +318,14 @@ require('packer').startup({
 
         use {
             'David-Kunz/treesitter-unit',
-            wants = 'nvim-treesitter',
+            wants  = 'nvim-treesitter',
             config = function() require('settings').treesitter_unit() end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
             'uarun/vim-protobuf',
-            ft = {'proto'},
+            ft = { 'proto' },
         }
 
         use {
@@ -326,7 +337,7 @@ require('packer').startup({
         use {
             'blackCauldron7/surround.nvim',
             config = function() require('settings').surround() end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {

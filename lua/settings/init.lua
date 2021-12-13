@@ -116,10 +116,10 @@ function M.navigator()
     local navigator = require('Navigator')
     navigator.setup()
 
-    vim.keymap.nnoremap{"<C-h>", navigator.left, silent=true}
-    vim.keymap.nnoremap{"<C-k>", navigator.up, silent=true}
+    vim.keymap.nnoremap{"<C-h>", navigator.left,  silent=true}
+    vim.keymap.nnoremap{"<C-k>", navigator.up,    silent=true}
     vim.keymap.nnoremap{"<C-l>", navigator.right, silent=true}
-    vim.keymap.nnoremap{"<C-j>", navigator.down, silent=true}
+    vim.keymap.nnoremap{"<C-j>", navigator.down,  silent=true}
 function M.visual_multi()
     vim.g.VM_theme = 'ocean'
     vim.g.VM_highlight_matches = ''
@@ -149,6 +149,14 @@ function M.visual_multi()
     end, {}}
 end
 
+function M.dressing()
+    require('dressing').setup({
+        input = {
+            default_prompt = "➤ ",
+            insert_only = false,
+            winblend = 0,
+        },
+    })
 end
 
 return M
