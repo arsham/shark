@@ -92,7 +92,6 @@ require('packer').startup({
 
         use {
             'tpope/vim-fugitive',
-            event = { 'BufNewFile', 'BufRead' },
             cmd   = { 'G', 'Git' },
         }
 
@@ -107,6 +106,9 @@ require('packer').startup({
             -- create ~/.gist-vim with this content: token xxxxx
             'mattn/vim-gist',
             requires = { 'mattn/webapi-vim' },
+            config   = function()
+                vim.g.gist_per_page_limit = 100
+            end,
             cmd      = { 'Gist' },
         }
 
@@ -213,7 +215,7 @@ require('packer').startup({
                 vim.keymap.xmap{'ga', '<Plug>(EasyAlign)'}
                 vim.keymap.nmap{'ga', '<Plug>(EasyAlign)'}
             end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            keys = { 'ga' },
         }
 
         use {
@@ -225,14 +227,14 @@ require('packer').startup({
 
         use {
             'tommcdo/vim-exchange',
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            keys = { {'n', 'cx'}, {'v', 'X'} },
         }
 
         use {
             'windwp/nvim-autopairs',
             wants  = "nvim-cmp",
             config = function() require('settings').autopairs() end,
-            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event  = { 'InsertEnter' },
         }
 
         use({
@@ -246,7 +248,7 @@ require('packer').startup({
                     },
                 })
             end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cmd = { 'Sort' },
         })
 
         --{{{ Programming }}}
@@ -262,7 +264,6 @@ require('packer').startup({
                 require('settings.lsp')
             end,
             after = 'nvim-lspconfig',
-            event = { 'BufNewFile', 'BufRead' },
         }
 
         use {
@@ -309,7 +310,6 @@ require('packer').startup({
                 }
             end,
             after = {"nvim-lspconfig", "fzf.vim"},
-            ft = lspFiletypes,
         }
 
         use {
@@ -320,13 +320,11 @@ require('packer').startup({
                     'nvim-treesitter/nvim-treesitter-refactor',
                     after = 'nvim-treesitter',
                     config = function() require('settings').treesitter_refactor() end,
-                    event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
                 },
                 {
                     'nvim-treesitter/nvim-treesitter-textobjects',
                     branch = '0.5-compat',
                     after = 'nvim-treesitter',
-                    event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
                 },
             },
             config = function() require('settings.treesitter') end,
@@ -338,6 +336,12 @@ require('packer').startup({
             'David-Kunz/treesitter-unit',
             wants  = 'nvim-treesitter',
             config = function() require('settings').treesitter_unit() end,
+            after  = 'nvim-treesitter',
+        }
+
+        use {
+            'github/copilot.vim',
+            config = function () require('settings').copilot() end,
             event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
