@@ -370,6 +370,22 @@ require('packer').startup({
             event = { 'BufRead', 'BufNewFile' },
         }
 
+        --{{{ Misc }}}
+
+        use {
+            "iamcco/markdown-preview.nvim",
+            run = function()
+                vim.fn["mkdp#util#install"]()
+                -- couln't make this work.
+                -- vim.cmd[[cd app && npm -g install --prefix ~/.node_modules]]
+            end,
+            setup  = function() vim.g.mkdp_filetypes = { "markdown" } end,
+            config = function()
+                vim.g.mkdp_browser = 'brave'
+            end,
+            ft = { "markdown" },
+        }
+
     end,
     config = {
         log = { level = 'info' },
