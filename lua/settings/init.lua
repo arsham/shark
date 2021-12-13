@@ -120,6 +120,23 @@ function M.navigator()
     vim.keymap.nnoremap{"<C-k>", navigator.up,    silent=true}
     vim.keymap.nnoremap{"<C-l>", navigator.right, silent=true}
     vim.keymap.nnoremap{"<C-j>", navigator.down,  silent=true}
+end
+
+function M.lsp_installer()
+    local lsp_installer = require("nvim-lsp-installer")
+
+    lsp_installer.settings({
+        install_root_dir = vim.env.HOME .. "/.cache/lsp-servers",
+        ui = {
+            icons = {
+                server_installed = "✓",
+                server_pending = "➜",
+                server_uninstalled = "✗"
+            }
+        },
+    })
+end
+
 function M.visual_multi()
     vim.g.VM_theme = 'ocean'
     vim.g.VM_highlight_matches = ''

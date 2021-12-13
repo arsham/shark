@@ -37,20 +37,8 @@ end}
 
 command{"InstallDependencies", function()
     local commands = {
-        bash       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "bash-language-server@latest"},
-        vim        = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vim-language-server@latest"},
-        dockerfile = {"npm", "-g", "install", "--prefix", "~/.node_modules", "dockerfile-language-server-nodejs@latest"},
-        html       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-html-languageserver-bin@latest"},
-        json       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-json-languageserver@latest"},
-        yaml       = {"npm", "-g", "install", "--prefix", "~/.node_modules", "yaml-language-server@latest"},
-        neovim     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest"},
-        typescript = {"npm", "-g", "install", "--prefix", "~/.node_modules", "typescript@latest", "typescript-language-server@latest"},
-        eslint     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "eslint@latest", "--save-dev"},
-        unknown    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "vscode-langservers-extracted@latest"},
-        gopls      = {"go", "install", "golang.org/x/tools/gopls@latest"},
         golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
         gojq       = {"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
-        sqls       = {"go", "install", "github.com/lighttiger2505/sqls@latest"},
     }
 
     local total = table.length(commands)
@@ -79,7 +67,7 @@ command{"InstallDependencies", function()
 
                 count = count + 1
                 if count == total then
-                    local str =  "yay -S ripgrep bat lua-language-server-git ccls words-insane ctags jedi-language-server"
+                    local str =  "yay -S ripgrep bat ccls words-insane ctags"
                     vim.schedule(function()
                         vim.fn.setreg('+', str)
                     end)

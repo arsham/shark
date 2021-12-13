@@ -108,6 +108,7 @@ local function attach_mappings_commands(client)
     if caps.document_range_formatting then
         nvim_command('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
         vim.keymap.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
+        vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
     end
 
     if caps.rename then

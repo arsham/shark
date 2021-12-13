@@ -24,7 +24,11 @@ function M.get_diagnostics_count(severity)
         severity = severity_lsp_to_vim(severity)
         local opts = { severity = severity }
         if client.id ~= nil then
-            opts.namespace = vim.diagnostic.get_namespace(client.id)
+            local namespace, ok = pcall(vim.diagnostic.get_namespace, client.id)
+            if not ok then
+                return 0
+            end
+            opts.namespace = namespace
         end
         count = count + #vim.diagnostic.get(0, opts)
     end

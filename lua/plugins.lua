@@ -243,9 +243,17 @@ require('packer').startup({
         --{{{ Programming }}}
         use {
             'neovim/nvim-lspconfig',
-            wants = "nvim-cmp",
-            config = function() require('settings.lsp') end,
-            event = {'BufNewFile', 'BufRead'},
+            after = "nvim-cmp",
+        }
+
+        use {
+            'williamboman/nvim-lsp-installer',
+            config = function()
+                require('settings').lsp_installer()
+                require('settings.lsp')
+            end,
+            after = 'nvim-lspconfig',
+            event = { 'BufNewFile', 'BufRead' },
         }
 
         use {
@@ -291,6 +299,7 @@ require('packer').startup({
                     },
                 }
             end,
+            after = {"nvim-lspconfig", "fzf.vim"},
             ft = lspFiletypes,
         }
 
