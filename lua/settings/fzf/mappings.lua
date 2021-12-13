@@ -39,9 +39,11 @@ keymap.nnoremap{'<M-b>', silent=true, function()
     vim.fn["fzf#run"](wrapped)
 end}
 
+-- Ctrl+/ for searching in current buffer.
 keymap.nnoremap{'<C-_>', silent=true, function()
     local args = {
-        options = '--layout reverse-list --with-nth=4.. --delimiter=":" --prompt="Current Buffer> "',
+        options = '--layout reverse-list --with-nth=4.. --preview-window ' ..
+            'nohidden --delimiter=":" --prompt="Current Buffer> "',
     }
     local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
     local rg_cmd = table.concat({

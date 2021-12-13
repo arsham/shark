@@ -50,8 +50,10 @@ require('packer').startup({
             'kevinhwang91/nvim-bqf',
             requires = {
                 'junegunn/fzf',
-                'nvim-treesitter/nvim-treesitter',
-                branch = '0.5-compat',
+                {
+                    'nvim-treesitter/nvim-treesitter',
+                    branch = '0.5-compat',
+                },
             },
             config = function() require('bqf').enable() end,
             event = { 'BufWinEnter quickfix' },
@@ -131,6 +133,7 @@ require('packer').startup({
                 vim.keymap.nmap{ '<C-W>z', '<Plug>(zoom-toggle)' }
             end,
             event = { 'BufRead', 'BufNewFile' },
+            keys  = { '<C-w>z' },
         }
 
         use {
@@ -157,6 +160,12 @@ require('packer').startup({
 
         use {
             'lukas-reineke/indent-blankline.nvim',
+            config = function()
+                require("indent_blankline").setup {
+                    show_trailing_blankline_indent = false,
+                    show_first_indent_level = false,
+                }
+            end,
             event = { 'BufRead', 'BufNewFile' },
         }
 
