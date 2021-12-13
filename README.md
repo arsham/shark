@@ -157,8 +157,8 @@ The `leader` key is the `space`!
 | `<leader>hr` | (gitsigns) **R**eset staged **h**unk                    |
 | `<leader>hR` | (gitsigns) **R**eset buffer                             |
 | `<leader>hp` | (gitsigns) **P**review **h**unk                         |
-| `]]`         | Jumps to the next function                              |
-| `[[`         | Jumps to the previous function                          |
+| `]m`         | Jumps to the start of next function                     |
+| `[m`         | Jumps to the start of previous function                 |
 | `<leader>hh` | Opens the **help** for current word                     |
 | `<leader>cs` | Search for **C**heat**S**heets with cht.sh service      |
 | `<leader>cq` | **C**heat**S**heets with quotes                         |

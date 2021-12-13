@@ -70,6 +70,18 @@ util.augroup{"SPECIAL_SETTINGS", {
         vim.cmd[[ setlocal textwidth=72 ]]
         vim.cmd[[ setlocal colorcolumn="50,72" ]]
     end},
+
+    {"BufEnter,FocusGained,InsertLeave,WinEnter", '*', run=function()
+        if vim.wo.number and vim.fn.mode() ~= 'i' then
+            vim.wo.relativenumber = true
+        end
+    end, docs="set relative number when focused"},
+    {"BufLeave,FocusLost,InsertEnter,WinLeave", '*', run=function()
+        if vim.wo.number then
+            vim.wo.relativenumber = false
+        end
+    end, docs="unset relative number when unfocused"},
+
 }}
 
 
