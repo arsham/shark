@@ -85,7 +85,7 @@ require('packer').startup({
 
         use {
             'numToStr/Navigator.nvim',
-            config = function() require('settings').navigator() end
+            config = function() require('settings').navigator() end,
         }
 
         --{{{ git }}}

@@ -112,6 +112,18 @@ function M.treesitter_unit()
     vim.api.nvim_set_keymap('o', 'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', {noremap=true})
 end
 
+function M.copilot()
+    vim.cmd[[
+    imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
+    ]]
+    vim.g.copilot_no_tab_map = true
+    vim.g.copilot_assume_mapped = true
+    vim.keymap.nnoremap{'<leader>ce', ':Copilot enable<cr>', silent=true}
+    vim.keymap.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true}
+    -- disabled by default
+    vim.cmd[[:Copilot disable]]
+end
+
 function M.navigator()
     local navigator = require('Navigator')
     navigator.setup()
