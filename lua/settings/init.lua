@@ -188,4 +188,8 @@ function M.dressing()
     })
 end
 
+function M.fugitive()
+    vim.keymap.nnoremap{'<leader>gs', ':Git<cr>', silent=true}
+end
+
 return M

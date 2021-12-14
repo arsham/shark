@@ -92,7 +92,10 @@ require('packer').startup({
 
         use {
             'tpope/vim-fugitive',
-            cmd   = { 'G', 'Git' },
+            config = function() require('settings').fugitive() end,
+            event  = { 'BufNewFile', 'BufRead' },
+            cmd    = { 'G', 'Git' },
+            keys   = { '<leader>gs' },
         }
 
         use {
