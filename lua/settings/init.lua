@@ -141,8 +141,8 @@ function M.lsp_installer()
         install_root_dir = vim.env.HOME .. "/.cache/lsp-servers",
         ui = {
             icons = {
-                server_installed = "✓",
-                server_pending = "➜",
+                server_installed   = "✓",
+                server_pending     = "➜",
                 server_uninstalled = "✗"
             }
         },
@@ -156,16 +156,16 @@ function M.visual_multi()
     vim.g.VM_silent_exit = 1
     vim.g.VM_default_mappings = 1
     vim.g.VM_maps = {
-        Delete = 's',
-        Undo = '<C-u>',
-        Redo = '<C-r>',
-        ['Select Operator'] = 'v',
-        ['Select Cursor Up'] = '<M-C-k>',
+        Delete                 = 's',
+        Undo                   = '<C-u>',
+        Redo                   = '<C-r>',
+        ['Select Operator']    = 'v',
+        ['Select Cursor Up']   = '<M-C-k>',
         ['Select Cursor Down'] = '<M-C-j>',
-        ['Move Left'] = '<M-C-h>',
-        ['Move Right'] = '<M-C-l>',
-        ['Align'] = '<M-a>',
-        ['Find Under'] = '<C-n>',
+        ['Move Left']          = '<M-C-h>',
+        ['Move Right']         = '<M-C-l>',
+        ['Align']              = '<M-a>',
+        ['Find Under']         = '<C-n>',
         ['Find Subword Under'] = '<C-n>',
     }
 
@@ -182,8 +182,8 @@ function M.dressing()
     require('dressing').setup({
         input = {
             default_prompt = "➤ ",
-            insert_only = false,
-            winblend = 0,
+            insert_only    = false,
+            winblend       = 0,
         },
     })
 end

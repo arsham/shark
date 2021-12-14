@@ -99,6 +99,7 @@ vim.opt.nrformats   = "bin,hex,alpha"           -- can increment alphabetically 
 vim.opt.foldmethod  = "manual"
 vim.opt.foldnestmax = 3
 vim.opt.foldenable  = false                       -- dont fold by default
+vim.g.markdown_folding = 1
 
 vim.opt.spelllang  = "en_gb"
 vim.opt.spell      = false

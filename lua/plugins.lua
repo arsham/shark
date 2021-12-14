@@ -100,8 +100,7 @@ require('packer').startup({
         use {
             'tpope/vim-rhubarb',
             requires = { 'tpope/vim-fugitive' },
-            event    = { 'BufNewFile', 'BufRead' },
-            cmd      = { 'GBrowse' },
+            event = { 'BufRead', 'BufNewFile' },
         }
 
         use {
@@ -115,9 +114,7 @@ require('packer').startup({
             -- create ~/.gist-vim with this content: token xxxxx
             'mattn/vim-gist',
             requires = { 'mattn/webapi-vim' },
-            config   = function()
-                vim.g.gist_per_page_limit = 100
-            end,
+            config   = function() vim.g.gist_per_page_limit = 100 end,
             cmd      = { 'Gist' },
         }
         -- }}}
@@ -182,7 +179,14 @@ require('packer').startup({
 
         use {
             'stevearc/dressing.nvim',
-            config = function() require('settings').dressing() end,
+            config = function()
+                local async_load_plugin = nil
+                async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
+                    require('settings').dressing()
+                    async_load_plugin:close()
+                end))
+                async_load_plugin:send()
+            end,
         }
         -- }}}
 
@@ -190,7 +194,7 @@ require('packer').startup({
         use {
             'numToStr/Comment.nvim',
             config = function() require('Comment').setup() end,
-            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event  = { 'BufRead', 'BufNewFile' },
         }
 
         use {
@@ -246,7 +250,7 @@ require('packer').startup({
             event  = { 'InsertEnter' },
         }
 
-        use({
+        use {
             'sQVe/sort.nvim',
             config = function()
                 require("sort").setup({
@@ -258,13 +262,14 @@ require('packer').startup({
                 })
             end,
             cmd = { 'Sort' },
-        })
+        }
         -- }}}
 
         -- {{{ Programming
         use {
             'neovim/nvim-lspconfig',
-            after = "nvim-cmp",
+            wants = {'nvim-cmp'},
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -273,7 +278,11 @@ require('packer').startup({
                 require('settings').lsp_installer()
                 require('settings.lsp')
             end,
-            after = 'nvim-lspconfig',
+            wants = {
+                'nvim-lspconfig',
+                'nvim-cmp',
+            },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
@@ -352,7 +361,7 @@ require('packer').startup({
         use {
             'github/copilot.vim',
             config = function () require('settings').copilot() end,
-            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event  = { 'InsertEnter' },
         }
 
         use {
