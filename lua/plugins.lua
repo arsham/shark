@@ -98,6 +98,13 @@ require('packer').startup({
         }
 
         use {
+            'tpope/vim-rhubarb',
+            requires = { 'tpope/vim-fugitive' },
+            event    = { 'BufNewFile', 'BufRead' },
+            cmd      = { 'GBrowse' },
+        }
+
+        use {
             'lewis6991/gitsigns.nvim',
             requires = { 'nvim-lua/plenary.nvim' },
             config   = function() require('settings.gitsigns') end,

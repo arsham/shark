@@ -163,6 +163,7 @@ vim.opt.termguicolors = true
 vim.g.netrw_winsize   = 20
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner    = 0
+vim.g.netrw_browsex_viewer = 'xdg-open'
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noinsert,noselect"
