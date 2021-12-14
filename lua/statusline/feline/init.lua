@@ -132,6 +132,14 @@ table.insert(components.active[2], {
     provider = {
         name = 'file_info',
         opts = {
+            type = 'full-path',
+            file_modified_icon = '',
+            file_readonly_icon = '🔒',
+        }
+    },
+    short_provider = {
+        name = 'file_info',
+        opts = {
             type = 'relative',
             file_modified_icon = '',
             file_readonly_icon = '🔒',
@@ -302,7 +310,6 @@ table.insert(components.active[3], {
     },
 })
 
--- fileType
 table.insert(components.active[3], {
     provider = 'file_type',
     enabled = function() return vim.fn.expand('%:t') ~= '' end,
@@ -451,7 +458,17 @@ table.insert(components.inactive[2], {
     provider = {
         name = 'file_info',
         opts = {
+            type = 'full-path',
+            file_modified_icon = '',
+            file_readonly_icon = '🔒',
+        }
+    },
+    short_provider = {
+        name = 'file_info',
+        opts = {
             type = 'relative',
+            file_modified_icon = '',
+            file_readonly_icon = '🔒',
         }
     },
     enabled = function() return vim.fn.expand('%:t') ~= '' end,
