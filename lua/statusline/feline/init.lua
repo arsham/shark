@@ -116,7 +116,7 @@ table.insert(components.active[1], {
 
 table.insert(components.active[2], {
     provider = ' ',
-    enabled = function() return vim.fn.getfsize(vim.fn.expand('%')) > 0 end,
+    enabled = function() return vim.fn.expand('%:t') ~= '' end,
     hl = mid_ribbon_hl,
     left_sep = {
         str = "left_filled",
@@ -137,7 +137,7 @@ table.insert(components.active[2], {
             file_readonly_icon = '🔒',
         }
     },
-    enabled = function() return vim.fn.getfsize(vim.fn.expand('%')) > 0 end,
+    enabled = function() return vim.fn.expand('%:t') ~= '' end,
     hl = {
         fg = 'white',
         bg = 'statusline_bg',
@@ -146,7 +146,7 @@ table.insert(components.active[2], {
 
 table.insert(components.active[2], {
     provider = 'file_size',
-    enabled = function() return vim.fn.getfsize(vim.fn.expand('%')) > 0 end,
+    enabled = function() return vim.fn.expand('%:t') ~= '' end,
     truncate_hide = true,
     hl = {
         fg = 'grey_fg',
@@ -156,7 +156,7 @@ table.insert(components.active[2], {
 
 table.insert(components.active[2], {
     provider = ' ',
-    enabled = function() return vim.fn.getfsize(vim.fn.expand('%')) > 0 end,
+    enabled = function() return vim.fn.expand('%:t') ~= '' end,
     hl = mid_ribbon_hl,
     right_sep = {
         str = "right_filled",
@@ -454,7 +454,7 @@ table.insert(components.inactive[2], {
             type = 'relative',
         }
     },
-    enabled = function() return vim.fn.getfsize(vim.fn.expand('%')) > 0 end,
+    enabled = function() return vim.fn.expand('%:t') ~= '' end,
     hl = {
         fg = 'grey_fg',
         bg = 'short_bg',
