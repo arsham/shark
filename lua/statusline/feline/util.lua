@@ -233,8 +233,14 @@ function M.git_root()
         return ""
     end
 
-    local root = git_dir:gsub('/.git/?$', '')
-    return root:match '^.+/(.+)$'
+    local root = git_dir:gsub('/.git/?', '')
+    -- sub_root is a path to a worktree if exists.
+    local sub_root = git_dir:match('/([^/]+)/.git/worktrees/.+$')
+    local repo = ''
+    if sub_root then
+        repo = ' ['..sub_root..']'
+    end
+    return root:match '^.+/(.+)$' .. repo
 end
 
 function M.dir_name(_, opts)
