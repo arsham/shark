@@ -4,7 +4,7 @@ require('astronauta.keymap')
 util.augroup{"LINE_RETURN", {
     {"BufReadPost", "*", function()
         local line = vim.fn.line
-        if line("'\"") > 0 and line("'\"") <= line("$") then
+        if line("'\"") > 0 and line("'\"") <= line("$") and vim.bo.buftype ~= 'nofile' then
             vim.cmd[[normal! g`"zvzz']]
         end
     end},
