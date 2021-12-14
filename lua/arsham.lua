@@ -1,5 +1,6 @@
 -- This is the 'arsham' color scheme.
 
+-- {{{ Palette
 local palette = {
     name           = 'arsham',
     base0          = '#232627',
@@ -49,6 +50,7 @@ local palette = {
     italic         = 'italic',
     reverse        = 'reverse',
 }
+-- }}}
 
 local mappings = {
     Normal = {
@@ -342,6 +344,7 @@ local mappings = {
         guifg = palette.aqua,
         guibg = palette.none,
     },
+    -- {{{ Diff
     DiffAdd = {
         -- diff mode: Added line
         guifg = palette.diff_add_fg,
@@ -386,6 +389,7 @@ local mappings = {
     diffIndexLine = {
         guifg = palette.purple,
     },
+    -- }}}
     Folded = {
         -- line used for closed folds
         guifg = palette.grey,
@@ -683,6 +687,7 @@ local mappings = {
 }
 
 local plugin_syntax = {
+    -- {{{ Treesitter
     TSString = {
         guifg = palette.yellow,
     },
@@ -906,7 +911,8 @@ local plugin_syntax = {
     TSDefinition = {
         guibg = palette.base5,
     },
-
+    -- }}}
+    -- {{{ LSP
     LspDiagnosticsDefaultError = {
         -- used for "Error" diagnostic virtual text
         guifg = palette.error,
@@ -1104,7 +1110,8 @@ local plugin_syntax = {
         guifg = palette.base4,
         guibg = palette.blue_pale,
     },
-
+    -- }}}
+    -- {{{ ALE
     ALEErrorSign = {
         guifg = palette.error,
         guibg = palette.base2,
@@ -1129,7 +1136,7 @@ local plugin_syntax = {
         guifg = palette.blue_pale,
         guibg = palette.base2,
     },
-
+    -- }}}
 
     illuminatedWord = {
         guibg = palette.white,
@@ -1146,6 +1153,7 @@ local plugin_syntax = {
         guifg = palette.black,
     },
 
+    -- {{{ Nvim Tree
     NvimTreeFolderName = {
         guifg = palette.white,
     },
@@ -1198,7 +1206,8 @@ local plugin_syntax = {
         guifg = palette.white,
         guibg = palette.sidebar_bg,
     },
-
+    -- }}}
+    -- {{{ Git Signs
     GitSignsAdd = {
         guifg = palette.green,
         guibg = palette.base2,
@@ -1235,7 +1244,8 @@ local plugin_syntax = {
         guifg = palette.red,
         guibg = palette.base2,
     },
-
+    -- }}}
+    -- {{{ Notifications
     NotifyERRORBorder = {
         guifg = palette.error,
     },
@@ -1281,6 +1291,7 @@ local plugin_syntax = {
     NotifyTRACETitle = {
         guifg = palette.pink,
     },
+    -- }}}
 }
 
 local setup = function()
@@ -1310,3 +1321,5 @@ end
 return {
     setup = setup
 }
+
+-- vim: foldmethod=marker

@@ -32,14 +32,13 @@ local status_plugin = 'feline'
 require('packer').startup({
     function(use)
 
-        --{{{ Libraries }}}
-
+        -- {{{ Libraries
         use 'wbthomason/packer.nvim'
         use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
+        -- }}}
 
-        --{{{ Core/System utilities }}}
-
+        -- {{{ Core/System utilities
         use {
             'junegunn/fzf.vim',
             requires = { 'junegunn/fzf' },
@@ -87,9 +86,9 @@ require('packer').startup({
             'numToStr/Navigator.nvim',
             config = function() require('settings').navigator() end,
         }
+        -- }}}
 
-        --{{{ git }}}
-
+        -- {{{ git
         use {
             'tpope/vim-fugitive',
             config = function() require('settings').fugitive() end,
@@ -114,9 +113,9 @@ require('packer').startup({
             end,
             cmd      = { 'Gist' },
         }
+        -- }}}
 
-        --{{{ Visuals }}}
-
+        -- {{{ Visuals
         use 'kyazdani42/nvim-web-devicons'
 
         use {
@@ -178,9 +177,9 @@ require('packer').startup({
             'stevearc/dressing.nvim',
             config = function() require('settings').dressing() end,
         }
+        -- }}}
 
-        --{{{ Editing }}}
-
+        -- {{{ Editing
         use {
             'numToStr/Comment.nvim',
             config = function() require('Comment').setup() end,
@@ -253,8 +252,9 @@ require('packer').startup({
             end,
             cmd = { 'Sort' },
         })
+        -- }}}
 
-        --{{{ Programming }}}
+        -- {{{ Programming
         use {
             'neovim/nvim-lspconfig',
             after = "nvim-cmp",
@@ -357,8 +357,9 @@ require('packer').startup({
             'towolf/vim-helm',
             ft = { 'yaml' },
         }
+        -- }}}
 
-        --{{{ Text objects }}}
+        -- {{{ Text objects
         use {
             'blackCauldron7/surround.nvim',
             config = function() require('settings').surround() end,
@@ -376,9 +377,9 @@ require('packer').startup({
             opt = true,
             event = { 'BufRead', 'BufNewFile' },
         }
+        -- }}}
 
-        --{{{ Misc }}}
-
+        -- {{{ Misc
         use {
             "iamcco/markdown-preview.nvim",
             run = function()
@@ -392,6 +393,7 @@ require('packer').startup({
             end,
             ft = { "markdown" },
         }
+        -- }}}
 
     end,
     config = {
@@ -403,3 +405,5 @@ require('packer').startup({
         }
     },
 })
+
+--- vim: foldmethod=marker
