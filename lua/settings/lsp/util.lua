@@ -1,5 +1,4 @@
 require('astronauta.keymap')
-local nvim_command = vim.api.nvim_command
 local util = require('util')
 
 local M = {}
@@ -80,9 +79,9 @@ local function attach_mappings_commands(client)
     }
     local caps = client.resolved_capabilities
     if caps.code_action then
-        nvim_command('command! -buffer -range CodeAction lua require("settings.lsp.util").code_action(<range> ~= 0, <line1>, <line2>)')
+        vim.cmd('command! -buffer -range CodeAction lua require("settings.lsp.util").code_action(<range> ~= 0, <line1>, <line2>)')
         vim.keymap.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
-        vim.keymap.vnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
+        vim.keymap.vnoremap{'<leader>ca', ":'<,'>CodeAction<CR>", buffer=true, silent=true}
 
         -- Either is it set to true, or there is a specified set of
         -- capabilities.
@@ -107,7 +106,7 @@ local function attach_mappings_commands(client)
     }}
 
     if caps.document_range_formatting then
-        nvim_command('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
+        vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
         vim.keymap.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
         vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
     end
@@ -168,8 +167,8 @@ local function attach_mappings_commands(client)
         })
     end}
     if caps.workspace_folder_properties.supported then
-        nvim_command('command! -buffer -nargs=? -complete=dir AddWorkspace lua vim.lsp.buf.add_workspace_folder(<q-args> ~= "" and vim.fn.fnamemodify(<q-args>, ":p"))')
-        nvim_command('command! -buffer -nargs=? -complete=customlist,v:lua.vim.lsp.buf.list_workspace_folders RemoveWorkspace lua vim.lsp.buf.remove_workspace_folder(<f-args>)')
+        vim.cmd('command! -buffer -nargs=? -complete=dir AddWorkspace lua vim.lsp.buf.add_workspace_folder(<q-args> ~= "" and vim.fn.fnamemodify(<q-args>, ":p"))')
+        vim.cmd('command! -buffer -nargs=? -complete=customlist,v:lua.vim.lsp.buf.list_workspace_folders RemoveWorkspace lua vim.lsp.buf.remove_workspace_folder(<f-args>)')
     end
 
     util.command{"Log", buffer=true, "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()"}

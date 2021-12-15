@@ -6,6 +6,7 @@ local keymap = vim.keymap
 -- vim.api.nvim_put(t, 'l', true, false)
 
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 keymap.noremap{'<Up>',     '<Nop>'}
 keymap.noremap{'<Down>',   '<Nop>'}

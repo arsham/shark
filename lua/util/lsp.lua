@@ -26,16 +26,6 @@ function M.diagnostics_exist(severity)
     return M.get_diagnostics_count(severity) > 0
 end
 
-function M.lsp_client_names()
-    local clients = {}
-
-    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
-        clients[#clients+1] = client.name
-    end
-
-    return table.concat(clients, ' '),  ' '
-end
-
 -- Common function used by the diagnostics providers
 local function diagnostics(severity)
     local count = M.get_diagnostics_count(severity)

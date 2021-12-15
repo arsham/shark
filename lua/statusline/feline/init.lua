@@ -213,7 +213,7 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diag_errors',
-    enabled = function() return lsp.diagnostics_exist('Error') end,
+    enabled = function() return lsp.diagnostics_exist(vim.diagnostic.ERROR) end,
     hl = {
         fg = 'red',
         bg = 'statusline_bg',
@@ -222,7 +222,7 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diag_warnings',
-    enabled = function() return lsp.diagnostics_exist('Warning') end,
+    enabled = function() return lsp.diagnostics_exist(vim.diagnostic.WARN) end,
     hl = {
         fg = 'warn',
         bg = 'statusline_bg',
@@ -231,7 +231,7 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diag_hints',
-    enabled = function() return lsp.diagnostics_exist('Hint') end,
+    enabled = function() return lsp.diagnostics_exist(vim.diagnostic.HINT) end,
     hl = {
         fg = 'green',
         bg = 'statusline_bg',
@@ -240,7 +240,7 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diag_info',
-    enabled = function() return lsp.diagnostics_exist('Information') end,
+    enabled = function() return lsp.diagnostics_exist(vim.diagnostic.INFO) end,
     hl = {
         fg = 'nord_blue',
         bg = 'statusline_bg',

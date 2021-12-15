@@ -124,15 +124,6 @@ local servers = {
     },
 
     sqls = {},
-
-    -- It causes vim to pause a second when it quits.
-    -- sqls = {
-    --     on_attach = function(client)
-    --         client.resolved_capabilities.execute_command = true
-    --         require'sqls'.setup{}
-    --     end,
-    --     picker = 'fzf'
-    -- }
 }
 
 local lsp_installer = require("nvim-lsp-installer")
