@@ -332,6 +332,13 @@ require('packer').startup({
         }
 
         use {
+            'jose-elias-alvarez/null-ls.nvim',
+            requires = { 'nvim-lua/plenary.nvim' },
+            config   = function() require('settings').null_ls() end,
+            ft       = lspFiletypes,
+        }
+
+        use {
             'nvim-treesitter/nvim-treesitter',
             branch = '0.5-compat',
             requires = {
@@ -362,6 +369,11 @@ require('packer').startup({
             'github/copilot.vim',
             config = function () require('settings').copilot() end,
             event  = { 'InsertEnter' },
+        }
+
+        use {
+            'nanotee/sqls.nvim',
+            ft = { 'sql' },
         }
 
         use {

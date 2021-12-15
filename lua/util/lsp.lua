@@ -15,25 +15,11 @@ end
 
 function M.get_diagnostics_count(severity)
     local active_clients = vim.lsp.buf_get_clients(0)
-
     if not active_clients then return 0 end
 
-    local count = 0
-
-    for _, client in pairs(active_clients) do
-        severity = severity_lsp_to_vim(severity)
-        local opts = { severity = severity }
-        if client.id ~= nil then
-            local namespace, ok = pcall(vim.diagnostic.get_namespace, client.id)
-            if not ok then
-                return 0
-            end
-            opts.namespace = namespace
-        end
-        count = count + #vim.diagnostic.get(0, opts)
-    end
-
-    return count
+    severity = severity_lsp_to_vim(severity)
+    local opts = { severity = severity }
+    return #vim.diagnostic.get(vim.api.nvim_get_current_buf(), opts)
 end
 
 function M.diagnostics_exist(severity)
@@ -57,19 +43,19 @@ local function diagnostics(severity)
 end
 
 function M.diagnostic_errors()
-    return diagnostics('Error'), '  '
+    return diagnostics(vim.diagnostic.severity.ERROR), '  '
 end
 
 function M.diagnostic_warnings()
-    return diagnostics('Warning'), '  '
+    return diagnostics(vim.diagnostic.severity.WARN), '  '
 end
 
 function M.diagnostic_hints()
-    return diagnostics('Hint'), '  '
+    return diagnostics(vim.diagnostic.severity.HINT), '  '
 end
 
 function M.diagnostic_info()
-    return diagnostics('Information'), '  '
+    return diagnostics(vim.diagnostic.severity.INFO), '  '
 end
 
 return M

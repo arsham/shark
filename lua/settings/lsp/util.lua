@@ -82,16 +82,17 @@ local function attach_mappings_commands(client)
     if caps.code_action then
         nvim_command('command! -buffer -range CodeAction lua require("settings.lsp.util").code_action(<range> ~= 0, <line1>, <line2>)')
         vim.keymap.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
+        vim.keymap.vnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
 
         -- Either is it set to true, or there is a specified set of
         -- capabilities.
-        if caps.code_action == true or table.contains(caps.code_action.codeActionKinds, "source.organizeImports") then
+        if type(caps.code_action) == "table" and table.contains(caps.code_action.codeActionKinds, "source.organizeImports") then
             vim.keymap.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
             pre_save.imports = lsp_organise_imports
         end
     end
 
-    if caps.document_formatting then
+    if caps.document_formatting and client.name ~= "sqls" then
         vim.keymap.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
         pre_save.format = function()
             vim.lsp.buf.formatting_sync(nil, 2000)

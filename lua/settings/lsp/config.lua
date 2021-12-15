@@ -50,33 +50,34 @@ local servers = {
     tsserver = {},
 
     gopls = {
-        gopls = {
-            analyses = {
-                unusedparams = true,
-            },
-            completeUnimported = true,
-            staticcheck = true,
-            buildFlags = {"-tags=integration,e2e"},
-            hoverKind = "FullDocumentation",
-            linkTarget = "pkg.go.dev",
-            linksInHover = true,
-            experimentalWorkspaceModule = true,
-            experimentalPostfixCompletions = true,
-            codelenses = {
-                generate = true,
-                gc_details = true,
-                test = true,
-                tidy = true,
-            },
-            -- allExperiments = true,
-            -- formatting = {
-            --      gofumpt = true,
-            -- },
-            usePlaceholders = true,
+        settings = {
+            gopls = {
+                analyses = {
+                    unusedparams = true,
+                },
+                completeUnimported = true,
+                staticcheck = true,
+                buildFlags = {"-tags=integration,e2e"},
+                hoverKind = "FullDocumentation",
+                linkTarget = "pkg.go.dev",
+                linksInHover = true,
+                experimentalWorkspaceModule = true,
+                experimentalPostfixCompletions = true,
+                codelenses = {
+                    generate = true,
+                    gc_details = true,
+                    test = true,
+                    tidy = true,
+                },
+                -- allExperiments = true,
+                -- formatting = {
+                --      gofumpt = true,
+                -- },
+                usePlaceholders = true,
 
-            completionDocumentation=true,
-            deepCompletion=true,
-            -- matcher = "CaseInsensitive",
+                completionDocumentation=true,
+                deepCompletion=true,
+            },
         },
     },
 
@@ -90,7 +91,39 @@ local servers = {
         }
     },
 
-    sumneko_lua = {},
+    sumneko_lua = {
+        settings = {
+            Lua = {
+                runtime = {
+                    version = 'LuaJIT',
+                    path = runtime_path,
+                },
+
+                diagnostics = {
+                    globals = { 'vim', 'use', 'require' },
+                },
+
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = {
+                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                        [vim.fn.expand('~/.local/share/nvim/site/pack/packer')] = true,
+                    },
+                    -- library = vim.api.nvim_get_runtime_file("", true),
+                    maxPreload = 2000,
+                    preloadFileSize = 1000,
+                },
+
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                    enable = false,
+                },
+            },
+        }
+    },
+
+    sqls = {},
 
     -- It causes vim to pause a second when it quits.
     -- sqls = {
@@ -104,48 +137,29 @@ local servers = {
 
 local lsp_installer = require("nvim-lsp-installer")
 
-for _, conf in pairs(servers) do
+lsp_installer.on_server_ready(function(server)
+    local conf = servers[server.name]
+    if not conf then
+        conf = {}
+    end
     local opts = vim.tbl_deep_extend("force", {
         on_attach = on_attach,
         capabilities = capabilities,
     }, conf)
 
-    lsp_installer.on_server_ready(function(server)
-        if server.name == "sumneko_lua" then
-            opts.settings = {
-                Lua = {
-                    runtime = {
-                        version = 'LuaJIT',
-                        path = runtime_path,
-                    },
-
-                    diagnostics = {
-                        globals = { 'vim', 'use', 'require' },
-                    },
-
-                    workspace = {
-                        -- Make the server aware of Neovim runtime files
-                        library = {
-                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                            [vim.fn.expand('~/.local/share/nvim/site/pack/packer')] = true,
-                        },
-                        -- library = vim.api.nvim_get_runtime_file("", true),
-                        maxPreload = 2000,
-                        preloadFileSize = 1000,
-                    },
-
-                    -- Do not send telemetry data containing a randomized but unique identifier
-                    telemetry = {
-                        enable = false,
-                    },
-                },
+    if server.name == 'sqls' then
+        local fn = function(client, ...)
+            client.resolved_capabilities.execute_command = true
+            client.commands = require('sqls').commands -- Neovim 0.6+ only
+            require('sqls').setup{
+                picker = 'fzf',
             }
+            on_attach(client, ...)
         end
-
-        server:setup(opts)
-    end)
-end
+        opts.on_attach = fn
+    end
+    server:setup(opts)
+end)
 
 -- Sets up a couple of autocmds that would stop wrapping go.mod files, and will
 -- tidy and restart when the go.mod file is updated.

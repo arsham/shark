@@ -192,4 +192,15 @@ function M.fugitive()
     vim.keymap.nnoremap{'<leader>gs', ':Git<cr>', silent=true}
 end
 
+function M.null_ls()
+    local null_ls = require('null-ls')
+    null_ls.setup({
+        sources = {
+            null_ls.builtins.formatting.fixjson,
+            null_ls.builtins.formatting.prettier,
+            null_ls.builtins.diagnostics.golangci_lint,
+        },
+    })
+end
+
 return M

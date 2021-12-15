@@ -37,8 +37,11 @@ end}
 
 command{"InstallDependencies", function()
     local commands = {
+        fixjson    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest"},
+        prettier   = {"npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest"},
         golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
         gojq       = {"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
+        stylua     = {'cargo', 'install', 'stylua'},
     }
 
     local total = table.length(commands)
