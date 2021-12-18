@@ -24,8 +24,6 @@ local colorizer_ft = {
     'markdown',
 }
 
-local status_plugin = 'feline'
-
 require('packer').startup({
     function(use)
 
@@ -90,8 +88,7 @@ require('packer').startup({
             config = function() require('settings').fugitive() end,
             event  = { 'BufNewFile', 'BufRead' },
             cmd    = { 'G', 'Git' },
-            keys   = { '<leader>gs' },
-        }
+       }
 
         use {
             'tpope/vim-rhubarb',
@@ -424,18 +421,24 @@ require('packer').startup({
 
         -- {{{ Misc
         use {
-            "iamcco/markdown-preview.nvim",
+            'iamcco/markdown-preview.nvim',
             run = function()
-                vim.fn["mkdp#util#install"]()
+                vim.fn['mkdp#util#install']()
                 -- couln't make this work.
                 -- vim.cmd[[cd app && npm -g install --prefix ~/.node_modules]]
             end,
-            setup  = function() vim.g.mkdp_filetypes = { "markdown" } end,
-            config = function()
-                vim.g.mkdp_browser = 'brave'
-            end,
-            ft = { "markdown" },
+            setup  = function() vim.g.mkdp_filetypes = { 'markdown' } end,
+            config = function() vim.g.mkdp_browser = 'brave' end,
+            ft = { 'markdown' },
         }
+
+        use { 'milisims/nvim-luaref' }
+
+        use {
+            'tmux-plugins/vim-tmux',
+            ft = 'tmux',
+        }
+
         -- }}}
 
     end,
