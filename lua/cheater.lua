@@ -1,4 +1,5 @@
 require('astronauta.keymap')
+local util = require('util')
 
 local items = {
     "",
@@ -108,6 +109,11 @@ local function curl(section, query, no_comment)
 
             vim.schedule(function()
                 vim.fn.append(cur_line, res)
+                local motion = ''
+                if #res > 1 then
+                    motion = string.format('%dj', #res - 1)
+                end
+                util.normal('n', string.format('jV%s', motion))
             end)
         end,
     }):start()

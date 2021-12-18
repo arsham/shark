@@ -199,8 +199,9 @@ operated on visually selected lines.
 
 To use the **C**heat**S**heet functionality, type your query in the buffer and
 invoke the key binding. The response will be inserted on the next lint in the
-buffer. The `<leader>cn` will append the next available `\N` value and runs the
-query again.
+buffer and puts you in the `SELECT` mode. If you want the results just hit
+`Esc` key. The `<leader>cn` will append the next available `\N` value and runs
+the query again.
 
 </details>
 
