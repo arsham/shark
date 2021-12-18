@@ -1,12 +1,14 @@
 local util = require('util')
 require('astronauta.keymap')
 
--- vnoremap <silent> af :<C-u>lua require'nvim-treesitter.textobjects.select'.select_textobject('@function.outer')<CR>
-
 local function next_obj(motion)
     local c = vim.fn.getchar()
     local ch = vim.fn.nr2char(c)
-    local sequence = "f" .. ch .. "v" .. motion .. ch
+    local step = 'l'
+    if ch == ')' or ch == ']' or ch == '>' or ch == '}' then
+        step = 'h'
+    end
+    local sequence = "f" .. ch .. step .. "v" .. motion .. ch
     util.normal('x', sequence)
 end
 
