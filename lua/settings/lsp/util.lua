@@ -1,8 +1,8 @@
 require('astronauta.keymap')
 local util = require('util')
 
-local M = {}
-
+---Restats the LSP server. Fixes the problem with the LSP server not
+---restarting with LspRestart command.
 local function restart_lsp()
     vim.cmd[[LspStop]]
     vim.defer_fn(function() vim.cmd[[LspStart]] end, 1000)
@@ -34,7 +34,8 @@ local function lsp_organise_imports()
     end
 end
 
--- Returns the name of the struct, method or function.
+---Returns the name of the struct, method or function.
+---@return string
 local function get_current_node_name()
     local ts_utils = require'nvim-treesitter.ts_utils'
     local cur_node = ts_utils.get_node_at_cursor()
@@ -67,8 +68,9 @@ local function get_current_node_name()
     return (ts_utils.get_node_text(cur_node:child(index)))[1]
 end
 
--- Attaches commands, mappings and autocmds to current buffer based on the
--- client's capabilities.
+---Attaches commands, mappings and autocmds to current buffer based on the
+---client's capabilities.
+---@param client any
 local function attach_mappings_commands(client)
     -- Contains functions to be run before writing the buffer. The format
     -- function will format the while buffer, and the imports function will
@@ -197,6 +199,13 @@ local function attach_mappings_commands(client)
     util.command{"DiagnosticsAll",    "LspDiagnosticsAll"}
 end
 
+local M = {}
+
+---@alias lsp_client 'vim.lsp.client'
+
+---The function to pass to the LSP's on_attach callback.
+---@param client lsp_client
+---@param bufnr number
 function M.on_attach(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -225,6 +234,11 @@ function M.on_attach(client, bufnr)
     end
 end
 
+---Formats a range if given.
+---@param range_given boolean
+---@param line1 number
+---@param line2 number
+---@param bang boolean
 function M.format_command(range_given, line1, line2, bang)
     if range_given then
         vim.lsp.buf.range_formatting(nil, {line1, 0}, {line2, 99999999})
@@ -235,6 +249,10 @@ function M.format_command(range_given, line1, line2, bang)
     end
 end
 
+---Runs code actions on a given range.
+---@param range_given boolean
+---@param line1 number
+---@param line2 number
 function M.code_action(range_given, line1, line2)
     if range_given then
         vim.lsp.buf.range_code_action(nil, {line1, 0}, {line2, 99999999})

@@ -1295,27 +1295,25 @@ local plugin_syntax = {
 }
 
 local setup = function()
-    require('util').profiler('setting up the theme', function()
-        vim.cmd('hi clear')
-        if vim.fn.exists('syntax_on') then
-            vim.cmd('syntax reset')
-        end
+    vim.cmd('hi clear')
+    if vim.fn.exists('syntax_on') then
+        vim.cmd('syntax reset')
+    end
 
-        local highlight = require('util').highlight
-        vim.g.colors_name = palette.name
-        for group, colors in pairs(mappings) do
+    local highlight = require('util').highlight
+    vim.g.colors_name = palette.name
+    for group, colors in pairs(mappings) do
+        highlight(group, colors)
+    end
+    local async_load_plugin = nil
+    async_load_plugin = vim.loop.new_async(vim.schedule_wrap( function()
+        for group, colors in pairs(plugin_syntax) do
             highlight(group, colors)
         end
-        local async_load_plugin = nil
-        async_load_plugin = vim.loop.new_async(vim.schedule_wrap( function()
-            for group, colors in pairs(plugin_syntax) do
-                highlight(group, colors)
-            end
-            async_load_plugin:close()
-        end))
-        async_load_plugin:send()
-        vim.cmd[[ match ExtraWhitespace /\\s\\+$/ ]]
-    end)
+        async_load_plugin:close()
+    end))
+    async_load_plugin:send()
+    vim.cmd[[ match ExtraWhitespace /\\s\\+$/ ]]
 end
 
 return {

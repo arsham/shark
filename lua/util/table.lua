@@ -1,3 +1,9 @@
+---Returns parts of the table between first and last indices.
+---@param tbl table
+---@param first number
+---@param last number
+---@param step number the step between each index
+---@return table
 function table.slice(tbl, first, last, step)
     local sliced = {}
     for i = first or 1, last or #tbl, step or 1 do
@@ -6,18 +12,36 @@ function table.slice(tbl, first, last, step)
     return sliced
 end
 
+---Returns the length of the table.
+---@param tbl table
+---@return number
 function table.length(tbl)
     local count = 0
     for _ in pairs(tbl) do count = count + 1 end
     return count
 end
 
--- usage: for v in values({1, 2, 3}) do print(v) end
+
+---Returns and iterator that produces values from the table.
+---
+---Example:
+--- ```
+--- for v in values({1, 2, 3}) do
+---     print(v)
+--- end
+--- ```
+---
+---@param tbl table
+---@return function
 function table.values(tbl)
     local i = 0
     return function() i = i + 1; return tbl[i] end
 end
 
+---Merge two tables.
+---@param tbl1 table
+---@param tbl2 table
+---@return table
 function table.merge(tbl1, tbl2)
     local tmp = {}
     for _, v in ipairs(tbl1) do table.insert(tmp, v) end
@@ -25,6 +49,10 @@ function table.merge(tbl1, tbl2)
     return tmp
 end
 
+---Return true of the table contains the value.
+---@param tbl table
+---@param val any
+---@return boolean
 function table.contains(tbl, val)
     for _, v in ipairs(tbl) do
         if v == val then
@@ -34,6 +62,9 @@ function table.contains(tbl, val)
     return false
 end
 
+---Reverse the table.
+---@param t table
+---@return table
 function table.reverse(t)
     local reversedTable = {}
     local itemCount = #t
@@ -44,6 +75,8 @@ function table.reverse(t)
 end
 
 _ = math.randomseed(os.time())
+---Shuffle the table.
+---@param t table
 function table.shuffle(t)
     local iterations = #t
     local j

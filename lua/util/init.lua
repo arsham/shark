@@ -1,26 +1,37 @@
 require('util.string')
 require('util.table')
-local M = {}
 
--- profile prints the time it takes to run the fn function if the
--- vim.g.run_profiler is set to true.
+local M = {
+    profiler_enabled = false,
+    profiler_path = vim.env.HOME..'/tmp',
+}
+
+---Prints the time it takes to run the fn function if the vim.g.run_profiler is
+---set to true.
+---@param name string|function if a function, you can ignore the fn
+---@param fn function
 function M.profiler(name, fn)
-    if vim.g.run_profiler ~= true then
+    if type(name) == 'function' then
+        fn = name
+        name = 'unknown'
+    end
+    if not M.profiler_enabled then
         fn()
         return
     end
-    if type(name) == 'function' then
-        fn = name
-        name = 'an unknown operation'
-    end
-    local start = vim.loop.hrtime()
+    local filename = M.profiler_path .. '/nvim_profiler_' .. name .. '.log'
+    local msg = 'Profile results are at ' .. filename
+
+    require'plenary.profile'.start(filename, {flame = true})
     fn()
-    local msg = ('%f: for running %s'):format((vim.loop.hrtime() - start)/1e6, name)
+    require'plenary.profile'.stop()
     vim.notify(msg, "info", {
-        title = "Duration",
+        title = name,
     })
 end
 
+---Dumps any values
+---@vararg any
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, {...})
     print(unpack(objects))
@@ -30,15 +41,17 @@ function M.cwr()
     return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 end
 
--- Executes a normal command in normal mode.
--- @param mode string: see feedkeys() documentation.
--- @param motion string: what you mean to do in normal mode.
+---Executes a normal command in normal mode.
+---@param mode string @see vim.api.nvim_feedkeys().
+---@param motion string what you mean to do in normal mode.
 function M.normal(mode, motion)
     local sequence = vim.api.nvim_replace_termcodes(motion, true, false, false)
     vim.api.nvim_feedkeys(sequence, mode, true)
 end
 
--- mkdir_home creates a new folder in $HOME if not exists.
+---mkdir_home creates a new folder in $HOME if not exists.
+---@param dir string
+---@return boolean #success result
 function M.mkdir_home(dir)
     local path = vim.env.HOME .. '/' .. dir
     local p = require('plenary.path'):new(path)
@@ -48,9 +61,9 @@ function M.mkdir_home(dir)
     return true
 end
 
--- Pushes the current location to the jumplist and calls the fn callback, then
--- centres the cursor.
--- @param fn callable: a lua function to be run.
+---Pushes the current location to the jumplist and calls the fn callback, then
+---centres the cursor.
+---@param fn function
 function M.call_and_centre(fn)
     M.normal('n', "m'")
     fn()
@@ -59,9 +72,9 @@ function M.call_and_centre(fn)
     end)
 end
 
--- Pushes the current location to the jumplist and calls the cmd, then centres
--- the cursor.
--- @param cmd string
+---Pushes the current location to the jumplist and calls the cmd, then centres
+---the cursor.
+---@param cmd string
 function M.cmd_and_centre(cmd)
     M.normal('n', "m'")
     vim.cmd(cmd)
@@ -70,10 +83,17 @@ function M.cmd_and_centre(cmd)
     end)
 end
 
--- Create a highlight group.
--- @param group name of the highlight group.
--- @param opt is additional properties. Keys are: style, guifg, guibg, guisp,
--- ctermfg, ctermbg.
+---@class HighlightOpt
+---@field style string
+---@field guifg string
+---@field guibg string
+---@field guisp string
+---@field ctermfg string
+---@field ctermbg string
+
+---Create a highlight group.
+---@param group string name of the highlight group.
+---@param opt HighlightOpt additional properties.
 function M.highlight(group, opt)
     local style   = opt.style   and 'gui = '     .. opt.style   or 'gui = NONE'
     local guifg   = opt.guifg   and 'guifg = '   .. opt.guifg   or 'guifg = NONE'
@@ -89,8 +109,8 @@ end
 
 local storage = {}
 
--- Have to use a global to handle re-requiring this file and losing all of the
--- commands.
+---Have to use a global to handle re-requiring this file and losing all of the
+---commands.
 __ContextStorage = __ContextStorage or {}
 storage._store = __ContextStorage
 
@@ -103,14 +123,16 @@ function M._exec_command(id, ...)
     storage._store[id](...)
 end
 
--- Creates a command from provided specifics.
--- @param opt table: contain the following:
---    name|[1]       string: name of the command.
---    run|[2]        string or function
---    attrs optional string: command atts that land before the name.
---    docs           string: is handy when you query verbose command.
---    silent         boolean
---    post_run       string: a post action.
+---@class CommandOpts
+---@field name string also unnamed first element
+---@field run string|function also unnamed second element
+---@field attrs? string command atts that land before the name.
+---@field docs string handy when you query verbose command.
+---@field silent boolean
+---@field post_run string: post action.
+
+---Creates a command from provided specifics.
+---@param opts CommandOpts
 function M.command(opts)
     local args = {}
 
@@ -145,10 +167,12 @@ function M.command(opts)
     vim.cmd(str)
 end
 
--- Creates an augroup with a set of autocmds.
--- @param table: contain the following:
---    name|[1] string: name of the group. Should be unique.
---    cmds|[2] table: an array of autocmds. See M.autocmd.
+---@class AugroupOpt
+---@field name string also the first field. Name of the group. Should be unique.
+---@field cmds AutocmdOpt[] @see M.autocmd.
+
+---Creates an augroup with a set of autocmds.
+---@param opts AugroupOpt
 function M.augroup(opts)
     local name = opts.name or opts[1]
     if name == "" then
@@ -165,15 +189,17 @@ function M.augroup(opts)
     vim.cmd('augroup END')
 end
 
--- Creates a single autocmd. You most likely want to use it in a context of an
--- augroup.
--- @param table: contain the following:
---    events|[1]    string: "E1,E2"; or you can set the buffer to true
---    tergets|[2]   string: "*.go"
---    run|[3]       string or function
---    docs          string: is handy when you query verbose command.
---    buffer        boolean
---    silent        boolean
+---@class AutocmdOpt
+---@field events  string "E1,E2"; or you can set the buffer to true
+---@field tergets string "*.go"
+---@field run     string or function
+---@field docs    string is handy when you query verbose command.
+---@field buffer  boolean
+---@field silent  boolean
+
+---Creates a single autocmd. You most likely want to use it in a context of an
+---augroup.
+---@param opts AutocmdOpt[]
 function M.autocmd(opts)
     local args = {}
 
@@ -246,9 +272,9 @@ local popup_options = {
     },
 }
 
--- Takes the user input in a popup.
--- @param opts table: to override the vim.notify config table. Try prompt or
--- on_submit.
+---Takes the user input in a popup.
+---@param opts table to override the vim.notify config table. Try prompt or
+---on_submit.
 function M.user_input(opts)
     local conf = {
         prompt = '> ',
@@ -278,7 +304,9 @@ function M.user_input(opts)
     end)
 end
 
--- Returns true if there is an active lsp server attached to current buffer.
+---Returns true if there is an active lsp server attached to current buffer.
+---@return boolean
+---@deprecated
 function M.lsp_attached()
     local clients = vim.lsp.get_active_clients()
     if next(clients) ~= nil then

@@ -106,6 +106,8 @@ M.separators = {
     github_icon        = " ﯙ ",
 }
 
+---Returns the VIM mode.
+---@return string
 function M.vim_mode()
     local mode = M.mode_mappings[vim.fn.mode()]
     local value = ""
@@ -123,16 +125,20 @@ function M.vim_mode()
     return value
 end
 
--- Return parent path for specified entry (either file or directory), nil if
--- there is none
--- Adapted from from galaxyline.
+---Return parent path for specified entry (either file or directory), nil if
+---there is none. Adapted from from galaxyline.
+---@param path string
+---@return string
 local function parent_pathname(path)
     local i = path:find("[\\/:][^\\/:]*$")
     if not i then return end
     return path:sub(1, i-1)
 end
 
--- Adapted from from galaxyline.
+---Returns the git directory for the current file. Adapted from from
+---galaxyline.
+---@param path string
+---@return string
 local function get_git_dir(path)
 
     -- Checks if provided directory contains git directory
@@ -192,6 +198,8 @@ local function get_git_dir(path)
     return  path .. '/' .. git_dir
 end
 
+---Returns the git root of the current file.
+---@return string
 function M.git_root()
     local git_dir = get_git_dir()
     if not git_dir then

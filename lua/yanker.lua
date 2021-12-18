@@ -13,9 +13,9 @@ util.augroup{"CLIPBOARD", {
     end},
 }}
 
--- Removes duplicates from the store. We do this just when we list the items,
--- otherwise we have to spend too much time deduplicating everytime we yank
--- something.
+---Removes duplicates from the store. We do this just when we list the items,
+---otherwise we have to spend too much time deduplicating everytime we yank
+---something.
 local function make_unique()
     local unique = {}
     local seen = {}

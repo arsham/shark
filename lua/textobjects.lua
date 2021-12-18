@@ -39,8 +39,8 @@ vim.keymap.onoremap{'il', function() util.normal('x',  'vil')  end}
 vim.keymap.xnoremap{'al', function() util.normal('xt', '$o0')  end}
 vim.keymap.onoremap{'al', function() util.normal('x',  'val')  end}
 
--- Number pseudo-text object (integer and float)
--- Exmaple: ciN
+---Number pseudo-text object (integer and float)
+---Exmaple: ciN
 local function visual_number()
     vim.fn.search('\\d\\([^0-9\\.]\\|$\\)', 'cW')
     util.normal('x', 'v')
@@ -49,8 +49,8 @@ end
 vim.keymap.xnoremap{'iN', visual_number}
 vim.keymap.onoremap{'iN', visual_number}
 
--- Selects all lines with equal or higher indents to the current line in line
--- visual mode. It ignores any empty lines.
+---Selects all lines with equal or higher indents to the current line in line
+---visual mode. It ignores any empty lines.
 local function in_indent()
     local cur_line = vim.api.nvim_win_get_cursor(0)[1]
     local cur_indent = vim.fn.indent(cur_line)
@@ -96,7 +96,7 @@ vim.keymap.onoremap{'ii', in_indent, silent = true}
 -- So, this makes the vii work, but a few other things stop functioning.
 -- vim.keymap.onoremap{'ii', function() util.normal('x', 'vii') end, {silent = true}}
 
--- @param include (boolean): if true, will remove the backticks too.
+---@param include boolean if true, will remove the backticks too.
 local function in_backticks(include)
     util.normal('n', "m'")
     vim.fn.search('`', 'bcsW')

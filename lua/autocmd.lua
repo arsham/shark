@@ -1,5 +1,4 @@
 local util = require('util')
-require('astronauta.keymap')
 
 util.augroup{"LINE_RETURN", {
     {"BufReadPost", "*", function()

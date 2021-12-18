@@ -49,12 +49,8 @@ local function insert_empty_lines(count, add)
 end
 
 -- insert empty lines with motions, can be 10[<space>
-keymap.nnoremap{"]<space>", function()
-    insert_empty_lines(vim.v.count, 0)
-end, silent=true}
-keymap.nnoremap{"[<space>", function()
-    insert_empty_lines(vim.v.count, -1)
-end, silent=true}
+keymap.nnoremap{"]<space>", function() insert_empty_lines(vim.v.count, 0) end, silent=true}
+keymap.nnoremap{"[<space>", function() insert_empty_lines(vim.v.count, -1) end, silent=true}
 
 keymap.nnoremap{'<M-Left>',  silent=true, ':vert resize -2<CR>'}
 keymap.nnoremap{'<M-Right>', silent=true, ':vert resize +2<CR>'}
@@ -95,9 +91,9 @@ local function end_of_line(loc, content, char, remove)
 end
 
 -- Add the char at the end of the line, or the visually selected area.
--- @param name(string): the name of mapping to repeat.
--- @param char(string): char to add.
--- @param remove(bool): if false, the char is added, otherwise the last
+---@param name string the name of mapping to repeat.
+---@param char string char to add.
+---@param remove boolean if false, the char is added, otherwise the last
 -- character is removed.
 local function change_line_ends(name, char, remove)
     local mode = vim.api.nvim_get_mode().mode

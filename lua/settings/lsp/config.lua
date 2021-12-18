@@ -91,38 +91,6 @@ local servers = {
         }
     },
 
-    sumneko_lua = {
-        settings = {
-            Lua = {
-                runtime = {
-                    version = 'LuaJIT',
-                    path = runtime_path,
-                },
-
-                diagnostics = {
-                    globals = { 'vim', 'use', 'require', 'rocks', 'use_rocks' },
-                },
-
-                workspace = {
-                    -- Make the server aware of Neovim runtime files
-                    library = {
-                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                        [vim.fn.expand('~/.local/share/nvim/site/pack/packer')] = true,
-                    },
-                    -- library = vim.api.nvim_get_runtime_file("", true),
-                    maxPreload = 2000,
-                    preloadFileSize = 1000,
-                },
-
-                -- Do not send telemetry data containing a randomized but unique identifier
-                telemetry = {
-                    enable = false,
-                },
-            },
-        }
-    },
-
     yamlls = {
         settings = {
             yaml = {
@@ -179,10 +147,28 @@ lsp_installer.on_server_ready(function(server)
         capabilities = capabilities,
     }, conf)
 
-    if server.name == 'sqls' then
+    if server.name == 'sumneko_lua' then
+        opts = require("lua-dev").setup({
+            lspconfig = {
+                on_attach = attach_wrap,
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim', 'use', 'require', 'rocks', 'use_rocks' },
+                        },
+                        workspace = {
+                            maxPreload = 2000,
+                            preloadFileSize = 50000,
+                        }
+                    }
+                }
+            },
+        })
+    elseif server.name == 'sqls' then
         local fn = function(client, ...)
             client.resolved_capabilities.execute_command = true
-            client.commands = require('sqls').commands -- Neovim 0.6+ only
+            client.commands = require('sqls').commands
             require('sqls').setup{
                 picker = 'fzf',
             }

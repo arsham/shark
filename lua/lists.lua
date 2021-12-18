@@ -3,8 +3,8 @@ require('astronauta.keymap')
 
 local M = {}
 
--- When using `dd` in the quickfix list, remove the item from the quickfix
--- list.
+---When using `dd` in the quickfix list, remove the item from the quickfix
+---list.
 local function delete_list_item()
     local cur_list = {}
     local close = "cclose"
@@ -40,9 +40,16 @@ local function delete_list_item()
     end
 end
 
--- Inserts the current position of the cursor in the qf/local list with the
--- note.
--- @param is_local(boolean): if true, the item goes into the local list.
+---@class ListItem
+---@field bufnr number
+---@field lnum number
+---@field col number
+---@field text string
+
+---Inserts the current position of the cursor in the qf/local list with the
+---note.
+---@param item ListItem
+---@param is_local boolean if true, the item goes into the local list.
 function M.insert_list(item, is_local)
     local cur_list = {}
     if is_local then
@@ -60,9 +67,10 @@ function M.insert_list(item, is_local)
     end
 end
 
--- Inserts the current position of the cursor in the qf/local list with the
--- note.
--- @param is_local(boolean): if true, the item goes into the local list.
+---Inserts the current position of the cursor in the qf/local list with the
+---note.
+---@param note string
+---@param is_local boolean if true, the item goes into the local list.
 local function inset_note_to_list(note, is_local)
     local location = vim.api.nvim_win_get_cursor(0)
     local item = {
@@ -77,10 +85,10 @@ end
 util.command{"Clearquickfix", "call setqflist([]) | ccl"}
 util.command{"Clearloclist",  "call setloclist(0, []) | lcl"}
 
--- Opens a popup for a note, and adds the current line and column with the note
--- to the list.
--- @param name(string): the name of the mapping for repeating.
--- @param is_local(boolean): if true, the item goes into the local list.
+---Opens a popup for a note, and adds the current line and column with the note
+---to the list.
+---@param name string the name of the mapping for repeating.
+---@param is_local boolean if true, the item goes into the local list.
 local function add_note(name, is_local)
     util.user_input{
         prompt = "Note: ",
@@ -92,9 +100,9 @@ local function add_note(name, is_local)
     }
 end
 
--- Add the current line and the column to the list.
--- @param name(string): the name of the mapping for repeating.
--- @param is_local(boolean): if true, the item goes into the local list.
+---Add the current line and the column to the list.
+---@param name string the name of the mapping for repeating.
+---@param is_local boolean if true, the item goes into the local list.
 local function add_line(name, is_local)
     local note = vim.api.nvim_get_current_line()
     inset_note_to_list(note, is_local)
@@ -102,7 +110,7 @@ local function add_line(name, is_local)
     vim.fn["repeat#set"](key, vim.v.count)
 end
 
--- {{{ Quickfix list mappings
+---{{{ Quickfix list mappings
 vim.keymap.nnoremap{'<leader>qo', silent=true, ':copen<CR>'}
 vim.keymap.nnoremap{'<Plug>QuickfixAdd', function()
     add_line('<Plug>QuickfixAdd', false)
@@ -113,9 +121,9 @@ vim.keymap.nnoremap{'<Plug>QuickfixNote', function()
 end}
 vim.keymap.nmap{'<leader>qn', '<Plug>QuickfixNote'}
 vim.keymap.nnoremap{'<leader>qc', silent=true, ":Clearquickfix<CR>"}
--- }}}
+---}}}
 
--- {{{ Local list mappings
+---{{{ Local list mappings
 vim.keymap.nnoremap{'<leader>wo', silent=true, ':lopen<CR>'}
 vim.keymap.nnoremap{'<Plug>LocallistAdd', function()
     add_line('<Plug>LocallistAdd', true)
@@ -126,12 +134,12 @@ vim.keymap.nnoremap{'<Plug>LocallistNote', function()
 end}
 vim.keymap.nmap{'<leader>wn', '<Plug>LocallistNote'}
 vim.keymap.nnoremap{'<leader>wc', silent=true, ":Clearloclist<CR>"}
--- }}}
+---}}}
 
--- Creates a mapping for jumping through lists.
--- @param key(string): the key to map.
--- @param next(string): the command to execute if there is a next item.
--- @param wrap(string): the command to execute if there is no next item.
+---Creates a mapping for jumping through lists.
+---@param key string the key to map.
+---@param next string the command to execute if there is a next item.
+---@param wrap string the command to execute if there is no next item.
 local function jump_list_mapping(key, next, wrap)
     vim.keymap.nnoremap{key, function()
         util.cmd_and_centre(([[
@@ -139,7 +147,7 @@ local function jump_list_mapping(key, next, wrap)
                 %s
             catch /^Vim\%%((\a\+)\)\=:E553/
                 %s
-            catch /^Vim\%%((\a\+)\)\=:E42/
+            catch /^Vim\%%((\a\+)\)\=:E42\|E776/
             endtry
         ]]):format(next, wrap))
     end}
@@ -158,7 +166,7 @@ util.augroup{"QF_LOC_LISTS", {
     end},
 }}
 
--- Makes the quickfix and local list prettier. Borrowed from nvim-bqf.
+---Makes the quickfix and local list prettier. Borrowed from nvim-bqf.
 function _G.qftf(info)
     local items
     local ret = {}

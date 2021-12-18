@@ -1,27 +1,37 @@
 local util = require('util')
+local util_lsp = require('util.lsp')
 table.insert(vim.opt.rtp, "~/.fzf")
 
+---Shows a fzf search for going to definition. If LSP is not attached, it uses
+---the BTags functionality.
+---@param lines string[]
 local function goto_def(lines)
     local file = lines[1]
     vim.api.nvim_command(("e %s"):format(file))
-    if util.lsp_attached() then
+    if util_lsp.is_lsp_attached() then
         pcall(vim.lsp.buf.document_symbol)
     else
         vim.api.nvim_command(":BTags")
     end
 end
 
+---Shows a fzf search for going to a line number.
+---@param lines string[]
 local function goto_line(lines)
     local file = lines[1]
     vim.api.nvim_command(("e %s"):format(file))
     util.normal('n', ':')
 end
 
+---Shows a fzf search for line content.
+---@param lines string[]
 local function search_file(lines)
     local file = lines[1]
     vim.api.nvim_command(("e +BLines %s"):format(file))
 end
 
+---Set selected lines in the quickfix list with fzf search.
+---@param files string[]
 local function set_qf_list(files)
     local item = {
         lnum = 1,
