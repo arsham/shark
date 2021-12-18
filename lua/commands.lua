@@ -36,11 +36,11 @@ end}
 
 command{"InstallDependencies", function()
     local commands = {
-        fixjson    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest"},
-        prettier   = {"npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest"},
         golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
         gojq       = {"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
-        stylua     = {'cargo', 'install', 'stylua'},
+        fixjson    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest"},
+        prettier   = {"npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest"},
+        neovim     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest"},
     }
 
     local total = table.length(commands)
@@ -69,7 +69,7 @@ command{"InstallDependencies", function()
 
                 count = count + 1
                 if count == total then
-                    local str =  "yay -S ripgrep bat ccls words-insane ctags"
+                    local str =  "yay -S ripgrep bat ccls words-insane ctags python-pip the_silver_searcher"
                     vim.schedule(function()
                         vim.fn.setreg('+', str)
                     end)

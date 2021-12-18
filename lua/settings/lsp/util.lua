@@ -199,6 +199,12 @@ end
 
 function M.on_attach(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- TODO: find out how to disable the statuline badges as well.
+	if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
+		vim.diagnostic.disable()
+	end
+
     vim.api.nvim_buf_call(bufnr, function() attach_mappings_commands(client) end)
 
     util.augroup{"STOP_LSP_TYPES", {

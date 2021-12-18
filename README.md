@@ -1,29 +1,35 @@
 # NeoVim
 
-The goal of this setup is to start-up fast, provide mappings that can be easily
-memorised, interact with the **Lua** API, and make programming fun. This is not
-a framework.
+The goal of this project is to have a fast Neovim startup, provide mappings
+that can be easily memorised, interact with the **Lua** API, and make
+programming fun.
 
-This setup is mostly customised to be used for **Go** (**Golang**) development.
-But there are a few other **LSP** servers setup as well.
+This setup is mostly customised to for **Go** (**Golang**) development. But
+there are a few other **LSP** servers setup as well.
 
 ## Highlights
 
 * Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
-* It loads really fast! With about **38 plugins**, it takes **18ms** to
+* It loads really fast! With over **60 plugins**, it takes **18ms** to
   **25ms** on average to start. (benchmarked with the `StartupTime` benchmark
   tool).
 * There are a few **Lua** functions available for setting up
   **autocmd/augroup** and **commands** that accept **Lua functions** to run.
   They are super cool, check them out!
 * **LSP**, **Treesitter**, and **fzf** are setup to work together.
+* Completion with **nvim-cmp** plugin is setup.
 * It is optimised to handle very **large** files.
 * There are some handy **textobjects** such as **backticks** and **indents**.
-* You can make **notes** for files/lines in the **quickfix/local** lists.
+* You can add the current location of the cursor or make **notes** on the
+  current location in the **quickfix/local** lists with repeatable mappings.
 * You can **manipulate** quickfix/local lists.
+* It comes with integration with **git** and gist.
+* Has a lot of useful feedback in the gutter.
 * Bindings for using the **cht.sh** service.
-* Statusline is configures with **feline**.
+* Statusline is configures with **feline**. It is set to give a lot of useful
+  information about the buffer.
+* Prettier quickfix buffer.
 * The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
@@ -32,9 +38,9 @@ But there are a few other **LSP** servers setup as well.
     * [Core Mappings](#core-mappings)
     * [Text Objects](#text-objects)
     * [Lists](#lists)
-    * [Matching](#matching)
+    * [Highlight Matching](#highlight-matching)
     * [FZF](#fzf)
-    * [LSP and ALE](#lsp-and-ale)
+    * [LSP](#lsp)
     * [Commands](#commands)
     * [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
@@ -69,47 +75,57 @@ replacement or the requirement changes.
 <details>
     <summary>Click to view the plugin list</summary>
 
-| Plugin                                                                                                        | Description                       |
-| :---                                                                                                          | :---                              |
-| [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                                           | Package manager                   |
-| [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                                       | Fuzzy matching a lot of actions   |
-| [junegunn/fzf](https://github.com/junegunn/fzf)                                                               |                                   |
-| [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                             | LSP configuration                 |
-| [dense-analysis/ale](https://github.com/dense-analysis/ale)                                                   | Linter Plugin                     |
-| [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and its related plugins.                              | Completion                        |
-| [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions   |
-| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                                       | File explorer tree                |
-| [famiu/feline.nvim](https://github.com/famiu/feline.nvim) (default statusline)                                | Statusline                        |
-| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                                         | Statusline                        |
-| [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                                   | Fuzzy completion for command mode |
-| [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                                             | Better quickfix list manager      |
-| [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                                                   | git integration                   |
-| [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                                         | git signs in the gutter           |
-| [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                                       |                                   |
-| [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                                         | Case conversion                   |
-| [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                                         | Text alignment                    |
-| [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                                           | Multiple cursors                  |
-| [tommcdo/vim-exchange](https://github.com/tommcdo/vim-exchange)                                               | Text exchange operator            |
-| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                                             |                                   |
-| [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                                               | Better notification UI            |
-| [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                                               | UI component                      |
-| [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                   |
-| [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                   |
-| [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)                               |                                   |
-| [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                                             |                                   |
-| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)                               |                                   |
-| [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                                               |                                   |
-| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                                 |                                   |
-| [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)                         |                                   |
-| [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                   |
-| [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)                                     |                                   |
+Some plugins are not listed here. You can find the complete list in the
+[plugins.lua](./lua/plugins.lua) file.
+
+| Plugin                                                                                                        | Description                                            |
+| :---                                                                                                          | :---                                                   |
+| [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                                           | Package manager                                        |
+| [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                                       | Fuzzy matching a lot of actions                        |
+| [junegunn/fzf](https://github.com/junegunn/fzf)                                                               |                                                        |
+| [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                             | LSP configuration                                      |
+| [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)                         | Automatically install LSP servers                      |
+| [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions                        |
+| [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)                         |                                                        |
+| [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                                       | Completion, and its related plugins.                   |
+| [nanotee/sqls.nvim](https://github.com/nanotee/sqls.nvim)                                                     | SQL LSP                                                |
 | [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                         | Highlighting engine                                    |
 | [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)       |                                                        |
 | [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) |                                                        |
 | [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                                   |                                                        |
+| [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                                         | Seamlessly navigate between tmux panes and vim windows |
+| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                                       | File explorer tree                                     |
+| [famiu/feline.nvim](https://github.com/famiu/feline.nvim)                                                     | Statusline (default)                                   |
+| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                                         | Statusline                                             |
+| [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                                   | Fuzzy completion for command mode                      |
+| [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                                             | Better quickfix list manager                           |
+| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)                 | Better UI for vim                                      |
+| [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                                           | Better quickfix list manager                           |
+| [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive) and vim-rhubarb                                   | git integration                                        |
+| [mattn/vim-gist](https://github.com/mattn/vim-gist)                                                           | gist integration                                       |
+| [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                                         | git signs in the gutter                                |
 | [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                                             |                                                        |
 | [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |                                                        |
+| [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                                       |                                                        |
+| [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                                         | Case conversion                                        |
+| [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                                         | Text alignment                                         |
+| [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                                           | Multiple cursors                                       |
+| [tommcdo/vim-exchange](https://github.com/tommcdo/vim-exchange)                                               | Text exchange operator                                 |
+| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                                             |                                                        |
+| [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                                               | Better notification UI                                 |
+| [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                                               | UI component                                           |
+| [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                                        |
+| [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                                        |
+| [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)                               |                                                        |
 | [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                                       |                                                        |
+| [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                                             |                                                        |
+| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)                               |                                                        |
+| [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                                               |                                                        |
+| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                                 |                                                        |
+| [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)                               |                                                        |
+| [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)                         |                                                        |
+| [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                                        |
+| [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)                                     |                                                        |
 
 </details>
 
@@ -120,51 +136,59 @@ situation or messes with a community-driven or Vim's very well known mapping:
 
 | Part of mapping | Description                                                |
 | :---            | :---                                                       |
-| **q**           | **quickfix** list mappings                                 |
-| **w**           | **local list** mappings (because it's beside **q**)        |
-| **d**           | LSP **d**iagnostics                                        |
-| **l**           | ALE **l**inting                                            |
+| **q**           | **Q**uickfix list mappings                                 |
+| **w**           | **L**ocal list mappings (because it's beside **q**)        |
+| **d**           | LSP **D**iagnostics                                        |
 | **g**           | **G**o to, Jump to, run something that goes to or jumps to |
 | **m**           | **M**atch highlighting, **m**arks                          |
 | **f**           | **F**ile, **F**ind                                         |
 | **y**           | **Y**ank                                                   |
 | **a**           | **A**ll, or disabling certain constraints                  |
+| **]**           | Jumps to the next item                                     |
+| **[**           | Jumps to the previous item                                 |
 
-The `leader` key is the `space`!
+The `leader` key is `space`!
 
 <details>
     <summary>Click to view the mappings</summary>
 
-| Mapping      | Description                                             |
-| :---         | :---                                                    |
-| `<leader>kb` | Toggles Neovim tree                                     |
-| `<leader>kf` | **F**inds current file in the Neovim tree               |
-| `<Alt-j>`    | Shifts line(s) down one line and format                 |
-| `<Alt-k>`    | Shifts line(s) up one line and format                   |
-| `<Alt-,>`    | Adds `,` at the end of current line without moving      |
-| `<Alt-.>`    | Adds `.` at the end of current line without moving      |
-| `<Alt-{>`    | Adds curly brackets at the end of line into insert mode |
-| `]<space>`   | Inserts [count] empty lines after                       |
-| `[<space>`   | Inserts [count] empty lines before                      |
-| `<leader>gw` | **G**reps for current **W**ord in buffer. Sets qflist   |
-| `<leader>sp` | Toggles **Sp**elling on current buffer                  |
-| `<leader>sf` | Auto **f**ixes previous misspelled word                 |
-| `g=`         | Re-indents the hole buffer                              |
-| `]c`         | (gitsigns) Next hunk                                    |
-| `[c`         | (gitsigns) Previous hunk                                |
-| `<leader>hb` | (gitsigns) **B**lame line                               |
-| `<leader>hs` | (gitsigns) **S**tage **h**unk                           |
-| `<leader>hl` | (gitsigns) **S**tage **l**ine                           |
-| `<leader>hu` | (gitsigns) **U**nstage **h**unk                         |
-| `<leader>hr` | (gitsigns) **R**eset staged **h**unk                    |
-| `<leader>hR` | (gitsigns) **R**eset buffer                             |
-| `<leader>hp` | (gitsigns) **P**review **h**unk                         |
-| `]m`         | Jumps to the start of next function                     |
-| `[m`         | Jumps to the start of previous function                 |
-| `<leader>hh` | Opens the **help** for current word                     |
-| `<leader>cs` | Search for **C**heat**S**heets with cht.sh service      |
-| `<leader>cq` | **C**heat**S**heets with quotes                         |
-| `<leader>cn` | **C**heat**S**heet **N**ext example                     |
+| Mapping       | Description                                                       |
+| :---          | :---                                                              |
+| `<leader>kb`  | Toggles Neovim tree                                               |
+| `<leader>kf`  | **F**inds current file in the Neovim tree                         |
+| `<Alt-j>`     | Shifts line(s) down one line and format                           |
+| `<Alt-k>`     | Shifts line(s) up one line and format                             |
+| `<Alt-,>`     | Adds `,` at the end of current line without moving                |
+| `<Alt-.>`     | Adds `.` at the end of current line without moving                |
+| `<Alt-{>`     | Adds curly brackets at the end of line into insert mode           |
+| `]<space>`    | Inserts [count] empty lines after                                 |
+| `[<space>`    | Inserts [count] empty lines before                                |
+| `<leader>gw`  | **G**reps for current **W**ord in buffer. Populates the locallist |
+| `<leader>sp`  | Toggles **Sp**elling on current buffer                            |
+| `<leader>sf`  | Auto **f**ixes previous misspelled word                           |
+| `z=`          | Show spell recommendations                                        |
+| `g=`          | Re-indents the hole buffer                                        |
+| `]c`          | (gitsigns) Next hunk                                              |
+| `[c`          | (gitsigns) Previous hunk                                          |
+| `<leader>hb`  | (gitsigns) **B**lame line                                         |
+| `<leader>hs`  | (gitsigns) **S**tage **h**unk                                     |
+| `<leader>hl`  | (gitsigns) **S**tage **l**ine                                     |
+| `<leader>hu`  | (gitsigns) **U**nstage **h**unk                                   |
+| `<leader>hr`  | (gitsigns) **R**eset **h**unk                                     |
+| `<leader>hR`  | (gitsigns) **R**eset buffer                                       |
+| `<leader>hp`  | (gitsigns) **P**review **h**unk                                   |
+| `<leader>hh`  | Opens the **help** for current word                               |
+| `<leader>cs`  | Search for **C**heat**S**heets with cht.sh service                |
+| `<leader>cq`  | **C**heat**S**heets with quotes                                   |
+| `<leader>cn`  | **C**heat**S**heet **N**ext example                               |
+| `<Alt-Left>`  | Reduce vertical size                                              |
+| `<Alt-Right>` | Increase vertical size                                            |
+| `<Alt-Up>`    | Reduce horizontal size                                            |
+| `<Alt-Down>`  | Increase horizontal size                                          |
+| `<Esc><Esc>`  | Clear hlsearch                                                    |
+| `<leader>1`   | Diff get from LOCAL (left)                                        |
+| `<leader>2`   | Diff get from BASE (middle)                                       |
+| `<leader>3`   | Diff get from REMOTE (right)                                      |
 
 To use the **C**heat**S**heet functionality, type your query in the buffer and
 invoke the key binding. The response will be inserted on the next lint in the
@@ -180,27 +204,31 @@ There are more specialised mappings provided, keep reading please!
 <details>
     <summary>Click to view the text objects</summary>
 
-| Text Object | Description                                |
-| :---        | :---                                       |
-| `H`         | To the beginning of line                   |
-| `L`         | To the end of line                         |
-| `ii`        | **I**n **I**ndentation                     |
-| i`          | **I**n backtick (`) pairs (multi-line)     |
-| a`          | **A**round backtick (`) pairs (multi-line) |
-| `an`        | **A**round **N**ext pairs (current lint)   |
-| `in`        | **I**n **N**ext pairs (current line)       |
-| `il`        | **I**n line                                |
-| `al`        | **A**round line                            |
-| `iN`        | **I**n numeric value (can be float too)    |
-| `ih`        | Select **H**unk                            |
-| `af`        | **A**round **F**unction                    |
-| `if`        | **I**n **F**unction                        |
-| `am`        | **A**round **M**ethod                      |
-| `im`        | **I**n **M**ethod                          |
-| `ab`        | **A**round **B**lock                       |
-| `ib`        | **I**n **B**lock                           |
-| `ah`        | **A**round **H**unk (git changes)          |
-| `ih`        | **I**n **H**kunk (git changes)             |
+| Text Object | Description                                 |
+| :---        | :---                                        |
+| `H`         | To the beginning of line                    |
+| `L`         | To the end of line                          |
+| `ii`        | **I**n **I**ndentation                      |
+| i`          | **I**n backtick (`) pairs (multi-line)      |
+| a`          | **A**round backtick (`) pairs (multi-line)  |
+| `an`        | **A**round **N**ext pairs (current lint)    |
+| `in`        | **I**n **N**ext pairs (current line)        |
+| `il`        | **I**n line                                 |
+| `al`        | **A**round line                             |
+| `iN`        | **I**n **N**umeric value (can be float too) |
+| `ih`        | **I**n **H**unk                             |
+| `af`        | **A**round **F**unction                     |
+| `if`        | **I**n **F**unction                         |
+| `am`        | **A**round call                             |
+| `im`        | **I**n call                                 |
+| `ab`        | **A**round **B**lock                        |
+| `ib`        | **I**n **B**lock                            |
+| `ah`        | **A**round **H**unk (git changes)           |
+| `ih`        | **I**n **H**kunk (git changes)              |
+| `au`        | **A**round **U**nit                         |
+| `iu`        | **I**n **U**nit                             |
+| `aa`        | **A**round **A**rgument                     |
+| `ia`        | **I**n **A**rgument                         |
 
 There are sets of **i*** and **a*** text objects, where `*` can be any of:
 **_ . : , ; | / \ * + - #**
@@ -215,19 +243,29 @@ substitute `w` for `q` or vice versa. Generally **q** is for **quickfix** list
 and **w** is for **local list**. I chose **w** because it's beside **q** and it
 makes it easy to think about these two types of lists.
 
+`<leader>qq`, `<leader>ww`, `<leader>qn` and `<leader>wn` are repeatable with
+**.**!
+
 After adding an item to the list, an indicator in the **statusline** will show
 you how many items you have in a list.
 
 <details>
     <summary>Click to view mappings for lists</summary>
 
-| Mapping      | Description                                                      |
-| :---         | :---                                                             |
-| `<leader>qq` | Add current line and column to the list.                         |
-| `<leader>qn` | Add current line and column with a **note**. (you will be asked) |
-| `<leader>qc` | **Clear** the list.                                              |
-| `]q` & `]w`  | Go to the next item in the list and centre.                      |
-| `[q` & `[w`  | Go to the previous item in the list and centre.                  |
+| Mapping      | Description                                                              |
+| :---         | :---                                                                     |
+| `<leader>qq` | Add current line and column to the **q**uickfix list.                    |
+| `<leader>qn` | Add current line and column with your **n**ote to the **q**uickfix list. |
+| `<leader>qo` | **O**pen the **q**uickfix list.                                          |
+| `<leader>qc` | **C**lear the **q**uickfix list.                                         |
+| `]q`         | Go to the next item in the **q**uickfix list and centre.                 |
+| `[q`         | Go to the previous item in the **q**uickfix list and centre.             |
+| `<leader>wq` | Add current line and column to the locallist.                            |
+| `<leader>wn` | Add current line and column with your **n**ote to the locallist.         |
+| `<leader>wo` | **O**pen the locallist.                                                  |
+| `<leader>wc` | **C**lear the locallist.                                                 |
+| `]w`         | Go to the next item in the locallist and centre.                         |
+| `[w`         | Go to the previous item in the locallist and centre.                     |
 
 </details>
 
@@ -245,10 +283,9 @@ Additional to [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf) bindings,
 you can do `<count>dd` in the quickfix/local list buffers to delete `<count>`
 rows from quickfix/local list buffer.
 
-### Matching
+### Highlight Matching
 
-You can **highlight** words with random colours. We are using the `match`
-functionality, which means these groups are applied only to the current buffer.
+You can **highlight** words with random colours.
 
 `<leader>ma` and `<leader>me` are repeatable with **.**!
 
@@ -281,8 +318,6 @@ Most actions can apply to multiple selected items if possible.
 | `<Alt-/>`          | Search in lines of **all open buffers**.               |
 | `<leader>@`        | Search in **ctags** or **LSP** symbols (see below).    |
 | `<leader>:`        | Commands                                               |
-| `<leader>y`        | **Y**ank to `+` register (external clipboard)          |
-| `<leader>yh`       | List **Y**ank **H**istory)                             |
 | `<leader>ff`       | **F**ind in contents of all files in current folder.   |
 | `<leader>fa`       | **F**ind **A**ll disabling `.gitignore` handling.      |
 | `<leader>rg`       | Search (**rg**) with current word.                     |
@@ -292,8 +327,15 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>gg`       | **GGrep**                                              |
 | `<leader>gf`       | **GFiles**                                             |
 | `<leader>mm`       | **Marks**                                              |
-| `z=`               | Show spell recommendations                             |
 | `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
+
+| Yank Mappings   | Description                                       |
+| :---            | :---                                              |
+| `<leader>yh`    | List **Y**ank **H**istory)                        |
+| `<leader>y`     | **Y**ank to the `+` register (external clipboard) |
+| `<leader>p`     | **P**aste from the `+` register                   |
+| `<leader>P`     | **P**aste from the `+` register (before/above)    |
+| (v) `<leader>p` | **P**aste on selected text without changing "reg  |
 
 When you invoke `<leader>yh` you will be presented with a history of the
 **yanked** items. Upon choosing one, the item will be set to the unnamed
@@ -336,11 +378,11 @@ There are a few added commands to what fzf provides.
 
 </details>
 
-### LSP and ALE
+### LSP
 
-When a **LSP** server is attached to a buffer, a bunch of mappings will be
-defined for that buffer. When possible, **fzf** will take over the results of
-the **LSP** mappings results. **ALE** also provides some mappings internally.
+When a **LSP** server is attached to a buffer, a series of mappings will be
+defined for that buffer based on the server's capabilities. When possible,
+**fzf** will take over the results of the **LSP** mappings results.
 
 Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 `<Ctrl-k>` in completion menu in order to move up and down.
@@ -348,46 +390,60 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 <details>
     <summary>Click to view the mappings</summary>
 
-| Mapping       | Description                                 |
-| :---          | :---                                        |
-| `<leader>ll`  | Run ALE **l**inters                         |
-| `<leader>ld`  | Run A**L**E show **D**etails                |
-| `]l`          | Go to next **l**inting issue                |
-| `[l`          | Go to previous **l**inting issue            |
-| `]d`          | Go to next **d**iagnostic issue             |
-| `[d`          | Go to previous **d**iagnostic issue         |
-| `<leader>gq`  | Format the buffer with LSP                  |
-| `H`           | **H**over popup                             |
-| `<Ctrl-h>`    | (insert mode) Show **H**over popup          |
-| `K`           | Show **S**ignature                          |
-| `<Ctrl-l>`    | (insert mode) Show **S**ignature            |
-| `gd`          | **G**o to **D**efinition                    |
-| `gD`          | **G**o to **D**eclaration                   |
-| `<leader>gi`  | **G**o to **I**mplementation                |
-| `gr`          | Show **R**eferences                         |
-| `<leader>@`   | Document Symbols                            |
-| `<leader>gc`  | Show **C**allers                            |
-| `<Tab>`       | (insert mode) Next completion item          |
-| `<Shift-Tab>` | (insert mode) Previous completion item      |
-| `<Ctrl-j>`    | (insert mode) Next completion item          |
-| `<Ctrl-k>`    | (insert mode) Previous completion item      |
-| `<Alt-n>`     | (insert mode) Next completion source        |
-| `<Alt-p>`     | (insert mode) Previous completion source    |
-| `<leader>dd`  | Show line **D**iagnostics                   |
-| `<leader>dq`  | Fill the **Q**uicklist with **D**iagnostics |
-| `<leader>dw`  | Fill the local list with **D**iagnostics    |
-| `<leader>dr`  | Restart the LSP server (see below)          |
-| `<leader>ca`  | **C**ode **A**ctions                        |
-| `<leader>cr`  | **C**ode lens **R**un                       |
+| Mapping       | Description                                                |
+| :---          | :---                                                       |
+| `gd`          | **G**o to **D**efinition                                   |
+| `gD`          | **G**o to **D**eclaration                                  |
+| `<leader>df`  | Show function **d**e**f**inition in popup                  |
+| `<leader>gi`  | **G**o to **I**mplementation                               |
+| `gr`          | Show **R**eferences                                        |
+| `<leader>@`   | Document Symbols                                           |
+| `<leader>gc`  | Show **C**allers (incoming calls)                          |
+| `H`           | **H**over popup                                            |
+| `<Ctrl-h>`    | (insert mode) Show **H**over popup                         |
+| `K`           | Show **S**ignature help                                    |
+| `<Ctrl-l>`    | (insert mode) Show **S**ignature help                      |
+| `<Tab>`       | (insert mode) Next completion item                         |
+| `<Shift-Tab>` | (insert mode) Previous completion item                     |
+| `<Ctrl-j>`    | (insert mode) Next completion item                         |
+| `<Ctrl-k>`    | (insert mode) Previous completion item                     |
+| `<Alt-n>`     | (insert mode) Next completion source                       |
+| `<Alt-p>`     | (insert mode) Previous completion source                   |
+| `<leader>dd`  | Show line **D**iagnostics                                  |
+| `<leader>dq`  | Fill the **Q**uicklist with **D**iagnostics                |
+| `<leader>dw`  | Fill the local list with **D**iagnostics                   |
+| `]d`          | Go to next **d**iagnostic issue                            |
+| `[d`          | Go to previous **d**iagnostic issue                        |
+| `<leader>i`   | Organise **i**mports                                       |
+| `<leader>gq`  | Format the buffer with LSP                                 |
+| `<leader>dr`  | **R**estart the LSP server (see below)                     |
+| `<leader>ca`  | **C**ode **A**ctions (also in visual mode)                 |
+| `<leader>cr`  | **C**ode lens **R**un                                      |
+| `]f`          | Jumps to the start of next **f**unction                    |
+| `[f`          | Jumps to the start of previous **f**unction                |
+| `]b`          | Jumps to the start of next **b**lock                       |
+| `[b`          | Jumps to the start of previous **b**lock                   |
+| `<leader>.a`  | Swap parameter to right                                    |
+| `<leader>,a`  | Swap parameter to left                                     |
+| `<leader>.f`  | Swap **f**unction to next                                  |
+| `<leader>,f`  | Swap **f**unction to previous                              |
+| `<Alt-n>`     | Initiate **n**ode selection                                |
+| `<CR>`        | After selection is initiated, increment selection          |
+| `<BS>`        | After selection is initiated, decrease selection           |
+| `<Alt-n>`     | After selection is initiated, increment selection on scope |
 
-Please note that the `<leader>@` binding will use the `LSP` symbols if is
-attached to the buffer, or `ctags` otherwise.
+### Notes
+
+* The `<leader>@` binding will use the `LSP` symbols if is attached to the
+buffer, or `ctags` otherwise.
+* Invoke `<leader>df` twice to enter the flowing window. `q` exits.
 
 Please see the code for all available mappings.
+
 </details>
 
-**LSP** and **ALE** define their own set of commands, however I have added a
-few interesting additions.
+**LSP** defines its own set of commands, however I have added a few interesting
+additions.
 
 <details>
     <summary>Click to view the commands</summary>
@@ -396,6 +452,7 @@ few interesting additions.
 | :---               | :---                                          |
 | `RestartLsp`       | Restart LSP with a delay.                     |
 | `Rename`           | Rename a symbol                               |
+| `CodeAction`       | Also works on a visually selected text.       |
 | `WorkspaceSymbols` |                                               |
 | `DocumentSymbol`   |                                               |
 | `Callees`          |                                               |
@@ -514,7 +571,7 @@ These functions will call your function/command and then centres the buffer:
 
 ```lua
 util.call_and_centre(function() print("Yolo!") end)
-util.cmd_and_centre("ALENextWrap")
+util.cmd_and_centre("SomeCommand")
 ```
 
 #### User Input
@@ -567,8 +624,7 @@ none of its associated mappings or commands are loaded.
 │   ├── plugins.lua                  # Plugings are loaded here.
 │   ├── settings                     # Pluging settings are here.
 │   │   ├── init.lua
-│   │   ├── ale.lua
-│   │   ├── completion.lua
+│   │   ├── cmp.lua
 │   │   ├── fzf
 │   │   │   └── init.lua
 │   │   ├── gitsigns.lua

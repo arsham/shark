@@ -123,41 +123,6 @@ function M.vim_mode()
     return value
 end
 
-function M.ale_diagnostics()
-    local error = 0
-    local warning = 0
-    local info = 0
-
-    local ok, data = pcall(vim.fn['ale#statusline#Count'], vim.fn.bufnr())
-    if not ok then
-        return ""
-    end
-    error = data.error + data.style_error
-    warning = data.warning + data.style_warning
-    info = data.info
-
-    local ret = {}
-
-    if error + warning + info == 0 then
-        return ""
-    end
-
-    if error > 0 then
-        table.insert(ret, '')
-        table.insert(ret, error)
-    end
-    if warning > 0 then
-        table.insert(ret, '')
-        table.insert(ret, warning)
-    end
-    if info > 0 then
-        table.insert(ret, '')
-        table.insert(ret, info)
-    end
-
-    return table.concat(ret, ' ') .. ' '
-end
-
 -- Return parent path for specified entry (either file or directory), nil if
 -- there is none
 -- Adapted from from galaxyline.
@@ -316,6 +281,45 @@ end
 function M.quickfix_count()
     local count = #vim.fn.getqflist()
     return ("  %d "):format(count)
+end
+
+local config = {
+    errors = "",
+    warnings = "",
+    info = "🛈",
+    hints = "!",
+    ok = "",
+    spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
+}
+
+function M.get_lsp_progress()
+    local messaging = require('lsp-status/messaging')
+    local buf_messages = messaging.messages()
+    local msgs = {}
+    for _, msg in ipairs(buf_messages) do
+        local contents
+        if msg.progress then
+            contents = msg.title
+            -- if msg.message then
+            --     contents = contents .. ' ' .. msg.message
+            -- end
+
+            -- this percentage format string escapes a percent sign once to
+            -- show a percentage and one more time to prevent errors in vim
+            -- statusline's because of it's treatment of % chars
+            if msg.percentage then contents = contents .. string.format(" (%.0f%%%%)", msg.percentage) end
+
+            if msg.spinner then
+                contents = config.spinner_frames[(msg.spinner % #config.spinner_frames) + 1] ..
+                    ' ' .. contents
+            end
+        else
+            contents = msg.content
+        end
+
+        table.insert(msgs, contents)
+    end
+    return table.concat(msgs, config.component_separator)
 end
 
 return M

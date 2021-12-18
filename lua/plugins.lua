@@ -14,17 +14,14 @@ augroup PACKER_RELOAD
 augroup END
 ]]
 
-local lspFiletypes = {
-    'go',
-    'lua',
-    'vim',
-    'sql',
-    'bash',
-    'py',
+local status_plugin = 'feline'
+local colorizer_ft = {
+    'css',
+    'scss',
+    'sass',
     'html',
-    'yaml',
-    'json',
-    'js',
+    'lua',
+    'markdown',
 }
 
 local status_plugin = 'feline'
@@ -39,9 +36,11 @@ require('packer').startup({
         -- }}}
 
         -- {{{ Core/System utilities
+        use 'junegunn/fzf'
+
         use {
             'junegunn/fzf.vim',
-            requires = { 'junegunn/fzf' },
+            requires = 'junegunn/fzf',
             config   = function() require('settings.fzf') end,
         }
 
@@ -96,13 +95,13 @@ require('packer').startup({
 
         use {
             'tpope/vim-rhubarb',
-            requires = { 'tpope/vim-fugitive' },
-            event = { 'BufRead', 'BufNewFile' },
+            requires = 'tpope/vim-fugitive',
+            after    = 'vim-fugitive',
         }
 
         use {
             'lewis6991/gitsigns.nvim',
-            requires = { 'nvim-lua/plenary.nvim' },
+            requires = 'nvim-lua/plenary.nvim',
             config   = function() require('settings.gitsigns') end,
             event    = { 'BufNewFile', 'BufRead' },
         }
@@ -110,7 +109,7 @@ require('packer').startup({
         use {
             -- create ~/.gist-vim with this content: token xxxxx
             'mattn/vim-gist',
-            requires = { 'mattn/webapi-vim' },
+            requires = 'mattn/webapi-vim',
             config   = function() vim.g.gist_per_page_limit = 100 end,
             cmd      = { 'Gist' },
         }
@@ -144,9 +143,9 @@ require('packer').startup({
         use {
             'norcalli/nvim-colorizer.lua',
             config = function()
-                require'colorizer'.setup{ 'css', 'scss', 'sass', 'html', 'lua' }
+                require'colorizer'.setup(colorizer_ft)
             end,
-            event = { 'BufRead', 'BufNewFile' },
+            ft = colorizer_ft,
         }
 
         use {
@@ -154,7 +153,7 @@ require('packer').startup({
             config = function()
                 local async_load_plugin = nil
                 async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-                    vim.notify = require("notify")
+                    vim.notify = require('notify')
                     async_load_plugin:close()
                 end))
                 async_load_plugin:send()
@@ -166,7 +165,7 @@ require('packer').startup({
         use {
             'lukas-reineke/indent-blankline.nvim',
             config = function()
-                require("indent_blankline").setup {
+                require('indent_blankline').setup {
                     show_trailing_blankline_indent = false,
                     show_first_indent_level = false,
                 }
@@ -189,12 +188,6 @@ require('packer').startup({
 
         -- {{{ Editing
         use {
-            'numToStr/Comment.nvim',
-            config = function() require('Comment').setup() end,
-            event  = { 'BufRead', 'BufNewFile' },
-        }
-
-        use {
             'tpope/vim-repeat',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
@@ -216,7 +209,7 @@ require('packer').startup({
             -- Title-Dash/Title-Kebab: gsK
             -- dot.case:               gs.
             'arthurxavierx/vim-caser',
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            keys = { 'gs' },
         }
 
         use {
@@ -232,7 +225,7 @@ require('packer').startup({
             'mg979/vim-visual-multi',
             branch = 'master',
             config = function() require('settings').visual_multi() end,
-            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            keys   = { '<C-n>', '<C-Down>', '<C-Up>' },
         }
 
         use {
@@ -242,7 +235,7 @@ require('packer').startup({
 
         use {
             'windwp/nvim-autopairs',
-            wants  = "nvim-cmp",
+            wants  = 'nvim-cmp',
             config = function() require('settings').autopairs() end,
             event  = { 'InsertEnter' },
         }
@@ -250,7 +243,7 @@ require('packer').startup({
         use {
             'sQVe/sort.nvim',
             config = function()
-                require("sort").setup({
+                require('sort').setup({
                     delimiters = {
                         ',', '|', ';', ':',
                         's', -- Space
@@ -265,7 +258,7 @@ require('packer').startup({
         -- {{{ Programming
         use {
             'neovim/nvim-lspconfig',
-            wants = {'nvim-cmp'},
+            after = {'nvim-cmp'},
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
@@ -275,48 +268,45 @@ require('packer').startup({
                 require('settings').lsp_installer()
                 require('settings.lsp')
             end,
-            wants = {
+            after = {
                 'nvim-lspconfig',
                 'nvim-cmp',
+                'cmp-nvim-lsp',
+                'lsp-status.nvim',
+                'cmp-nvim-lsp',
             },
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
             'hrsh7th/nvim-cmp',
-            config = function() require('settings.cmp') end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            event    = { 'BufRead', 'BufNewFile', 'InsertEnter' },
             requires = {
-                { 'hrsh7th/cmp-nvim-lsp'  , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-nvim-lua'  , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-buffer'    , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-path'      , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-cmdline'   , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-calc'      , after = 'nvim-cmp' },
-                { "lukas-reineke/cmp-rg"  , after = 'nvim-cmp' },
-                -- { 'hrsh7th/cmp-copilot'   , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-nvim-lsp-signature-help' , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-vsnip'     , after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-buffer',   after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-path',     after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-cmdline',  after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-calc',     after = 'nvim-cmp' },
+                { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
+                { 'hrsh7th/cmp-vsnip',    after = 'nvim-cmp' },
                 { 'hrsh7th/vim-vsnip',
                     config = function ()
-                        vim.g.vsnip_snippet_dir = vim.env.HOME .. "/.config/nvim/vsnip"
+                        vim.g.vsnip_snippet_dir = vim.env.HOME .. '/.config/nvim/vsnip'
                     end,
-                    after = 'nvim-cmp',
+                    after    = 'nvim-cmp',
+                    requires = 'rafamadriz/friendly-snippets',
                 },
-            }
-        }
-
-        use {
-            'dense-analysis/ale',
-            config = function() require('settings.ale') end, opt = true,
-            ft     = lspFiletypes,
+                { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
+            },
+            config = function() require('settings.cmp') end,
         }
 
         use {
             'ojroques/nvim-lspfuzzy',
             requires = {
-                { 'junegunn/fzf' },
-                { 'junegunn/fzf.vim' },
+                'junegunn/fzf',
+                'junegunn/fzf.vim',
+                'nvim-lspconfig',
             },
             config = function()
                 require('lspfuzzy').setup{
@@ -325,14 +315,22 @@ require('packer').startup({
                     },
                 }
             end,
-            after = {"nvim-lspconfig", "fzf.vim"},
+            after = {'nvim-lspconfig', 'fzf.vim'},
         }
 
         use {
             'jose-elias-alvarez/null-ls.nvim',
-            requires = { 'nvim-lua/plenary.nvim' },
+            requires = {
+                'nvim-lua/plenary.nvim',
+                'nvim-lspconfig',
+            },
+            after    = { 'nvim-lspconfig' },
             config   = function() require('settings').null_ls() end,
-            ft       = lspFiletypes,
+        }
+
+        use {
+            'nvim-lua/lsp-status.nvim',
+            after = {'nvim-lspconfig', 'fzf.vim'},
         }
 
         use {
@@ -387,6 +385,10 @@ require('packer').startup({
 
         use {
             'nanotee/sqls.nvim',
+            config = function ()
+                vim.keymap.nnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
+                vim.keymap.vnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
+            end,
             ft = { 'sql' },
         }
 

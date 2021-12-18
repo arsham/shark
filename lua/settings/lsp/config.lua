@@ -44,10 +44,10 @@ local servers = {
     vimls = {},
     dockerls = {},
     jedi_language_server = {},
-    yamlls = {},
     html = {},
     clangd = {},
     tsserver = {},
+    sqls = {},
 
     gopls = {
         settings = {
@@ -100,7 +100,7 @@ local servers = {
                 },
 
                 diagnostics = {
-                    globals = { 'vim', 'use', 'require' },
+                    globals = { 'vim', 'use', 'require', 'rocks', 'use_rocks' },
                 },
 
                 workspace = {
@@ -123,8 +123,49 @@ local servers = {
         }
     },
 
-    sqls = {},
+    yamlls = {
+        settings = {
+            yaml = {
+                format = { enable = true, singleQuote = true },
+                validate = true,
+                hover = true,
+                completion = true,
+                schemaStore = {
+                    enable = true,
+                    url = 'https://www.schemastore.org/api/json/catalog.json',
+                },
+                schemas = {
+                    kubernetes = {
+                        'templates/*.yaml',
+                        'helm/*.yaml',
+                        'kube/*.yaml',
+                    },
+                    ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
+                    ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
+                    ['http://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
+                    ['http://json.schemastore.org/ansible-playbook'] = 'playbook.{yml,yaml}',
+                    ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
+                    ['http://json.schemastore.org/stylelintrc'] = '.stylelintrc.{yml,yaml}',
+                    ['http://json.schemastore.org/circleciconfig'] = '.circleci/**/*.{yml,yaml}',
+                    ['http://json.schemastore.org/kustomization'] = 'kustomization.{yml,yaml}',
+                    ['http://json.schemastore.org/helmfile'] = 'helmfile.{yml,yaml}',
+                    ['http://json.schemastore.org/gitlab-ci'] = '/*lab-ci.{yml,yaml}',
+                }
+            }
+        }
+    },
 }
+
+
+local lsp_status = require('lsp-status')
+lsp_status.config{}
+
+lsp_status.register_progress()
+local attach_wrap = function(client, ...)
+    lsp_status.on_attach(client)
+    on_attach(client, ...)
+end
+capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
 
 local lsp_installer = require("nvim-lsp-installer")
 
@@ -134,7 +175,7 @@ lsp_installer.on_server_ready(function(server)
         conf = {}
     end
     local opts = vim.tbl_deep_extend("force", {
-        on_attach = on_attach,
+        on_attach = attach_wrap,
         capabilities = capabilities,
     }, conf)
 
@@ -145,7 +186,7 @@ lsp_installer.on_server_ready(function(server)
             require('sqls').setup{
                 picker = 'fzf',
             }
-            on_attach(client, ...)
+            attach_wrap(client, ...)
         end
         opts.on_attach = fn
     end
