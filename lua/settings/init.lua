@@ -89,22 +89,6 @@ M.nvim_tree = {
     end
 }
 
-function M.kommentary()
-    require('kommentary.config').configure_language('default', {
-        prefer_single_line_comments = true,
-    })
-    require('kommentary.config').configure_language('lua', {
-        single_line_comment_string = '--',
-        prefer_single_line_comments = true,
-    })
-    require('kommentary.config').configure_language('gomod', {
-        single_line_comment_string = '//',
-    })
-    -- vim.api.nvim_set_keymap("n", "gcc", "<Plug>kommentary_line_default", {})
-    -- vim.api.nvim_set_keymap("n", "gc", "<Plug>kommentary_motion_default", {})
-    -- vim.api.nvim_set_keymap("v", "gc", "<Plug>kommentary_visual_default<C-c>", {})
-end
-
 function M.treesitter_unit()
     vim.api.nvim_set_keymap('x', 'iu', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
     vim.api.nvim_set_keymap('x', 'au', ':lua require"treesitter-unit".select(true)<CR>', {noremap=true})
@@ -201,6 +185,32 @@ function M.null_ls()
             null_ls.builtins.diagnostics.golangci_lint,
         },
     })
+end
+
+function M.Comment()
+    local cmt_utils = require('Comment.utils')
+    local ts_utils  = require('ts_context_commentstring.utils')
+    local internal  = require('ts_context_commentstring.internal')
+
+    require('Comment').setup {
+        pre_hook = function(ctx)
+            -- Determine the location where to calculate commentstring from
+            local location = nil
+            if ctx.ctype == cmt_utils.ctype.block then
+                location = ts_utils.get_cursor_location()
+            elseif ctx.cmotion == cmt_utils.cmotion.v or ctx.cmotion == cmt_utils.cmotion.V then
+                location = ts_utils.get_visual_start_location()
+            end
+
+            -- Detemine whether to use linewise or blockwise commentstring
+            local type = ctx.ctype == cmt_utils.ctype.line and '__default' or '__multiline'
+
+            return internal.calculate_commentstring({
+                key = type,
+                location = location,
+            })
+        end,
+    }
 end
 
 return M

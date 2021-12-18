@@ -49,10 +49,7 @@ require('packer').startup({
             'kevinhwang91/nvim-bqf',
             requires = {
                 'junegunn/fzf',
-                {
-                    'nvim-treesitter/nvim-treesitter',
-                    branch = '0.5-compat',
-                },
+                'nvim-treesitter/nvim-treesitter',
             },
             config = function() require('bqf').enable() end,
             event = { 'BufWinEnter quickfix' },
@@ -340,29 +337,46 @@ require('packer').startup({
 
         use {
             'nvim-treesitter/nvim-treesitter',
-            branch = '0.5-compat',
             requires = {
                 {
+                    'nvim-treesitter/nvim-treesitter-textobjects',
+                    after  = 'nvim-treesitter',
+                    -- This is actually the nvim-treesitter config, but it's
+                    -- here to make lazy loading happy.
+                    config = function() require('settings.treesitter') end,
+                },
+                {
                     'nvim-treesitter/nvim-treesitter-refactor',
-                    after = 'nvim-treesitter',
+                    after  = 'nvim-treesitter',
                     config = function() require('settings').treesitter_refactor() end,
                 },
                 {
-                    'nvim-treesitter/nvim-treesitter-textobjects',
-                    branch = '0.5-compat',
+                    'David-Kunz/treesitter-unit',
+                    after  = 'nvim-treesitter',
+                    config = function() require('settings').treesitter_unit() end,
+                },
+                {
+                    'nvim-treesitter/playground',
                     after = 'nvim-treesitter',
+                    run   = ':TSInstall query',
+                    cmd   = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
                 },
             },
-            config = function() require('settings.treesitter') end,
-            run = ':TSUpdate',
+            run   = ':TSUpdate',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
-            'David-Kunz/treesitter-unit',
-            wants  = 'nvim-treesitter',
-            config = function() require('settings').treesitter_unit() end,
-            after  = 'nvim-treesitter',
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            requires = 'nvim-treesitter/nvim-treesitter',
+            after    = 'nvim-treesitter',
+        }
+
+        use {
+            'numToStr/Comment.nvim',
+            requires = 'JoosepAlviste/nvim-ts-context-commentstring',
+            after    = 'nvim-ts-context-commentstring',
+            config   = function() require('settings').Comment() end,
         }
 
         use {
@@ -396,13 +410,12 @@ require('packer').startup({
 
         use {
             'glts/vim-textobj-comment',
-            wants = 'vim-textobj-user',
-            requires = {
-                'kana/vim-textobj-user',
-                opt = true,
-                event = { 'BufRead', 'BufNewFile' },
-            },
-            opt = true,
+            requires = 'kana/vim-textobj-user',
+            after    = 'vim-textobj-user',
+        }
+
+        use {
+            'kana/vim-textobj-user',
             event = { 'BufRead', 'BufNewFile' },
         }
         -- }}}

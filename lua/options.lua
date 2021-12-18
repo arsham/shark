@@ -96,7 +96,7 @@ vim.opt.updatetime = 100
 vim.opt.matchpairs:append("<:>")
 vim.opt.complete    = ".,w,b,u,t,i"
 vim.opt.nrformats   = "bin,hex,alpha"           -- can increment alphabetically too!
-vim.opt.foldmethod  = "manual"
+
 vim.opt.foldnestmax = 3
 vim.opt.foldenable  = false                       -- dont fold by default
 vim.g.markdown_folding = 1

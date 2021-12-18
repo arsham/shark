@@ -44,10 +44,11 @@ But there are a few other **LSP** servers setup as well.
 Just use **Stow** and stow this folder. Once you start Neovim, it will install
 the package manager and installs the listed plugins.
 
-You need to run the `InstallDependencies` command to install LSP servers and
-other dependencies. Some dependencies can't be installed with this tool (yet),
-therefore you need to install them manually. The command will let you know what
-you need to install in the notification.
+You need to run the `InstallDependencies` command to install some dependencies.
+Run `TSUpdate` to satisfy treesitter dependencies, and finally run
+`LspInstallInfo` and install the LSP servers you need. Some dependencies can't
+be installed with this tool (yet), therefore you need to install them manually.
+The command will let you know what you need to install in the notification.
 
 ## Functionality
 
@@ -77,10 +78,6 @@ replacement or the requirement changes.
 | [dense-analysis/ale](https://github.com/dense-analysis/ale)                                                   | Linter Plugin                     |
 | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and its related plugins.                              | Completion                        |
 | [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions   |
-| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                         | Highlighting engine               |
-| [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)       |                                   |
-| [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) |                                   |
-| [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                                   |                                   |
 | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                                       | File explorer tree                |
 | [famiu/feline.nvim](https://github.com/famiu/feline.nvim) (default statusline)                                | Statusline                        |
 | [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                                         | Statusline                        |
@@ -88,7 +85,6 @@ replacement or the requirement changes.
 | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                                             | Better quickfix list manager      |
 | [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                                                   | git integration                   |
 | [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                                         | git signs in the gutter           |
-| [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                                             |                                   |
 | [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                                       |                                   |
 | [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                                         | Case conversion                   |
 | [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                                         | Text alignment                    |
@@ -100,7 +96,6 @@ replacement or the requirement changes.
 | [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                   |
 | [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                   |
 | [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)                               |                                   |
-| [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                                       |                                   |
 | [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                                             |                                   |
 | [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)                               |                                   |
 | [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                                               |                                   |
@@ -108,6 +103,13 @@ replacement or the requirement changes.
 | [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)                         |                                   |
 | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                   |
 | [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)                                     |                                   |
+| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                         | Highlighting engine                                    |
+| [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)       |                                                        |
+| [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) |                                                        |
+| [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                                   |                                                        |
+| [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                                             |                                                        |
+| [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |                                                        |
+| [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                                       |                                                        |
 
 </details>
 

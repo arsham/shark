@@ -29,10 +29,9 @@ command{"CC", docs="close all floating windows", run=function()
     end
 end}
 
-command{"Scratch", docs="open a new scratch buffer", run=function()
-    vim.api.nvim_command("silent! new")
-    vim.bo.buftype = "nofile"
-    vim.bo.swapfile = false
+command{"FoldComments", docs="fold all comments", run=function()
+    vim.wo.foldexpr=[[getline(v:lnum)=~'^\s*//']]
+    vim.wo.foldmethod="expr"
 end}
 
 command{"InstallDependencies", function()

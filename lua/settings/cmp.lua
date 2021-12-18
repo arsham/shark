@@ -1,17 +1,12 @@
 local cmp = require'cmp'
 local compare = require('cmp.config.compare')
 
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 --        ⌘ ⌂       ﲀ 練 ﴲ  ﰮ      ﳤ   
---   ƒ    了   ﬌     <>
+--   ƒ    了   ﬌     <> ⬤
 local kind_icons = {
     Buffers       = '',
     Class         = '',
@@ -50,9 +45,6 @@ cmp.setup({
     },
 
     preselect = cmp.PreselectMode.None,
-    -- completion = {
-    --     autocomplete = false,
-    -- },
 
     mapping = {
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -75,25 +67,16 @@ cmp.setup({
             behavior = cmp.SelectBehavior.Select
         }),
 
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
+        -- only use < tab >/<s-tab> for switching between placeholders.
+        ["<Tab>"] = cmp.mapping(function()
+            if vim.fn["vsnip#available"](1) == 1 then
                 feedkey("<Plug>(vsnip-expand-or-jump)", "")
-            elseif has_words_before() then
-                cmp.complete()
-            else
-                fallback()
             end
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        ["<S-Tab>"] = cmp.mapping(function()
+            if vim.fn["vsnip#jumpable"](-1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
-            else
-                fallback()
             end
         end, { "i", "s" }),
     },
@@ -101,7 +84,6 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
-        -- { name = 'copilot' },
         { name = 'path' },
         { name = 'vsnip' },
         { name = 'calc' },
@@ -141,15 +123,6 @@ cmp.setup({
 
     sorting = {
         comparators = {
-            -- keeps the suggestion on top. Alternative to PreselectMode.
-            -- function(entry1, entry2)
-            --     local preselect1 = entry1.completion_item.preselect or false
-            --     local preselect2 = entry2.completion_item.preselect or false
-            --     if preselect1 ~= preselect2 then
-            --         return preselect1
-            --     end
-            -- end,
-
             compare.kind,
             compare.recently_used,
             compare.offset,
