@@ -10,7 +10,6 @@ util.augroup{"CLIPBOARD", {
         -- We are trying to make a set here, instead we will clean up when we
         -- read.
         table.insert(store, 1, vim.v.event)
-        _G.arsham = vim.v.event
     end},
 }}
 
@@ -49,7 +48,6 @@ vim.keymap.nnoremap{'<leader>yh', silent=true, function()
         end
         table.insert(yank_list, i .. '\t' .. type .. '\t' .. value)
     end
-    _G.arsham = yank_list
 
     local wrapped = vim.fn["fzf#wrap"]({
         source = yank_list,

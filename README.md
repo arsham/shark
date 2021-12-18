@@ -483,7 +483,7 @@ util.augroup{"SOME_AUTOMATION", {
     {"BufReadPost", "*", function()
         vim.notify("This just happened!", vim.lsp.log_levels.INFO)
     end},
-    {"BufReadPost", buffer=true, run=":ALELintStop"},
+    {"BufReadPost", buffer=true, run=":LspStop"},
     {"BufReadPost", "*.go", docs="an example of nested autocmd", run=function()
         vim.notify("Buffer is read", vim.lsp.log_levels.INFO)
         util.autocmd{"BufDelete", buffer=true, run=function()

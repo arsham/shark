@@ -80,18 +80,17 @@ util.augroup{"TREESITTER_LARGE_FILES", {
         if vim.fn.expand('%:t') == 'lsp.log' or vim.bo.filetype == 'help' then
             return
         end
-        local lines = vim.api.nvim_buf_line_count(0)
-        if lines > 5000 then
-            vim.wo.colorcolumn = ""
+        local size = vim.fn.getfsize(vim.fn.expand('%'))
+        if size > 64 * 1024 then
             vim.schedule(function()
-                vim.cmd[[TSBufDisable highlight]]
                 vim.cmd[[TSBufDisable refactor.highlight_definitions]]
             end)
-            local message = "File was too large, had to disable treesitter!"
-            vim.notify(message, vim.lsp.log_levels.WARN, {
-                title = "Settings Change",
-                timeout = 4000,
-            })
+        end
+
+        if size > 512 * 1024 then
+            vim.schedule(function()
+                vim.cmd[[TSBufDisable highlight]]
+            end)
         end
     end}
 }}
