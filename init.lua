@@ -13,8 +13,12 @@
 
 -- Set to true to show the profile times on startup.
 vim.g.run_profiler = false
+vim.opt.termguicolors = true
 local profiler = require('util').profiler
 profiler('plugins',  function() require('plugins')  end)
+if not pcall(require, 'astronauta.keymap') then
+    profiler = function(_, _) end
+end
 profiler('options',  function() require('options')  end)
 profiler('visuals',  function() require('visuals')  end)
 profiler('autocmd',  function() require('autocmd')  end)
