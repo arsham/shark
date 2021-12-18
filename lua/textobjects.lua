@@ -85,16 +85,12 @@ local function in_indent()
         last_line = i
     end
 
-    local sequence = string.format("%dGV%dG", first_line, last_line)
+    local sequence = string.format("%dgg0o%dgg$$", first_line, last_line)
     util.normal('xt', sequence)
-    -- local sequence = string.format("%dG0o%dG$", first_line, last_line)
-    -- util.normal('x', sequence)
 end
 
-vim.keymap.vnoremap{'ii', in_indent, silent = true}
-vim.keymap.onoremap{'ii', in_indent, silent = true}
--- So, this makes the vii work, but a few other things stop functioning.
--- vim.keymap.onoremap{'ii', function() util.normal('x', 'vii') end, {silent = true}}
+vim.keymap.vnoremap{'ii', in_indent, silent=true}
+vim.keymap.onoremap{'ii', function() util.normal('x',  'vii')  end}
 
 ---@param include boolean if true, will remove the backticks too.
 local function in_backticks(include)
