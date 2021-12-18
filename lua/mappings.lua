@@ -1,5 +1,5 @@
-local util = require('util')
 require('astronauta.keymap')
+local util = require('util')
 local keymap = vim.keymap
 
 -- vim.v.count
@@ -34,15 +34,27 @@ keymap.xnoremap{'>', '>gv'}
 -- Re-indent the whole buffer.
 keymap.nnoremap{'g=', 'gg=Gg``'}
 
--- insert empty lines with motions, can be 10[<space>
--- TODO: can we use nvim_buf_set_text?
-keymap.nnoremap{"[<space>", silent=true, ":<c-u>put!=repeat([''],v:count)<bar>']+1<cr>"}
-keymap.nnoremap{"]<space>", silent=true, ":<c-u>put =repeat([''],v:count)<bar>'[-1<cr>"}
+-- Inserts empty lines near the cursor.
+-- @param count(int): Number of lines to insert.
+-- @param add(int): 0 to insert after current line, -1 to insert before current
+-- line.
+local function insert_empty_lines(count, add)
+    if count == 0 then count = 1 end
+    local lines = {}
+    for i = 1,count do
+        lines[i] = ''
+    end
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_buf_set_lines(0, pos[1]+add, pos[1]+add, false, lines)
+end
 
--- keymap.nnoremap{'<C-h>', '<C-w><C-h>'}
--- keymap.nnoremap{'<C-j>', '<C-w><C-j>'}
--- keymap.nnoremap{'<C-k>', '<C-w><C-k>'}
--- keymap.nnoremap{'<C-l>', '<C-w><C-l>'}
+-- insert empty lines with motions, can be 10[<space>
+keymap.nnoremap{"]<space>", function()
+    insert_empty_lines(vim.v.count, 0)
+end, silent=true}
+keymap.nnoremap{"[<space>", function()
+    insert_empty_lines(vim.v.count, -1)
+end, silent=true}
 
 keymap.nnoremap{'<M-Left>',  silent=true, ':vert resize -2<CR>'}
 keymap.nnoremap{'<M-Right>', silent=true, ':vert resize +2<CR>'}
@@ -64,13 +76,6 @@ keymap.nnoremap{'j', expr=true, [[(v:count > 2 ? "m'" . v:count : '') . 'j']]}
 -- Clear hlsearch
 keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
 
--- Terminal mappings.
--- keymap.tnoremap{'<C-R>', [[<C-\\><C-N>"'.nr2char(getchar()).'pi']]}
--- keymap.tnoremap{'<C-w><C-h>', '<C-\\><C-N><C-w>h'}
--- keymap.tnoremap{'<C-w><C-j>', '<C-\\><C-N><C-w>j'}
--- keymap.tnoremap{'<C-w><C-k>', '<C-\\><C-N><C-w>k'}
--- keymap.tnoremap{'<C-w><C-l>', '<C-\\><C-N><C-w>l'}
-
 -- Add comma/period at the end of the line.
 keymap.inoremap{'<M-,>', '<Esc>m`A,<Esc>``a'}
 keymap.nnoremap{'<M-,>', 'm`A,<Esc>``'}
@@ -84,7 +89,6 @@ keymap.nnoremap{'<M-{>', 'A {<CR>}<Esc>O'}
 keymap.noremap{'<Leader>y', '"+y'}
 keymap.noremap{'<Leader>p', '"+p'}
 keymap.noremap{'<Leader>P', '"+P'}
-keymap.nnoremap{'Y', 'y$'}
 
 -- select a text, and this will replace it with the " contents.
 keymap.vnoremap{'<leader>p', '"_dP'}
@@ -93,7 +97,7 @@ keymap.vnoremap{'<leader>p', '"_dP'}
 -- I:<ESC>j0vG.
 keymap.vnoremap{'.', ':norm.<CR>'}
 
-keymap.nnoremap{'<leader>gw', ':silent grep <cword> % <CR>', silent=true}
+keymap.nnoremap{'<leader>gw', ':silent lgrep <cword> % <CR>', silent=true}
 
 -- ]s and [s to jump.
 -- zg to ignore.
