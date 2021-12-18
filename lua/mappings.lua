@@ -76,11 +76,78 @@ keymap.nnoremap{'j', expr=true, [[(v:count > 2 ? "m'" . v:count : '') . 'j']]}
 -- Clear hlsearch
 keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
 
--- Add comma/period at the end of the line.
-keymap.inoremap{'<M-,>', '<Esc>m`A,<Esc>``a'}
-keymap.nnoremap{'<M-,>', 'm`A,<Esc>``'}
-keymap.inoremap{'<M-.>', '<Esc>m`A.<Esc>``a'}
-keymap.nnoremap{'<M-.>', 'm`A.<Esc>``'}
+-- Add char at the end of a line at the `loc` location.
+-- @param loc(int): line number to add the char at.
+-- @param char(string): char to add.
+-- @param content(string): current content of the line.
+-- @param remote(bool): if false, the char is added, otherwise the last
+-- character is removed.
+local function end_of_line(loc, content, char, remove)
+    if remove and (content:sub(-1) ~= char) then
+        return
+    end
+    if remove and #content > 0 then
+        content = content:sub(1, -2)
+    elseif not remove then
+        content = content .. char
+    end
+    vim.api.nvim_buf_set_lines(0, loc-1, loc, false, {content})
+end
+
+-- Add the char at the end of the line, or the visually selected area.
+-- @param name(string): the name of mapping to repeat.
+-- @param char(string): char to add.
+-- @param remove(bool): if false, the char is added, otherwise the last
+-- character is removed.
+local function change_line_ends(name, char, remove)
+    local mode = vim.api.nvim_get_mode().mode
+    if mode == 'n' or mode == 'i' then
+        local loc = vim.api.nvim_win_get_cursor(0)
+        local line = vim.api.nvim_get_current_line()
+        end_of_line(loc[1], line, char, remove)
+    elseif mode == "V" or mode == "CTRL-V" or mode == "\22" then
+        local start = vim.fn.getpos("v")[2]
+        local finish = vim.fn.getcurpos()[2]
+        if finish < start then
+            start, finish = finish, start
+        end
+        start = start - 1
+        local lines = vim.api.nvim_buf_get_lines(0, start, finish, false)
+
+        for k, line in ipairs(lines) do
+            end_of_line(start + k, line, char, remove)
+        end
+    end
+
+    local key = vim.api.nvim_replace_termcodes(name, true, false, true)
+    vim.fn["repeat#set"](key, vim.v.count)
+end
+
+-- Add coma at the end of the line, or the visually selected area.
+local end_mapping = {
+    ['Period']    = {'.', '>'},
+    ['Coma']      = {',', 'lt'},
+    ['SemiColon'] = {';', ':'},
+}
+for n, tuple in pairs(end_mapping) do
+    local name1 = string.format('<Plug>AddEnd%s', n)
+    local key1  = '<M-' .. tuple[1] .. '>'
+    keymap.nnoremap{name1, function() change_line_ends(name1, tuple[1]) end}
+    keymap.nmap{key1, name1}
+    keymap.inoremap{name1, function() change_line_ends(name1, tuple[1]) end}
+    keymap.imap{key1, name1}
+    keymap.vnoremap{name1, function() change_line_ends(name1, tuple[1]) end}
+    keymap.vmap{key1, name1}
+
+    local name2 = string.format('<Plug>DelEnd%s', n)
+    local key2  = '<M-' .. tuple[2] .. '>'
+    keymap.nnoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
+    keymap.nmap{key2, name2}
+    keymap.inoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
+    keymap.imap{key2, name2}
+    keymap.vnoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
+    keymap.vmap{key2, name2}
+end
 
 -- Insert a pair of brackets and go into insert mode.
 keymap.inoremap{'<M-{>', '<Esc>A {<CR>}<Esc>O'}

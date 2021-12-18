@@ -159,7 +159,11 @@ The `leader` key is `space`!
 | `<Alt-j>`     | Shifts line(s) down one line and format                           |
 | `<Alt-k>`     | Shifts line(s) up one line and format                             |
 | `<Alt-,>`     | Adds `,` at the end of current line without moving                |
+| `<S-Alt-,>`   | Removes `,` from the end of current line without moving           |
 | `<Alt-.>`     | Adds `.` at the end of current line without moving                |
+| `<S-Alt-,>`   | Removes `.` from the end of current line without moving           |
+| `<Alt-;>`     | Adds `;` at the end of current line without moving                |
+| `<S-Alt-,>`   | Removes `;` from the end of current line without moving           |
 | `<Alt-{>`     | Adds curly brackets at the end of line into insert mode           |
 | `]<space>`    | Inserts [count] empty lines after                                 |
 | `[<space>`    | Inserts [count] empty lines before                                |
@@ -189,6 +193,9 @@ The `leader` key is `space`!
 | `<leader>1`   | Diff get from LOCAL (left)                                        |
 | `<leader>2`   | Diff get from BASE (middle)                                       |
 | `<leader>3`   | Diff get from REMOTE (right)                                      |
+
+All operations with adding/removing `.`, `,`, `;` are **repeatable** and can be
+operated on visually selected lines.
 
 To use the **C**heat**S**heet functionality, type your query in the buffer and
 invoke the key binding. The response will be inserted on the next lint in the
