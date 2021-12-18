@@ -260,7 +260,12 @@ require('packer').startup({
         -- {{{ Programming
         use {
             'neovim/nvim-lspconfig',
-            after = {'nvim-cmp'},
+            after = { 'nvim-cmp', 'lua-dev.nvim' },
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+        }
+
+        use {
+            'folke/lua-dev.nvim',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
@@ -317,7 +322,7 @@ require('packer').startup({
                     },
                 }
             end,
-            after = {'nvim-lspconfig', 'fzf.vim'},
+            after = { 'nvim-lspconfig', 'fzf.vim' },
         }
 
         use {

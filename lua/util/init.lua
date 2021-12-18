@@ -30,6 +30,15 @@ function M.profiler(name, fn)
     })
 end
 
+---Prints the time it takes to run the fn function.
+---@param fn function
+function M.timeit(fn)
+    local start = vim.loop.hrtime()
+    fn()
+    local msg = ('%fs'):format((vim.loop.hrtime() - start)/1e6)
+    print(msg)
+end
+
 ---Dumps any values
 ---@vararg any
 function _G.dump(...)
