@@ -77,33 +77,61 @@ end
 util.command{"Clearquickfix", "call setqflist([]) | ccl"}
 util.command{"Clearloclist",  "call setloclist(0, []) | lcl"}
 
-local function add_note(is_local)
-    return function()
-        util.user_input{
-            prompt = "Note: ",
-            on_submit = function(value)
-                inset_note_to_list(value, is_local)
-            end,
-        }
-    end
+-- Opens a popup for a note, and adds the current line and column with the note
+-- to the list.
+-- @param name(string): the name of the mapping for repeating.
+-- @param is_local(boolean): if true, the item goes into the local list.
+local function add_note(name, is_local)
+    util.user_input{
+        prompt = "Note: ",
+        on_submit = function(value)
+            inset_note_to_list(value, is_local)
+            local key = vim.api.nvim_replace_termcodes(name, true, false, true)
+            vim.fn["repeat#set"](key, vim.v.count)
+        end,
+    }
 end
 
-local function add_line(is_local)
-    return function()
-        local note = vim.api.nvim_get_current_line()
-        inset_note_to_list(note, is_local)
-    end
+-- Add the current line and the column to the list.
+-- @param name(string): the name of the mapping for repeating.
+-- @param is_local(boolean): if true, the item goes into the local list.
+local function add_line(name, is_local)
+    local note = vim.api.nvim_get_current_line()
+    inset_note_to_list(note, is_local)
+    local key = vim.api.nvim_replace_termcodes(name, true, false, true)
+    vim.fn["repeat#set"](key, vim.v.count)
 end
 
-vim.keymap.nnoremap{'<leader>qq', silent=true, add_line(false)}
-vim.keymap.nnoremap{'<leader>qn', silent=true, add_note(false)}
+-- {{{ Quickfix list mappings
+vim.keymap.nnoremap{'<leader>qo', silent=true, ':copen<CR>'}
+vim.keymap.nnoremap{'<Plug>QuickfixAdd', function()
+    add_line('<Plug>QuickfixAdd', false)
+end}
+vim.keymap.nmap{'<leader>qq', '<Plug>QuickfixAdd'}
+vim.keymap.nnoremap{'<Plug>QuickfixNote', function()
+    add_note('<Plug>QuickfixNote', false)
+end}
+vim.keymap.nmap{'<leader>qn', '<Plug>QuickfixNote'}
 vim.keymap.nnoremap{'<leader>qc', silent=true, ":Clearquickfix<CR>"}
+-- }}}
 
-vim.keymap.nnoremap{'<leader>ww', silent=true, add_line(true)}
-vim.keymap.nnoremap{'<leader>wn', silent=true, add_note(true)}
+-- {{{ Local list mappings
+vim.keymap.nnoremap{'<leader>wo', silent=true, ':lopen<CR>'}
+vim.keymap.nnoremap{'<Plug>LocallistAdd', function()
+    add_line('<Plug>LocallistAdd', true)
+end}
+vim.keymap.nmap{'<leader>ww', '<Plug>LocallistAdd'}
+vim.keymap.nnoremap{'<Plug>LocallistNote', function()
+    add_note('<Plug>LocallistNote', true)
+end}
+vim.keymap.nmap{'<leader>wn', '<Plug>LocallistNote'}
 vim.keymap.nnoremap{'<leader>wc', silent=true, ":Clearloclist<CR>"}
+-- }}}
 
 -- Creates a mapping for jumping through lists.
+-- @param key(string): the key to map.
+-- @param next(string): the command to execute if there is a next item.
+-- @param wrap(string): the command to execute if there is no next item.
 local function jump_list_mapping(key, next, wrap)
     vim.keymap.nnoremap{key, function()
         util.cmd_and_centre(([[
@@ -139,7 +167,7 @@ function _G.qftf(info)
     else
         items = vim.fn.getloclist(info.winid, {id = info.id, items = 0}).items
     end
-    local limit = 30
+    local limit = 40
     local fname_fmt1, fname_fmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
     local valid_fmt = '%s │%5d:%-3d│%s %s'
     for i = info.start_idx, info.end_idx do
