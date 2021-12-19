@@ -302,12 +302,15 @@ You can **highlight** words with random colours.
 <details>
     <summary>Click to view the mappings</summary>
 
+Note that all these mappings are bound to the current window.
+
 | Mapping      | Description                                              |
 | :---         | :---                                                     |
 | `<leader>ma` | **A**dd current word as a sub-pattern to the highlights. |
 | `<leader>me` | Add an **e**xact match on current term.                  |
 | `<leader>mp` | Add an match by asking for a **p**attern.                |
-| `<leader>mc` | **C**lear all matched patterns on current buffer.        |
+| `<leader>md` | **D**elete **M**atches with fzf search.                  |
+| `<leader>mc` | **C**lear all matched patterns on current window.        |
 
 </details>
 

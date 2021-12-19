@@ -143,3 +143,51 @@ end}
 
 -- Clear all matches of the current buffer.
 vim.keymap.nnoremap{'<leader>mc', vim.fn.clearmatches}
+
+---List all matches and remove by user's selection.
+vim.keymap.nnoremap{'<leader>md', function()
+    local source = {}
+    local groups = {}
+    for _, v in ipairs(mappings) do
+        groups[v.group] = v.color
+    end
+
+    local rt = {}
+
+    local matches = vim.fn.getmatches()
+    for id = #matches, 0, -1 do
+        local v = matches[id]
+        if v and groups[v.group] then
+            table.insert(rt, {
+                id = v.id,
+                pattern = v.pattern,
+                group = v.group,
+            })
+        end
+    end
+    if #rt == 0 then return end
+    table.sort(rt, function(a, b) return a.id < b.id end)
+
+    for id = #rt, 1, -1 do
+        local v = rt[id]
+        if v then
+            local str = string.format('%2d\t%50s\t%20s', v.id, v.pattern, groups[v.group])
+            table.insert(source, str)
+        end
+    end
+
+    local wrap = vim.fn["fzf#wrap"]({
+        source = source,
+        options = '--multi --bind ctrl-a:select-all+accept ' ..
+                    '--layout reverse-list --with-nth=2.. --delimiter="\t"',
+    })
+    wrap["sink*"] = function(list)
+        for _, name in pairs(list) do
+            local id = string.match(name, '^%s*(%d+)')
+            if id ~= nil then
+                vim.fn.matchdelete(id)
+            end
+        end
+    end
+    vim.fn["fzf#run"](wrap)
+end}
