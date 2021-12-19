@@ -1,4 +1,4 @@
-require('astronauta.keymap')
+if not pcall(require, 'astronauta.keymap') then return end
 
 local M = {}
 

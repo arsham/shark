@@ -1,3 +1,5 @@
+vim.opt.termguicolors = true
+pcall(require, 'impatient')
 local packer_bootstrap = false
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -33,12 +35,18 @@ require('packer').startup({
     function(use)
 
         -- {{{ Libraries
-        use 'wbthomason/packer.nvim'
+        use {
+            "wbthomason/packer.nvim",
+            event = "VimEnter",
+        }
         use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
         -- }}}
 
         -- {{{ Core/System utilities
+        use { "nathom/filetype.nvim" }
+        use { "lewis6991/impatient.nvim" }
+
         use 'junegunn/fzf'
 
         use {
@@ -461,7 +469,10 @@ require('packer').startup({
             open_fn = function()
                 return require('packer.util').float({ border = 'single' })
             end
-        }
+        },
+
+        -- Move to lua dir so impatient.nvim can cache it.
+        compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
     },
 })
 

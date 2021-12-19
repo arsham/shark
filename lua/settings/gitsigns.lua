@@ -1,5 +1,5 @@
+if not pcall(require, 'astronauta.keymap') then return end
 local util = require('util')
-require('astronauta.keymap')
 local keymap = vim.keymap
 local gitsigns = require('gitsigns')
 

@@ -1,4 +1,4 @@
-require('astronauta.keymap')
+if not pcall(require, 'astronauta.keymap') then return end
 local util = require('util')
 
 ---Restats the LSP server. Fixes the problem with the LSP server not
