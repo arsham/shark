@@ -130,8 +130,7 @@ for n, tuple in pairs(end_mapping) do
     local key1  = '<M-' .. tuple[1] .. '>'
     keymap.nnoremap{name1, function() change_line_ends(name1, tuple[1]) end}
     keymap.nmap{key1, name1}
-    keymap.inoremap{name1, function() change_line_ends(name1, tuple[1]) end}
-    keymap.imap{key1, name1}
+    keymap.inoremap{key1, function() change_line_ends(name1, tuple[1]) end}
     keymap.vnoremap{name1, function() change_line_ends(name1, tuple[1]) end}
     keymap.vmap{key1, name1}
 
@@ -139,8 +138,7 @@ for n, tuple in pairs(end_mapping) do
     local key2  = '<M-' .. tuple[2] .. '>'
     keymap.nnoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
     keymap.nmap{key2, name2}
-    keymap.inoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
-    keymap.imap{key2, name2}
+    keymap.inoremap{key2, function() change_line_ends(name2, tuple[1], true) end}
     keymap.vnoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
     keymap.vmap{key2, name2}
 end
