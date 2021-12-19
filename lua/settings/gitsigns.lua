@@ -11,7 +11,7 @@ gitsigns.setup {
         topdelete    = {text = '▔', show_count = true},
         changedelete = {text = '▎', show_count = true},
     },
-    sign_priority = 1,
+    sign_priority = 10,
     count_chars = {
         [1]   = "",
         [2]   = "₂",
@@ -28,6 +28,7 @@ gitsigns.setup {
     diff_opts = {
         internal = true,
     },
+    update_debounce = 750,
 }
 
 keymap.nnoremap{']c', function() util.call_and_centre(gitsigns.next_hunk) end}

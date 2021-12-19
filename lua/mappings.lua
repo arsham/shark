@@ -34,10 +34,10 @@ keymap.xnoremap{'>', '>gv'}
 -- Re-indent the whole buffer.
 keymap.nnoremap{'g=', 'gg=Gg``'}
 
--- Inserts empty lines near the cursor.
--- @param count(int): Number of lines to insert.
--- @param add(int): 0 to insert after current line, -1 to insert before current
--- line.
+---Inserts empty lines near the cursor.
+---@param count number  Number of lines to insert.
+---@param add number 0 to insert after current line, -1 to insert before current
+---line.
 local function insert_empty_lines(count, add)
     if count == 0 then count = 1 end
     local lines = {}
@@ -101,7 +101,7 @@ local function change_line_ends(name, char, remove)
         local loc = vim.api.nvim_win_get_cursor(0)
         local line = vim.api.nvim_get_current_line()
         end_of_line(loc[1], line, char, remove)
-    elseif mode == "V" or mode == "CTRL-V" or mode == "\22" then
+    elseif mode == "V" or mode == "CTRL-V" or mode == "v" then
         local start = vim.fn.getpos("v")[2]
         local finish = vim.fn.getcurpos()[2]
         if finish < start then
@@ -184,3 +184,47 @@ keymap.nnoremap{'<leader>jq', ":%!gojq '.'<CR>"}
 
 -- Show help for work under the cursor.
 keymap.nnoremap{'<leader>hh',  ":h <CR>"}
+
+
+---Jumps to the next indentation level equal to current line. It skips empty
+---lines, unless the next non-empty line has a lower indentation level.
+---@param down boolean indicates whether we are jumping down.
+local function jump_indent(down)
+    local cur_loc    = vim.api.nvim_win_get_cursor(0)[1]
+    local last_loc   = cur_loc
+    local cur_indent = vim.fn.indent(cur_loc)
+    -- if jumped and the next line is the same indentation level, stop the
+    -- loop.
+    local jumped      = false
+    local total_lines = vim.api.nvim_buf_line_count(0)
+    local barrier     = down and total_lines or 0
+    local step        = down and 1 or -1
+
+    for i = cur_loc, barrier, step do
+        local line_len = #vim.fn.getline(i)
+        local indent   = vim.fn.indent(i)
+        if line_len == 0 then
+            jumped = true
+        elseif indent < cur_indent then
+            break
+        elseif indent == cur_indent then
+            last_loc = i
+            if jumped then
+                break
+            end
+        end
+    end
+
+    local count = last_loc - cur_loc
+    if count == 0 then
+        return
+    end
+
+    if not down then count = count + 1 end
+    local direction = down and 'j' or 'k'
+    local sequence = string.format("%d%s", count, direction)
+    util.normal('xt', sequence)
+end
+
+vim.keymap.nnoremap{']=', function() jump_indent(true)  end}
+vim.keymap.nnoremap{'[=', function() jump_indent(false) end}

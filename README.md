@@ -167,6 +167,8 @@ The `leader` key is `space`!
 | `<Alt-{>`     | Adds curly brackets at the end of line into insert mode           |
 | `]<space>`    | Inserts [count] empty lines after                                 |
 | `[<space>`    | Inserts [count] empty lines before                                |
+| `]=`          | Jump down along the indents                                       |
+| `[=`          | Jump up along the indents                                         |
 | `<leader>gw`  | **G**reps for current **W**ord in buffer. Populates the locallist |
 | `<leader>sp`  | Toggles **Sp**elling on current buffer                            |
 | `<leader>sf`  | Auto **f**ixes previous misspelled word                           |
