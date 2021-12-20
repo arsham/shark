@@ -2,6 +2,8 @@ if not pcall(require, 'astronauta.keymap') then return end
 local keymap = vim.keymap
 local util = require('util')
 
+-- This options: --tac will reverse the source data.
+
 keymap.nnoremap{'<leader>:', ':Commands<CR>'}
 keymap.nnoremap{'<C-p>',     ':Files<CR>',      silent=true}
 keymap.nnoremap{'<M-p>',     ':Files ~/<CR>',   silent=true}
@@ -11,22 +13,45 @@ keymap.nnoremap{'<M-/>',     ':Lines<CR>',      silent=true}
 
 keymap.nnoremap{'<M-b>', silent=true, function()
     local list = vim.fn.getbufinfo({buflisted = 1})
-    local buf_list = {}
+    local buf_list = {
+        table.concat({'', '', '', 'Buffer', '', 'Filename', ''}, '\t'),
+    }
+    local cur_buf = vim.fn.bufnr('')
+    local alt_buf = vim.fn.bufnr('#')
+
     for _, v in pairs(list) do
+        local name = vim.fn.fnamemodify(v.name, ":~:.")
         local t = {
             tostring(v.bufnr),
-            "   ",
             v.name,
+            v.lnum,
+            string.format('[%d]', v.bufnr),
+            '',
+            name,
+            '',
         }
-        if v.changed > 0 then
-            t[2] = "[+]"
+        local signs = ''
+        if v.bufnr == cur_buf then
+            signs = signs .. '%'
         end
-        table.insert(buf_list, table.concat(t, " "))
+        if v.bufnr == alt_buf then
+            signs = signs .. '#'
+        end
+        t[5] = signs
+        if v.changed > 0 then
+            t[7] = "[+]"
+        end
+        table.insert(buf_list, table.concat(t, "\t"))
     end
 
     local wrapped = vim.fn["fzf#wrap"]({
         source = buf_list,
-        options = [[--prompt "Delete Buffers > " --multi --bind 'ctrl-a:select-all+accept']],
+        options = table.concat({
+            [[--prompt "Delete Buffers > " --exit-0 --multi --ansi --delimiter '\t']],
+            "--with-nth=4.. --bind 'ctrl-a:select-all+accept' --preview-window +{3}+3/2,nohidden",
+            string.format("--preview '%s/preview.sh {2}'", vim.g.fzf_bin_location),
+            '-n 3 --tiebreak=index --header-lines=1',
+        }, ' '),
     })
     wrapped['sink*'] = function(names)
         for _, name in pairs(names) do
