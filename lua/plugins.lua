@@ -176,17 +176,6 @@ require('packer').startup({
         use 'MunifTanjim/nui.nvim'
 
         use {
-            'lukas-reineke/indent-blankline.nvim',
-            config = function()
-                require('indent_blankline').setup {
-                    show_trailing_blankline_indent = false,
-                    show_first_indent_level = false,
-                }
-            end,
-            event = { 'BufRead', 'BufNewFile' },
-        }
-
-        use {
             'stevearc/dressing.nvim',
             config = function()
                 local async_load_plugin = nil
@@ -206,7 +195,7 @@ require('packer').startup({
         }
 
         use {
-            'bronson/vim-trailing-whitespace',
+            'ntpeters/vim-better-whitespace',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 

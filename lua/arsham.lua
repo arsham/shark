@@ -681,8 +681,8 @@ local mappings = {
         guifg = palette.green,
     },
     ExtraWhitespace = {
-        guibg   = palette.darkred,
-        ctermbg = palette.darkred,
+        guifg = palette.base1,
+        guibg = palette.diff_add_fg,
     },
 }
 
@@ -1313,7 +1313,6 @@ local setup = function()
         async_load_plugin:close()
     end))
     async_load_plugin:send()
-    vim.cmd[[ match ExtraWhitespace /\\s\\+$/ ]]
 end
 
 return {

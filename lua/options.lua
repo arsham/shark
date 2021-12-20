@@ -12,8 +12,14 @@ vim.opt.wrap        = false
 vim.opt.whichwrap:append("h,l")
 vim.opt.linebreak = true  -- Wrap lines at convenient points
 
-vim.opt.list           = true
-vim.opt.listchars      = { tab = '  ', trail = '.' }
+vim.opt.list      = true
+vim.opt.listchars = {
+    tab      = '  ',
+    trail    = '·',
+    extends  = '◣',
+    precedes = '◢',
+    nbsp     = '○',
+}
 vim.opt.title          = true
 vim.opt.titlestring:append("%t")
 vim.opt.number         = true
