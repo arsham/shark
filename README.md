@@ -350,6 +350,9 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>P`     | **P**aste from the `+` register (before/above)    |
 | (v) `<leader>p` | **P**aste on selected text without changing "reg  |
 
+If you keep hitting `<Ctrl-/>` the preview window will change width. With
+`Shift-/` you can show and hide the preview window.
+
 When you invoke `<leader>yh` you will be presented with a history of the
 **yanked** items. Upon choosing one, the item will be set to the unnamed
 register and you use **p** from there.

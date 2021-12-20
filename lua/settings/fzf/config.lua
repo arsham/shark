@@ -68,7 +68,7 @@ vim.g.fzf_layout = {
 }
 
 vim.g.fzf_buffers_jump = 1          -- [Buffers] Jump to the existing window if possible
-vim.g.fzf_preview_window = {'right:50%:+{2}-/2,nohidden', 'ctrl-/'}
+vim.g.fzf_preview_window = {'right:50%:+{2}-/2,nohidden', '?'}
 vim.g.fzf_commits_log_options = table.concat({
     [[ --graph --color=always                                    ]],
     [[ --format="%C(yellow)%h%C(red)%d%C(reset)                  ]],
@@ -83,3 +83,5 @@ require('util').augroup{"FZF_FIXES", {
     --     require('util').autocmd{"BufLeave", buffer=true, run="set laststatus=2 showmode ruler"}
     -- end},
 }}
+
+vim.g.fzf_history_dir = vim.env.HOME .. '/.local/share/fzf-history'

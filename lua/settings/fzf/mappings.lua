@@ -45,7 +45,7 @@ keymap.nnoremap{'<C-_>', silent=true, function()
         options = '--layout reverse-list --with-nth=4.. --preview-window ' ..
             'nohidden --delimiter=":" --prompt="Current Buffer> "',
     }
-    local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
+    local preview = vim.fn["fzf#vim#with_preview"](args)
     local rg_cmd = table.concat({
         'rg --with-filename --column',
         '   --line-number --no-heading --color=never --smart-case . ',
@@ -77,11 +77,7 @@ keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict
 ---@param term? string if empty, the search will only happen on the content.
 ---@param opts string options to pass to ripgrep call.
 local function do_rg(term, opts)
-    opts = opts or ''
-    local delimiter = ''
-    if term == '' then
-        delimiter = ' --delimiter : --nth 4..'
-    end
+    local delimiter = term and ' --delimiter : --nth 4..' or ''
     local args = {
         options = '--prompt="Search Files> " --preview-window nohidden' .. delimiter,
     }
@@ -89,7 +85,7 @@ local function do_rg(term, opts)
     local rg_cmd = table.concat({
         'rg --column --line-number --no-heading',
         '   --color=always --smart-case --hidden -g "!.git/" ',
-        opts,
+        opts or '',
         ' -- ',
         vim.fn.shellescape(term),
     }, " ")
