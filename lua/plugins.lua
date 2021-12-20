@@ -75,7 +75,7 @@ require('packer').startup({
             config   = function() require('settings').nvim_tree.config() end,
             event    = { 'BufRead' },
             cmd      = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
-            keys     = { '<leader>kb', '<leader>kf' },
+            keys     = { '<leader>kk', '<leader>kf' },
         }
 
         use {

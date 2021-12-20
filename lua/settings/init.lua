@@ -51,8 +51,9 @@ end
 
 M.nvim_tree = {
     setup = function()
-        vim.g.nvim_tree_quit_on_open    = 1
-        vim.g.nvim_tree_git_hl          = 1
+        vim.g.nvim_tree_quit_on_open = 1
+        vim.g.nvim_tree_git_hl       = 1
+        vim.g.nvim_tree_refresh_wait = 500
 
         vim.g.nvim_tree_icons = {
             lsp = {
@@ -93,11 +94,16 @@ M.nvim_tree = {
             },
             filters = {
                 dotfiles = false,
-                custom = { '.git', 'node_modules', '.cache' },
+                custom   = { '.git', 'node_modules', '.cache' },
+            },
+            git = {
+                enable  = true,
+                ignore  = false,
+                timeout = 500,
             },
         }
 
-        vim.keymap.nnoremap{'<leader>kb', function()
+        vim.keymap.nnoremap{'<leader>kk', function()
             require'nvim-tree'.toggle()
         end, silent=true}
         vim.keymap.nnoremap{'<leader>kf', function()

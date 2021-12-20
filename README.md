@@ -99,7 +99,6 @@ Some plugins are not listed here. You can find the complete list in the
 | [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                                         | Statusline                                             |
 | [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                                   | Fuzzy completion for command mode                      |
 | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                                             | Better quickfix list manager                           |
-| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)                 | Better UI for vim                                      |
 | [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                                           | Better quickfix list manager                           |
 | [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive) and vim-rhubarb                                   | git integration                                        |
 | [mattn/vim-gist](https://github.com/mattn/vim-gist)                                                           | gist integration                                       |
@@ -154,7 +153,7 @@ The `leader` key is `space`!
 
 | Mapping       | Description                                                       |
 | :---          | :---                                                              |
-| `<leader>kb`  | Toggles Neovim tree                                               |
+| `<leader>kk`  | Toggles Neovim tree                                               |
 | `<leader>kf`  | **F**inds current file in the Neovim tree                         |
 | `<Alt-j>`     | Shifts line(s) down one line and format                           |
 | `<Alt-k>`     | Shifts line(s) up one line and format                             |
