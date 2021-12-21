@@ -195,6 +195,11 @@ require('packer').startup({
         }
 
         use {
+            'vim-scripts/visualrepeat',
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+        }
+
+        use {
             'ntpeters/vim-better-whitespace',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }

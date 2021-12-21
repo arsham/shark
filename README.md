@@ -106,6 +106,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                                             |                                                        |
 | [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |                                                        |
 | [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                                       |                                                        |
+| [vim-scripts/visualrepeat](https://github.com/vim-scripts/visualrepeat)                                       | Repeat in visual mode                                  |
 | [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                                         | Case conversion                                        |
 | [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                                         | Text alignment                                         |
 | [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                                           | Multiple cursors                                       |

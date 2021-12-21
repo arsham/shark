@@ -154,10 +154,6 @@ keymap.noremap{'<Leader>P', '"+P'}
 -- select a text, and this will replace it with the " contents.
 keymap.vnoremap{'p', '"_dP'}
 
--- let the visual mode use the period. To add : at the begining of all lines:
--- I:<ESC>j0vG.
-keymap.vnoremap{'.', ':norm.<CR>'}
-
 keymap.nnoremap{'<leader>gw', ':silent lgrep <cword> % <CR>', silent=true}
 
 -- ]s and [s to jump.
