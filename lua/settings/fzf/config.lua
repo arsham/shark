@@ -78,10 +78,6 @@ vim.g.fzf_commits_log_options = table.concat({
 -- fix escape in fzf popup.
 require('util').augroup{"FZF_FIXES", {
     {"FileType", "fzf", run="tnoremap <buffer> <esc> <c-c>"},
-    -- {"FileType", "fzf", run=function()
-    --     vim.cmd("set laststatus=0 noshowmode noruler")
-    --     require('util').autocmd{"BufLeave", buffer=true, run="set laststatus=2 showmode ruler"}
-    -- end},
 }}
 
 vim.g.fzf_history_dir = vim.env.HOME .. '/.local/share/fzf-history'

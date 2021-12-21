@@ -97,6 +97,8 @@ end}
 
 -- Replace the default dictionary completion with fzf-based fuzzy completion.
 keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
+keymap.imap{'<c-x><c-f>', '<plug>(fzf-complete-path)'}
+keymap.imap{'<c-x><c-l>', '<plug>(fzf-complete-line)'}
 
 ---Do a ripgrep search with a fzf search interface.
 ---@param term? string if empty, the search will only happen on the content.

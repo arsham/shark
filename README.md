@@ -343,6 +343,8 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>gf`       | **GFiles**                                             |
 | `<leader>mm`       | **Marks**                                              |
 | `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
+| `<Ctrl-x><Ctrl-f>` | Search in **f**iles                                    |
+| `<Ctrl-x><Ctrl-l>` | Search in **l**ines                                    |
 
 | Yank Mappings   | Description                                       |
 | :---            | :---                                              |
