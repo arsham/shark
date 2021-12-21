@@ -221,10 +221,7 @@ require('packer').startup({
 
         use {
             'junegunn/vim-easy-align',
-            config = function()
-                vim.keymap.xmap{'ga', '<Plug>(EasyAlign)'}
-                vim.keymap.nmap{'ga', '<Plug>(EasyAlign)'}
-            end,
+            config = function() require('settings.easyalign') end,
             keys = { 'ga' },
         }
 
