@@ -147,58 +147,57 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **a**           | **A**ll, or disabling certain constraints                  |
 | **]**           | Jumps to the next item                                     |
 | **[**           | Jumps to the previous item                                 |
+| **h**           | **H**unk                                                   |
 
 The `leader` key is `space`!
 
 <details>
     <summary>Click to view the mappings</summary>
 
-| Mapping       | Description                                                       |
-| :---          | :---                                                              |
-| `<leader>kk`  | (Also `<leader><leader>`)Toggles Neovim tree                      |
-| `<leader>kf`  | **F**inds current file in the Neovim tree                         |
-| `<Alt-j>`     | Shifts line(s) down one line and format                           |
-| `<Alt-k>`     | Shifts line(s) up one line and format                             |
-| `<Alt-,>`     | Adds `,` at the end of current line without moving                |
-| `<S-Alt-,>`   | Removes `,` from the end of current line without moving           |
-| `<Alt-.>`     | Adds `.` at the end of current line without moving                |
-| `<S-Alt-,>`   | Removes `.` from the end of current line without moving           |
-| `<Alt-;>`     | Adds `;` at the end of current line without moving                |
-| `<S-Alt-,>`   | Removes `;` from the end of current line without moving           |
-| `<Alt-{>`     | Adds curly brackets at the end of line into insert mode           |
-| `]<space>`    | Inserts [count] empty lines after                                 |
-| `[<space>`    | Inserts [count] empty lines before                                |
-| `]=`          | Jump down along the indents                                       |
-| `[=`          | Jump up along the indents                                         |
-| `<leader>gw`  | **G**reps for current **W**ord in buffer. Populates the locallist |
-| `<leader>sp`  | Toggles **Sp**elling on current buffer                            |
-| `<leader>sf`  | Auto **f**ixes previous misspelled word                           |
-| `z=`          | Show spell recommendations                                        |
-| `g=`          | Re-indents the hole buffer                                        |
-| `]c`          | (gitsigns) Next hunk                                              |
-| `[c`          | (gitsigns) Previous hunk                                          |
-| `<leader>hb`  | (gitsigns) **B**lame line                                         |
-| `<leader>hs`  | (gitsigns) **S**tage **h**unk                                     |
-| `<leader>hl`  | (gitsigns) **S**tage **l**ine                                     |
-| `<leader>hu`  | (gitsigns) **U**nstage **h**unk                                   |
-| `<leader>hr`  | (gitsigns) **R**eset **h**unk                                     |
-| `<leader>hR`  | (gitsigns) **R**eset buffer                                       |
-| `<leader>hp`  | (gitsigns) **P**review **h**unk                                   |
-| `<leader>hh`  | Opens the **help** for current word                               |
-| `<leader>cs`  | Search for **C**heat**S**heets with cht.sh service                |
-| `<leader>cq`  | **C**heat**S**heets with quotes                                   |
-| `<leader>cn`  | **C**heat**S**heet **N**ext example                               |
-| `<Alt-Left>`  | Reduce vertical size                                              |
-| `<Alt-Right>` | Increase vertical size                                            |
-| `<Alt-Up>`    | Reduce horizontal size                                            |
-| `<Alt-Down>`  | Increase horizontal size                                          |
-| `<Esc><Esc>`  | Clear hlsearch                                                    |
-| `<leader>1`   | Diff get from LOCAL (left)                                        |
-| `<leader>2`   | Diff get from BASE (middle)                                       |
-| `<leader>3`   | Diff get from REMOTE (right)                                      |
-
-All operations with adding/removing `.`, `,`, `;` are **repeatable** and can be
-operated on visually selected lines.
+| Mapping            | Description                                                          |
+| :---               | :---                                                                 |
+| `<leader>kk`       | Toggles Neovim tree                                                  |
+| `<leader><leader>` | Toggles Neovim tree                                                  |
+| `<leader>kf`       | **F**inds current file in the Neovim tree                            |
+| `<Alt-j>`          | Shifts line(s) down one line and format                              |
+| [count]`<Alt-k>`   | Shifts line(s) up one line and format                                |
+| `<Alt-,>`          | Adds `,` at the end of current line without moving (repeatable)      |
+| `<S-Alt-,>`        | Removes `,` from the end of current line without moving (repeatable) |
+| `<Alt-.>`          | Adds `.` at the end of current line without moving (repeatable)      |
+| `<S-Alt-,>`        | Removes `.` from the end of current line without moving (repeatable) |
+| `<Alt-;>`          | Adds `;` at the end of current line without moving (repeatable)      |
+| `<S-Alt-,>`        | Removes `;` from the end of current line without moving (repeatable) |
+| `<Alt-{>`          | Adds curly brackets at the end of line into insert mode (repeatable) |
+| [count]`]<space>`  | Inserts [count] empty lines after                                    |
+| [count]`[<space>`  | Inserts [count] empty lines before                                   |
+| `]=`               | Jump down along the indents                                          |
+| `[=`               | Jump up along the indents                                            |
+| `<leader>gw`       | **G**reps for current **W**ord in buffer. Populates the locallist    |
+| `<leader>sp`       | Toggles **Sp**elling on current buffer                               |
+| `<leader>sf`       | Auto **f**ixes previous misspelled word                              |
+| `z=`               | Show spell recommendations                                           |
+| `g=`               | Re-indents the hole buffer                                           |
+| `]c`               | (gitsigns) Next hunk                                                 |
+| `[c`               | (gitsigns) Previous hunk                                             |
+| `<leader>hb`       | (gitsigns) **B**lame line                                            |
+| `<leader>hs`       | (gitsigns) **S**tage **h**unk                                        |
+| `<leader>hl`       | (gitsigns) **S**tage **l**ine                                        |
+| `<leader>hu`       | (gitsigns) **U**nstage **h**unk                                      |
+| `<leader>hr`       | (gitsigns) **R**eset **h**unk                                        |
+| `<leader>hR`       | (gitsigns) **R**eset buffer                                          |
+| `<leader>hp`       | (gitsigns) **P**review **h**unk                                      |
+| `<leader>hh`       | Opens the **help** for current word                                  |
+| `<leader>cs`       | Search for **C**heat**S**heets with cht.sh service                   |
+| `<leader>cq`       | **C**heat**S**heets with quotes                                      |
+| `<leader>cn`       | **C**heat**S**heet **N**ext example                                  |
+| `<Alt-Left>`       | Reduce vertical size                                                 |
+| `<Alt-Right>`      | Increase vertical size                                               |
+| `<Alt-Up>`         | Reduce horizontal size                                               |
+| `<Alt-Down>`       | Increase horizontal size                                             |
+| `<Esc><Esc>`       | Clear hlsearch                                                       |
+| `<leader>1`        | Diff get from LOCAL (left)                                           |
+| `<leader>2`        | Diff get from BASE (middle)                                          |
+| `<leader>3`        | Diff get from REMOTE (right)                                         |
 
 To use the **C**heat**S**heet functionality, type your query in the buffer and
 invoke the key binding. The response will be inserted on the next lint in the
@@ -346,13 +345,13 @@ Most actions can apply to multiple selected items if possible.
 | `<Ctrl-x><Ctrl-f>` | Search in **f**iles                                    |
 | `<Ctrl-x><Ctrl-l>` | Search in **l**ines                                    |
 
-| Yank Mappings   | Description                                       |
-| :---            | :---                                              |
-| `<leader>yh`    | List **Y**ank **H**istory)                        |
-| `<leader>y`     | **Y**ank to the `+` register (external clipboard) |
-| `<leader>p`     | **P**aste from the `+` register                   |
-| `<leader>P`     | **P**aste from the `+` register (before/above)    |
-| (v) `<leader>p` | **P**aste on selected text without changing "reg  |
+| Yank Mappings | Description                                       |
+| :---          | :---                                              |
+| `<leader>yh`  | List **Y**ank **H**istory)                        |
+| `<leader>y`   | **Y**ank to the `+` register (external clipboard) |
+| `<leader>p`   | **P**aste from the `+` register                   |
+| `<leader>P`   | **P**aste from the `+` register (before/above)    |
+| (v) `p`       | **P**aste on selected text without changing "reg  |
 
 If you keep hitting `<Ctrl-/>` the preview window will change width. With
 `Shift-/` you can show and hide the preview window.
