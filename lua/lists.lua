@@ -110,6 +110,9 @@ local function add_line(name, is_local)
     vim.fn["repeat#set"](key, vim.v.count)
 end
 
+---Close quickfix list and local list windows.
+vim.keymap.nnoremap{'<leader>cc', silent=true, ':cclose<bar>lclose<CR>'}
+
 ---{{{ Quickfix list mappings
 vim.keymap.nnoremap{'<leader>qo', silent=true, ':copen<CR>'}
 vim.keymap.nnoremap{'<Plug>QuickfixAdd', function()

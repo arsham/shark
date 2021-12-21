@@ -265,6 +265,7 @@ you how many items you have in a list.
 
 | Mapping      | Description                                                              |
 | :---         | :---                                                                     |
+| `<leader>cc` | Close both quickfix and local list windows                               |
 | `<leader>qq` | Add current line and column to the **q**uickfix list.                    |
 | `<leader>qn` | Add current line and column with your **n**ote to the **q**uickfix list. |
 | `<leader>qo` | **O**pen the **q**uickfix list.                                          |
