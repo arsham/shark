@@ -109,6 +109,9 @@ M.nvim_tree = {
         vim.keymap.nnoremap{'<leader>kf', function()
             require'nvim-tree'.find_file(true)
         end, silent=true}
+        vim.keymap.nnoremap{'<leader><leader>', function()
+            require'nvim-tree'.find_file(true)
+        end, silent=true}
     end
 }
 

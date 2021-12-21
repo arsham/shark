@@ -155,7 +155,7 @@ The `leader` key is `space`!
 
 | Mapping       | Description                                                       |
 | :---          | :---                                                              |
-| `<leader>kk`  | Toggles Neovim tree                                               |
+| `<leader>kk`  | (Also `<leader><leader>`)Toggles Neovim tree                      |
 | `<leader>kf`  | **F**inds current file in the Neovim tree                         |
 | `<Alt-j>`     | Shifts line(s) down one line and format                           |
 | `<Alt-k>`     | Shifts line(s) up one line and format                             |
