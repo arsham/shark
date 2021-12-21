@@ -451,6 +451,12 @@ require('packer').startup({
             ft = 'tmux',
         }
 
+        use {
+            ---creates diagrams from text. Requires diagon from snap.
+            'willchao612/vim-diagon',
+            cmd = 'Diagon',
+        }
+
         -- }}}
         if packer_bootstrap then
             require("packer").sync()
