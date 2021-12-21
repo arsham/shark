@@ -15,22 +15,36 @@ end}
 command{"Reload", function()
     local loc = vim.env['MYVIMRC']
     local base_dir = require('plenary.path'):new(loc):parents()[1]
-    local wrap = vim.fn["fzf#wrap"]({
-        source = ('fd . -e lua %s'):format(base_dir),
-        options = '--multi --bind ctrl-a:select-all+accept',
+    local got = string.split(vim.fn.system(('fd . -e lua -t f -L %s'):format(base_dir)), '\n')
+    local source = {}
+    for _, name in ipairs(got) do
+        table.insert(source, ('%s\t%s'):format(name, vim.fn.fnamemodify(name, ":~:.")))
+    end
+
+    local wrapped = vim.fn["fzf#wrap"]({
+        source = source,
+        options = table.concat({
+            '--prompt="Open Config> " +m',
+            ' --with-nth=2.. --delimiter="\t"',
+            '--multi --bind ctrl-a:select-all+accept',
+            '--preview-window +{3}+3/2,nohidden',
+            '--preview', preview_sh,
+            '-n 1 --tiebreak=index',
+        }, ' '),
     })
-    wrap["sink*"] = function(list)
+    wrapped["sink*"] = function(list)
         for _, name in pairs(list) do
+            name = name:match('^[^\t]*')
             if name ~= "" then
                 vim.cmd(("luafile %s"):format(name))
             end
         end
     end
-    vim.fn["fzf#run"](wrap)
+    vim.fn["fzf#run"](wrapped)
 end}
 
 command{"Config", function()
-    local got = string.split(vim.fn.system('fd . -t f ~/.config/nvim'), '\n')
+    local got = string.split(vim.fn.system('fd . -t f -F ~/.config/nvim'), '\n')
     local source = {}
     for _, name in ipairs(got) do
         table.insert(source, ('%s\t%s'):format(name, vim.fn.fnamemodify(name, ":~:.")))
