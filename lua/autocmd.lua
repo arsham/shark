@@ -91,6 +91,7 @@ util.augroup{"FILETYPE_COMMANDS", {
     end},
 
     {"BufNewFile,BufRead", ".*aliases", run=function() vim.bo.filetype = 'sh' end},
+    {"BufNewFile,BufRead", "Makefile*", run=function() vim.bo.filetype = 'make' end},
 
     {"TextYankPost", "*", docs="highlihgt yanking", run=function()
         vim.highlight.on_yank{ higroup = "Substitute", timeout = 150 }

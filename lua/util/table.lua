@@ -62,7 +62,7 @@ function table.contains(tbl, val)
     return false
 end
 
----Reverse the table.
+---Return a reversed the table.
 ---@param t table
 ---@return table
 function table.reverse(t)

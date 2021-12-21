@@ -114,6 +114,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                                             |                                                        |
 | [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                                               | Better notification UI                                 |
 | [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                                               | UI component                                           |
+| [mbbill/undotree](https://github.com/mbbill/undotree)                                                         | Undo tree browser                                      |
 | [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                                        |
 | [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                                        |
 | [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)                               |                                                        |

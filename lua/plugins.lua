@@ -96,6 +96,18 @@ require('packer').startup({
             'numToStr/Navigator.nvim',
             config = function() require('settings').navigator() end,
         }
+
+        use {
+            'mbbill/undotree',
+            config = function()
+                vim.g.undotree_CustomUndotreeCmd  = 'vertical 40 new'
+                vim.g.undotree_CustomDiffpanelCmd = 'botright 15 new'
+                vim.keymap.nnoremap{'<leader>u', ':UndotreeToggle<CR>', silent=true}
+            end,
+            branch = 'search',
+            cmd    = { 'UndotreeShow', 'UndotreeToggle' },
+            keys   = { '<leader>u' },
+        }
         -- }}}
 
         -- {{{ git
@@ -141,6 +153,7 @@ require('packer').startup({
         use {
             'famiu/feline.nvim',
             cond   = status_plugin == 'feline',
+            after = 'nvim-web-devicons',
             config = function() require('statusline.feline') end,
         }
 
