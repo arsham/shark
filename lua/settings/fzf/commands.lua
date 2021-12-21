@@ -1,4 +1,5 @@
 local command = require('util').command
+local preview_sh = string.format("'%s/preview.sh {1}'", vim.g.fzf_bin_location)
 
 command{"Notes",    "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
 command{"Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", attrs="-bang"}
@@ -29,11 +30,29 @@ command{"Reload", function()
 end}
 
 command{"Config", function()
+    local got = string.split(vim.fn.system('fd . -t f ~/.config/nvim'), '\n')
+    local source = {}
+    for _, name in ipairs(got) do
+        table.insert(source, ('%s\t%s'):format(name, vim.fn.fnamemodify(name, ":~:.")))
+    end
+
     local wrapped = vim.fn["fzf#wrap"]({
-        source = 'fd . ~/.config/nvim',
-        options = '--multi --bind ctrl-a:select-all+accept',
+        source = source,
+        options = table.concat({
+            '--prompt="Open Config> " +m',
+            ' --with-nth=2.. --delimiter="\t"',
+            "--preview-window +{3}+3/2,nohidden",
+            '--preview', preview_sh,
+            '-n 1 --tiebreak=index',
+        }, ' '),
     })
-    wrapped['sink*'] = nil
+    wrapped["sink"] = function(filename)
+        filename = filename:match('^[^\t]*')
+        if filename ~= '' then
+            vim.cmd(':e ' .. filename)
+        end
+    end
+    wrapped["sink*"] = function() end
     vim.fn["fzf#run"](wrapped)
 end}
 
@@ -78,7 +97,7 @@ command{"MarksDelete", function()
             '--prompt="Delete Mark> " --multi --header-lines=1',
             '--bind ctrl-a:select-all+accept --with-nth=2.. --delimiter="\t"',
             "--preview-window +{3}+3/2,nohidden",
-            string.format("--preview '%s/preview.sh {1}'", vim.g.fzf_bin_location),
+            '--preview', preview_sh,
             '-n 3 --tiebreak=index',
         }, ' '),
     })
