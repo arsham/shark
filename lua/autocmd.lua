@@ -65,6 +65,20 @@ util.augroup{"SPECIAL_SETTINGS", {
 
 }}
 
+if vim.fn.exists('$TMUX') == 1 then
+    util.augroup{"TMUX_RENAME", {
+        {'BufEnter', '*', function()
+            if vim.bo.buftype == '' then
+                local bufname = vim.fn.expand('%:t:S')
+                vim.fn.system('tmux rename-window ' .. bufname)
+            end
+        end},
+        {'VimLeave', '*', function()
+            vim.fn.system('tmux set-window automatic-rename on')
+        end},
+    }}
+end
+
 util.augroup{"FILETYPE_COMMANDS", {
     {events="Filetype", targets="python,proto", run=function()
         vim.bo.tabstop = 4
