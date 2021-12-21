@@ -45,21 +45,42 @@ command{"MarksDelete", function()
         v.file = vim.fn.bufname(bufnr)
         table.insert(list, v)
     end
+    local items = {}
+    for _, v in pairs(list) do
+        table.insert(items, {
+            show_name = vim.fn.fnamemodify(v.file, ":~:."),
+            mark = string.sub(v.mark, 2, 2),
+            line = v.pos[2],
+            col = v.pos[3],
+            file = v.file,
+        })
+    end
 
     local mark_list = {
-        ("mark %5s %3s %s"):format('line', 'col', 'file/text'),
+        ("666\tmark\t%5s\t%3s\t%s"):format('line', 'col', 'file/text'),
     }
-    for _, item in pairs(list) do
+    for _, item in pairs(items) do
         if string.match(string.lower(item.mark), '[a-z]') then
-            local str = (" %s %5d %3d %s"):format(
-                string.sub(item.mark, 2, 2), item.pos[2], item.pos[3], item.file)
+            local str = ("%s:%d\t%s\t%5d\t%3d\t%s"):format(
+                item.show_name, item.line,
+                item.mark,
+                item.line,
+                item.col,
+                item.file
+            )
             table.insert(mark_list, str)
         end
     end
 
     local wrapped = vim.fn["fzf#wrap"]({
         source = mark_list,
-        options = '--multi --bind ctrl-a:select-all+accept --header-lines=1 --prompt="Delete Mark> "',
+        options = table.concat({
+            '--prompt="Delete Mark> " --multi --header-lines=1',
+            '--bind ctrl-a:select-all+accept --with-nth=2.. --delimiter="\t"',
+            "--preview-window +{3}+3/2,nohidden",
+            string.format("--preview '%s/preview.sh {1}'", vim.g.fzf_bin_location),
+            '-n 3 --tiebreak=index',
+        }, ' '),
     })
     wrapped['sink*'] = function(names)
         for _, name in pairs(names) do
