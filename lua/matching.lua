@@ -142,7 +142,20 @@ vim.keymap.nnoremap{'<leader>mp', function()
 end}
 
 -- Clear all matches of the current buffer.
-vim.keymap.nnoremap{'<leader>mc', vim.fn.clearmatches}
+vim.keymap.nnoremap{'<leader>mc', function()
+    local groups = {}
+    for _, v in ipairs(mappings) do
+        groups[v.group] = true
+    end
+
+    local matches = vim.fn.getmatches()
+    for id in ipairs(matches) do
+        local v = matches[id]
+        if v and groups[v.group] then
+            vim.fn.matchdelete(v.id)
+        end
+    end
+end}
 
 ---List all matches and remove by user's selection.
 vim.keymap.nnoremap{'<leader>md', function()
