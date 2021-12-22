@@ -57,6 +57,7 @@ table.insert(components.active[1], {
 table.insert(components.active[1], {
     provider      = 'git_root',
     enabled       = function() return require('feline.providers.git').git_info_exists() end,
+    priority      = 10,
     truncate_hide = true,
     hl            = left_ribbon_hl,
     left_sep = {
@@ -68,6 +69,7 @@ table.insert(components.active[1], {
 table.insert(components.active[1], {
     provider      = 'git_branch',
     enabled       = function() return require('feline.providers.git').git_info_exists() end,
+    priority      = 9,
     truncate_hide = true,
     hl            = left_ribbon_hl,
     left_sep = {
@@ -191,6 +193,7 @@ table.insert(components.active[3], {
     provider      = 'lsp_client_names',
     enabled       = function() return lsp.is_lsp_attached() end,
     hl            = right_ribbon_hl,
+    priority      = 3,
     truncate_hide = true,
 })
 
@@ -324,6 +327,8 @@ table.insert(components.active[3], {
         val.style = 'bold'
         return val
     end,
+    priority      = 7,
+    truncate_hide = true,
     right_sep = {
         str = ' ',
         hl = {
@@ -366,6 +371,7 @@ table.insert(components.active[3], {
     enabled = function()
         return #vim.fn.getqflist() > 0
     end,
+    priority      = 10,
     truncate_hide = true,
     hl = function()
         return {
@@ -376,11 +382,12 @@ table.insert(components.active[3], {
     end,
 })
 
-local locallist_conf = {
+table.insert(components.active[3], {
     provider = 'locallist_count',
     enabled = function()
         return #vim.fn.getloclist(0) > 0
     end,
+    priority      = 10,
     truncate_hide = true,
     hl = function()
         return {
@@ -389,8 +396,7 @@ local locallist_conf = {
             style = 'bold',
         }
     end,
-}
-table.insert(components.active[3], locallist_conf)
+})
 
 table.insert(components.active[3], {
     provider = 'position',
@@ -436,17 +442,77 @@ table.insert(components.inactive[1], {
     left_sep = {
         str = 'github_icon',
         hl = {
-            fg    = 'white',
-            bg    = 'short_bg',
-            style = 'bold'
+            fg = 'white',
+            bg = 'short_bg',
         },
     },
     right_sep = {
-        str = "slant_right_2",
+        str = " ",
         hl = {
-            fg    = 'short_bg',
-            bg    = 'mid_bg',
-            style = 'bold'
+            fg = 'white',
+            bg = 'mid_bg',
+        },
+    },
+})
+
+table.insert(components.inactive[1], {
+    provider      = 'git_branch',
+    enabled       = function() return require('feline.providers.git').git_info_exists() end,
+    truncate_hide = true,
+    hl = {
+        fg    = 'white',
+        bg = 'mid_bg',
+    },
+    left_sep = {
+        fg = 'white',
+        bg = 'short_bg',
+    },
+    right_sep = {
+        fg = 'white',
+        bg = 'short_bg',
+    },
+})
+
+
+table.insert(components.inactive[1], {
+    provider = 'git_diff_added',
+    enabled  = function() return require('feline.providers.git').git_info_exists() end,
+    hl = {
+        fg = 'white',
+        bg = 'mid_bg',
+    },
+})
+
+table.insert(components.inactive[1], {
+    provider = 'git_diff_changed',
+    enabled  = function() return require('feline.providers.git').git_info_exists() end,
+    hl = {
+        fg = 'white',
+        bg = 'mid_bg',
+    },
+})
+
+table.insert(components.inactive[1], {
+    provider = 'git_diff_removed',
+    enabled  = function() return require('feline.providers.git').git_info_exists() end,
+    hl = {
+        fg = 'white',
+        bg = 'mid_bg',
+    },
+})
+
+-- left angle
+table.insert(components.inactive[1], {
+    provider = ' ',
+    hl = {
+        fg = 'white',
+        bg = 'mid_bg',
+    },
+    right_sep = {
+        str = 'slant_right_2',
+        hl = {
+            fg = 'mid_bg',
+            bg = 'short_bg',
         },
     },
 })
@@ -507,7 +573,20 @@ table.insert(components.inactive[3], {
     }
 })
 
-table.insert(components.inactive[3], locallist_conf)
+table.insert(components.inactive[3], {
+    provider = 'locallist_count',
+    enabled = function()
+        return #vim.fn.getloclist(0) > 0
+    end,
+    priority      = 10,
+    truncate_hide = true,
+    hl = function()
+        return {
+            fg = 'purple',
+            bg = 'green_pale',
+        }
+    end,
+})
 
 table.insert(components.inactive[3], {
     provider = 'position',
