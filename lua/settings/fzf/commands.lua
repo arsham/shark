@@ -44,7 +44,8 @@ command{"Reload", function()
 end}
 
 command{"Config", function()
-    local got = string.split(vim.fn.system('fd . -t f -F ~/.config/nvim'), '\n')
+    local path = vim.fn.expand('~/.config/nvim')
+    local got = vim.fn.systemlist({'fd', '.', '-t', 'f', '-F', path})
     local source = {}
     for _, name in ipairs(got) do
         table.insert(source, ('%s\t%s'):format(name, vim.fn.fnamemodify(name, ":~:.")))
@@ -60,13 +61,14 @@ command{"Config", function()
         }, ' '),
         placeholder = "{1}",
     })
-    wrapped["sink"] = function(filename)
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    preview["sink*"] = function() end
+    preview["sink"] = function(filename)
         filename = filename:match('^[^\t]*')
         if filename ~= '' then
             vim.cmd(':e ' .. filename)
         end
     end
-    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     vim.fn["fzf#run"](preview)
 end}
 
@@ -138,7 +140,7 @@ end}
 
 command{"GGrep", attrs="-bang -nargs=*", function(term)
     local preview = vim.fn["fzf#vim#with_preview"]({
-        dir = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+        dir = vim.fn.systemlist({'git', 'rev-parse', '--show-toplevel'})[1]
     })
     vim.fn["fzf#vim#grep"](
         'git grep --line-number -- ' .. vim.fn.shellescape(term),
@@ -160,7 +162,7 @@ end}
 command{"ArgDelete", "ArgsDelete"}
 
 command{"ArgAdd", function()
-    local list = vim.fn.systemlist('fd . -t f')
+    local list = vim.fn.systemlist({'fd', '.', '-t', 'f'})
     local args = vim.fn.argv()
     local seen = {}
     local files = {}
