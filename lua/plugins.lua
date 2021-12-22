@@ -21,7 +21,6 @@ augroup PACKER_RELOAD
 augroup END
 ]]
 
-local status_plugin = 'feline'
 local colorizer_ft = {
     'css',
     'scss',
@@ -142,15 +141,7 @@ require('packer').startup({
         use 'kyazdani42/nvim-web-devicons'
 
         use {
-            'glepnir/galaxyline.nvim',
-            branch = 'main',
-            cond   = status_plugin == 'galaxyline',
-            config = function() require('statusline.galaxyline') end,
-        }
-
-        use {
             'famiu/feline.nvim',
-            cond   = status_plugin == 'feline',
             after = 'nvim-web-devicons',
             config = function() require('statusline.feline') end,
         }
