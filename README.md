@@ -394,6 +394,7 @@ There are a few added commands to what fzf provides.
 | GGrep       | Run **git grep**                           |
 | Marks       | Show marks with preview                    |
 | MarksDelete | Delete marks                               |
+| Worktree    | (Also WT) switches between git worktrees   |
 | Todo        | List **todo**/**fixme** lines              |
 
 </details>

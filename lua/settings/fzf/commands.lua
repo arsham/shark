@@ -204,3 +204,18 @@ command{"Checkout", attrs="-bang -nargs=0", docs="checkout a branch", function()
     }
     vim.fn["fzf#vim#grep"](cmd, 0, opts)
 end}
+
+---Switch git worktrees. It creates a new tab in the new location.
+command{"Worktree", docs="switch git worktree", function()
+    local cmd = "git worktree list | cut -d' ' -f1"
+    local wrapped = vim.fn["fzf#wrap"]({
+        source = cmd,
+        options = {'--no-multi'},
+    })
+    wrapped['sink*'] = function(dir)
+        local str = string.format("tabnew | tcd %s", dir[2])
+        vim.cmd(str)
+    end
+    vim.fn["fzf#run"](wrapped)
+end}
+command{'WT', 'Worktree'}
