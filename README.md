@@ -366,9 +366,9 @@ you can invoke one of these secondary actions:
 
 | Mapping | Description                        |
 | :---    | :---                               |
-| `/`     | To search in the lines.            |
-| `@`     | To search in ctags or lsp symbols. |
-| `:`     | To go to a specific line.          |
+| `alt-/` | To search in the lines.            |
+| `alt-#` | To search in ctags or lsp symbols. |
+| `alt-:` | To go to a specific line.          |
 | `alt-q` | Add items to the quickfix list.    |
 
 Note that if a `LSP` server is not attached to the buffer, it will fall back to
@@ -444,8 +444,6 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 | `[f`          | Jumps to the start of previous **f**unction                |
 | `]b`          | Jumps to the start of next **b**lock                       |
 | `[b`          | Jumps to the start of previous **b**lock                   |
-| `<leader>.a`  | Swap parameter to right                                    |
-| `<leader>,a`  | Swap parameter to left                                     |
 | `<leader>.f`  | Swap **f**unction to next                                  |
 | `<leader>,f`  | Swap **f**unction to previous                              |
 | `<Alt-n>`     | Initiate **n**ode selection                                |

@@ -51,9 +51,9 @@ vim.g.fzf_action = {
     ['ctrl-x'] = 'split',
     ['ctrl-v'] = 'vsplit',
     ['alt-q']  = set_qf_list,
-    ['@']      = goto_def,
-    [':']      = goto_line,
-    ['/']      = search_file,
+    ['alt-#']  = goto_def,
+    ['alt-:']  = goto_line,
+    ['alt-/']  = search_file,
 }
 
 vim.g.fzf_commands_expect = 'enter'
