@@ -325,7 +325,7 @@ Most actions can apply to multiple selected items if possible.
 
 | Mapping            | Description                                            |
 | :---               | :---                                                   |
-| `<Ctrl-p>`         | File list in current project. (See noted)              |
+| `<Ctrl-p>`         | File list in current folder.                           |
 | `<Alt-p>`          | File list in home folder.                              |
 | `<Ctrl-b>`         | **B**uffer list.                                       |
 | `<Alt-b>`          | Delete **b**uffers from the buffer list.               |
@@ -356,11 +356,6 @@ Most actions can apply to multiple selected items if possible.
 
 If you keep hitting `<Ctrl-/>` the preview window will change width. With
 `Shift-/` you can show and hide the preview window.
-
-`<Ctrl-p>` will sort the results with proximity to the current file if there
-are any open. It requires
-[proximity-sort](https://github.com/jonhoo/proximity-sort) program, otherwise
-it falls back to default.
 
 When you invoke `<leader>yh` you will be presented with a history of the
 **yanked** items. Upon choosing one, the item will be set to the unnamed
