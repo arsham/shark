@@ -14,7 +14,7 @@ end}
 command{"Reload", function()
     local loc = vim.env['MYVIMRC']
     local base_dir = require('plenary.path'):new(loc):parents()[1]
-    local got = string.split(vim.fn.system(('fd . -e lua -t f -L %s'):format(base_dir)), '\n')
+    local got = vim.fn.systemlist({'fd', '.', '-e', 'lua', '-t', 'f', '-L', base_dir})
     local source = {}
     for _, name in ipairs(got) do
         table.insert(source, ('%s\t%s'):format(name, vim.fn.fnamemodify(name, ":~:.")))
@@ -31,7 +31,8 @@ command{"Reload", function()
         }, ' '),
         placeholder = "{1}",
     })
-    wrapped["sink*"] = function(list)
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    preview["sink*"] = function(list)
         for _, name in pairs(list) do
             name = name:match('^[^\t]*')
             if name ~= "" then
@@ -39,7 +40,6 @@ command{"Reload", function()
             end
         end
     end
-    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     vim.fn["fzf#run"](preview)
 end}
 
