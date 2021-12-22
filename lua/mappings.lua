@@ -147,9 +147,10 @@ end
 keymap.inoremap{'<M-{>', '<Esc>A {<CR>}<Esc>O'}
 keymap.nnoremap{'<M-{>', 'A {<CR>}<Esc>O'}
 
-keymap.noremap{'<Leader>y', '"+y'}
-keymap.noremap{'<Leader>p', '"+p'}
-keymap.noremap{'<Leader>P', '"+P'}
+keymap.nnoremap{'<Leader>y', '"+y'}
+keymap.xnoremap{'<Leader>y', '"+y'}
+keymap.nnoremap{'<Leader>p', '"+p'}
+keymap.nnoremap{'<Leader>P', '"+P'}
 
 -- select a text, and this will replace it with the " contents.
 keymap.vnoremap{'p', '"_dP'}
