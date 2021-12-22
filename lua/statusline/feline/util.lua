@@ -41,6 +41,7 @@ M.mode_mappings = {
     ['niI'] = {'(Normal)',     'I'},
     ['niR'] = {'(Normal)',     'R'},
     ['niV'] = {'(Normal)',     'V'},
+    ['nt']  = {'Normal',       'T'},
     ['v']   = {'Visual',       'C'},
     ['V']   = {'V·Line',       'L'},
     ['']  = {'V·Block',      'B'},

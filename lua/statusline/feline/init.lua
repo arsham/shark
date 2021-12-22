@@ -613,7 +613,7 @@ table.insert(components.inactive[3], {
 })
 
 require('feline').setup({
-    colors           = util.colors,
+    theme            = util.colors,
     default_bg       = util.colors.bg,
     default_fg       = util.colors.fg,
     vi_mode_colors   = util.vi_mode_colors,
