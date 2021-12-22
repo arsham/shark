@@ -69,7 +69,7 @@ command{"InstallDependencies", function()
 
                 count = count + 1
                 if count == total then
-                    local str =  "yay -S ripgrep bat ccls words-insane ctags python-pip the_silver_searcher && snap install diagon"
+                    local str =  "yay -S ripgrep bat ccls words-insane ctags python-pip the_silver_searcher && snap install diagon proximity-sort"
                     vim.schedule(function()
                         vim.fn.setreg('+', str)
                     end)

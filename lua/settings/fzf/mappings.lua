@@ -4,8 +4,29 @@ local util = require('util')
 
 -- This options: --tac will reverse the source data.
 
+---List files sorted by proximity to current file.
+keymap.nnoremap{'<C-p>', function()
+    local filename = vim.fn.expand('%')
+    local name = vim.fn.fnamemodify(filename, ':h:.:S')
+    local cmd = {'fd', '-t', 'f', '--follow'}
+    if name ~= '.' then
+        cmd = string.format('fd --type file --follow | proximity-sort %s', vim.fn.shellescape(filename))
+    end
+    local source = vim.fn.systemlist(cmd)
+    local wrapped = vim.fn["fzf#vim#with_preview"]({
+        source = source,
+        options = '--tiebreak=index',
+    })
+    vim.fn["fzf#vim#files"]('', wrapped)
+end, silent=true}
+
+local ok, is_exe = pcall(vim.fn.executable, 'proximity-sort')
+if not ok or is_exe ~= 1 then
+    ---Fallback to the default.
+    keymap.nnoremap{'<C-p>', ':Files<CR>', silent=true}
+end
+
 keymap.nnoremap{'<leader>:', ':Commands<CR>'}
-keymap.nnoremap{'<C-p>',     ':Files<CR>',      silent=true}
 keymap.nnoremap{'<M-p>',     ':Files ~/<CR>',   silent=true}
 keymap.nnoremap{'<C-b>',     ':Buffers<CR>',    silent=true}
 keymap.nnoremap{'<C-_>',     ':BLinesPrev<CR>', silent=true}
