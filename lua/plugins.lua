@@ -51,10 +51,7 @@ require('packer').startup({
         use {
             'junegunn/fzf.vim',
             requires = 'junegunn/fzf',
-            config   = function()
-                vim.g.fzf_bin_location = vim.fn.stdpath('data') .. '/site/pack/packer/start/fzf.vim/bin'
-                require('settings.fzf')
-            end,
+            config   = function() require('settings.fzf') end,
         }
 
         use {

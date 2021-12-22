@@ -1,5 +1,4 @@
 local command = require('util').command
-local preview_sh = string.format("'%s/preview.sh {1}'", vim.g.fzf_bin_location)
 
 command{"Notes",    "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
 command{"Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", attrs="-bang"}
@@ -25,12 +24,12 @@ command{"Reload", function()
         source = source,
         options = table.concat({
             '--prompt="Open Config> " +m',
-            ' --with-nth=2.. --delimiter="\t"',
+            '--with-nth=2.. --delimiter="\t"',
             '--multi --bind ctrl-a:select-all+accept',
             '--preview-window +{3}+3/2,nohidden',
-            '--preview', preview_sh,
             '-n 1 --tiebreak=index',
         }, ' '),
+        placeholder = "{1}",
     })
     wrapped["sink*"] = function(list)
         for _, name in pairs(list) do
@@ -40,7 +39,8 @@ command{"Reload", function()
             end
         end
     end
-    vim.fn["fzf#run"](wrapped)
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    vim.fn["fzf#run"](preview)
 end}
 
 command{"Config", function()
@@ -54,11 +54,11 @@ command{"Config", function()
         source = source,
         options = table.concat({
             '--prompt="Open Config> " +m',
-            ' --with-nth=2.. --delimiter="\t"',
+            '--with-nth=2.. --delimiter="\t"',
             "--preview-window +{3}+3/2,nohidden",
-            '--preview', preview_sh,
             '-n 1 --tiebreak=index',
         }, ' '),
+        placeholder = "{1}",
     })
     wrapped["sink"] = function(filename)
         filename = filename:match('^[^\t]*')
@@ -66,8 +66,8 @@ command{"Config", function()
             vim.cmd(':e ' .. filename)
         end
     end
-    wrapped["sink*"] = function() end
-    vim.fn["fzf#run"](wrapped)
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    vim.fn["fzf#run"](preview)
 end}
 
 -- Delete marks interactivly with fzf.
@@ -111,9 +111,9 @@ command{"MarksDelete", function()
             '--prompt="Delete Mark> " --multi --header-lines=1',
             '--bind ctrl-a:select-all+accept --with-nth=2.. --delimiter="\t"',
             "--preview-window +{3}+3/2,nohidden",
-            '--preview', preview_sh,
             '-n 3 --tiebreak=index',
         }, ' '),
+        placeholder = "{1}",
     })
     wrapped['sink*'] = function(names)
         for _, name in pairs(names) do
@@ -123,7 +123,8 @@ command{"MarksDelete", function()
             end
         end
     end
-    vim.fn["fzf#run"](wrapped, vim.fn["fzf#vim#with_preview"]())
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    vim.fn["fzf#run"](preview)
 end}
 
 command{"Marks", attrs="-bang -bar", docs="show marks", function()
