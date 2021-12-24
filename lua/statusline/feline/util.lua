@@ -275,11 +275,10 @@ function M.search_results()
     if vim.v.hlsearch and vim.v.hlsearch == 1 and search_count.total > 0 then
         active = true
     end
+    if not active then return "" end
 
-    if active then
-        return '/' .. search_term .. '[' .. search_count.current .. '/' .. search_count.total .. ']'
-    end
-    return ""
+    search_term = search_term:gsub([[\<]], ''):gsub([[\>]], '')
+    return '/' .. search_term .. '[' .. search_count.current .. '/' .. search_count.total .. ']'
 end
 
 function M.locallist_count()

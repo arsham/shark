@@ -91,6 +91,7 @@ require('packer').startup({
         use {
             'numToStr/Navigator.nvim',
             config = function() require('settings').navigator() end,
+            event = 'UIEnter',
         }
 
         use {
@@ -135,12 +136,16 @@ require('packer').startup({
         -- }}}
 
         -- {{{ Visuals
-        use 'kyazdani42/nvim-web-devicons'
+        use {
+            'kyazdani42/nvim-web-devicons',
+            event = 'UIEnter',
+        }
 
         use {
             'famiu/feline.nvim',
-            after = 'nvim-web-devicons',
+            after  = 'nvim-web-devicons',
             config = function() require('statusline.feline') end,
+            event  = 'UIEnter',
         }
 
         use {
@@ -170,9 +175,13 @@ require('packer').startup({
                 end))
                 async_load_plugin:send()
             end,
+            event = 'UIEnter',
         }
 
-        use 'MunifTanjim/nui.nvim'
+        use {
+            'MunifTanjim/nui.nvim',
+            event = 'UIEnter',
+        }
 
         use {
             'stevearc/dressing.nvim',
@@ -184,6 +193,7 @@ require('packer').startup({
                 end))
                 async_load_plugin:send()
             end,
+            event = 'UIEnter',
         }
         -- }}}
 
@@ -200,6 +210,12 @@ require('packer').startup({
 
         use {
             'ntpeters/vim-better-whitespace',
+            config = function()
+                vim.g.better_whitespace_filetypes_blacklist = {
+                    'diff', 'git', 'gitcommit', 'unite', 'qf', 'help',
+                    'markdown', 'fugitive', 'undotree', 'scratch',
+                }
+            end,
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 

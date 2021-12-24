@@ -21,3 +21,4 @@ table.insert(formatlistpat, '\\s\\+')                   -- One or more spaces
 table.insert(formatlistpat, [[\\\|]])                   -- or
 table.insert(formatlistpat, '^\\s*[-+*]\\s\\+')         -- Bullet points
 vim.bo.formatlistpat = table.concat(formatlistpat, '')
+vim.wo.cursorline = true
