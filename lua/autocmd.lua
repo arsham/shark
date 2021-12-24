@@ -2,8 +2,16 @@ local util = require('util')
 
 util.augroup{"LINE_RETURN", {
     {"BufReadPost", "*", function()
+        local types = {
+            "nofile",
+            'gitcommit',
+            'gitrebase'
+        }
+        if table.any(types, vim.bo.buftype) then
+            return
+        end
         local line = vim.fn.line
-        if line("'\"") > 0 and line("'\"") <= line("$") and vim.bo.buftype ~= 'nofile' then
+        if line("'\"") > 0 and line("'\"") <= line("$") then
             vim.cmd[[normal! g`"zv']]
         end
     end},

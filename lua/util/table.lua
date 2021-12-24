@@ -85,3 +85,16 @@ function table.shuffle(t)
         t[i], t[j] = t[j], t[i]
     end
 end
+
+---Returns true if the item is in the table.
+---@param t table
+---@param item any
+---@return boolean
+function table.any(t, item)
+    for k in pairs(t) do
+        if k == item then
+            return true
+        end
+    end
+    return false
+end
