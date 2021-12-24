@@ -1,11 +1,12 @@
 if not pcall(require, 'astronauta.keymap') then return end
+local nvim = require('nvim')
 local util = require('util')
 
 ---Restats the LSP server. Fixes the problem with the LSP server not
 ---restarting with LspRestart command.
 local function restart_lsp()
-    vim.cmd[[LspStop]]
-    vim.defer_fn(function() vim.cmd[[LspStart]] end, 1000)
+    nvim.ex.LspStop()
+    vim.defer_fn(nvim.ex.LspStart, 1000)
 end
 util.command{"RestartLsp", buffer=true, restart_lsp}
 vim.keymap.nnoremap{'<leader>dr', restart_lsp, silent=true}

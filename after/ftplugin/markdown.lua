@@ -1,7 +1,8 @@
 require('astronauta.keymap')
+local nvim = require('nvim')
 -- see #14670
 -- vim.opt_local.spell = true
-vim.cmd[[ setlocal spell ]]
+nvim.ex.setlocal('spell')
 vim.bo.softtabstop = 1  -- if I have two spaces in a sentence, delete only one.
 vim.bo.autoindent = true
 vim.bo.textwidth = 0

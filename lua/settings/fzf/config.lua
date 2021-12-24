@@ -11,7 +11,7 @@ local function goto_def(lines)
     if util_lsp.is_lsp_attached() then
         pcall(vim.lsp.buf.document_symbol)
     else
-        vim.api.nvim_command(":BTags")
+        nvim.ex.BTags()
     end
 end
 
@@ -43,7 +43,7 @@ local function set_qf_list(files)
         item.filename = filename
         lists.insert_list(item, false)
     end
-    vim.cmd[[copen]]
+    nvim.ex.copen()
 end
 
 vim.g.fzf_action = {

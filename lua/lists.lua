@@ -1,3 +1,4 @@
+local nvim = require('nvim')
 local util = require('util')
 require('astronauta.keymap')
 
@@ -7,13 +8,13 @@ local M = {}
 ---list.
 local function delete_list_item()
     local cur_list = {}
-    local close = "cclose"
+    local close = nvim.ex.close
     local win_id = vim.fn.win_getid()
     local is_loc = vim.fn.getwininfo(win_id)[1].loclist == 1
 
     if is_loc then
         cur_list = vim.fn.getloclist(win_id)
-        close = "lclose"
+        close = nvim.ex.lclose
     else
         cur_list = vim.fn.getqflist()
     end
@@ -34,7 +35,7 @@ local function delete_list_item()
     end
 
     if #cur_list == 0 then
-        vim.cmd(close)
+        close()
     elseif item ~= 1 then
         util.normal('n', ("%dj"):format(item - 1))
     end

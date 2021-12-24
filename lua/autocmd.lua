@@ -1,3 +1,4 @@
+local nvim = require('nvim')
 local util = require('util')
 
 util.augroup{"LINE_RETURN", {
@@ -12,7 +13,7 @@ util.augroup{"LINE_RETURN", {
         end
         local line = vim.fn.line
         if line("'\"") > 0 and line("'\"") <= line("$") then
-            vim.cmd[[normal! g`"zv']]
+            nvim.ex.normal_([[g`"zv']])
         end
     end},
 }}
@@ -138,8 +139,8 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
                     return
                 end
                 local save = vim.fn.winsaveview()
-                vim.cmd[[ keeppatterns %s/\s\+$//e ]]
-                vim.cmd[[silent! %s#\($\n\s*\)\+\%$##]]
+                nvim.ex.keeppatterns([[%s/\s\+$//e]])
+                nvim.ex.silent_([[%s#\($\n\s*\)\+\%$##]])
                 vim.fn.winrestview(save)
             end,
         }

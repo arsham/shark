@@ -40,6 +40,7 @@ require('packer').startup({
         }
         use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
+        use 'norcalli/nvim.lua'
         -- }}}
 
         -- {{{ Core/System utilities

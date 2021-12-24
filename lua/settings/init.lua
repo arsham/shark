@@ -1,4 +1,6 @@
 if not pcall(require, 'astronauta.keymap') then return end
+local nvim = require('nvim')
+local util = require('util')
 
 local M = {}
 
@@ -116,22 +118,20 @@ M.nvim_tree = {
 }
 
 function M.treesitter_unit()
-    vim.api.nvim_set_keymap('x', 'iu', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
-    vim.api.nvim_set_keymap('x', 'au', ':lua require"treesitter-unit".select(true)<CR>', {noremap=true})
-    vim.api.nvim_set_keymap('o', 'iu', ':<c-u>lua require"treesitter-unit".select()<CR>', {noremap=true})
-    vim.api.nvim_set_keymap('o', 'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', {noremap=true})
+    vim.keymap.xnoremap{'iu', ':lua require"treesitter-unit".select()<CR>'}
+    vim.keymap.xnoremap{'au', ':lua require"treesitter-unit".select(true)<CR>'}
+    vim.keymap.onoremap{'iu', ':<c-u>lua require"treesitter-unit".select()<CR>'}
+    vim.keymap.onoremap{'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>'}
 end
 
 function M.copilot()
-    vim.cmd[[
-    imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
-    ]]
+    vim.keymap.imap{'<C-y>', [[copilot#Accept("\<CR>")]], silent=true, expr=true, script=true}
     vim.g.copilot_no_tab_map = true
     vim.g.copilot_assume_mapped = true
     vim.keymap.nnoremap{'<leader>ce', ':Copilot enable<cr>', silent=true}
     vim.keymap.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true}
     -- disabled by default
-    vim.cmd[[:Copilot disable]]
+    nvim.ex.Copilot('disable')
 end
 
 function M.navigator()

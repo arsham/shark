@@ -1294,10 +1294,12 @@ local plugin_syntax = {
     -- }}}
 }
 
+local nvim = require('nvim')
+
 local setup = function()
-    vim.cmd('hi clear')
+    nvim.ex.clear()
     if vim.fn.exists('syntax_on') then
-        vim.cmd('syntax reset')
+        nvim.ex.syntax('reset')
     end
 
     local highlight = require('util').highlight

@@ -1,3 +1,4 @@
+local nvim = require('nvim')
 local command = require('util').command
 
 command{"Notes",    "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
@@ -36,7 +37,7 @@ command{"Reload", function()
         for _, name in pairs(list) do
             name = name:match('^[^\t]*')
             if name ~= "" then
-                vim.cmd(("luafile %s"):format(name))
+                nvim.ex.luafile(name)
             end
         end
     end
@@ -66,7 +67,7 @@ command{"Config", function()
     preview["sink"] = function(filename)
         filename = filename:match('^[^\t]*')
         if filename ~= '' then
-            vim.cmd(':e ' .. filename)
+            nvim.ex.edit(filename)
         end
     end
     vim.fn["fzf#run"](preview)
@@ -121,7 +122,7 @@ command{"MarksDelete", function()
         for _, name in pairs(names) do
             local mark = string.match(name, '%a')
             if mark ~= nil then
-                vim.cmd('delmarks ' .. mark)
+                nvim.ex.delmarks(mark)
             end
         end
     end
@@ -164,7 +165,7 @@ command{"GGrep", attrs="-bang -nargs=+", function(term)
                 local toplevel = vim.fn.system("git rev-parse --show-toplevel")
                 toplevel = string.gsub(toplevel, "\n", '')
                 local str = string.format([[fugitive://%s/.git//%s]], toplevel, sha)
-                vim.cmd('edit ' .. str)
+                vim.ex.edit(str)
             end
         end
     end
@@ -178,7 +179,7 @@ command{"ArgsDelete", function()
         options = '--multi --bind ctrl-a:select-all+accept',
     })
     wrapped['sink*'] = function(lines)
-        vim.cmd('argd ' .. table.concat(lines, " "))
+        nvim.ex.argd(lines)
     end
     vim.fn["fzf#run"](wrapped)
 end}
@@ -204,7 +205,7 @@ command{"ArgAdd", function()
         options = '--multi --bind ctrl-a:select-all+accept',
     })
     wrapped['sink*'] = function(lines)
-        vim.cmd('arga ' .. table.concat(lines, " "))
+        nvim.ex.arga(lines)
     end
     vim.fn["fzf#run"](wrapped)
 end}
@@ -239,8 +240,8 @@ command{"Worktree", docs="switch git worktree", function()
         options = {'--no-multi'},
     })
     wrapped['sink*'] = function(dir)
-        local str = string.format("tabnew | tcd %s", dir[2])
-        vim.cmd(str)
+        nvim.ex.tabnew()
+        nvim.ex.tcd(dir[2])
     end
     vim.fn["fzf#run"](wrapped)
 end}

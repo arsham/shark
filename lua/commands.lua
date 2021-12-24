@@ -1,4 +1,5 @@
 local util = require('util')
+local nvim = require('nvim')
 local command = util.command
 
 command{"Filename", function()
@@ -15,7 +16,7 @@ command{"JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]]
 command{"WatchLuaFileChanges", docs="watch changes on the lua file and reload", run=function()
     util.augroup{"WATCH_LUA_FILE", {
         {"BufWritePost", buffer=true, run=function()
-            vim.cmd[[:luafile %]]
+            nvim.ex.luafile('%')
         end},
     }}
 end}

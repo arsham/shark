@@ -146,5 +146,5 @@ keymap.nnoremap{'z=', function()
 end}
 
 vim.keymap.nnoremap{'<leader>@', function()
-    vim.api.nvim_command(":BTags")
+    nvim.ex.BTags()
 end, silent=true}

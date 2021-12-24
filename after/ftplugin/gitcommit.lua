@@ -2,9 +2,11 @@
 -- vim.bo.textwidth = 72
 -- vim.wo.colorcolumn = "50,72"
 -- vim.wo.spell = true
-vim.cmd[[ setlocal spell ]]
-vim.cmd[[ setlocal textwidth=72 ]]
-vim.cmd[[ setlocal colorcolumn="50,72" ]]
+local nvim = require('nvim')
+nvim.ex.setlocal('spell')
+nvim.ex.setlocal('textwidth=72')
+nvim.ex.setlocal('colorcolumn="50,72"')
+nvim.ex.startinsert()
 
 vim.bo.formatoptions = vim.bo.formatoptions .. 'cn'
 local formatlistpat = {'^\\s*'}                         -- Optional leading whitespace

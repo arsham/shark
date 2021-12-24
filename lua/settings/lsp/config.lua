@@ -1,5 +1,6 @@
 if not pcall(require, 'astronauta.keymap') then return end
 -- vim.lsp.set_log_level("debug")
+local nvim = require('nvim')
 local util = require('util')
 
 --Enable (broadcasting) snippet capability for completion
@@ -206,7 +207,7 @@ util.augroup{"GOPLS_GOMOD", {
                 end
 
                 vim.schedule(function()
-                    vim.cmd[[RestartLsp]]
+                    nvim.ex.RestartLsp()
                 end)
                 vim.notify(res, type, {
                     title = "Go Modules Are Tidy Now",

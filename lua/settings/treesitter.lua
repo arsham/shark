@@ -148,13 +148,13 @@ util.augroup{"TREESITTER_LARGE_FILES", {
         local size = vim.fn.getfsize(vim.fn.expand('%'))
         if size > 64 * 1024 then
             vim.schedule(function()
-                vim.cmd[[TSBufDisable refactor.highlight_definitions]]
+                nvim.ex.TSBufDisable('refactor.highlight_definitions')
             end)
         end
 
         if size > 512 * 1024 then
             vim.schedule(function()
-                vim.cmd[[TSBufDisable highlight]]
+                nvim.ex.TSBufDisable('highlight')
             end)
         end
     end}

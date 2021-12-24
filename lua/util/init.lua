@@ -1,3 +1,4 @@
+local nvim = require('nvim')
 require('util.string')
 require('util.table')
 
@@ -110,10 +111,10 @@ function M.highlight(group, opt)
     local guisp   = opt.guisp   and 'guisp = '   .. opt.guisp   or ''
     local ctermfg = opt.ctermfg and 'ctermfg = ' .. opt.ctermfg or ''
     local ctermbg = opt.ctermbg and 'ctermbg = ' .. opt.ctermbg or ''
-    local str     = ([[highlight %s %s %s %s %s %s %s]]):format(
+    local str     = table.concat({
         group, style, guifg, guibg, ctermfg, ctermbg, guisp
-    )
-    vim.cmd(str)
+    }, ' ')
+    nvim.ex.highlight(str)
 end
 
 local storage = {}
@@ -169,11 +170,11 @@ function M.command(opts)
         error("Unexpected type to run (".. docs .. "):" .. tostring(run))
     end
 
-    local str = ([[command! %s %s %s %s]]):format(attrs, name, silent, command_str)
+    local str = table.concat({attrs, name, silent, command_str}, ' ')
     if post_run ~= "" then
         str = str .. " | " .. post_run
     end
-    vim.cmd(str)
+    nvim.ex.command_(str)
 end
 
 ---@class AugroupOpt
@@ -190,12 +191,12 @@ function M.augroup(opts)
 
     local cmds = opts.cmds or opts[2]
 
-    vim.cmd('augroup ' .. name)
-    vim.cmd('autocmd! *')
+    nvim.ex.augroup(name)
+    nvim.ex.autocmd_('*')
     for _, def in pairs(cmds) do
         M.autocmd(def)
     end
-    vim.cmd('augroup END')
+    nvim.ex.augroup('END')
 end
 
 ---@class AutocmdOpt

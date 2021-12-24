@@ -1,4 +1,5 @@
 local util = require('util')
+local nvim = require('nvim')
 
 local store = {}
 __Scratch_buffer_storage = __Scratch_buffer_storage or {}
@@ -21,8 +22,9 @@ end
 
 util.command{"Scratch", docs="open a new scratch buffer", run=function()
     local name = string.format("Scratch %d", store.next())
-    vim.cmd("silent! vsplit | enew | lcd ~/")
-    vim.cmd("file " .. name)
+    nvim.ex.vsplit()
+    nvim.ex.enew()
+    nvim.ex.file(name)
     vim.bo.buftype = "nofile"
     vim.bo.swapfile = false
 
