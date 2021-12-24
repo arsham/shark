@@ -34,6 +34,11 @@ command{"FoldComments", docs="fold all comments", run=function()
     vim.wo.foldmethod="expr"
 end}
 
+command{"Nowrap", docs="prevents current buffer from wrapping", buffer=true, run=function()
+    vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
+    vim.bo.formatoptions = vim.bo.formatoptions:gsub('c', '')
+end}
+
 command{"InstallDependencies", function()
     local commands = {
         golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
