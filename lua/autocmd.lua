@@ -89,6 +89,16 @@ util.augroup{"SPECIAL_SETTINGS", {
         end
     end, docs='auto close shell terminals'},
 
+    {'BufNewFile', '*', run=function()
+        util.autocmd{'BufWritePre', buffer=true, once=true, run=function()
+            local path = vim.fn.expand('%:h')
+            local p = require('plenary.path'):new(path)
+            if not p:exists() then
+                p:mkdir{parents=true}
+            end
+        end, docs='create missing parent directories automatically'}
+    end},
+
 }}
 
 if vim.fn.exists('$TMUX') == 1 then

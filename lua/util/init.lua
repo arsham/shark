@@ -206,6 +206,7 @@ end
 ---@field docs    string is handy when you query verbose command.
 ---@field buffer  boolean
 ---@field silent  boolean
+---@field once    boolean adds ++once
 
 ---Creates a single autocmd. You most likely want to use it in a context of an
 ---augroup.
@@ -229,6 +230,7 @@ function M.autocmd(opts)
     local buffer = args.buffer or ""
     local docs = args.docs or "no documents"
     local silent = args.silent or ""
+    local once = args.once and '++once' or ""
 
     local autocmd_str
     if type(run) == 'string' then
@@ -240,8 +242,8 @@ function M.autocmd(opts)
         error("Unexpected type to run (" .. docs .. "): " .. tostring(run))
     end
 
-    local def = ([[%s %s %s %s %s]]):format(events, targets, buffer, silent, autocmd_str)
-    vim.cmd(table.concat(vim.tbl_flatten { "autocmd", def }, " "))
+    local def = table.concat({events, targets, buffer, silent, once, autocmd_str}, ' ')
+    nvim.ex.autocmd(def)
 end
 
 M.job_str = function(str)

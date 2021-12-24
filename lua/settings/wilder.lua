@@ -45,6 +45,7 @@ local function init_wilder()
     end
 end
 
-require('util').augroup{"WILDER", {
-    {"CmdlineEnter", targets="* ++once", run=init_wilder},
+-- Lazy loading the setup.
+require('util').augroup{'WILDER', {
+    {'CmdlineEnter', targets='*', once=true, run=init_wilder},
 }}
