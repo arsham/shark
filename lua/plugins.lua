@@ -299,6 +299,7 @@ require('packer').startup({
                 'lsp-status.nvim',
                 'cmp-nvim-lsp',
             },
+            cmd = 'LspInstallInfo',
         }
 
         use {
@@ -385,6 +386,7 @@ require('packer').startup({
                 },
             },
             run   = ':TSUpdate',
+            cmd   = 'TSUpdate',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
@@ -459,7 +461,10 @@ require('packer').startup({
             ft = { 'markdown' },
         }
 
-        use { 'milisims/nvim-luaref' }
+        use {
+            'milisims/nvim-luaref',
+            ft = { 'lua' },
+        }
 
         use {
             'tmux-plugins/vim-tmux',

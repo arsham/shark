@@ -11,8 +11,8 @@ there are a few other **LSP** servers setup as well.
 
 * Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
-* It loads really fast! With over **60 plugins**, it takes **14ms** to
-  **20ms** on average to start. (benchmarked with the `StartupTime` benchmark
+* It loads really fast! With over **60 plugins**, it takes **10ms** to
+  **15ms** on average to start. (benchmarked with the `StartupTime` benchmark
   tool).
 * There are a few **Lua** functions available for setting up
   **autocmd/augroup** and **commands** that accept **Lua functions** to run.
