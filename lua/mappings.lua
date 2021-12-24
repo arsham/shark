@@ -270,3 +270,6 @@ end
 
 vim.keymap.nnoremap{']=', function() jump_indent(true)  end}
 vim.keymap.nnoremap{'[=', function() jump_indent(false) end}
+
+vim.keymap.nnoremap{'&', ':&&<CR>'}
+vim.keymap.xnoremap{'&', ':&&<CR>'}
