@@ -71,6 +71,23 @@ util.augroup{"SPECIAL_SETTINGS", {
         end
     end, docs="unset relative number when unfocused"},
 
+    {'TermOpen', '*', function()
+        if vim.bo.filetype == 'fzf' then return end
+        vim.wo.statusline = '%{b:term_title}'
+        vim.keymap.tnoremap{'<Esc>', [[<C-\><C-n>]], buffer=true}
+        nvim.ex.startinsert()
+    end, docs='start in insert mode and set the status line'},
+
+    -- See neovim/neovim#15440
+    {'TermClose', '*', function()
+        if vim.v.event.status == 0 then
+            local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)
+            if info and info.argv[1] == vim.env.SHELL then
+                pcall(vim.api.nvim_buf_delete, 0, {})
+            end
+        end
+    end, docs='auto close shell terminals'},
+
 }}
 
 if vim.fn.exists('$TMUX') == 1 then
