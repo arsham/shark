@@ -200,9 +200,6 @@ end
 
 function M.fugitive()
     vim.keymap.nnoremap{'<leader>gs', ':Git<cr>', silent=true}
-    vim.cmd[[
-        exe 'command! -bang -nargs=+ -range=-1 -complete=customlist,fugitive#LogComplete GGrep :exe fugitive#LogCommand(<line1>,<count>,+"<range>",<bang>0,"<mods>", "-G" . <q-args>, "c")'
-    ]]
     util.augroup{'FUGITIVE_SETTINGS', {
         {'FileType', 'fugitive', run=function()
             vim.wo.cursorline = true

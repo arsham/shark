@@ -138,14 +138,37 @@ command{"Marks", attrs="-bang -bar", docs="show marks", function()
     vim.fn["fzf#vim#marks"](preview, 0)
 end}
 
-command{"GGrep", attrs="-bang -nargs=*", function(term)
-    local preview = vim.fn["fzf#vim#with_preview"]({
-        dir = vim.fn.systemlist({'git', 'rev-parse', '--show-toplevel'})[1]
+command{"GGrep", attrs="-bang -nargs=+", function(term)
+    local format = '--format=format:%H\t* %h\t%ar\t%an\t%s\t%d'
+    local source = vim.fn.systemlist({'git', '--no-pager', 'log', '-G', term, format})
+    local wrapped = vim.fn["fzf#wrap"]({
+        source = source,
+        options = table.concat({
+            '--prompt="Search In Tree> "',
+            '+m --nth=1 --with-nth=2.. --delimiter="\t"',
+            '--exit-0 --tiebreak=index',
+            '--preview-window +{3}+3/2,~1,nohidden',
+            '--preview',
+            '"',
+            [[echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |]],
+            "xargs -I % sh -c 'git show --color=always %'",
+            '"',
+        }, ' '),
+        placeholder = "{1}",
     })
-    vim.fn["fzf#vim#grep"](
-        'git grep --line-number -- ' .. vim.fn.shellescape(term),
-        0, preview, 0
-    )
+
+    wrapped["sink*"] = function(list)
+        for _, sha in pairs(list) do
+            sha = sha:match('^[^\t]*')
+            if sha ~= "" then
+                local toplevel = vim.fn.system("git rev-parse --show-toplevel")
+                toplevel = string.gsub(toplevel, "\n", '')
+                local str = string.format([[fugitive://%s/.git//%s]], toplevel, sha)
+                vim.cmd('edit ' .. str)
+            end
+        end
+    end
+    vim.fn["fzf#run"](wrapped)
 end}
 
 -- Delete args interactivly with fzf.
