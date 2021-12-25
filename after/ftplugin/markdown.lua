@@ -1,5 +1,6 @@
 require('astronauta.keymap')
 local nvim = require('nvim')
+local util = require('util')
 -- see #14670
 -- vim.opt_local.spell = true
 nvim.ex.setlocal('spell')
@@ -54,3 +55,27 @@ vim.keymap.inoremap{'<CR>', function()
     end
     return "\\<cr>" .. marker
 end, expr=true, buffer=true}
+
+---Jumps to the next heading.
+---@param down boolean if goes to next, otherwise to the previous.
+local function nextHeading(down)
+    local count = vim.v.count
+    local col = vim.fn.col(".")
+
+    local flags = 'W'
+    if down then
+        flags = 'bW'
+    end
+    vim.fn.search('^#', flags)
+
+    if count > 1 then
+        if col == 1 then count = count - 1 end
+        util.normal('nx', string.rep('n', count))
+    end
+
+    local motion = string.format('%d|', col)
+    util.normal('nx', motion)
+end
+
+vim.keymap.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true}
+vim.keymap.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true}
