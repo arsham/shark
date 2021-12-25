@@ -32,7 +32,11 @@ vim.diagnostic.config({
     signs = true,
     underline = true,
     update_in_insert = false,
-    severity_sort = false,
+    severity_sort = true,
+    float = {
+        focusable = true,
+        source    = "always",
+    },
 })
 
 
@@ -101,23 +105,7 @@ local servers = {
                     enable = true,
                     url = 'https://www.schemastore.org/api/json/catalog.json',
                 },
-                schemas = {
-                    kubernetes = {
-                        'templates/*.yaml',
-                        'helm/*.yaml',
-                        'kube/*.yaml',
-                    },
-                    ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
-                    ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
-                    ['http://json.schemastore.org/ansible-stable-2.9'] = 'roles/tasks/*.{yml,yaml}',
-                    ['http://json.schemastore.org/ansible-playbook'] = 'playbook.{yml,yaml}',
-                    ['http://json.schemastore.org/prettierrc'] = '.prettierrc.{yml,yaml}',
-                    ['http://json.schemastore.org/stylelintrc'] = '.stylelintrc.{yml,yaml}',
-                    ['http://json.schemastore.org/circleciconfig'] = '.circleci/**/*.{yml,yaml}',
-                    ['http://json.schemastore.org/kustomization'] = 'kustomization.{yml,yaml}',
-                    ['http://json.schemastore.org/helmfile'] = 'helmfile.{yml,yaml}',
-                    ['http://json.schemastore.org/gitlab-ci'] = '/*lab-ci.{yml,yaml}',
-                }
+                schemas = require('settings.lsp.schemas').yamlls,
             }
         }
     },

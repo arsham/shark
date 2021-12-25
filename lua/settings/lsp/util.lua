@@ -130,6 +130,7 @@ local function attach_mappings_commands(client)
     if caps.goto_definition then
         util.command{"Definition", buffer=true, function() vim.lsp.buf.definition() end}
         vim.keymap.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
+        vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
     if caps.declaration then
         vim.keymap.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
