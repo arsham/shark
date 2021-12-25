@@ -52,21 +52,23 @@ keymap.nnoremap{'<M-b>', silent=true, function()
         source = buf_list,
         options = table.concat({
             '--prompt "Delete Buffers > "',
-            "--exit-0 --multi --ansi --delimiter '\t'",
-            '--with-nth=4.. --nth=3',
-            "--bind 'ctrl-a:select-all+accept' --preview-window +{3}+3/2,nohidden",
-            '--tiebreak=index --header-lines=1',
+            '--multi', '--exit-0',
+            '--ansi',
+            "--delimiter '\t'",
+            '--with-nth=4..', '--nth=3',
+            "--bind 'ctrl-a:select-all+accept'",
+            '--preview-window +{3}+3/2,nohidden',
+            '--tiebreak=index',
+            '--header-lines=1',
         }, ' '),
         placeholder = "{1}",
     })
 
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     preview['sink*'] = function(names)
-        for _, name in pairs(names) do
+        for _, name in pairs({unpack(names, 2)}) do
             local num = tonumber(name:match('^[^\t]+\t[^\t]+\t([^\t]+)\t'))
-            if num ~= nil then
-                pcall(vim.api.nvim_buf_delete, num, {})
-            end
+            pcall(vim.api.nvim_buf_delete, num, {})
         end
     end
     vim.fn["fzf#run"](preview)
@@ -102,10 +104,16 @@ local function do_rg(term, opts)
     }
     local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
     local rg_cmd = table.concat({
-        'rg --column --line-number --no-heading',
-        '   --color=always --smart-case --hidden -g "!.git/" ',
+        'rg',
+        '--column',
+        '--line-number',
+        '--no-heading',
+        '--color=always',
+        '--smart-case',
+        '--hidden',
+        '-g "!.git/" ',
         opts or '',
-        ' -- ',
+        '--',
         vim.fn.shellescape(term),
     }, " ")
     vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)

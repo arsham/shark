@@ -9,8 +9,14 @@ command{"Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", attrs="-bang"}
 
 command{"Todo", function()
     local cmd = table.concat({
-        'rg --column --line-number --no-heading --color=always',
-        '   --smart-case --hidden -g "!.git/" -- "fixme|todo"',
+        'rg',
+        '--line-number', '--column',
+        '--no-heading',
+        '--color=always',
+        '--smart-case',
+        '--hidden', '-g "!.git/"',
+        '--',
+        '"fixme|todo"',
     }, " ")
     vim.fn["fzf#vim#grep"](cmd, 1, vim.fn["fzf#vim#with_preview"]())
 end}
@@ -27,21 +33,22 @@ command{"Reload", function()
     local wrapped = vim.fn["fzf#wrap"]({
         source = source,
         options = table.concat({
-            '--prompt="Open Config> " +m',
-            '--with-nth=2.. --delimiter="\t"',
-            '--multi --bind ctrl-a:select-all+accept',
+            '--prompt="Open Config> "',
+            '--header="<C-a>:reloads all"',
+            '--delimiter="\t"',
+            '--with-nth=2..', '--nth=1',
+            '--multi',
+            '--bind ctrl-a:select-all+accept',
             '--preview-window +{3}+3/2,nohidden',
-            '-n 1 --tiebreak=index',
+            '--tiebreak=index',
         }, ' '),
         placeholder = "{1}",
     })
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     preview["sink*"] = function(list)
-        for _, name in pairs(list) do
+        for _, name in pairs({unpack(list, 2)}) do
             name = name:match('^[^\t]*')
-            if name ~= "" then
-                nvim.ex.luafile(name)
-            end
+            nvim.ex.luafile(name)
         end
     end
     vim.fn["fzf#run"](preview)
@@ -58,10 +65,12 @@ command{"Config", function()
     local wrapped = vim.fn["fzf#wrap"]({
         source = source,
         options = table.concat({
-            '--prompt="Open Config> " +m',
-            '--with-nth=2.. --delimiter="\t"',
+            '--prompt="Open Config> "',
+            '+m',
+            '--with-nth=2..', '--nth=1',
+            '--delimiter="\t"',
             "--preview-window +{3}+3/2,nohidden",
-            '-n 1 --tiebreak=index',
+            '--tiebreak=index',
         }, ' '),
         placeholder = "{1}",
     })
@@ -114,19 +123,22 @@ command{"MarksDelete", function()
     local wrapped = vim.fn["fzf#wrap"]({
         source = mark_list,
         options = table.concat({
-            '--prompt="Delete Mark> " --multi --header-lines=1',
-            '--bind ctrl-a:select-all+accept --with-nth=2.. --delimiter="\t"',
+            '--prompt="Delete Mark> "',
+            '--header="<C-a>:deletes all"',
+            '--header-lines=1',
+            '--delimiter="\t"',
+            '--with-nth=2..', '--nth=3',
+            '--multi',
+            '--bind ctrl-a:select-all+accept',
             "--preview-window +{3}+3/2,nohidden",
-            '-n 3 --tiebreak=index',
+            '--tiebreak=index',
         }, ' '),
         placeholder = "{1}",
     })
     wrapped['sink*'] = function(names)
-        for _, name in pairs(names) do
+        for _, name in pairs({unpack(names, 2)}) do
             local mark = string.match(name, '%a')
-            if mark ~= nil then
-                nvim.ex.delmarks(mark)
-            end
+            nvim.ex.delmarks(mark)
         end
     end
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
@@ -149,11 +161,13 @@ command{"GGrep", attrs="-bang -nargs=+", function(term)
         source = source,
         options = table.concat({
             '--prompt="Search In Tree> "',
-            '+m --nth=1 --with-nth=2.. --delimiter="\t"',
-            '--exit-0 --tiebreak=index',
+            '+m',
+            '--delimiter="\t"',
+            '--with-nth=2..', '--nth=1',
+            '--tiebreak=index',
             '--preview-window +{3}+3/2,~1,nohidden',
-            '--preview',
-            '"',
+            '--exit-0',
+            '--preview', '"',
             [[echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |]],
             "xargs -I % sh -c 'git show --color=always %'",
             '"',
@@ -225,7 +239,18 @@ command{"Checkout", attrs="-bang -nargs=0", docs="checkout a branch", function()
     current = current:gsub("\n", "")
     local current_escaped = current:gsub("/", "\\/")
 
-    local cmd = "git branch -r --no-color | sed -r -e 's/^[^/]*\\///' -e '/^" .. current_escaped .. "$/d' -e '/^HEAD/d' | sort -u"
+    local cmd = table.concat({
+        'git',
+        'branch',
+        '-r',
+        '--no-color |',
+        'sed',
+        '-r',
+        "-e 's/^[^/]*\\///'",
+        "-e '/^",
+        current_escaped,
+        "$/d' -e '/^HEAD/d' | sort -u",
+    })
     local opts = {
         sink = function(branch)
             vim.fn.system('git checkout ' .. branch)
@@ -252,12 +277,12 @@ command{'WT', 'Worktree'}
 
 function M.lines_grep()
     local options = table.concat({
+        '--prompt="Current Buffer> "',
         '--header="<CR>:jumps to line, <C-w>:adds to locallist, <C-q>:adds to quickfix list"',
         '--layout reverse-list',
+        '--delimiter="\t"',
         '--with-nth=3..',
         '--preview-window nohidden',
-        '--delimiter="\t"',
-        '--prompt="Current Buffer> "',
     }, ' ')
     local filename = vim.fn.fnameescape(vim.fn.expand('%'))
     local rg_cmd = {
