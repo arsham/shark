@@ -9,7 +9,9 @@ keymap.nnoremap{'<leader>:', ':Commands<CR>'}
 keymap.nnoremap{'<C-p>', ':Files<CR>',    silent=true}
 keymap.nnoremap{'<M-p>', ':Files ~/<CR>', silent=true}
 keymap.nnoremap{'<C-b>', ':Buffers<CR>',  silent=true}
-keymap.nnoremap{'<M-/>', ':Lines<CR>',    silent=true}
+-- Ctrl+/ for searching in current buffer.
+keymap.nnoremap{'<C-_>', require('settings.fzf.commands').lines_grep, silent=true}
+keymap.nnoremap{'<M-/>', ':Lines<CR>', silent=true}
 
 keymap.nnoremap{'<M-b>', silent=true, function()
     local list = vim.fn.getbufinfo({buflisted = 1})
@@ -68,21 +70,6 @@ keymap.nnoremap{'<M-b>', silent=true, function()
         end
     end
     vim.fn["fzf#run"](preview)
-end}
-
--- Ctrl+/ for searching in current buffer.
-keymap.nnoremap{'<C-_>', silent=true, function()
-    local args = {
-        options = '--layout reverse-list --with-nth=4.. --preview-window ' ..
-            'nohidden --delimiter=":" --prompt="Current Buffer> "',
-    }
-    local preview = vim.fn["fzf#vim#with_preview"](args)
-    local rg_cmd = table.concat({
-        'rg --with-filename --column',
-        '   --line-number --no-heading --color=never --smart-case . ',
-        vim.fn.fnameescape(vim.fn.expand('%')),
-    }, " ")
-    vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
 end}
 
 keymap.nnoremap{'<leader>gf', ':GFiles<CR>',  silent=true}

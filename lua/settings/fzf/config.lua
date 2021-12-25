@@ -47,15 +47,33 @@ local function set_qf_list(files)
     nvim.ex.copen()
 end
 
-vim.g.fzf_action = {
+---Set selected lines in the local list with fzf search.
+---@param files string[]
+local function set_loclist(files)
+    local item = {
+        lnum = 1,
+        col = 1,
+        text = "Added with fzf selection",
+    }
+    local lists = require('lists')
+    for _, filename in pairs(files) do
+        item.filename = filename
+        lists.insert_list(item, true)
+    end
+    nvim.ex.lopen()
+end
+
+_G.FzfActions = {
     ['ctrl-t'] = 'tab split',
     ['ctrl-x'] = 'split',
     ['ctrl-v'] = 'vsplit',
     ['alt-q']  = set_qf_list,
+    ['alt-w']  = set_loclist,
     ['alt-#']  = goto_def,
     ['alt-:']  = goto_line,
     ['alt-/']  = search_file,
 }
+vim.g.fzf_action = FzfActions
 
 vim.g.fzf_commands_expect = 'enter'
 vim.g.fzf_layout = {

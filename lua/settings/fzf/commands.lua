@@ -1,5 +1,8 @@
 local nvim = require('nvim')
-local command = require('util').command
+local util = require('util')
+local command = util.command
+
+local M = {}
 
 command{"Notes",    "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
 command{"Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", attrs="-bang"}
@@ -246,3 +249,53 @@ command{"Worktree", docs="switch git worktree", function()
     vim.fn["fzf#run"](wrapped)
 end}
 command{'WT', 'Worktree'}
+
+function M.lines_grep()
+    local options = table.concat({
+        '--header="<CR>:jumps to line, <C-w>:adds to locallist, <C-q>:adds to quickfix list"',
+        '--layout reverse-list',
+        '--with-nth=3..',
+        '--preview-window nohidden',
+        '--delimiter="\t"',
+        '--prompt="Current Buffer> "',
+    }, ' ')
+    local filename = vim.fn.fnameescape(vim.fn.expand('%'))
+    local rg_cmd = {
+        'rg', '.',
+        '--line-number',
+        '--no-heading',
+        '--color=never',
+        '--smart-case',
+        filename,
+    }
+    local got = vim.fn.systemlist(rg_cmd)
+    local source = {}
+    for _, line in pairs(got) do
+       local num, content = line:match('^(%d+):(.+)$')
+       table.insert(source, string.format('%s:%d\t%d\t%s', filename, num, num, content))
+    end
+    local wrapped = vim.fn["fzf#wrap"]({
+        source = source,
+        options = options,
+        placeholder = '{1}',
+    })
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    preview['sink*'] = function(names)
+        if #names == 0 then return end
+        local action = names[1]
+        if #action > 0 then
+            local fn = FzfActions[action]
+            if fn then
+                fn({unpack(names, 2)})
+            end
+        end
+        if #names == 2 then
+            local num = names[2]:match('^[^:]+:(%d+)\t')
+            util.normal('n', string.format('%dgg', num))
+        end
+    end
+    vim.fn["fzf#run"](preview)
+end
+command{"BLines", docs="Search in buffer lines", M.lines_grep}
+
+return M
