@@ -369,7 +369,7 @@ you can invoke one of these secondary actions:
 | Mapping | Description                        |
 | :------ | :--------------------------------- |
 | `alt-/` | To search in the lines.            |
-| `alt-#` | To search in ctags or lsp symbols. |
+| `alt-@` | To search in ctags or lsp symbols. |
 | `alt-:` | To go to a specific line.          |
 | `alt-q` | Add items to the quickfix list.    |
 

@@ -9,11 +9,11 @@ table.insert(vim.opt.rtp, "~/.fzf")
 local function goto_def(lines)
     local file = lines[1]
     vim.api.nvim_command(("e %s"):format(file))
-    if util_lsp.is_lsp_attached() then
-        pcall(vim.lsp.buf.document_symbol)
-    else
-        nvim.ex.BTags()
+    if util_lsp.is_lsp_attached() and util_lsp.has_lsp_capability('document_symbol') then
+        local ok = pcall(vim.lsp.buf.document_symbol)
+        if ok then return end
     end
+    nvim.ex.BTags()
 end
 
 ---Shows a fzf search for going to a line number.
@@ -69,7 +69,7 @@ _G.FzfActions = {
     ['ctrl-v'] = 'vsplit',
     ['alt-q']  = set_qf_list,
     ['alt-w']  = set_loclist,
-    ['alt-#']  = goto_def,
+    ['alt-@']  = goto_def,
     ['alt-:']  = goto_line,
     ['alt-/']  = search_file,
 }
