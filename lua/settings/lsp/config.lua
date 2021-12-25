@@ -83,13 +83,11 @@ local servers = {
     },
 
     jsonls =  {
-        commands = {
-            Format = {
-                function()
-                    vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-                end
-            }
-        }
+        settings = {
+            json = {
+                schemas = require('settings.lsp.schemas').jsonls,
+            },
+        },
     },
 
     yamlls = {
@@ -177,6 +175,27 @@ lsp_installer.on_server_ready(function(server)
         end
         opts.on_attach = fn
     end
+
+    -- neovim's LSP client does not currently support dynamic capabilities registration.
+    if server.name == "sqls" then
+        -- sqls has a bad formatting.
+        opts.capabilities.document_formatting = false
+        opts.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = false
+            attach_wrap(client, bufnr)
+        end
+    end
+
+    if server.name == "jsonls" then
+        opts.capabilities.document_symbol = false
+        opts.capabilities.document_formatting = false
+        opts.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_symbol = false
+            client.resolved_capabilities.document_formatting = false
+            attach_wrap(client, bufnr)
+        end
+    end
+
     server:setup(opts)
 end)
 

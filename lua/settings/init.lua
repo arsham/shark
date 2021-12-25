@@ -215,6 +215,16 @@ function M.null_ls()
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.diagnostics.golangci_lint,
         },
+        on_attach = function(client)
+            if client.resolved_capabilities.document_formatting then
+                vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+            end
+            if client.resolved_capabilities.document_range_formatting then
+                vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
+                vim.keymap.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
+                vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
+            end
+        end,
     })
 end
 

@@ -94,7 +94,7 @@ local function attach_mappings_commands(client)
         end
     end
 
-    if caps.document_formatting and client.name ~= "sqls" then
+    if caps.document_formatting then
         vim.keymap.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
         pre_save.format = function()
             vim.lsp.buf.formatting_sync(nil, 2000)

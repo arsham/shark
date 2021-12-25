@@ -350,8 +350,8 @@ require('packer').startup({
                 'nvim-lua/plenary.nvim',
                 'nvim-lspconfig',
             },
-            after    = { 'nvim-lspconfig' },
             config   = function() require('settings').null_ls() end,
+            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
         use {
