@@ -137,6 +137,11 @@ util.augroup{"FILETYPE_COMMANDS", {
         vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
         vim.bo.formatoptions = vim.bo.formatoptions:gsub('c', '')
     end},
+
+    {'Filetype', 'help', docs='exit help with gq', run=function()
+        vim.keymap.nnoremap{'gq', ':q<CR>', buffer=true}
+    end},
+
 }}
 
 local async_load_plugin = nil
