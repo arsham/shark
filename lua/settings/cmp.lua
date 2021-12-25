@@ -5,36 +5,36 @@ local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
---        ⌘ ⌂       ﲀ 練 ﴲ  ﰮ      ﳤ   
---   ƒ    了   ﬌     <> ⬤
+--                ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
+--        ﳤ            ƒ          了    ﬌      <    >  ⬤
+--                                                  
 local kind_icons = {
-    Buffers       = '',
-    Class         = '',
-    Color         = "",
-    Constant      = "",
-    Constructor   = "",
-    Enum          = '',
-    EnumMember    = "",
-    Event         = "",
-    Field         = 'ﰠ',
-    File          = "",
-    Folder        = '',
-    Function      = "",
-    Interface     = "",
-    Keyword       = "",
-    Method        = '',
-    Module        = "",
-    Operator      = '',
-    Path          = '',
-    Property      = "襁",
-    Reference     = '',
-    Snippet       = "",
-    Struct        = "",
-    Text          = '',
-    TypeParameter = "",
-    Unit          = "塞",
-    Value         = "",
-    Variable      = '',
+    Buffers       = ' ',
+    Class         = ' ',
+    Color         = ' ',
+    Constant      = ' ',
+    Constructor   = ' ',
+    Enum          = ' ',
+    EnumMember    = ' ',
+    Event         = ' ',
+    Field         = 'ﰠ ',
+    File          = ' ',
+    Folder        = ' ',
+    Function      = 'ƒ ',
+    Interface     = ' ',
+    Keyword       = ' ',
+    Method        = ' ',
+    Module        = ' ',
+    Operator      = ' ',
+    Property      = '襁 ',
+    Reference     = ' ',
+    Snippet       = ' ',
+    Struct        = ' ',
+    TypeParameter = ' ',
+    Unit          = '塞 ',
+    Value         = ' ',
+    Variable      = ' ',
+    Text          = ' ',
 }
 
 cmp.setup({
@@ -86,13 +86,13 @@ cmp.setup({
     },
 
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
-        { name = 'path' },
-        { name = 'vsnip' },
-        { name = 'calc' },
+        { name = 'nvim_lsp' , priority       = 80 } ,
+        { name = 'nvim_lua' , priority       = 80 } ,
+        { name = 'path'     , priority       = 40 } ,
+        { name = 'vsnip'    , priority       = 10 } ,
+        { name = 'calc' }   ,
         { name = 'nvim_lsp_signature_help' },
-        { name = 'buffer', keyword_length = 3, max_item_count = 10,
+        { name = 'buffer'   , keyword_length = 3, max_item_count = 10 ,
             option = {
                 get_bufnrs = function()
                     return vim.api.nvim_list_bufs()
@@ -103,20 +103,21 @@ cmp.setup({
     }),
 
     formatting = {
+        fields = {'kind', 'abbr', 'menu'},
         format = function(entry, vim_item)
-            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-            vim_item.menu = ({
-                buffer        = "[Buffer]",
-                nvim_lsp      = "[LSP]",
-                luasnip       = "[LuaSnip]",
-                vsnip         = "[VSnip]",
-                nvim_lua      = "[Lua]",
-                latex_symbols = "[LaTeX]",
-                path          = "[Path]",
-                rg            = "[RG]",
-                omni          = "[Omni]",
-                copilot       = "[Copilot]",
-            })[entry.source.name]
+            vim_item.menu = string.format('%-9s [%s]', vim_item.kind, ({
+                buffer        = "Buffer",
+                nvim_lsp      = "LSP",
+                luasnip       = "LuaSnip",
+                vsnip         = "VSnip",
+                nvim_lua      = "Lua",
+                latex_symbols = "LaTeX",
+                path          = "Path",
+                rg            = "RG",
+                omni          = "Omni",
+                copilot       = "Copilot",
+            })[entry.source.name])
+            vim_item.kind = kind_icons[vim_item.kind]
             return vim_item
         end
     },
@@ -127,11 +128,14 @@ cmp.setup({
 
     sorting = {
         comparators = {
-            compare.kind,
-            compare.recently_used,
+            function(...)
+                return require('cmp_buffer'):compare_locality(...)
+            end,
             compare.offset,
             compare.exact,
             compare.score,
+            compare.recently_used,
+            compare.kind,
             compare.sort_text,
             compare.length,
             compare.order,
