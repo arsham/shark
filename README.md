@@ -9,40 +9,40 @@ there are a few other **LSP** servers setup as well.
 
 ## Highlights
 
-* Besides in a few places that Neovim doesn't provide an API in Lua, most
+- Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
-* It loads really fast! With over **60 plugins**, it takes **10ms** to
+- It loads really fast! With over **60 plugins**, it takes **10ms** to
   **15ms** on average to start. (benchmarked with the `StartupTime` benchmark
   tool).
-* There are a few **Lua** functions available for setting up
+- There are a few **Lua** functions available for setting up
   **autocmd/augroup** and **commands** that accept **Lua functions** to run.
   They are super cool, check them out!
-* **LSP**, **Treesitter**, and **fzf** are setup to work together.
-* Completion with **nvim-cmp** plugin is setup.
-* It is optimised to handle very **large** files.
-* There are some handy **textobjects** such as **backticks** and **indents**.
-* You can add the current location of the cursor or make **notes** on the
+- **LSP**, **Treesitter**, and **fzf** are setup to work together.
+- Completion with **nvim-cmp** plugin is setup.
+- It is optimised to handle very **large** files.
+- There are some handy **textobjects** such as **backticks** and **indents**.
+- You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
-* You can **manipulate** quickfix/local lists.
-* It comes with integration with **git** and gist.
-* Has a lot of useful feedback in the gutter.
-* Bindings for using the **cht.sh** service.
-* Statusline is configures with **feline**. It is set to give a lot of useful
+- You can **manipulate** quickfix/local lists.
+- It comes with integration with **git** and gist.
+- Has a lot of useful feedback in the gutter.
+- Bindings for using the **cht.sh** service.
+- Statusline is configures with **feline**. It is set to give a lot of useful
   information about the buffer.
-* Prettier quickfix buffer.
-* The theme is setup with Lua to take advantage of its performance.
+- Prettier quickfix buffer.
+- The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
-    * [Plugins](#plugins)
-    * [Core Mappings](#core-mappings)
-    * [Text Objects](#text-objects)
-    * [Lists](#lists)
-    * [Highlight Matching](#highlight-matching)
-    * [FZF](#fzf)
-    * [LSP](#lsp)
-    * [Commands](#commands)
-    * [Utilities](#utilities)
+   - [Plugins](#plugins)
+   - [Core Mappings](#core-mappings)
+   - [Text Objects](#text-objects)
+   - [Lists](#lists)
+   - [Highlight Matching](#highlight-matching)
+   - [FZF](#fzf)
+   - [LSP](#lsp)
+   - [Commands](#commands)
+   - [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
 
 ## Setup
@@ -79,7 +79,7 @@ Some plugins are not listed here. You can find the complete list in the
 [plugins.lua](./lua/plugins.lua) file.
 
 | Plugin                                                                                                        | Description                                            |
-| :---                                                                                                          | :---                                                   |
+| :------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------- |
 | [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                                           | Package manager                                        |
 | [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                                       | Fuzzy matching a lot of actions                        |
 | [junegunn/fzf](https://github.com/junegunn/fzf)                                                               |                                                        |
@@ -137,7 +137,8 @@ In most mappings we are following this theme, unless there is an uncomfortable
 situation or messes with a community-driven or Vim's very well known mapping:
 
 | Part of mapping | Description                                                |
-| :---            | :---                                                       |
+| :-------------- | :--------------------------------------------------------- |
+| **b**           | **B**uffer                                                 |
 | **q**           | **Q**uickfix list mappings                                 |
 | **w**           | **L**ocal list mappings (because it's beside **q**)        |
 | **d**           | LSP **D**iagnostics                                        |
@@ -156,7 +157,8 @@ The `leader` key is `space`!
     <summary>Click to view the mappings</summary>
 
 | Mapping            | Description                                                          |
-| :---               | :---                                                                 |
+| :----------------- | :------------------------------------------------------------------- |
+| `<Ctrl-w>b`        | Delete current **B**uffer                                            |
 | `<leader>kk`       | Toggles Neovim tree                                                  |
 | `<leader><leader>` | Toggles Neovim tree                                                  |
 | `<leader>kf`       | **F**inds current file in the Neovim tree                            |
@@ -216,7 +218,7 @@ There are more specialised mappings provided, keep reading please!
     <summary>Click to view the text objects</summary>
 
 | Text Object | Description                                 |
-| :---        | :---                                        |
+| :---------- | :------------------------------------------ |
 | `H`         | To the beginning of line                    |
 | `L`         | To the end of line                          |
 | `ii`        | **I**n **I**ndentation                      |
@@ -241,8 +243,8 @@ There are more specialised mappings provided, keep reading please!
 | `aa`        | **A**round **A**rgument                     |
 | `ia`        | **I**n **A**rgument                         |
 
-There are sets of **i*** and **a*** text objects, where `*` can be any of:
-**_ . : , ; | / \ * + - #**
+There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
+**\_ . : , ; | / \ \* + - #**
 
 </details>
 
@@ -264,7 +266,7 @@ you how many items you have in a list.
     <summary>Click to view mappings for lists</summary>
 
 | Mapping      | Description                                                              |
-| :---         | :---                                                                     |
+| :----------- | :----------------------------------------------------------------------- |
 | `<leader>cc` | Close both quickfix and local list windows                               |
 | `<leader>qq` | Add current line and column to the **q**uickfix list.                    |
 | `<leader>qn` | Add current line and column with your **n**ote to the **q**uickfix list. |
@@ -285,7 +287,7 @@ you how many items you have in a list.
     <summary>Click to view commands for lists</summary>
 
 | Command         | Description                                 |
-| :---            | :---                                        |
+| :-------------- | :------------------------------------------ |
 | `Clearquickfix` | **Clear** the quickfix list.                |
 | `Clearloclist`  | **Clear** the local list of current buffer. |
 
@@ -307,7 +309,7 @@ You can **highlight** words with random colours.
 Note that all these mappings are bound to the current window.
 
 | Mapping      | Description                                              |
-| :---         | :---                                                     |
+| :----------- | :------------------------------------------------------- |
 | `<leader>ma` | **A**dd current word as a sub-pattern to the highlights. |
 | `<leader>me` | Add an **e**xact match on current term.                  |
 | `<leader>mp` | Add an match by asking for a **p**attern.                |
@@ -324,7 +326,7 @@ Note that all these mappings are bound to the current window.
 Most actions can apply to multiple selected items if possible.
 
 | Mapping            | Description                                            |
-| :---               | :---                                                   |
+| :----------------- | :----------------------------------------------------- |
 | `<Ctrl-p>`         | File list in current folder.                           |
 | `<Alt-p>`          | File list in home folder.                              |
 | `<Ctrl-b>`         | **B**uffer list.                                       |
@@ -347,7 +349,7 @@ Most actions can apply to multiple selected items if possible.
 | `<Ctrl-x><Ctrl-l>` | Search in **l**ines                                    |
 
 | Yank Mappings | Description                                       |
-| :---          | :---                                              |
+| :------------ | :------------------------------------------------ |
 | `<leader>yh`  | List **Y**ank **H**istory)                        |
 | `<leader>y`   | **Y**ank to the `+` register (external clipboard) |
 | `<leader>p`   | **P**aste from the `+` register                   |
@@ -365,7 +367,7 @@ When a file is selected, additional to what **fzf** provides out of the box,
 you can invoke one of these secondary actions:
 
 | Mapping | Description                        |
-| :---    | :---                               |
+| :------ | :--------------------------------- |
 | `alt-/` | To search in the lines.            |
 | `alt-#` | To search in ctags or lsp symbols. |
 | `alt-:` | To go to a specific line.          |
@@ -387,7 +389,7 @@ There are a few added commands to what fzf provides.
     <summary>Click to view the commands</summary>
 
 | Command     | Description                                |
-| :---        | :---                                       |
+| :---------- | :----------------------------------------- |
 | Reload      | Reload one or more lua config files        |
 | ArgAdd      | Select and add files to the args list      |
 | ArgDelete   | Select and delete files from the args list |
@@ -412,7 +414,7 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
     <summary>Click to view the mappings</summary>
 
 | Mapping       | Description                                                |
-| :---          | :---                                                       |
+| :------------ | :--------------------------------------------------------- |
 | `gd`          | **G**o to **D**efinition                                   |
 | `gD`          | **G**o to **D**eclaration                                  |
 | `<leader>df`  | Show function **d**e**f**inition in popup                  |
@@ -453,9 +455,9 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 
 ### Notes
 
-* The `<leader>@` binding will use the `LSP` symbols if is attached to the
-buffer, or `ctags` otherwise.
-* Invoke `<leader>df` twice to enter the flowing window. `q` exits.
+- The `<leader>@` binding will use the `LSP` symbols if is attached to the
+  buffer, or `ctags` otherwise.
+- Invoke `<leader>df` twice to enter the flowing window. `q` exits.
 
 Please see the code for all available mappings.
 
@@ -468,7 +470,7 @@ additions.
     <summary>Click to view the commands</summary>
 
 | Command            | Description                                   |
-| :---               | :---                                          |
+| :----------------- | :-------------------------------------------- |
 | `RestartLsp`       | Restart LSP with a delay.                     |
 | `Rename`           | Rename a symbol                               |
 | `CodeAction`       | Also works on a visually selected text.       |
@@ -501,7 +503,7 @@ The following list of commands do not fit into any specific categories.
     <summary>Click to view the commands</summary>
 
 | Command               | Description                                  |
-| :---                  | :---                                         |
+| :-------------------- | :------------------------------------------- |
 | `InstallDependencies` | Install required dependencies                |
 | `WatchLuaFileChanges` | Watch for changes in current file and reload |
 | `CC`                  | Close all floating windows                   |
@@ -659,4 +661,5 @@ none of its associated mappings or commands are loaded.
 │   └── visuals.lua
 └── spell
 ```
+
 </details>

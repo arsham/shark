@@ -273,3 +273,6 @@ vim.keymap.nnoremap{'[=', function() jump_indent(false) end}
 
 vim.keymap.nnoremap{'&', ':&&<CR>'}
 vim.keymap.xnoremap{'&', ':&&<CR>'}
+
+---Delete the buffer.
+vim.keymap.nnoremap{'<C-w>b', ':bd<CR>'}
