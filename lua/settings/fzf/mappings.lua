@@ -1,15 +1,15 @@
 if not pcall(require, 'astronauta.keymap') then return end
+local nvim = require('nvim')
 local keymap = vim.keymap
 local util = require('util')
 
 -- This options: --tac will reverse the source data.
 
 keymap.nnoremap{'<leader>:', ':Commands<CR>'}
-keymap.nnoremap{'<C-p>',     ':Files<CR>',      silent=true}
-keymap.nnoremap{'<M-p>',     ':Files ~/<CR>',   silent=true}
-keymap.nnoremap{'<C-b>',     ':Buffers<CR>',    silent=true}
-keymap.nnoremap{'<C-_>',     ':BLinesPrev<CR>', silent=true}
-keymap.nnoremap{'<M-/>',     ':Lines<CR>',      silent=true}
+keymap.nnoremap{'<C-p>', ':Files<CR>',    silent=true}
+keymap.nnoremap{'<M-p>', ':Files ~/<CR>', silent=true}
+keymap.nnoremap{'<C-b>', ':Buffers<CR>',  silent=true}
+keymap.nnoremap{'<M-/>', ':Lines<CR>',    silent=true}
 
 keymap.nnoremap{'<M-b>', silent=true, function()
     local list = vim.fn.getbufinfo({buflisted = 1})
@@ -21,11 +21,13 @@ keymap.nnoremap{'<M-b>', silent=true, function()
 
     for _, v in pairs(list) do
         local name = vim.fn.fnamemodify(v.name, ":~:.")
+        -- the bufnr can't go to the first item otherwise it breaks the preview
+        -- line
         local t = {
-            tostring(v.bufnr),
-            v.name,
+            string.format('%s:%d', v.name, v.lnum),
             v.lnum,
-            string.format('[%d]', v.bufnr),
+            tostring(v.bufnr),
+            string.format('[%s]', util.ansi_color(util.colours.red, v.bufnr)),
             '',
             name,
             '',
@@ -47,21 +49,25 @@ keymap.nnoremap{'<M-b>', silent=true, function()
     local wrapped = vim.fn["fzf#wrap"]({
         source = buf_list,
         options = table.concat({
-            [[--prompt "Delete Buffers > " --exit-0 --multi --ansi --delimiter '\t']],
-            "--with-nth=4.. --bind 'ctrl-a:select-all+accept' --preview-window +{3}+3/2,nohidden",
-            string.format("--preview '%s/preview.sh {2}'", vim.g.fzf_bin_location),
-            '-n 3 --tiebreak=index --header-lines=1',
+            '--prompt "Delete Buffers > "',
+            "--exit-0 --multi --ansi --delimiter '\t'",
+            '--with-nth=4.. --nth=3',
+            "--bind 'ctrl-a:select-all+accept' --preview-window +{3}+3/2,nohidden",
+            '--tiebreak=index --header-lines=1',
         }, ' '),
+        placeholder = "{1}",
     })
-    wrapped['sink*'] = function(names)
+
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    preview['sink*'] = function(names)
         for _, name in pairs(names) do
-            local num = string.match(name, '%d+')
+            local num = tonumber(name:match('^[^\t]+\t[^\t]+\t([^\t]+)\t'))
             if num ~= nil then
                 pcall(vim.api.nvim_buf_delete, num, {})
             end
         end
     end
-    vim.fn["fzf#run"](wrapped)
+    vim.fn["fzf#run"](preview)
 end}
 
 -- Ctrl+/ for searching in current buffer.

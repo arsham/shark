@@ -333,4 +333,23 @@ function M.lsp_attached()
     return false
 end
 
+M.colours = {
+    black   = 30,
+    red     = 31,
+    green   = 32,
+    yellow  = 33,
+    blue    = 34,
+    magenta = 35,
+    cyan    = 36,
+}
+
+---Returns a string that prints a colorized version of the given table suitable
+---for terminal output.
+---@param colour any item from the colours table.
+---@param text string text to colorize.
+---@return string
+function M.ansi_color(colour, text)
+    return ("\x1b[%s;1;m%s\x1b[m"):format(colour, text)
+end
+
 return M
