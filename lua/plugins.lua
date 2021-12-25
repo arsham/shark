@@ -62,7 +62,7 @@ require('packer').startup({
                 'nvim-treesitter/nvim-treesitter',
             },
             config = function() require('bqf').enable() end,
-            event = { 'BufWinEnter quickfix' },
+            ft = { 'qf' },
         }
 
         use {
