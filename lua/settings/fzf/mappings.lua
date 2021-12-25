@@ -79,7 +79,6 @@ keymap.nnoremap{'<C-_>', silent=true, function()
     vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
 end}
 
-keymap.nnoremap{'<leader>gg', ':GGrep<CR>',   silent=true}
 keymap.nnoremap{'<leader>gf', ':GFiles<CR>',  silent=true}
 keymap.nnoremap{'<leader>fh', ':History<CR>', silent=true}
 -- Run locate.

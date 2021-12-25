@@ -182,6 +182,7 @@ The `leader` key is `space`!
 | `g=`               | Re-indents the hole buffer                                           |
 | `]c`               | (gitsigns) Next hunk                                                 |
 | `[c`               | (gitsigns) Previous hunk                                             |
+| `<leader>gg`       | Fu**g**itive git buffer                                              |
 | `<leader>hb`       | (gitsigns) **B**lame line                                            |
 | `<leader>hs`       | (gitsigns) **S**tage **h**unk                                        |
 | `<leader>hl`       | (gitsigns) **S**tage **l**ine                                        |
@@ -341,7 +342,6 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
 | `<leader>fh`       | **F**ile **H**istory                                   |
 | `<leader>fl`       | **F**ile **l**ocate (requires mlocate)                 |
-| `<leader>gg`       | **GGrep**                                              |
 | `<leader>gf`       | **GFiles**                                             |
 | `<leader>mm`       | **Marks**                                              |
 | `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
