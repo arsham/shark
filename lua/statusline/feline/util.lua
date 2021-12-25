@@ -282,13 +282,17 @@ function M.search_results()
 end
 
 function M.locallist_count()
-    local count = #vim.fn.getloclist(0)
-    return ("  %d "):format(count)
+    local ll = vim.fn.getloclist(vim.fn.winnr(), {idx=0, size=0})
+    local count = ll.size
+    local current = ll.idx
+    return ("  %d/%d "):format(current, count)
 end
 
 function M.quickfix_count()
-    local count = #vim.fn.getqflist()
-    return ("  %d "):format(count)
+    local qf = vim.fn.getqflist({idx=0, size=0})
+    local count = qf.size
+    local current = qf.idx
+    return ("  %d/%d "):format(current, count)
 end
 
 local config = {
