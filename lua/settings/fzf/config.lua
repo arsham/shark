@@ -1,3 +1,4 @@
+local nvim = require('nvim')
 local util = require('util')
 local util_lsp = require('util.lsp')
 table.insert(vim.opt.rtp, "~/.fzf")
