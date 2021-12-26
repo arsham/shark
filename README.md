@@ -338,8 +338,10 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>:`        | Commands                                               |
 | `<leader>ff`       | **F**ind in contents of all files in current folder.   |
 | `<leader>fa`       | **F**ind **A**ll disabling `.gitignore` handling.      |
+| `<leader>fi`       | **I**ncrementally **F**ind.                            |
 | `<leader>rg`       | Search (**rg**) with current word.                     |
 | `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
+| `<leader>ri`       | **I**ncrementally search (**rg**) with current word.   |
 | `<leader>fh`       | **F**ile **H**istory                                   |
 | `<leader>fl`       | **F**ile **l**ocate (requires mlocate)                 |
 | `<leader>gf`       | **GFiles**                                             |

@@ -3,29 +3,96 @@ local util = require('util')
 
 local M = {}
 
----Do a ripgrep search with a fzf search interface.
+---Launches a ripgrep search with a fzf search interface.
 ---@param term? string if empty, the search will only happen on the content.
----@param opts string options to pass to ripgrep call.
-function M.do_rg(term, opts)
-    local delimiter = term and ' --delimiter : --nth 4..' or ''
-    local args = {
-        options = '--prompt="Search Files> " --preview-window nohidden' .. delimiter,
-    }
-    local preview = vim.fn["fzf#vim#with_preview"](args, 'right:60%:+{2}-/2', 'ctrl-/')
+---@param no_ignore? string disables the ignore rules.
+function M.ripgrep_search(term, no_ignore)
+    term = vim.fn.shellescape(term)
+    local nth       = ''
+    local with_nth  = ''
+    local delimiter = ''
+    if term then
+        with_nth  = '--nth 2..'
+        nth       = '--nth 1,4..'
+        delimiter = '--delimiter :'
+    end
+    no_ignore = no_ignore and '' or '--no-ignore'
+
     local rg_cmd = table.concat({
         'rg',
-        '--column',
-        '--line-number',
+        '--line-number', '--column',
         '--no-heading',
         '--color=always',
         '--smart-case',
         '--hidden',
-        '-g "!.git/" ',
-        opts or '',
-        '--',
-        vim.fn.shellescape(term),
+        '-g "!.git/" ', no_ignore,
+        '--', term,
     }, " ")
+
+    local args = {
+        options = table.concat({
+            '--prompt="Search in files> "',
+            '--preview-window nohidden',
+            delimiter,
+            with_nth,
+            nth,
+        }, ' ')
+    }
+
+    local preview = vim.fn["fzf#vim#with_preview"](args)
     vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
+end
+
+---Launches a ripgrep search with a fzf search interface.
+---@param term? string if empty, the search will only happen on the content.
+---@param no_ignore? string disables the ignore rules.
+function M.ripgrep_search_incremental(term, no_ignore)
+    term = vim.fn.shellescape(term)
+    local query       = ''
+    local nth       = ''
+    local with_nth  = ''
+    local delimiter = ''
+    if term then
+        query     = '--query ' .. term
+        with_nth  = '--nth 2..'
+        nth       = '--nth 1,4..'
+        delimiter = '--delimiter :'
+    end
+    no_ignore = no_ignore and '' or '--no-ignore'
+
+    local rg_cmd = table.concat({
+        'rg',
+        '--line-number', '--column',
+        '--no-heading',
+        '--color=always',
+        '--smart-case',
+        '--hidden',
+        '-g "!.git/" ', no_ignore,
+        '-- %s || true',
+    }, " ")
+
+    local initial = string.format(rg_cmd, term)
+    local reload_cmd = string.format(rg_cmd, '{q}')
+
+    local args = {
+        options = table.concat({
+            '--prompt="1. Ripgrep> "',
+            '--header="<Alt-Enter>:Reload on current query"',
+            '--header-lines=1',
+            '--preview-window nohidden',
+            '--phony', '--disabled',
+            ---         with_nth,
+            query,
+            '--bind',
+            string.format("'change:reload:%s'", reload_cmd),
+            '--bind "alt-enter:unbind(change,alt-enter)+change-prompt(2. FZF> )+enable-search+clear-query"',
+            delimiter,
+            nth,
+        }, ' ')
+    }
+
+    local preview = vim.fn["fzf#vim#with_preview"](args)
+    vim.fn["fzf#vim#grep"](initial, 1, preview)
 end
 
 function M.delete_buffer()
@@ -89,6 +156,8 @@ function M.delete_buffer()
     vim.fn["fzf#run"](preview)
 end
 
+---Searches in the lines of current buffer. It provides an incremental search
+---that would switch to fzf filtering on <Alt-Enter>.
 function M.lines_grep()
     local options = table.concat({
         '--prompt="Current Buffer> "',
@@ -149,7 +218,7 @@ function M.reload_config()
         source = source,
         options = table.concat({
             '--prompt="Open Config> "',
-            '--header="<C-a>:reloads all"',
+            '--header="<C-a>:Reload all"',
             '--delimiter="\t"',
             '--with-nth=2..', '--nth=1',
             '--multi',
@@ -238,7 +307,7 @@ function M.delete_marks()
         source = mark_list,
         options = table.concat({
             '--prompt="Delete Mark> "',
-            '--header="<C-a>:deletes all"',
+            '--header="<C-a>:Delete all"',
             '--header-lines=1',
             '--delimiter="\t"',
             '--with-nth=2..', '--nth=3',
@@ -265,7 +334,7 @@ function M.git_grep(term)
     local wrapped = vim.fn["fzf#wrap"]({
         source = source,
         options = table.concat({
-            '--prompt="Search In Tree> "',
+            '--prompt="Search in tree> "',
             '+m',
             '--delimiter="\t"',
             '--with-nth=2..', '--nth=1',
@@ -287,7 +356,7 @@ function M.git_grep(term)
                 local toplevel = vim.fn.system("git rev-parse --show-toplevel")
                 toplevel = string.gsub(toplevel, "\n", '')
                 local str = string.format([[fugitive://%s/.git//%s]], toplevel, sha)
-                vim.ex.edit(str)
+                nvim.ex.edit(str)
             end
         end
     end

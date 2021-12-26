@@ -33,17 +33,23 @@ keymap.imap{'<c-x><c-f>', '<plug>(fzf-complete-path)'}
 keymap.imap{'<c-x><c-l>', '<plug>(fzf-complete-line)'}
 
 -- Open the search tool.
-keymap.nnoremap{"<leader>ff", function() util.do_rg("") end}
+keymap.nnoremap{"<leader>ff", function() util.ripgrep_search("") end}
 -- Open the search tool, ignoring .gitignore.
-keymap.nnoremap{"<leader>fa", function() util.do_rg("", '-u') end}
+keymap.nnoremap{"<leader>fa", function() util.ripgrep_search("", true) end}
+-- Incremental search.
+keymap.nnoremap{"<leader>fi", function() util.ripgrep_search_incremental("", true) end}
 
 -- Search over current word.
 keymap.nnoremap{"<leader>rg", function()
-    util.do_rg(vim.fn.expand("<cword>"))
+    util.ripgrep_search(vim.fn.expand("<cword>"))
 end}
 -- Search over current word, ignoring .gitignore.
 keymap.nnoremap{"<leader>ra", function()
-    util.do_rg(vim.fn.expand("<cword>"), '-u')
+    util.ripgrep_search(vim.fn.expand("<cword>"), true)
+end}
+-- Incremental search over current word, ignoring .gitignore.
+keymap.nnoremap{"<leader>ri", function()
+    util.ripgrep_search(vim.fn.expand("<cword>"), true)
 end}
 
 keymap.nnoremap{'<leader>mm',  ":Marks<CR>"}
