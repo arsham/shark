@@ -4,8 +4,8 @@ local packer_bootstrap = false
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     packer_bootstrap = vim.fn.system({
-        "git", "clone", "--depth", "1",
-        "https://github.com/wbthomason/packer.nvim",
+        'git', 'clone', '--depth', '1',
+        'https://github.com/wbthomason/packer.nvim',
         install_path,
     })
 end
@@ -35,8 +35,8 @@ require('packer').startup({
 
         -- {{{ Libraries
         use {
-            "wbthomason/packer.nvim",
-            event = "VimEnter",
+            'wbthomason/packer.nvim',
+            event = 'VimEnter',
         }
         use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
@@ -44,15 +44,19 @@ require('packer').startup({
         -- }}}
 
         -- {{{ Core/System utilities
-        use { "nathom/filetype.nvim" }
-        use { "lewis6991/impatient.nvim" }
+        use { 'nathom/filetype.nvim' }
+        use { 'lewis6991/impatient.nvim' }
 
-        use 'junegunn/fzf'
+        use {
+            'junegunn/fzf',
+            event = 'VimEnter',
+        }
 
         use {
             'junegunn/fzf.vim',
             requires = 'junegunn/fzf',
             config   = function() require('settings.fzf') end,
+            event = 'VimEnter',
         }
 
         use {
@@ -87,6 +91,7 @@ require('packer').startup({
             'gelguy/wilder.nvim',
             config = function() require('settings.wilder') end,
             run    = ':UpdateRemotePlugins',
+            event = 'VimEnter',
         }
 
         use {
@@ -112,6 +117,7 @@ require('packer').startup({
         use {
             'tpope/vim-fugitive',
             config = function() require('settings').fugitive() end,
+            event = 'VimEnter',
        }
 
         use {
@@ -146,7 +152,7 @@ require('packer').startup({
             'famiu/feline.nvim',
             after  = 'nvim-web-devicons',
             config = function() require('statusline.feline') end,
-            event  = 'UIEnter',
+            event  = 'VimEnter',
         }
 
         use {
@@ -176,7 +182,7 @@ require('packer').startup({
                 end))
                 async_load_plugin:send()
             end,
-            event = 'UIEnter',
+            event = 'VimEnter',
         }
 
         use {
@@ -383,7 +389,7 @@ require('packer').startup({
                     'nvim-treesitter/playground',
                     after = 'nvim-treesitter',
                     run   = ':TSInstall query',
-                    cmd   = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+                    cmd   = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
                 },
             },
             run   = ':TSUpdate',
@@ -480,7 +486,7 @@ require('packer').startup({
 
         -- }}}
         if packer_bootstrap then
-            require("packer").sync()
+            require('packer').sync()
         end
 
     end,
