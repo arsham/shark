@@ -45,15 +45,16 @@ end
 vim.wo.foldmethod = 'expr'
 
 vim.keymap.inoremap{'<CR>', function()
-    local line = vim.fn.substitute(vim.fn.getline(vim.fn.line('.')), '^\\s*', '', '')
-    local marker = vim.fn.matchstr(line, [[^\([*-]\|\d\+\.\)\s]])
+    local line = vim.fn.getline(vim.fn.line('.')):gsub('^%s*', '')
+    local marker = vim.fn.matchstr(line, [[^\(\d\+\.\)\s]])
     if not marker and marker == line then
-        return "\\<c-u>"
+        return "<c-u>"
     end
-    if marker ~= '\\d' then
-        marker = tostring(tonumber(marker) + 1) .. '. '
+    local m = tonumber(marker)
+    if m then
+        marker = tostring(m + 1) .. '. '
     end
-    return "\\<cr>" .. marker
+    return "<cr>" .. marker
 end, expr=true, buffer=true}
 
 ---Jumps to the next heading.
