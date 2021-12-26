@@ -147,7 +147,7 @@ lsp_installer.on_server_ready(function(server)
                         workspace = {
                             maxPreload = 2000,
                             preloadFileSize = 50000,
-                        }
+                        },
                     }
                 }
             },
@@ -187,40 +187,19 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
--- Sets up a couple of autocmds that would stop wrapping go.mod files, and will
--- tidy and restart when the go.mod file is updated.
 util.augroup{"GOPLS_GOMOD", {
     {"BufNewFile,BufRead", "go.mod", docs="don't wrap me", run=function()
         vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
     end},
-    {"BufWritePost", "go.mod", docs="run go mod tidy on save", run=function()
-        local job = require('plenary.job')
-        job:new({
-            command = "go",
-            args = {"mod", "tidy"},
-            on_exit = function(j, exit_code)
-                local res = table.concat(j:result(), "\n")
-                if #res == 0 then
-                    res = "Everything is tidy now"
-                end
 
-                local type = vim.lsp.log_levels.INFO
-                local timeout = 3000
+    {"BufWritePre", "go.mod", docs="run go mod tidy on save", run=function()
+        local filename = vim.fn.expand('%:p')
+        local bufnr = vim.fn.expand('<abuf>')
+        require('util.lsp').go_mod_tidy(tonumber(bufnr), filename)
+    end},
 
-                if exit_code ~=0 then
-                    type = vim.lsp.log_levels.ERROR
-                    res = table.concat(j:stderr_result(), "\n")
-                    timeout = 10000
-                end
-
-                vim.schedule(function()
-                    nvim.ex.RestartLsp()
-                end)
-                vim.notify(res, type, {
-                    title = "Go Modules Are Tidy Now",
-                    timeout = timeout,
-                })
-            end,
-        }):start()
+    {"BufRead", "go.mod", docs='check for updates', run=function()
+        local filename = vim.fn.expand('<amatch>')
+        require('util.lsp').go_mod_check_upgrades(filename)
     end},
 }}
