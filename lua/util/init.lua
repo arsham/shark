@@ -153,12 +153,12 @@ function M.command(opts)
         end
     end
 
-    local name = args.name or args[1]
-    local run = args.run or args[2]
-    local attrs = args.attrs or ""
+    local name     = args.name or args[1]
+    local run      = args.run or args[2]
+    local attrs    = args.attrs or ""
     local post_run = args.post_run or ""
-    local docs =  args.docs or 'no documents'
-    local silent = args.silent or ""
+    local docs     = args.docs or 'no documents'
+    local silent   = args.silent or ""
 
     local command_str
     if type(run) == 'string' then
@@ -179,7 +179,7 @@ end
 
 ---@class AugroupOpt
 ---@field name string also the first field. Name of the group. Should be unique.
----@field cmds AutocmdOpt[] @see M.autocmd.
+---@field cmds? AutocmdOpt[] if empty then it only creates the augroup. @see M.autocmd.
 
 ---Creates an augroup with a set of autocmds.
 ---@param opts AugroupOpt
@@ -190,6 +190,9 @@ function M.augroup(opts)
     end
 
     local cmds = opts.cmds or opts[2]
+    if not cmds then
+        cmds = {}
+    end
 
     nvim.ex.augroup(name)
     nvim.ex.autocmd_('*')
@@ -200,13 +203,14 @@ function M.augroup(opts)
 end
 
 ---@class AutocmdOpt
----@field events  string "E1,E2"; or you can set the buffer to true
----@field tergets string "*.go"
----@field run     string or function
----@field docs    string is handy when you query verbose command.
----@field buffer  boolean
----@field silent  boolean
----@field once    boolean adds ++once
+---@field group?   string the group to attach to.
+---@field events   string "E1,E2"; or you can set the buffer to true
+---@field tergets? string "*.go"
+---@field run      string or function
+---@field docs?    string is handy when you query verbose command.
+---@field buffer?  boolean
+---@field silent?  boolean
+---@field once?    boolean adds ++once
 
 ---Creates a single autocmd. You most likely want to use it in a context of an
 ---augroup.
@@ -224,13 +228,14 @@ function M.autocmd(opts)
         end
     end
 
-    local events = args.events or args[1]
+    local events  = args.events or args[1]
     local targets = args.targets or args[2] or ""
-    local run = args.run or args[3]
-    local buffer = args.buffer or ""
-    local docs = args.docs or "no documents"
-    local silent = args.silent or ""
-    local once = args.once and '++once' or ""
+    local run     = args.run or args[3]
+    local buffer  = args.buffer or ""
+    local docs    = args.docs or "no documents"
+    local silent  = args.silent or ""
+    local once    = args.once and '++once' or ""
+    local group   = args.group or ""
 
     local autocmd_str
     if type(run) == 'string' then
@@ -242,7 +247,7 @@ function M.autocmd(opts)
         error("Unexpected type to run (" .. docs .. "): " .. tostring(run))
     end
 
-    local def = table.concat({events, targets, buffer, silent, once, autocmd_str}, ' ')
+    local def = table.concat({group, events, targets, buffer, silent, once, autocmd_str}, ' ')
     nvim.ex.autocmd(def)
 end
 

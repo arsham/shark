@@ -1,5 +1,4 @@
 local util = require('util')
-local nvim = require('nvim')
 local command = util.command
 
 command{"Filename", function()
@@ -13,12 +12,33 @@ command{"YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end}
 command{"MergeConflict", ":grep '<<<<<<< HEAD'"}
 command{"JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]]}
 
+util.augroup{"WATCH_LUA_FILE"}
 command{"WatchLuaFileChanges", docs="watch changes on the lua file and reload", run=function()
-    util.augroup{"WATCH_LUA_FILE", {
-        {"BufWritePost", buffer=true, run=function()
-            nvim.ex.luafile('%')
-        end},
-    }}
+    local filename = vim.fn.expand('%:p')
+    local name = filename:match([[/nvim/lua/(.+).lua]])
+    if not name then
+        local msg = string.format('Could not figure out the package: %s', name)
+        vim.notify(msg, vim.lsp.log_levels.ERROR, {
+            title = 'Reload Error',
+            timeout = 2000,
+        })
+        return
+    end
+    local msg = string.format('Watching "%s.lua" for changes', name)
+    vim.notify(msg, vim.lsp.log_levels.INFO, {
+        title = 'Watching',
+        timeout = 2000,
+    })
+    util.autocmd{"WATCH_LUA_FILE BufWritePost", buffer=true, run=function()
+        local p_name, _= name:gsub('/', '.')
+        package.loaded[p_name] = nil
+        require(p_name)
+        msg = string.format('"%s.lua" reloaded', name)
+        vim.notify(msg, vim.lsp.log_levels.INFO, {
+            title = 'Success!',
+            timeout = 1000,
+        })
+    end, docs=string.format('watching %s', filename)}
 end}
 
 command{"CC", docs="close all floating windows", run=function()
