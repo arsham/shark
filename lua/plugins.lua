@@ -123,7 +123,6 @@ require('packer').startup({
         use {
             'tpope/vim-fugitive',
             config = function() require('settings').fugitive() end,
-            event = 'VimEnter',
        }
 
         use {
