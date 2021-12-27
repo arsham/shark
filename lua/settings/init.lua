@@ -200,11 +200,6 @@ end
 
 function M.fugitive()
     vim.keymap.nnoremap{'<leader>gg', ':Git<cr>', silent=true}
-    util.augroup{'FUGITIVE_SETTINGS', {
-        {'FileType', 'fugitive', run=function()
-            vim.wo.cursorline = true
-        end},
-    }}
 end
 
 function M.null_ls()

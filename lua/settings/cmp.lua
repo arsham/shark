@@ -105,7 +105,7 @@ cmp.setup({
     formatting = {
         fields = {'kind', 'abbr', 'menu'},
         format = function(entry, vim_item)
-            vim_item.menu = string.format('%-9s [%s]', vim_item.kind, ({
+            vim_item.menu = string.format('%-7s[%s]', vim_item.kind, ({
                 buffer        = "Buffer",
                 nvim_lsp      = "LSP",
                 luasnip       = "LuaSnip",

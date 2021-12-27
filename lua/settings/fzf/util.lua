@@ -118,7 +118,7 @@ function M.delete_buffer()
         }
         local signs = ''
         if v.bufnr == cur_buf then
-            signs = signs .. '%'
+            signs = signs .. util.ansi_color(util.colours.red, '%')
         end
         if v.bufnr == alt_buf then
             signs = signs .. '#'
