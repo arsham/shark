@@ -24,7 +24,7 @@ parser_config.gotmpl = {
 require('nvim-treesitter.configs').setup {
     ensure_installed = "all",
 
-    indent    = { enable = true },
+    indent    = { enable = true, disable = { "yaml" } },
     fold      = { enable = true },
     highlight = {
         enable = true,
