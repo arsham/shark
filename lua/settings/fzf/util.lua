@@ -205,7 +205,9 @@ function M.lines_grep()
     vim.fn["fzf#run"](preview)
 end
 
-function M.reload_config()
+---Launches a fzf search for reloading config files.
+---@param watch boolean if true it will keep watching for changes.
+function M.reload_config(watch)
     local loc = vim.env['MYVIMRC']
     local base_dir = require('plenary.path'):new(loc):parents()[1]
     local got = vim.fn.systemlist({'fd', '.', '-e', 'lua', '-t', 'f', '-L', base_dir})
@@ -230,9 +232,22 @@ function M.reload_config()
     })
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     preview["sink*"] = function(list)
+        local names = {}
         for _, name in pairs({unpack(list, 2)}) do
             name = name:match('^[^\t]*')
-            nvim.ex.luafile(name)
+            table.insert(names, name)
+        end
+        if watch then
+            require('commands').watch_file_changes(names)
+            return
+        end
+        for _, name in pairs(names) do
+            name = name:match('^[^\t]*')
+            local mod, ok = util.file_module(name)
+            if ok then
+                package.loaded[mod] = nil
+                require(mod)
+            end
         end
     end
     vim.fn["fzf#run"](preview)

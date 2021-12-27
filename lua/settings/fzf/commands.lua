@@ -5,6 +5,7 @@ local command = require('util').command
 command{"GGrep",  util.git_grep, attrs="-bang -nargs=+"}
 command{"BLines", util.lines_grep, docs="Search in buffer lines"}
 command{"Reload", util.reload_config}
+command{"ReloadWatch", function() util.reload_config(true) end}
 command{"Config", util.open_config}
 command{"Todo",   util.open_todo}
 command{"Notes",  "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
