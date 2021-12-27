@@ -48,7 +48,7 @@ end
 ---@param no_ignore? string disables the ignore rules.
 function M.ripgrep_search_incremental(term, no_ignore)
     term = vim.fn.shellescape(term)
-    local query       = ''
+    local query     = ''
     local nth       = ''
     local with_nth  = ''
     local delimiter = ''
@@ -81,12 +81,12 @@ function M.ripgrep_search_incremental(term, no_ignore)
             '--header-lines=1',
             '--preview-window nohidden',
             '--phony', '--disabled',
-            ---         with_nth,
             query,
             '--bind',
             string.format("'change:reload:%s'", reload_cmd),
             '--bind "alt-enter:unbind(change,alt-enter)+change-prompt(2. FZF> )+enable-search+clear-query"',
             delimiter,
+            with_nth,
             nth,
         }, ' ')
     }

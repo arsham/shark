@@ -276,3 +276,4 @@ vim.keymap.xnoremap{'&', ':&&<CR>'}
 
 ---Delete the buffer.
 vim.keymap.nnoremap{'<C-w>b', ':bd<CR>'}
+vim.keymap.nnoremap{'<C-w><C-b>', ':bd<CR>'}

@@ -30,6 +30,11 @@ local colorizer_ft = {
     'markdown',
 }
 
+---Disables LSP plugins and other heavy plugins.
+local function full_start()
+    return not vim.env.NVIM_START_LIGHT
+end
+
 require('packer').startup({
     function(use)
 
@@ -67,6 +72,7 @@ require('packer').startup({
             },
             config = function() require('bqf').enable() end,
             ft = { 'qf' },
+            cond = full_start,
         }
 
         use {
@@ -170,6 +176,7 @@ require('packer').startup({
                 require'colorizer'.setup(colorizer_ft)
             end,
             ft = colorizer_ft,
+            cond = full_start,
         }
 
         use {
@@ -201,6 +208,7 @@ require('packer').startup({
                 async_load_plugin:send()
             end,
             event = 'UIEnter',
+            cond = full_start,
         }
         -- }}}
 
@@ -224,6 +232,7 @@ require('packer').startup({
                 }
             end,
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cond = full_start,
         }
 
         use {
@@ -286,11 +295,13 @@ require('packer').startup({
             'neovim/nvim-lspconfig',
             after = { 'nvim-cmp', 'lua-dev.nvim' },
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cond = full_start,
         }
 
         use {
             'folke/lua-dev.nvim',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cond = full_start,
         }
 
         use {
@@ -307,6 +318,7 @@ require('packer').startup({
                 'cmp-nvim-lsp',
             },
             cmd = 'LspInstallInfo',
+            cond = full_start,
         }
 
         use {
@@ -331,6 +343,7 @@ require('packer').startup({
                 { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
             },
             config = function() require('settings.cmp') end,
+            cond = full_start,
         }
 
         use {
@@ -348,6 +361,7 @@ require('packer').startup({
                 }
             end,
             after = { 'nvim-lspconfig', 'fzf.vim' },
+            cond = full_start,
         }
 
         use {
@@ -358,11 +372,13 @@ require('packer').startup({
             },
             config   = function() require('settings').null_ls() end,
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cond = full_start,
         }
 
         use {
             'nvim-lua/lsp-status.nvim',
             after = {'nvim-lspconfig', 'fzf.vim'},
+            cond = full_start,
         }
 
         use {
@@ -390,6 +406,7 @@ require('packer').startup({
                     after = 'nvim-treesitter',
                     run   = ':TSInstall query',
                     cmd   = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
+                    cond = full_start,
                 },
             },
             run   = ':TSUpdate',
@@ -414,6 +431,7 @@ require('packer').startup({
             'github/copilot.vim',
             config = function () require('settings').copilot() end,
             event  = { 'InsertEnter' },
+            cond = full_start,
         }
 
         use {
@@ -423,6 +441,7 @@ require('packer').startup({
                 vim.keymap.vnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
             end,
             ft = { 'sql' },
+            cond = full_start,
         }
 
         use {
@@ -466,11 +485,13 @@ require('packer').startup({
             setup  = function() vim.g.mkdp_filetypes = { 'markdown' } end,
             config = function() vim.g.mkdp_browser = 'brave' end,
             ft = { 'markdown' },
+            cond = full_start,
         }
 
         use {
             'milisims/nvim-luaref',
             ft = { 'lua' },
+            cond = full_start,
         }
 
         use {
