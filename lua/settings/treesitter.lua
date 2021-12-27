@@ -1,3 +1,4 @@
+local nvim = require('nvim')
 local util = require('util')
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
@@ -27,13 +28,13 @@ require('nvim-treesitter.configs').setup {
     indent    = { enable = true, disable = { "yaml" } },
     fold      = { enable = true },
     highlight = {
-        enable = true,
+        enable           = true,
         use_languagetree = false,
-        disable = { "json" },
+        disable          = { "json" },
         custom_captures = {
-            ["function.call"] = "TSFunction",
+            ["function.call"]    = "TSFunction",
             ["function.bracket"] = "Type",
-            ["namespace.type"] = "Namespace",
+            ["namespace.type"]   = "Namespace",
         },
     },
 
@@ -62,15 +63,13 @@ require('nvim-treesitter.configs').setup {
             keymaps = {
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
-                -- Saved for linewise pseudo object.
-                -- ['al'] = '@loop.outer',
-                -- ['il'] = '@loop.inner',
                 ['am'] = '@call.outer',
                 ['im'] = '@call.inner',
                 ['ab'] = '@block.outer',
                 ['ib'] = '@block.inner',
                 ['aa'] = '@parameter.outer',
                 ['ia'] = '@parameter.inner',
+                ['as'] = '@statement.outer',
             },
         },
 
@@ -81,6 +80,7 @@ require('nvim-treesitter.configs').setup {
                 ["]f"]  = "@function.outer",
                 ["]b"]  = "@block.outer",
                 ["]gc"] = "@comment.outer",
+                ["]a"]  = "@parameter.inner",
             },
             goto_next_end = {
                 ["]F"] = "@function.outer",
@@ -90,6 +90,7 @@ require('nvim-treesitter.configs').setup {
                 ["[f"]  = "@function.outer",
                 ["[b"]  = "@block.outer",
                 ["[gc"] = "@comment.outer",
+                ["[a"]  = "@parameter.inner",
             },
             goto_previous_end = {
                 ["[F"] = "@function.outer",
@@ -100,12 +101,10 @@ require('nvim-treesitter.configs').setup {
         swap = {
             enable = true,
             swap_next = {
-                ["<leader>.a"] = "@parameter.inner",
                 ["<leader>.f"] = "@function.outer",
                 ["<leader>.e"] = "@element",
             },
             swap_previous = {
-                ["<leader>,a"] = "@parameter.inner",
                 ["<leader>,f"] = "@function.outer",
                 ["<leader>,e"] = "@element",
             },
@@ -123,16 +122,16 @@ require('nvim-treesitter.configs').setup {
             updatetime = 25,
             persist_queries = true,
             keybindings = {
-                toggle_query_editor = 'o',
-                toggle_hl_groups = 'i',
+                toggle_query_editor       = 'o',
+                toggle_hl_groups          = 'i',
                 toggle_injected_languages = 't',
-                toggle_anonymous_nodes = 'a',
-                toggle_language_display = 'I',
-                focus_language = 'f',
-                unfocus_language = 'F',
-                update = 'R',
-                goto_node = '<cr>',
-                show_help = '?',
+                toggle_anonymous_nodes    = 'a',
+                toggle_language_display   = 'I',
+                focus_language            = 'f',
+                unfocus_language          = 'F',
+                update                    = 'R',
+                goto_node                 = '<cr>',
+                show_help                 = '?',
             },
         },
 
