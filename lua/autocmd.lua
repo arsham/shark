@@ -72,11 +72,12 @@ util.augroup{"SPECIAL_SETTINGS", {
         end
     end, docs="unset relative number when unfocused"},
 
-    {'TermOpen', '*', function()
-        if vim.bo.filetype == 'fzf' then return end
+    {'TermOpen', 'term:\\/\\/*', function()
         vim.wo.statusline = '%{b:term_title}'
         vim.keymap.tnoremap{'<Esc>', [[<C-\><C-n>]], buffer=true}
         nvim.ex.startinsert()
+        vim.wo.number = false
+        vim.wo.relativenumber = false
     end, docs='start in insert mode and set the status line'},
 
     -- See neovim/neovim#15440
