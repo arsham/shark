@@ -1,5 +1,6 @@
 local util = require('util')
 local command = util.command
+local M = {}
 
 command{"Filename", function()
     vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
@@ -12,58 +13,47 @@ command{"YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end}
 command{"MergeConflict", ":grep '<<<<<<< HEAD'"}
 command{"JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]]}
 
----Returns a pair of canonical name and the module name.
----@param filename string
----@return string
----@return string
----@return boolean when the filename matches a correct module.
-local function try_filename(filename)
-    local patterns = {
-        [[/nvim/lua/(.+.lua)$]],
-        [[nvim/lua/(.+.lua)$]],
-        [[lua/(.+.lua)$]],
-        [[(.+.lua)$]],
-    }
-    for _, pattern in ipairs(patterns) do
-        local name = filename:match(pattern)
-        if name then
-            local mod_name = name:match('(.+).lua$')
-            mod_name, _= mod_name:gsub('/', '.')
-            return name, mod_name, true
-        end
-    end
-    return '', '', false
-end
-
----Sets up a watch on the filename if it is a lua file.
+---Sets up a watch on the filename if it is a lua module.
 ---@param filenames string[]
 local function setup_watch(filenames)
     local modules = {}
     for _, filename in ipairs(filenames) do
-        local mod = {}
-        local name, mod_name, ok = try_filename(filename)
-        local loaded = pcall(require, mod_name)
+        local mod, ok = util.file_module(filename)
 
-        if not ok or not loaded then
+        if not ok then
             local msg = string.format('Could not figure out the package: %s', filename)
             vim.notify(msg, vim.lsp.log_levels.ERROR, {
                 title = 'Reload Error',
                 timeout = 2000,
             })
         else
-            mod.module = mod_name
-            mod.filepath = filename
-            mod.name = name
             table.insert(modules, mod)
-
-            local msg = string.format('Watching "%s" for changes', name)
-            vim.notify(msg, vim.lsp.log_levels.INFO, {
-                title = 'Watching',
-                timeout = 2000,
-            })
         end
     end
     return modules
+end
+
+function M.watch_file_changes(filenames)
+    local modules= setup_watch(filenames)
+    for _, module in ipairs(modules) do
+        local msg = string.format('Watching "%s" for changes', module.name)
+        vim.notify(msg, vim.lsp.log_levels.INFO, {
+            title = 'Watching',
+            timeout = 2000,
+        })
+        util.autocmd{"WATCH_LUA_FILE BufWritePost", module.filepath, run=function()
+            for _, mod in ipairs(modules) do
+                package.loaded[mod.module] = nil
+                require(mod.module)
+
+                msg = string.format('"%s" reloaded', mod.name)
+                vim.notify(msg, vim.lsp.log_levels.INFO, {
+                    title = 'Success!',
+                    timeout = 1000,
+                })
+            end
+        end, docs=string.format('watching %s', module.name)}
+    end
 end
 
 util.augroup{"WATCH_LUA_FILE"}
@@ -71,23 +61,7 @@ command{"WatchLuaFileChanges", attrs='-nargs=* -complete=file', run=function(arg
     local filename = vim.fn.expand('%:p')
     local files = arg and string.split(arg, ' ') or {}
     table.insert(files, filename)
-    local modules= setup_watch(files)
-
-    for _, module in ipairs(modules) do
-        util.autocmd{"WATCH_LUA_FILE BufWritePost", module.filepath, run=function()
-            for _, mod in ipairs(modules) do
-                vim.cmd(string.format('lua require("%s")', mod.module))
-                package.loaded[mod.module] = nil
-                require(mod.module)
-
-                local msg = string.format('"%s" reloaded', mod.name)
-                vim.notify(msg, vim.lsp.log_levels.INFO, {
-                    title = 'Success!',
-                    timeout = 1000,
-                })
-            end
-        end, docs=string.format('watching %s', filename)}
-    end
+    M.watch_file_changes(files)
 end, docs="watch changes on the lua file and reload"}
 
 command{"CC", docs="close all floating windows", run=function()
@@ -163,3 +137,5 @@ command{"InstallDependencies", function()
         }):start()
     end
 end}
+
+return M
