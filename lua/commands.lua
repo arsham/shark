@@ -41,7 +41,7 @@ function M.watch_file_changes(filenames)
             title = 'Watching',
             timeout = 2000,
         })
-        util.autocmd{"WATCH_LUA_FILE BufWritePost", module.filepath, run=function()
+        util.autocmd{"WATCH_LUA_FILE BufWritePost", module.name, run=function()
             for _, mod in ipairs(modules) do
                 package.loaded[mod.module] = nil
                 require(mod.module)

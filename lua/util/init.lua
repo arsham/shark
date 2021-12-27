@@ -365,6 +365,7 @@ end
 ---@return boolean when the filename matches a correct module.
 local function try_filename(filename)
     local patterns = {
+        [[/nvim/([%a\/]+.+.lua)$]],
         [[/nvim/lua/(.+.lua)$]],
         [[nvim/lua/(.+.lua)$]],
         [[lua/(.+.lua)$]],
