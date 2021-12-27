@@ -1,5 +1,5 @@
 if not pcall(require, 'astronauta.keymap') then return end
--- vim.lsp.set_log_level("debug")
+---vim.lsp.set_log_level("debug")
 local util = require('util')
 
 --Enable (broadcasting) snippet capability for completion

@@ -1,6 +1,6 @@
--- This is the 'arsham' color scheme.
+---This is the 'arsham' color scheme.
 
--- {{{ Palette
+---{{{ Palette
 local palette = {
     name           = 'arsham',
     base0          = '#232627',
@@ -50,7 +50,7 @@ local palette = {
     white          = '#FFF1F3',
     yellow         = '#FFE087',
 }
--- }}}
+---}}}
 
 local mappings = {
     Normal = {
@@ -1321,4 +1321,4 @@ return {
     setup = setup
 }
 
--- vim: foldmethod=marker
+--- vim: foldmethod=marker

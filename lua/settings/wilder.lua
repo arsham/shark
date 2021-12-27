@@ -45,7 +45,7 @@ local function init_wilder()
     end
 end
 
--- Lazy loading the setup.
+---Lazy loading the setup.
 require('util').augroup{"WILDER", {
     {"CmdlineEnter", targets="* ++once", run=init_wilder},
 }}

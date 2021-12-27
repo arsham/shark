@@ -43,7 +43,7 @@ keymap.vnoremap{'<leader>hr', function() gitsigns.reset_hunk({vim.fn.line("."), 
 keymap.nnoremap{'<leader>hR', function() gitsigns.reset_buffer() end}
 keymap.nnoremap{'<leader>hp', function() gitsigns.preview_hunk() end}
 
--- Text objects
+---Text objects
 local actions = require('gitsigns.actions')
 keymap.onoremap{'ih', actions.select_hunk}
 keymap.xnoremap{'ih', actions.select_hunk}

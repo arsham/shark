@@ -119,19 +119,19 @@ local function do_match(name, exact)
     vim.fn["repeat#set"](key, vim.v.count)
 end
 
--- Add any matches containing a word under the cursor.
+---Add any matches containing a word under the cursor.
 vim.keymap.nnoremap{'<Plug>MatchAdd', function()
     do_match('<Plug>MatchAdd', false)
 end}
 vim.keymap.nmap{'<leader>ma', '<Plug>MatchAdd'}
 
--- Add any exact matches containing a word under the cursor.
+---Add any exact matches containing a word under the cursor.
 vim.keymap.nnoremap{'<Plug>MatchExact', function()
     do_match('<Plug>MatchExact', true)
 end}
 vim.keymap.nmap{'<leader>me', '<Plug>MatchExact'}
 
--- Add any matches containing the input from user.
+---Add any matches containing the input from user.
 vim.keymap.nnoremap{'<leader>mp', function()
     util.user_input{
         prompt = "Pattern: ",
@@ -141,7 +141,7 @@ vim.keymap.nnoremap{'<leader>mp', function()
     }
 end}
 
--- Clear all matches of the current buffer.
+---Clear all matches of the current buffer.
 vim.keymap.nnoremap{'<leader>mc', function()
     local groups = {}
     for _, v in ipairs(mappings) do

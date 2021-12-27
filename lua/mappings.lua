@@ -2,8 +2,8 @@ require('astronauta.keymap')
 local util = require('util')
 local keymap = vim.keymap
 
--- vim.v.count
--- vim.api.nvim_put(t, 'l', true, false)
+---vim.v.count
+---vim.api.nvim_put(t, 'l', true, false)
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -16,10 +16,10 @@ keymap.inoremap{'<Up>',    '<Nop>'}
 keymap.inoremap{'<Down>',  '<Nop>'}
 keymap.inoremap{'<Left>',  '<Nop>'}
 keymap.inoremap{'<Right>', '<Nop>'}
--- Disable Ex mode
+---Disable Ex mode
 keymap.nmap{'Q', '<Nop>'}
 
--- Moving lines with alt key.
+---Moving lines with alt key.
 keymap.nnoremap{'<A-j>', silent=true, [[:<c-u>execute 'm +'. v:count1<cr>==]]}
 keymap.nnoremap{'<A-k>', silent=true, [[:<c-u>execute 'm -1-'. v:count1<cr>==]]}
 keymap.inoremap{'<A-j>', silent=true, [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]]}
@@ -27,11 +27,11 @@ keymap.inoremap{'<A-k>', silent=true, [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>
 keymap.vnoremap{'<A-j>', silent=true, [[:m '>+1<CR>gv=gv]]}
 keymap.vnoremap{'<A-k>', silent=true, [[:m '<-2<CR>gv=gv]]}
 
--- Keep the visually selected area when indenting.
+---Keep the visually selected area when indenting.
 keymap.xnoremap{'<', '<gv'}
 keymap.xnoremap{'>', '>gv'}
 
--- Re-indent the whole buffer.
+---Re-indent the whole buffer.
 keymap.nnoremap{'g=', 'gg=Gg``'}
 
 ---Inserts empty lines near the cursor.
@@ -48,7 +48,7 @@ local function insert_empty_lines(count, add)
     vim.api.nvim_buf_set_lines(0, pos[1]+add, pos[1]+add, false, lines)
 end
 
--- insert empty lines with motions, can be 10[<space>
+---insert empty lines with motions, can be 10[<space>
 keymap.nnoremap{"]<space>", function() insert_empty_lines(vim.v.count, 0) end, silent=true}
 keymap.nnoremap{"[<space>", function() insert_empty_lines(vim.v.count, -1) end, silent=true}
 
@@ -60,24 +60,24 @@ keymap.nnoremap{'<M-Down>',  silent=true, ':resize -2<CR>'}
 keymap.nnoremap{'<C-e>', '2<C-e>'}
 keymap.nnoremap{'<C-y>', '2<C-y>'}
 
--- Auto re-centre when moving around
+---Auto re-centre when moving around
 keymap.nnoremap{'G', "Gzz"}
 keymap.nnoremap{'g;', "m'g;zz"}
 keymap.nnoremap{'g,', "m'g,zz"}
 
--- put numbered motions in the jumplist.
+---put numbered motions in the jumplist.
 keymap.nnoremap{'k', expr=true, [[(v:count > 2 ? "m'" . v:count : '') . 'k']]}
 keymap.nnoremap{'j', expr=true, [[(v:count > 2 ? "m'" . v:count : '') . 'j']]}
 
--- Clear hlsearch
+---Clear hlsearch
 keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
 
--- Add char at the end of a line at the `loc` location.
--- @param loc(int): line number to add the char at.
--- @param char(string): char to add.
--- @param content(string): current content of the line.
--- @param remote(bool): if false, the char is added, otherwise the last
--- character is removed.
+---Add char at the end of a line at the `loc` location.
+---@param loc(int): line number to add the char at.
+---@param char(string): char to add.
+---@param content(string): current content of the line.
+---@param remote(bool): if false, the char is added, otherwise the last
+---character is removed.
 local function end_of_line(loc, content, char, remove)
     if remove and (content:sub(-1) ~= char) then
         return
@@ -90,11 +90,11 @@ local function end_of_line(loc, content, char, remove)
     vim.api.nvim_buf_set_lines(0, loc-1, loc, false, {content})
 end
 
--- Add the char at the end of the line, or the visually selected area.
+---Add the char at the end of the line, or the visually selected area.
 ---@param name string the name of mapping to repeat.
 ---@param char string char to add.
 ---@param remove boolean if false, the char is added, otherwise the last
--- character is removed.
+---character is removed.
 local function change_line_ends(name, char, remove)
     local mode = vim.api.nvim_get_mode().mode
     if mode == 'n' or mode == 'i' then
@@ -119,7 +119,7 @@ local function change_line_ends(name, char, remove)
     vim.fn["repeat#set"](key, vim.v.count)
 end
 
--- Add coma at the end of the line, or the visually selected area.
+---Add coma at the end of the line, or the visually selected area.
 local end_mapping = {
     ['Period']    = {'.', '>'},
     ['Coma']      = {',', 'lt'},
@@ -143,7 +143,7 @@ for n, tuple in pairs(end_mapping) do
     keymap.vmap{key2, name2}
 end
 
--- Insert a pair of brackets and go into insert mode.
+---Insert a pair of brackets and go into insert mode.
 keymap.inoremap{'<M-{>', '<Esc>A {<CR>}<Esc>O'}
 keymap.nnoremap{'<M-{>', 'A {<CR>}<Esc>O'}
 
@@ -152,15 +152,15 @@ keymap.xnoremap{'<Leader>y', '"+y'}
 keymap.nnoremap{'<Leader>p', '"+p'}
 keymap.nnoremap{'<Leader>P', '"+P'}
 
--- select a text, and this will replace it with the " contents.
+---select a text, and this will replace it with the " contents.
 keymap.vnoremap{'p', '"_dP'}
 
 keymap.nnoremap{'<leader>gw', ':silent lgrep <cword> % <CR>', silent=true}
 
--- ]s and [s to jump.
--- zg to ignore.
+---]s and [s to jump.
+---zg to ignore.
 keymap.nnoremap{'<leader>sp', function() vim.wo.spell = not vim.wo.spell end}
--- auto correct spelling and jump bak.
+---auto correct spelling and jump bak.
 keymap.nnoremap{'<leader>sf', function()
     local spell = vim.wo.spell
     vim.wo.spell = true
@@ -170,14 +170,14 @@ keymap.nnoremap{'<leader>sf', function()
     end)
 end}
 
--- mergetool mappings.
+---mergetool mappings.
 keymap.nnoremap{'<leader>1', ':diffget LOCAL<CR>'}
 keymap.nnoremap{'<leader>2', ':diffget BASE<CR>'}
 keymap.nnoremap{'<leader>3', ':diffget REMOTE<CR>'}
 
 keymap.nnoremap{'<leader>jq', ":%!gojq '.'<CR>"}
 
--- Show help for work under the cursor.
+---Show help for work under the cursor.
 keymap.nnoremap{'<leader>hh',  ":h <CR>"}
 
 ---Returns the indentation of the next line from the given argument, that is

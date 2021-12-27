@@ -1,5 +1,5 @@
 local M = {}
--- Find more schemas here: https://www.schemastore.org/json/
+---Find more schemas here: https://www.schemastore.org/json/
 M.jsonls = {
     {
         description = "TypeScript compiler configuration file",

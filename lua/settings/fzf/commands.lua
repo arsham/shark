@@ -11,7 +11,7 @@ command{"Todo",   util.open_todo}
 command{"Notes",  "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
 command{"Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", attrs="-bang"}
 
--- Delete marks interactivly with fzf.
+---Delete marks interactivly with fzf.
 command{"MarksDelete", util.delete_marks}
 
 command{"Marks", attrs="-bang -bar", docs="show marks", function()
@@ -25,7 +25,7 @@ end}
 
 command{"ArgAdd", util.args_add}
 
--- Delete args interactivly with fzf.
+---Delete args interactivly with fzf.
 command{"ArgsDelete", function()
     local wrapped = vim.fn["fzf#wrap"]({
         source = vim.fn.argv(),
@@ -38,7 +38,7 @@ command{"ArgsDelete", function()
 end}
 command{"ArgDelete", "ArgsDelete"}
 
--- Replacing the default ordering.
+---Replacing the default ordering.
 command{"History", attrs="-bang -nargs=*", function()
     vim.fn["fzf#vim#history"](vim.fn["fzf#vim#with_preview"]({
         options = '--no-sort',

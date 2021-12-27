@@ -13,7 +13,7 @@ end
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[packadd! cfilter]]
 
--- Auto compile when there are changes in plugins.lua
+---Auto compile when there are changes in plugins.lua
 vim.cmd [[
 augroup PACKER_RELOAD
     autocmd!

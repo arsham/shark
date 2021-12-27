@@ -41,8 +41,8 @@ require('nvim-treesitter.configs').setup {
         enable         = true,
         enable_autocmd = false,
         config = {
-            c = "// %s",
-            lua = "-- %s",
+            c   = "// %s",
+            lua = "---%s",
         },
     },
 

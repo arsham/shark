@@ -3,7 +3,7 @@ local nvim = require('nvim')
 local keymap = vim.keymap
 local util = require('settings.fzf.util')
 
--- Ctrl+/ for searching in current buffer.
+---Ctrl+/ for searching in current buffer.
 keymap.nnoremap{'<leader>:', ':Commands<CR>'}
 keymap.nnoremap{'<C-_>',      util.lines_grep,    silent=true}
 keymap.nnoremap{'<M-/>',      ':Lines<CR>',       silent=true}
@@ -14,7 +14,7 @@ keymap.nnoremap{'<M-b>',      util.delete_buffer, silent=true}
 keymap.nnoremap{'<leader>gf', ':GFiles<CR>',      silent=true}
 keymap.nnoremap{'<leader>fh', ':History<CR>',     silent=true}
 
--- Run locate.
+---Run locate.
 keymap.nnoremap{'<leader>fl', silent=true, function()
     require('util').user_input{
         prompt = "Term: ",
@@ -27,27 +27,27 @@ keymap.nnoremap{'<leader>fl', silent=true, function()
     }
 end}
 
--- Replace the default dictionary completion with fzf-based fuzzy completion.
+---Replace the default dictionary completion with fzf-based fuzzy completion.
 keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
 keymap.imap{'<c-x><c-f>', '<plug>(fzf-complete-path)'}
 keymap.imap{'<c-x><c-l>', '<plug>(fzf-complete-line)'}
 
--- Open the search tool.
+---Open the search tool.
 keymap.nnoremap{"<leader>ff", function() util.ripgrep_search("") end}
--- Open the search tool, ignoring .gitignore.
+---Open the search tool, ignoring .gitignore.
 keymap.nnoremap{"<leader>fa", function() util.ripgrep_search("", true) end}
--- Incremental search.
+---Incremental search.
 keymap.nnoremap{"<leader>fi", function() util.ripgrep_search_incremental("", true) end}
 
--- Search over current word.
+---Search over current word.
 keymap.nnoremap{"<leader>rg", function()
     util.ripgrep_search(vim.fn.expand("<cword>"))
 end}
--- Search over current word, ignoring .gitignore.
+---Search over current word, ignoring .gitignore.
 keymap.nnoremap{"<leader>ra", function()
     util.ripgrep_search(vim.fn.expand("<cword>"), true)
 end}
--- Incremental search over current word, ignoring .gitignore.
+---Incremental search over current word, ignoring .gitignore.
 keymap.nnoremap{"<leader>ri", function()
     util.ripgrep_search(vim.fn.expand("<cword>"), true)
 end}

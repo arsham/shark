@@ -33,8 +33,8 @@ end
 
 util.highlight("YankerEmptySpace", {guibg = 'red'})
 
--- Lists all yank history, and will set it to the unnamed register on
--- selection.
+---Lists all yank history, and will set it to the unnamed register on
+---selection.
 vim.keymap.nnoremap{'<leader>yh', silent=true, function()
     make_unique()
     local yank_list = {}

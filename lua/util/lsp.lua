@@ -1,7 +1,7 @@
 local nvim = require('nvim')
 local M = {}
 
--- Adopted from the feline codebase.
+---Adopted from the feline codebase.
 
 ---Returns true if a LSP server is attached to the current buffer.
 ---@return boolean
@@ -52,7 +52,7 @@ function M.diagnostics_exist(severity)
     return M.get_diagnostics_count(severity) > 0
 end
 
--- Common function used by the diagnostics providers
+---Common function used by the diagnostics providers
 local function diagnostics(severity)
     local count = M.get_diagnostics_count(severity)
     return count ~= 0 and tostring(count) or ''

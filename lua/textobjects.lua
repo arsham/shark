@@ -17,8 +17,8 @@ vim.keymap.onoremap{'an', function() next_obj("a") end}
 vim.keymap.xnoremap{'in', function() next_obj("i") end}
 vim.keymap.onoremap{'in', function() next_obj("i") end}
 
--- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
--- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
+--- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
+--- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
 local chars = {'_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '-', '#' }
 for char in table.values(chars) do
     vim.keymap.xnoremap{'i' .. char, function()
@@ -35,7 +35,7 @@ for char in table.values(chars) do
     end}
 end
 
--- line pseudo text objects.
+---line pseudo text objects.
 vim.keymap.xnoremap{'il', function() util.normal('xt', 'g_o^') end}
 vim.keymap.onoremap{'il', function() util.normal('x',  'vil')  end}
 vim.keymap.xnoremap{'al', function() util.normal('xt', '$o0')  end}

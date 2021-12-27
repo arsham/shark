@@ -86,24 +86,24 @@ table.insert(components.active[1], {
     provider = 'git_diff_added',
     enabled  = function() return require('feline.providers.git').git_info_exists() end,
     hl       = left_ribbon_hl,
-    -- icon  = "  ",
+    ---icon  = "  ",
 })
 
 table.insert(components.active[1], {
     provider = 'git_diff_changed',
     enabled  = function() return require('feline.providers.git').git_info_exists() end,
     hl       = left_ribbon_hl,
-    -- icon  = "  ",
+    ---icon  = "  ",
 })
 
 table.insert(components.active[1], {
     provider = 'git_diff_removed',
     enabled  = function() return require('feline.providers.git').git_info_exists() end,
     hl       = left_ribbon_hl,
-    -- icon  = "  ",
+    ---icon  = "  ",
 })
 
--- left angle
+---left angle
 table.insert(components.active[1], {
     provider = ' ',
     hl       = left_ribbon_hl,
@@ -124,7 +124,6 @@ table.insert(components.active[2], {
         str = "left_filled",
         hl = {
             fg = 'statusline_bg',
-            bg = 'mid_bg',
             style = 'bold'
         },
     },
@@ -248,7 +247,7 @@ table.insert(components.active[3], {
     },
 })
 
--- spell checker
+---spell checker
 table.insert(components.active[3], {
     provider = '暈',
     enabled  = function() return vim.wo.spell end,
@@ -267,7 +266,7 @@ table.insert(components.active[3], {
     },
 })
 
--- fileIcon
+---fileIcon
 table.insert(components.active[3], {
     provider = function()
         local filename  = vim.fn.expand('%:t')
@@ -339,7 +338,7 @@ table.insert(components.active[3], {
     }
 })
 
--- search results key
+---search results key
 table.insert(components.active[3], {
     provider      = 'search_results',
     truncate_hide = true,
@@ -501,7 +500,7 @@ table.insert(components.inactive[1], {
     },
 })
 
--- left angle
+---left angle
 table.insert(components.inactive[1], {
     provider = ' ',
     hl = {
