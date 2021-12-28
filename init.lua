@@ -1,5 +1,5 @@
 vim.opt.termguicolors = true
-require('util.tables')
+require('util')
 require('plugins')
 if not pcall(require, 'astronauta.keymap') then return end
 
