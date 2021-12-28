@@ -1,7 +1,7 @@
 local util = require('util')
 require('astronauta.keymap')
 
-local mappings = {
+local mappings = _t{
     { group = 'MatchingAA', color = '#FF6188' },
     { group = 'MatchingAB', color = '#A9DC76' },
     { group = 'MatchingAC', color = '#78DCE8' },
@@ -92,7 +92,7 @@ local mappings = {
     { group = 'MatchingDJ', color = '#7FFF00' },
 }
 
-table.shuffle(mappings)
+mappings:shuffle()
 
 for _, mapping in pairs(mappings) do
     util.highlight(mapping['group'], {

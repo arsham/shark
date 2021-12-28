@@ -1,5 +1,4 @@
 if not pcall(require, 'astronauta.keymap') then return end
-require('util.table')
 
 --[=====[
 #### Alignment options in interactive mode

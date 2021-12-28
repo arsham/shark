@@ -11,12 +11,12 @@ util.augroup{'PACKER_RELOAD', {
 
 util.augroup{"LINE_RETURN", {
     {"BufReadPost", "*", function()
-        local types = {
+        local types = _t{
             "nofile",
             'gitcommit',
             'gitrebase'
         }
-        if table.any(types, vim.bo.buftype) then
+        if types:contains(vim.bo.buftype) then
             return
         end
         local line = vim.fn.line

@@ -20,7 +20,7 @@ vim.keymap.onoremap{'in', function() next_obj("i") end}
 --- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
 --- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
 local chars = {'_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '-', '#' }
-for char in table.values(chars) do
+for _, char in ipairs(chars) do
     vim.keymap.xnoremap{'i' .. char, function()
         util.normal('xt', 'T' .. char .. 'ot' .. char)
     end}

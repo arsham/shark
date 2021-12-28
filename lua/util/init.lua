@@ -1,6 +1,5 @@
 local nvim = require('nvim')
 require('util.string')
-require('util.table')
 
 local M = {
     profiler_enabled = false,

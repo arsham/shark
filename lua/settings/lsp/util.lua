@@ -88,7 +88,7 @@ local function attach_mappings_commands(client)
 
         -- Either is it set to true, or there is a specified set of
         -- capabilities.
-        if type(caps.code_action) == "table" and table.contains(caps.code_action.codeActionKinds, "source.organizeImports") then
+        if type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports") then
             vim.keymap.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
             pre_save.imports = lsp_organise_imports
         end

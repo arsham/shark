@@ -85,22 +85,22 @@ command{"Nowrap", docs="prevents current buffer from wrapping", buffer=true, run
 end}
 
 command{"InstallDependencies", function()
-    local commands = {
-        golangci   = {"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
-        gojq       = {"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
-        fixjson    = {"npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest"},
-        prettier   = {"npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest"},
-        neovim     = {"npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest"},
+    local commands = _t{
+        golangci   = _t{"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
+        gojq       = _t{"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
+        fixjson    = _t{"npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest"},
+        prettier   = _t{"npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest"},
+        neovim     = _t{"npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest"},
     }
 
-    local total = table.length(commands)
+    local total = commands:length()
     local count = 0
 
     local job = require('plenary.job')
     for name, spec in pairs(commands) do
         job:new({
             command = spec[1],
-            args = table.slice(spec, 2, #spec),
+            args = spec:slice(2, #spec),
             on_exit = function(j, exit_code)
                 local res = table.concat(j:result(), "\n")
                 local type = vim.lsp.log_levels.INFO
