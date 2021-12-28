@@ -31,35 +31,34 @@ local function search_file(lines)
     vim.api.nvim_command(("e +BLines %s"):format(file))
 end
 
----Set selected lines in the quickfix list with fzf search.
----@param files string[]
-local function set_qf_list(files)
-    local item = {
-        lnum = 1,
-        col = 1,
-        text = "Added with fzf selection",
-    }
+---Set selected lines in the quickfix/local list with fzf search.
+---@param items string[]|table[]
+local function insert_into_list(items, is_local)
     local lists = require('lists')
-    for _, filename in pairs(files) do
-        item.filename = filename
-        lists.insert_list(item, false)
+    for _, item in pairs(items) do
+        if type(item) == 'string' then
+            item = {
+                filename = item,
+                lnum = 1,
+                col  = 1,
+                text = "Added with fzf selection",
+            }
+        end
+        lists.insert_list(item, is_local)
     end
+end
+
+---Set selected lines in the quickfix list with fzf search.
+---@param items string[]|table[]
+local function set_qf_list(items)
+    insert_into_list(items, false)
     nvim.ex.copen()
 end
 
 ---Set selected lines in the local list with fzf search.
----@param files string[]
-local function set_loclist(files)
-    local item = {
-        lnum = 1,
-        col = 1,
-        text = "Added with fzf selection",
-    }
-    local lists = require('lists')
-    for _, filename in pairs(files) do
-        item.filename = filename
-        lists.insert_list(item, true)
-    end
+---@param items string[]|table[]
+local function set_loclist(items)
+    insert_into_list(items, true)
     nvim.ex.lopen()
 end
 

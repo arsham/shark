@@ -258,4 +258,13 @@ function Table:sort(fn)
     return ret
 end
 
+---Inserts element `value` at position `pos` in `list` and return a new Table.
+---@overload fun(list: table, value: any)
+---@param ... any
+function Table:insert(...)
+    local ret = _t(self)
+    table.insert(ret, ...)
+    return ret
+end
+
 return Table

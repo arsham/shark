@@ -187,6 +187,7 @@ function M.lines_grep()
         options = options,
         placeholder = '{1}',
     })
+
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     preview['sink*'] = function(names)
         if #names == 0 then return end
@@ -194,9 +195,22 @@ function M.lines_grep()
         if #action > 0 then
             local fn = FzfActions[action]
             if fn then
-                fn({unpack(names, 2)})
+                names = _t{unpack(names, 2)}
+                local filenames = _t()
+
+                names:map(function(v)
+                    local name, line = v:match('^([^:]+):([^\t]+)\t')
+                    filenames = filenames:insert({
+                        filename = vim.fn.fnameescape(name),
+                        lnum     = tonumber(line),
+                        col      = 1,
+                        text     = "Added with fzf selection",
+                    })
+                end)
+                fn(filenames)
             end
         end
+
         if #names == 2 then
             local num = names[2]:match('^[^:]+:(%d+)\t')
             util.normal('n', string.format('%dgg', num))
