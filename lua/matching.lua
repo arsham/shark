@@ -143,18 +143,14 @@ end}
 
 ---Clear all matches of the current buffer.
 vim.keymap.nnoremap{'<leader>mc', function()
-    local groups = {}
-    for _, v in ipairs(mappings) do
+    local groups = _t()
+    mappings:map(function(v)
         groups[v.group] = true
-    end
+    end)
 
-    local matches = vim.fn.getmatches()
-    for id in ipairs(matches) do
-        local v = matches[id]
-        if v and groups[v.group] then
-            vim.fn.matchdelete(v.id)
-        end
-    end
+    _t(vim.fn.getmatches())
+    :filter(function(v) return v and groups[v.group] end)
+    :map(function(v) vim.fn.matchdelete(v.id) end)
 end}
 
 ---List all matches and remove by user's selection.
