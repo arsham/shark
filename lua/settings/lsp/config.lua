@@ -144,7 +144,7 @@ lsp_installer.on_server_ready(function(server)
                             globals = { 'vim', 'use', 'require', 'rocks', 'use_rocks' },
                         },
                         workspace = {
-                            maxPreload = 2000,
+                            maxPreload = 100000,
                             preloadFileSize = 50000,
                         },
                     }

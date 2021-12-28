@@ -212,7 +212,7 @@ function M.null_ls()
         },
         on_attach = function(client)
             if client.resolved_capabilities.document_formatting then
-                vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+                util.autocmd{'BufWritePre', function() vim.lsp.buf.formatting_sync() end, buffer=true}
             end
             if client.resolved_capabilities.document_range_formatting then
                 vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')

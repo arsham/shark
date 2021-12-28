@@ -83,8 +83,16 @@ local function inset_note_to_list(note, is_local)
     M.insert_list(item, is_local)
 end
 
-util.command{"Clearquickfix", "call setqflist([]) | ccl"}
-util.command{"Clearloclist",  "call setloclist(0, []) | lcl"}
+local clearqflist = function()
+    vim.fn.setqflist({})
+    nvim.ex.cclose()
+end
+local clearloclist = function()
+    vim.fn.setloclist(0, {})
+    nvim.ex.lclose()
+end
+util.command{"Clearquickfix", clearqflist}
+util.command{"Clearloclist",  clearloclist}
 
 ---Opens a popup for a note, and adds the current line and column with the note
 ---to the list.
@@ -112,10 +120,13 @@ local function add_line(name, is_local)
 end
 
 ---Close quickfix list and local list windows.
-vim.keymap.nnoremap{'<leader>cc', silent=true, ':cclose<bar>lclose<CR>'}
+vim.keymap.nnoremap{'<leader>cc', function()
+    nvim.ex.cclose()
+    nvim.ex.lclose()
+end, silent=true}
 
 ---{{{ Quickfix list mappings
-vim.keymap.nnoremap{'<leader>qo', silent=true, ':copen<CR>'}
+vim.keymap.nnoremap{'<leader>qo', nvim.ex.copen, silent=true}
 vim.keymap.nnoremap{'<Plug>QuickfixAdd', function()
     add_line('<Plug>QuickfixAdd', false)
 end}
@@ -124,11 +135,11 @@ vim.keymap.nnoremap{'<Plug>QuickfixNote', function()
     add_note('<Plug>QuickfixNote', false)
 end}
 vim.keymap.nmap{'<leader>qn', '<Plug>QuickfixNote'}
-vim.keymap.nnoremap{'<leader>qc', silent=true, ":Clearquickfix<CR>"}
+vim.keymap.nnoremap{'<leader>qc', clearqflist, silent=true}
 ---}}}
 
 ---{{{ Local list mappings
-vim.keymap.nnoremap{'<leader>wo', silent=true, ':lopen<CR>'}
+vim.keymap.nnoremap{'<leader>wo', nvim.ex.lopen, silent=true}
 vim.keymap.nnoremap{'<Plug>LocallistAdd', function()
     add_line('<Plug>LocallistAdd', true)
 end}
@@ -137,7 +148,7 @@ vim.keymap.nnoremap{'<Plug>LocallistNote', function()
     add_note('<Plug>LocallistNote', true)
 end}
 vim.keymap.nmap{'<leader>wn', '<Plug>LocallistNote'}
-vim.keymap.nnoremap{'<leader>wc', silent=true, ":Clearloclist<CR>"}
+vim.keymap.nnoremap{'<leader>wc', clearloclist, silent=true}
 ---}}}
 
 ---Creates a mapping for jumping through lists.

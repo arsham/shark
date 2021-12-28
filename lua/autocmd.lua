@@ -1,6 +1,14 @@
 local nvim = require('nvim')
 local util = require('util')
 
+util.augroup{'PACKER_RELOAD', {
+    {'BufWritePost', 'lua/plugins.lua', function()
+        nvim.ex.source('<afile>')
+        nvim.ex.PackerCompile()
+        nvim.ex.PackerInstall()
+    end, docs='auto compile and install new plugins'}
+}}
+
 util.augroup{"LINE_RETURN", {
     {"BufReadPost", "*", function()
         local types = {
@@ -134,13 +142,17 @@ util.augroup{"FILETYPE_COMMANDS", {
         vim.highlight.on_yank{ higroup = "Substitute", timeout = 150 }
     end},
 
+    {"FileType", "lspinfo", docs="close lspinfo popup", run=function()
+        vim.keymap.nnoremap{'q', nvim.ex.close, buffer=true, silent=true}
+    end},
+
     {"Filetype", "sql,sqls", docs="don't wrap me", run=function()
         vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
         vim.bo.formatoptions = vim.bo.formatoptions:gsub('c', '')
     end},
 
-    {'Filetype', 'help', docs='exit help with gq', run=function()
-        vim.keymap.nnoremap{'gq', ':q<CR>', buffer=true}
+    {'Filetype', 'help,man', docs='exit help with gq', run=function()
+        vim.keymap.nnoremap{'gq', nvim.ex.close, buffer=true}
     end},
 
 }}

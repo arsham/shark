@@ -73,10 +73,10 @@ keymap.nnoremap{'j', expr=true, [[(v:count > 2 ? "m'" . v:count : '') . 'j']]}
 keymap.nnoremap{'<Esc><Esc>', silent=true, ':noh<CR>'}
 
 ---Add char at the end of a line at the `loc` location.
----@param loc(int): line number to add the char at.
----@param char(string): char to add.
----@param content(string): current content of the line.
----@param remote(bool): if false, the char is added, otherwise the last
+---@param loc number line number to add the char at.
+---@param char string char to add.
+---@param content string current content of the line.
+---@param remove boolean if false, the char is added, otherwise the last
 ---character is removed.
 local function end_of_line(loc, content, char, remove)
     if remove and (content:sub(-1) ~= char) then
