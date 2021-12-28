@@ -159,40 +159,31 @@ end}
 
 ---List all matches and remove by user's selection.
 vim.keymap.nnoremap{'<leader>md', function()
-    local source = {}
-    local groups = {}
-    for _, v in ipairs(mappings) do
+    local source = _t()
+    local groups = _t()
+    mappings:map(function(v)
         groups[v.group] = v.color
-    end
+    end)
 
-    local rt = {}
+    _t(vim.fn.getmatches())
+    :filter(function(v)  return v and groups[v.group] end)
+    :sort(function(a, b) return a.id > b.id end)
+    :map(function(v)
+        local str = string.format('%2d\t%50s\t%20s', v.id, v.pattern, groups[v.group])
+        table.insert(source, str)
+    end)
 
-    local matches = vim.fn.getmatches()
-    for id = #matches, 0, -1 do
-        local v = matches[id]
-        if v and groups[v.group] then
-            table.insert(rt, {
-                id = v.id,
-                pattern = v.pattern,
-                group = v.group,
-            })
-        end
-    end
-    if #rt == 0 then return end
-    table.sort(rt, function(a, b) return a.id < b.id end)
-
-    for id = #rt, 1, -1 do
-        local v = rt[id]
-        if v then
-            local str = string.format('%2d\t%50s\t%20s', v.id, v.pattern, groups[v.group])
-            table.insert(source, str)
-        end
-    end
+    if source:length() == 0 then return end
 
     local wrap = vim.fn["fzf#wrap"]({
         source = source,
-        options = '--multi --bind ctrl-a:select-all+accept ' ..
-                    '--layout reverse-list --with-nth=2.. --delimiter="\t"',
+        options = table.concat({
+            '--multi',
+            '--bind', 'ctrl-a:select-all+accept ',
+            '--layout reverse-list',
+            '--delimiter="\t"',
+            '--with-nth=2..',
+        }, ' '),
     })
     wrap["sink*"] = function(list)
         for _, name in pairs(list) do
