@@ -23,7 +23,7 @@ end
 
 ---Splits a string into a table of strings.
 ---@param str string
----@param sep string
+---@param sep? string if not provided it will split by spaces
 ---@return table
 function string.split(str, sep)
     local res = _t()
@@ -32,15 +32,4 @@ function string.split(str, sep)
             table.insert(res, w)
     end)
     return res
-end
-
----Splits by spaces.
----@param str string
----@return table
-function string.split_space(str)
-    local chunks = {}
-    for substring in str:gmatch("%S+") do
-        table.insert(chunks, substring)
-    end
-    return chunks
 end

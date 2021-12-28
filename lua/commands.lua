@@ -60,7 +60,7 @@ end
 util.augroup{"WATCH_LUA_FILE"}
 command{"WatchLuaFileChanges", attrs='-nargs=* -complete=file', run=function(arg)
     local filename = vim.fn.expand('%:p')
-    local files = arg and string.split(arg, ' ') or {}
+    local files = arg and arg:split() or {}
     table.insert(files, filename)
     M.watch_file_changes(files)
 end, docs="watch changes on the lua file and reload"}

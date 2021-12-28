@@ -39,7 +39,7 @@ vim.diagnostic.config({
 })
 
 
-local runtime_path = vim.split(package.path, ';')
+local runtime_path = package.path:split(';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
@@ -124,10 +124,7 @@ capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilitie
 local lsp_installer = require("nvim-lsp-installer")
 
 lsp_installer.on_server_ready(function(server)
-    local conf = servers[server.name]
-    if not conf then
-        conf = {}
-    end
+    local conf = servers[server.name] or {}
     local opts = vim.tbl_deep_extend("force", {
         on_attach = attach_wrap,
         capabilities = capabilities,

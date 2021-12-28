@@ -253,7 +253,7 @@ end
 
 M.job_str = function(str)
     local job = require('plenary.job')
-    local cmd = vim.split(str, " ")
+    local cmd = str:split()
     job:new({
         command = cmd[1],
         args = table.slice(cmd, 2, #cmd),
