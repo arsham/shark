@@ -419,18 +419,27 @@ function M.open_todo()
 end
 
 function M.args_add()
-    local list = vim.fn.systemlist({'fd', '.', '-t', 'f'})
-    local args = vim.fn.argv()
-    local seen = {}
-    local files = {}
-    for _, v in pairs(args) do
+    local seen = _t()
+    _t(vim.fn.argv()):map(function(v)
         seen[v] = true
-    end
+    end)
 
-    for _, v in pairs(list) do
-        if not seen[v] then
-            table.insert(files, v)
-        end
+    local files = _t()
+    _t(vim.fn.systemlist({'fd', '.', '-t', 'f'}))
+    :map(function(v)
+        return v:gsub("^./", "")
+    end)
+    :filter(function(v)
+        return not seen[v]
+    end)
+    :map(function(v)
+        table.insert(files, v)
+    end)
+
+    if files:length() == 0  then
+        local msg = 'Already added everything from current folder'
+        vim.notify(msg, vim.lsp.log_levels.WARN, {title = 'Adding Args'})
+        return
     end
 
     local wrapped = vim.fn["fzf#wrap"]({
