@@ -35,25 +35,26 @@ end
 
 function M.watch_file_changes(filenames)
     local modules= setup_watch(filenames)
+    local names = {}
     for _, module in ipairs(modules) do
-        local msg = string.format('Watching "%s" for changes', module.name)
-        vim.notify(msg, vim.lsp.log_levels.INFO, {
-            title = 'Watching',
-            timeout = 2000,
-        })
+        table.insert(names, module.name)
         util.autocmd{"WATCH_LUA_FILE BufWritePost", module.name, run=function()
             for _, mod in ipairs(modules) do
                 package.loaded[mod.module] = nil
                 require(mod.module)
-
-                msg = string.format('"%s" reloaded', mod.name)
-                vim.notify(msg, vim.lsp.log_levels.INFO, {
-                    title = 'Success!',
-                    timeout = 1000,
-                })
             end
+            local msg = table.concat(names, "\n")
+            vim.notify(msg, vim.lsp.log_levels.INFO, {
+                title   = 'Reloaded',
+                timeout = 1000,
+            })
         end, docs=string.format('watching %s', module.name)}
     end
+    local msg = table.concat(names, "\n")
+    vim.notify(msg, vim.lsp.log_levels.INFO, {
+        title   = 'Watching Changes',
+        timeout = 2000,
+    })
 end
 
 util.augroup{"WATCH_LUA_FILE"}
