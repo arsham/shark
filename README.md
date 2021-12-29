@@ -15,7 +15,7 @@ there are a few other **LSP** servers setup as well.
   **15ms** on average to load up. (benchmarked with the `StartupTime` benchmark
   tool).
 - There are a few **Lua** functions available for setting up
-  **autocmd/augroup** and **commands** that accept **Lua functions** to run.
+  **autocmd/augroup** that accept **Lua functions** to run.
   They are super cool, check them out!
 - **LSP**, **Treesitter**, and **fzf** are setup to work together.
 - Completion with **nvim-cmp** plugin is setup.
@@ -41,7 +41,6 @@ there are a few other **LSP** servers setup as well.
    - [Highlight Matching](#highlight-matching)
    - [FZF](#fzf)
    - [LSP](#lsp)
-   - [Commands](#commands)
    - [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
 
@@ -541,22 +540,6 @@ util.normal('n', 'y2k')
 ```
 
 See `:h feedkeys()` for values of the mode.
-
-#### Command
-
-Creates a command. It can accept a LUA function or a VimL string.
-
-```lua
-util.command{"Filename", function()
-    print(vim.fn.expand '%:p')
-end}
-util.command{"Notes", "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", attrs="-bang"}
-util.command{"Todo", "grep todo|fixme **/*", post_run="cw", silent=true}
-util.command{"Yepyepyep", function() print("aha aha") end, docs="useless command!"}
-```
-
-The `docs` is useful when you query `:verbose command Yepyepyep` to identify
-what's happening.
 
 #### Augroup and Autocmd
 

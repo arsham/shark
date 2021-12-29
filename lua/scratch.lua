@@ -20,7 +20,7 @@ function store.delete(id)
     store[id] = nil
 end
 
-util.command{"Scratch", docs="open a new scratch buffer", run=function()
+util.command("Scratch", function()
     local name = string.format("Scratch %d", store.next())
     nvim.ex.vsplit()
     nvim.ex.enew()
@@ -32,4 +32,4 @@ util.command{"Scratch", docs="open a new scratch buffer", run=function()
         local num = tonumber(vim.fn.expand('<afile>'):match("Scratch (%d+)"))
         store.delete(num)
     end}
-end}
+end)

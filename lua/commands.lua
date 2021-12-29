@@ -2,16 +2,17 @@ local util = require('util')
 local command = util.command
 local M = {}
 
-command{"Filename", function()
-    vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
-end}
-command{"YankFilename",  function() vim.fn.setreg('"', vim.fn.expand '%:t') end}
-command{"YankFilenameC", function() vim.fn.setreg('+', vim.fn.expand '%:t') end}
-command{"YankFilepath",  function() vim.fn.setreg('"', vim.fn.expand '%:p') end}
-command{"YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end}
 
-command{"MergeConflict", ":grep '<<<<<<< HEAD'"}
-command{"JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]]}
+command("Filename", function()
+    vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
+end)
+command("YankFilename",  function() vim.fn.setreg('"', vim.fn.expand '%:t') end)
+command("YankFilenameC", function() vim.fn.setreg('+', vim.fn.expand '%:t') end)
+command("YankFilepath",  function() vim.fn.setreg('"', vim.fn.expand '%:p') end)
+command("YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end)
+
+command("MergeConflict", ":grep '<<<<<<< HEAD'")
+command("JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]])
 
 ---Sets up a watch on the filename if it is a lua module.
 ---@param filenames string[]
@@ -58,33 +59,33 @@ function M.watch_file_changes(filenames)
 end
 
 util.augroup{"WATCH_LUA_FILE"}
-command{"WatchLuaFileChanges", attrs='-nargs=* -complete=file', run=function(arg)
+command("WatchLuaFileChanges", function(arg)
     local filename = vim.fn.expand('%:p')
     local files = arg and arg:split() or {}
     table.insert(files, filename)
     M.watch_file_changes(files)
-end, docs="watch changes on the lua file and reload"}
+end, {nargs='*', complete='file'})
 
-command{"CC", docs="close all floating windows", run=function()
+command("CC", function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
         local config = vim.api.nvim_win_get_config(win)
         if config.relative ~= "" then
             vim.api.nvim_win_close(win, false)
         end
     end
-end}
+end)
 
-command{"FoldComments", docs="fold all comments", run=function()
+command("FoldComments", function()
     vim.wo.foldexpr=[[getline(v:lnum)=~'^\s*//']]
     vim.wo.foldmethod="expr"
-end}
+end)
 
-command{"Nowrap", docs="prevents current buffer from wrapping", buffer=true, run=function()
+util.buffer_command("Nowrap", function()
     vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
     vim.bo.formatoptions = vim.bo.formatoptions:gsub('c', '')
-end}
+end)
 
-command{"InstallDependencies", function()
+command("InstallDependencies", function()
     local commands = _t{
         golangci   = _t{"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
         gojq       = _t{"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
@@ -137,6 +138,6 @@ command{"InstallDependencies", function()
             end,
         }):start()
     end
-end}
+end)
 
 return M

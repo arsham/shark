@@ -8,7 +8,7 @@ local function restart_lsp()
     nvim.ex.LspStop()
     vim.defer_fn(nvim.ex.LspStart, 1000)
 end
-util.command{"RestartLsp", buffer=true, restart_lsp}
+util.buffer_command("RestartLsp", restart_lsp)
 vim.keymap.nnoremap{'<leader>dr', restart_lsp, silent=true}
 
 local function lsp_organise_imports()
@@ -115,7 +115,7 @@ local function attach_mappings_commands(client)
     end
 
     if caps.rename then
-        util.command{'Rename', buffer=true, function() vim.lsp.buf.rename() end}
+        util.buffer_command('Rename', function() vim.lsp.buf.rename() end)
     end
 
     if caps.hover then
@@ -128,7 +128,7 @@ local function attach_mappings_commands(client)
     end
 
     if caps.goto_definition then
-        util.command{"Definition", buffer=true, function() vim.lsp.buf.definition() end}
+        util.buffer_command("Definition", function() vim.lsp.buf.definition() end)
         vim.keymap.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
         vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
@@ -136,54 +136,54 @@ local function attach_mappings_commands(client)
         vim.keymap.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
     end
     if caps.type_definition then
-        util.command{"TypeDefinition", buffer=true, function() vim.lsp.buf.type_definition() end}
+        util.buffer_command("TypeDefinition", function() vim.lsp.buf.type_definition() end)
     end
     if caps.implementation then
-        util.command{"Implementation", buffer=true, function() vim.lsp.buf.implementation() end}
+        util.buffer_command("Implementation", function() vim.lsp.buf.implementation() end)
         vim.keymap.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true}
     end
 
     if caps.find_references then
-        util.command{"References", buffer=true, function() vim.lsp.buf.references() end}
+        util.buffer_command("References", function() vim.lsp.buf.references() end)
         vim.keymap.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true}
     end
 
     if caps.document_symbol then
-        util.command{"DocumentSymbol", buffer=true, function() vim.lsp.buf.document_symbol() end}
+        util.buffer_command("DocumentSymbol", function() vim.lsp.buf.document_symbol() end)
         vim.keymap.nnoremap{'<leader>@', function()
             vim.lsp.buf.document_symbol()
         end, buffer=true, silent=true}
     end
     if caps.workspace_symbol then
-        util.command{"WorkspaceSymbols", buffer=true, function() vim.lsp.buf.workspace_symbol() end}
+        util.buffer_command("WorkspaceSymbols", function() vim.lsp.buf.workspace_symbol() end)
     end
 
     if caps.call_hierarchy then
-        util.command{"Callees", buffer=true, function() vim.lsp.buf.outgoing_calls() end}
-        util.command{"Callers", buffer=true, function() vim.lsp.buf.incoming_calls() end}
+        util.buffer_command("Callees", function() vim.lsp.buf.outgoing_calls() end)
+        util.buffer_command("Callers", function() vim.lsp.buf.incoming_calls() end)
         vim.keymap.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true}
     end
 
-    util.command{"ListWorkspace", buffer=true, function()
+    util.buffer_command("ListWorkspace", function()
         vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
             title = "Workspace Folders",
             timeout = 3000,
         })
-    end}
+    end)
     if caps.workspace_folder_properties.supported then
         vim.cmd('command! -buffer -nargs=? -complete=dir AddWorkspace lua vim.lsp.buf.add_workspace_folder(<q-args> ~= "" and vim.fn.fnamemodify(<q-args>, ":p"))')
         vim.cmd('command! -buffer -nargs=? -complete=customlist,v:lua.vim.lsp.buf.list_workspace_folders RemoveWorkspace lua vim.lsp.buf.remove_workspace_folder(<f-args>)')
     end
 
-    util.command{"Log", buffer=true, "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()"}
+    util.buffer_command("Log", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()")
 
-    util.command{"Test", docs="locate tests for a node", buffer=true, function()
+    util.buffer_command("Test", function()
         local name = get_current_node_name()
         if name == "" then return nil end
 
         local pattern = "test" .. name
         vim.lsp.buf.workspace_symbol(pattern)
-    end}
+    end)
 
     vim.keymap.inoremap{'<C-j>',   '<C-n>',  buffer=true, silent=true}
     vim.keymap.inoremap{'<C-k>',   '<C-p>',  buffer=true, silent=true}
@@ -197,8 +197,8 @@ local function attach_mappings_commands(client)
     vim.keymap.nnoremap{'[d', function()
         util.call_and_centre(vim.diagnostic.goto_prev)
     end, buffer=true, silent=true}
-    util.command{"Diagnostics",       buffer=true, function() require('lspfuzzy').diagnostics(0) end}
-    util.command{"DiagnosticsAll",    "LspDiagnosticsAll"}
+    util.buffer_command("Diagnostics", function() require('lspfuzzy').diagnostics(0) end)
+    util.buffer_command("DiagnosticsAll",    "LspDiagnosticsAll")
 end
 
 local M = {}
@@ -224,8 +224,8 @@ function M.on_attach(client, bufnr)
 
     local caps = client.resolved_capabilities
     if caps.code_lens then
-        util.command{"CodeLensRefresh", buffer=true, function() vim.lsp.codelens.refresh() end}
-        util.command{"CodeLensRun", buffer=true,     function() vim.lsp.codelens.run() end}
+        util.buffer_command("CodeLensRefresh", function() vim.lsp.codelens.refresh() end)
+        util.buffer_command("CodeLensRun", function() vim.lsp.codelens.run() end)
         vim.keymap.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true}
 
         util.augroup{"CODE_LENSES", {

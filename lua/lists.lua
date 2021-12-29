@@ -91,8 +91,8 @@ local clearloclist = function()
     vim.fn.setloclist(0, {})
     nvim.ex.lclose()
 end
-util.command{"Clearquickfix", clearqflist}
-util.command{"Clearloclist",  clearloclist}
+util.command("Clearquickfix", clearqflist)
+util.command("Clearloclist",  clearloclist)
 
 ---Opens a popup for a note, and adds the current line and column with the note
 ---to the list.

@@ -133,48 +133,24 @@ function M._exec_command(id, ...)
     storage._store[id](...)
 end
 
----@class CommandOpts
----@field name string also unnamed first element
----@field run string|function also unnamed second element
----@field attrs? string command atts that land before the name.
----@field docs string handy when you query verbose command.
----@field silent boolean
----@field post_run string: post action.
-
 ---Creates a command from provided specifics.
----@param opts CommandOpts
-function M.command(opts)
-    local args = {}
+---@param name string
+---@param command string|function
+---@param opts dict
+function M.command(name, command, opts)
+    opts = opts or {}
+    opts.force = true
+    vim.api.nvim_add_user_command(name, command, opts)
+end
 
-    for k, v in pairs(opts) do
-        args[k] = v
-        if k == 'silent' then
-            args.silent = 'silent!'
-        end
-    end
-
-    local name     = args.name or args[1]
-    local run      = args.run or args[2]
-    local attrs    = args.attrs or ""
-    local post_run = args.post_run or ""
-    local docs     = args.docs or 'no documents'
-    local silent   = args.silent or ""
-
-    local command_str
-    if type(run) == 'string' then
-        command_str = ('execute "%s"'):format(run)
-    elseif type(run) == 'function' then
-        local func_id = storage._create(run)
-        command_str = ([[lua require('util')._exec_command(%s, <q-args>) -- %s]]):format(func_id, docs)
-    else
-        error("Unexpected type to run (".. docs .. "):" .. tostring(run))
-    end
-
-    local str = table.concat({attrs, name, silent, command_str}, ' ')
-    if post_run ~= "" then
-        str = str .. " | " .. post_run
-    end
-    nvim.ex.command_(str)
+---Creates a command from provided specifics on current buffer.
+---@param name string
+---@param command string|function
+---@param opts dict
+function M.buffer_command(name, command, opts)
+    opts = opts or {}
+    opts.force = true
+    vim.api.nvim_buf_add_user_command(0, name, command, opts)
 end
 
 ---@class AugroupOpt
@@ -319,23 +295,6 @@ function M.user_input(opts)
             input:unmount()
         end)
     end)
-end
-
----Returns true if there is an active lsp server attached to current buffer.
----@return boolean
----@deprecated
-function M.lsp_attached()
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) ~= nil then
-        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-        for _, client in ipairs(clients) do
-            local filetypes = client.config.filetypes
-            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                return true
-            end
-        end
-    end
-    return false
 end
 
 M.colours = {
