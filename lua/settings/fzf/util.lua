@@ -341,19 +341,20 @@ function M.delete_marks()
             '--delimiter="\t"',
             '--with-nth=2..', '--nth=3',
             '--multi',
+            '--exit-0',
             '--bind ctrl-a:select-all+accept',
             "--preview-window +{3}+3/2,nohidden",
             '--tiebreak=index',
         }, ' '),
         placeholder = "{1}",
     })
-    wrapped['sink*'] = function(names)
+    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
+    preview['sink*'] = function(names)
         for _, name in pairs({unpack(names, 2)}) do
-            local mark = string.match(name, '%a')
+            local mark = string.match(name, '^[^\t]+\t(%a)')
             nvim.ex.delmarks(mark)
         end
     end
-    local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     vim.fn["fzf#run"](preview)
 end
 
