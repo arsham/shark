@@ -10,19 +10,25 @@ util.augroup{'PACKER_RELOAD', {
 }}
 
 util.augroup{"LINE_RETURN", {
-    {"BufReadPost", "*", function()
-        local types = _t{
-            "nofile",
-            'gitcommit',
-            'gitrebase'
-        }
-        if types:contains(vim.bo.buftype) then
-            return
-        end
-        local line = vim.fn.line
-        if line("'\"") > 0 and line("'\"") <= line("$") then
-            nvim.ex.normal_([[g`"zv']])
-        end
+    {"BufRead", "*", function()
+        util.autocmd{'FileType', run=function()
+            local types = _t{
+                'nofile',
+                'fugitive',
+                'gitcommit',
+                'gitrebase',
+                'commit',
+                'rebase',
+            }
+            if vim.fn.expand('%') == '' or types:contains(vim.bo.filetype) then
+                return
+            end
+            local line = vim.fn.line
+
+            if line("'\"") > 0 and line("'\"") <= line("$") then
+                nvim.ex.normal_([[g`"zv']])
+            end
+        end, buffer=true, once=true}
     end},
 }}
 
