@@ -42,6 +42,10 @@ function M.watch_file_changes(filenames)
         util.autocmd{"WATCH_LUA_FILE BufWritePost", module.name, run=function()
             for _, mod in ipairs(modules) do
                 package.loaded[mod.module] = nil
+                local luacache = (_G.__luacache or {}).cache
+                if luacache then
+                    luacache[mod.module] = nil
+                end
                 require(mod.module)
             end
             local msg = table.concat(names, "\n")
@@ -51,6 +55,7 @@ function M.watch_file_changes(filenames)
             })
         end, docs=string.format('watching %s', module.name)}
     end
+
     local msg = table.concat(names, "\n")
     vim.notify(msg, vim.lsp.log_levels.INFO, {
         title   = 'Watching Changes',
@@ -61,7 +66,7 @@ end
 util.augroup{"WATCH_LUA_FILE"}
 command("WatchLuaFileChanges", function(arg)
     local filename = vim.fn.expand('%:p')
-    local files = arg and arg:split() or {}
+    local files = arg and arg.args:split() or {}
     table.insert(files, filename)
     M.watch_file_changes(files)
 end, {nargs='*', complete='file'})
