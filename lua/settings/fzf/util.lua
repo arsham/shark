@@ -200,7 +200,7 @@ function M.lines_grep()
 
                 names:map(function(v)
                     local name, line = v:match('^([^:]+):([^\t]+)\t')
-                    filenames = filenames:insert({
+                    filenames:insert({
                         filename = vim.fn.fnameescape(name),
                         lnum     = tonumber(line),
                         col      = 1,

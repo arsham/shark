@@ -1,6 +1,30 @@
----@class Table
+local function inherit(cls, parents)
+    cls.__index = cls
+    cls.__super = parents
+    local cls_parents = {
+        __index = function(_, key)
+            for i=1, #parents do
+                local found = parents[i][key]
+                if found then return found end
+            end
+        end,
+    }
+    setmetatable(cls, cls_parents)
+    setmetatable(parents, cls_parents)
+end
+
+---@class Table : table
+---@field __super tablelib
 local Table = {}
-Table.__index = Table
+inherit(Table, {table})
+
+---Creates a new Table from the given table.
+---@param t table
+Table.new = function(t)
+    return setmetatable(t or {}, Table)
+end
+_G._t =  Table.new
+Table.__call = Table.new
 
 Table.__tostring = function(self)
     local ret = {}
@@ -16,8 +40,8 @@ end
 
 ---Compares two tables for equality. It does not care about the named orders,
 ---however it greatly cares about the order of the index keys.
----@param self Table
----@param other Table
+---@param self table
+---@param other table
 ---@return boolean
 Table.__eq = function(self, other)
     if type(other) ~= 'Table' then
@@ -34,23 +58,19 @@ Table.__eq = function(self, other)
     return true
 end
 
-
----Creates a new Table from the given table.
----@param t table
----@return Table
-Table.new = function(t)
-    t = t or {}
-    local ret = setmetatable({}, Table)
-    for i, j in pairs(t) do
-        ret[i] = j
-    end
-    return ret
+---Returns the number of elements in the table, including the key-value
+---pairs.
+---@param self table|Table|tablelib
+---@return number
+function Table:table_len()
+    local count = 0
+    for _ in pairs(self) do count = count + 1 end
+    return count
 end
-_G._t = Table.new
 
 ---Filters the table if the function returns true.
+---@param self Table
 ---@param fn fun(v: any):boolean
----@return Table
 function Table:filter(fn)
     assert(type(fn) == "function", "filter: func must be a function")
     local ret = _t()
@@ -69,8 +89,8 @@ function Table:filter(fn)
 end
 
 ---Runs the function for each item in the table.
+---@param self Table
 ---@param fn fun(v: any, k?:any):any the key is passed for convenience.
----@return table
 function Table:map(fn)
     assert(type(fn) == "function", "map: func must be a function")
     local ret = _t()
@@ -81,11 +101,10 @@ function Table:map(fn)
 end
 
 ---Returns a new Table that contains only the values of the table.
----@return Table
 function Table:values()
     local ret = _t()
     for _, v in pairs(self) do
-        table.insert(ret, v)
+        ret:insert(v)
     end
     return ret
 end
@@ -95,7 +114,6 @@ end
 ---@param first number
 ---@param last number
 ---@param step number the step between each index
----@return Table
 function Table:slice(first, last, step)
     local sliced = _t()
     local length = self:length()
@@ -106,17 +124,14 @@ function Table:slice(first, last, step)
 end
 
 ---Returns the length of the table.
----@return number
 function Table:length()
-    local count = 0
-    for _ in pairs(self) do count = count + 1 end
-    return count
+    return #self
 end
 
 ---Merge two tables. Note that the new indices of the second table will be
 ---adjusted to the first table.
----@param other table
----@return Table
+---@param other Table
+---@param self Table
 function Table:merge(other)
     local tmp = _t()
     local length = 0
@@ -170,7 +185,7 @@ function Table:contains(val)
 end
 
 ---Return a reversed the table. Note that it only works on the numeric indices.
----@return Table
+---@param self Table
 function Table:reverse()
     local reversed = _t()
     local itemCount = #self
@@ -185,19 +200,19 @@ function Table:reverse()
 end
 
 _ = math.randomseed(os.time())
----Shuffle the table.
 function Table:shuffle()
-    local iterations = self:length()
+    local ret = _t(self)
+    local iterations = ret:length()
     local j
     for i = iterations, 2, -1 do
         j = math.random(i)
-        self[i], self[j] = self[j], self[i]
+        ret[i], ret[j] = ret[j], ret[i]
     end
+    return ret
 end
 
 ---Returns a table containing chucks of the given table by chuck size.
 ---@param size number
----@return Table
 ---@usage
 ---local t = _t{11, 22, 3, 4, 5, 6, 7, 8, a=9, b=10}
 ---local chunks = t:chunk(3)
@@ -231,7 +246,6 @@ end
 
 ---Returns a unique set of the table. It only operates on the indexed keys.
 ---@param fn? fun(v: any):any will mutate the value if provided.
----@return Table
 function Table:unique(fn)
     fn = fn or function(v) return v end
     local ret = _t()
@@ -242,28 +256,19 @@ function Table:unique(fn)
             if fn then
                 v = fn(v)
             end
-            table.insert(ret, v)
+            ret:insert(v)
         end
         seen[key] = true
     end
     return ret
 end
 
----Returns a sorted list elements in a given order.
+---Sorts list elements in a given order and returns a new Table.
+---
 ---@param fn fun(a: any, b: any):boolean
----@return Table
 function Table:sort(fn)
     local ret = _t(self)
-    table.sort(ret, fn)
-    return ret
-end
-
----Inserts element `value` at position `pos` in `list` and return a new Table.
----@overload fun(list: table, value: any)
----@param ... any
-function Table:insert(...)
-    local ret = _t(self)
-    table.insert(ret, ...)
+    self.__super.sort(self, fn)
     return ret
 end
 
