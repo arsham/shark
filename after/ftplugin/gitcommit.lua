@@ -1,3 +1,7 @@
+local bufname = vim.fn.bufname()
+if vim.fn.getbufvar(bufname, 'ftplugin_loaded') == true then return end
+vim.fn.setbufvar(bufname, 'ftplugin_loaded', true)
+
 ---see #14670
 ---vim.bo.textwidth = 72
 ---vim.wo.colorcolumn = "50,72"
