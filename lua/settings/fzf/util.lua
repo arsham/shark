@@ -80,11 +80,10 @@ function M.ripgrep_search_incremental(term, no_ignore)
             '--header="<Alt-Enter>:Reload on current query"',
             '--header-lines=1',
             '--preview-window nohidden',
-            '--phony', '--disabled',
             query,
-            '--bind',
-            string.format("'change:reload:%s'", reload_cmd),
+            '--bind', string.format("'change:reload:%s'", reload_cmd),
             '--bind "alt-enter:unbind(change,alt-enter)+change-prompt(2. FZF> )+enable-search+clear-query"',
+            '--tiebreak=index',
             delimiter,
             with_nth,
             nth,
@@ -359,18 +358,23 @@ function M.delete_marks()
 end
 
 function M.git_grep(term)
-    local format = '--format=format:%H\t* %h\t%ar\t%an\t%s\t%d'
-    local source = vim.fn.systemlist({'git', '--no-pager', 'log', '-G', term, format})
+    local format = 'format:%H\t* %h\t%ar\t%an\t%s\t%d'
+    local query = [[git  --no-pager  log  -G '%s' --format='%s']]
+    local source = vim.fn.systemlist(string.format(query, term.args, format))
+    local reload_cmd = string.format(query, '{q}', format)
     local wrapped = vim.fn["fzf#wrap"]({
         source = source,
         options = table.concat({
             '--prompt="Search in tree> "',
             '+m',
             '--delimiter="\t"',
-            '--with-nth=2..', '--nth=1',
+            '--phony',
+            '--with-nth=2..', '--nth=3..',
             '--tiebreak=index',
             '--preview-window +{3}+3/2,~1,nohidden',
             '--exit-0',
+            '--bind', string.format('"change:reload:%s"', reload_cmd),
+            '--bind', '"alt-enter:unbind(change,alt-enter)+change-prompt(2. FZF> )+enable-search+clear-query"',
             '--preview', '"',
             [[echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |]],
             "xargs -I % sh -c 'git show --color=always %'",
