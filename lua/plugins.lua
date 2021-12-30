@@ -13,15 +13,6 @@ end
 vim.cmd [[packadd packer.nvim]]
 vim.cmd [[packadd! cfilter]]
 
-local colorizer_ft = {
-    'css',
-    'scss',
-    'sass',
-    'html',
-    'lua',
-    'markdown',
-}
-
 ---Disables LSP plugins and other heavy plugins.
 local function full_start()
     return not vim.env.NVIM_START_LIGHT
@@ -161,6 +152,7 @@ require('packer').startup({
             keys  = { '<C-w>z' },
         }
 
+        local colorizer_ft = { 'css', 'scss', 'sass', 'html', 'lua', 'markdown' }
         use {
             'norcalli/nvim-colorizer.lua',
             config = function()
