@@ -1,11 +1,12 @@
+local util = require('util')
 vim.opt.wildcharm = vim.fn.char2nr('	')  --- tab
 vim.fn['wilder#enable_cmdline_enter']()
 vim.fn['wilder#set_option']('modes', {':'})
 
-vim.keymap.cnoremap{'<TAB>',   'wilder#in_context() ? wilder#next()     : "\\<Tab>"',   expr=true}
-vim.keymap.cnoremap{'<S-TAB>', 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', expr=true}
-vim.keymap.cnoremap{'<C-j>',   'wilder#in_context() ? wilder#next()     : "\\<Tab>"',   expr=true}
-vim.keymap.cnoremap{'<C-k>',   'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', expr=true}
+util.cnoremap{'<TAB>',  'wilder#in_context() ? wilder#next()     : "\\<Tab>"',    expr=true}
+util.cnoremap{'<S-TAB>', 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', expr=true}
+util.cnoremap{'<C-j>',  'wilder#in_context() ? wilder#next()     : "\\<Tab>"',    expr=true}
+util.cnoremap{'<C-k>',  'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"',  expr=true}
 
 local function init_wilder()
     local command = {

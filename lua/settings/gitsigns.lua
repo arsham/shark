@@ -1,6 +1,4 @@
-if not pcall(require, 'astronauta.keymap') then return end
 local util = require('util')
-local keymap = vim.keymap
 local gitsigns = require('gitsigns')
 
 gitsigns.setup {
@@ -31,21 +29,21 @@ gitsigns.setup {
     update_debounce = 750,
 }
 
-keymap.nnoremap{']c', function() util.call_and_centre(gitsigns.next_hunk) end}
-keymap.nnoremap{'[c', function() util.call_and_centre(gitsigns.prev_hunk) end}
-keymap.nnoremap{'<leader>hb', function() gitsigns.blame_line{full=true} end}
-keymap.nnoremap{'<leader>hs', function() gitsigns.stage_hunk() end}
-keymap.nnoremap{'<leader>hl', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
-keymap.vnoremap{'<leader>hs', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
-keymap.nnoremap{'<leader>hu', function() gitsigns.undo_stage_hunk() end}
-keymap.nnoremap{'<leader>hr', function() gitsigns.reset_hunk() end}
-keymap.vnoremap{'<leader>hr', function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
-keymap.nnoremap{'<leader>hR', function() gitsigns.reset_buffer() end}
-keymap.nnoremap{'<leader>hp', function() gitsigns.preview_hunk() end}
+util.nnoremap{']c', function() util.call_and_centre(gitsigns.next_hunk) end}
+util.nnoremap{'[c', function() util.call_and_centre(gitsigns.prev_hunk) end}
+util.nnoremap{'<leader>hb', function() gitsigns.blame_line{full=true} end}
+util.nnoremap{'<leader>hs', function() gitsigns.stage_hunk() end}
+util.nnoremap{'<leader>hl', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
+util.vnoremap{'<leader>hs', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
+util.nnoremap{'<leader>hu', function() gitsigns.undo_stage_hunk() end}
+util.nnoremap{'<leader>hr', function() gitsigns.reset_hunk() end}
+util.vnoremap{'<leader>hr', function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line(".")}) end}
+util.nnoremap{'<leader>hR', function() gitsigns.reset_buffer() end}
+util.nnoremap{'<leader>hp', function() gitsigns.preview_hunk() end}
 
 ---Text objects
 local actions = require('gitsigns.actions')
-keymap.onoremap{'ih', actions.select_hunk}
-keymap.xnoremap{'ih', actions.select_hunk}
-keymap.onoremap{'ah', actions.select_hunk}
-keymap.xnoremap{'ah', actions.select_hunk}
+util.onoremap{'ih', actions.select_hunk}
+util.xnoremap{'ih', actions.select_hunk}
+util.onoremap{'ah', actions.select_hunk}
+util.xnoremap{'ah', actions.select_hunk}

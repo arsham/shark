@@ -1,4 +1,3 @@
-require('astronauta.keymap')
 local util = require('util')
 
 local items = {
@@ -134,9 +133,9 @@ local function invoke(no_comment, query)
     vim.fn["fzf#run"](wrapped)
 end
 
-vim.keymap.nnoremap{'<leader>cs', silent=true, function() invoke(true) end}
-vim.keymap.nnoremap{'<leader>cq', silent=true, function() invoke(false) end}
-vim.keymap.nnoremap{'<leader>cn', silent=true, function()
+util.nnoremap{'<leader>cs', function() invoke(true) end,  silent=true}
+util.nnoremap{'<leader>cq', function() invoke(false) end, silent=true}
+util.nnoremap{'<leader>cn', function()
     if last_query == "" then
         vim.notify("No previous cheat query", "error", {
             title = "Error",
@@ -153,4 +152,4 @@ vim.keymap.nnoremap{'<leader>cn', silent=true, function()
     end
 
     curl(last_section, query, last_mode)
-end}
+end, silent=true}

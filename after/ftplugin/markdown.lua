@@ -2,7 +2,6 @@ local bufname = vim.fn.bufname()
 if vim.fn.getbufvar(bufname, 'ftplugin_loaded') == true then return end
 vim.fn.setbufvar(bufname, 'ftplugin_loaded', true)
 
-require('astronauta.keymap')
 local nvim = require('nvim')
 local util = require('util')
 ---see #14670
@@ -48,6 +47,8 @@ end
 
 vim.wo.foldmethod = 'expr'
 
+---TODO: find out what is clashing with nvim-cmp and remove the plugin.
+require('astronauta.keymap')
 vim.keymap.inoremap{'<CR>', function()
     local line = vim.fn.getline(vim.fn.line('.')):gsub('^%s*', '')
     local marker = vim.fn.matchstr(line, [[^\(\d\+\.\)\s]])
@@ -82,5 +83,5 @@ local function nextHeading(down)
     util.normal('nx', motion)
 end
 
-vim.keymap.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true}
-vim.keymap.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true}
+util.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true}
+util.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true}

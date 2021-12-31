@@ -1,4 +1,3 @@
-if not pcall(require, 'astronauta.keymap') then return end
 local nvim = require('nvim')
 local util = require('util')
 
@@ -9,7 +8,7 @@ local function restart_lsp()
     vim.defer_fn(nvim.ex.LspStart, 1000)
 end
 util.buffer_command("RestartLsp", restart_lsp)
-vim.keymap.nnoremap{'<leader>dr', restart_lsp, silent=true}
+util.nnoremap{'<leader>dr', restart_lsp, silent=true}
 
 local function lsp_organise_imports()
     local context = { source = { organizeImports = true } }
@@ -83,19 +82,19 @@ local function attach_mappings_commands(client)
     local caps = client.resolved_capabilities
     if caps.code_action then
         vim.cmd('command! -buffer -range CodeAction lua require("settings.lsp.util").code_action(<range> ~= 0, <line1>, <line2>)')
-        vim.keymap.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
-        vim.keymap.vnoremap{'<leader>ca', ":'<,'>CodeAction<CR>", buffer=true, silent=true}
+        util.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
+        util.vnoremap{'<leader>ca', ":'<,'>CodeAction<CR>", buffer=true, silent=true}
 
         --- Either is it set to true, or there is a specified set of
         --- capabilities.
         if type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports") then
-            vim.keymap.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
+            util.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
             pre_save.imports = lsp_organise_imports
         end
     end
 
     if caps.document_formatting then
-        vim.keymap.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
+        util.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
         pre_save.format = function()
             vim.lsp.buf.formatting_sync(nil, 2000)
         end
@@ -110,7 +109,7 @@ local function attach_mappings_commands(client)
 
     if caps.document_range_formatting then
         vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
-        vim.keymap.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
+        util.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
         vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
     end
 
@@ -119,38 +118,38 @@ local function attach_mappings_commands(client)
     end
 
     if caps.hover then
-        vim.keymap.nnoremap{'H',     vim.lsp.buf.hover, buffer=true, silent=true}
-        vim.keymap.inoremap{'<C-h>', vim.lsp.buf.hover, buffer=true, silent=true}
+        util.nnoremap{'H',    vim.lsp.buf.hover,  buffer=true, silent=true}
+        util.inoremap{'<C-h>', vim.lsp.buf.hover, buffer=true, silent=true}
     end
     if caps.signature_help then
-        vim.keymap.nnoremap{'K',     vim.lsp.buf.signature_help, buffer=true, silent=true}
-        vim.keymap.inoremap{'<C-l>', vim.lsp.buf.signature_help, buffer=true, silent=true}
+        util.nnoremap{'K',    vim.lsp.buf.signature_help,  buffer=true, silent=true}
+        util.inoremap{'<C-l>', vim.lsp.buf.signature_help, buffer=true, silent=true}
     end
 
     if caps.goto_definition then
         util.buffer_command("Definition", function() vim.lsp.buf.definition() end)
-        vim.keymap.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
+        util.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
         vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
     if caps.declaration then
-        vim.keymap.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
+        util.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
     end
     if caps.type_definition then
         util.buffer_command("TypeDefinition", function() vim.lsp.buf.type_definition() end)
     end
     if caps.implementation then
         util.buffer_command("Implementation", function() vim.lsp.buf.implementation() end)
-        vim.keymap.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true}
+        util.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true}
     end
 
     if caps.find_references then
         util.buffer_command("References", function() vim.lsp.buf.references() end)
-        vim.keymap.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true}
+        util.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true}
     end
 
     if caps.document_symbol then
         util.buffer_command("DocumentSymbol", function() vim.lsp.buf.document_symbol() end)
-        vim.keymap.nnoremap{'<leader>@', function()
+        util.nnoremap{'<leader>@', function()
             vim.lsp.buf.document_symbol()
         end, buffer=true, silent=true}
     end
@@ -161,7 +160,7 @@ local function attach_mappings_commands(client)
     if caps.call_hierarchy then
         util.buffer_command("Callees", function() vim.lsp.buf.outgoing_calls() end)
         util.buffer_command("Callers", function() vim.lsp.buf.incoming_calls() end)
-        vim.keymap.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true}
+        util.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true}
     end
 
     util.buffer_command("ListWorkspace", function()
@@ -185,20 +184,20 @@ local function attach_mappings_commands(client)
         vim.lsp.buf.workspace_symbol(pattern)
     end)
 
-    vim.keymap.inoremap{'<C-j>',   '<C-n>',  buffer=true, silent=true}
-    vim.keymap.inoremap{'<C-k>',   '<C-p>',  buffer=true, silent=true}
+    util.inoremap{'<C-j>', '<C-n>', buffer=true, silent=true}
+    util.inoremap{'<C-k>', '<C-p>', buffer=true, silent=true}
 
-    vim.keymap.nnoremap{'<leader>dd', vim.diagnostic.open_float, buffer=true, silent=true}
-    vim.keymap.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true}
-    vim.keymap.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true}
-    vim.keymap.nnoremap{']d', function()
+    util.nnoremap{'<leader>dd', vim.diagnostic.open_float, buffer=true, silent=true}
+    util.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true}
+    util.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true}
+    util.nnoremap{']d', function()
         util.call_and_centre(vim.diagnostic.goto_next)
     end, buffer=true, silent=true}
-    vim.keymap.nnoremap{'[d', function()
+    util.nnoremap{'[d', function()
         util.call_and_centre(vim.diagnostic.goto_prev)
     end, buffer=true, silent=true}
     util.buffer_command("Diagnostics", function() require('lspfuzzy').diagnostics(0) end)
-    util.buffer_command("DiagnosticsAll",    "LspDiagnosticsAll")
+    util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
 end
 
 local M = {}
@@ -226,7 +225,7 @@ function M.on_attach(client, bufnr)
     if caps.code_lens then
         util.buffer_command("CodeLensRefresh", function() vim.lsp.codelens.refresh() end)
         util.buffer_command("CodeLensRun", function() vim.lsp.codelens.run() end)
-        vim.keymap.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true}
+        util.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true}
 
         util.augroup{"CODE_LENSES", {
             {"CursorHold,CursorHoldI,InsertLeave", buffer=true, run=function()

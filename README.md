@@ -125,7 +125,6 @@ Some plugins are not listed here. You can find the complete list in the
 | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)                               |                                                        |
 | [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)                         |                                                        |
 | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                                        |
-| [tjdevries/astronauta.nvim](https://github.com/tjdevries/astronauta.nvim)                                     |                                                        |
 | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                                           | Make diagrams from text                                |
 
 </details>

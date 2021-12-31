@@ -1,7 +1,7 @@
 vim.opt.termguicolors = true
-require('util')
 require('plugins')
-if not pcall(require, 'astronauta.keymap') then return end
+if not pcall(require, 'nvim') then return end
+require('util')
 
 require('options')
 require('visuals')

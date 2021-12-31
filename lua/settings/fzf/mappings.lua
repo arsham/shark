@@ -1,21 +1,20 @@
-if not pcall(require, 'astronauta.keymap') then return end
 local nvim = require('nvim')
-local keymap = vim.keymap
-local util = require('settings.fzf.util')
+local util = require('util')
+local fzf = require('settings.fzf.util')
 
 ---Ctrl+/ for searching in current buffer.
-keymap.nnoremap{'<leader>:', ':Commands<CR>'}
-keymap.nnoremap{'<C-_>',      util.lines_grep,    silent=true}
-keymap.nnoremap{'<M-/>',      ':Lines<CR>',       silent=true}
-keymap.nnoremap{'<C-p>',      ':Files<CR>',       silent=true}
-keymap.nnoremap{'<M-p>',      ':Files ~/<CR>',    silent=true}
-keymap.nnoremap{'<C-b>',      ':Buffers<CR>',     silent=true}
-keymap.nnoremap{'<M-b>',      util.delete_buffer, silent=true}
-keymap.nnoremap{'<leader>gf', ':GFiles<CR>',      silent=true}
-keymap.nnoremap{'<leader>fh', ':History<CR>',     silent=true}
+util.nnoremap{'<leader>:', ':Commands<CR>'}
+util.nnoremap{'<C-_>',     fzf.lines_grep,     silent=true}
+util.nnoremap{'<M-/>',     ':Lines<CR>',       silent=true}
+util.nnoremap{'<C-p>',     ':Files<CR>',       silent=true}
+util.nnoremap{'<M-p>',     ':Files ~/<CR>',    silent=true}
+util.nnoremap{'<C-b>',     ':Buffers<CR>',     silent=true}
+util.nnoremap{'<M-b>',     fzf.delete_buffer,  silent=true}
+util.nnoremap{'<leader>gf', ':GFiles<CR>',     silent=true}
+util.nnoremap{'<leader>fh', ':History<CR>',    silent=true}
 
 ---Run locate.
-keymap.nnoremap{'<leader>fl', silent=true, function()
+util.nnoremap{'<leader>fl', function()
     require('util').user_input{
         prompt = "Term: ",
         on_submit = function(term)
@@ -25,36 +24,36 @@ keymap.nnoremap{'<leader>fl', silent=true, function()
             end)
         end,
     }
-end}
+end, silent=true}
 
 ---Replace the default dictionary completion with fzf-based fuzzy completion.
-keymap.inoremap{'<c-x><c-k>', expr=true, [[fzf#vim#complete('cat /usr/share/dict/words-insane')]]}
-keymap.imap{'<c-x><c-f>', '<plug>(fzf-complete-path)'}
-keymap.imap{'<c-x><c-l>', '<plug>(fzf-complete-line)'}
+util.inoremap{'<c-x><c-k>', [[fzf#vim#complete('cat /usr/share/dict/words-insane')]], expr=true}
+util.imap{'<c-x><c-f>', '<plug>(fzf-complete-path)'}
+util.imap{'<c-x><c-l>', '<plug>(fzf-complete-line)'}
 
 ---Open the search tool.
-keymap.nnoremap{"<leader>ff", function() util.ripgrep_search("") end}
+util.nnoremap{"<leader>ff", function() fzf.ripgrep_search("") end, desc="find in files"}
 ---Open the search tool, ignoring .gitignore.
-keymap.nnoremap{"<leader>fa", function() util.ripgrep_search("", true) end}
+util.nnoremap{"<leader>fa", function() fzf.ripgrep_search("", true) end}
 ---Incremental search.
-keymap.nnoremap{"<leader>fi", function() util.ripgrep_search_incremental("", true) end}
+util.nnoremap{"<leader>fi", function() fzf.ripgrep_search_incremental("", true) end}
 
 ---Search over current word.
-keymap.nnoremap{"<leader>rg", function()
-    util.ripgrep_search(vim.fn.expand("<cword>"))
+util.nnoremap{"<leader>rg", function()
+    fzf.ripgrep_search(vim.fn.expand("<cword>"))
 end}
 ---Search over current word, ignoring .gitignore.
-keymap.nnoremap{"<leader>ra", function()
-    util.ripgrep_search(vim.fn.expand("<cword>"), true)
+util.nnoremap{"<leader>ra", function()
+    fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
 end}
 ---Incremental search over current word, ignoring .gitignore.
-keymap.nnoremap{"<leader>ri", function()
-    util.ripgrep_search(vim.fn.expand("<cword>"), true)
+util.nnoremap{"<leader>ri", function()
+    fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
 end}
 
-keymap.nnoremap{'<leader>mm',  ":Marks<CR>"}
+util.nnoremap{'<leader>mm', ":Marks<CR>"}
 
-keymap.nnoremap{'z=', function()
+util.nnoremap{'z=', function()
     local term = vim.fn.expand("<cword>")
     vim.fn["fzf#run"]({
         source = vim.fn.spellsuggest(term),
@@ -65,4 +64,4 @@ keymap.nnoremap{'z=', function()
     })
 end}
 
-vim.keymap.nnoremap{'<leader>@', nvim.ex.BTags, silent=true}
+util.nnoremap{'<leader>@', nvim.ex.BTags, silent=true}

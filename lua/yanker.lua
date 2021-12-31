@@ -1,5 +1,4 @@
 local util = require('util')
-require('astronauta.keymap')
 
 local store = _t()
 __Clipboard_storage = __Clipboard_storage or _t()
@@ -13,7 +12,7 @@ util.augroup{"CLIPBOARD", {
 
 ---Lists all yank history, and will set it to the unnamed register on
 ---selection.
-vim.keymap.nnoremap{'<leader>yh', silent=true, function()
+util.nnoremap{'<leader>yh', function()
     local yank_list = _t()
     local seen = _t()
     store:filter(function(v)
@@ -54,4 +53,4 @@ vim.keymap.nnoremap{'<leader>yh', silent=true, function()
         vim.fn.setreg('"', value, item.regtype)
     end
     vim.fn["fzf#run"](wrapped)
-end}
+end, silent=true}

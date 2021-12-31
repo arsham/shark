@@ -1,3 +1,4 @@
+if not pcall(require, 'nvim') then return end
 local nvim = require('nvim')
 require('util.tables')
 require('util.strings')
@@ -363,5 +364,97 @@ function M.file_module(filename)
     end
     return mod, ok
 end
+
+---@class mapping_options
+---@field lhs? string or first element key to trigger the mapping.
+---@field rhs? string or second element. Should be empty if callback is given.
+---@field callback? function
+---@field buffer? boolean
+---@field silent? boolean
+---@field noremap? boolean
+---@field expr? string
+
+---Creates mappings.
+---@param mode string
+---@param conf mapping_options
+function M.map(mode, conf)
+    local opts, map_opts = {}, {}
+    for k, v in pairs(conf) do
+        if type(k) == "number" then
+            opts[k] = v
+        else
+            map_opts[k] = v
+        end
+    end
+
+    local lhs = opts.lhs or conf[1]
+    local rhs = opts.rhs or conf[2]
+
+    if type(rhs) == 'function' then
+        map_opts.callback = rhs
+        rhs = ''
+    end
+
+    if conf.buffer then
+        map_opts.buffer = nil
+        vim.api.nvim_buf_set_keymap(0, mode, lhs, rhs, map_opts)
+        return
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, map_opts)
+end
+
+---Create a normal mode mapping.
+---@param conf mapping_options
+function M.nmap(conf) M.map('n', conf) end
+---Create a mapping for insert mode.
+---@param conf mapping_options
+function M.imap(conf) M.map('i', conf) end
+---Create a mapping for visual mode.
+---@param conf mapping_options
+function M.vmap(conf) M.map('v', conf) end
+---Create a mapping for visual mode.
+---@param conf mapping_options
+function M.xmap(conf) M.map('x', conf) end
+---Create a mapping for operator-pending mode.
+---@param conf mapping_options
+function M.omap(conf) M.map('o', conf) end
+---Create a mapping for command-line mode.
+---@param conf mapping_options
+function M.cmap(conf) M.map('c', conf) end
+---Create a mapping for terminal mode.
+---@param conf mapping_options
+function M.tmap(conf) M.map('t', conf) end
+
+---Not to be consumed by users.
+---@param mode string
+---@param conf mapping_options
+function M._noremap(mode, conf)
+    conf.noremap = true
+    M.map(mode, conf)
+end
+
+function M.noremap(conf) M._noremap('', conf) end
+
+---Create a normal mode mapping.
+---@param conf mapping_options
+function M.nnoremap(conf) M._noremap('n', conf) end
+---Create a mapping for insert mode.
+---@param conf mapping_options
+function M.inoremap(conf) M._noremap('i', conf) end
+---Create a mapping for visual mode.
+---@param conf mapping_options
+function M.vnoremap(conf) M._noremap('v', conf) end
+---Create a mapping for visual mode.
+---@param conf mapping_options
+function M.xnoremap(conf) M._noremap('x', conf) end
+---Create a mapping for operator-pending mode.
+---@param conf mapping_options
+function M.onoremap(conf) M._noremap('o', conf) end
+---Create a mapping for command-line mode.
+---@param conf mapping_options
+function M.cnoremap(conf) M._noremap('c', conf) end
+---Create a mapping for terminal mode.
+---@param conf mapping_options
+function M.tnoremap(conf) M._noremap('t', conf) end
 
 return M

@@ -1,5 +1,4 @@
-if not pcall(require, 'astronauta.keymap') then return end
-
+local util = require('util')
 --[=====[
 #### Alignment options in interactive mode
 
@@ -75,6 +74,6 @@ vim.g.easy_align_delimiters = {
 
 vim.g.easy_align_bypass_fold = 1
 
-vim.keymap.xmap{'ga',         '<Plug>(EasyAlign)'}
-vim.keymap.nmap{'ga',         '<Plug>(EasyAlign)'}
-vim.keymap.nmap{'<leader>ga', '<Plug>(LiveEasyAlign)'}
+util.xmap{'ga',         '<Plug>(EasyAlign)'}
+util.nmap{'ga',         '<Plug>(EasyAlign)'}
+util.nmap{'<leader>ga', '<Plug>(LiveEasyAlign)'}

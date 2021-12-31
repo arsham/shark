@@ -1,5 +1,4 @@
 local util = require('util')
-require('astronauta.keymap')
 
 local function next_obj(motion)
     local c = vim.fn.getchar()
@@ -12,34 +11,34 @@ local function next_obj(motion)
     util.normal('x', sequence)
 end
 
-vim.keymap.xnoremap{'an', function() next_obj("a") end}
-vim.keymap.onoremap{'an', function() next_obj("a") end}
-vim.keymap.xnoremap{'in', function() next_obj("i") end}
-vim.keymap.onoremap{'in', function() next_obj("i") end}
+util.xnoremap{'an', function() next_obj("a") end}
+util.onoremap{'an', function() next_obj("a") end}
+util.xnoremap{'in', function() next_obj("i") end}
+util.onoremap{'in', function() next_obj("i") end}
 
 --- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
 --- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
 local chars = {'_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '-', '#' }
 for _, char in ipairs(chars) do
-    vim.keymap.xnoremap{'i' .. char, function()
+    util.xnoremap{'i' .. char, function()
         util.normal('xt', 'T' .. char .. 'ot' .. char)
     end}
-    vim.keymap.onoremap{'i' .. char, function()
+    util.onoremap{'i' .. char, function()
         util.normal('x', 'vi' .. char)
     end}
-    vim.keymap.xnoremap{'a' .. char, function()
+    util.xnoremap{'a' .. char, function()
         util.normal('xt', 'F' .. char .. 'of' .. char)
     end}
-    vim.keymap.onoremap{'a' .. char, function()
+    util.onoremap{'a' .. char, function()
         util.normal('x', 'va' .. char)
     end}
 end
 
 ---line pseudo text objects.
-vim.keymap.xnoremap{'il', function() util.normal('xt', 'g_o^') end}
-vim.keymap.onoremap{'il', function() util.normal('x',  'vil')  end}
-vim.keymap.xnoremap{'al', function() util.normal('xt', '$o0')  end}
-vim.keymap.onoremap{'al', function() util.normal('x',  'val')  end}
+util.xnoremap{'il', function() util.normal('xt', 'g_o^') end}
+util.onoremap{'il', function() util.normal('x',  'vil')  end}
+util.xnoremap{'al', function() util.normal('xt', '$o0')  end}
+util.onoremap{'al', function() util.normal('x',  'val')  end}
 
 ---Number pseudo-text object (integer and float)
 ---Exmaple: ciN
@@ -48,8 +47,8 @@ local function visual_number()
     util.normal('x', 'v')
     vim.fn.search('\\(^\\|[^0-9\\.]\\d\\)', 'becW')
 end
-vim.keymap.xnoremap{'iN', visual_number}
-vim.keymap.onoremap{'iN', visual_number}
+util.xnoremap{'iN', visual_number}
+util.onoremap{'iN', visual_number}
 
 ---Selects all lines with equal or higher indents to the current line in line
 ---visual mode. It ignores any empty lines.
@@ -91,8 +90,8 @@ local function in_indent()
     util.normal('xt', sequence)
 end
 
-vim.keymap.vnoremap{'ii', in_indent, silent=true}
-vim.keymap.onoremap{'ii', function() util.normal('x',  'vii')  end}
+util.vnoremap{'ii', in_indent, silent=true}
+util.onoremap{'ii', function() util.normal('x', 'vii')  end}
 
 ---@param include boolean if true, will remove the backticks too.
 local function in_backticks(include)
@@ -110,10 +109,10 @@ local function in_backticks(include)
     util.normal('x', 'h')
 end
 
-vim.keymap.vnoremap{'i`', function() in_backticks(false) end,     silent = true}
-vim.keymap.vnoremap{'a`', function() in_backticks(true) end,      silent = true}
-vim.keymap.onoremap{'i`', function() util.normal('x', 'vi`') end, silent = true}
-vim.keymap.onoremap{'a`', function() util.normal('x', 'va`') end, silent = true}
+util.vnoremap{'i`', function() in_backticks(false) end,     silent = true}
+util.vnoremap{'a`', function() in_backticks(true) end,      silent = true}
+util.onoremap{'i`', function() util.normal('x', 'vi`') end, silent = true}
+util.onoremap{'a`', function() util.normal('x', 'va`') end, silent = true}
 
-vim.keymap.onoremap{'H', '^'}
-vim.keymap.onoremap{'L', '$'}
+util.onoremap{'H', '^'}
+util.onoremap{'L', '$'}

@@ -1,4 +1,3 @@
-if not pcall(require, 'astronauta.keymap') then return end
 local nvim = require('nvim')
 local util = require('util')
 
@@ -105,31 +104,31 @@ M.nvim_tree = {
             },
         }
 
-        vim.keymap.nnoremap{'<leader>kk', function()
+        util.nnoremap{'<leader>kk', function()
             require'nvim-tree'.toggle()
         end, silent=true}
-        vim.keymap.nnoremap{'<leader>kf', function()
+        util.nnoremap{'<leader>kf', function()
             require'nvim-tree'.find_file(true)
         end, silent=true}
-        vim.keymap.nnoremap{'<leader><leader>', function()
+        util.nnoremap{'<leader><leader>', function()
             require'nvim-tree'.toggle()
         end, silent=true}
     end
 }
 
 function M.treesitter_unit()
-    vim.keymap.xnoremap{'iu', ':lua require"treesitter-unit".select()<CR>'}
-    vim.keymap.xnoremap{'au', ':lua require"treesitter-unit".select(true)<CR>'}
-    vim.keymap.onoremap{'iu', ':<c-u>lua require"treesitter-unit".select()<CR>'}
-    vim.keymap.onoremap{'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>'}
+    util.xnoremap{'iu', ':lua require"treesitter-unit".select()<CR>'}
+    util.xnoremap{'au', ':lua require"treesitter-unit".select(true)<CR>'}
+    util.onoremap{'iu', ':<c-u>lua require"treesitter-unit".select()<CR>'}
+    util.onoremap{'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>'}
 end
 
 function M.copilot()
-    vim.keymap.imap{'<C-y>', [[copilot#Accept("\<CR>")]], silent=true, expr=true, script=true}
+    util.imap{'<C-y>', [[copilot#Accept("\<CR>")]], silent=true, expr=true, script=true}
     vim.g.copilot_no_tab_map = true
     vim.g.copilot_assume_mapped = true
-    vim.keymap.nnoremap{'<leader>ce', ':Copilot enable<cr>', silent=true}
-    vim.keymap.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true}
+    util.nnoremap{'<leader>ce', ':Copilot enable<cr>',  silent=true}
+    util.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true}
     --- disabled by default
     nvim.ex.Copilot('disable')
 end
@@ -138,10 +137,10 @@ function M.navigator()
     local navigator = require('Navigator')
     navigator.setup()
 
-    vim.keymap.nnoremap{"<C-h>", navigator.left,  silent=true}
-    vim.keymap.nnoremap{"<C-k>", navigator.up,    silent=true}
-    vim.keymap.nnoremap{"<C-l>", navigator.right, silent=true}
-    vim.keymap.nnoremap{"<C-j>", navigator.down,  silent=true}
+    util.nnoremap{"<C-h>", navigator.left,  silent=true}
+    util.nnoremap{"<C-k>", navigator.up,    silent=true}
+    util.nnoremap{"<C-l>", navigator.right, silent=true}
+    util.nnoremap{"<C-j>", navigator.down,  silent=true}
 end
 
 function M.lsp_installer()
@@ -180,12 +179,12 @@ function M.visual_multi()
     }
 
     --- these don't work in the above maps.
-    vim.keymap.nnoremap{[[<Leader>\]], function()
+    util.nnoremap{[[<Leader>\]], function()
         vim.fn["vm#commands#add_cursor_at_pos"](0)
-    end, {}}
-    vim.keymap.nnoremap{'<Leader>A', function()
+    end}
+    util.nnoremap{'<Leader>A', function()
         vim.fn["vm#commands#find_all"](0, 1)
-    end, {}}
+    end}
 end
 
 function M.dressing()
@@ -199,7 +198,7 @@ function M.dressing()
 end
 
 function M.fugitive()
-    vim.keymap.nnoremap{'<leader>gg', ':Git<cr>', silent=true}
+    util.nnoremap{'<leader>gg', ':Git<cr>', silent=true}
 end
 
 function M.null_ls()
@@ -216,7 +215,7 @@ function M.null_ls()
             end
             if client.resolved_capabilities.document_range_formatting then
                 vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
-                vim.keymap.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
+                util.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
                 vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
             end
         end,

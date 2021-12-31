@@ -95,7 +95,9 @@ vim.g.fzf_commits_log_options = table.concat({
 
 ---fix escape in fzf popup.
 require('util').augroup{"FZF_FIXES", {
-    {"FileType", "fzf", run="tnoremap <buffer> <esc> <c-c>"},
+    {"FileType", "fzf", run=function()
+        util.tnoremap{'<esc>', '<C-c>', buffer=true}
+    end},
 }}
 
 vim.g.fzf_history_dir = vim.env.HOME .. '/.local/share/fzf-history'

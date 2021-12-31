@@ -26,9 +26,9 @@ require('packer').startup({
             'wbthomason/packer.nvim',
             event = 'VimEnter',
         }
-        use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
         use 'norcalli/nvim.lua'
+        use 'tjdevries/astronauta.nvim'
         --- }}}
 
         --- {{{ Core/System utilities
@@ -94,7 +94,7 @@ require('packer').startup({
             config = function()
                 vim.g.undotree_CustomUndotreeCmd  = 'vertical 40 new'
                 vim.g.undotree_CustomDiffpanelCmd = 'botright 15 new'
-                vim.keymap.nnoremap{'<leader>u', ':UndotreeToggle<CR>', silent=true}
+                require('util').nnoremap{'<leader>u', ':UndotreeToggle<CR>', silent=true}
             end,
             branch = 'search',
             cmd    = { 'UndotreeShow', 'UndotreeToggle' },
@@ -146,7 +146,7 @@ require('packer').startup({
         use {
             'dhruvasagar/vim-zoom',
             config = function()
-                vim.keymap.nmap{ '<C-W>z', '<Plug>(zoom-toggle)' }
+                require('util').nmap{'<C-W>z', '<Plug>(zoom-toggle)'}
             end,
             event = { 'BufRead', 'BufNewFile' },
             keys  = { '<C-w>z' },
@@ -420,8 +420,8 @@ require('packer').startup({
         use {
             'nanotee/sqls.nvim',
             config = function ()
-                vim.keymap.nnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
-                vim.keymap.vnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
+                require('util').nnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
+                require('util').vnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
             end,
             ft = { 'sql' },
             cond = full_start,

@@ -1,5 +1,4 @@
 local util = require('util')
-require('astronauta.keymap')
 
 local mappings = _t{
     { group = 'MatchingAA', color = '#FF6188' },
@@ -120,19 +119,19 @@ local function do_match(name, exact)
 end
 
 ---Add any matches containing a word under the cursor.
-vim.keymap.nnoremap{'<Plug>MatchAdd', function()
+util.nnoremap{'<Plug>MatchAdd', function()
     do_match('<Plug>MatchAdd', false)
 end}
-vim.keymap.nmap{'<leader>ma', '<Plug>MatchAdd'}
+util.nmap{'<leader>ma', '<Plug>MatchAdd'}
 
 ---Add any exact matches containing a word under the cursor.
-vim.keymap.nnoremap{'<Plug>MatchExact', function()
+util.nnoremap{'<Plug>MatchExact', function()
     do_match('<Plug>MatchExact', true)
 end}
-vim.keymap.nmap{'<leader>me', '<Plug>MatchExact'}
+util.nmap{'<leader>me', '<Plug>MatchExact'}
 
 ---Add any matches containing the input from user.
-vim.keymap.nnoremap{'<leader>mp', function()
+util.nnoremap{'<leader>mp', function()
     util.user_input{
         prompt = "Pattern: ",
         on_submit = function(term)
@@ -142,7 +141,7 @@ vim.keymap.nnoremap{'<leader>mp', function()
 end}
 
 ---Clear all matches of the current buffer.
-vim.keymap.nnoremap{'<leader>mc', function()
+util.nnoremap{'<leader>mc', function()
     local groups = _t()
     mappings:map(function(v)
         groups[v.group] = true
@@ -154,7 +153,7 @@ vim.keymap.nnoremap{'<leader>mc', function()
 end}
 
 ---List all matches and remove by user's selection.
-vim.keymap.nnoremap{'<leader>md', function()
+util.nnoremap{'<leader>md', function()
     local source = _t()
     local groups = _t()
     mappings:map(function(v)
