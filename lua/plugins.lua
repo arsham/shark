@@ -21,7 +21,7 @@ end
 require('packer').startup({
     function(use)
 
-        -- {{{ Libraries
+        --- {{{ Libraries
         use {
             'wbthomason/packer.nvim',
             event = 'VimEnter',
@@ -29,9 +29,9 @@ require('packer').startup({
         use 'tjdevries/astronauta.nvim'
         use 'nvim-lua/plenary.nvim'
         use 'norcalli/nvim.lua'
-        -- }}}
+        --- }}}
 
-        -- {{{ Core/System utilities
+        --- {{{ Core/System utilities
         use { 'nathom/filetype.nvim' }
         use { 'lewis6991/impatient.nvim' }
 
@@ -70,11 +70,11 @@ require('packer').startup({
 
         use {
             'tweekmonster/startuptime.vim',
-            -- 'dstein64/vim-startuptime',
+            --- 'dstein64/vim-startuptime',
             cmd = { 'StartupTime' },
         }
 
-        -- { 'norcalli/profiler.nvim', },
+        --- { 'norcalli/profiler.nvim', },
 
         use {
             'gelguy/wilder.nvim',
@@ -100,9 +100,9 @@ require('packer').startup({
             cmd    = { 'UndotreeShow', 'UndotreeToggle' },
             keys   = { '<leader>u' },
         }
-        -- }}}
+        --- }}}
 
-        -- {{{ git
+        --- {{{ git
         use {
             'tpope/vim-fugitive',
             config = function() require('settings').fugitive() end,
@@ -122,15 +122,15 @@ require('packer').startup({
         }
 
         use {
-            -- create ~/.gist-vim with this content: token xxxxx
+            --- create ~/.gist-vim with this content: token xxxxx
             'mattn/vim-gist',
             requires = 'mattn/webapi-vim',
             config   = function() vim.g.gist_per_page_limit = 100 end,
             cmd      = { 'Gist' },
         }
-        -- }}}
+        --- }}}
 
-        -- {{{ Visuals
+        --- {{{ Visuals
         use {
             'kyazdani42/nvim-web-devicons',
             event = 'UIEnter',
@@ -193,9 +193,9 @@ require('packer').startup({
             event = 'UIEnter',
             cond = full_start,
         }
-        -- }}}
+        --- }}}
 
-        -- {{{ Editing
+        --- {{{ Editing
         use {
             'tpope/vim-repeat',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
@@ -219,16 +219,16 @@ require('packer').startup({
         }
 
         use {
-            -- MixedCase/PascalCase:   gsm/gsp
-            -- camelCase:              gsc
-            -- snake_case:             gs_
-            -- UPPER_CASE:             gsu/gsU
-            -- Title Case:             gst
-            -- Sentence case:          gss
-            -- space case:             gs<space>
-            -- dash-case/kebab-case:   gs-/gsk
-            -- Title-Dash/Title-Kebab: gsK
-            -- dot.case:               gs.
+            --- MixedCase/PascalCase:   gsm/gsp
+            --- camelCase:              gsc
+            --- snake_case:             gs_
+            --- UPPER_CASE:             gsu/gsU
+            --- Title Case:             gst
+            --- Sentence case:          gss
+            --- space case:             gs<space>
+            --- dash-case/kebab-case:   gs-/gsk
+            --- Title-Dash/Title-Kebab: gsK
+            --- dot.case:               gs.
             'arthurxavierx/vim-caser',
             keys = { 'gs' },
         }
@@ -264,16 +264,16 @@ require('packer').startup({
                 require('sort').setup({
                     delimiters = {
                         ',', '|', ';', ':',
-                        's', -- Space
-                        't'  -- Tab
+                        's', --- Space
+                        't'  --- Tab
                     },
                 })
             end,
             cmd = { 'Sort' },
         }
-        -- }}}
+        --- }}}
 
-        -- {{{ Programming
+        --- {{{ Programming
         use {
             'neovim/nvim-lspconfig',
             after = { 'nvim-cmp', 'lua-dev.nvim' },
@@ -370,8 +370,8 @@ require('packer').startup({
                 {
                     'nvim-treesitter/nvim-treesitter-textobjects',
                     after  = 'nvim-treesitter',
-                    -- This is actually the nvim-treesitter config, but it's
-                    -- here to make lazy loading happy.
+                    --- This is actually the nvim-treesitter config, but it's
+                    --- here to make lazy loading happy.
                     config = function() require('settings.treesitter') end,
                 },
                 {
@@ -436,9 +436,9 @@ require('packer').startup({
             'towolf/vim-helm',
             ft = { 'yaml' },
         }
-        -- }}}
+        --- }}}
 
-        -- {{{ Text objects
+        --- {{{ Text objects
         use {
             'blackCauldron7/surround.nvim',
             config = function() require('settings').surround() end,
@@ -455,15 +455,13 @@ require('packer').startup({
             'kana/vim-textobj-user',
             event = { 'BufRead', 'BufNewFile' },
         }
-        -- }}}
+        --- }}}
 
-        -- {{{ Misc
+        --- {{{ Misc
         use {
             'iamcco/markdown-preview.nvim',
             run = function()
                 vim.fn['mkdp#util#install']()
-                -- couln't make this work.
-                -- vim.cmd[[cd app && npm -g install --prefix ~/.node_modules]]
             end,
             setup  = function() vim.g.mkdp_filetypes = { 'markdown' } end,
             config = function() vim.g.mkdp_browser = 'brave' end,
@@ -483,12 +481,12 @@ require('packer').startup({
         }
 
         use {
-            ---creates diagrams from text. Requires diagon from snap.
+            --- creates diagrams from text. Requires diagon from snap.
             'willchao612/vim-diagon',
             cmd = 'Diagon',
         }
 
-        -- }}}
+        --- }}}
         if packer_bootstrap then
             require('packer').sync()
         end
@@ -502,7 +500,7 @@ require('packer').startup({
             end
         },
 
-        -- Move to lua dir so impatient.nvim can cache it.
+        --- Move to lua dir so impatient.nvim can cache it.
         compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
     },
 })

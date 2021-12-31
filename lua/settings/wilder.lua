@@ -1,4 +1,4 @@
-vim.opt.wildcharm = vim.fn.char2nr('	')  -- tab
+vim.opt.wildcharm = vim.fn.char2nr('	')  --- tab
 vim.fn['wilder#enable_cmdline_enter']()
 vim.fn['wilder#set_option']('modes', {':'})
 

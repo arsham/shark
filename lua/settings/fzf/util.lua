@@ -104,8 +104,8 @@ function M.delete_buffer()
 
     for _, v in pairs(list) do
         local name = vim.fn.fnamemodify(v.name, ":~:.")
-        -- the bufnr can't go to the first item otherwise it breaks the preview
-        -- line
+        --- the bufnr can't go to the first item otherwise it breaks the preview
+        --- line
         local t = {
             string.format('%s:%d', v.name, v.lnum),
             v.lnum,

@@ -94,7 +94,7 @@ util.augroup{"SPECIAL_SETTINGS", {
         vim.wo.relativenumber = false
     end, docs='start in insert mode and set the status line'},
 
-    -- See neovim/neovim#15440
+    --- See neovim/neovim#15440
     {'TermClose', '*', function()
         if vim.v.event.status == 0 then
             local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)

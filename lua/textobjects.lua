@@ -61,7 +61,7 @@ local function in_indent()
     local first_line = cur_line
     for i = cur_line,0,-1 do
         if cur_indent == 0 and #vim.fn.getline(i) == 0 then
-            -- If we are at column zero, we will stop at an empty line.
+            --- If we are at column zero, we will stop at an empty line.
             break
         end
         if #vim.fn.getline(i) ~= 0 then

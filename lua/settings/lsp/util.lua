@@ -19,7 +19,7 @@ local function lsp_organise_imports()
     params.context = context
 
     local method = "textDocument/codeAction"
-    local timeout = 1000 -- ms
+    local timeout = 1000 --- ms
 
     local resp = vim.lsp.buf_request_sync(0, method, params, timeout)
     if not resp then return end
@@ -73,9 +73,9 @@ end
 ---client's capabilities.
 ---@param client any
 local function attach_mappings_commands(client)
-    -- Contains functions to be run before writing the buffer. The format
-    -- function will format the while buffer, and the imports function will
-    -- organise imports.
+    --- Contains functions to be run before writing the buffer. The format
+    --- function will format the while buffer, and the imports function will
+    --- organise imports.
     local pre_save = {
         format = function() end,
         imports = function() end,
@@ -86,8 +86,8 @@ local function attach_mappings_commands(client)
         vim.keymap.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
         vim.keymap.vnoremap{'<leader>ca', ":'<,'>CodeAction<CR>", buffer=true, silent=true}
 
-        -- Either is it set to true, or there is a specified set of
-        -- capabilities.
+        --- Either is it set to true, or there is a specified set of
+        --- capabilities.
         if type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports") then
             vim.keymap.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
             pre_save.imports = lsp_organise_imports
@@ -211,7 +211,7 @@ local M = {}
 function M.on_attach(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    -- TODO: find out how to disable the statuline badges as well.
+    --- TODO: find out how to disable the statuline badges as well.
 	if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
 		vim.diagnostic.disable()
 	end

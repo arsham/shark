@@ -1,8 +1,8 @@
 if not pcall(require, 'astronauta.keymap') then return end
----vim.lsp.set_log_level("debug")
+--- vim.lsp.set_log_level("debug")
 local util = require('util')
 
---Enable (broadcasting) snippet capability for completion
+--- Enable (broadcasting) snippet capability for completion
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local on_attach = require('settings.lsp.util').on_attach
 
@@ -17,10 +17,10 @@ for type in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   local nr = "DiagnosticLineNr" .. type
     vim.fn.sign_define(hl, {
-        text   = "", -- or the icon
+        text   = "", --- or the icon
         texthl = hl,
         linehl = "",
-        numhl  = nr, -- or hl
+        numhl  = nr, --- or hl
     })
 end
 
@@ -73,10 +73,10 @@ local servers = {
                     test = true,
                     tidy = true,
                 },
-                -- allExperiments = true,
-                -- formatting = {
-                --      gofumpt = true,
-                -- },
+                --- allExperiments = true,
+                --- formatting = {
+                ---      gofumpt = true,
+                --- },
                 usePlaceholders = true,
 
                 completionDocumentation=true,
@@ -160,9 +160,9 @@ lsp_installer.on_server_ready(function(server)
         opts.on_attach = fn
     end
 
-    -- neovim's LSP client does not currently support dynamic capabilities registration.
+    --- neovim's LSP client does not currently support dynamic capabilities registration.
     if server.name == "sqls" then
-        -- sqls has a bad formatting.
+        --- sqls has a bad formatting.
         opts.capabilities.document_formatting = false
         opts.on_attach = function(client, bufnr)
             client.resolved_capabilities.document_formatting = false

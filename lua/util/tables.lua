@@ -218,10 +218,10 @@ end
 ---local chunks = t:chunk(3)
 ---for _, chunk in ipairs(chunks) do
 ---    print(table.concat(chunk, ", "))
----    -- prints: 1=11, 2=22, 3=3
----    --         1=4, 2=5, 3=6
----    --         1=7, 2=8, a=9
----    --         b=10
+---    --- prints: 1=11, 2=22, 3=3
+---    ---         1=4, 2=5, 3=6
+---    ---         1=7, 2=8, a=9
+---    ---         b=10
 --- end
 function Table:chunk(size)
     local ret = _t()

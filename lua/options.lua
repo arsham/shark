@@ -1,6 +1,6 @@
 vim.opt.autoindent  = true
 vim.opt.smartindent = true
-vim.opt.formatoptions:append("n") -- smart auto-indent numbered lists.
+vim.opt.formatoptions:append("n") --- smart auto-indent numbered lists.
 vim.opt.textwidth   = 79
 vim.opt.colorcolumn = "80,120"
 vim.opt.shiftwidth  = 4
@@ -10,7 +10,7 @@ vim.opt.expandtab   = true
 vim.opt.wrap        = false
 
 vim.opt.whichwrap:append("h,l")
-vim.opt.linebreak = true  -- Wrap lines at convenient points
+vim.opt.linebreak = true  --- Wrap lines at convenient points
 
 vim.opt.list      = true
 vim.opt.listchars = {
@@ -32,21 +32,21 @@ vim.opt.shada    = "!,'10000,<1000,s100,h,f1,:100000,@10000,/1000"
 vim.opt.showcmd  = true
 vim.opt.showmode = true
 
----vim.opt.shortmess = vim.opt.shortmess + "f"     -- Use "(3 of 5)" instead of "(file 3 of 5)"
----vim.opt.shortmess = vim.opt.shortmess + "i"     -- Use "[noeol]" instead of "[Incomplete last line]"
----vim.opt.shortmess = vim.opt.shortmess + "l"     -- Use "999L, 888C" instead of "999 lines, 888 characters"
----vim.opt.shortmess = vim.opt.shortmess + "m"       -- Use "[+]" instead of "[Modified]"
----vim.opt.shortmess = vim.opt.shortmess + "n"     -- Use "[New]" instead of "[New File]"
----vim.opt.shortmess = vim.opt.shortmess + "r"     -- Use "[RO]" instead of "[readonly]"
----vim.opt.shortmess = vim.opt.shortmess + "x"     -- Use "[dos]" instead of "[dos format]", "[unix]" instead of [unix format]" and "[mac]" instead of "[mac format]".
+---vim.opt.shortmess = vim.opt.shortmess + "f"     --- Use "(3 of 5)" instead of "(file 3 of 5)"
+---vim.opt.shortmess = vim.opt.shortmess + "i"     --- Use "[noeol]" instead of "[Incomplete last line]"
+---vim.opt.shortmess = vim.opt.shortmess + "l"     --- Use "999L, 888C" instead of "999 lines, 888 characters"
+---vim.opt.shortmess = vim.opt.shortmess + "m"     --- Use "[+]" instead of "[Modified]"
+---vim.opt.shortmess = vim.opt.shortmess + "n"     --- Use "[New]" instead of "[New File]"
+---vim.opt.shortmess = vim.opt.shortmess + "r"     --- Use "[RO]" instead of "[readonly]"
+---vim.opt.shortmess = vim.opt.shortmess + "x"     --- Use "[dos]" instead of "[dos format]", "[unix]" instead of [unix format]" and "[mac]" instead of "[mac format]".
 ---   set shortmess+=a     " All of the above abbreviations
----vim.opt.shortmess = vim.opt.shortmess + "o"     -- Overwrite message for writing a file with subsequent message for reading a file (useful for ":wn" or when 'autowrite' on)
----vim.opt.shortmess = vim.opt.shortmess + "O"     -- Message for reading a file overwrites any previous message.  Also for quickfix message (e.g., ":cn").
----vim.opt.shortmess = vim.opt.shortmess + "t"       -- Truncate file message at the start if it is too long to fit on the command-line, "<" will appear in the left most column.  Ignored in Ex mode.
----vim.opt.shortmess = vim.opt.shortmess + "T"     -- Truncate other messages in the middle if they are too long to fit on the command line.  "..." will appear in the middle.  Ignored in Ex mode.
----vim.opt.shortmess = vim.opt.shortmess + "A"     -- Don't give the "ATTENTION" message when an existing swap file is found.
----vim.opt.shortmess = vim.opt.shortmess + "I"     -- Don't give the intro message when starting Vim |:intro|.
----vim.opt.shortmess = vim.opt.shortmess + "c"       -- Avoid showing message extra message when using completion
+---vim.opt.shortmess = vim.opt.shortmess + "o"     --- Overwrite message for writing a file with subsequent message for reading a file (useful for ":wn" or when 'autowrite' on)
+---vim.opt.shortmess = vim.opt.shortmess + "O"     --- Message for reading a file overwrites any previous message.  Also for quickfix message (e.g., ":cn").
+---vim.opt.shortmess = vim.opt.shortmess + "t"     --- Truncate file message at the start if it is too long to fit on the command-line, "<" will appear in the left most column.  Ignored in Ex mode.
+---vim.opt.shortmess = vim.opt.shortmess + "T"     --- Truncate other messages in the middle if they are too long to fit on the command line.  "..." will appear in the middle.  Ignored in Ex mode.
+---vim.opt.shortmess = vim.opt.shortmess + "A"     --- Don't give the "ATTENTION" message when an existing swap file is found.
+---vim.opt.shortmess = vim.opt.shortmess + "I"     --- Don't give the intro message when starting Vim |:intro|.
+---vim.opt.shortmess = vim.opt.shortmess + "c"     --- Avoid showing message extra message when using completion
 vim.opt.shortmess:append("filmnrxoOtTAIc")
 
 vim.opt.hidden = true
@@ -101,10 +101,10 @@ vim.opt.updatetime = 100
 ---adds <> to % matchpairs
 vim.opt.matchpairs:append("<:>")
 vim.opt.complete    = ".,w,b,u,t,i"
-vim.opt.nrformats   = "bin,hex,alpha"           -- can increment alphabetically too!
+vim.opt.nrformats   = "bin,hex,alpha"           --- can increment alphabetically too!
 
 vim.opt.foldnestmax = 3
-vim.opt.foldenable  = false                       -- dont fold by default
+vim.opt.foldenable  = false                       --- dont fold by default
 vim.g.markdown_folding = 1
 
 vim.opt.spelllang  = "en_gb"
@@ -119,12 +119,12 @@ local spellfile = vim.env.HOME .. "/.config/nvim/spell"
 ---require('util').mkdir_home(spellfile)
 vim.opt.spellfile = spellfile .. "/en.utf-8.add"
 
-vim.opt.scrolloff     = 3         -- keep 3 lines visible while scrolling
+vim.opt.scrolloff     = 3         --- keep 3 lines visible while scrolling
 vim.opt.sidescrolloff = 15
 vim.opt.sidescroll    = 1
 
 vim.opt.ignorecase = true
-vim.opt.inccommand = "nosplit"         -- allow for live substitution
+vim.opt.inccommand = "nosplit"         --- allow for live substitution
 vim.opt.smartcase  = true
 ---Searches current directory recursively.
 vim.opt.path       = ".,**,~/.config/nvim/**"

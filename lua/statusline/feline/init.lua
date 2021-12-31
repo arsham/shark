@@ -123,7 +123,8 @@ table.insert(components.active[2], {
     left_sep = {
         str = "left_filled",
         hl = {
-            fg = 'statusline_bg',
+            fg    = 'statusline_bg',
+            bg    = 'mid_bg',
             style = 'bold'
         },
     },
@@ -435,7 +436,7 @@ table.insert(components.inactive[1], {
     truncate_hide = true,
     hl = {
         fg    = 'white',
-        bg    = 'short_bg',
+        bg    = 'mid_bg',
         style = 'bold'
     },
     left_sep = {
@@ -459,7 +460,7 @@ table.insert(components.inactive[1], {
     enabled       = function() return require('feline.providers.git').git_info_exists() end,
     truncate_hide = true,
     hl = {
-        fg    = 'white',
+        fg = 'white',
         bg = 'mid_bg',
     },
     left_sep = {
@@ -535,22 +536,22 @@ table.insert(components.inactive[2], {
     },
     enabled = function() return vim.fn.expand('%:t') ~= '' end,
     hl = {
-        fg = 'grey_fg',
-        bg = 'short_bg',
+        fg = 'white',
+        bg = 'mid_bg',
     },
     left_sep = {
         str = "slant_right_2",
         hl = {
-            fg    = 'mid_bg',
-            bg    = 'short_bg',
+            bg    = 'mid_bg',
+            fg    = 'short_bg',
             style = 'bold'
         },
     },
     right_sep = {
         str = "slant_right_2",
         hl = {
-            fg = 'short_bg',
-            bg = 'mid_bg',
+            bg = 'short_bg',
+            fg = 'mid_bg',
             style = 'bold'
         },
     },
@@ -567,7 +568,7 @@ table.insert(components.inactive[3], {
         str = 'slant_left',
         hl = {
             fg = 'green_pale',
-            bg = 'mid_bg',
+            bg = 'short_bg',
         },
     }
 })

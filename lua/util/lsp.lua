@@ -89,7 +89,7 @@ end
 ---Executes go.mod tidy.
 ---@param filename string should be the full path of the go.mod file.
 function M.go_mod_tidy(bufnr, filename)
-    local clients = vim.lsp.get_active_clients(0)
+    local clients = vim.lsp.get_active_clients()
     local command = {
         command = 'gopls.tidy',
         arguments = {{

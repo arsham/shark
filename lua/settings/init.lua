@@ -38,11 +38,11 @@ function M.autopairs()
 
     autopairs.setup{
         check_ts = true,
-        -- will ignore alphanumeric and `.` symbol
+        --- will ignore alphanumeric and `.` symbol
         ignored_next_char = "[%w%.]",
     }
     autopairs.add_rules(require('nvim-autopairs.rules.endwise-lua'))
-    -- press % => %% only while inside a comment or string
+    --- press % => %% only while inside a comment or string
     autopairs.add_rules({
         Rule("|", "|", "lua")
             :with_pair(ts_conds.is_ts_node({'string','comment'})),
@@ -130,7 +130,7 @@ function M.copilot()
     vim.g.copilot_assume_mapped = true
     vim.keymap.nnoremap{'<leader>ce', ':Copilot enable<cr>', silent=true}
     vim.keymap.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true}
-    -- disabled by default
+    --- disabled by default
     nvim.ex.Copilot('disable')
 end
 
@@ -179,7 +179,7 @@ function M.visual_multi()
         ['Find Subword Under'] = '<C-n>',
     }
 
-    -- these don't work in the above maps.
+    --- these don't work in the above maps.
     vim.keymap.nnoremap{[[<Leader>\]], function()
         vim.fn["vm#commands#add_cursor_at_pos"](0)
     end, {}}
@@ -230,7 +230,7 @@ function M.Comment()
 
     require('Comment').setup {
         pre_hook = function(ctx)
-            -- Determine the location where to calculate commentstring from
+            --- Determine the location where to calculate commentstring from
             local location = nil
             if ctx.ctype == cmt_utils.ctype.block then
                 location = ts_utils.get_cursor_location()
@@ -238,7 +238,7 @@ function M.Comment()
                 location = ts_utils.get_visual_start_location()
             end
 
-            -- Detemine whether to use linewise or blockwise commentstring
+            --- Detemine whether to use linewise or blockwise commentstring
             local type = ctx.ctype == cmt_utils.ctype.line and '__default' or '__multiline'
 
             return internal.calculate_commentstring({

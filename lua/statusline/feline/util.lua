@@ -142,13 +142,13 @@ end
 ---@return string
 local function get_git_dir(path)
 
-    -- Checks if provided directory contains git directory
+    --- Checks if provided directory contains git directory
     local function has_git_dir(dir)
         local git_dir = dir..'/.git'
         if vim.fn.isdirectory(git_dir) == 1 then return git_dir end
     end
 
-    -- Get git directory from git file if present
+    --- Get git directory from git file if present
     local function has_git_file(dir)
         local gitfile = io.open(dir..'/.git')
         if gitfile ~= nil then
@@ -159,11 +159,11 @@ local function get_git_dir(path)
         end
     end
 
-    -- Check if git directory is absolute path or a relative
+    --- Check if git directory is absolute path or a relative
     local function is_path_absolute(dir)
         local patterns = {
-            '^/',        -- unix
-            '^%a:[/\\]', -- windows
+            '^/',        --- unix
+            '^%a:[/\\]', --- windows
         }
         for _, pattern in ipairs(patterns) do
             if string.find(dir, pattern) then
@@ -173,21 +173,21 @@ local function get_git_dir(path)
         return false
     end
 
-    -- If path nil or '.' get the absolute path to current directory
+    --- If path nil or '.' get the absolute path to current directory
     if not path or path == '.' then
         path = vim.fn.getcwd()
     end
 
     local git_dir
-    -- Check in each path for a git directory, continues until found or reached
-    -- root directory
+    --- Check in each path for a git directory, continues until found or reached
+    --- root directory
     while path do
-        -- Try to get the git directory checking if it exists or from a git file
+        --- Try to get the git directory checking if it exists or from a git file
         git_dir = has_git_dir(path) or has_git_file(path)
         if git_dir ~= nil then
             break
         end
-        -- Move to the parent directory, nil if there is none
+        --- Move to the parent directory, nil if there is none
         path = parent_pathname(path)
     end
 
@@ -208,7 +208,7 @@ function M.git_root()
     end
 
     local root = git_dir:gsub('/.git/?', '')
-    -- sub_root is a path to a worktree if exists.
+    --- sub_root is a path to a worktree if exists.
     local sub_root = git_dir:match('/([^/]+)/.git/worktrees/.+$')
     local repo = ''
     if sub_root then
@@ -312,13 +312,13 @@ function M.get_lsp_progress()
         local contents
         if msg.progress then
             contents = msg.title
-            -- if msg.message then
-            --     contents = contents .. ' ' .. msg.message
-            -- end
+            --- if msg.message then
+            ---     contents = contents .. ' ' .. msg.message
+            --- end
 
-            -- this percentage format string escapes a percent sign once to
-            -- show a percentage and one more time to prevent errors in vim
-            -- statusline's because of it's treatment of % chars
+            --- this percentage format string escapes a percent sign once to
+            --- show a percentage and one more time to prevent errors in vim
+            --- statusline's because of it's treatment of % chars
             if msg.percentage then contents = contents .. string.format(" (%.0f%%%%)", msg.percentage) end
 
             if msg.spinner then

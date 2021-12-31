@@ -67,7 +67,7 @@ cmp.setup({
             behavior = cmp.SelectBehavior.Select
         }),
 
-        -- only use < tab >/<s-tab> for switching between placeholders.
+        --- only use < tab >/<s-tab> for switching between placeholders.
         ["<Tab>"] = cmp.mapping(function(fallback)
             if vim.fn["vsnip#available"](1) == 1 then
                 feedkey("<Plug>(vsnip-expand-or-jump)", "")

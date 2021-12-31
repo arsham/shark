@@ -240,7 +240,7 @@ local function jump_indent(down)
                 break
             elseif same_level and on_main_level then
                 if road_block then
-                    -- the next line also coule be empty.
+                    --- the next line also coule be empty.
                     break
                 elseif in_move then
                     if will_go_up or goes_down_the_main then
