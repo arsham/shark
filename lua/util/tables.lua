@@ -278,4 +278,10 @@ function Table:sort(fn)
     return ret
 end
 
+---Executes the fn function on the whole table and returns a new Table.
+---@param fn function(v: any) any
+function Table:exec(fn)
+    return _t(fn(self))
+end
+
 return Table
