@@ -1,3 +1,6 @@
+---Inherits from all parents.
+---@param cls Table
+---@param parents any[]
 local function inherit(cls, parents)
     cls.__index = cls
     cls.__super = parents
@@ -20,6 +23,7 @@ inherit(Table, {table})
 
 ---Creates a new Table from the given table.
 ---@param t table
+---@return Table
 Table.new = function(t)
     return setmetatable(t or {}, Table)
 end
@@ -76,12 +80,13 @@ function Table:filter(fn)
     local ret = _t()
     local cur_index = 0
     for k, v in pairs(self) do
-        if fn(v) then
+        local ok, new_val = fn(v)
+        if ok then
             if type(k) == "number" then
                 cur_index = cur_index + 1
-                ret[cur_index] = v
+                ret[cur_index] = new_val or v
             else
-                ret[k] = v
+                ret[k] = new_val or v
             end
         end
     end
