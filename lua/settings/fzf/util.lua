@@ -194,21 +194,19 @@ function M.lines_grep()
         local action = names[1]
         if #action > 0 then
             local fn = FzfActions[action]
-            if fn then
-                names = _t{unpack(names, 2)}
-                local filenames = _t()
-
-                names:map(function(v)
-                    local name, line = v:match('^([^:]+):([^\t]+)\t')
-                    filenames:insert({
-                        filename = vim.fn.fnameescape(name),
-                        lnum     = tonumber(line),
-                        col      = 1,
-                        text     = "Added with fzf selection",
-                    })
-                end)
-                fn(filenames)
-            end
+            _t(names)
+            :when(fn)
+            :slice(2)
+            :map(function(v)
+                local name, line = v:match('^([^:]+):([^\t]+)\t')
+                return {
+                    filename = vim.fn.fnameescape(name),
+                    lnum     = tonumber(line),
+                    col      = 1,
+                    text     = "Added with fzf selection",
+                }
+            end)
+            :exec(fn)
         end
 
         if #names == 2 then
@@ -299,38 +297,30 @@ function M.open_config()
 end
 
 function M.delete_marks()
-    local list = vim.fn.getmarklist()
-    local bufnr = vim.fn.bufnr()
-    for _, v in pairs(vim.fn.getmarklist(bufnr)) do
-        v.file = vim.fn.bufname(bufnr)
-        table.insert(list, v)
-    end
-    local items = {}
-    for _, v in pairs(list) do
-        table.insert(items, {
-            show_name = vim.fn.fnamemodify(v.file, ":~:."),
-            mark = string.sub(v.mark, 2, 2),
-            line = v.pos[2],
-            col = v.pos[3],
-            file = v.file,
-        })
-    end
-
-    local mark_list = {
+    local mark_list = _t{
         ("666\tmark\t%5s\t%3s\t%s"):format('line', 'col', 'file/text'),
     }
-    for _, item in pairs(items) do
-        if string.match(string.lower(item.mark), '[a-z]') then
-            local str = ("%s:%d\t%s\t%5d\t%3d\t%s"):format(
-                item.show_name, item.line,
-                item.mark,
-                item.line,
-                item.col,
-                item.file
-            )
-            table.insert(mark_list, str)
-        end
-    end
+    local bufnr = vim.fn.bufnr()
+    local bufname = vim.fn.bufname(bufnr)
+    _t(vim.fn.getmarklist(bufnr))
+    :map(function(v)
+        v.file = bufname
+        return v
+    end)
+    :merge(vim.fn.getmarklist())
+    :filter(function(v)
+        return string.match(string.lower(v.mark), '[a-z]')
+    end)
+    :map(function(v)
+        mark_list:insert(("%s:%d\t%s\t%5d\t%3d\t%s"):format(
+            vim.fn.fnamemodify(v.file, ":~:."),
+            v.pos[2],
+            string.sub(v.mark, 2, 2),
+            v.pos[2],
+            v.pos[3],
+            v.file
+        ))
+    end)
 
     local wrapped = vim.fn["fzf#wrap"]({
         source = mark_list,
@@ -350,10 +340,10 @@ function M.delete_marks()
     })
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     preview['sink*'] = function(names)
-        for _, name in pairs({unpack(names, 2)}) do
+        _t(names):slice(2):map(function(name)
             local mark = string.match(name, '^[^\t]+\t(%a)')
             nvim.ex.delmarks(mark)
-        end
+        end)
     end
     vim.fn["fzf#run"](preview)
 end
