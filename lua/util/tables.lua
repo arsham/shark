@@ -284,4 +284,12 @@ function Table:exec(fn)
     return _t(fn(self))
 end
 
+---Returns the Table if the v condition is true. Otherwise returns an empty
+---Table.
+---@param v boolean
+---@return Table
+function Table:when(v)
+    return v and self or _t{}
+end
+
 return Table
