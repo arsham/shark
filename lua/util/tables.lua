@@ -122,6 +122,7 @@ end
 function Table:slice(first, last, step)
     local sliced = _t()
     local length = self:length()
+    last = last or #self
     for i = first or 1, last or length, step or 1 do
         sliced[#sliced+1] = self[i]
     end
