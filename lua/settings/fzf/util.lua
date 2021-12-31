@@ -179,6 +179,7 @@ function M.lines_grep()
     local source = {}
     for _, line in pairs(got) do
         local num, content = line:match('^(%d+):(.+)$')
+        if not num then return end
         table.insert(source, string.format('%s:%d\t%d\t%s', filename, num, num, content))
     end
     local wrapped = vim.fn["fzf#wrap"]({
