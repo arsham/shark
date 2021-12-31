@@ -103,6 +103,17 @@ vim.opt.matchpairs:append("<:>")
 vim.opt.complete    = ".,w,b,u,t,i"
 vim.opt.nrformats   = "bin,hex,alpha"           --- can increment alphabetically too!
 
+--- Renders line this:
+--- »» _G.custom_foldtext = function()···················· ««[6 Lines]·········
+_G.custom_foldtext = function()
+    local line = vim.fn.getline(vim.v.foldstart)
+    local folded_line_num = vim.v.foldend - vim.v.foldstart
+    local line_text = line:gsub(' *', '', 1)
+    local fillcharcount = vim.opt.textwidth._value - #line_text
+    return string.format('»» %s%s ««[%d Lines]', line_text, string.rep('·', fillcharcount), folded_line_num)
+end
+vim.opt.foldtext = 'v:lua.custom_foldtext()'
+
 vim.opt.foldnestmax = 3
 vim.opt.foldenable  = false                       --- dont fold by default
 vim.g.markdown_folding = 1
