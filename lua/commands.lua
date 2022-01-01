@@ -90,6 +90,12 @@ util.buffer_command("Nowrap", function()
     vim.bo.formatoptions = vim.bo.formatoptions:gsub('c', '')
 end)
 
+util.command('ToggleRelativeNumbers', function()
+    vim.opt.relativenumber = vim.g.disable_relative_numbers or false
+    vim.opt.number = true
+    vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
+end)
+
 command("InstallDependencies", function()
     local commands = _t{
         golangci   = _t{"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},

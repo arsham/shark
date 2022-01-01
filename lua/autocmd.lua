@@ -68,6 +68,9 @@ util.augroup{"SPECIAL_SETTINGS", {
     end},
 
     {"BufEnter,FocusGained,InsertLeave,WinEnter", '*', run=function()
+        if vim.g.disable_relative_numbers then
+            return
+        end
         if vim.fn.expand('%:t') == 'lsp.log' or vim.bo.filetype == 'help' then
             return
         end
