@@ -244,23 +244,34 @@ function M.reload_config(watch)
     })
     local preview = vim.fn["fzf#vim#with_preview"](wrapped)
     preview["sink*"] = function(list)
-        local names = {}
-        for _, name in pairs({unpack(list, 2)}) do
-            name = name:match('^[^\t]*')
-            table.insert(names, name)
-        end
-        if watch then
+        local names = _t(list)
+        :slice(2)
+        :map(function(v)
+            return v:match('^[^\t]*')
+        end)
+
+        if watch == true then
             require('commands').watch_file_changes(names)
             return
         end
-        for _, name in pairs(names) do
+
+        names:filter(function(name)
             name = name:match('^[^\t]*')
             local mod, ok = util.file_module(name)
-            if ok then
-                package.loaded[mod] = nil
-                require(mod)
-            end
-        end
+            return ok, mod.module
+        end)
+        :map(function(mod)
+            package.loaded[mod] = nil
+            require(mod)
+            return mod
+        end):
+        exec(function(mod)
+            local msg = table.concat(mod, "\n")
+            vim.notify(msg, vim.lsp.log_levels.INFO, {
+                title   = 'Reloaded',
+                timeout = 1000,
+            })
+        end)
     end
     vim.fn["fzf#run"](preview)
 end
