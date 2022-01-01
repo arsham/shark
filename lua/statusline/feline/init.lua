@@ -158,6 +158,13 @@ table.insert(components.active[2], {
     provider      = 'file_size',
     enabled       = function() return vim.fn.expand('%:t') ~= '' end,
     truncate_hide = true,
+    left_sep = {
+        str = ' ',
+        hl = {
+            fg = 'white',
+            bg = 'statusline_bg',
+        },
+    },
     hl = {
         fg = 'grey_fg',
         bg = 'statusline_bg',
