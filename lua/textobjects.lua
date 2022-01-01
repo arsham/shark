@@ -116,3 +116,13 @@ util.onoremap{'a`', function() util.normal('x', 'va`') end, silent = true, desc=
 
 util.onoremap{'H', '^', desc='to the beginning of line'}
 util.onoremap{'L', '$', desc='to the end of line'}
+
+util.vnoremap{'iz', function()
+    util.normal('xt', '[zjo]zk')
+end, silent=true, desc='in fold block'}
+util.onoremap{'iz', function() util.normal('x', 'viz') end, desc='in fold block'}
+
+util.vnoremap{'az', function()
+    util.normal('xt', '[zo]z')
+end, silent=true, desc='around fold block'}
+util.onoremap{'az', function() util.normal('x', 'vaz') end, desc='around fold block'}

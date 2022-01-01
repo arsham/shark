@@ -241,6 +241,8 @@ There are more specialised mappings provided, keep reading please!
 | `iu`        | **I**n **U**nit                             |
 | `aa`        | **A**round **A**rgument                     |
 | `ia`        | **I**n **A**rgument                         |
+| `az`        | **A**round folds                            |
+| `iz`        | **I**n folds                                |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**
