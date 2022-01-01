@@ -120,10 +120,14 @@ end
 ---@param last number
 ---@param step number the step between each index
 function Table:slice(first, last, step)
+    step = step or 1
+    if step == 1 then
+        return _t({unpack(self, first, last)})
+    end
     local sliced = _t()
     local length = self:length()
     last = last or #self
-    for i = first or 1, last or length, step or 1 do
+    for i = first or 1, last or length, step do
         sliced[#sliced+1] = self[i]
     end
     return sliced
