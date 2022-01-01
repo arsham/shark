@@ -29,7 +29,7 @@ require('nvim-treesitter.configs').setup {
     highlight = {
         enable           = true,
         use_languagetree = false,
-        disable          = { "json" },
+        disable          = { 'json', 'markdown' },
         custom_captures = {
             ["function.call"]    = "TSFunction",
             ["function.bracket"] = "Type",
