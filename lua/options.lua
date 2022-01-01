@@ -103,14 +103,27 @@ vim.opt.matchpairs:append("<:>")
 vim.opt.complete    = ".,w,b,u,t,i"
 vim.opt.nrformats   = "bin,hex,alpha"           --- can increment alphabetically too!
 
---- Renders line this:
---- »» _G.custom_foldtext = function()···················· ««[6 Lines]·········
+--- Renders like this:
+--- » TSString = { «« Treesitter »»···················· « [ 223]·····
+--- If the marker doesn't have any texts in front of it, it will be cut.
 _G.custom_foldtext = function()
     local line = vim.fn.getline(vim.v.foldstart)
     local folded_line_num = vim.v.foldend - vim.v.foldstart
     local line_text = line:gsub(' *', '', 1)
-    local fillcharcount = vim.opt.textwidth._value - #line_text
-    return string.format('»» %s%s ««[%d Lines]', line_text, string.rep('·', fillcharcount), folded_line_num)
+    local add = 0
+    local mark1 = '»'
+    local mark2 = '«'
+    if line_text:match('---%s*{{{$') then
+        line_text = line_text:gsub('---%s*{{{.*', '', 1)
+    elseif line_text:match('---%s*{{{') then
+        line_text = line_text:gsub('---%s*{{{', ' ««', 1) .. ' »»'
+        add = add + 4 -- accounting for surrounding «»
+    else
+        mark1 = '»»'
+        mark2 = '««'
+    end
+    local fillcharcount = vim.opt.textwidth._value - #line_text + add
+    return string.format('%s %s%s %s [ %d]', mark1, line_text, string.rep('·', fillcharcount), mark2, folded_line_num)
 end
 vim.opt.foldtext = 'v:lua.custom_foldtext()'
 
