@@ -88,7 +88,7 @@ util.augroup{"SPECIAL_SETTINGS", {
 
     {'TermOpen', 'term:\\/\\/*', function()
         vim.wo.statusline = '%{b:term_title}'
-        util.tnoremap{'<Esc>', [[<C-\><C-n>]], buffer=true}
+        util.tnoremap{'<Esc>', [[<C-\><C-n>]], buffer=true, desc='entern normal mode'}
         nvim.ex.startinsert()
         vim.wo.number = false
         vim.wo.relativenumber = false
@@ -149,7 +149,7 @@ util.augroup{"FILETYPE_COMMANDS", {
     end},
 
     {"FileType", "lspinfo", docs="close lspinfo popup", run=function()
-        util.nnoremap{'q', nvim.ex.close, buffer=true, silent=true}
+        util.nnoremap{'q', nvim.ex.close, buffer=true, silent=true, desc='close lspinfo popup'}
     end},
 
     {"Filetype", "sql,sqls", docs="don't wrap me", run=function()
@@ -158,7 +158,7 @@ util.augroup{"FILETYPE_COMMANDS", {
     end},
 
     {'Filetype', 'help,man', docs='exit help with gq', run=function()
-        util.nnoremap{'gq', nvim.ex.close, buffer=true}
+        util.nnoremap{'gq', nvim.ex.close, buffer=true, desc='close help/man pages'}
     end},
 
 }}

@@ -8,7 +8,7 @@ local function restart_lsp()
     vim.defer_fn(nvim.ex.LspStart, 1000)
 end
 util.buffer_command("RestartLsp", restart_lsp)
-util.nnoremap{'<leader>dr', restart_lsp, silent=true}
+util.nnoremap{'<leader>dr', restart_lsp, silent=true, desc='Restart LSP server'}
 
 local function lsp_organise_imports()
     local context = { source = { organizeImports = true } }
@@ -81,20 +81,22 @@ local function attach_mappings_commands(client)
     }
     local caps = client.resolved_capabilities
     if caps.code_action then
-        vim.cmd('command! -buffer -range CodeAction lua require("settings.lsp.util").code_action(<range> ~= 0, <line1>, <line2>)')
-        util.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true}
-        util.vnoremap{'<leader>ca', ":'<,'>CodeAction<CR>", buffer=true, silent=true}
+        util.buffer_command('CodeAction', function(args)
+            require("settings.lsp.util").code_action(args.range ~= 0, args.line1, args.line2)
+        end, {range=true})
+        util.nnoremap{'<leader>ca', vim.lsp.buf.code_action, buffer=true, silent=true, desc='Code action'}
+        util.vnoremap{'<leader>ca', ":'<,'>CodeAction<CR>", buffer=true, silent=true, desc='Code action'}
 
         --- Either is it set to true, or there is a specified set of
         --- capabilities.
         if type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports") then
-            util.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true}
+            util.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true, desc='Organise imports'}
             pre_save.imports = lsp_organise_imports
         end
     end
 
     if caps.document_formatting then
-        util.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true}
+        util.nnoremap{"<leader>gq", vim.lsp.buf.formatting, buffer=true, silent=true, desc='Format buffer'}
         pre_save.format = function()
             vim.lsp.buf.formatting_sync(nil, 2000)
         end
@@ -108,8 +110,10 @@ local function attach_mappings_commands(client)
     }}
 
     if caps.document_range_formatting then
-        vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
-        util.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
+        util.buffer_command('Format', function(args)
+            require("settings.lsp.util").format_command(args.range ~= 0, args.line1, args.line2, args.bang)
+        end, {range=true})
+        util.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true, desc='Format range'}
         vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
     end
 
@@ -118,33 +122,33 @@ local function attach_mappings_commands(client)
     end
 
     if caps.hover then
-        util.nnoremap{'H',    vim.lsp.buf.hover,  buffer=true, silent=true}
-        util.inoremap{'<C-h>', vim.lsp.buf.hover, buffer=true, silent=true}
+        util.nnoremap{'H',    vim.lsp.buf.hover,  buffer=true, silent=true, desc='show hover'}
+        util.inoremap{'<C-h>', vim.lsp.buf.hover, buffer=true, silent=true, desc='show hover'}
     end
     if caps.signature_help then
-        util.nnoremap{'K',    vim.lsp.buf.signature_help,  buffer=true, silent=true}
-        util.inoremap{'<C-l>', vim.lsp.buf.signature_help, buffer=true, silent=true}
+        util.nnoremap{'K',    vim.lsp.buf.signature_help,  buffer=true, silent=true, desc='show signature help'}
+        util.inoremap{'<C-l>', vim.lsp.buf.signature_help, buffer=true, silent=true, desc='show signature help'}
     end
 
     if caps.goto_definition then
         util.buffer_command("Definition", function() vim.lsp.buf.definition() end)
-        util.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true}
+        util.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true, desc='Go to definition'}
         vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
     if caps.declaration then
-        util.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true}
+        util.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true, desc='Go to declaration'}
     end
     if caps.type_definition then
         util.buffer_command("TypeDefinition", function() vim.lsp.buf.type_definition() end)
     end
     if caps.implementation then
         util.buffer_command("Implementation", function() vim.lsp.buf.implementation() end)
-        util.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true}
+        util.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true, desc='Go to implementation'}
     end
 
     if caps.find_references then
         util.buffer_command("References", function() vim.lsp.buf.references() end)
-        util.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true}
+        util.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true, desc='Go to references'}
     end
 
     if caps.document_symbol then
@@ -160,7 +164,7 @@ local function attach_mappings_commands(client)
     if caps.call_hierarchy then
         util.buffer_command("Callees", function() vim.lsp.buf.outgoing_calls() end)
         util.buffer_command("Callers", function() vim.lsp.buf.incoming_calls() end)
-        util.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true}
+        util.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true, desc='show incoming calls'}
     end
 
     util.buffer_command("ListWorkspace", function()
@@ -170,8 +174,14 @@ local function attach_mappings_commands(client)
         })
     end)
     if caps.workspace_folder_properties.supported then
-        vim.cmd('command! -buffer -nargs=? -complete=dir AddWorkspace lua vim.lsp.buf.add_workspace_folder(<q-args> ~= "" and vim.fn.fnamemodify(<q-args>, ":p"))')
-        vim.cmd('command! -buffer -nargs=? -complete=customlist,v:lua.vim.lsp.buf.list_workspace_folders RemoveWorkspace lua vim.lsp.buf.remove_workspace_folder(<f-args>)')
+        util.buffer_command('AddWorkspace', function(args)
+            vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
+            require("settings.lsp.util").format_command(args.range ~= 0, args.line1, args.line2, args.bang)
+        end, {range=true, nargs='?', complete='dir'})
+        util.buffer_command('RemoveWorkspace', function(args)
+            vim.lsp.buf.remove_workspace_folder(args.args)
+            require("settings.lsp.util").format_command(args.range ~= 0, args.line1, args.line2, args.bang)
+        end, {range=true, nargs='?', complete='customlist,v:lua.vim.lsp.buf.list_workspace_folders'})
     end
 
     util.buffer_command("Log", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()")
@@ -184,18 +194,18 @@ local function attach_mappings_commands(client)
         vim.lsp.buf.workspace_symbol(pattern)
     end)
 
-    util.inoremap{'<C-j>', '<C-n>', buffer=true, silent=true}
-    util.inoremap{'<C-k>', '<C-p>', buffer=true, silent=true}
+    util.inoremap{'<C-j>', '<C-n>', buffer=true, silent=true, desc='next completion items'}
+    util.inoremap{'<C-k>', '<C-p>', buffer=true, silent=true, desc='previous completion items'}
 
-    util.nnoremap{'<leader>dd', vim.diagnostic.open_float, buffer=true, silent=true}
-    util.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true}
-    util.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true}
+    util.nnoremap{'<leader>dd', vim.diagnostic.open_float, buffer=true, silent=true, desc='show diagnostics'}
+    util.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true, desc='populate quickfix list with diagnostics'}
+    util.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true, desc='populate local list with diagnostics'}
     util.nnoremap{']d', function()
         util.call_and_centre(vim.diagnostic.goto_next)
-    end, buffer=true, silent=true}
+    end, buffer=true, silent=true, desc='goto next diagnostic'}
     util.nnoremap{'[d', function()
         util.call_and_centre(vim.diagnostic.goto_prev)
-    end, buffer=true, silent=true}
+    end, buffer=true, silent=true, desc='goto previous diagnostic'}
     util.buffer_command("Diagnostics", function() require('lspfuzzy').diagnostics(0) end)
     util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
 end
@@ -225,7 +235,7 @@ function M.on_attach(client, bufnr)
     if caps.code_lens then
         util.buffer_command("CodeLensRefresh", function() vim.lsp.codelens.refresh() end)
         util.buffer_command("CodeLensRun", function() vim.lsp.codelens.run() end)
-        util.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true}
+        util.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true, desc='run code lenses'}
 
         util.augroup{"CODE_LENSES", {
             {"CursorHold,CursorHoldI,InsertLeave", buffer=true, run=function()

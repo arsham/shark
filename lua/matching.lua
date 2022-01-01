@@ -118,19 +118,16 @@ local function do_match(name, exact)
     vim.fn["repeat#set"](key, vim.v.count)
 end
 
----Add any matches containing a word under the cursor.
 util.nnoremap{'<Plug>MatchAdd', function()
     do_match('<Plug>MatchAdd', false)
-end}
-util.nmap{'<leader>ma', '<Plug>MatchAdd'}
+end, desc='Add any matches containing a word under the cursor'}
+util.nmap{'<leader>ma', '<Plug>MatchAdd', desc='Add any matches containing a word under the cursor'}
 
----Add any exact matches containing a word under the cursor.
 util.nnoremap{'<Plug>MatchExact', function()
     do_match('<Plug>MatchExact', true)
-end}
-util.nmap{'<leader>me', '<Plug>MatchExact'}
+end, desc='Add any exact matches containing a word under the cursor'}
+util.nmap{'<leader>me', '<Plug>MatchExact', desc='Add any exact matches containing a word under the cursor'}
 
----Add any matches containing the input from user.
 util.nnoremap{'<leader>mp', function()
     util.user_input{
         prompt = "Pattern: ",
@@ -138,9 +135,8 @@ util.nnoremap{'<leader>mp', function()
             vim.fn.matchadd(next_group(), term)
         end,
     }
-end}
+end, desc='Add any matches containing the input from user'}
 
----Clear all matches of the current buffer.
 util.nnoremap{'<leader>mc', function()
     local groups = _t()
     mappings:map(function(v)
@@ -150,9 +146,8 @@ util.nnoremap{'<leader>mc', function()
     _t(vim.fn.getmatches())
     :filter(function(v) return v and groups[v.group] end)
     :map(function(v) vim.fn.matchdelete(v.id) end)
-end}
+end, desc='Clear all matches of the current buffer'}
 
----List all matches and remove by user's selection.
 util.nnoremap{'<leader>md', function()
     local source = _t()
     local groups = _t()
@@ -189,4 +184,4 @@ util.nnoremap{'<leader>md', function()
         end
     end
     vim.fn["fzf#run"](wrap)
-end}
+end, desc='List all matches and remove by user\'s selection'}

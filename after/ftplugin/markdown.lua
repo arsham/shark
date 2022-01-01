@@ -60,7 +60,7 @@ vim.keymap.inoremap{'<CR>', function()
         marker = tostring(m + 1) .. '. '
     end
     return "<cr>" .. marker
-end, expr=true, buffer=true}
+end, expr=true, buffer=true, desc='create lists in markdown'}
 
 ---Jumps to the next heading.
 ---@param down boolean if goes to next, otherwise to the previous.
@@ -83,5 +83,6 @@ local function nextHeading(down)
     util.normal('nx', motion)
 end
 
-util.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true}
-util.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true}
+local desc = 'jump to the next heading in markdown document'
+util.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true, desc=desc}
+util.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true, desc=desc}

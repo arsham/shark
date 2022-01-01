@@ -6,31 +6,27 @@ local util = require('util')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-util.noremap{'<Up>',     '<Nop>'}
-util.noremap{'<Down>',   '<Nop>'}
-util.noremap{'<Left>',   '<Nop>'}
-util.noremap{'<Right>',  '<Nop>'}
-util.inoremap{'<Up>',    '<Nop>'}
-util.inoremap{'<Down>',  '<Nop>'}
-util.inoremap{'<Left>',  '<Nop>'}
-util.inoremap{'<Right>', '<Nop>'}
----Disable Ex mode
-util.nmap{'Q', '<Nop>'}
+util.noremap{'<Up>',     '<Nop>', desc='disabling arrows'}
+util.noremap{'<Down>',   '<Nop>', desc='disabling arrows'}
+util.noremap{'<Left>',   '<Nop>', desc='disabling arrows'}
+util.noremap{'<Right>',  '<Nop>', desc='disabling arrows'}
+util.inoremap{'<Up>',    '<Nop>', desc='disabling arrows'}
+util.inoremap{'<Down>',  '<Nop>', desc='disabling arrows'}
+util.inoremap{'<Left>',  '<Nop>', desc='disabling arrows'}
+util.inoremap{'<Right>', '<Nop>', desc='disabling arrows'}
+util.nmap{'Q', '<Nop>', desc='disabling Ex mode'}
 
----Moving lines with alt key.
-util.nnoremap{'<A-j>', [[:<c-u>execute 'm +'. v:count1<cr>==]], silent=true}
-util.nnoremap{'<A-k>', [[:<c-u>execute 'm -1-'. v:count1<cr>==]], silent=true}
-util.inoremap{'<A-j>', [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], silent=true}
-util.inoremap{'<A-k>', [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], silent=true}
-util.vnoremap{'<A-j>', [[:m '>+1<CR>gv=gv]], silent=true}
-util.vnoremap{'<A-k>', [[:m '<-2<CR>gv=gv]], silent=true}
+util.nnoremap{'<A-j>', [[:<c-u>execute 'm +'. v:count1<cr>==]], silent=true, desc='move lines down'}
+util.nnoremap{'<A-k>', [[:<c-u>execute 'm -1-'. v:count1<cr>==]], silent=true, desc='move lines up'}
+util.inoremap{'<A-j>', [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], silent=true, desc='move lines down'}
+util.inoremap{'<A-k>', [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], silent=true, desc='move lines up'}
+util.vnoremap{'<A-j>', [[:m '>+1<CR>gv=gv]], silent=true, desc='move lines down'}
+util.vnoremap{'<A-k>', [[:m '<-2<CR>gv=gv]], silent=true, desc='move lines up'}
 
----Keep the visually selected area when indenting.
-util.xnoremap{'<', '<gv'}
-util.xnoremap{'>', '>gv'}
+util.xnoremap{'<', '<gv', desc='Keep the visually selected area when indenting'}
+util.xnoremap{'>', '>gv', desc='Keep the visually selected area when indenting'}
 
----Re-indent the whole buffer.
-util.nnoremap{'g=', 'gg=Gg``'}
+util.nnoremap{'g=', 'gg=Gg``', desc='Re-indent the whole buffer'}
 
 ---Inserts empty lines near the cursor.
 ---@param count number  Number of lines to insert.
@@ -46,29 +42,29 @@ local function insert_empty_lines(count, add)
     vim.api.nvim_buf_set_lines(0, pos[1]+add, pos[1]+add, false, lines)
 end
 
----insert empty lines with motions, can be 10[<space>
-util.nnoremap{']<space>', function() insert_empty_lines(vim.v.count, 0) end,  silent=true}
-util.nnoremap{'[<space>', function() insert_empty_lines(vim.v.count, -1) end, silent=true}
+util.nnoremap{']<space>', function()
+    insert_empty_lines(vim.v.count, 0)
+end, silent=true, desc='insert [count]empty line(s) below current line'}
+util.nnoremap{'[<space>', function()
+    insert_empty_lines(vim.v.count, -1)
+end, silent=true, desc='insert [count]empty line(s) below current line'}
 
-util.nnoremap{'<M-Left>', ':vert resize -2<CR>',  silent=true}
-util.nnoremap{'<M-Right>', ':vert resize +2<CR>', silent=true}
-util.nnoremap{'<M-Up>',   ':resize +2<CR>',  silent=true}
-util.nnoremap{'<M-Down>', ':resize -2<CR>',  silent=true}
+util.nnoremap{'<M-Left>',  ':vert resize -2<CR>', silent=true, desc='decreases vertical size'}
+util.nnoremap{'<M-Right>', ':vert resize +2<CR>', silent=true, desc='increase vertical size'}
+util.nnoremap{'<M-Up>',    ':resize +2<CR>',      silent=true, desc='increase horizontal size'}
+util.nnoremap{'<M-Down>',  ':resize -2<CR>',      silent=true, desc='decreases horizontal size'}
 
 util.nnoremap{'<C-e>', '2<C-e>'}
 util.nnoremap{'<C-y>', '2<C-y>'}
 
----Auto re-centre when moving around
-util.nnoremap{'G', "Gzz"}
-util.nnoremap{'g;', "m'g;zz"}
-util.nnoremap{'g,', "m'g,zz"}
+util.nnoremap{'G',  'Gzz',    desc='Auto re-centre when moving around'}
+util.nnoremap{'g;', "m'g;zz", desc='Auto re-centre when moving around'}
+util.nnoremap{'g,', "m'g,zz", desc='Auto re-centre when moving around'}
 
----put numbered motions in the jumplist.
-util.nnoremap{'k', [[(v:count > 2 ? "m'" . v:count : '') . 'k']], expr=true}
-util.nnoremap{'j', [[(v:count > 2 ? "m'" . v:count : '') . 'j']], expr=true}
+util.nnoremap{'k', [[(v:count > 2 ? "m'" . v:count : '') . 'k']], expr=true, desc='numbered motions in the jumplist'}
+util.nnoremap{'j', [[(v:count > 2 ? "m'" . v:count : '') . 'j']], expr=true, desc='numbered motions in the jumplist'}
 
----Clear hlsearch
-util.nnoremap{'<Esc><Esc>', ':noh<CR>', silent=true}
+util.nnoremap{'<Esc><Esc>', ':noh<CR>', silent=true, desc='Clear hlsearch'}
 
 ---Add char at the end of a line at the `loc` location.
 ---@param loc number line number to add the char at.
@@ -126,39 +122,38 @@ local end_mapping = {
 for n, tuple in pairs(end_mapping) do
     local name1 = string.format('<Plug>AddEnd%s', n)
     local key1  = '<M-' .. tuple[1] .. '>'
-    util.nnoremap{name1, function() change_line_ends(name1, tuple[1]) end}
-    util.nmap{key1, name1}
-    util.inoremap{key1, function() change_line_ends(name1, tuple[1]) end}
-    util.vnoremap{name1, function() change_line_ends(name1, tuple[1]) end}
-    util.vmap{key1, name1}
+    local desc = string.format('Add %s at the end of line', n)
+    util.nnoremap{name1, function() change_line_ends(name1, tuple[1]) end, desc=desc}
+    util.nmap{key1, name1, desc=desc}
+    util.inoremap{key1, function() change_line_ends(name1, tuple[1]) end, desc=desc}
+    util.vnoremap{name1, function() change_line_ends(name1, tuple[1]) end, desc=desc}
+    util.vmap{key1, name1, desc=desc}
 
     local name2 = string.format('<Plug>DelEnd%s', n)
     local key2  = '<M-' .. tuple[2] .. '>'
-    util.nnoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
-    util.nmap{key2, name2}
-    util.inoremap{key2, function() change_line_ends(name2, tuple[1], true) end}
-    util.vnoremap{name2, function() change_line_ends(name2, tuple[1], true) end}
-    util.vmap{key2, name2}
+    desc = string.format('Remove %s from the end of line', n)
+    util.nnoremap{name2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
+    util.nmap{key2, name2, desc=desc}
+    util.inoremap{key2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
+    util.vnoremap{name2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
+    util.vmap{key2, name2, desc=desc}
 end
 
----Insert a pair of brackets and go into insert mode.
-util.inoremap{'<M-{>', '<Esc>A {<CR>}<Esc>O'}
-util.nnoremap{'<M-{>', 'A {<CR>}<Esc>O'}
+util.inoremap{'<M-{>', '<Esc>A {<CR>}<Esc>O', desc='Insert a pair of brackets and go into insert mode'}
+util.nnoremap{'<M-{>', 'A {<CR>}<Esc>O', desc='Insert a pair of brackets and go into insert mode'}
 
 util.nnoremap{'<Leader>y', '"+y'}
 util.xnoremap{'<Leader>y', '"+y'}
 util.nnoremap{'<Leader>p', '"+p'}
 util.nnoremap{'<Leader>P', '"+P'}
 
----select a text, and this will replace it with the " contents.
-util.vnoremap{'p', '"_dP'}
+util.vnoremap{'p', '"_dP', desc='select a text, and this will replace it with the " contents'}
 
-util.nnoremap{'<leader>gw', ':silent lgrep <cword> % <CR>', silent=true}
+util.nnoremap{'<leader>gw', ':silent lgrep <cword> % <CR>', silent=true, desc='grep on local buffer'}
 
 ---]s and [s to jump.
 ---zg to ignore.
-util.nnoremap{'<leader>sp', function() vim.wo.spell = not vim.wo.spell end}
----auto correct spelling and jump bak.
+util.nnoremap{'<leader>sp', function() vim.wo.spell = not vim.wo.spell end, desc='toggle spelling'}
 util.nnoremap{'<leader>sf', function()
     local spell = vim.wo.spell
     vim.wo.spell = true
@@ -166,17 +161,15 @@ util.nnoremap{'<leader>sf', function()
     vim.schedule(function()
         vim.wo.spell = spell
     end)
-end}
+end, desc='auto correct spelling and jump bak.'}
 
----mergetool mappings.
-util.nnoremap{'<leader>1', ':diffget LOCAL<CR>'}
-util.nnoremap{'<leader>2', ':diffget BASE<CR>'}
-util.nnoremap{'<leader>3', ':diffget REMOTE<CR>'}
+util.nnoremap{'<leader>1', ':diffget LOCAL<CR>',  desc='mergetool mapping'}
+util.nnoremap{'<leader>2', ':diffget BASE<CR>',   desc='mergetool mapping'}
+util.nnoremap{'<leader>3', ':diffget REMOTE<CR>', desc='mergetool mapping'}
 
 util.nnoremap{'<leader>jq', ":%!gojq '.'<CR>"}
 
----Show help for work under the cursor.
-util.nnoremap{'<leader>hh',  ":h <CR>"}
+util.nnoremap{'<leader>hh',  ":h <CR>", desc='Show help for work under the cursor'}
 
 ---Returns the indentation of the next line from the given argument, that is
 ---not empty. All lines are trimmed before examination.
@@ -266,12 +259,11 @@ local function jump_indent(down)
     util.normal('xt', sequence)
 end
 
-util.nnoremap{']=', function() jump_indent(true)  end}
-util.nnoremap{'[=', function() jump_indent(false) end}
+util.nnoremap{']=', function() jump_indent(true)  end, desc='jump down along the indent'}
+util.nnoremap{'[=', function() jump_indent(false) end, desc='jump up along the indent'}
 
-util.nnoremap{'&', ':&&<CR>'}
-util.xnoremap{'&', ':&&<CR>'}
+util.nnoremap{'&', ':&&<CR>', desc='repeat last substitute command'}
+util.xnoremap{'&', ':&&<CR>', desc='repeat last substitute command'}
 
----Delete the buffer.
-util.nnoremap{'<C-w>b', ':bd<CR>'}
-util.nnoremap{'<C-w><C-b>', ':bd<CR>'}
+util.nnoremap{'<C-w>b',     ':bd<CR>', desc='delete current buffer'}
+util.nnoremap{'<C-w><C-b>', ':bd<CR>', desc='delete current buffer'}

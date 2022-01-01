@@ -93,10 +93,9 @@ vim.g.fzf_commits_log_options = table.concat({
     [[ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)" ]],
 }, " ")
 
----fix escape in fzf popup.
 require('util').augroup{"FZF_FIXES", {
     {"FileType", "fzf", run=function()
-        util.tnoremap{'<esc>', '<C-c>', buffer=true}
+        util.tnoremap{'<esc>', '<C-c>', buffer=true, desc='escape fzf with escape'}
     end},
 }}
 

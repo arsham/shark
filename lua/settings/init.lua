@@ -106,29 +106,29 @@ M.nvim_tree = {
 
         util.nnoremap{'<leader>kk', function()
             require'nvim-tree'.toggle()
-        end, silent=true}
+        end, silent=true, desc='Toggle tree view'}
         util.nnoremap{'<leader>kf', function()
             require'nvim-tree'.find_file(true)
-        end, silent=true}
+        end, silent=true, desc='Find file in tree view'}
         util.nnoremap{'<leader><leader>', function()
             require'nvim-tree'.toggle()
-        end, silent=true}
+        end, silent=true, desc='Toggle tree view'}
     end
 }
 
 function M.treesitter_unit()
-    util.xnoremap{'iu', ':lua require"treesitter-unit".select()<CR>'}
-    util.xnoremap{'au', ':lua require"treesitter-unit".select(true)<CR>'}
-    util.onoremap{'iu', ':<c-u>lua require"treesitter-unit".select()<CR>'}
-    util.onoremap{'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>'}
+    util.xnoremap{'iu', ':lua require"treesitter-unit".select()<CR>',          desc='select in unit'}
+    util.xnoremap{'au', ':lua require"treesitter-unit".select(true)<CR>',      desc='select around unit'}
+    util.onoremap{'iu', ':<c-u>lua require"treesitter-unit".select()<CR>',     desc='select in unit'}
+    util.onoremap{'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', desc='select around unit'}
 end
 
 function M.copilot()
-    util.imap{'<C-y>', [[copilot#Accept("\<CR>")]], silent=true, expr=true, script=true}
+    util.imap{'<C-y>', [[copilot#Accept("\<CR>")]], silent=true, expr=true, script=true, desc='copilot accept suggestion'}
     vim.g.copilot_no_tab_map = true
     vim.g.copilot_assume_mapped = true
-    util.nnoremap{'<leader>ce', ':Copilot enable<cr>',  silent=true}
-    util.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true}
+    util.nnoremap{'<leader>ce', ':Copilot enable<cr>',  silent=true, desc='enable copilot'}
+    util.nnoremap{'<leader>cd', ':Copilot disable<cr>', silent=true, desc='disable copilot'}
     --- disabled by default
     nvim.ex.Copilot('disable')
 end
@@ -137,10 +137,10 @@ function M.navigator()
     local navigator = require('Navigator')
     navigator.setup()
 
-    util.nnoremap{"<C-h>", navigator.left,  silent=true}
-    util.nnoremap{"<C-k>", navigator.up,    silent=true}
-    util.nnoremap{"<C-l>", navigator.right, silent=true}
-    util.nnoremap{"<C-j>", navigator.down,  silent=true}
+    util.nnoremap{"<C-h>", navigator.left,  silent=true, desc='navigate to left window or tmux pane'}
+    util.nnoremap{"<C-k>", navigator.up,    silent=true, desc='navigate to upper window or tmux pane'}
+    util.nnoremap{"<C-l>", navigator.right, silent=true, desc='navigate to right window or tmux pane'}
+    util.nnoremap{"<C-j>", navigator.down,  silent=true, desc='navigate to lower window or tmux pane'}
 end
 
 function M.lsp_installer()
@@ -181,10 +181,10 @@ function M.visual_multi()
     --- these don't work in the above maps.
     util.nnoremap{[[<Leader>\]], function()
         vim.fn["vm#commands#add_cursor_at_pos"](0)
-    end}
+    end, desc='add cursor at position'}
     util.nnoremap{'<Leader>A', function()
         vim.fn["vm#commands#find_all"](0, 1)
-    end}
+    end, desc='find all matches'}
 end
 
 function M.dressing()
@@ -198,7 +198,7 @@ function M.dressing()
 end
 
 function M.fugitive()
-    util.nnoremap{'<leader>gg', ':Git<cr>', silent=true}
+    util.nnoremap{'<leader>gg', ':Git<cr>', silent=true, desc='open fugitive'}
 end
 
 function M.null_ls()
@@ -214,8 +214,10 @@ function M.null_ls()
                 util.autocmd{'BufWritePre', run=function() vim.lsp.buf.formatting_sync() end, buffer=true}
             end
             if client.resolved_capabilities.document_range_formatting then
-                vim.cmd('command! -buffer -range -bang Format lua require("settings.lsp.util").format_command(<range> ~= 0, <line1>, <line2>, "<bang>" == "!")')
-                util.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true}
+                util.buffer_command('Format', function(args)
+                    require("settings.lsp.util").format_command(args.range ~= 0, args.line1, args.line2, args.bang)
+                end, {range=true})
+                util.vnoremap{"gq", ':Format<CR>', buffer=true, silent=true, desc='format range'}
                 vim.bo.formatexpr = 'v:lua.vim.lsp.formatexpr()'
             end
         end,

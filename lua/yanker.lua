@@ -53,4 +53,4 @@ util.nnoremap{'<leader>yh', function()
         vim.fn.setreg('"', value, item.regtype)
     end
     vim.fn["fzf#run"](wrapped)
-end, silent=true}
+end, silent=true, desc='Show yank history'}

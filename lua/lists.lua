@@ -118,43 +118,46 @@ local function add_line(name, is_local)
     vim.fn["repeat#set"](key, vim.v.count)
 end
 
----Close quickfix list and local list windows.
 util.nnoremap{'<leader>cc', function()
     nvim.ex.cclose()
     nvim.ex.lclose()
-end, silent=true}
+end, silent=true, desc='Close quickfix list and local list windows'}
 
 ---{{{ Quickfix list mappings
-util.nnoremap{'<leader>qo', nvim.ex.copen, silent=true}
+util.nnoremap{'<leader>qo', nvim.ex.copen, silent=true, desc='open quickfix list'}
+
 util.nnoremap{'<Plug>QuickfixAdd', function()
     add_line('<Plug>QuickfixAdd', false)
-end}
-util.nmap{'<leader>qq', '<Plug>QuickfixAdd'}
+end, desc='add to quickfix list'}
+
+util.nmap{'<leader>qq', '<Plug>QuickfixAdd', desc='add to quickfix list'}
 util.nnoremap{'<Plug>QuickfixNote', function()
     add_note('<Plug>QuickfixNote', false)
-end}
-util.nmap{'<leader>qn', '<Plug>QuickfixNote'}
-util.nnoremap{'<leader>qc', clearqflist, silent=true}
+end, desc='add to quickfix list with a node'}
+
+util.nmap{'<leader>qn', '<Plug>QuickfixNote', desc='add to quickfix list with node'}
+util.nnoremap{'<leader>qc', clearqflist, silent=true, desc='clear quickfix list'}
 ---}}}
 
 ---{{{ Local list mappings
-util.nnoremap{'<leader>wo', nvim.ex.lopen, silent=true}
+util.nnoremap{'<leader>wo', nvim.ex.lopen, silent=true, desc='open local list'}
 util.nnoremap{'<Plug>LocallistAdd', function()
     add_line('<Plug>LocallistAdd', true)
-end}
-util.nmap{'<leader>ww', '<Plug>LocallistAdd'}
+end, desc='add to local list'}
+util.nmap{'<leader>ww', '<Plug>LocallistAdd', desc='add to local list'}
 util.nnoremap{'<Plug>LocallistNote', function()
     add_note('<Plug>LocallistNote', true)
-end}
-util.nmap{'<leader>wn', '<Plug>LocallistNote'}
-util.nnoremap{'<leader>wc', clearloclist, silent=true}
+end, desc='add to local list with a node'}
+util.nmap{'<leader>wn', '<Plug>LocallistNote', desc='add to local list with node'}
+util.nnoremap{'<leader>wc', clearloclist, silent=true, desc='clear local list'}
 ---}}}
 
 ---Creates a mapping for jumping through lists.
 ---@param key string the key to map.
 ---@param next string the command to execute if there is a next item.
 ---@param wrap string the command to execute if there is no next item.
-local function jump_list_mapping(key, next, wrap)
+---@param desc string the description of the mapping.
+local function jump_list_mapping(key, next, wrap, desc)
     util.nnoremap{key, function()
         util.cmd_and_centre(([[
             try
@@ -164,19 +167,19 @@ local function jump_list_mapping(key, next, wrap)
             catch /^Vim\%%((\a\+)\)\=:E42\|E776/
             endtry
         ]]):format(next, wrap))
-    end}
+    end, desc=desc}
 end
-jump_list_mapping(']q', 'cnext',     'cfirst')
-jump_list_mapping('[q', 'cprevious', 'clast')
-jump_list_mapping(']w', 'lnext',     'lfirst')
-jump_list_mapping('[w', 'lprevious', 'llast')
+jump_list_mapping(']q', 'cnext',     'cfirst', 'jump to next item in quickfix list')
+jump_list_mapping('[q', 'cprevious', 'clast',  'jump to previous item in quickfix list')
+jump_list_mapping(']w', 'lnext',     'lfirst', 'jump to next item in local list')
+jump_list_mapping('[w', 'lprevious', 'llast',  'jump to previous item in local list')
 
 util.augroup{"QF_LOC_LISTS", {
     {"Filetype", "qf", docs="don't list qf/local lists", run=function()
         vim.bo.buflisted = false
     end},
     {"FileType", "qf", docs="delete from qf/local lists", run=function()
-        util.nnoremap{'dd', delete_list_item, buffer=true}
+        util.nnoremap{'dd', delete_list_item, buffer=true, desc='delete from qf/local lists'}
     end},
 }}
 
