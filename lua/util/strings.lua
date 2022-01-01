@@ -11,7 +11,7 @@ end
 ---@param n string
 ---@return boolean
 function string.endswith(s, n)
-    return s:sub(-#s) == n
+    return s:sub(-#n) == n
 end
 
 ---Turns str into title case.
