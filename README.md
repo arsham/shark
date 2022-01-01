@@ -649,3 +649,7 @@ none of its associated mappings or commands are loaded.
 ```
 
 </details>
+
+<!--
+vim: foldlevel=2
+-->

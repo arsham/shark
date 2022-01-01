@@ -128,7 +128,6 @@ end
 vim.opt.foldtext = 'v:lua.custom_foldtext()'
 
 vim.opt.foldnestmax = 3
-vim.opt.foldenable  = false                       --- dont fold by default
 vim.g.markdown_folding = 1
 
 vim.opt.spelllang  = "en_gb"

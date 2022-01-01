@@ -1,3 +1,4 @@
+--{{{ --{{{
 vim.opt.termguicolors = true
 pcall(require, 'impatient')
 local packer_bootstrap = false
@@ -17,10 +18,10 @@ vim.cmd [[packadd! cfilter]]
 local function full_start()
     return not vim.env.NVIM_START_LIGHT
 end
-
+--}}} --}}}
+--{{{
 require('packer').startup({
     function(use)
-
         --- {{{ Libraries
         use {
             'wbthomason/packer.nvim',
@@ -303,7 +304,7 @@ require('packer').startup({
             cmd = 'LspInstallInfo',
             cond = full_start,
         }
-
+        --{{{ nvim-cmp
         use {
             'hrsh7th/nvim-cmp',
             event    = { 'BufRead', 'BufNewFile', 'InsertEnter' },
@@ -328,7 +329,7 @@ require('packer').startup({
             config = function() require('settings.cmp') end,
             cond = full_start,
         }
-
+        --}}}
         use {
             'ojroques/nvim-lspfuzzy',
             requires = {
@@ -363,7 +364,7 @@ require('packer').startup({
             after = {'nvim-lspconfig', 'fzf.vim'},
             cond = full_start,
         }
-
+        --{{{ Treesitter
         use {
             'nvim-treesitter/nvim-treesitter',
             requires = {
@@ -402,7 +403,7 @@ require('packer').startup({
             requires = 'nvim-treesitter/nvim-treesitter',
             after    = 'nvim-treesitter',
         }
-
+        --}}}
         use {
             'numToStr/Comment.nvim',
             requires = 'JoosepAlviste/nvim-ts-context-commentstring',
@@ -485,8 +486,8 @@ require('packer').startup({
             'willchao612/vim-diagon',
             cmd = 'Diagon',
         }
-
         --- }}}
+--{{{
         if packer_bootstrap then
             require('packer').sync()
         end
@@ -503,6 +504,7 @@ require('packer').startup({
         --- Move to lua dir so impatient.nvim can cache it.
         compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
     },
+--}}}
 })
-
---- vim: foldmethod=marker
+--}}}
+--- vim: foldmethod=marker foldlevel=1
