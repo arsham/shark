@@ -52,7 +52,7 @@ Table.__eq = function(self, other)
   if type(other) ~= 'Table' then
     other = Table.new(other)
   end
-  if self:length() ~= other:length() then
+  if #self ~= #other then
     return false
   end
   for k in pairs(self) do
@@ -192,7 +192,13 @@ end
 ---@param val any
 ---@return boolean
 function Table:contains(val)
+  if val ~= nil and type(val) == 'table' then
+    val = _t(val)
+  end
   return self:contains_fn(function(v)
+    if type(v) == 'table' then
+      return _t(v) == val
+    end
     return v == val
   end)
 end

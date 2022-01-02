@@ -139,4 +139,81 @@ describe('Table', function()
     end)
   end)
 
+  describe('find_first', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30}
+
+    it('error when argument is not a function', function()
+      assert.has.errors(function() t:find_first() end)
+      assert.has.errors(function() t:find_first('aa') end)
+    end)
+
+    it('returns first match', function()
+      local got = t:find_first(function(v) return v == 3 end)
+      assert.are.same(3, got)
+    end)
+
+    it('returns nil when no match', function()
+      local got = t:find_first(function(v) return v == 666 end)
+      assert.is_nil(got)
+    end)
+
+    it('returns first match in maps too', function()
+      local got = t:find_first(function(v) return v == 3 end)
+      assert.are.same(3, got)
+    end)
+  end)
+
+  describe('contains_fn', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30}
+
+    it('error when argument is not a function', function()
+      assert.has.errors(function() t:contains_fn() end)
+      assert.has.errors(function() t:contains_fn('aa') end)
+    end)
+
+    it('returns true when match', function()
+      local got = t:contains_fn(function(v) return v == 3 end)
+      assert.is_true(got)
+    end)
+
+    it('returns false when no match', function()
+      local got = t:contains_fn(function(v) return v == 666 end)
+      assert.is_false(got)
+    end)
+
+    it('returns true in maps too', function()
+      local got = t:contains_fn(function(v) return v == 3 end)
+      assert.is_true(got)
+    end)
+  end)
+
+  describe('contains', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30, {a=80}}
+
+    it('returns false if no value is given', function()
+      local got = t:contains()
+      assert.is_false(got)
+    end)
+
+    it('returns true if value is in table', function()
+      local got = t:contains(3)
+      assert.is_true(got)
+    end)
+
+    it('returns false if value is not in table', function()
+      local got = t:contains(666)
+      assert.is_false(got)
+    end)
+
+    it('returns false if value is in deep', function()
+      local got = t:contains(80)
+      assert.is_false(got)
+    end)
+
+    it('returns true if value is a table in table', function()
+      local got = t:contains({a=80})
+      assert.is_true(got)
+    end)
+
+  end)
 end)
