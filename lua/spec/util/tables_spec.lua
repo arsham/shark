@@ -113,4 +113,30 @@ describe('Table', function()
     end)
   end)
 
+  describe('merge', function()
+    local t1 = _t{2, 3, a=7, 9, b=10, 11}
+    local t2 = _t{3, a=3, 9, c=10, 13}
+
+    it('two empty', function()
+      local got = _t():merge(_t())
+      assert.are.same(_t(), got)
+    end)
+
+    it('left empty', function()
+      local got = _t():merge(t1)
+      assert.are.same(t1, got)
+    end)
+
+    it('right empty', function()
+      local got = t1:merge(_t())
+      assert.are.same(t1, got)
+    end)
+
+    it('do merge', function()
+      local want = _t{2, 3, a=3, 9, b=10, c=10, 11, 13}
+      local got = t1:merge(t2)
+      assert.are.same(want, got:sort())
+    end)
+  end)
+
 end)

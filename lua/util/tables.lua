@@ -140,23 +140,26 @@ end
 ---adjusted to the first table.
 ---@param other Table
 ---@param self Table
-function Table:merge(other)
-  local tmp = _t()
-  local length = 0
+---@param dup boolean|nil if true it will duplicate indexed values.
+function Table:merge(other, dup)
+  local tmp = _t(vim.deepcopy(self))
+  local seen = _t()
   for k, v in pairs(self) do
-    tmp[k] = v
     if type(k) == "number" then
-      length = length + 1
+      seen[v] = true
     end
   end
 
-  for k, v in ipairs(other) do
-    if type(k) == "number" then
-      tmp[length + k] = v
-    else
+  for k, v in pairs(other) do
+    if type(k) == "string" then
       tmp[k] = v
+    else
+      if dup or not seen[v] then
+        table.insert(tmp, v)
+      end
     end
   end
+
   return tmp
 end
 
