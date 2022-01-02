@@ -1,3 +1,4 @@
+---@diagnostics disable
 local M = {}
 ---Find more schemas here: https://www.schemastore.org/json/
 M.jsonls = {

@@ -106,6 +106,7 @@ vim.opt.nrformats   = "bin,hex,alpha"           --- can increment alphabetically
 --- Renders like this:
 --- » TSString = { «« Treesitter »»···················· « [ 223]·····
 --- If the marker doesn't have any texts in front of it, it will be cut.
+-- selene: allow(global_usage)
 _G.custom_foldtext = function()
     local line = vim.fn.getline(vim.v.foldstart)
     local folded_line_num = vim.v.foldend - vim.v.foldstart

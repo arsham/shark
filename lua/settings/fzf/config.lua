@@ -3,6 +3,8 @@ local util = require('util')
 local util_lsp = require('util.lsp')
 table.insert(vim.opt.rtp, "~/.fzf")
 
+local M = {}
+
 ---Shows a fzf search for going to definition. If LSP is not attached, it uses
 ---the BTags functionality.
 ---@param lines string[]
@@ -62,7 +64,7 @@ local function set_loclist(items)
   nvim.ex.lopen()
 end
 
-_G.FzfActions = {
+M.fzfActions = {
   ['ctrl-t'] = 'tab split',
   ['ctrl-x'] = 'split',
   ['ctrl-v'] = 'vsplit',
@@ -72,7 +74,7 @@ _G.FzfActions = {
   ['alt-:']  = goto_line,
   ['alt-/']  = search_file,
 }
-vim.g.fzf_action = FzfActions
+vim.g.fzf_action = M.fzfActions
 
 vim.g.fzf_commands_expect = 'enter'
 vim.g.fzf_layout = {
@@ -100,3 +102,5 @@ require('util').augroup{"FZF_FIXES", {
 }}
 
 vim.g.fzf_history_dir = vim.env.HOME .. '/.local/share/fzf-history'
+
+return M

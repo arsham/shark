@@ -21,7 +21,7 @@ keys listed below.
 
 --]=====]
 
-local equal_sign = {
+local equal_sign = _t{
   '===',
   '<=>',
   [[\(&&\|||\|<<\|>>\)=]],
@@ -30,8 +30,9 @@ local equal_sign = {
   [[[:+/*!%^=><&|.-]\?=[#?]\?]],
   '\\~=',
 }
-local gt_sign = { '>>', '=>', '>' }
-local lt_sign = { '<<', '=<', '<' }
+local gt_sign = _t{ '>>', '=>', '>' }
+local lt_sign = _t{ '<<', '=<', '<' }
+
 vim.g.easy_align_delimiters = {
   ['>'] = { pattern = table.concat(gt_sign, '\\|') },
   ['<'] = { pattern = table.concat(lt_sign, '\\|') },
@@ -59,7 +60,7 @@ vim.g.easy_align_delimiters = {
   },
   s = {
     pattern = table.concat(
-    table.merge(equal_sign, table.merge(lt_sign, gt_sign)),
+    equal_sign:merge(lt_sign:merge(gt_sign)),
     '\\|'),
     left_margin =   1,
     right_margin =  1,

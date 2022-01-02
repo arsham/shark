@@ -27,6 +27,7 @@ inherit(Table, {table})
 Table.new = function(t)
     return setmetatable(t or {}, Table)
 end
+-- selene: allow(global_usage)
 _G._t =  Table.new
 Table.__call = Table.new
 
@@ -68,7 +69,9 @@ end
 ---@return number
 function Table:table_len()
     local count = 0
-    for _ in pairs(self) do count = count + 1 end
+    for _ in pairs(self) do
+      count = count + 1
+    end
     return count
 end
 
@@ -191,7 +194,9 @@ end
 ---@param val any
 ---@return boolean
 function Table:contains(val)
-    return self:contains_fn(function(v) return v == val end)
+    return self:contains_fn(function(v)
+      return v == val
+    end)
 end
 
 ---Return a reversed the table. Note that it only works on the numeric indices.
@@ -209,7 +214,7 @@ function Table:reverse()
     return reversed
 end
 
-_ = math.randomseed(os.time())
+math.randomseed(os.time())
 function Table:shuffle()
     local ret = _t(self)
     local iterations = ret:length()
@@ -257,7 +262,9 @@ end
 ---Returns a unique set of the table. It only operates on the indexed keys.
 ---@param fn? fun(v: any):any will mutate the value if provided.
 function Table:unique(fn)
-    fn = fn or function(v) return v end
+    fn = fn or function(v)
+      return v
+    end
     local ret = _t()
     local seen = _t()
     for _, v in ipairs(self) do

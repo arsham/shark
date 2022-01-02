@@ -27,12 +27,18 @@ end, silent=true, desc='run locate'}
 
 ---Replace the default dictionary completion with fzf-based fuzzy completion.
 util.inoremap{'<c-x><c-k>', [[fzf#vim#complete('cat /usr/share/dict/words-insane')]], expr=true, desc='dict completion'}
-util.imap{'<c-x><c-f>', '<plug>(fzf-complete-path)', expr=true, desc='path completion'}
-util.imap{'<c-x><c-l>', '<plug>(fzf-complete-line)', expr=true, desc='line completion'}
+util.imap{'<c-x><c-f>', '<Plug>(fzf-complete-path)', desc='path completion'}
+util.imap{'<c-x><c-l>', '<Plug>(fzf-complete-line)', desc='line completion'}
 
-util.nnoremap{'<leader>ff', function() fzf.ripgrep_search('') end, desc='find in files'}
-util.nnoremap{'<leader>fa', function() fzf.ripgrep_search('', true) end, desc='find in files (ignore .gitignore)'}
-util.nnoremap{'<leader>fi', function() fzf.ripgrep_search_incremental('', true) end, desc='incremental search with rg'}
+util.nnoremap{'<leader>ff', function()
+  fzf.ripgrep_search('')
+end, desc='find in files'}
+util.nnoremap{'<leader>fa', function()
+  fzf.ripgrep_search('', true)
+end, desc='find in files (ignore .gitignore)'}
+util.nnoremap{'<leader>fi', function()
+  fzf.ripgrep_search_incremental('', true)
+end, desc='incremental search with rg'}
 
 util.nnoremap{"<leader>rg", function()
   fzf.ripgrep_search(vim.fn.expand("<cword>"))

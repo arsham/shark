@@ -34,6 +34,7 @@ vim.bo.formatlistpat = table.concat(formatlistpat, '')
 vim.bo.comments = 'b:*,b:-'
 vim.wo.foldexpr = 'v:lua.FoldMarkdown(v:lnum)'
 
+-- selene: allow(global_usage)
 function _G.FoldMarkdown(line_number)
   local level = vim.fn.matchend(vim.fn.getline(line_number), '^#*')
   local nextlevel =  vim.fn.matchend(vim.fn.getline(line_number + 1), '^#*')
@@ -75,7 +76,9 @@ local function nextHeading(down)
   vim.fn.search('^#', flags)
 
   if count > 1 then
-    if col == 1 then count = count - 1 end
+    if col == 1 then
+      count = count - 1
+    end
     util.normal('nx', string.rep('n', count))
   end
 
@@ -84,5 +87,9 @@ local function nextHeading(down)
 end
 
 local desc = 'jump to the next heading in markdown document'
-util.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true, desc=desc}
-util.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true, desc=desc}
+util.nnoremap{']]', function()
+  nextHeading(true)
+end, buffer=true, silent=true, desc=desc}
+util.nnoremap{'[[', function()
+  nextHeading(false)
+end, buffer=true, silent=true, desc=desc}

@@ -193,7 +193,7 @@ function M.lines_grep()
     if #names == 0 then return end
     local action = names[1]
     if #action > 0 then
-      local fn = FzfActions[action]
+      local fn = require('settings.fzf.config').fzfActions[action]
       _t(names)
       :when(fn)
       :slice(2)

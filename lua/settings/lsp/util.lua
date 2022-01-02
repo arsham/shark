@@ -89,7 +89,8 @@ local function attach_mappings_commands(client)
 
     --- Either is it set to true, or there is a specified set of
     --- capabilities.
-    if type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports") then
+    if type(caps.code_action) == "table" and
+      _t(caps.code_action.codeActionKinds):contains("source.organizeImports") then
       util.nnoremap{'<leader>i', lsp_organise_imports, buffer=true, silent=true, desc='Organise imports'}
       pre_save.imports = lsp_organise_imports
     end
@@ -118,7 +119,9 @@ local function attach_mappings_commands(client)
   end
 
   if caps.rename then
-    util.buffer_command('Rename', function() vim.lsp.buf.rename() end)
+    util.buffer_command('Rename', function()
+      vim.lsp.buf.rename()
+    end)
   end
 
   if caps.hover then
@@ -131,7 +134,9 @@ local function attach_mappings_commands(client)
   end
 
   if caps.goto_definition then
-    util.buffer_command("Definition", function() vim.lsp.buf.definition() end)
+    util.buffer_command("Definition", function()
+      vim.lsp.buf.definition()
+    end)
     util.nnoremap{'gd', vim.lsp.buf.definition, buffer=true, silent=true, desc='Go to definition'}
     vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
   end
@@ -139,31 +144,45 @@ local function attach_mappings_commands(client)
     util.nnoremap{'gD', vim.lsp.buf.declaration, buffer=true, silent=true, desc='Go to declaration'}
   end
   if caps.type_definition then
-    util.buffer_command("TypeDefinition", function() vim.lsp.buf.type_definition() end)
+    util.buffer_command("TypeDefinition", function()
+      vim.lsp.buf.type_definition()
+    end)
   end
   if caps.implementation then
-    util.buffer_command("Implementation", function() vim.lsp.buf.implementation() end)
+    util.buffer_command("Implementation", function()
+      vim.lsp.buf.implementation()
+    end)
     util.nnoremap{'<leader>gi', vim.lsp.buf.implementation, buffer=true, silent=true, desc='Go to implementation'}
   end
 
   if caps.find_references then
-    util.buffer_command("References", function() vim.lsp.buf.references() end)
+    util.buffer_command("References", function()
+      vim.lsp.buf.references()
+    end)
     util.nnoremap{'gr', vim.lsp.buf.references, buffer=true, silent=true, desc='Go to references'}
   end
 
   if caps.document_symbol then
-    util.buffer_command("DocumentSymbol", function() vim.lsp.buf.document_symbol() end)
+    util.buffer_command("DocumentSymbol", function()
+      vim.lsp.buf.document_symbol()
+    end)
     util.nnoremap{'<leader>@', function()
       vim.lsp.buf.document_symbol()
     end, buffer=true, silent=true}
   end
   if caps.workspace_symbol then
-    util.buffer_command("WorkspaceSymbols", function() vim.lsp.buf.workspace_symbol() end)
+    util.buffer_command("WorkspaceSymbols", function()
+      vim.lsp.buf.workspace_symbol()
+    end)
   end
 
   if caps.call_hierarchy then
-    util.buffer_command("Callees", function() vim.lsp.buf.outgoing_calls() end)
-    util.buffer_command("Callers", function() vim.lsp.buf.incoming_calls() end)
+    util.buffer_command("Callees", function()
+      vim.lsp.buf.outgoing_calls()
+    end)
+    util.buffer_command("Callers", function()
+      vim.lsp.buf.incoming_calls()
+    end)
     util.nnoremap{'<leader>gc', vim.lsp.buf.incoming_calls, buffer=true, silent=true, desc='show incoming calls'}
   end
 
@@ -198,15 +217,17 @@ local function attach_mappings_commands(client)
   util.inoremap{'<C-k>', '<C-p>', buffer=true, silent=true, desc='previous completion items'}
 
   util.nnoremap{'<leader>dd', vim.diagnostic.open_float, buffer=true, silent=true, desc='show diagnostics'}
-  util.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true, desc='populate quickfix list with diagnostics'}
-  util.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true, desc='populate local list with diagnostics'}
+  util.nnoremap{'<leader>dq', vim.diagnostic.setqflist,  buffer=true, silent=true, desc='populate quickfix'}
+  util.nnoremap{'<leader>dw', vim.diagnostic.setloclist, buffer=true, silent=true, desc='populate local list'}
   util.nnoremap{']d', function()
     util.call_and_centre(vim.diagnostic.goto_next)
   end, buffer=true, silent=true, desc='goto next diagnostic'}
   util.nnoremap{'[d', function()
     util.call_and_centre(vim.diagnostic.goto_prev)
   end, buffer=true, silent=true, desc='goto previous diagnostic'}
-  util.buffer_command("Diagnostics", function() require('lspfuzzy').diagnostics(0) end)
+  util.buffer_command("Diagnostics", function()
+    require('lspfuzzy').diagnostics(0)
+  end)
   util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
 end
 
@@ -225,7 +246,9 @@ function M.on_attach(client, bufnr)
     vim.diagnostic.disable()
   end
 
-  vim.api.nvim_buf_call(bufnr, function() attach_mappings_commands(client) end)
+  vim.api.nvim_buf_call(bufnr, function()
+    attach_mappings_commands(client)
+  end)
 
   util.augroup{"STOP_LSP_TYPES", {
     {events="BufReadPost,BufNewFile", targets="*/templates/*.yaml,*/templates/*.tpl", run="LspStop"},
@@ -233,8 +256,12 @@ function M.on_attach(client, bufnr)
 
   local caps = client.resolved_capabilities
   if caps.code_lens then
-    util.buffer_command("CodeLensRefresh", function() vim.lsp.codelens.refresh() end)
-    util.buffer_command("CodeLensRun", function() vim.lsp.codelens.run() end)
+    util.buffer_command("CodeLensRefresh", function()
+      vim.lsp.codelens.refresh()
+    end)
+    util.buffer_command("CodeLensRun", function()
+      vim.lsp.codelens.run()
+    end)
     util.nnoremap{'<leader>cr', vim.lsp.codelens.run, buffer=true, silent=true, desc='run code lenses'}
 
     util.augroup{"CODE_LENSES", {

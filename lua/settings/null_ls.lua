@@ -5,10 +5,13 @@ null_ls.setup({
     null_ls.builtins.formatting.fixjson,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.diagnostics.selene,
   },
   on_attach = function(client)
     if client.resolved_capabilities.document_formatting then
-      util.autocmd{'BufWritePre', run=function() vim.lsp.buf.formatting_sync() end, buffer=true}
+      util.autocmd{'BufWritePre', run=function()
+        vim.lsp.buf.formatting_sync()
+      end, buffer=true}
     end
     if client.resolved_capabilities.document_range_formatting then
       util.buffer_command('Format', function(args)

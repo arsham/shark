@@ -104,7 +104,9 @@ end
 local last_group = 0
 local function next_group()
     last_group = last_group + 1
-    if last_group > #mappings then last_group = 1 end
+    if last_group > #mappings then
+      last_group = 1
+    end
     return mappings[last_group]['group']
 end
 
@@ -145,7 +147,9 @@ util.nnoremap{'<leader>mc', function()
 
     _t(vim.fn.getmatches())
     :filter(function(v) return v and groups[v.group] end)
-    :map(function(v) vim.fn.matchdelete(v.id) end)
+    :map(function(v)
+      vim.fn.matchdelete(v.id)
+    end)
 end, desc='Clear all matches of the current buffer'}
 
 util.nnoremap{'<leader>md', function()
