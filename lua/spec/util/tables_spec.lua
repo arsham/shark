@@ -69,4 +69,48 @@ describe('Table', function()
       assert.are.same(_t{2, 4, 6, a=10}, t2)
     end)
   end)
+
+  describe('values', function()
+    local t = _t{2, 3, a=7, 9}
+    local original = vim.deepcopy(t)
+
+    before_each(function()
+      t = original
+    end)
+
+    it('returns new copy', function()
+      local got = t:values()
+      table.insert(got, 666)
+      assert.are.same(t, original)
+    end)
+
+    it('returns empty for empty tables', function()
+      assert.are.same(_t(), _t():values())
+    end)
+
+    it('returns values', function()
+      assert.are.same(_t{2, 3, 7, 9}:sort(), t:values():sort())
+    end)
+  end)
+
+  describe('slice', function()
+    local t = _t{2, 3, a=7, 9, b=10, 11}
+    local original_len = #t
+
+    it('second to last', function()
+      local got = t:slice(2)
+      assert.are.same(_t{3, 9, 11}, got)
+    end)
+
+    it('returns new copy', function()
+      t:slice(3)
+      assert.are.same(original_len, #t)
+    end)
+
+    it('stepping', function()
+      local got = t:slice(1, #t, 2)
+      assert.are.same(_t{2, 9}, got)
+    end)
+  end)
+
 end)

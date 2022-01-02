@@ -128,17 +128,12 @@ function Table:slice(first, last, step)
     return _t({unpack(self, first, last)})
   end
   local sliced = _t()
-  local length = self:length()
+  local length = #self
   last = last or #self
   for i = first or 1, last or length, step do
     sliced[#sliced+1] = self[i]
   end
   return sliced
-end
-
----Returns the length of the table.
-function Table:length()
-  return #self
 end
 
 ---Merge two tables. Note that the new indices of the second table will be
@@ -217,7 +212,7 @@ end
 math.randomseed(os.time())
 function Table:shuffle()
   local ret = _t(self)
-  local iterations = ret:length()
+  local iterations = #ret
   local j
   for i = iterations, 2, -1 do
     j = math.random(i)
