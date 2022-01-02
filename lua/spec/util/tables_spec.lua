@@ -46,6 +46,27 @@ describe('Table', function()
       local t2 = m:filter(function(v) return v > 1 end)
       assert.is_not.same(_t{1, b=2}, t2)
     end)
+  end)
 
+  describe('map', function()
+    local t = _t{}
+
+    before_each(function() t = _t{1, 2, 3, a=5} end)
+
+    it('error when argument is not a function', function()
+      assert.has.errors(function() t:map() end)
+      assert.has.errors(function() t:map('aa') end)
+    end)
+
+    it('returns new table', function()
+      local t2 = t:map(function(v) return v end)
+      table.insert(t2, 1)
+      assert.is_not.same(t, t2)
+    end)
+
+    it('applies the map', function()
+      local t2 = t:map(function(v) return 2 * v end)
+      assert.are.same(_t{2, 4, 6, a=10}, t2)
+    end)
   end)
 end)
