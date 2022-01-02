@@ -14,11 +14,11 @@ vim.opt.linebreak = true  --- Wrap lines at convenient points
 
 vim.opt.list      = true
 vim.opt.listchars = {
-    tab      = '  ',
-    trail    = '·',
-    extends  = '◣',
-    precedes = '◢',
-    nbsp     = '○',
+  tab      = '  ',
+  trail    = '·',
+  extends  = '◣',
+  precedes = '◢',
+  nbsp     = '○',
 }
 vim.opt.title          = true
 vim.opt.titlestring:append("%t")
@@ -58,9 +58,9 @@ vim.opt.viewdir = vim.env.HOME .. "/.cache/vim/views"
 ---than mangled in the previous blob.
 vim.opt.diffopt:append("indent-heuristic")
 vim.opt.suffixesadd = {
-    ".go",
-    ".py",
-    ".lua",
+  ".go",
+  ".py",
+  ".lua",
 }
 
 ---enable ctrl-n and ctrl-p to scroll through matches
@@ -69,30 +69,30 @@ vim.opt.wildignorecase = true
 
 ---stuff to ignore when tab completing
 vim.opt.wildignore = {
-    "*~",
-    "*.o",
-    "*.obj",
-    "*.so",
-    "*vim/backups*",
-    "*.git/**",
-    "**/.git/**",
-    "*sass-cache*",
-    "*DS_Store*",
-    "vendor/rails/**",
-    "vendor/cache/**",
-    "*.gem",
-    "*.pyc",
-    "log/**",
-    "*.png",
-    "*.jpg",
-    "*.gif",
-    "*.zip",
-    "*.bg2",
-    "*.gz",
-    "*.db",
-    "**/node_modules/**",
-    "**/bin/**",
-    "**/thesaurus/**",
+  "*~",
+  "*.o",
+  "*.obj",
+  "*.so",
+  "*vim/backups*",
+  "*.git/**",
+  "**/.git/**",
+  "*sass-cache*",
+  "*DS_Store*",
+  "vendor/rails/**",
+  "vendor/cache/**",
+  "*.gem",
+  "*.pyc",
+  "log/**",
+  "*.png",
+  "*.jpg",
+  "*.gif",
+  "*.zip",
+  "*.bg2",
+  "*.gz",
+  "*.db",
+  "**/node_modules/**",
+  "**/bin/**",
+  "**/thesaurus/**",
 }
 
 vim.opt.omnifunc   = "syntaxcomplete#Complete"
@@ -108,23 +108,23 @@ vim.opt.nrformats   = "bin,hex,alpha"           --- can increment alphabetically
 --- If the marker doesn't have any texts in front of it, it will be cut.
 -- selene: allow(global_usage)
 _G.custom_foldtext = function()
-    local line = vim.fn.getline(vim.v.foldstart)
-    local folded_line_num = vim.v.foldend - vim.v.foldstart
-    local line_text = line:gsub(' *', '', 1)
-    local add = 0
-    local mark1 = '»'
-    local mark2 = '«'
-    if line_text:match('---%s*{{{$') then
-        line_text = line_text:gsub('---%s*{{{.*', '', 1)
-    elseif line_text:match('---%s*{{{') then
-        line_text = line_text:gsub('---%s*{{{', ' ««', 1) .. ' »»'
-        add = add + 4 -- accounting for surrounding «»
-    else
-        mark1 = '»»'
-        mark2 = '««'
-    end
-    local fillcharcount = vim.opt.textwidth._value - #line_text + add
-    return string.format('%s %s%s %s [ %d]', mark1, line_text, string.rep('·', fillcharcount), mark2, folded_line_num)
+  local line = vim.fn.getline(vim.v.foldstart)
+  local folded_line_num = vim.v.foldend - vim.v.foldstart
+  local line_text = line:gsub(' *', '', 1)
+  local add = 0
+  local mark1 = '»'
+  local mark2 = '«'
+  if line_text:match('---%s*{{{$') then
+    line_text = line_text:gsub('---%s*{{{.*', '', 1)
+  elseif line_text:match('---%s*{{{') then
+    line_text = line_text:gsub('---%s*{{{', ' ««', 1) .. ' »»'
+    add = add + 4 -- accounting for surrounding «»
+  else
+    mark1 = '»»'
+    mark2 = '««'
+  end
+  local fillcharcount = vim.opt.textwidth._value - #line_text + add
+  return string.format('%s %s%s %s [ %d]', mark1, line_text, string.rep('·', fillcharcount), mark2, folded_line_num)
 end
 vim.opt.foldtext = 'v:lua.custom_foldtext()'
 
@@ -136,7 +136,7 @@ vim.opt.spell      = false
 vim.opt.thesaurus  = vim.env.HOME .. "/.local/share/thesaurus/moby.txt"
 ---install words-insane package
 vim.opt.dictionary = {
-    "/usr/share/dict/words-insane",
+  "/usr/share/dict/words-insane",
 }
 
 local spellfile = vim.env.HOME .. "/.config/nvim/spell"
@@ -156,8 +156,8 @@ vim.opt.showmatch  = true
 
 local ok, is_exe = pcall(vim.fn.executable, "rg")
 if ok and is_exe == 1 then
-    vim.opt.grepprg = "rg --vimgrep --smart-case --follow --hidden"
-    vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+  vim.opt.grepprg = "rg --vimgrep --smart-case --follow --hidden"
+  vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 end
 
 ---let the visual block mode go over empty characters.
@@ -167,7 +167,7 @@ vim.opt.modeline    = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.fillchars = {
-    vert = "│",
+  vert = "│",
 }
 
 vim.opt.sessionoptions:append("tabpages,globals")
