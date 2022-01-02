@@ -267,22 +267,22 @@ function Table:chunk(size)
 end
 
 ---Returns a unique set of the table. It only operates on the indexed keys.
----@param fn? fun(v: any):any will mutate the value if provided.
+---@param fn? fun(v: any):any mutate values if provided and returns not nil.
 function Table:unique(fn)
+  if type(fn) ~= "function" then
+    fn = nil
+  end
   fn = fn or function(v)
     return v
   end
   local ret = _t()
   local seen = _t()
   for _, v in ipairs(self) do
-    local key = fn(v)
-    if not seen[key] then
-      if fn then
-        v = fn(v)
-      end
+    v = fn(v) or v
+    if not seen[v] then
       ret:insert(v)
     end
-    seen[key] = true
+    seen[v] = true
   end
   return ret
 end

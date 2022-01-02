@@ -246,6 +246,30 @@ describe('Table', function()
     end)
   end)
 
+  describe('unique', function()
+    local t = _t{2, 3, 2, a=10, b=20, c=3, {a=80}, 10, 2}
+
+    it('returns unique indexed values', function()
+      local got = t:unique()
+      assert.are.same(_t{2, 3, {a=80}, 10}, got)
+    end)
+
+    it('ignored non function fn', function()
+      local got = t:unique('aa')
+      assert.are.same(_t{2, 3, {a=80}, 10}, got)
+    end)
+
+    it('changes the value if function is provided', function()
+      local got = t:unique(function(v)
+        if v == 3 then
+          return 666
+        end
+      end)
+      assert.are.same(_t{2, 666, {a=80}, 10}, got)
+    end)
+
+  end)
+
   describe('sort', function()
     local t = _t{2, 3, 4, a=10, b=20, c=30}
     local original = vim.deepcopy(t)
