@@ -293,7 +293,37 @@ describe('Table', function()
       local got = t:sort(function(a, b) return a > b end)
       assert.are.same(_t{4, 3, 2, c=30, b=20, a=10}, got)
     end)
+  end)
 
+  describe('exec', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30}
+
+    it('errors if fn is not callable', function()
+      assert.has.errors(function() t:exec() end)
+      assert.has.errors(function() t:exec('aa') end)
+    end)
+
+    it('passes values to the given function', function()
+      local got = t:exec(function(v)
+        assert.are.same(v, t)
+        return {987}
+      end)
+      assert.are.same(_t{987}, got)
+    end)
+  end)
+
+  describe('when', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30}
+
+    it('returns the same table if the value is true', function()
+      local got = t:when(true)
+      assert.are.same(t, got)
+    end)
+
+    it('returns an empty table if the value is false', function()
+      local got = t:when(false)
+      assert.are.same(_t{}, got)
+    end)
   end)
 
 end)
