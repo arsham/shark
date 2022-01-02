@@ -14,15 +14,15 @@ util.nnoremap{'<leader>gf', ':GFiles<CR>',     silent=true, desc='show files in 
 util.nnoremap{'<leader>fh', ':History<CR>',    silent=true, desc='show history'}
 
 util.nnoremap{'<leader>fl', function()
-    require('util').user_input{
-        prompt = "Term: ",
-        on_submit = function(term)
-            vim.schedule(function()
-                local preview = vim.fn["fzf#vim#with_preview"]()
-                vim.fn["fzf#vim#locate"](term, preview)
-            end)
-        end,
-    }
+  require('util').user_input{
+    prompt = "Term: ",
+    on_submit = function(term)
+      vim.schedule(function()
+        local preview = vim.fn["fzf#vim#with_preview"]()
+        vim.fn["fzf#vim#locate"](term, preview)
+      end)
+    end,
+  }
 end, silent=true, desc='run locate'}
 
 ---Replace the default dictionary completion with fzf-based fuzzy completion.
@@ -35,26 +35,26 @@ util.nnoremap{'<leader>fa', function() fzf.ripgrep_search('', true) end, desc='f
 util.nnoremap{'<leader>fi', function() fzf.ripgrep_search_incremental('', true) end, desc='incremental search with rg'}
 
 util.nnoremap{"<leader>rg", function()
-    fzf.ripgrep_search(vim.fn.expand("<cword>"))
+  fzf.ripgrep_search(vim.fn.expand("<cword>"))
 end, desc='search over current word'}
 util.nnoremap{"<leader>ra", function()
-    fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
+  fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
 end, desc='search over current word (ignore .gitignore)'}
 util.nnoremap{"<leader>ri", function()
-    fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
+  fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
 end, desc='search over current word (ignore .gitignore)'}
 
 util.nnoremap{'<leader>mm', ':Marks<CR>', desc='show marks'}
 
 util.nnoremap{'z=', function()
-    local term = vim.fn.expand("<cword>")
-    vim.fn["fzf#run"]({
-        source = vim.fn.spellsuggest(term),
-        sink = function(new_term)
-            require('util').normal('n', '"_ciw' .. new_term .. '')
-        end,
-        down = 10,
-    })
+  local term = vim.fn.expand("<cword>")
+  vim.fn["fzf#run"]({
+    source = vim.fn.spellsuggest(term),
+    sink = function(new_term)
+      require('util').normal('n', '"_ciw' .. new_term .. '')
+    end,
+    down = 10,
+  })
 end, desc='show spell suggestions'}
 
 util.nnoremap{'<leader>@', nvim.ex.BTags, silent=true, desc='show tags'}

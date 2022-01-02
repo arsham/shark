@@ -2,31 +2,31 @@ local util = require('util')
 local gitsigns = require('gitsigns')
 
 gitsigns.setup {
-    signs = {
-        add          = {text = '░', show_count = true},
-        change       = {text = '▒', show_count = true},
-        delete       = {text = '░', show_count = true},
-        topdelete    = {text = '▔', show_count = true},
-        changedelete = {text = '▎', show_count = true},
-    },
-    sign_priority = 10,
-    count_chars = {
-        [1]   = "",
-        [2]   = "₂",
-        [3]   = "₃",
-        [4]   = "₄",
-        [5]   = "₅",
-        [6]   = "₆",
-        [7]   = "₇",
-        [8]   = "₈",
-        [9]   = "₉",
-        ["+"] = "₊"
-    },
-    keymaps = {},
-    diff_opts = {
-        internal = true,
-    },
-    update_debounce = 750,
+  signs = {
+    add          = {text = '░', show_count = true},
+    change       = {text = '▒', show_count = true},
+    delete       = {text = '░', show_count = true},
+    topdelete    = {text = '▔', show_count = true},
+    changedelete = {text = '▎', show_count = true},
+  },
+  sign_priority = 10,
+  count_chars = {
+    [1]   = "",
+    [2]   = "₂",
+    [3]   = "₃",
+    [4]   = "₄",
+    [5]   = "₅",
+    [6]   = "₆",
+    [7]   = "₇",
+    [8]   = "₈",
+    [9]   = "₉",
+    ["+"] = "₊"
+  },
+  keymaps = {},
+  diff_opts = {
+    internal = true,
+  },
+  update_debounce = 750,
 }
 
 util.nnoremap{']c', function() util.call_and_centre(gitsigns.next_hunk) end, desc='go to next hunk'}

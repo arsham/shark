@@ -106,12 +106,23 @@ end
 ---@param group string name of the highlight group.
 ---@param opt HighlightOpt additional properties.
 function M.highlight(group, opt)
+    vim.validate {
+        opt = {opt, 't'},
+        ['opt.style']   = {opt.style,   's', true},
+        ['opt.guifg']   = {opt.guifg,   's', true},
+        ['opt.guibg']   = {opt.guibg,   's', true},
+        ['opt.guisp']   = {opt.guisp,   's', true},
+        ['opt.ctermfg'] = {opt.ctermfg, 's', true},
+        ['opt.ctermbg'] = {opt.ctermbg, 's', true},
+    }
+
     local style   = opt.style   and 'gui = '     .. opt.style   or 'gui = NONE'
     local guifg   = opt.guifg   and 'guifg = '   .. opt.guifg   or 'guifg = NONE'
     local guibg   = opt.guibg   and 'guibg = '   .. opt.guibg   or 'guibg = NONE'
     local guisp   = opt.guisp   and 'guisp = '   .. opt.guisp   or ''
     local ctermfg = opt.ctermfg and 'ctermfg = ' .. opt.ctermfg or ''
     local ctermbg = opt.ctermbg and 'ctermbg = ' .. opt.ctermbg or ''
+
     local str     = table.concat({
         group, style, guifg, guibg, ctermfg, ctermbg, guisp
     }, ' ')
@@ -162,9 +173,10 @@ end
 ---@param opts AugroupOpt
 function M.augroup(opts)
     local name = opts.name or opts[1]
-    if name == "" then
-        error("Need group name (name)")
-    end
+    vim.validate{
+        name = {name, function(n) return n ~= '' end, 'non empty group name'},
+        opts = {opts, 't', true},
+    }
 
     local cmds = opts.cmds or opts[2]
     if not cmds then
@@ -193,6 +205,9 @@ end
 ---augroup.
 ---@param opts AutocmdOpt[]
 function M.autocmd(opts)
+    vim.validate{
+        opts = {opts, 't'},
+    }
     local args = {}
 
     for k, v in pairs(opts) do
@@ -230,7 +245,7 @@ end
 
 M.job_str = function(str)
     local job = require('plenary.job')
-    local cmd = str:split()
+    local cmd = vim.split(str, ' ')
     job:new({
         command = cmd[1],
         args = table.slice(cmd, 2, #cmd),
@@ -394,6 +409,13 @@ function M.map(mode, conf)
         map_opts.callback = rhs
         rhs = ''
     end
+
+    vim.validate {
+        mode = {mode, {'s', 't'}},
+        lhs  = {lhs,  's'},
+        rhs  = {rhs,  {'s', 'f'}},
+        opts = {opts, 't',  true}
+    }
 
     if conf.buffer then
         map_opts.buffer = nil

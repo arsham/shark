@@ -66,7 +66,7 @@ end
 util.augroup{"WATCH_LUA_FILE"}
 command("WatchLuaFileChanges", function(arg)
     local filename = vim.fn.expand('%:p')
-    local files = arg and arg.args:split() or {}
+    local files = arg and vim.split(arg) or {}
     table.insert(files, filename)
     M.watch_file_changes(files)
 end, {nargs='*', complete='file'})

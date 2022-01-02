@@ -35,14 +35,14 @@ vim.bo.comments = 'b:*,b:-'
 vim.wo.foldexpr = 'v:lua.FoldMarkdown(v:lnum)'
 
 function _G.FoldMarkdown(line_number)
-    local level = vim.fn.matchend(vim.fn.getline(line_number), '^#*')
-    local nextlevel =  vim.fn.matchend(vim.fn.getline(line_number + 1), '^#*')
-    if level > 0 then
-        return '>' .. level
-    elseif nextlevel > 0 then
-        return '<' .. nextlevel
-    end
-    return '='
+  local level = vim.fn.matchend(vim.fn.getline(line_number), '^#*')
+  local nextlevel =  vim.fn.matchend(vim.fn.getline(line_number + 1), '^#*')
+  if level > 0 then
+    return '>' .. level
+  elseif nextlevel > 0 then
+    return '<' .. nextlevel
+  end
+  return '='
 end
 
 vim.wo.foldmethod = 'expr'
@@ -50,37 +50,37 @@ vim.wo.foldmethod = 'expr'
 ---TODO: find out what is clashing with nvim-cmp and remove the plugin.
 require('astronauta.keymap')
 vim.keymap.inoremap{'<CR>', function()
-    local line = vim.fn.getline(vim.fn.line('.')):gsub('^%s*', '')
-    local marker = vim.fn.matchstr(line, [[^\(\d\+\.\)\s]])
-    if not marker and marker == line then
-        return "<c-u>"
-    end
-    local m = tonumber(marker)
-    if m then
-        marker = tostring(m + 1) .. '. '
-    end
-    return "<cr>" .. marker
+  local line = vim.fn.getline(vim.fn.line('.')):gsub('^%s*', '')
+  local marker = vim.fn.matchstr(line, [[^\(\d\+\.\)\s]])
+  if not marker and marker == line then
+    return "<c-u>"
+  end
+  local m = tonumber(marker)
+  if m then
+    marker = tostring(m + 1) .. '. '
+  end
+  return "<cr>" .. marker
 end, expr=true, buffer=true, desc='create lists in markdown'}
 
 ---Jumps to the next heading.
 ---@param down boolean if goes to next, otherwise to the previous.
 local function nextHeading(down)
-    local count = vim.v.count
-    local col = vim.fn.col(".")
+  local count = vim.v.count
+  local col = vim.fn.col(".")
 
-    local flags = 'W'
-    if down then
-        flags = 'bW'
-    end
-    vim.fn.search('^#', flags)
+  local flags = 'W'
+  if down then
+    flags = 'bW'
+  end
+  vim.fn.search('^#', flags)
 
-    if count > 1 then
-        if col == 1 then count = count - 1 end
-        util.normal('nx', string.rep('n', count))
-    end
+  if count > 1 then
+    if col == 1 then count = count - 1 end
+    util.normal('nx', string.rep('n', count))
+  end
 
-    local motion = string.format('%d|', col)
-    util.normal('nx', motion)
+  local motion = string.format('%d|', col)
+  util.normal('nx', motion)
 end
 
 local desc = 'jump to the next heading in markdown document'

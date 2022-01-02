@@ -1,189 +1,189 @@
 local M = {}
 ---Find more schemas here: https://www.schemastore.org/json/
 M.jsonls = {
-    {
-        description = "TypeScript compiler configuration file",
-        fileMatch = {
-            "tsconfig.json",
-            "tsconfig.*.json",
-        },
-        url = "https://json.schemastore.org/tsconfig.json",
+  {
+    description = "TypeScript compiler configuration file",
+    fileMatch = {
+      "tsconfig.json",
+      "tsconfig.*.json",
     },
-    {
-        description = "Lerna config",
-        fileMatch = { "lerna.json" },
-        url = "https://json.schemastore.org/lerna.json",
+    url = "https://json.schemastore.org/tsconfig.json",
+  },
+  {
+    description = "Lerna config",
+    fileMatch = { "lerna.json" },
+    url = "https://json.schemastore.org/lerna.json",
+  },
+  {
+    description = "Babel configuration",
+    fileMatch = {
+      ".babelrc.json",
+      ".babelrc",
+      "babel.config.json",
     },
-    {
-        description = "Babel configuration",
-        fileMatch = {
-            ".babelrc.json",
-            ".babelrc",
-            "babel.config.json",
-        },
-        url = "https://json.schemastore.org/babelrc.json",
+    url = "https://json.schemastore.org/babelrc.json",
+  },
+  {
+    description = "ESLint config",
+    fileMatch = {
+      ".eslintrc.json",
+      ".eslintrc",
     },
-    {
-        description = "ESLint config",
-        fileMatch = {
-            ".eslintrc.json",
-            ".eslintrc",
-        },
-        url = "https://json.schemastore.org/eslintrc.json",
+    url = "https://json.schemastore.org/eslintrc.json",
+  },
+  {
+    description = "Bucklescript config",
+    fileMatch = { "bsconfig.json" },
+    url = "https://raw.githubusercontent.com/rescript-lang/rescript-compiler/8.2.0/docs/docson/build-schema.json",
+  },
+  {
+    description = "Prettier config",
+    fileMatch = {
+      ".prettierrc",
+      ".prettierrc.json",
+      "prettier.config.json",
     },
-    {
-        description = "Bucklescript config",
-        fileMatch = { "bsconfig.json" },
-        url = "https://raw.githubusercontent.com/rescript-lang/rescript-compiler/8.2.0/docs/docson/build-schema.json",
+    url = "https://json.schemastore.org/prettierrc",
+  },
+  {
+    description = "Vercel Now config",
+    fileMatch = { "now.json" },
+    url = "https://json.schemastore.org/now",
+  },
+  {
+    description = "Stylelint config",
+    fileMatch = {
+      ".stylelintrc",
+      ".stylelintrc.json",
+      "stylelint.config.json",
     },
-    {
-        description = "Prettier config",
-        fileMatch = {
-            ".prettierrc",
-            ".prettierrc.json",
-            "prettier.config.json",
-        },
-        url = "https://json.schemastore.org/prettierrc",
+    url = "https://json.schemastore.org/stylelintrc",
+  },
+  {
+    description = "A JSON schema for the ASP.NET LaunchSettings.json files",
+    fileMatch = { "launchsettings.json" },
+    url = "https://json.schemastore.org/launchsettings.json",
+  },
+  {
+    description = "Schema for CMake Presets",
+    fileMatch = {
+      "CMakePresets.json",
+      "CMakeUserPresets.json",
     },
-    {
-        description = "Vercel Now config",
-        fileMatch = { "now.json" },
-        url = "https://json.schemastore.org/now",
+    url = "https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json",
+  },
+  {
+    description = "Configuration file as an alternative for configuring your repository in the settings page.",
+    fileMatch = {
+      ".codeclimate.json",
     },
-    {
-        description = "Stylelint config",
-        fileMatch = {
-            ".stylelintrc",
-            ".stylelintrc.json",
-            "stylelint.config.json",
-        },
-        url = "https://json.schemastore.org/stylelintrc",
+    url = "https://json.schemastore.org/codeclimate.json",
+  },
+  {
+    description = "LLVM compilation database",
+    fileMatch = {
+      "compile_commands.json",
     },
-    {
-        description = "A JSON schema for the ASP.NET LaunchSettings.json files",
-        fileMatch = { "launchsettings.json" },
-        url = "https://json.schemastore.org/launchsettings.json",
+    url = "https://json.schemastore.org/compile-commands.json",
+  },
+  {
+    description = "Config file for Command Task Runner",
+    fileMatch = {
+      "commands.json",
     },
-    {
-        description = "Schema for CMake Presets",
-        fileMatch = {
-            "CMakePresets.json",
-            "CMakeUserPresets.json",
-        },
-        url = "https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json",
+    url = "https://json.schemastore.org/commands.json",
+  },
+  {
+    description = "AWS CloudFormation provides a common language for you to describe and provision all the infrastructure resources in your cloud environment.",
+    fileMatch = {
+      "*.cf.json",
+      "cloudformation.json",
     },
-    {
-        description = "Configuration file as an alternative for configuring your repository in the settings page.",
-        fileMatch = {
-            ".codeclimate.json",
-        },
-        url = "https://json.schemastore.org/codeclimate.json",
+    url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/cloudformation.schema.json",
+  },
+  {
+    description = "The AWS Serverless Application Model (AWS SAM, previously known as Project Flourish) extends AWS CloudFormation to provide a simplified way of defining the Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables needed by your serverless application.",
+    fileMatch = {
+      "serverless.template",
+      "*.sam.json",
+      "sam.json",
     },
-    {
-        description = "LLVM compilation database",
-        fileMatch = {
-            "compile_commands.json",
-        },
-        url = "https://json.schemastore.org/compile-commands.json",
+    url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/sam.schema.json",
+  },
+  {
+    description = "Json schema for properties json file for a GitHub Workflow template",
+    fileMatch = {
+      ".github/workflow-templates/**.properties.json",
     },
-    {
-        description = "Config file for Command Task Runner",
-        fileMatch = {
-            "commands.json",
-        },
-        url = "https://json.schemastore.org/commands.json",
+    url = "https://json.schemastore.org/github-workflow-template-properties.json",
+  },
+  {
+    description = "golangci-lint configuration file",
+    fileMatch = {
+      ".golangci.toml",
+      ".golangci.json",
     },
-    {
-        description = "AWS CloudFormation provides a common language for you to describe and provision all the infrastructure resources in your cloud environment.",
-        fileMatch = {
-            "*.cf.json",
-            "cloudformation.json",
-        },
-        url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/cloudformation.schema.json",
+    url = "https://json.schemastore.org/golangci-lint.json",
+  },
+  {
+    description = "JSON schema for the JSON Feed format",
+    fileMatch = {
+      "feed.json",
     },
-    {
-        description = "The AWS Serverless Application Model (AWS SAM, previously known as Project Flourish) extends AWS CloudFormation to provide a simplified way of defining the Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables needed by your serverless application.",
-        fileMatch = {
-            "serverless.template",
-            "*.sam.json",
-            "sam.json",
-        },
-        url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/sam.schema.json",
+    url = "https://json.schemastore.org/feed.json",
+    versions = {
+      ["1"] = "https://json.schemastore.org/feed-1.json",
+      ["1.1"] = "https://json.schemastore.org/feed.json",
     },
-    {
-        description = "Json schema for properties json file for a GitHub Workflow template",
-        fileMatch = {
-            ".github/workflow-templates/**.properties.json",
-        },
-        url = "https://json.schemastore.org/github-workflow-template-properties.json",
+  },
+  {
+    description = "Packer template JSON configuration",
+    fileMatch = {
+      "packer.json",
     },
-    {
-        description = "golangci-lint configuration file",
-        fileMatch = {
-            ".golangci.toml",
-            ".golangci.json",
-        },
-        url = "https://json.schemastore.org/golangci-lint.json",
+    url = "https://json.schemastore.org/packer.json",
+  },
+  {
+    description = "NPM configuration file",
+    fileMatch = {
+      "package.json",
     },
-    {
-        description = "JSON schema for the JSON Feed format",
-        fileMatch = {
-            "feed.json",
-        },
-        url = "https://json.schemastore.org/feed.json",
-        versions = {
-            ["1"] = "https://json.schemastore.org/feed-1.json",
-            ["1.1"] = "https://json.schemastore.org/feed.json",
-        },
+    url = "https://json.schemastore.org/package.json",
+  },
+  {
+    description = "JSON schema for Visual Studio component configuration files",
+    fileMatch = {
+      "*.vsconfig",
     },
-    {
-        description = "Packer template JSON configuration",
-        fileMatch = {
-            "packer.json",
-        },
-        url = "https://json.schemastore.org/packer.json",
-    },
-    {
-        description = "NPM configuration file",
-        fileMatch = {
-            "package.json",
-        },
-        url = "https://json.schemastore.org/package.json",
-    },
-    {
-        description = "JSON schema for Visual Studio component configuration files",
-        fileMatch = {
-            "*.vsconfig",
-        },
-        url = "https://json.schemastore.org/vsconfig.json",
-    },
-    {
-        description = "Resume json",
-        fileMatch = { "resume.json" },
-        url = "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
-    },
+    url = "https://json.schemastore.org/vsconfig.json",
+  },
+  {
+    description = "Resume json",
+    fileMatch = { "resume.json" },
+    url = "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  },
 }
 
 M.yamlls = {
-    kubernetes = {
-        'templates/*.yaml',
-        'helm/*.yaml',
-        'kube/*.yaml',
-    },
-    ['http://json.schemastore.org/golangci-lint.json']      = '.golangci.{yml,yaml}',
-    ['http://json.schemastore.org/github-workflow.json']    = '.github/workflows/*.{yml,yaml}',
-    ['http://json.schemastore.org/github-action.json']      = '.github/action.{yml,yaml}',
-    ['http://json.schemastore.org/ansible-stable-2.9.json'] = 'roles/tasks/*.{yml,yaml}',
-    ['http://json.schemastore.org/ansible-playbook.json']   = 'playbook.{yml,yaml}',
-    ['http://json.schemastore.org/prettierrc.json']         = '.prettierrc.{yml,yaml}',
-    ['http://json.schemastore.org/stylelintrc.json']        = '.stylelintrc.{yml,yaml}',
-    ['http://json.schemastore.org/circleciconfig.json']     = '.circleci/**/*.{yml,yaml}',
-    ['http://json.schemastore.org/kustomization.json']      = 'kustomization.{yml,yaml}',
-    ['http://json.schemastore.org/helmfile.json']           = 'templates/**/*.{yml,yaml}',
-    ['http://json.schemastore.org/chart.json']              = 'Chart.yml,yaml}',
-    ['http://json.schemastore.org/gitlab-ci.json']          = '/*lab-ci.{yml,yaml}',
+  kubernetes = {
+    'templates/*.yaml',
+    'helm/*.yaml',
+    'kube/*.yaml',
+  },
+  ['http://json.schemastore.org/golangci-lint.json']      = '.golangci.{yml,yaml}',
+  ['http://json.schemastore.org/github-workflow.json']    = '.github/workflows/*.{yml,yaml}',
+  ['http://json.schemastore.org/github-action.json']      = '.github/action.{yml,yaml}',
+  ['http://json.schemastore.org/ansible-stable-2.9.json'] = 'roles/tasks/*.{yml,yaml}',
+  ['http://json.schemastore.org/ansible-playbook.json']   = 'playbook.{yml,yaml}',
+  ['http://json.schemastore.org/prettierrc.json']         = '.prettierrc.{yml,yaml}',
+  ['http://json.schemastore.org/stylelintrc.json']        = '.stylelintrc.{yml,yaml}',
+  ['http://json.schemastore.org/circleciconfig.json']     = '.circleci/**/*.{yml,yaml}',
+  ['http://json.schemastore.org/kustomization.json']      = 'kustomization.{yml,yaml}',
+  ['http://json.schemastore.org/helmfile.json']           = 'templates/**/*.{yml,yaml}',
+  ['http://json.schemastore.org/chart.json']              = 'Chart.yml,yaml}',
+  ['http://json.schemastore.org/gitlab-ci.json']          = '/*lab-ci.{yml,yaml}',
 
-    ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "templates/**/*.{yml,yaml}",
+  ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "templates/**/*.{yml,yaml}",
 }
 
 return M
