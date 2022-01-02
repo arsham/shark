@@ -18,12 +18,8 @@ util.inoremap{'<Right>', '<Nop>', desc='disabling arrows'}
 util.nmap{'Q', '<Nop>', desc='disabling Ex mode'}
 --}}}
 
-util.nnoremap{'<A-j>', [[:<c-u>execute 'm +'. v:count1<cr>==]], silent=true, desc='move lines down'}
-util.nnoremap{'<A-k>', [[:<c-u>execute 'm -1-'. v:count1<cr>==]], silent=true, desc='move lines up'}
 util.inoremap{'<A-j>', [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], silent=true, desc='move lines down'}
 util.inoremap{'<A-k>', [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], silent=true, desc='move lines up'}
-util.vnoremap{'<A-j>', [[:m '>+1<CR>gv=gv]], silent=true, desc='move lines down'}
-util.vnoremap{'<A-k>', [[:m '<-2<CR>gv=gv]], silent=true, desc='move lines up'}
 
 util.xnoremap{'<', '<gv', desc='Keep the visually selected area when indenting'}
 util.xnoremap{'>', '>gv', desc='Keep the visually selected area when indenting'}

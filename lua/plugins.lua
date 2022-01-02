@@ -250,14 +250,7 @@ require('packer').startup({
 
     use {
       'booperlv/nvim-gomove',
-      config = function()
-        require("gomove").setup {
-          map_defaults = true,
-          reindent_mode = "vim-move",
-          move_past_line = true,
-          ignore_indent_lh_dup = true,
-        }
-      end,
+      config = function() require('settings.gomove') end,
       event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
     }
     --}}}
