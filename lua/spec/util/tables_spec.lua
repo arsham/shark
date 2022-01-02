@@ -216,4 +216,60 @@ describe('Table', function()
     end)
 
   end)
+
+  describe('chunk', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30, {a=80}, 10, 20}
+
+    it('returns the same table if chunk size is >= as table length', function()
+      local got = t:chunk(9)
+      assert.are.same(t, got[1])
+      got = t:chunk(10)
+      assert.are.same(t, got[1])
+      got = t:chunk(100)
+      assert.are.same(t, got[1])
+    end)
+
+    it('returns the same table if chunk size is 0', function()
+      local got = t:chunk(0)
+      assert.are.same(t, got[1])
+    end)
+
+    it('returns tables of length 1 with chunk size 1', function()
+    end)
+
+    it('returns two chunks with chunk size of half the table size', function()
+      local got = t:chunk(5)
+      assert.are.same(5, #got[1])
+      assert.are.same(#t - #got[1], #got[2])
+      local whole = got[1]:merge(got[2])
+      assert.are.same(t, whole)
+    end)
+  end)
+
+  describe('sort', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30}
+    local original = vim.deepcopy(t)
+
+    before_each(function()
+      t = original
+    end)
+
+    it('returns new copy', function()
+      local got = t:sort()
+      table.insert(got, 10)
+      assert.is_not.same(t, got)
+    end)
+
+    it('sorts by key', function()
+      local got = t:sort(function(a, b) return a < b end)
+      assert.are.same(_t{a=10, b=20, c=30, 2, 3, 4}, got)
+    end)
+
+    it('sorts by value', function()
+      local got = t:sort(function(a, b) return a > b end)
+      assert.are.same(_t{4, 3, 2, c=30, b=20, a=10}, got)
+    end)
+
+  end)
+
 end)

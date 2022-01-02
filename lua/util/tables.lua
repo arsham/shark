@@ -243,6 +243,9 @@ end
 ---    ---         b=10
 --- end
 function Table:chunk(size)
+  if size == 0 then
+    return _t({vim.deepcopy(self)})
+  end
   local ret = _t()
   local cur_chunk = 1
   local cur_size = 0
@@ -288,8 +291,8 @@ end
 ---
 ---@param fn fun(a: any, b: any):boolean
 function Table:sort(fn)
-  local ret = _t(self)
-  self.__super.sort(self, fn)
+  local ret = _t(vim.deepcopy(self))
+  self.__super.sort(ret, fn)
   return ret
 end
 
