@@ -253,6 +253,11 @@ require('packer').startup({
       config = function() require('settings.gomove') end,
       event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
     }
+
+    use {
+      'svban/YankAssassin.vim',
+      event = { 'BufRead', 'BufNewFile' },
+    }
     --}}}
 
     --{{{ Programming
