@@ -1,3 +1,4 @@
+---@diagnostic disable
 local cmp = require'cmp'
 local compare = require('cmp.config.compare')
 

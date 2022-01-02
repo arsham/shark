@@ -19,6 +19,7 @@ local function full_start()
     return not vim.env.NVIM_START_LIGHT
 end
 --}}} --}}}
+
 --{{{
 require('packer').startup({
     function(use)
@@ -45,7 +46,7 @@ require('packer').startup({
             'junegunn/fzf.vim',
             requires = 'junegunn/fzf',
             config   = function() require('settings.fzf') end,
-            event = 'VimEnter',
+            event    = 'VimEnter',
         }
 
         use {
@@ -55,15 +56,15 @@ require('packer').startup({
                 'nvim-treesitter/nvim-treesitter',
             },
             config = function() require('bqf').enable() end,
-            ft = { 'qf' },
-            cond = full_start,
+            ft     = { 'qf' },
+            cond   = full_start,
         }
 
         use {
             'kyazdani42/nvim-tree.lua',
             requires = { 'kyazdani42/nvim-web-devicons' },
-            setup    = function() require('settings').nvim_tree.setup() end,
-            config   = function() require('settings').nvim_tree.config() end,
+            setup    = function() require('settings.nvim_tree').setup() end,
+            config   = function() require('settings.nvim_tree').config() end,
             event    = { 'BufRead' },
             cmd      = { 'NvimTreeOpen', 'NvimTreeToggle', 'NvimTreeFindFile' },
             keys     = { '<leader>kk', '<leader>kf', '<leader><leader>' },
@@ -71,32 +72,25 @@ require('packer').startup({
 
         use {
             'tweekmonster/startuptime.vim',
-            --- 'dstein64/vim-startuptime',
             cmd = { 'StartupTime' },
         }
-
-        --- { 'norcalli/profiler.nvim', },
 
         use {
             'gelguy/wilder.nvim',
             config = function() require('settings.wilder') end,
             run    = ':UpdateRemotePlugins',
-            event = 'VimEnter',
+            event  = 'VimEnter',
         }
 
         use {
             'numToStr/Navigator.nvim',
-            config = function() require('settings').navigator() end,
-            event = 'UIEnter',
+            config = function() require('settings.navigator') end,
+            event  = 'UIEnter',
         }
 
         use {
             'mbbill/undotree',
-            config = function()
-                vim.g.undotree_CustomUndotreeCmd  = 'vertical 40 new'
-                vim.g.undotree_CustomDiffpanelCmd = 'botright 15 new'
-                require('util').nnoremap{'<leader>u', ':UndotreeToggle<CR>', silent=true}
-            end,
+            config = function() require('settings.undotree') end,
             branch = 'search',
             cmd    = { 'UndotreeShow', 'UndotreeToggle' },
             keys   = { '<leader>u' },
@@ -106,8 +100,8 @@ require('packer').startup({
         --- {{{ git
         use {
             'tpope/vim-fugitive',
-            config = function() require('settings').fugitive() end,
-       }
+            config = function() require('settings.fugitive') end,
+        }
 
         use {
             'tpope/vim-rhubarb',
@@ -159,21 +153,14 @@ require('packer').startup({
             config = function()
                 require'colorizer'.setup(colorizer_ft)
             end,
-            ft = colorizer_ft,
+            ft   = colorizer_ft,
             cond = full_start,
         }
 
         use {
             'rcarriga/nvim-notify',
-            config = function()
-                local async_load_plugin = nil
-                async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-                    vim.notify = require('notify')
-                    async_load_plugin:close()
-                end))
-                async_load_plugin:send()
-            end,
-            event = 'VimEnter',
+            config = function() require('settings.nvim_tree') end,
+            event  = 'VimEnter',
         }
 
         use {
@@ -183,16 +170,9 @@ require('packer').startup({
 
         use {
             'stevearc/dressing.nvim',
-            config = function()
-                local async_load_plugin = nil
-                async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-                    require('settings').dressing()
-                    async_load_plugin:close()
-                end))
-                async_load_plugin:send()
-            end,
-            event = 'UIEnter',
-            cond = full_start,
+            config = function() require('settings.dressing') end,
+            event  = 'UIEnter',
+            cond   = full_start,
         }
         --- }}}
 
@@ -209,14 +189,9 @@ require('packer').startup({
 
         use {
             'ntpeters/vim-better-whitespace',
-            config = function()
-                vim.g.better_whitespace_filetypes_blacklist = {
-                    'diff', 'git', 'gitcommit', 'unite', 'qf', 'help',
-                    'markdown', 'fugitive', 'undotree', 'scratch',
-                }
-            end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
-            cond = full_start,
+            config = function() require('settings.vim_better_whitespace') end,
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cond   = full_start,
         }
 
         use {
@@ -237,13 +212,13 @@ require('packer').startup({
         use {
             'junegunn/vim-easy-align',
             config = function() require('settings.easyalign') end,
-            keys = { 'ga' },
+            keys   = { 'ga' },
         }
 
         use {
             'mg979/vim-visual-multi',
             branch = 'master',
-            config = function() require('settings').visual_multi() end,
+            config = function() require('settings.visual_multi') end,
             keys   = { '<C-n>', '<C-Down>', '<C-Up>' },
         }
 
@@ -255,7 +230,7 @@ require('packer').startup({
         use {
             'windwp/nvim-autopairs',
             wants  = 'nvim-cmp',
-            config = function() require('settings').autopairs() end,
+            config = function() require('settings.autopairs') end,
             event  = { 'InsertEnter' },
         }
 
@@ -279,19 +254,19 @@ require('packer').startup({
             'neovim/nvim-lspconfig',
             after = { 'nvim-cmp', 'lua-dev.nvim' },
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
-            cond = full_start,
+            cond  = full_start,
         }
 
         use {
             'folke/lua-dev.nvim',
             event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
-            cond = full_start,
+            cond  = full_start,
         }
 
         use {
             'williamboman/nvim-lsp-installer',
             config = function()
-                require('settings').lsp_installer()
+                require('settings.lsp_installer')
                 require('settings.lsp')
             end,
             after = {
@@ -301,7 +276,7 @@ require('packer').startup({
                 'lsp-status.nvim',
                 'cmp-nvim-lsp',
             },
-            cmd = 'LspInstallInfo',
+            cmd  = 'LspInstallInfo',
             cond = full_start,
         }
         --{{{ nvim-cmp
@@ -317,11 +292,12 @@ require('packer').startup({
                 { 'hrsh7th/cmp-calc',     after = 'nvim-cmp' },
                 { 'lukas-reineke/cmp-rg', after = 'nvim-cmp' },
                 { 'hrsh7th/cmp-vsnip',    after = 'nvim-cmp' },
-                { 'hrsh7th/vim-vsnip',
+                {
+                    'hrsh7th/vim-vsnip',
+                    after  = 'nvim-cmp',
                     config = function ()
                         vim.g.vsnip_snippet_dir = vim.env.HOME .. '/.config/nvim/vsnip'
                     end,
-                    after    = 'nvim-cmp',
                     requires = 'rafamadriz/friendly-snippets',
                 },
                 { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
@@ -330,6 +306,7 @@ require('packer').startup({
             cond = full_start,
         }
         --}}}
+
         use {
             'ojroques/nvim-lspfuzzy',
             requires = {
@@ -345,7 +322,7 @@ require('packer').startup({
                 }
             end,
             after = { 'nvim-lspconfig', 'fzf.vim' },
-            cond = full_start,
+            cond  = full_start,
         }
 
         use {
@@ -354,15 +331,15 @@ require('packer').startup({
                 'nvim-lua/plenary.nvim',
                 'nvim-lspconfig',
             },
-            config   = function() require('settings').null_ls() end,
-            event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
-            cond = full_start,
+            config = function() require('settings.null_ls') end,
+            event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
+            cond   = full_start,
         }
 
         use {
             'nvim-lua/lsp-status.nvim',
             after = {'nvim-lspconfig', 'fzf.vim'},
-            cond = full_start,
+            cond  = full_start,
         }
         --{{{ Treesitter
         use {
@@ -378,19 +355,19 @@ require('packer').startup({
                 {
                     'nvim-treesitter/nvim-treesitter-refactor',
                     after  = 'nvim-treesitter',
-                    config = function() require('settings').treesitter_refactor() end,
+                    config = function() require('settings.treesitter_refactor') end,
                 },
                 {
                     'David-Kunz/treesitter-unit',
                     after  = 'nvim-treesitter',
-                    config = function() require('settings').treesitter_unit() end,
+                    config = function() require('settings.treesitter_unit') end,
                 },
                 {
                     'nvim-treesitter/playground',
                     after = 'nvim-treesitter',
                     run   = ':TSInstall query',
                     cmd   = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' },
-                    cond = full_start,
+                    cond  = full_start,
                 },
             },
             run   = ':TSUpdate',
@@ -408,14 +385,14 @@ require('packer').startup({
             'numToStr/Comment.nvim',
             requires = 'JoosepAlviste/nvim-ts-context-commentstring',
             after    = 'nvim-ts-context-commentstring',
-            config   = function() require('settings').Comment() end,
+            config   = function() require('settings.comment') end,
         }
 
         use {
             'github/copilot.vim',
-            config = function () require('settings').copilot() end,
+            config = function () require('settings.copilot') end,
             event  = { 'InsertEnter' },
-            cond = full_start,
+            cond   = full_start,
         }
 
         use {
@@ -424,7 +401,7 @@ require('packer').startup({
                 require('util').nnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
                 require('util').vnoremap{'<C-Space>', ':SqlsExecuteQuery<CR>', buffer=true, silent=true}
             end,
-            ft = { 'sql' },
+            ft   = { 'sql' },
             cond = full_start,
         }
 
@@ -442,7 +419,7 @@ require('packer').startup({
         --- {{{ Text objects
         use {
             'blackCauldron7/surround.nvim',
-            config = function() require('settings').surround() end,
+            config = function() require('settings.surround') end,
             event  = { 'BufRead', 'BufNewFile', 'InsertEnter' },
         }
 
@@ -466,8 +443,8 @@ require('packer').startup({
             end,
             setup  = function() vim.g.mkdp_filetypes = { 'markdown' } end,
             config = function() vim.g.mkdp_browser = 'brave' end,
-            ft = { 'markdown' },
-            cond = full_start,
+            ft     = { 'markdown' },
+            cond   = full_start,
         }
 
         use {
@@ -487,7 +464,7 @@ require('packer').startup({
             cmd = 'Diagon',
         }
         --- }}}
---{{{
+        --{{{
         if packer_bootstrap then
             require('packer').sync()
         end
@@ -504,7 +481,7 @@ require('packer').startup({
         --- Move to lua dir so impatient.nvim can cache it.
         compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
     },
---}}}
+    --}}}
 })
 --}}}
 --- vim: foldmethod=marker foldlevel=1

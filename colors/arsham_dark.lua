@@ -1,5 +1,4 @@
 local palette = { ---{{{
-    name           = 'arsham',
     base0          = '#232627',
     base1          = '#211F22',
     base2          = '#2A2D30',
