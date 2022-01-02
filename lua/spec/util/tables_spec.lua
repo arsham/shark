@@ -326,4 +326,39 @@ describe('Table', function()
     end)
   end)
 
+  describe('chaining methods', function()
+    local t1 = _t{2, 3, 4, a=10, b=20, c=30}
+    local t2 = _t{30, 11, 29}
+
+    it('calling unique on sorted', function()
+      local got = t1:sort():unique()
+      assert.are.same(_t{2, 3, 4}, got)
+    end)
+
+    it('calling merge on sorted', function()
+      local got = t1:sort():merge(t2)
+      assert.are.same(_t{2, 3, 4, a=10, b=20, c=30, 30, 11, 29}, got)
+    end)
+
+    it('calling merge and then filter', function()
+      local got = t1:merge(t2):filter(function(v)
+        return v > 10
+      end)
+      assert.are.same(_t{b=20, c=30, 30, 11, 29}:sort(), got:sort())
+    end)
+
+    it('merge and map chaining', function()
+      local got = t1:merge(t2):map(function(v)
+        return v * 2
+      end)
+      assert.are.same(_t{4, 6, 8, a=20, b=40, c=60, 60, 22, 58}, got)
+    end)
+
+    it('returns empty after chaining and returning false from when', function()
+      local got = t1:merge(t2):when(false):map(function(v)
+        return v * 2
+      end)
+      assert.are.same(_t{}, got)
+    end)
+  end)
 end)
