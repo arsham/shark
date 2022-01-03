@@ -310,4 +310,14 @@ function Table:when(v)
   return v and self or _t{}
 end
 
+---Returns the length of the table inclusing the map items.
+---@return number
+function Table:map_length()
+  local ret = 0
+  for _, _ in pairs(self) do
+    ret = ret + 1
+  end
+  return ret
+end
+
 return Table

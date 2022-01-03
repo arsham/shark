@@ -360,4 +360,13 @@ describe('Table', function()
       assert.are.same(_t{}, got)
     end)
   end)
+
+  describe('map_length', function()
+    local t = _t{2, 3, 4, a=10, b=20, c=30}
+
+    it('returns the length of the map', function()
+      local got = t:map_length()
+      assert.are.same(6, got)
+    end)
+  end)
 end)

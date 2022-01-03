@@ -118,7 +118,7 @@ util.command("InstallDependencies", function()
     selene     = _t{'cargo', 'install', 'selene'},
   }
 
-  local total = #commands
+  local total = commands:map_length()
   local count = 0
 
   local job = require('plenary.job')
