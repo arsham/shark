@@ -1,4 +1,4 @@
---{{{
+---{{{ Packer stup
 vim.opt.termguicolors = true
 pcall(require, 'impatient')
 local packer_bootstrap = false
@@ -18,12 +18,12 @@ vim.cmd [[packadd! cfilter]]
 local function full_start()
   return not vim.env.NVIM_START_LIGHT
 end
---}}}
+---}}}
 
---{{{
+---{{{ Plugins
 require('packer').startup({
   function(use)
-    --{{{ Libraries
+    ---{{{ Libraries
     use {
       'wbthomason/packer.nvim',
       event = 'VimEnter',
@@ -31,11 +31,11 @@ require('packer').startup({
     use 'nvim-lua/plenary.nvim'
     use 'norcalli/nvim.lua'
     use 'tjdevries/astronauta.nvim'
-    --}}}
+    ---}}}
 
-    --{{{ Core/System utilities
-    use { 'nathom/filetype.nvim' }
-    use { 'lewis6991/impatient.nvim' }
+    ---{{{ Core/System utilities
+    use 'nathom/filetype.nvim'
+    use 'lewis6991/impatient.nvim'
 
     use {
       'junegunn/fzf',
@@ -95,9 +95,9 @@ require('packer').startup({
       cmd    = { 'UndotreeShow', 'UndotreeToggle' },
       keys   = { '<leader>u' },
     }
-    --}}}
+    ---}}}
 
-    --{{{ git
+    ---{{{ git
     use {
       'tpope/vim-fugitive',
       config = function() require('settings.fugitive') end,
@@ -123,9 +123,9 @@ require('packer').startup({
       config   = function() vim.g.gist_per_page_limit = 100 end,
       cmd      = { 'Gist' },
     }
-    --}}}
+    ---}}}
 
-    --{{{ Visuals
+    ---{{{ Visuals
     use {
       'kyazdani42/nvim-web-devicons',
       event = 'UIEnter',
@@ -174,9 +174,9 @@ require('packer').startup({
       event  = 'UIEnter',
       cond   = full_start,
     }
-    --- }}}
+    ---}}}
 
-    --{{{ Editing
+    ---{{{ Editing
     use {
       'tpope/vim-repeat',
       event = { 'BufRead', 'BufNewFile', 'InsertEnter' },
@@ -258,9 +258,9 @@ require('packer').startup({
       'svban/YankAssassin.vim',
       event = { 'BufRead', 'BufNewFile' },
     }
-    --}}}
+    ---}}}
 
-    --{{{ Programming
+    ---{{{ Programming
     use {
       'neovim/nvim-lspconfig',
       after = { 'nvim-cmp', 'lua-dev.nvim' },
@@ -352,7 +352,7 @@ require('packer').startup({
       after = {'nvim-lspconfig', 'fzf.vim'},
       cond  = full_start,
     }
-    --{{{ Treesitter
+    ---{{{ Treesitter
     use {
       'nvim-treesitter/nvim-treesitter',
       requires = {
@@ -391,7 +391,8 @@ require('packer').startup({
       requires = 'nvim-treesitter/nvim-treesitter',
       after    = 'nvim-treesitter',
     }
-    --}}}
+    ---}}}
+
     use {
       'numToStr/Comment.nvim',
       requires = 'JoosepAlviste/nvim-ts-context-commentstring',
@@ -425,9 +426,9 @@ require('packer').startup({
       'towolf/vim-helm',
       ft = { 'yaml' },
     }
-    --}}}
+    ---}}}
 
-    --{{{ Text objects
+    ---{{{ Text objects
     use {
       'blackCauldron7/surround.nvim',
       config = function() require('settings.surround') end,
@@ -444,9 +445,9 @@ require('packer').startup({
       'kana/vim-textobj-user',
       event = { 'BufRead', 'BufNewFile' },
     }
-    --}}}
+    ---}}}
 
-    --{{{ Misc
+    ---{{{ Misc
     use {
       'iamcco/markdown-preview.nvim',
       run = function()
@@ -474,9 +475,8 @@ require('packer').startup({
       'willchao612/vim-diagon',
       cmd = 'Diagon',
     }
-    --}}}
-    --{{{
-    if packer_bootstrap then
+    ---}}}
+    if packer_bootstrap then---{{{
       require('packer').sync()
     end
 
@@ -492,7 +492,7 @@ require('packer').startup({
     --- Move to lua dir so impatient.nvim can cache it.
     compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
   },
-  --}}}
+  ---}}}
 })
 ---}}}
 

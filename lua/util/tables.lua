@@ -288,7 +288,6 @@ function Table:unique(fn)
 end
 
 ---Sorts list elements in a given order and returns a new Table.
----
 ---@param fn fun(a: any, b: any):boolean
 function Table:sort(fn)
   local ret = _t(vim.deepcopy(self))
@@ -297,7 +296,7 @@ function Table:sort(fn)
 end
 
 ---Executes the fn function on the whole table and returns a new Table.
----@param fn function(v: any) any
+---@param fn fun(v: any):any will pass the Table to the function.
 function Table:exec(fn)
   return _t(fn(self))
 end

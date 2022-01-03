@@ -282,10 +282,10 @@ local internals = function(palette) ---{{{ Internals
       guibg = palette.none,
       style = palette.undercurl,
     },--}}}
-    DiffAdd = {--{{{ Diff
-    --- diff mode: Added line
-    guifg = palette.diff_add_fg,
-    guibg = palette.diff_add_bg,
+    DiffAdd = {---{{{
+      --- diff mode: Added line
+      guifg = palette.diff_add_fg,
+      guibg = palette.diff_add_bg,
     },
     DiffDelete = {
       --- diff mode: Deleted line
@@ -637,604 +637,613 @@ end
 
 local plugin_syntax = function(palette) ---{{{ Plugins
   return {
-    TSString = {--{{{ Treesitter
-    guifg = palette.yellow,
-  },
-  TSStringRegex = {
-    --- For regexes.
-    guifg = palette.purple,
-  },
-  TSStringEscape = {
-    --- For escape characters within a string.
-    guifg = palette.purple,
-  },
-  TSInclude = {
-    --- For includes: `#include` in C, `use` or `extern crate` in Rust, or
-    --- `require` in Lua.
-    guifg = palette.pink,
-  },
-  TSVariable = {
-    guifg = palette.white,
-  },
-  TSVariableBuiltin = {
-    guifg = palette.orange,
-  },
-  TSAnnotation = {
-    --- For C++/Dart attributes, annotations that can be attached to the
-    --- code to denote some kind of meta information.
-    guifg = palette.green,
-  },
-  TSAttribute = {
-    guifg = palette.yellow,
-  },
-  TSBoolean = {
-    --- For booleans.
-    guifg = palette.orange,
-  },
-  TSComment = {
-    guifg = palette.base6,
-  },
-  TSConstant = {
-    guifg = palette.aqua,
-  },
-  TSConstBuiltin = {
-    --- For constant that are built in the language: `nil` in Lua.
-    guifg = palette.orange,
-  },
-  TSConstMacro = {
-    --- For constants that are defined by macros: `NULL` in C.
-    guifg = palette.purple,
-  },
-  TSError = {
-    --- For syntax/parser errors.
-    guifg = palette.error,
-  },
-  TSConditional = {
-    guifg = palette.pink,
-  },
-  TSCharacter = {
-    --- For characters.
-    --- any character constant: 'c', '\n'
-    guifg = palette.yellow,
-  },
-  TSConstructor = {
-    --- For constructor calls and definitions: `= { }` in Lua, and Java
-    --- constructors.
-    guifg = palette.purple,
-  },
-  TSFunction = {
-    guifg = palette.green,
-  },
-  TSFuncBuiltin = {
-    guifg = palette.aqua,
-  },
-  TSFuncMacro = {
-    --- For macro defined fuctions (calls and definitions): each
-    --- `macro_rules` in Rust.
-    guifg = palette.green,
-  },
-  TSKeyword = {
-    guifg = palette.pink,
-  },
-  TSKeywordFunction = {
-    guifg = palette.pink,
-  },
-  TSKeywordOperator = {
-    --- sizeof", "+", "*", etc.
-    guifg = palette.pink,
-  },
-  TSKeywordReturn = {
-    guifg = palette.pink,
-  },
-  TSMethod = {
-    guifg = palette.green,
-  },
-  TSNamespace = {
-    --- For identifiers referring to modules and namespaces.
-    guifg = palette.purple,
-  },
-  TSNumber = {
-    guifg = palette.purple,
-  },
-  TSOperator = {
-    --- For any operator: `+`, but also `->` and `*` in C.
-    guifg = palette.pink,
-  },
-  TSParameter = {
-    --- For parameters of a function.
-    guifg = palette.white,
-  },
-  TSParameterReference = {
-    --- For references to parameters of a function.
-    guifg = palette.white,
-  },
-  TSProperty = {
-    --- Same as `TSField`,accesing for struct members in C.
-    guifg = palette.green,
-  },
-  TSPunctDelimiter = {
-    --- For delimiters ie: `.`
-    guifg = palette.white,
-  },
-  TSPunctBracket = {
-    --- For brackets and parens.
-    guifg = palette.white,
-  },
-  TSPunctSpecial = {
-    --- For special punctutation that does not fall in the catagories
-    --- before.
-    guifg = palette.pink,
-  },
-  TSRepeat = {
-    guifg = palette.pink,
-  },
-  TSSymbol = {
-    --- For identifiers referring to symbols or atoms.
-    guifg = palette.yellow,
-  },
-  TSTag = {
-    --- Tags like html tag names.
-    guifg = palette.pink,
-  },
-  TSTagDelimiter = {
-    --- Tag delimiter like `<` `>` `/`
-    guifg = palette.white,
-  },
-  TSText = {
-    --- For strings considered text in a markup language.
-    guifg = palette.text,
-  },
-  TSTextReference = {
-    guifg = palette.yellow,
-  },
-  TSEmphasis = {
-    --- For text to be represented with emphasis.
-    guifg = palette.blue_pale,
-  },
-  TSUnderline = {
-    --- For text to be represented with an underline.
-    guifg = palette.white,
-    guibg = palette.none,
-    style = palette.underline,
-  },
-  TSTitle = {
-    --- Text that is part of a title.
-    guifg = palette.title,
-    guibg = palette.none,
-    style = palette.bold,
-  },
-  TSLiteral = {
-    --- Literal text.
-    guifg = palette.white,
-  },
-  TSURI = {
-    --- Any URI like a link or email.
-    guifg = palette.link,
-  },
-  TSTagAttribute = {
-    guifg = palette.green,
-  },
-  TSLabel = {
-    --- For labels: `label:` in C and `:label:` in Lua.
-    guifg = palette.pink,
-  },
-  TSType = {
-    --- For types.
-    guifg = palette.aqua,
-  },
-  TSTypeBuiltin = {
-    --- For builtin types.
-    guifg = palette.purple,
-  },
-  TSException = {
-    --- For exception related keywords.  try, catch, throw
-    guifg = palette.pink,
-  },
-  TSField = {
-    --- For fields.
-    guifg = palette.white,
-  },
-  TSFloat = {
-    guifg = palette.purple,
-  },
-  TSNote = {
-    guifg = palette.orange,
-    guibg = palette.info,
-    style = palette.bold,
-  },
-  TSWarning = {
-    --- TODO, HACK, WARNING
-    guifg = palette.black,
-    guibg = palette.warning,
-    style = palette.bold,
-  },
-  TSDanger = {
-    --- FIXME, XXX, BUG
-    guifg = palette.black,
-    guibg = palette.error,
-    style = palette.bold,
-  },
-  TSDefinitionUsage = {
-    guibg = palette.base5,
-  },
-  TSDefinition = {
-    guibg = palette.base5,
-  },
-  --- }}}
-  LspDiagnosticsDefaultError = { --- {{{ LSP
-  --- used for "Error" diagnostic virtual text
-  guifg = palette.error,
-  },
-  LspDiagnosticsError = {
-    guifg = palette.error,
-  },
-  LspDiagnosticsWarning = {
-    guifg = palette.yellow,
-  },
-  LspDiagnosticsInformation = {
-    guifg = palette.blue_pale,
-  },
-  LspDiagnosticsHint = {
-    guifg = palette.purple,
-  },
-  LspDiagnosticsSignError = {
-    --- used for "Error" diagnostic signs in sign column
-    guifg = palette.red,
-    guibg = palette.base2,
-  },
-  LspDiagnosticsFloatingError = {
-    --- used for "Error" diagnostic messages in the diagnostics float
-    guifg = palette.error,
-  },
-  LspDiagnosticsSignWarning = {
-    --- used for "Warning" diagnostic signs in sign column
-    guifg = palette.yellow,
-    guibg = palette.base2,
-  },
-  LspDiagnosticsFloatingWarning = {
-    --- used for "Warning" diagnostic messages in the diagnostics float
-    guifg = palette.yellow,
-  },
-  LspDiagnosticsSignInformation = {
-    --- used for "Information" diagnostic signs in sign column
-    guibg = palette.base2,
-    guifg = palette.white,
-  },
-  LspDiagnosticsFloatingInformation = {
-    --- used for "Information" diagnostic messages in the diagnostics float
-    guifg = palette.blue_pale,
-  },
-  LspDiagnosticsSignHint = {
-    --- used for "Hint" diagnostic signs in sign column
-    guifg = palette.aqua,
-    guibg = palette.base2,
-  },
-  LspDiagnosticsFloatingHint = {
-    --- used for "Hint" diagnostic messages in the diagnostics float
-    guifg = palette.purple,
-  },
-  LspDiagnosticsVirtualTextError = {
-    --- Virtual text "Error"
-    guifg = palette.red,
-  },
-  LspDiagnosticsVirtualTextWarning = {
-    --- Virtual text "Warning"
-    guifg = palette.yellow,
-  },
-  LspDiagnosticsVirtualTextInformation = {
-    --- Virtual text "Information"
-    guifg = palette.white,
-  },
-  LspDiagnosticsVirtualTextHint = {
-    --- Virtual text "Hint"
-    guifg = palette.aqua,
-  },
-  LspDiagnosticsUnderlineError = {
-    --- used to underline "Error" diagnostics.
-    --- style = palette.undercurl,
-    guisp = palette.red,
-  },
-  LspDiagnosticsDefaultWarning = {
-    --- used for "Warning" diagnostic signs in sign column
-    guifg = palette.yellow,
-  },
-  LspDiagnosticsUnderlineWarning = {
-    --- used to underline "Warning" diagnostics.
-    --- style = palette.undercurl,
-    guisp = palette.yellow,
-  },
-  LspDiagnosticsDefaultInformation = {
-    --- used for "Information" diagnostic virtual text
-    guifg = palette.blue_pale,
-  },
-  LspDiagnosticsUnderlineInformation = {
-    --- used to underline "Information" diagnostics.
-    --- style = palette.undercurl,
-    guisp = palette.white,
-  },
-  LspDiagnosticsDefaultHint = {
-    --- used for "Hint" diagnostic virtual text
-    guifg = palette.purple,
-  },
-  LspDiagnosticsUnderlineHint = {
-    --- used to underline "Hint" diagnostics.
-    --- style = palette.undercurl,
-    guisp = palette.aqua,
-  },
-  LspSignatureActiveParameter = {
-    guifg = palette.orange,
-  },
-  LspCodeLens = {
-    guifg = palette.orange,
-  },
-  LspFloatWinNormal = {
-    guibg = palette.blue_pale,
-  },
-  LspFloatWinBorder = {
-    guifg = palette.border_highlight,
-  },
-  LspSagaBorderTitle = {
-    guifg = palette.cyan,
-  },
-  LspSagaHoverBorder = {
-    guifg = palette.blue,
-  },
-  LspSagaRenameBorder = {
-    guifg = palette.green,
-  },
-  LspSagaDefPreviewBorder = {
-    guifg = palette.green,
-  },
-  LspSagaCodeActionBorder = {
-    guifg = palette.blue,
-  },
-  LspSagaFinderSelection = {
-    guifg = palette.bg_visual,
-  },
-  LspSagaCodeActionTitle = {
-    guifg = palette.blue1,
-  },
-  LspSagaCodeActionContent = {
-    guifg = palette.purple,
-  },
-  LspSagaSignatureHelpBorder = {
-    guifg = palette.red,
-  },
-  LspLinesDiagBorder = {
-    guifg = palette.contrast,
-  },
-  LspReferenceText = {
-    --- used for highlighting "text" references
-    guifg = palette.accent,
-    guibg = palette.highlight,
-  },
-  LspReferenceRead = {
-    --- used for highlighting "read" references
-    guifg = palette.accent,
-    guibg = palette.highlight,
-  },
-  LspReferenceWrite = {
-    --- used for highlighting "write" references
-    guifg = palette.accent,
-    guibg = palette.highlight,
-  },
-  LspTroubleText = {
-    guifg = palette.text,
-  },
-  LspTroubleCount = {
-    guifg = palette.purple,
-    guibg = palette.active,
-  },
-  LspTroubleNormal = {
-    guifg = palette.white,
-    guibg = palette.sidebar,
-  },
-
-  DiagnosticError = {
-    guifg = palette.error,
-  },
-  DiagnosticLineNrError = {
-    guifg = palette.base4,
-    guibg = palette.error,
-  },
-  DiagnosticWarning = {
-    guifg = palette.warning,
-  },
-  DiagnosticLineNrWarn = {
-    guifg = palette.base4,
-    guibg = palette.warning,
-  },
-  DiagnosticInformation = {
-    guifg = palette.green,
-  },
-  DiagnosticLineNrInfo = {
-    guifg = palette.base4,
-    guibg = palette.green,
-  },
-  DiagnosticHint = {
-    guifg = palette.blue_pale,
-  },
-  DiagnosticLineNrHint = {
-    guifg = palette.base4,
-    guibg = palette.blue_pale,
-  },
-  --- }}}
-  ALEErrorSign = { --- {{{ ALE
-    guifg = palette.error,
-    guibg = palette.base2,
-  },
-  ALEStyleErrorSign = {
-    guifg = palette.error,
-    guibg = palette.base2,
-  },
-  ALEWarningSign = {
-    guifg = palette.warning,
-    guibg = palette.base2,
-  },
-  ALEStyleWarningSign = {
-    guifg = palette.warning,
-    guibg = palette.base2,
-  },
-  ALEInfoSign = {
-    guifg = palette.green,
-    guibg = palette.base2,
-  },
-  ALEDummySign = {
-    guifg = palette.blue_pale,
-    guibg = palette.base2,
-  },
-  --- }}}
-  illuminatedWord = {--{{{
-    guibg = palette.white,
-  },
-  illuminatedCurWord = {
-    guibg = palette.white,
-  },
-  CursorWord0 = {
-    guibg = palette.white,
-    guifg = palette.black,
-  },
-  CursorWord1 = {
-    guibg = palette.white,
-    guifg = palette.black,
-  },--}}}
-    NvimTreeFolderName = { --- {{{ Nvim Tree
-    guifg = palette.white,
-  },
-  NvimTreeFolderIcon= {
-    guifg = palette.accent,
-  },
-  NvimTreeEmptyFolderName= {
-    guifg = palette.disabled,
-  },
-  NvimTreeOpenedFolderName= {
-    guifg = palette.accent,
-    style = palette.italic,
-  },
-  NvimTreeIndentMarker = {
-    guifg = palette.disabled,
-  },
-  NvimTreeGitDirty = {
-    guifg = palette.blue,
-  },
-  NvimTreeGitNew = {
-    guifg = palette.green,
-  },
-  NvimTreeGitStaged = {
-    guifg = palette.comments,
-  },
-  NvimTreeGitDeleted = {
-    guifg = palette.red,
-  },
-  NvimTreeOpenedFile = {
-    guifg = palette.accent,
-  },
-  NvimTreeImageFile = {
-    guifg = palette.yellow,
-  },
-  NvimTreeMarkdownFile = {
-    guifg = palette.pink,
-  },
-  NvimTreeExecFile = {
-    guifg = palette.green,
-  },
-  NvimTreeRootFolder = {
-    guifg = palette.pink,
-  },
-  NvimTreeSpecialFile = {
-    guifg = palette.white,
-    guibg = palette.none,
-    style = palette.none,
-  },
-  NvimTreeNormal = {
-    guifg = palette.white,
-    guibg = palette.sidebar_bg,
-  },
-  --- }}}
-  GitSignsAdd = { --- {{{ Git Signs
-    guifg = palette.green,
-    guibg = palette.base2,
-  },
-  GitSignsAddNr = {
-    guifg = palette.green,
-    guibg = palette.base2,
-  },
-  GitSignsAddLn = {
-    guifg = palette.green,
-    guibg = palette.base2,
-  },
-  GitSignsChange = {
-    guifg = palette.blue,
-    guibg = palette.base2,
-  },
-  GitSignsChangeNr = {
-    guifg = palette.blue,
-    guibg = palette.base2,
-  },
-  GitSignsChangeLn = {
-    guifg = palette.blue,
-    guibg = palette.base2,
-  },
-  GitSignsDelete = {
-    guifg = palette.red,
-    guibg = palette.base2,
-  },
-  GitSignsDeleteNr = {
-    guifg = palette.red,
-    guibg = palette.base2,
-  },
-  GitSignsDeleteLn = {
-    guifg = palette.red,
-    guibg = palette.base2,
-  },
-  --- }}}
-    NotifyERRORBorder = { --- {{{ Notifications
-    guifg = palette.error,
-  },
-  NotifyWARNBorder = {
-    guifg = palette.warning,
-  },
-  NotifyINFOBorder = {
-    guifg = palette.green,
-  },
-  NotifyDEBUGBorder = {
-    guifg = palette.grey,
-  },
-  NotifyTRACEBorder = {
-    guifg = palette.pink,
-  },
-  NotifyERRORIcon = {
-    guifg = palette.error,
-  },
-  NotifyWARNIcon = {
-    guifg = palette.warning,
-  },
-  NotifyINFOIcon = {
-    guifg = palette.green,
-  },
-  NotifyDEBUGIcon = {
-    guifg = palette.grey,
-  },
-  NotifyTRACEIcon = {
-    guifg = palette.pink,
-  },
-  NotifyERRORTitle = {
-    guifg = palette.error,
-  },
-  NotifyWARNTitle = {
-    guifg = palette.warning,
-  },
-  NotifyINFOTitle = {
-    guifg = palette.green,
-  },
-  NotifyDEBUGTitle = {
-    guifg = palette.grey,
-  },
-  NotifyTRACETitle = {
-    guifg = palette.pink,
-  },
-  ---}}}
-}
+    ---{{{ Treesitter
+    TSString = {
+      guifg = palette.yellow,
+    },
+    TSStringRegex = {
+      --- For regexes.
+      guifg = palette.purple,
+    },
+    TSStringEscape = {
+      --- For escape characters within a string.
+      guifg = palette.purple,
+    },
+    TSInclude = {
+      --- For includes: `#include` in C, `use` or `extern crate` in Rust, or
+      --- `require` in Lua.
+      guifg = palette.pink,
+    },
+    TSVariable = {
+      guifg = palette.white,
+    },
+    TSVariableBuiltin = {
+      guifg = palette.orange,
+    },
+    TSAnnotation = {
+      --- For C++/Dart attributes, annotations that can be attached to the
+      --- code to denote some kind of meta information.
+      guifg = palette.green,
+    },
+    TSAttribute = {
+      guifg = palette.yellow,
+    },
+    TSBoolean = {
+      --- For booleans.
+      guifg = palette.orange,
+    },
+    TSComment = {
+      guifg = palette.base6,
+    },
+    TSConstant = {
+      guifg = palette.aqua,
+    },
+    TSConstBuiltin = {
+      --- For constant that are built in the language: `nil` in Lua.
+      guifg = palette.orange,
+    },
+    TSConstMacro = {
+      --- For constants that are defined by macros: `NULL` in C.
+      guifg = palette.purple,
+    },
+    TSError = {
+      --- For syntax/parser errors.
+      guifg = palette.error,
+    },
+    TSConditional = {
+      guifg = palette.pink,
+    },
+    TSCharacter = {
+      --- For characters.
+      --- any character constant: 'c', '\n'
+      guifg = palette.yellow,
+    },
+    TSConstructor = {
+      --- For constructor calls and definitions: `= { }` in Lua, and Java
+      --- constructors.
+      guifg = palette.purple,
+    },
+    TSFunction = {
+      guifg = palette.green,
+    },
+    TSFuncBuiltin = {
+      guifg = palette.aqua,
+    },
+    TSFuncMacro = {
+      --- For macro defined fuctions (calls and definitions): each
+      --- `macro_rules` in Rust.
+      guifg = palette.green,
+    },
+    TSKeyword = {
+      guifg = palette.pink,
+    },
+    TSKeywordFunction = {
+      guifg = palette.pink,
+    },
+    TSKeywordOperator = {
+      --- sizeof", "+", "*", etc.
+      guifg = palette.pink,
+    },
+    TSKeywordReturn = {
+      guifg = palette.pink,
+    },
+    TSMethod = {
+      guifg = palette.green,
+    },
+    TSNamespace = {
+      --- For identifiers referring to modules and namespaces.
+      guifg = palette.purple,
+    },
+    TSNumber = {
+      guifg = palette.purple,
+    },
+    TSOperator = {
+      --- For any operator: `+`, but also `->` and `*` in C.
+      guifg = palette.pink,
+    },
+    TSParameter = {
+      --- For parameters of a function.
+      guifg = palette.white,
+    },
+    TSParameterReference = {
+      --- For references to parameters of a function.
+      guifg = palette.white,
+    },
+    TSProperty = {
+      --- Same as `TSField`,accesing for struct members in C.
+      guifg = palette.green,
+    },
+    TSPunctDelimiter = {
+      --- For delimiters ie: `.`
+      guifg = palette.white,
+    },
+    TSPunctBracket = {
+      --- For brackets and parens.
+      guifg = palette.white,
+    },
+    TSPunctSpecial = {
+      --- For special punctutation that does not fall in the catagories
+      --- before.
+      guifg = palette.pink,
+    },
+    TSRepeat = {
+      guifg = palette.pink,
+    },
+    TSSymbol = {
+      --- For identifiers referring to symbols or atoms.
+      guifg = palette.yellow,
+    },
+    TSTag = {
+      --- Tags like html tag names.
+      guifg = palette.pink,
+    },
+    TSTagDelimiter = {
+      --- Tag delimiter like `<` `>` `/`
+      guifg = palette.white,
+    },
+    TSText = {
+      --- For strings considered text in a markup language.
+      guifg = palette.text,
+    },
+    TSTextReference = {
+      guifg = palette.yellow,
+    },
+    TSEmphasis = {
+      --- For text to be represented with emphasis.
+      guifg = palette.blue_pale,
+    },
+    TSUnderline = {
+      --- For text to be represented with an underline.
+      guifg = palette.white,
+      guibg = palette.none,
+      style = palette.underline,
+    },
+    TSTitle = {
+      --- Text that is part of a title.
+      guifg = palette.title,
+      guibg = palette.none,
+      style = palette.bold,
+    },
+    TSLiteral = {
+      --- Literal text.
+      guifg = palette.white,
+    },
+    TSURI = {
+      --- Any URI like a link or email.
+      guifg = palette.link,
+    },
+    TSTagAttribute = {
+      guifg = palette.green,
+    },
+    TSLabel = {
+      --- For labels: `label:` in C and `:label:` in Lua.
+      guifg = palette.pink,
+    },
+    TSType = {
+      --- For types.
+      guifg = palette.aqua,
+    },
+    TSTypeBuiltin = {
+      --- For builtin types.
+      guifg = palette.purple,
+    },
+    TSException = {
+      --- For exception related keywords.  try, catch, throw
+      guifg = palette.pink,
+    },
+    TSField = {
+      --- For fields.
+      guifg = palette.white,
+    },
+    TSFloat = {
+      guifg = palette.purple,
+    },
+    TSNote = {
+      guifg = palette.orange,
+      guibg = palette.info,
+      style = palette.bold,
+    },
+    TSWarning = {
+      --- TODO, HACK, WARNING
+      guifg = palette.black,
+      guibg = palette.warning,
+      style = palette.bold,
+    },
+    TSDanger = {
+      --- FIXME, XXX, BUG
+      guifg = palette.black,
+      guibg = palette.error,
+      style = palette.bold,
+    },
+    TSDefinitionUsage = {
+      guibg = palette.base5,
+    },
+    TSDefinition = {
+      guibg = palette.base5,
+    },
+    ---}}}
+    ---{{{ LSP
+    LspDiagnosticsDefaultError = {
+      --- used for "Error" diagnostic virtual text
+      guifg = palette.error,
+    },
+    LspDiagnosticsError = {
+      guifg = palette.error,
+    },
+    LspDiagnosticsWarning = {
+      guifg = palette.yellow,
+    },
+    LspDiagnosticsInformation = {
+      guifg = palette.blue_pale,
+    },
+    LspDiagnosticsHint = {
+      guifg = palette.purple,
+    },
+    LspDiagnosticsSignError = {
+      --- used for "Error" diagnostic signs in sign column
+      guifg = palette.red,
+      guibg = palette.base2,
+    },
+    LspDiagnosticsFloatingError = {
+      --- used for "Error" diagnostic messages in the diagnostics float
+      guifg = palette.error,
+    },
+    LspDiagnosticsSignWarning = {
+      --- used for "Warning" diagnostic signs in sign column
+      guifg = palette.yellow,
+      guibg = palette.base2,
+    },
+    LspDiagnosticsFloatingWarning = {
+      --- used for "Warning" diagnostic messages in the diagnostics float
+      guifg = palette.yellow,
+    },
+    LspDiagnosticsSignInformation = {
+      --- used for "Information" diagnostic signs in sign column
+      guibg = palette.base2,
+      guifg = palette.white,
+    },
+    LspDiagnosticsFloatingInformation = {
+      --- used for "Information" diagnostic messages in the diagnostics float
+      guifg = palette.blue_pale,
+    },
+    LspDiagnosticsSignHint = {
+      --- used for "Hint" diagnostic signs in sign column
+      guifg = palette.aqua,
+      guibg = palette.base2,
+    },
+    LspDiagnosticsFloatingHint = {
+      --- used for "Hint" diagnostic messages in the diagnostics float
+      guifg = palette.purple,
+    },
+    LspDiagnosticsVirtualTextError = {
+      --- Virtual text "Error"
+      guifg = palette.red,
+    },
+    LspDiagnosticsVirtualTextWarning = {
+      --- Virtual text "Warning"
+      guifg = palette.yellow,
+    },
+    LspDiagnosticsVirtualTextInformation = {
+      --- Virtual text "Information"
+      guifg = palette.white,
+    },
+    LspDiagnosticsVirtualTextHint = {
+      --- Virtual text "Hint"
+      guifg = palette.aqua,
+    },
+    LspDiagnosticsUnderlineError = {
+      --- used to underline "Error" diagnostics.
+      --- style = palette.undercurl,
+      guisp = palette.red,
+    },
+    LspDiagnosticsDefaultWarning = {
+      --- used for "Warning" diagnostic signs in sign column
+      guifg = palette.yellow,
+    },
+    LspDiagnosticsUnderlineWarning = {
+      --- used to underline "Warning" diagnostics.
+      --- style = palette.undercurl,
+      guisp = palette.yellow,
+    },
+    LspDiagnosticsDefaultInformation = {
+      --- used for "Information" diagnostic virtual text
+      guifg = palette.blue_pale,
+    },
+    LspDiagnosticsUnderlineInformation = {
+      --- used to underline "Information" diagnostics.
+      --- style = palette.undercurl,
+      guisp = palette.white,
+    },
+    LspDiagnosticsDefaultHint = {
+      --- used for "Hint" diagnostic virtual text
+      guifg = palette.purple,
+    },
+    LspDiagnosticsUnderlineHint = {
+      --- used to underline "Hint" diagnostics.
+      --- style = palette.undercurl,
+      guisp = palette.aqua,
+    },
+    LspSignatureActiveParameter = {
+      guifg = palette.orange,
+    },
+    LspCodeLens = {
+      guifg = palette.orange,
+    },
+    LspFloatWinNormal = {
+      guibg = palette.blue_pale,
+    },
+    LspFloatWinBorder = {
+      guifg = palette.border_highlight,
+    },
+    LspSagaBorderTitle = {
+      guifg = palette.cyan,
+    },
+    LspSagaHoverBorder = {
+      guifg = palette.blue,
+    },
+    LspSagaRenameBorder = {
+      guifg = palette.green,
+    },
+    LspSagaDefPreviewBorder = {
+      guifg = palette.green,
+    },
+    LspSagaCodeActionBorder = {
+      guifg = palette.blue,
+    },
+    LspSagaFinderSelection = {
+      guifg = palette.bg_visual,
+    },
+    LspSagaCodeActionTitle = {
+      guifg = palette.blue1,
+    },
+    LspSagaCodeActionContent = {
+      guifg = palette.purple,
+    },
+    LspSagaSignatureHelpBorder = {
+      guifg = palette.red,
+    },
+    LspLinesDiagBorder = {
+      guifg = palette.contrast,
+    },
+    LspReferenceText = {
+      --- used for highlighting "text" references
+      guifg = palette.accent,
+      guibg = palette.highlight,
+    },
+    LspReferenceRead = {
+      --- used for highlighting "read" references
+      guifg = palette.accent,
+      guibg = palette.highlight,
+    },
+    LspReferenceWrite = {
+      --- used for highlighting "write" references
+      guifg = palette.accent,
+      guibg = palette.highlight,
+    },
+    LspTroubleText = {
+      guifg = palette.text,
+    },
+    LspTroubleCount = {
+      guifg = palette.purple,
+      guibg = palette.active,
+    },
+    LspTroubleNormal = {
+      guifg = palette.white,
+      guibg = palette.sidebar,
+    },
+    ---}}}
+    ---{{{ Diagnostics
+    DiagnosticError = {
+      guifg = palette.error,
+    },
+    DiagnosticLineNrError = {
+      guifg = palette.base4,
+      guibg = palette.error,
+    },
+    DiagnosticWarning = {
+      guifg = palette.warning,
+    },
+    DiagnosticLineNrWarn = {
+      guifg = palette.base4,
+      guibg = palette.warning,
+    },
+    DiagnosticInformation = {
+      guifg = palette.green,
+    },
+    DiagnosticLineNrInfo = {
+      guifg = palette.base4,
+      guibg = palette.green,
+    },
+    DiagnosticHint = {
+      guifg = palette.blue_pale,
+    },
+    DiagnosticLineNrHint = {
+      guifg = palette.base4,
+      guibg = palette.blue_pale,
+    },
+    ---}}}
+    ---{{{ ALE
+    ALEErrorSign = {
+      guifg = palette.error,
+      guibg = palette.base2,
+    },
+    ALEStyleErrorSign = {
+      guifg = palette.error,
+      guibg = palette.base2,
+    },
+    ALEWarningSign = {
+      guifg = palette.warning,
+      guibg = palette.base2,
+    },
+    ALEStyleWarningSign = {
+      guifg = palette.warning,
+      guibg = palette.base2,
+    },
+    ALEInfoSign = {
+      guifg = palette.green,
+      guibg = palette.base2,
+    },
+    ALEDummySign = {
+      guifg = palette.blue_pale,
+      guibg = palette.base2,
+    },
+    ---}}}
+    ---{{{ Misc
+    illuminatedWord = {
+      guibg = palette.white,
+    },
+    illuminatedCurWord = {
+      guibg = palette.white,
+    },
+    CursorWord0 = {
+      guibg = palette.white,
+      guifg = palette.black,
+    },
+    CursorWord1 = {
+      guibg = palette.white,
+      guifg = palette.black,
+    },
+    ---}}}
+    ---{{{ Nvim-Tree
+    NvimTreeFolderName = {
+      guifg = palette.white,
+    },
+    NvimTreeFolderIcon= {
+      guifg = palette.accent,
+    },
+    NvimTreeEmptyFolderName= {
+      guifg = palette.disabled,
+    },
+    NvimTreeOpenedFolderName= {
+      guifg = palette.accent,
+      style = palette.italic,
+    },
+    NvimTreeIndentMarker = {
+      guifg = palette.disabled,
+    },
+    NvimTreeGitDirty = {
+      guifg = palette.blue,
+    },
+    NvimTreeGitNew = {
+      guifg = palette.green,
+    },
+    NvimTreeGitStaged = {
+      guifg = palette.comments,
+    },
+    NvimTreeGitDeleted = {
+      guifg = palette.red,
+    },
+    NvimTreeOpenedFile = {
+      guifg = palette.accent,
+    },
+    NvimTreeImageFile = {
+      guifg = palette.yellow,
+    },
+    NvimTreeMarkdownFile = {
+      guifg = palette.pink,
+    },
+    NvimTreeExecFile = {
+      guifg = palette.green,
+    },
+    NvimTreeRootFolder = {
+      guifg = palette.pink,
+    },
+    NvimTreeSpecialFile = {
+      guifg = palette.white,
+      guibg = palette.none,
+      style = palette.none,
+    },
+    NvimTreeNormal = {
+      guifg = palette.white,
+      guibg = palette.sidebar_bg,
+    },
+    ---}}}
+    ---{{{ Git Signs
+    GitSignsAdd = {
+      guifg = palette.green,
+      guibg = palette.base2,
+    },
+    GitSignsAddNr = {
+      guifg = palette.green,
+      guibg = palette.base2,
+    },
+    GitSignsAddLn = {
+      guifg = palette.green,
+      guibg = palette.base2,
+    },
+    GitSignsChange = {
+      guifg = palette.blue,
+      guibg = palette.base2,
+    },
+    GitSignsChangeNr = {
+      guifg = palette.blue,
+      guibg = palette.base2,
+    },
+    GitSignsChangeLn = {
+      guifg = palette.blue,
+      guibg = palette.base2,
+    },
+    GitSignsDelete = {
+      guifg = palette.red,
+      guibg = palette.base2,
+    },
+    GitSignsDeleteNr = {
+      guifg = palette.red,
+      guibg = palette.base2,
+    },
+    GitSignsDeleteLn = {
+      guifg = palette.red,
+      guibg = palette.base2,
+    },
+    ---}}}
+    ---{{{ Notifications
+    NotifyERRORBorder = {
+      guifg = palette.error,
+    },
+    NotifyWARNBorder = {
+      guifg = palette.warning,
+    },
+    NotifyINFOBorder = {
+      guifg = palette.green,
+    },
+    NotifyDEBUGBorder = {
+      guifg = palette.grey,
+    },
+    NotifyTRACEBorder = {
+      guifg = palette.pink,
+    },
+    NotifyERRORIcon = {
+      guifg = palette.error,
+    },
+    NotifyWARNIcon = {
+      guifg = palette.warning,
+    },
+    NotifyINFOIcon = {
+      guifg = palette.green,
+    },
+    NotifyDEBUGIcon = {
+      guifg = palette.grey,
+    },
+    NotifyTRACEIcon = {
+      guifg = palette.pink,
+    },
+    NotifyERRORTitle = {
+      guifg = palette.error,
+    },
+    NotifyWARNTitle = {
+      guifg = palette.warning,
+    },
+    NotifyINFOTitle = {
+      guifg = palette.green,
+    },
+    NotifyDEBUGTitle = {
+      guifg = palette.grey,
+    },
+    NotifyTRACETitle = {
+      guifg = palette.pink,
+    },
+    ---}}}
+  }
 end
 ---}}}
 
