@@ -1,18 +1,19 @@
 local util = require('util')
-local command = util.command
 local M = {}
 
-
-command("Filename", function()
-  vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {title="Filename", timeout=3000})
+util.command("Filename", function()
+  vim.notify(vim.fn.expand '%:p', vim.lsp.log_levels.INFO, {
+    title="Filename",
+    timeout=3000,
+  })
 end)
-command("YankFilename",  function() vim.fn.setreg('"', vim.fn.expand '%:t') end)
-command("YankFilenameC", function() vim.fn.setreg('+', vim.fn.expand '%:t') end)
-command("YankFilepath",  function() vim.fn.setreg('"', vim.fn.expand '%:p') end)
-command("YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end)
+util.command("YankFilename",  function() vim.fn.setreg('"', vim.fn.expand '%:t') end)
+util.command("YankFilenameC", function() vim.fn.setreg('+', vim.fn.expand '%:t') end)
+util.command("YankFilepath",  function() vim.fn.setreg('"', vim.fn.expand '%:p') end)
+util.command("YankFilepathC", function() vim.fn.setreg('+', vim.fn.expand '%:p') end)
 
-command("MergeConflict", ":grep '<<<<<<< HEAD'")
-command("JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]])
+util.command("MergeConflict", ":grep '<<<<<<< HEAD'")
+util.command("JsonDiff",      [[vert ball | windo execute '%!gojq' | windo diffthis]])
 
 ---Sets up a watch on the filename if it is a lua module.
 ---@param filenames string[]
@@ -39,6 +40,7 @@ function M.watch_file_changes(filenames)
   local names = {}
   for _, module in ipairs(modules) do
     table.insert(names, module.name)
+
     util.autocmd{"WATCH_LUA_FILE BufWritePost", module.name, run=function()
       for _, mod in ipairs(modules) do
         package.loaded[mod.module] = nil
@@ -49,6 +51,7 @@ function M.watch_file_changes(filenames)
         end
         require(mod.module)
       end
+
       local msg = table.concat(names, "\n")
       vim.notify(msg, vim.lsp.log_levels.INFO, {
         title   = 'Reloaded',
@@ -65,14 +68,17 @@ function M.watch_file_changes(filenames)
 end
 
 util.augroup{"WATCH_LUA_FILE"}
-command("WatchLuaFileChanges", function(arg)
+util.command("WatchLuaFileChanges", function(arg)
   local filename = vim.fn.expand('%:p')
-  local files = arg and vim.split(arg) or {}
+  local files = {}
+  if arg and arg.args ~= "" then
+    files = vim.split(arg.args, ' ') or {}
+  end
   table.insert(files, filename)
   M.watch_file_changes(files)
 end, {nargs='*', complete='file'})
 
-command("CC", function()
+util.command("CC", function()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local config = vim.api.nvim_win_get_config(win)
     if config.relative ~= "" then
@@ -81,7 +87,7 @@ command("CC", function()
   end
 end)
 
-command("FoldComments", function()
+util.command("FoldComments", function()
   vim.wo.foldexpr=[[getline(v:lnum)=~'^\s*//']]
   vim.wo.foldmethod="expr"
 end)
@@ -97,7 +103,7 @@ util.command('ToggleRelativeNumbers', function()
   vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
 end)
 
-command("InstallDependencies", function()
+util.command("InstallDependencies", function()
   local commands = _t{
     golangci   = _t{"go", "install", "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0"},
     gojq       = _t{"go", "install", "github.com/itchyny/gojq/cmd/gojq@latest"},
