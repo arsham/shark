@@ -87,5 +87,5 @@ local function nextHeading(down)
 end
 
 local desc = 'jump to the next heading in markdown document'
-util.nnoremap{']]', function() nextHeading(true)  end, buffer=true, silent=true, desc=desc}
-util.nnoremap{'[[', function() nextHeading(false) end, buffer=true, silent=true, desc=desc}
+util.nnoremap{']]', function() nextHeading(false)  end, buffer=true, silent=true, desc=desc}
+util.nnoremap{'[[', function() nextHeading(true) end, buffer=true, silent=true, desc=desc}
