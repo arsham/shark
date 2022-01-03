@@ -1160,39 +1160,39 @@ local plugin_syntax = function(palette) ---{{{ Plugins
     ---}}}
     ---{{{ Git Signs
     GitSignsAdd = {
-      guifg = palette.green,
+      guifg = palette.diff_add_bg,
       guibg = palette.base2,
     },
     GitSignsAddNr = {
-      guifg = palette.green,
+      guifg = palette.diff_add_bg,
       guibg = palette.base2,
     },
     GitSignsAddLn = {
-      guifg = palette.green,
+      guifg = palette.diff_add_bg,
       guibg = palette.base2,
     },
     GitSignsChange = {
-      guifg = palette.blue,
+      guifg = palette.diff_change_bg,
       guibg = palette.base2,
     },
     GitSignsChangeNr = {
-      guifg = palette.blue,
+      guifg = palette.diff_change_bg,
       guibg = palette.base2,
     },
     GitSignsChangeLn = {
-      guifg = palette.blue,
+      guifg = palette.diff_change_bg,
       guibg = palette.base2,
     },
     GitSignsDelete = {
-      guifg = palette.red,
+      guifg = palette.diff_remove_bg,
       guibg = palette.base2,
     },
     GitSignsDeleteNr = {
-      guifg = palette.red,
+      guifg = palette.diff_remove_bg,
       guibg = palette.base2,
     },
     GitSignsDeleteLn = {
-      guifg = palette.red,
+      guifg = palette.diff_remove_bg,
       guibg = palette.base2,
     },
     ---}}}

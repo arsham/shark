@@ -1,8 +1,8 @@
 vim.opt.termguicolors = true
 require('plugins')
 if not pcall(require, 'nvim') then return end
-require('util')
 
+require('util')
 require('options')
 require('visuals')
 require('autocmd')

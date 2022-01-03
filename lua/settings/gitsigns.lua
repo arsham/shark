@@ -3,11 +3,11 @@ local gitsigns = require('gitsigns')
 
 gitsigns.setup {
   signs = {
-    add          = {text = '░', show_count = true},
-    change       = {text = '▒', show_count = true},
-    delete       = {text = '░', show_count = true},
-    topdelete    = {text = '▔', show_count = true},
-    changedelete = {text = '▎', show_count = true},
+    add          = {text = '▌', show_count = true},
+    change       = {text = '▌', show_count = true},
+    delete       = {text = '▐', show_count = true},
+    topdelete    = {text = '▛', show_count = true},
+    changedelete = {text = '▚', show_count = true},
   },
   sign_priority = 10,
   count_chars = {
