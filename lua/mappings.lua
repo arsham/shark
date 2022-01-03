@@ -29,10 +29,11 @@ util.nnoremap{'g=', 'gg=Gg``', desc='Re-indent the whole buffer'}
 --{{{ Insert empty lines
 
 ---Inserts empty lines near the cursor.
+---@param name string name of the mapping to register for repeating.
 ---@param count number  Number of lines to insert.
 ---@param add number 0 to insert after current line, -1 to insert before current
 ---line.
-local function insert_empty_lines(count, add)
+local function insert_empty_lines(name, count, add)
   if count == 0 then
     count = 1
   end
@@ -42,14 +43,19 @@ local function insert_empty_lines(count, add)
   end
   local pos = vim.api.nvim_win_get_cursor(0)
   vim.api.nvim_buf_set_lines(0, pos[1]+add, pos[1]+add, false, lines)
+  local key = vim.api.nvim_replace_termcodes(name, true, false, true)
+  vim.fn["repeat#set"](key, vim.v.count)
 end
 
-util.nnoremap{']<space>', function()
-  insert_empty_lines(vim.v.count, 0)
+util.nnoremap{'<Plug>EmptySpaceAfter', function()
+  insert_empty_lines('<Plug>EmptySpaceAfter', vim.v.count, 0)
 end, silent=true, desc='insert [count]empty line(s) below current line'}
-util.nnoremap{'[<space>', function()
-  insert_empty_lines(vim.v.count, -1)
+util.nmap{']<space>', '<Plug>EmptySpaceAfter', silent=true, desc='insert [count]empty line(s) below current line'}
+
+util.nnoremap{'<Plug>EmptySpaceBefore', function()
+  insert_empty_lines('<Plug>EmptySpaceBefore', vim.v.count, -1)
 end, silent=true, desc='insert [count]empty line(s) below current line'}
+util.nmap{'[<space>', '<Plug>EmptySpaceBefore', silent=true, desc='insert [count]empty line(s) below current line'}
 --}}}
 
 util.nnoremap{'<M-Left>',  ':vert resize -2<CR>', silent=true, desc='decreases vertical size'}

@@ -169,8 +169,8 @@ The `leader` key is `space`!
 | `<Alt-;>`          | Adds `;` at the end of current line without moving (repeatable)      |
 | `<S-Alt-,>`        | Removes `;` from the end of current line without moving (repeatable) |
 | `<Alt-{>`          | Adds curly brackets at the end of line into insert mode (repeatable) |
-| [count]`]<space>`  | Inserts [count] empty lines after                                    |
-| [count]`[<space>`  | Inserts [count] empty lines before                                   |
+| [count]`]<space>`  | Inserts [count] empty lines after (repeatable)                       |
+| [count]`[<space>`  | Inserts [count] empty lines before (repeatable)                      |
 | `]=`               | Jump down along the indents                                          |
 | `[=`               | Jump up along the indents                                            |
 | `<leader>gw`       | **G**reps for current **W**ord in buffer. Populates the locallist    |
