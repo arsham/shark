@@ -29,39 +29,17 @@ gitsigns.setup {
   update_debounce = 750,
 }
 
-util.nnoremap{']c', function()
-  util.call_and_centre(gitsigns.next_hunk)
-end, desc='go to next hunk'}
-util.nnoremap{'[c', function()
-  util.call_and_centre(gitsigns.prev_hunk)
-end, desc='go to previous hunk'}
-util.nnoremap{'<leader>hb', function()
-  gitsigns.blame_line{full=true}
-end, desc='blame line'}
-util.nnoremap{'<leader>hs', function()
-  gitsigns.stage_hunk()
-end, desc='stage hunk'}
-util.nnoremap{'<leader>hl', function()
-  gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")})
-end, desc='stage line'}
-util.vnoremap{'<leader>hs', function()
-  gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")})
-end, desc='stage line'}
-util.nnoremap{'<leader>hu', function()
-  gitsigns.undo_stage_hunk()
-end, desc='undo last staged hunk'}
-util.nnoremap{'<leader>hr', function()
-  gitsigns.reset_hunk()
-end, desc='reset hunk'}
-util.vnoremap{'<leader>hr', function()
-  gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line(".")})
-end, desc='reset line'}
-util.nnoremap{'<leader>hR', function()
-  gitsigns.reset_buffer()
-end, desc='reset buffer'}
-util.nnoremap{'<leader>hp', function()
-  gitsigns.preview_hunk()
-end, desc='preview hunk'}
+util.nnoremap{']c',         function() util.call_and_centre(gitsigns.next_hunk) end, desc='go to next hunk'}
+util.nnoremap{'[c',         function() util.call_and_centre(gitsigns.prev_hunk) end, desc='go to previous hunk'}
+util.nnoremap{'<leader>hb', function() gitsigns.blame_line{full=true} end,           desc='blame line'}
+util.nnoremap{'<leader>hs', function() gitsigns.stage_hunk() end,                    desc='stage hunk'}
+util.nnoremap{'<leader>hu', function() gitsigns.undo_stage_hunk() end,               desc='undo last staged hunk'}
+util.nnoremap{'<leader>hr', function() gitsigns.reset_hunk() end,                    desc='reset hunk'}
+util.nnoremap{'<leader>hR', function() gitsigns.reset_buffer() end,                  desc='reset buffer'}
+util.nnoremap{'<leader>hp', function() gitsigns.preview_hunk() end,                  desc='preview hunk'}
+util.nnoremap{'<leader>hl', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end, desc='stage line'}
+util.vnoremap{'<leader>hs', function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line(".")}) end, desc='stage line'}
+util.vnoremap{'<leader>hr', function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line(".")}) end, desc='reset line'}
 
 ---Text objects
 local actions = require('gitsigns.actions')

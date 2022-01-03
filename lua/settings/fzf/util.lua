@@ -457,7 +457,7 @@ function M.args_add()
     table.insert(files, v)
   end)
 
-  if files:length() == 0  then
+  if #files == 0  then
     local msg = 'Already added everything from current folder'
     vim.notify(msg, vim.lsp.log_levels.WARN, {title = 'Adding Args'})
     return

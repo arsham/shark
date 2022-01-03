@@ -127,31 +127,19 @@ for n, tuple in pairs(end_mapping) do
   local name1 = string.format('<Plug>AddEnd%s', n)
   local key1  = '<M-' .. tuple[1] .. '>'
   local desc = string.format('Add %s at the end of line', n)
-  util.nnoremap{name1, function()
-    change_line_ends(name1, tuple[1])
-  end, desc=desc}
+  util.nnoremap{name1, function() change_line_ends(name1, tuple[1]) end, desc=desc}
   util.nmap{key1, name1, desc=desc}
-  util.inoremap{key1, function()
-    change_line_ends(name1, tuple[1])
-  end, desc=desc}
-  util.vnoremap{name1, function()
-    change_line_ends(name1, tuple[1])
-  end, desc=desc}
+  util.inoremap{key1, function() change_line_ends(name1, tuple[1]) end, desc=desc}
+  util.vnoremap{name1, function() change_line_ends(name1, tuple[1]) end, desc=desc}
   util.vmap{key1, name1, desc=desc}
 
   local name2 = string.format('<Plug>DelEnd%s', n)
   local key2  = '<M-' .. tuple[2] .. '>'
   desc = string.format('Remove %s from the end of line', n)
-  util.nnoremap{name2, function()
-    change_line_ends(name2, tuple[1], true)
-  end, desc=desc}
+  util.nnoremap{name2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
   util.nmap{key2, name2, desc=desc}
-  util.inoremap{key2, function()
-    change_line_ends(name2, tuple[1], true)
-  end, desc=desc}
-  util.vnoremap{name2, function()
-    change_line_ends(name2, tuple[1], true)
-  end, desc=desc}
+  util.inoremap{key2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
+  util.vnoremap{name2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
   util.vmap{key2, name2, desc=desc}
 end
 --}}}
@@ -279,12 +267,8 @@ local function jump_indent(down)
   util.normal('xt', sequence)
 end
 
-util.nnoremap{']=', function()
-  jump_indent(true)
-end, desc='jump down along the indent'}
-util.nnoremap{'[=', function()
-  jump_indent(false)
-end, desc='jump up along the indent'}
+util.nnoremap{']=', function() jump_indent(true) end, desc='jump down along the indent'}
+util.nnoremap{'[=', function() jump_indent(false) end, desc='jump up along the indent'}
 --}}}
 
 util.nnoremap{'&', ':&&<CR>', desc='repeat last substitute command'}

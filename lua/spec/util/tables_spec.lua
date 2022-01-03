@@ -6,7 +6,6 @@ local before_each = busted.before_each
 
 local _t = require('util.tables').new
 
--- selene: allow(multiple_statements)
 describe('Table', function()
 
   describe('table_len', function()

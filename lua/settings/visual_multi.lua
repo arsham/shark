@@ -20,9 +20,5 @@ vim.g.VM_maps = {
 }
 
 --- these don't work in the above maps.
-util.nnoremap{[[<Leader>\]], function()
-  vim.fn["vm#commands#add_cursor_at_pos"](0)
-end, desc='add cursor at position'}
-util.nnoremap{'<Leader>A', function()
-  vim.fn["vm#commands#find_all"](0, 1)
-end, desc='find all matches'}
+util.nnoremap{[[<Leader>\]], function() vim.fn["vm#commands#add_cursor_at_pos"](0) end, desc='add cursor at position'}
+util.nnoremap{'<Leader>A', function() vim.fn["vm#commands#find_all"](0, 1) end, desc='find all matches'}

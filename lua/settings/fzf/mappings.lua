@@ -30,25 +30,14 @@ util.inoremap{'<c-x><c-k>', [[fzf#vim#complete('cat /usr/share/dict/words-insane
 util.imap{'<c-x><c-f>', '<Plug>(fzf-complete-path)', desc='path completion'}
 util.imap{'<c-x><c-l>', '<Plug>(fzf-complete-line)', desc='line completion'}
 
-util.nnoremap{'<leader>ff', function()
-  fzf.ripgrep_search('')
-end, desc='find in files'}
-util.nnoremap{'<leader>fa', function()
-  fzf.ripgrep_search('', true)
-end, desc='find in files (ignore .gitignore)'}
-util.nnoremap{'<leader>fi', function()
-  fzf.ripgrep_search_incremental('', true)
-end, desc='incremental search with rg'}
+util.nnoremap{'<leader>ff', function() fzf.ripgrep_search('') end, desc='find in files'}
+util.nnoremap{'<leader>fa', function() fzf.ripgrep_search('', true) end, desc='find in files (ignore .gitignore)'}
+util.nnoremap{'<leader>fi', function() fzf.ripgrep_search_incremental('', true) end, desc='incremental search with rg'}
 
-util.nnoremap{"<leader>rg", function()
-  fzf.ripgrep_search(vim.fn.expand("<cword>"))
-end, desc='search over current word'}
-util.nnoremap{"<leader>ra", function()
-  fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
-end, desc='search over current word (ignore .gitignore)'}
-util.nnoremap{"<leader>ri", function()
-  fzf.ripgrep_search(vim.fn.expand("<cword>"), true)
-end, desc='search over current word (ignore .gitignore)'}
+local desc = 'search over current word'
+util.nnoremap{"<leader>rg", function() fzf.ripgrep_search(vim.fn.expand("<cword>")) end, desc=desc}
+util.nnoremap{"<leader>ra", function() fzf.ripgrep_search(vim.fn.expand("<cword>"), true) end, desc=desc .. ' (ignore .gitignore)'}
+util.nnoremap{"<leader>ri", function() fzf.ripgrep_search(vim.fn.expand("<cword>"), true) end, desc=desc .. ' (ignore .gitignore)'}
 
 util.nnoremap{'<leader>mm', ':Marks<CR>', desc='show marks'}
 

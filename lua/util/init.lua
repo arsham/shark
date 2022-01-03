@@ -428,39 +428,25 @@ end
 
 ---Create a normal mode mapping.
 ---@param conf mapping_options
-function M.nmap(conf)
-  M.map('n', conf)
-end
+function M.nmap(conf) M.map('n', conf) end
 ---Create a mapping for insert mode.
 ---@param conf mapping_options
-function M.imap(conf)
-  M.map('i', conf)
-end
+function M.imap(conf) M.map('i', conf) end
 ---Create a mapping for visual mode.
 ---@param conf mapping_options
-function M.vmap(conf)
-  M.map('v', conf)
-end
+function M.vmap(conf) M.map('v', conf) end
 ---Create a mapping for visual mode.
 ---@param conf mapping_options
-function M.xmap(conf)
-  M.map('x', conf)
-end
+function M.xmap(conf) M.map('x', conf) end
 ---Create a mapping for operator-pending mode.
 ---@param conf mapping_options
-function M.omap(conf)
-  M.map('o', conf)
-end
+function M.omap(conf) M.map('o', conf) end
 ---Create a mapping for command-line mode.
 ---@param conf mapping_options
-function M.cmap(conf)
-  M.map('c', conf)
-end
+function M.cmap(conf) M.map('c', conf) end
 ---Create a mapping for terminal mode.
 ---@param conf mapping_options
-function M.tmap(conf)
-  M.map('t', conf)
-end
+function M.tmap(conf) M.map('t', conf) end
 
 ---Not to be consumed by users.
 ---@param mode string
@@ -470,44 +456,28 @@ function M._noremap(mode, conf)
   M.map(mode, conf)
 end
 
-function M.noremap(conf)
-  M._noremap('', conf)
-end
+function M.noremap(conf) M._noremap('', conf) end
 
 ---Create a normal mode mapping.
 ---@param conf mapping_options
-function M.nnoremap(conf)
-  M._noremap('n', conf)
-end
+function M.nnoremap(conf) M._noremap('n', conf) end
 ---Create a mapping for insert mode.
 ---@param conf mapping_options
-function M.inoremap(conf)
-  M._noremap('i', conf)
-end
+function M.inoremap(conf) M._noremap('i', conf) end
 ---Create a mapping for visual mode.
 ---@param conf mapping_options
-function M.vnoremap(conf)
-  M._noremap('v', conf)
-end
+function M.vnoremap(conf) M._noremap('v', conf) end
 ---Create a mapping for visual mode.
 ---@param conf mapping_options
-function M.xnoremap(conf)
-  M._noremap('x', conf)
-end
+function M.xnoremap(conf) M._noremap('x', conf) end
 ---Create a mapping for operator-pending mode.
 ---@param conf mapping_options
-function M.onoremap(conf)
-  M._noremap('o', conf)
-end
+function M.onoremap(conf) M._noremap('o', conf) end
 ---Create a mapping for command-line mode.
 ---@param conf mapping_options
-function M.cnoremap(conf)
-  M._noremap('c', conf)
-end
+function M.cnoremap(conf) M._noremap('c', conf) end
 ---Create a mapping for terminal mode.
 ---@param conf mapping_options
-function M.tnoremap(conf)
-  M._noremap('t', conf)
-end
+function M.tnoremap(conf) M._noremap('t', conf) end
 
 return M

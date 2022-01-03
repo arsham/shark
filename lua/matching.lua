@@ -167,7 +167,7 @@ util.nnoremap{'<leader>md', function()
     table.insert(source, str)
   end)
 
-  if source:length() == 0 then return end
+  if #source == 0 then return end
 
   local wrap = vim.fn["fzf#wrap"]({
     source = source,

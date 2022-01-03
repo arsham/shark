@@ -11,18 +11,10 @@ local function next_obj(motion)
   util.normal('x', sequence)
 end
 
-util.xnoremap{'an', function()
-  next_obj("a")
-end, desc='around next pairs'}
-util.onoremap{'an', function()
-  next_obj("a")
-end, desc='around next pairs'}
-util.xnoremap{'in', function()
-  next_obj("i")
-end, desc='in next pairs'}
-util.onoremap{'in', function()
-  next_obj("i")
-end, desc='in next pairs'}
+util.xnoremap{'an', function() next_obj("a") end, desc='around next pairs'}
+util.onoremap{'an', function() next_obj("a") end, desc='around next pairs'}
+util.xnoremap{'in', function() next_obj("i") end, desc='in next pairs'}
+util.onoremap{'in', function() next_obj("i") end, desc='in next pairs'}
 
 --- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
 --- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
@@ -43,18 +35,10 @@ for _, char in ipairs(chars) do
 end
 
 ---line pseudo text objects.
-util.xnoremap{'il', function()
-  util.normal('xt', 'g_o^')
-end, desc='in current line'}
-util.onoremap{'il', function()
-  util.normal('x',  'vil')
-end, desc='in current line'}
-util.xnoremap{'al', function()
-  util.normal('xt', '$o0')
-end, desc='around current line'}
-util.onoremap{'al', function()
-  util.normal('x',  'val')
-end, desc='around current line'}
+util.xnoremap{'il', function() util.normal('xt', 'g_o^') end, desc='in current line'}
+util.onoremap{'il', function() util.normal('x',  'vil')  end, desc='in current line'}
+util.xnoremap{'al', function() util.normal('xt', '$o0')  end, desc='around current line'}
+util.onoremap{'al', function() util.normal('x',  'val')  end, desc='around current line'}
 
 ---Number pseudo-text object (integer and float)
 ---Exmaple: ciN
@@ -107,9 +91,7 @@ local function in_indent()
 end
 
 util.vnoremap{'ii', in_indent, silent=true, desc='in indentation block'}
-util.onoremap{'ii', function()
-  util.normal('x', 'vii')
-end, desc='in indentation block'}
+util.onoremap{'ii', function() util.normal('x', 'vii') end, desc='in indentation block'}
 
 ---@param include boolean if true, will remove the backticks too.
 local function in_backticks(include)
@@ -127,32 +109,16 @@ local function in_backticks(include)
   util.normal('x', 'h')
 end
 
-util.vnoremap{'i`', function()
-  in_backticks(false)
-end,     silent = true, desc='in backticks'}
-util.vnoremap{'a`', function()
-  in_backticks(true)
-end,      silent = true, desc='around backticks'}
-util.onoremap{'i`', function()
-  util.normal('x', 'vi`')
-end, silent = true, desc='in backticks'}
-util.onoremap{'a`', function()
-  util.normal('x', 'va`')
-end, silent = true, desc='around backticks'}
+util.vnoremap{'i`', function() in_backticks(false)     end, silent = true, desc='in backticks'}
+util.vnoremap{'a`', function() in_backticks(true)      end, silent = true, desc='around backticks'}
+util.onoremap{'i`', function() util.normal('x', 'vi`') end, silent = true, desc='in backticks'}
+util.onoremap{'a`', function() util.normal('x', 'va`') end, silent = true, desc='around backticks'}
 
 util.onoremap{'H', '^', desc='to the beginning of line'}
 util.onoremap{'L', '$', desc='to the end of line'}
 
-util.vnoremap{'iz', function()
-  util.normal('xt', '[zjo]zk')
-end, silent=true, desc='in fold block'}
-util.onoremap{'iz', function()
-  util.normal('x', 'viz')
-end, desc='in fold block'}
+util.vnoremap{'iz', function() util.normal('xt', '[zjo]zk') end, silent=true, desc='in fold block'}
+util.onoremap{'iz', function() util.normal('x', 'viz')      end, desc='in fold block'}
 
-util.vnoremap{'az', function()
-  util.normal('xt', '[zo]z')
-end, silent=true, desc='around fold block'}
-util.onoremap{'az', function()
-  util.normal('x', 'vaz')
-end, desc='around fold block'}
+util.vnoremap{'az', function() util.normal('xt', '[zo]z') end, silent=true, desc='around fold block'}
+util.onoremap{'az', function() util.normal('x', 'vaz')    end, desc='around fold block'}

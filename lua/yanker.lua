@@ -34,7 +34,7 @@ util.nnoremap{'<leader>yh', function()
     table.insert(yank_list, string.format('%d\t%s\t%s', i, util.ansi_color(util.colours.green, type), value))
   end)
 
-  if yank_list:length() == 0 then return end
+  if #yank_list == 0 then return end
 
   local wrapped = vim.fn["fzf#wrap"]({
     source = yank_list,

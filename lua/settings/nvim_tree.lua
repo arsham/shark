@@ -30,7 +30,8 @@ return {
   end,
 
   config = function()
-    require('nvim-tree').setup {
+    local nvim_tree = require('nvim-tree')
+    nvim_tree.setup {
       disable_netrw = false,
       hijack_netrw  = false,
       auto_close    = true,
@@ -54,14 +55,8 @@ return {
       },
     }
 
-    util.nnoremap{'<leader>kk', function()
-      require'nvim-tree'.toggle()
-    end, silent=true, desc='Toggle tree view'}
-    util.nnoremap{'<leader>kf', function()
-      require'nvim-tree'.find_file(true)
-    end, silent=true, desc='Find file in tree view'}
-    util.nnoremap{'<leader><leader>', function()
-      require'nvim-tree'.toggle()
-    end, silent=true, desc='Toggle tree view'}
+    util.nnoremap{'<leader>kk', nvim_tree.toggle, silent=true, desc='Toggle tree view'}
+    util.nnoremap{'<leader>kf', function() nvim_tree.find_file(true) end, silent=true, desc='Find file in tree view'}
+    util.nnoremap{'<leader><leader>', nvim_tree.toggle, silent=true, desc='Toggle tree view'}
   end
 }
