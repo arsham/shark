@@ -1,6 +1,7 @@
 if not pcall(require, 'nvim') then return end
 local nvim = require('nvim')
 require('util.tables')
+require('util.strings')
 
 local M = {
   profiler_enabled = false,

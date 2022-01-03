@@ -159,7 +159,7 @@ require('packer').startup({
 
     use {
       'rcarriga/nvim-notify',
-      config = function() require('settings.nvim_tree') end,
+      config = function() require('settings.nvim_notify') end,
       event  = 'VimEnter',
     }
 
