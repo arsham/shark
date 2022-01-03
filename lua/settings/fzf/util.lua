@@ -415,12 +415,12 @@ function M.checkout_branck()
     "-e '/^",
     current_escaped,
     "$/d' -e '/^HEAD/d' | sort -u",
-  })
+  }, ' ')
   local opts = {
     sink = function(branch)
       vim.fn.system('git checkout ' .. branch)
     end,
-    options = {'--no-multi', '--header=' .. current}
+    options = {'--no-multi', '--header=Currently on: ' .. current}
   }
   vim.fn["fzf#vim#grep"](cmd, 0, opts)
 end
