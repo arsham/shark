@@ -4,7 +4,6 @@ return {
   setup = function()
     vim.g.nvim_tree_quit_on_open = 1
     vim.g.nvim_tree_git_hl       = 1
-    vim.g.nvim_tree_refresh_wait = 500
 
     vim.g.nvim_tree_icons = {
       lsp = {
@@ -30,10 +29,12 @@ return {
   end,
 
   config = function()
+    local tree_cb = require('nvim-tree.config').nvim_tree_callback
     local nvim_tree = require('nvim-tree')
     nvim_tree.setup {
       disable_netrw = false,
       hijack_netrw  = false,
+      hijack_cursor = true,
       auto_close    = true,
       diagnostics   = {
         enable = true,
@@ -52,6 +53,14 @@ return {
         enable  = true,
         ignore  = false,
         timeout = 500,
+      },
+      view = {
+        mappings = {
+          custom_only = false,
+          list = {
+            { key = 'h', cb = tree_cb('close_node') },
+          },
+        },
       },
     }
 
