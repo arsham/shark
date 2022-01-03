@@ -6,6 +6,3 @@ any = true
 
 [_t]
 any = true
-
-[rules]
-multiple_statements = "allow"
