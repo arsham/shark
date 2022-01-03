@@ -35,6 +35,12 @@ local function setup_watch(filenames)
   return modules
 end
 
+local bufname = vim.fn.bufname()
+if vim.fn.getbufvar(bufname, 'watch_lua_file_augroup') ~= true then
+  vim.fn.setbufvar(bufname, 'watch_lua_file_augroup', true)
+  util.augroup{"WATCH_LUA_FILE"}
+end
+
 function M.watch_file_changes(filenames)
   local modules= setup_watch(filenames)
   local names = {}
@@ -67,7 +73,6 @@ function M.watch_file_changes(filenames)
   })
 end
 
-util.augroup{"WATCH_LUA_FILE"}
 util.command("WatchLuaFileChanges", function(arg)
   local filename = vim.fn.expand('%:p')
   local files = {}
