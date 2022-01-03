@@ -37,6 +37,7 @@ end
 ---@param items string[]|table[]
 local function insert_into_list(items, is_local)
   local lists = require('lists')
+  local values = {}
   for _, item in pairs(items) do
     if type(item) == 'string' then
       item = {
@@ -46,8 +47,9 @@ local function insert_into_list(items, is_local)
         text = "Added with fzf selection",
       }
     end
-    lists.insert_list(item, is_local)
+    table.insert(values, item)
   end
+  lists.insert_list(values, is_local)
 end
 
 ---Set selected lines in the quickfix list with fzf search.

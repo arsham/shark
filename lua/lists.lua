@@ -52,9 +52,9 @@ end
 
 ---Inserts the current position of the cursor in the qf/local list with the
 ---note.
----@param item ListItem
+---@param items ListItem[]
 ---@param is_local boolean if true, the item goes into the local list.
-function M.insert_list(item, is_local)
+function M.insert_list(items, is_local)
   local cur_list = {}
   if is_local then
     cur_list = vim.fn.getloclist(0)
@@ -62,7 +62,7 @@ function M.insert_list(item, is_local)
     cur_list = vim.fn.getqflist()
   end
 
-  table.insert(cur_list, item)
+  cur_list = vim.list_extend(cur_list, items)
 
   if is_local then
     vim.fn.setloclist(0, cur_list)
@@ -83,7 +83,7 @@ local function inset_note_to_list(note, is_local)
     col = location[2] + 1,
     text = note,
   }
-  M.insert_list(item, is_local)
+  M.insert_list({item}, is_local)
 end
 
 local clearqflist = function()
