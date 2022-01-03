@@ -140,7 +140,8 @@ util.nnoremap{'<Plug>QuickfixNote', function()
 end, desc='add to quickfix list with a node'}
 
 util.nmap{'<leader>qn', '<Plug>QuickfixNote', desc='add to quickfix list with node'}
-util.nnoremap{'<leader>qc', clearqflist, silent=true, desc='clear quickfix list'}
+util.nnoremap{'<leader>qd', clearqflist, silent=true, desc='drop quickfix list'}
+util.nnoremap{'<leader>qc', nvim.ex.cclose, silent=true, desc='close quickfix list'}
 ---}}}
 
 ---{{{ Local list mappings
@@ -153,7 +154,8 @@ util.nnoremap{'<Plug>LocallistNote', function()
   add_note('<Plug>LocallistNote', true)
 end, desc='add to local list with a node'}
 util.nmap{'<leader>wn', '<Plug>LocallistNote', desc='add to local list with node'}
-util.nnoremap{'<leader>wc', clearloclist, silent=true, desc='clear local list'}
+util.nnoremap{'<leader>wd', clearloclist, silent=true, desc='drop local list'}
+util.nnoremap{'<leader>wc', nvim.ex.lclose, silent=true, desc='close local list'}
 ---}}}
 
 ---Creates a mapping for jumping through lists.

@@ -272,13 +272,15 @@ you how many items you have in a list.
 | `<leader>qq` | Add current line and column to the **q**uickfix list.                    |
 | `<leader>qn` | Add current line and column with your **n**ote to the **q**uickfix list. |
 | `<leader>qo` | **O**pen the **q**uickfix list.                                          |
-| `<leader>qc` | **C**lear the **q**uickfix list.                                         |
+| `<leader>qd` | **D**rop the **q**uickfix list.                                          |
+| `<leader>qc` | **C**lose the **q**uickfix list.                                         |
 | `]q`         | Go to the next item in the **q**uickfix list and centre.                 |
 | `[q`         | Go to the previous item in the **q**uickfix list and centre.             |
 | `<leader>wq` | Add current line and column to the locallist.                            |
 | `<leader>wn` | Add current line and column with your **n**ote to the locallist.         |
 | `<leader>wo` | **O**pen the locallist.                                                  |
-| `<leader>wc` | **C**lear the locallist.                                                 |
+| `<leader>wd` | **D**rop the locallist.                                                  |
+| `<leader>wc` | **C**lose the locallist.                                                 |
 | `]w`         | Go to the next item in the locallist and centre.                         |
 | `[w`         | Go to the previous item in the locallist and centre.                     |
 
