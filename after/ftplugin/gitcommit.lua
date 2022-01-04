@@ -1,15 +1,8 @@
-local bufname = vim.fn.bufname()
-if vim.fn.getbufvar(bufname, 'ftplugin_loaded') == true then return end
-vim.fn.setbufvar(bufname, 'ftplugin_loaded', true)
-
----see #14670
----vim.bo.textwidth = 72
----vim.wo.colorcolumn = "50,72"
----vim.wo.spell = true
 local nvim = require('nvim')
-nvim.ex.setlocal('spell')
-nvim.ex.setlocal('textwidth=72')
-nvim.ex.setlocal('colorcolumn="50,72"')
+
+vim.opt_local.textwidth = 72
+vim.opt_local.colorcolumn = "50,72"
+vim.opt_local.spell = true
 nvim.ex.startinsert()
 
 vim.bo.formatoptions = vim.bo.formatoptions .. 'cn'
