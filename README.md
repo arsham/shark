@@ -200,6 +200,7 @@ The `leader` key is `space`!
 | `<leader>1`        | Diff get from LOCAL (left)                                           |
 | `<leader>2`        | Diff get from BASE (middle)                                          |
 | `<leader>3`        | Diff get from REMOTE (right)                                         |
+| [V]`@<reg>`        | Execute a macro over range of selected lines                         |
 
 To use the **C**heat**S**heet functionality, type your query in the buffer and
 invoke the key binding. The response will be inserted on the next lint in the
