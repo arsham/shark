@@ -15,7 +15,6 @@ util.inoremap{'<Up>',    '<Nop>', desc='disabling arrows'}
 util.inoremap{'<Down>',  '<Nop>', desc='disabling arrows'}
 util.inoremap{'<Left>',  '<Nop>', desc='disabling arrows'}
 util.inoremap{'<Right>', '<Nop>', desc='disabling arrows'}
---- }}}
 
 util.inoremap{'<A-j>', [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], silent=true, desc='move lines down'}
 util.inoremap{'<A-k>', [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], silent=true, desc='move lines up'}
