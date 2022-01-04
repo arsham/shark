@@ -6,7 +6,7 @@ local util = require('util')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
---{{{ Disabling arrows
+--- Disabling arrows {{{
 util.noremap{'<Up>',     '<Nop>', desc='disabling arrows'}
 util.noremap{'<Down>',   '<Nop>', desc='disabling arrows'}
 util.noremap{'<Left>',   '<Nop>', desc='disabling arrows'}
@@ -15,8 +15,7 @@ util.inoremap{'<Up>',    '<Nop>', desc='disabling arrows'}
 util.inoremap{'<Down>',  '<Nop>', desc='disabling arrows'}
 util.inoremap{'<Left>',  '<Nop>', desc='disabling arrows'}
 util.inoremap{'<Right>', '<Nop>', desc='disabling arrows'}
-util.nmap{'Q', '<Nop>', desc='disabling Ex mode'}
---}}}
+--- }}}
 
 util.inoremap{'<A-j>', [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], silent=true, desc='move lines down'}
 util.inoremap{'<A-k>', [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], silent=true, desc='move lines up'}
@@ -26,7 +25,7 @@ util.xnoremap{'>', '>gv', desc='Keep the visually selected area when indenting'}
 
 util.nnoremap{'g=', 'gg=Gg``', desc='Re-indent the whole buffer'}
 
---{{{ Insert empty lines
+-- Insert empty lines {{{
 
 ---Inserts empty lines near the cursor.
 ---@param name string name of the mapping to register for repeating.
@@ -56,7 +55,7 @@ util.nnoremap{'<Plug>EmptySpaceBefore', function()
   insert_empty_lines('<Plug>EmptySpaceBefore', vim.v.count, -1)
 end, silent=true, desc='insert [count]empty line(s) below current line'}
 util.nmap{'[<space>', '<Plug>EmptySpaceBefore', silent=true, desc='insert [count]empty line(s) below current line'}
---}}}
+--- }}}
 
 util.nnoremap{'<M-Left>',  ':vert resize -2<CR>', silent=true, desc='decreases vertical size'}
 util.nnoremap{'<M-Right>', ':vert resize +2<CR>', silent=true, desc='increase vertical size'}
@@ -75,7 +74,7 @@ util.nnoremap{'j', [[(v:count > 2 ? "m'" . v:count : '') . 'j']], expr=true, des
 
 util.nnoremap{'<Esc><Esc>', ':noh<CR>', silent=true, desc='Clear hlsearch'}
 
---{{{ Add/remove to/from the end of line(s)
+-- Add/remove to/from the end of line(s) {{{
 ---Add char at the end of a line at the `loc` location.
 ---@param loc number line number to add the char at.
 ---@param char string char to add.
@@ -148,7 +147,7 @@ for n, tuple in pairs(end_mapping) do
   util.vnoremap{name2, function() change_line_ends(name2, tuple[1], true) end, desc=desc}
   util.vmap{key2, name2, desc=desc}
 end
---}}}
+--- }}}
 
 util.inoremap{'<M-{>', '<Esc>A {<CR>}<Esc>O', desc='Insert a pair of brackets and go into insert mode'}
 util.nnoremap{'<M-{>', 'A {<CR>}<Esc>O', desc='Insert a pair of brackets and go into insert mode'}
@@ -184,7 +183,7 @@ util.nnoremap{'<leader>jq', ":%!gojq '.'<CR>"}
 
 util.nnoremap{'<leader>hh',  ":h <CR>", desc='Show help for work under the cursor'}
 
---{{{ Jump along the indents
+-- Jump along the indents {{{
 ---Returns the indentation of the next line from the given argument, that is
 ---not empty. All lines are trimmed before examination.
 ---@param from number the line number to start from.
@@ -275,12 +274,24 @@ end
 
 util.nnoremap{']=', function() jump_indent(true) end, desc='jump down along the indent'}
 util.nnoremap{'[=', function() jump_indent(false) end, desc='jump up along the indent'}
---}}}
+--- }}}
 
 util.nnoremap{'&', ':&&<CR>', desc='repeat last substitute command'}
 util.xnoremap{'&', ':&&<CR>', desc='repeat last substitute command'}
 
 util.nnoremap{'<C-w>b',     ':bd<CR>', desc='delete current buffer'}
 util.nnoremap{'<C-w><C-b>', ':bd<CR>', desc='delete current buffer'}
+
+--- Execute macros over selected range.
+util.xnoremap{"@", function()
+  local c = vim.fn.getchar()
+  local ch = vim.fn.nr2char(c)
+  local from = vim.fn.getpos("v")[2]
+  local to = vim.fn.getcurpos()[2]
+  vim.cmd(string.format("%d,%d normal! @%s", from, to, ch))
+end, silent=false, desc="execute macro over visual range"}
+
+--- Easier cgn process by starting with already selected text.
+util.nnoremap{"cn", "*``cgn"}
 
 --- vim: foldmethod=marker

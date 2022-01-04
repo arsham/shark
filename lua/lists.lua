@@ -127,7 +127,7 @@ util.nnoremap{'<leader>cc', function()
   nvim.ex.lclose()
 end, silent=true, desc='Close quickfix list and local list windows'}
 
----{{{ Quickfix list mappings
+--- Quickfix list mappings {{{
 util.nnoremap{'<leader>qo', nvim.ex.copen, silent=true, desc='open quickfix list'}
 
 util.nnoremap{'<Plug>QuickfixAdd', function()
@@ -142,9 +142,9 @@ end, desc='add to quickfix list with a node'}
 util.nmap{'<leader>qn', '<Plug>QuickfixNote', desc='add to quickfix list with node'}
 util.nnoremap{'<leader>qd', clearqflist, silent=true, desc='drop quickfix list'}
 util.nnoremap{'<leader>qc', nvim.ex.cclose, silent=true, desc='close quickfix list'}
----}}}
+--- }}}
 
----{{{ Local list mappings
+--- Local list mappings {{{
 util.nnoremap{'<leader>wo', nvim.ex.lopen, silent=true, desc='open local list'}
 util.nnoremap{'<Plug>LocallistAdd', function()
   add_line('<Plug>LocallistAdd', true)
@@ -156,7 +156,7 @@ end, desc='add to local list with a node'}
 util.nmap{'<leader>wn', '<Plug>LocallistNote', desc='add to local list with node'}
 util.nnoremap{'<leader>wd', clearloclist, silent=true, desc='drop local list'}
 util.nnoremap{'<leader>wc', nvim.ex.lclose, silent=true, desc='close local list'}
----}}}
+--- }}}
 
 ---Creates a mapping for jumping through lists.
 ---@param key string the key to map.

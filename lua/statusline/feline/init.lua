@@ -2,7 +2,7 @@ local lsp = require('util.lsp')
 local util = require('statusline.feline.util')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
-local components = { ---{{{
+local components = {--- {{{
   active       = {{}, {}, {}},
   inactive     = {{}, {}, {}},
 }
@@ -20,9 +20,9 @@ local mid_ribbon_hl = {
 local right_ribbon_hl = {
   fg = 'grey_fg',
   bg = 'statusline_bg',
-} ---}}}
+}--- }}}
 
----{{{ Vim mode
+--- Vim mode {{{
 table.insert(components.active[1], {
   provider = '  ',
   hl = function()
@@ -54,9 +54,9 @@ table.insert(components.active[1], {
   },
   icon = "  ",
 })
----}}
+--- }}}
 
----{{{ Git root
+--- Git root {{{
 table.insert(components.active[1], {
   provider      = 'git_root',
   enabled       = function() return require('feline.providers.git').git_info_exists() end,
@@ -68,9 +68,9 @@ table.insert(components.active[1], {
     hl  = left_ribbon_hl,
   },
 })
----}}}
+--- }}}
 
----{{{ Git bransh
+--- Git bransh {{{
 table.insert(components.active[1], {
   provider      = 'git_branch',
   enabled       = function() return require('feline.providers.git').git_info_exists() end,
@@ -86,9 +86,9 @@ table.insert(components.active[1], {
     hl  = left_ribbon_hl,
   },
 })
----}}}
+--- }}}
 
----{{{ Git diff
+--- Git diff {{{
 table.insert(components.active[1], {
   provider = 'git_diff_added',
   enabled  = function() return require('feline.providers.git').git_info_exists() end,
@@ -109,9 +109,9 @@ table.insert(components.active[1], {
   hl       = left_ribbon_hl,
   ---icon  = "  ",
 })
----}}}
+--- }}}
 
----{{{ Left angle
+--- Left angle {{{
 table.insert(components.active[1], {
   provider = ' ',
   hl       = left_ribbon_hl,
@@ -123,9 +123,9 @@ table.insert(components.active[1], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ Left angle
+--- Left angle {{{
 table.insert(components.active[2], {
   provider = ' ',
   enabled = function() return vim.fn.expand('%:t') ~= '' end,
@@ -139,9 +139,9 @@ table.insert(components.active[2], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ File info
+--- File info {{{
 table.insert(components.active[2], {
   provider = {
     name = 'file_info',
@@ -165,9 +165,9 @@ table.insert(components.active[2], {
     bg = 'statusline_bg',
   },
 })
----}}}
+--- }}}
 
----{{{ File size
+--- File size {{{
 table.insert(components.active[2], {
   provider      = 'file_size',
   enabled       = function() return vim.fn.expand('%:t') ~= '' end,
@@ -184,9 +184,9 @@ table.insert(components.active[2], {
     bg = 'statusline_bg',
   },
 })
----}}}
+--- }}}
 
----{{{ Right angle
+--- Right angle {{{
 table.insert(components.active[2], {
   provider = ' ',
   enabled  = function() return vim.fn.expand('%:t') ~= '' end,
@@ -199,9 +199,9 @@ table.insert(components.active[2], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ Left angle
+--- Left angle {{{
 table.insert(components.active[3], {
   provider = ' ',
   hl       = right_ribbon_hl,
@@ -213,9 +213,9 @@ table.insert(components.active[3], {
     },
   }
 })
----}}}
+--- }}}
 
----{{{ LSP client names
+--- LSP client names {{{
 table.insert(components.active[3], {
   provider      = 'lsp_client_names',
   enabled       = function() return lsp.is_lsp_attached() end,
@@ -223,9 +223,9 @@ table.insert(components.active[3], {
   priority      = 3,
   truncate_hide = true,
 })
----}}}
+--- }}}
 
----{{{ Lsp feedback
+--- Lsp feedback {{{
 table.insert(components.active[3], {
   provider      = 'lsp_progress',
   enabled       = function() return lsp.is_lsp_attached() end,
@@ -240,9 +240,9 @@ table.insert(components.active[3], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ Diagnostics
+--- Diagnostics {{{
 table.insert(components.active[3], {
   provider = 'diag_errors',
   enabled  = function() return lsp.diagnostics_exist(vim.diagnostic.ERROR) end,
@@ -278,9 +278,9 @@ table.insert(components.active[3], {
     bg = 'statusline_bg',
   },
 })
----}}}
+--- }}}
 
----{{{ Spell checker
+--- Spell checker {{{
 table.insert(components.active[3], {
   provider = '暈',
   enabled  = function() return vim.wo.spell end,
@@ -298,9 +298,9 @@ table.insert(components.active[3], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ File Icon
+--- File Icon {{{
 table.insert(components.active[3], {
   provider = function()
     local filename  = vim.fn.expand('%:t')
@@ -342,9 +342,9 @@ table.insert(components.active[3], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ File type
+--- File type {{{
 table.insert(components.active[3], {
   provider = 'file_type',
   enabled = function() return vim.fn.expand('%:t') ~= '' end,
@@ -373,9 +373,9 @@ table.insert(components.active[3], {
     },
   }
 })
----}}}
+--- }}}
 
----{{{ Search results key
+--- Search results key {{{
 table.insert(components.active[3], {
   provider      = 'search_results',
   truncate_hide = true,
@@ -389,9 +389,9 @@ table.insert(components.active[3], {
     },
   }
 })
----}}}
+--- }}}
 
-table.insert(components.active[3], { ---{{{
+table.insert(components.active[3], { --- {{{
   provider = "",
   hl = function()
     return {
@@ -402,9 +402,9 @@ table.insert(components.active[3], { ---{{{
   end,
   left_sep = "left_rounded",
 })
----}}}
+--- }}}
 
----{{{ Quickfix count
+--- Quickfix count {{{
 table.insert(components.active[3], {
   provider = 'quickfix_count',
   enabled = function()
@@ -420,9 +420,9 @@ table.insert(components.active[3], {
     }
   end,
 })
----}}}
+--- }}}
 
----{{{ Local list count
+--- Local list count {{{
 table.insert(components.active[3], {
   provider = 'locallist_count',
   enabled = function()
@@ -438,9 +438,9 @@ table.insert(components.active[3], {
     }
   end,
 })
----}}}
+--- }}}
 
----{{{ Line position
+--- Line position {{{
 table.insert(components.active[3], {
   provider = 'position',
   hl = function()
@@ -472,9 +472,9 @@ table.insert(components.active[3], {
     }
   end,
 })
----}}}
+--- }}}
 
----{{{ Git root
+--- Git root {{{
 table.insert(components.inactive[1], {
   provider = 'git_root',
   enabled = function() return require('feline.providers.git').git_info_exists() end,
@@ -499,9 +499,9 @@ table.insert(components.inactive[1], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ Git branch
+--- Git branch {{{
 table.insert(components.inactive[1], {
   provider      = 'git_branch',
   enabled       = function() return require('feline.providers.git').git_info_exists() end,
@@ -519,9 +519,9 @@ table.insert(components.inactive[1], {
     bg = 'short_bg',
   },
 })
----}}}
+--- }}}
 
----{{{ Git diff
+--- Git diff {{{
 table.insert(components.inactive[1], {
   provider = 'git_diff_added',
   enabled  = function() return require('feline.providers.git').git_info_exists() end,
@@ -548,9 +548,9 @@ table.insert(components.inactive[1], {
     bg = 'mid_bg',
   },
 })
----}}}
+--- }}}
 
----{{{ Left angle
+--- Left angle {{{
 table.insert(components.inactive[1], {
   provider = ' ',
   hl = {
@@ -565,9 +565,9 @@ table.insert(components.inactive[1], {
     },
   },
 })
----}}}
+--- }}}
 
----{{{ File info
+--- File info {{{
 table.insert(components.inactive[2], {
   provider = {
     name = 'file_info',
@@ -607,9 +607,9 @@ table.insert(components.inactive[2], {
     },
   },
 })
----}}}
+--- }}}
 
-table.insert(components.inactive[3], { ---{{{
+table.insert(components.inactive[3], { --- {{{
   provider = '',
   hl = {
     fg    = 'mid_bg',
@@ -624,9 +624,9 @@ table.insert(components.inactive[3], { ---{{{
     },
   }
 })
----}}}
+--- }}}
 
----{{{ Local list count
+--- Local list count {{{
 table.insert(components.inactive[3], {
   provider = 'locallist_count',
   enabled = function()
@@ -641,9 +641,9 @@ table.insert(components.inactive[3], {
     }
   end,
 })
----}}}
+--- }}}
 
----{{{ Line position
+--- Line position {{{
 table.insert(components.inactive[3], {
   provider = 'position',
   hl = {
@@ -667,9 +667,9 @@ table.insert(components.inactive[3], {
     },
   }
 })
----}}}
+--- }}}
 
-require('feline').setup({ ---{{{
+require('feline').setup({ --- {{{
   theme            = util.colors,
   default_bg       = util.colors.bg,
   default_fg       = util.colors.fg,
@@ -690,6 +690,6 @@ require('feline').setup({ ---{{{
     lsp_progress    = util.get_lsp_progress,
   },
 })
----}}}
+--- }}}
 
 --- vim: foldmethod=marker

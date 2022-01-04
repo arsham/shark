@@ -1,6 +1,6 @@
-local internals = function(palette) ---{{{ Internals
+local internals = function(palette) --- Internals {{{
   return {
-    Normal = {--{{{
+    Normal = {--- {{{
       guifg = palette.white,
       guibg = palette.base0,
     },
@@ -18,7 +18,7 @@ local internals = function(palette) ---{{{ Internals
       --- normal text and background color for floating windows
       guifg = palette.grey_light,
       guibg = palette.base4,
-    },--}}}
+    },--- }}}
     Pmenu = {--{{{
       --- Popup menu: normal item.
       guifg = palette.grey_light,
@@ -282,7 +282,7 @@ local internals = function(palette) ---{{{ Internals
       guibg = palette.none,
       style = palette.undercurl,
     },--}}}
-    DiffAdd = {---{{{
+    DiffAdd = {--- {{{
       --- diff mode: Added line
       guifg = palette.diff_add_fg,
       guibg = palette.diff_add_bg,
@@ -326,7 +326,7 @@ local internals = function(palette) ---{{{ Internals
     diffIndexLine = {
       guifg = palette.purple,
     },
-    ---}}}
+    --- }}}
     Folded = {--{{{
       --- line used for closed folds
       guifg = palette.grey,
@@ -633,11 +633,11 @@ local internals = function(palette) ---{{{ Internals
     },--}}}
   }
 end
----}}}
+--- }}}
 
-local plugin_syntax = function(palette) ---{{{ Plugins
+local plugin_syntax = function(palette) --- Plugins {{{
   return {
-    ---{{{ Treesitter
+    --- Treesitter {{{
     TSString = {
       guifg = palette.yellow,
     },
@@ -861,8 +861,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
     TSDefinition = {
       guibg = palette.base5,
     },
-    ---}}}
-    ---{{{ LSP
+    --- }}}
+    --- LSP {{{
     LspDiagnosticsDefaultError = {
       --- used for "Error" diagnostic virtual text
       guifg = palette.error,
@@ -1031,8 +1031,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
       guifg = palette.white,
       guibg = palette.sidebar,
     },
-    ---}}}
-    ---{{{ Diagnostics
+    --- }}}
+    --- Diagnostics {{{
     DiagnosticError = {
       guifg = palette.error,
     },
@@ -1061,8 +1061,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
       guifg = palette.base4,
       guibg = palette.blue_pale,
     },
-    ---}}}
-    ---{{{ ALE
+    --- }}}
+    --- ALE {{{
     ALEErrorSign = {
       guifg = palette.error,
       guibg = palette.base2,
@@ -1087,8 +1087,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
       guifg = palette.blue_pale,
       guibg = palette.base2,
     },
-    ---}}}
-    ---{{{ Misc
+    --- }}}
+    --- Misc {{{
     illuminatedWord = {
       guibg = palette.white,
     },
@@ -1103,8 +1103,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
       guibg = palette.white,
       guifg = palette.black,
     },
-    ---}}}
-    ---{{{ Nvim-Tree
+    --- }}}
+    --- Nvim-Tree {{{
     NvimTreeFolderName = {
       guifg = palette.white,
     },
@@ -1157,8 +1157,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
       guifg = palette.white,
       guibg = palette.sidebar_bg,
     },
-    ---}}}
-    ---{{{ Git Signs
+    --- }}}
+    --- Git Signs {{{
     GitSignsAdd = {
       guifg = palette.diff_add_bg,
       guibg = palette.base2,
@@ -1195,8 +1195,8 @@ local plugin_syntax = function(palette) ---{{{ Plugins
       guifg = palette.diff_remove_bg,
       guibg = palette.base2,
     },
-    ---}}}
-    ---{{{ Notifications
+    --- }}}
+    --- Notifications {{{
     NotifyERRORBorder = {
       guifg = palette.error,
     },
@@ -1242,12 +1242,12 @@ local plugin_syntax = function(palette) ---{{{ Plugins
     NotifyTRACETitle = {
       guifg = palette.pink,
     },
-    ---}}}
+    --- }}}
   }
 end
----}}}
+--- }}}
 
----{{{ Setup function
+--- Setup function {{{
 local nvim = require('nvim')
 
 ---Creates all highlighting from the given palette.
@@ -1277,6 +1277,6 @@ end
 return {
   setup = setup
 }
----}}}
+--- }}}
 
 --- vim: foldmethod=marker:foldlevel=1

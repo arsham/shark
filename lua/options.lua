@@ -103,30 +103,11 @@ vim.opt.matchpairs:append("<:>")
 vim.opt.complete    = ".,w,b,u,t,i"
 vim.opt.nrformats   = "bin,hex,alpha"           --- can increment alphabetically too!
 
---- Renders like this:
---- » TSString = { «« Treesitter »»···················· « [ 223]·····
---- If the marker doesn't have any texts in front of it, it will be cut.
 -- selene: allow(global_usage)
 _G.custom_foldtext = function()
-  local line = vim.fn.getline(vim.v.foldstart)
-  local folded_line_num = vim.v.foldend - vim.v.foldstart
-  local line_text = line:gsub(' *', '', 1)
-  local add = 0
-  local mark1 = '»'
-  local mark2 = '«'
-  if line_text:match('---%s*{{{$') then
-    line_text = line_text:gsub('---%s*{{{.*', '', 1)
-  elseif line_text:match('---%s*{{{') then
-    line_text = line_text:gsub('---%s*{{{', ' ««', 1) .. ' »»'
-    add = add + 4 -- accounting for surrounding «»
-  else
-    mark1 = '»»'
-    mark2 = '««'
-  end
-  local fillcharcount = vim.opt.textwidth._value - #line_text + add
-  return string.format('%s %s%s %s [ %d]', mark1, line_text, string.rep('·', fillcharcount), mark2, folded_line_num)
+  return require('util.folding')()
 end
-vim.opt.foldtext = 'v:lua.custom_foldtext()'
+vim.opt.foldtext = "v:lua.custom_foldtext()"
 
 vim.opt.foldnestmax = 3
 vim.g.markdown_folding = 1
