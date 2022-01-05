@@ -5,6 +5,17 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
       default_prompt = "➤ ",
       insert_only = false,
       winblend = 0,
+      prefer_width = 100,
+      min_width = 20,
+    },
+
+    select = {
+      fzf = {
+        window = {
+          width = 0.5,
+          height = 0.5,
+        },
+      },
     },
   })
   async_load_plugin:close()
