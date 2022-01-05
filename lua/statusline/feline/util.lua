@@ -15,18 +15,19 @@ M.force_inactive = {
   bufnames  = {}
 }
 
+-- stylua: ignore
 M.colors = {
   white         = "#b5bcc9",
   grey_fg       = "#737D87",
   short_bg      = "#34393D",
-  red           = "#ef8891",
-  red_dark      = "#B31F1F",
-  green         = "#9ce5c0",
+  red           = "#EF949C",
+  red_dark      = "#B34B4B",
+  green         = "#B0E5CA",
   green_pale    = "#839C8F",
   nord_blue     = "#9aa8cf",
   yellow        = "#fbdf90",
   yellow_pale   = "#B39E67",
-  purple        = "#A300ED",
+  purple        = "#9F78E1",
   statusline_bg = "#181f26",
   light_bg      = "#222930",
   light_bg2     = "#1d242b",
