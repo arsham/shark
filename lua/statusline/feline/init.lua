@@ -56,6 +56,23 @@ table.insert(components.active[1], {
 })
 --- }}}
 
+--- Fold method {{{
+table.insert(components.active[1], {
+  provider = "fold_method",
+  enabled = function()
+    return vim.wo.foldenable
+  end,
+  priority = 8,
+  truncate_hide = true,
+  hl = {
+    fg = "green_pale",
+    bg = "statusline_bg",
+    style = "bold",
+  },
+  icon = "  ",
+})
+--- }}}
+
 --- Git root {{{
 table.insert(components.active[1], {
   provider      = 'git_root',
@@ -669,25 +686,26 @@ table.insert(components.inactive[3], {
 })
 --- }}}
 
-require('feline').setup({ --- {{{
-  theme            = util.colors,
-  default_bg       = util.colors.bg,
-  default_fg       = util.colors.fg,
-  vi_mode_colors   = util.vi_mode_colors,
-  components       = components,
-  force_inactive   = util.force_inactive,
-  separators       = util.separators,
+require("feline").setup({ --- {{{
+  theme = util.colors,
+  default_bg = util.colors.bg,
+  default_fg = util.colors.fg,
+  vi_mode_colors = util.vi_mode_colors,
+  components = components,
+  force_inactive = util.force_inactive,
+  separators = util.separators,
   custom_providers = {
-    vim_mode        = util.vim_mode,
-    search_results  = util.search_results,
+    vim_mode = util.vim_mode,
+    search_results = util.search_results,
     locallist_count = util.locallist_count,
-    quickfix_count  = util.quickfix_count,
-    git_root        = util.git_root,
-    diag_errors     = lsp.diagnostic_errors,
-    diag_info       = lsp.diagnostic_info,
-    diag_warnings   = lsp.diagnostic_warnings,
-    diag_hints      = lsp.diagnostic_hints,
-    lsp_progress    = util.get_lsp_progress,
+    quickfix_count = util.quickfix_count,
+    git_root = util.git_root,
+    diag_errors = lsp.diagnostic_errors,
+    diag_info = lsp.diagnostic_info,
+    diag_warnings = lsp.diagnostic_warnings,
+    diag_hints = lsp.diagnostic_hints,
+    lsp_progress = util.get_lsp_progress,
+    fold_method = util.fold_method,
   },
 })
 --- }}}

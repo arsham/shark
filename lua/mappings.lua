@@ -291,6 +291,51 @@ util.xnoremap{"@", function()
 end, silent=false, desc="execute macro over visual range"}
 
 --- Easier cgn process by starting with already selected text.
-util.nnoremap{"cn", "*``cgn"}
+util.nnoremap({ "cn", "*``cgn" })
+
+util.nnoremap({
+  "<leader>zm",
+  function()
+    vim.opt_local.foldmethod = "manual"
+  end,
+  silent = true,
+  desc = "set local foldmethod to manual",
+})
+
+util.nnoremap({
+  "<leader>ze",
+  function()
+    vim.opt_local.foldmethod = "expr"
+  end,
+  silent = true,
+  desc = "set local foldmethod to expr",
+})
+
+util.nnoremap({
+  "<leader>zi",
+  function()
+    vim.opt_local.foldmethod = "indent"
+  end,
+  silent = true,
+  desc = "set local foldmethod to indent",
+})
+
+util.nnoremap({
+  "<leader>zk",
+  function()
+    vim.opt_local.foldmethod = "marker"
+  end,
+  silent = true,
+  desc = "set local foldmethod to marker",
+})
+
+util.nnoremap({
+  "<leader>zs",
+  function()
+    vim.opt_local.foldmethod = "syntax"
+  end,
+  silent = true,
+  desc = "set local foldmethod to syntax",
+})
 
 --- vim: foldmethod=marker

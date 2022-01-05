@@ -336,4 +336,14 @@ function M.get_lsp_progress()
   return table.concat(msgs, config.component_separator)
 end
 
+function M.fold_method()
+  return ({
+    marker = "MKR",
+    manual = "MNL",
+    syntax = "SYN",
+    indent = "IND",
+    expr = "EXP",
+  })[vim.wo.foldmethod] or "N/A"
+end
+
 return M

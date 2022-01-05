@@ -151,6 +151,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **]**           | Jumps to the next item                                     |
 | **[**           | Jumps to the previous item                                 |
 | **h**           | **H**unk                                                   |
+| **z**           | Folds, language/spelling                                   |
 
 The `leader` key is `space`!
 
@@ -205,6 +206,11 @@ The `leader` key is `space`!
 | `<leader>2`        | Diff get from BASE (middle)                                          |
 | `<leader>3`        | Diff get from REMOTE (right)                                         |
 | [V]`@<reg>`        | Execute a macro over range of selected lines                         |
+| `<leader>zm`       | Set folding method to **M**anual                                     |
+| `<leader>ze`       | Set folding method to **E**xpression                                 |
+| `<leader>zi`       | Set folding method to **I**ndent                                     |
+| `<leader>zm`       | Set folding method to Mar**k**er                                     |
+| `<leader>zs`       | Set folding method to **S**yntax                                     |
 
 To use the **C**heat**S**heet functionality, type your query in the buffer and
 invoke the key binding. The response will be inserted on the next lint in the
