@@ -4,6 +4,7 @@ local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.indentexpr = "nvim_treesitter#indent()"
 
 parser_config.sql = {
   install_info = {
