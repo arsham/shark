@@ -17,7 +17,7 @@ there are a few other **LSP** servers setup as well.
 - There are a few **Lua** functions available for setting up
   **autocmd/augroup** that accept **Lua functions** to run.
   They are super cool, check them out!
-- **LSP**, **Treesitter**, and **fzf** are setup to work together.
+- **LSP**, **Treesitter**, and **FZF** are setup to work together.
 - Completion with **nvim-cmp** plugin is setup.
 - It is optimised to handle very **large** files.
 - There are some handy **textobjects** such as **backticks** and **indents**.
@@ -54,6 +54,9 @@ Run `TSUpdate` to satisfy treesitter dependencies, and finally run
 `LspInstallInfo` and install the LSP servers you need. Some dependencies can't
 be installed with this tool (yet), therefore you need to install them manually.
 The command will let you know what you need to install in the notification.
+
+You can check the health of your installation by running the `checkhealth`
+command.
 
 ## Functionality
 
