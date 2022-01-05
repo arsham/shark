@@ -1,6 +1,6 @@
-local nvim = require('nvim')
-local util = require('util')
-local util_lsp = require('util.lsp')
+local nvim = require("nvim")
+local util = require("util")
+local util_lsp = require("util.lsp")
 table.insert(vim.opt.rtp, "~/.fzf")
 
 local M = {}
@@ -11,9 +11,11 @@ local M = {}
 local function goto_def(lines)
   local file = lines[1]
   vim.api.nvim_command(("e %s"):format(file))
-  if util_lsp.is_lsp_attached() and util_lsp.has_lsp_capability('document_symbol') then
+  if util_lsp.is_lsp_attached() and util_lsp.has_lsp_capability("document_symbol") then
     local ok = pcall(vim.lsp.buf.document_symbol)
-    if ok then return end
+    if ok then
+      return
+    end
   end
   nvim.ex.BTags()
 end
@@ -23,7 +25,7 @@ end
 local function goto_line(lines)
   local file = lines[1]
   vim.api.nvim_command(("e %s"):format(file))
-  util.normal('n', ':')
+  util.normal("n", ":")
 end
 
 ---Shows a fzf search for line content.
@@ -74,42 +76,49 @@ local function set_loclist(items)
 end
 
 M.fzfActions = {
-  ['ctrl-t'] = 'tab split',
-  ['ctrl-x'] = 'split',
-  ['ctrl-v'] = 'vsplit',
-  ['alt-q']  = set_qf_list,
-  ['alt-w']  = set_loclist,
-  ['alt-@']  = goto_def,
-  ['alt-:']  = goto_line,
-  ['alt-/']  = search_file,
+  ["ctrl-t"] = "tab split",
+  ["ctrl-x"] = "split",
+  ["ctrl-v"] = "vsplit",
+  ["alt-q"] = set_qf_list,
+  ["alt-w"] = set_loclist,
+  ["alt-@"] = goto_def,
+  ["alt-:"] = goto_line,
+  ["alt-/"] = search_file,
 }
 vim.g.fzf_action = M.fzfActions
 
-vim.g.fzf_commands_expect = 'enter'
+vim.g.fzf_commands_expect = "enter"
 vim.g.fzf_layout = {
   window = {
-    width     = 1,
-    height    = 0.5,
-    yoffset   = 1,
+    width = 1,
+    height = 0.5,
+    yoffset = 1,
     highlight = "Comment",
-    border    = 'none',
+    border = "none",
   },
 }
 
-vim.g.fzf_buffers_jump = 1          --- [Buffers] Jump to the existing window if possible
-vim.g.fzf_preview_window = {'right:50%:+{2}-/2,nohidden', '?'}
+vim.g.fzf_buffers_jump = 1 --- [Buffers] Jump to the existing window if possible
+vim.g.fzf_preview_window = { "right:50%:+{2}-/2,nohidden", "?" }
 vim.g.fzf_commits_log_options = table.concat({
   [[ --graph --color=always                                    ]],
   [[ --format="%C(yellow)%h%C(red)%d%C(reset)                  ]],
   [[ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)" ]],
 }, " ")
 
-require('util').augroup{"FZF_FIXES", {
-  {"FileType", "fzf", run=function()
-    util.tnoremap{'<esc>', '<C-c>', buffer=true, desc='escape fzf with escape'}
-  end},
-}}
+require("util").augroup({
+  "FZF_FIXES",
+  {
+    {
+      "FileType",
+      "fzf",
+      run = function()
+        util.tnoremap({ "<esc>", "<C-c>", buffer = true, desc = "escape fzf with escape" })
+      end,
+    },
+  },
+})
 
-vim.g.fzf_history_dir = vim.env.HOME .. '/.local/share/fzf-history'
+vim.g.fzf_history_dir = vim.env.HOME .. "/.local/share/fzf-history"
 
 return M

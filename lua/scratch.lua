@@ -1,5 +1,5 @@
-local util = require('util')
-local nvim = require('nvim')
+local util = require("util")
+local nvim = require("nvim")
 
 local store = {}
 __Scratch_buffer_storage = __Scratch_buffer_storage or {}
@@ -28,8 +28,12 @@ util.command("Scratch", function()
   vim.bo.buftype = "nofile"
   vim.bo.swapfile = false
 
-  util.autocmd{"BufDelete", buffer=true, run=function()
-    local num = tonumber(vim.fn.expand('<afile>'):match("Scratch (%d+)"))
-    store.delete(num)
-  end}
+  util.autocmd({
+    "BufDelete",
+    buffer = true,
+    run = function()
+      local num = tonumber(vim.fn.expand("<afile>"):match("Scratch (%d+)"))
+      store.delete(num)
+    end,
+  })
 end)

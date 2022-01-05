@@ -1,3 +1,3 @@
-require('settings.fzf.config')
-require('settings.fzf.commands')
-require('settings.fzf.mappings')
+require("settings.fzf.config")
+require("settings.fzf.commands")
+require("settings.fzf.mappings")

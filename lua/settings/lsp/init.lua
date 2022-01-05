@@ -1,2 +1,2 @@
-require('settings.lsp.config')
-require('settings.lsp.util')
+require("settings.lsp.config")
+require("settings.lsp.util")

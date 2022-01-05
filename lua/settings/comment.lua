@@ -1,8 +1,8 @@
-local cmt_utils = require('Comment.utils')
-local ts_utils  = require('ts_context_commentstring.utils')
-local internal  = require('ts_context_commentstring.internal')
+local cmt_utils = require("Comment.utils")
+local ts_utils = require("ts_context_commentstring.utils")
+local internal = require("ts_context_commentstring.internal")
 
-require('Comment').setup {
+require("Comment").setup({
   pre_hook = function(ctx)
     --- Determine the location where to calculate commentstring from
     local location = nil
@@ -13,11 +13,11 @@ require('Comment').setup {
     end
 
     --- Detemine whether to use linewise or blockwise commentstring
-    local type = ctx.ctype == cmt_utils.ctype.line and '__default' or '__multiline'
+    local type = ctx.ctype == cmt_utils.ctype.line and "__default" or "__multiline"
 
     return internal.calculate_commentstring({
       key = type,
       location = location,
     })
   end,
-}
+})

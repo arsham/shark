@@ -12,16 +12,6 @@ command("Config", util.open_config)
 command("Todo", util.open_todo)
 command("Notes", "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", { bang = true })
 command("Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", { bang = true })
-command("GGrep", util.git_grep, { bang = true, nargs = "*" })
-command("BLines", util.lines_grep)
-command("Reload", util.reload_config)
-command("ReloadWatch", function()
-  util.reload_config(true)
-end)
-command("Config", util.open_config)
-command("Todo", util.open_todo)
-command("Notes", "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", { bang = true })
-command("Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", { bang = true })
 
 ---Delete marks interactivly with fzf.
 command("MarksDelete", util.delete_marks)
@@ -29,9 +19,13 @@ command("MarksDelete", util.delete_marks)
 command("Marks", function()
   local home = vim.fn["fzf#shellescape"](vim.fn.expand("%"))
   local preview = vim.fn["fzf#vim#with_preview"]({
-    placeholder = '$([ -r $(echo {4} | sed "s#^~#$HOME#") ] && echo {4} || echo '
-      .. home
-      .. "):{2}",
+    placeholder = table.concat({
+      '$([ -r $(echo {4} | sed "s#^~#$HOME#") ]',
+      "&& echo {4}",
+      "|| echo ",
+      home,
+      "):{2}",
+    }, " "),
     options = "--preview-window +{2}-/2",
   })
   vim.fn["fzf#vim#marks"](preview, 0)

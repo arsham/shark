@@ -1,6 +1,6 @@
 local internals = function(palette) --- Internals {{{
   return {
-    Normal = {--- {{{
+    Normal = { --- {{{
       guifg = palette.white,
       guibg = palette.base0,
     },
@@ -18,8 +18,8 @@ local internals = function(palette) --- Internals {{{
       --- normal text and background color for floating windows
       guifg = palette.grey_light,
       guibg = palette.base4,
-    },--- }}}
-    Pmenu = {--{{{
+    }, --- }}}
+    Pmenu = { --{{{
       --- Popup menu: normal item.
       guifg = palette.grey_light,
       guibg = palette.base4,
@@ -42,8 +42,8 @@ local internals = function(palette) --- Internals {{{
       --- Popup menu: scrollbar.
       guifg = palette.none,
       guibg = palette.base3,
-    },--}}}
-    Cursor = {--{{{
+    }, --}}}
+    Cursor = { --{{{
       guifg = palette.none,
       guibg = palette.none,
       style = palette.reverse,
@@ -67,8 +67,8 @@ local internals = function(palette) --- Internals {{{
       guifg = palette.white,
       guibg = palette.none,
       style = palette.bold,
-    },--}}}
-    NormalMode = {--{{{
+    }, --}}}
+    NormalMode = { --{{{
       --- Normal mode message in the cmdline
       guifg = palette.accent,
       guibg = palette.none,
@@ -97,8 +97,8 @@ local internals = function(palette) --- Internals {{{
       guifg = palette.grey,
       guibg = palette.none,
       style = palette.reverse,
-    },--}}}
-    healthError = {--{{{
+    }, --}}}
+    healthError = { --{{{
       guifg = palette.error,
     },
     healthSuccess = {
@@ -116,8 +116,8 @@ local internals = function(palette) --- Internals {{{
       --- when a double-wide character doesn't fit at the end of the line).
       --- See also |hl-EndOfBuffer|.
       guifg = palette.base5,
-    },--}}}
-    Visual = {--{{{
+    }, --}}}
+    Visual = { --{{{
       --- Visual mode selection
       guibg = palette.base5,
     },
@@ -148,8 +148,8 @@ local internals = function(palette) --- Internals {{{
       --- ":s///c"
       guifg = palette.base2,
       guibg = palette.yellow,
-    },--}}}
-    CursorLineNr = {--{{{
+    }, --}}}
+    CursorLineNr = { --{{{
       --- Like LineNr when 'cursorline' or 'relativenumber' is set for the
       --- cursor line.
       guifg = palette.orange,
@@ -164,8 +164,8 @@ local internals = function(palette) --- Internals {{{
     Question = {
       --- |hit-enter| prompt and yes/no questions
       guifg = palette.yellow,
-    },--}}}
-    ModeMsg = {--{{{
+    }, --}}}
+    ModeMsg = { --{{{
       --- 'showmode' message (e.g., "-- INSERT -- ")
       guifg = palette.white,
       guibg = palette.none,
@@ -192,14 +192,14 @@ local internals = function(palette) --- Internals {{{
       guifg = palette.yellow,
       guibg = palette.none,
       style = palette.bold,
-    },--}}}
-    VertSplit = {--{{{
+    }, --}}}
+    VertSplit = { --{{{
       guifg = palette.blue_pale,
       guibg = palette.base0,
     },
     LineNr = {
       guifg = palette.base6,
-      guibg = palette.base2
+      guibg = palette.base2,
     },
     SignColumn = {
       guifg = palette.base5,
@@ -209,8 +209,8 @@ local internals = function(palette) --- Internals {{{
       --- column where |signs| are displayed
       guibg = palette.sidebar_bg,
       guifg = palette.white,
-    },--}}}
-    StatusLineNC = {--{{{
+    }, --}}}
+    StatusLineNC = { --{{{
       --- status lines of not-current windows Note: if this is equal to
       --- "StatusLine" Vim will use "^^^" in the status line of the current
       --- window.
@@ -252,8 +252,8 @@ local internals = function(palette) --- Internals {{{
       --- titles for output from ":set all", ":autocmd" etc.
       guifg = palette.yellow,
       style = palette.bold,
-    },--}}}
-    SpellBad = {--{{{
+    }, --}}}
+    SpellBad = { --{{{
       --- Word that is not recognized by the spellchecker. |spell| Combined
       --- with the highlighting used otherwise.
       guifg = palette.red,
@@ -281,8 +281,8 @@ local internals = function(palette) --- Internals {{{
       guifg = palette.pink,
       guibg = palette.none,
       style = palette.undercurl,
-    },--}}}
-    DiffAdd = {--- {{{
+    }, --}}}
+    DiffAdd = { --- {{{
       --- diff mode: Added line
       guifg = palette.diff_add_fg,
       guibg = palette.diff_add_bg,
@@ -327,9 +327,9 @@ local internals = function(palette) --- Internals {{{
       guifg = palette.purple,
     },
     --- }}}
-    Folded = {--{{{
+    Folded = { --{{{
       --- line used for closed folds
-      guifg = palette.grey,
+      guifg = palette.border,
       guibg = palette.base3,
     },
     FoldColumn = {
@@ -411,8 +411,8 @@ local internals = function(palette) --- Internals {{{
     PreCondit = {
       --- preprocessor #if, #else, #endif, etc.
       guifg = palette.pink,
-    },--}}}
-    Special = {--{{{
+    }, --}}}
+    Special = { --{{{
       --- any special symbol
       guifg = palette.white,
     },
@@ -478,8 +478,8 @@ local internals = function(palette) --- Internals {{{
       --- 'conceallevel')
       guifg = palette.grey,
       guibg = palette.none,
-    },--}}}
-    vCursor = {--{{{
+    }, --}}}
+    vCursor = { --{{{
       --- the character under the cursor
       guifg = palette.none,
       guibg = palette.none,
@@ -516,8 +516,8 @@ local internals = function(palette) --- Internals {{{
       --- |hl-CursorLine| when the cursor is there.
       guifg = palette.purple,
       style = palette.bold,
-    },--}}}
-    qfLineNr = {--{{{
+    }, --}}}
+    qfLineNr = { --{{{
       --- Line numbers for quickfix lists
       guifg = palette.highlight,
       guibg = palette.title,
@@ -608,8 +608,8 @@ local internals = function(palette) --- Internals {{{
     },
     markdownH3Delimiter = {
       guifg = palette.green,
-    },--}}}
-    Conditional = {--{{{
+    }, --}}}
+    Conditional = { --{{{
       guifg = palette.pink,
     },
     Directory = {
@@ -630,7 +630,7 @@ local internals = function(palette) --- Internals {{{
     ExtraWhitespace = {
       guifg = palette.base1,
       guibg = palette.diff_add_fg,
-    },--}}}
+    }, --}}}
   }
 end
 --- }}}
@@ -1108,13 +1108,13 @@ local plugin_syntax = function(palette) --- Plugins {{{
     NvimTreeFolderName = {
       guifg = palette.white,
     },
-    NvimTreeFolderIcon= {
+    NvimTreeFolderIcon = {
       guifg = palette.accent,
     },
-    NvimTreeEmptyFolderName= {
+    NvimTreeEmptyFolderName = {
       guifg = palette.disabled,
     },
-    NvimTreeOpenedFolderName= {
+    NvimTreeOpenedFolderName = {
       guifg = palette.accent,
       style = palette.italic,
     },
@@ -1248,24 +1248,24 @@ end
 --- }}}
 
 --- Setup function {{{
-local nvim = require('nvim')
+local nvim = require("nvim")
 
 ---Creates all highlighting from the given palette.
 ---@param palette string could be 'light_palette' or 'dark_palette'
 ---@param name string the colour scheme name
 local setup = function(palette, name)
   nvim.ex.clear()
-  if vim.fn.exists('syntax_on') then
-    nvim.ex.syntax('reset')
+  if vim.fn.exists("syntax_on") then
+    nvim.ex.syntax("reset")
   end
 
-  local highlight = require('util').highlight
+  local highlight = require("util").highlight
   vim.g.colors_name = name
   for group, colors in pairs(internals(palette)) do
     highlight(group, colors)
   end
   local async_load_plugin = nil
-  async_load_plugin = vim.loop.new_async(vim.schedule_wrap( function()
+  async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
     for group, colors in pairs(plugin_syntax(palette)) do
       highlight(group, colors)
     end
@@ -1275,7 +1275,7 @@ local setup = function(palette, name)
 end
 
 return {
-  setup = setup
+  setup = setup,
 }
 --- }}}
 

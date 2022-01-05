@@ -1,11 +1,13 @@
-if not pcall(require, 'nvim') then return end
-local nvim = require('nvim')
-require('util.tables')
-require('util.strings')
+if not pcall(require, "nvim") then
+  return
+end
+local nvim = require("nvim")
+require("util.tables")
+require("util.strings")
 
 local M = {
   profiler_enabled = false,
-  profiler_path = vim.env.HOME..'/tmp',
+  profiler_path = vim.env.HOME .. "/tmp",
 }
 
 ---Prints the time it takes to run the fn function if the vim.g.run_profiler is
@@ -13,20 +15,20 @@ local M = {
 ---@param name string|function if a function, you can ignore the fn
 ---@param fn function
 function M.profiler(name, fn)
-  if type(name) == 'function' then
+  if type(name) == "function" then
     fn = name
-    name = 'unknown'
+    name = "unknown"
   end
   if not M.profiler_enabled then
     fn()
     return
   end
-  local filename = M.profiler_path .. '/nvim_profiler_' .. name .. '.log'
-  local msg = 'Profile results are at ' .. filename
+  local filename = M.profiler_path .. "/nvim_profiler_" .. name .. ".log"
+  local msg = "Profile results are at " .. filename
 
-  require'plenary.profile'.start(filename, {flame = true})
+  require("plenary.profile").start(filename, { flame = true })
   fn()
-  require'plenary.profile'.stop()
+  require("plenary.profile").stop()
   vim.notify(msg, "info", {
     title = name,
   })
@@ -37,7 +39,7 @@ end
 function M.timeit(fn)
   local start = vim.loop.hrtime()
   fn()
-  local msg = ('%fs'):format((vim.loop.hrtime() - start)/1e6)
+  local msg = ("%fs"):format((vim.loop.hrtime() - start) / 1e6)
   print(msg)
 end
 
@@ -45,7 +47,7 @@ end
 ---@vararg any
 -- selene: allow(global_usage)
 function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, {...})
+  local objects = vim.tbl_map(vim.inspect, { ... })
   print(unpack(objects))
 end
 
@@ -65,8 +67,8 @@ end
 ---@param dir string
 ---@return boolean #success result
 function M.mkdir_home(dir)
-  local path = vim.env.HOME .. '/' .. dir
-  local p = require('plenary.path'):new(path)
+  local path = vim.env.HOME .. "/" .. dir
+  local p = require("plenary.path"):new(path)
   if not p:exists() then
     return p:mkdir()
   end
@@ -77,10 +79,10 @@ end
 ---centres the cursor.
 ---@param fn function
 function M.call_and_centre(fn)
-  M.normal('n', "m'")
+  M.normal("n", "m'")
   fn()
   vim.schedule(function()
-    M.normal('n', 'zz')
+    M.normal("n", "zz")
   end)
 end
 
@@ -88,10 +90,10 @@ end
 ---the cursor.
 ---@param cmd string
 function M.cmd_and_centre(cmd)
-  M.normal('n', "m'")
+  M.normal("n", "m'")
   vim.cmd(cmd)
   vim.schedule(function()
-    M.normal('n', 'zz')
+    M.normal("n", "zz")
   end)
 end
 
@@ -107,26 +109,32 @@ end
 ---@param group string name of the highlight group.
 ---@param opt HighlightOpt additional properties.
 function M.highlight(group, opt)
-  vim.validate {
-    opt = {opt, 't'},
-    ['opt.style']   = {opt.style,   's', true},
-    ['opt.guifg']   = {opt.guifg,   's', true},
-    ['opt.guibg']   = {opt.guibg,   's', true},
-    ['opt.guisp']   = {opt.guisp,   's', true},
-    ['opt.ctermfg'] = {opt.ctermfg, 's', true},
-    ['opt.ctermbg'] = {opt.ctermbg, 's', true},
-  }
+  vim.validate({
+    opt = { opt, "t" },
+    ["opt.style"] = { opt.style, "s", true },
+    ["opt.guifg"] = { opt.guifg, "s", true },
+    ["opt.guibg"] = { opt.guibg, "s", true },
+    ["opt.guisp"] = { opt.guisp, "s", true },
+    ["opt.ctermfg"] = { opt.ctermfg, "s", true },
+    ["opt.ctermbg"] = { opt.ctermbg, "s", true },
+  })
 
-  local style   = opt.style   and 'gui = '     .. opt.style   or 'gui = NONE'
-  local guifg   = opt.guifg   and 'guifg = '   .. opt.guifg   or 'guifg = NONE'
-  local guibg   = opt.guibg   and 'guibg = '   .. opt.guibg   or 'guibg = NONE'
-  local guisp   = opt.guisp   and 'guisp = '   .. opt.guisp   or ''
-  local ctermfg = opt.ctermfg and 'ctermfg = ' .. opt.ctermfg or ''
-  local ctermbg = opt.ctermbg and 'ctermbg = ' .. opt.ctermbg or ''
+  local style = opt.style and "gui = " .. opt.style or "gui = NONE"
+  local guifg = opt.guifg and "guifg = " .. opt.guifg or "guifg = NONE"
+  local guibg = opt.guibg and "guibg = " .. opt.guibg or "guibg = NONE"
+  local guisp = opt.guisp and "guisp = " .. opt.guisp or ""
+  local ctermfg = opt.ctermfg and "ctermfg = " .. opt.ctermfg or ""
+  local ctermbg = opt.ctermbg and "ctermbg = " .. opt.ctermbg or ""
 
-  local str     = table.concat({
-    group, style, guifg, guibg, ctermfg, ctermbg, guisp
-  }, ' ')
+  local str = table.concat({
+    group,
+    style,
+    guifg,
+    guibg,
+    ctermfg,
+    ctermbg,
+    guisp,
+  }, " ")
   nvim.ex.highlight(str)
 end
 
@@ -174,10 +182,12 @@ end
 ---@param opts AugroupOpt
 function M.augroup(opts)
   local name = opts.name or opts[1]
-  vim.validate{
-    name = {name, function(n) return n ~= '' end, 'non empty group name'},
-    opts = {opts, 't', true},
-  }
+  -- stylua: ignore start
+  vim.validate({
+    name = { name, function(n) return n ~= "" end, "non empty group name" },
+    opts = { opts, "t", true },
+  })
+  -- stylua: ignore end
 
   local cmds = opts.cmds or opts[2]
   if not cmds then
@@ -185,11 +195,11 @@ function M.augroup(opts)
   end
 
   nvim.ex.augroup(name)
-  nvim.ex.autocmd_('*')
+  nvim.ex.autocmd_("*")
   for _, def in pairs(cmds) do
     M.autocmd(def)
   end
-  nvim.ex.augroup('END')
+  nvim.ex.augroup("END")
 end
 
 ---@class AutocmdOpt
@@ -206,79 +216,81 @@ end
 ---augroup.
 ---@param opts AutocmdOpt[]
 function M.autocmd(opts)
-  vim.validate{
-    opts = {opts, 't'},
-  }
+  vim.validate({
+    opts = { opts, "t" },
+  })
   local args = {}
 
   for k, v in pairs(opts) do
     args[k] = v
-    if k == 'silent' and v then
-      args.silent = 'silent!'
+    if k == "silent" and v then
+      args.silent = "silent!"
     end
-    if k == 'buffer' and v then
-      args.buffer = '<buffer>'
+    if k == "buffer" and v then
+      args.buffer = "<buffer>"
     end
   end
 
-  local events  = args.events or args[1]
+  local events = args.events or args[1]
   local targets = args.targets or args[2] or ""
-  local run     = args.run or args[3]
-  local buffer  = args.buffer or ""
-  local docs    = args.docs or "no documents"
-  local silent  = args.silent or ""
-  local once    = args.once and '++once' or ""
-  local group   = args.group or ""
+  local run = args.run or args[3]
+  local buffer = args.buffer or ""
+  local docs = args.docs or "no documents"
+  local silent = args.silent or ""
+  local once = args.once and "++once" or ""
+  local group = args.group or ""
 
   local autocmd_str
-  if type(run) == 'string' then
+  if type(run) == "string" then
     autocmd_str = ('execute "%s"'):format(run)
-  elseif type(run) == 'function' then
+  elseif type(run) == "function" then
     local func_id = storage._create(run)
     autocmd_str = ([[lua require('util')._exec_command(%s) -- %s]]):format(func_id, docs)
   else
     error("Unexpected type to run (" .. docs .. "): " .. tostring(run))
   end
 
-  local def = table.concat({group, events, targets, buffer, silent, once, autocmd_str}, ' ')
+  local def = table.concat({ group, events, targets, buffer, silent, once, autocmd_str }, " ")
   nvim.ex.autocmd(def)
 end
 
 M.job_str = function(str)
-  local job = require('plenary.job')
-  local cmd = vim.split(str, ' ')
-  job:new({
-    command = cmd[1],
-    args = _t(cmd):slice(2, #cmd),
-    on_exit = function(j, exit_code)
-      local res = table.concat(j:result(), "\n")
-      if #res == 0 then
-        res = "No output"
-      end
+  local job = require("plenary.job")
+  local cmd = vim.split(str, " ")
+  job
+    :new({
+      command = cmd[1],
+      args = _t(cmd):slice(2, #cmd),
+      on_exit = function(j, exit_code)
+        local res = table.concat(j:result(), "\n")
+        if #res == 0 then
+          res = "No output"
+        end
 
-      local type = vim.lsp.log_levels.INFO
-      if exit_code ~=0 then
-        type = vim.lsp.log_levels.ERROR
-        res = table.concat(j:stderr_result(), "\n")
-      end
+        local type = vim.lsp.log_levels.INFO
+        if exit_code ~= 0 then
+          type = vim.lsp.log_levels.ERROR
+          res = table.concat(j:stderr_result(), "\n")
+        end
 
-      vim.notify(res, type, {
-        title = str,
-        timeout = 3000,
-      })
-    end,
-  }):start()
+        vim.notify(res, type, {
+          title = str,
+          timeout = 3000,
+        })
+      end,
+    })
+    :start()
 end
 
 local popup_options = {
   border = {
-    style = 'rounded',
-    highlight = 'FloatBorder',
+    style = "rounded",
+    highlight = "FloatBorder",
   },
-  position = '50%',
+  position = "50%",
   size = {
-    width = '80%',
-    height = '100%',
+    width = "80%",
+    height = "100%",
   },
 }
 
@@ -287,25 +299,25 @@ local popup_options = {
 ---on_submit.
 function M.user_input(opts)
   local conf = {
-    prompt = '> ',
+    prompt = "> ",
     on_submit = function(value)
       vim.notify(value, vim.lsp.log_levels.INFO, {
-        title = 'User Input',
+        title = "User Input",
         timeout = 2000,
       })
     end,
   }
 
   conf = vim.tbl_deep_extend("force", conf, opts)
-  local input = require('nui.input')(popup_options, {
+  local input = require("nui.input")(popup_options, {
     prompt = conf.prompt,
     zindex = 10,
     on_submit = conf.on_submit,
   })
 
   input:mount()
-  input:map('i', '<esc>', input.input_props.on_close, { noremap = true })
-  local event = require('nui.utils.autocmd').event
+  input:map("i", "<esc>", input.input_props.on_close, { noremap = true })
+  local event = require("nui.utils.autocmd").event
 
   input:on(event.BufHidden, function()
     vim.schedule(function()
@@ -315,13 +327,13 @@ function M.user_input(opts)
 end
 
 M.colours = {
-  black   = 30,
-  red     = 31,
-  green   = 32,
-  yellow  = 33,
-  blue    = 34,
+  black = 30,
+  red = 31,
+  green = 32,
+  yellow = 33,
+  blue = 34,
   magenta = 35,
-  cyan    = 36,
+  cyan = 36,
 }
 
 ---Returns a string that prints a colorized version of the given table suitable
@@ -333,7 +345,6 @@ function M.ansi_color(colour, text)
   -- selene: allow(bad_string_escape)
   return ("\x1b[%s;1;m%s\x1b[m"):format(colour, text)
 end
-
 
 ---Returns a pair of canonical name and the module name.
 ---@param filename string
@@ -351,12 +362,12 @@ local function try_filename(filename)
   for _, pattern in ipairs(patterns) do
     local name = filename:match(pattern)
     if name then
-      local mod_name = name:match('(.+).lua$')
-      mod_name, _= mod_name:gsub('/', '.')
+      local mod_name = name:match("(.+).lua$")
+      mod_name, _ = mod_name:gsub("/", ".")
       return name, mod_name, true
     end
   end
-  return '', '', false
+  return "", "", false
 end
 
 ---@class file_module
@@ -407,17 +418,17 @@ function M.map(mode, conf)
   local lhs = opts.lhs or conf[1]
   local rhs = opts.rhs or conf[2]
 
-  if type(rhs) == 'function' then
+  if type(rhs) == "function" then
     map_opts.callback = rhs
-    rhs = ''
+    rhs = ""
   end
 
-  vim.validate {
-    mode = {mode, {'s', 't'}},
-    lhs  = {lhs,  's'},
-    rhs  = {rhs,  {'s', 'f'}},
-    opts = {opts, 't',  true}
-  }
+  vim.validate({
+    mode = { mode, { "s", "t" } },
+    lhs = { lhs, "s" },
+    rhs = { rhs, { "s", "f" } },
+    opts = { opts, "t", true },
+  })
 
   if conf.buffer then
     map_opts.buffer = nil
@@ -426,6 +437,8 @@ function M.map(mode, conf)
   end
   vim.api.nvim_set_keymap(mode, lhs, rhs, map_opts)
 end
+
+-- stylua: ignore start
 
 ---Create a normal mode mapping.
 ---@param conf mapping_options
@@ -481,4 +494,5 @@ function M.cnoremap(conf) M._noremap('c', conf) end
 ---@param conf mapping_options
 function M.tnoremap(conf) M._noremap('t', conf) end
 
+-- stylua: ignore end
 return M

@@ -1,55 +1,55 @@
-local lsp = require('util.lsp')
-local util = require('statusline.feline.util')
-local vi_mode_utils = require('feline.providers.vi_mode')
+local lsp = require("util.lsp")
+local util = require("statusline.feline.util")
+local vi_mode_utils = require("feline.providers.vi_mode")
 
-local components = {--- {{{
-  active       = {{}, {}, {}},
-  inactive     = {{}, {}, {}},
+local components = { --- {{{
+  active = { {}, {}, {} },
+  inactive = { {}, {}, {} },
 }
 
 local left_ribbon_hl = {
-  fg = 'grey_fg',
-  bg = 'statusline_bg',
+  fg = "grey_fg",
+  bg = "statusline_bg",
 }
 
 local mid_ribbon_hl = {
-  fg = 'grey_fg',
-  bg = 'statusline_bg',
+  fg = "grey_fg",
+  bg = "statusline_bg",
 }
 
 local right_ribbon_hl = {
-  fg = 'grey_fg',
-  bg = 'statusline_bg',
-}--- }}}
+  fg = "grey_fg",
+  bg = "statusline_bg",
+} --- }}}
 
 --- Vim mode {{{
 table.insert(components.active[1], {
-  provider = '  ',
+  provider = "  ",
   hl = function()
     return {
-      fg    = 'statusline_bg',
-      bg    = vi_mode_utils.get_mode_color(),
-      style = 'bold',
+      fg = "statusline_bg",
+      bg = vi_mode_utils.get_mode_color(),
+      style = "bold",
     }
   end,
-  right_sep = 'right_rounded',
+  right_sep = "right_rounded",
 })
 
 table.insert(components.active[1], {
-  provider = 'vim_mode',
+  provider = "vim_mode",
   hl = function()
     return {
-      fg    = vi_mode_utils.get_mode_color(),
-      bg    = 'statusline_bg',
-      style = 'bold',
+      fg = vi_mode_utils.get_mode_color(),
+      bg = "statusline_bg",
+      style = "bold",
     }
   end,
   right_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      fg    = 'light_bg2',
-      bg    = 'statusline_bg',
-      style = 'bold'
+      fg = "light_bg2",
+      bg = "statusline_bg",
+      style = "bold",
     },
   },
   icon = "  ",
@@ -75,68 +75,78 @@ table.insert(components.active[1], {
 
 --- Git root {{{
 table.insert(components.active[1], {
-  provider      = 'git_root',
-  enabled       = function() return require('feline.providers.git').git_info_exists() end,
-  priority      = 10,
+  provider = "git_root",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
+  priority = 10,
   truncate_hide = true,
-  hl            = left_ribbon_hl,
+  hl = left_ribbon_hl,
   left_sep = {
-    str = 'github_icon',
-    hl  = left_ribbon_hl,
+    str = "github_icon",
+    hl = left_ribbon_hl,
   },
 })
 --- }}}
 
 --- Git bransh {{{
 table.insert(components.active[1], {
-  provider      = 'git_branch',
-  enabled       = function() return require('feline.providers.git').git_info_exists() end,
-  priority      = 9,
+  provider = "git_branch",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
+  priority = 9,
   truncate_hide = true,
-  hl            = left_ribbon_hl,
+  hl = left_ribbon_hl,
   left_sep = {
-    str = ' ',
-    hl  = left_ribbon_hl,
+    str = " ",
+    hl = left_ribbon_hl,
   },
   right_sep = {
-    str = ' ',
-    hl  = left_ribbon_hl,
+    str = " ",
+    hl = left_ribbon_hl,
   },
 })
 --- }}}
 
 --- Git diff {{{
 table.insert(components.active[1], {
-  provider = 'git_diff_added',
-  enabled  = function() return require('feline.providers.git').git_info_exists() end,
-  hl       = left_ribbon_hl,
+  provider = "git_diff_added",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
+  hl = left_ribbon_hl,
   ---icon  = "  ",
 })
 
 table.insert(components.active[1], {
-  provider = 'git_diff_changed',
-  enabled  = function() return require('feline.providers.git').git_info_exists() end,
-  hl       = left_ribbon_hl,
+  provider = "git_diff_changed",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
+  hl = left_ribbon_hl,
   ---icon  = "  ",
 })
 
 table.insert(components.active[1], {
-  provider = 'git_diff_removed',
-  enabled  = function() return require('feline.providers.git').git_info_exists() end,
-  hl       = left_ribbon_hl,
+  provider = "git_diff_removed",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
+  hl = left_ribbon_hl,
   ---icon  = "  ",
 })
 --- }}}
 
 --- Left angle {{{
 table.insert(components.active[1], {
-  provider = ' ',
-  hl       = left_ribbon_hl,
+  provider = " ",
+  hl = left_ribbon_hl,
   right_sep = {
-    str = 'right_filled',
+    str = "right_filled",
     hl = {
-      fg = 'statusline_bg',
-      bg = 'mid_bg',
+      fg = "statusline_bg",
+      bg = "mid_bg",
     },
   },
 })
@@ -144,15 +154,17 @@ table.insert(components.active[1], {
 
 --- Left angle {{{
 table.insert(components.active[2], {
-  provider = ' ',
-  enabled = function() return vim.fn.expand('%:t') ~= '' end,
+  provider = " ",
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
   hl = mid_ribbon_hl,
   left_sep = {
     str = "left_filled",
     hl = {
-      fg    = 'statusline_bg',
-      bg    = 'mid_bg',
-      style = 'bold'
+      fg = "statusline_bg",
+      bg = "mid_bg",
+      style = "bold",
     },
   },
 })
@@ -161,58 +173,64 @@ table.insert(components.active[2], {
 --- File info {{{
 table.insert(components.active[2], {
   provider = {
-    name = 'file_info',
+    name = "file_info",
     opts = {
-      type               = 'full-path',
-      file_modified_icon = '',
-      file_readonly_icon = '🔒',
-    }
+      type = "full-path",
+      file_modified_icon = "",
+      file_readonly_icon = "🔒",
+    },
   },
   short_provider = {
-    name = 'file_info',
+    name = "file_info",
     opts = {
-      type = 'relative',
-      file_modified_icon = '',
-      file_readonly_icon = '🔒',
-    }
+      type = "relative",
+      file_modified_icon = "",
+      file_readonly_icon = "🔒",
+    },
   },
-  enabled = function() return vim.fn.expand('%:t') ~= '' end,
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
   hl = {
-    fg = 'white',
-    bg = 'statusline_bg',
+    fg = "white",
+    bg = "statusline_bg",
   },
 })
 --- }}}
 
 --- File size {{{
 table.insert(components.active[2], {
-  provider      = 'file_size',
-  enabled       = function() return vim.fn.expand('%:t') ~= '' end,
+  provider = "file_size",
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
   truncate_hide = true,
   left_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      fg = 'white',
-      bg = 'statusline_bg',
+      fg = "white",
+      bg = "statusline_bg",
     },
   },
   hl = {
-    fg = 'grey_fg',
-    bg = 'statusline_bg',
+    fg = "grey_fg",
+    bg = "statusline_bg",
   },
 })
 --- }}}
 
 --- Right angle {{{
 table.insert(components.active[2], {
-  provider = ' ',
-  enabled  = function() return vim.fn.expand('%:t') ~= '' end,
-  hl       = mid_ribbon_hl,
+  provider = " ",
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
+  hl = mid_ribbon_hl,
   right_sep = {
     str = "right_filled",
     hl = {
-      fg = 'statusline_bg',
-      bg = 'mid_bg',
+      fg = "statusline_bg",
+      bg = "mid_bg",
     },
   },
 })
@@ -220,40 +238,44 @@ table.insert(components.active[2], {
 
 --- Left angle {{{
 table.insert(components.active[3], {
-  provider = ' ',
-  hl       = right_ribbon_hl,
+  provider = " ",
+  hl = right_ribbon_hl,
   left_sep = {
-    str = 'left_filled',
+    str = "left_filled",
     hl = {
-      fg = 'statusline_bg',
-      bg = 'mid_bg',
+      fg = "statusline_bg",
+      bg = "mid_bg",
     },
-  }
+  },
 })
 --- }}}
 
 --- LSP client names {{{
 table.insert(components.active[3], {
-  provider      = 'lsp_client_names',
-  enabled       = function() return lsp.is_lsp_attached() end,
-  hl            = right_ribbon_hl,
-  priority      = 3,
+  provider = "lsp_client_names",
+  enabled = function()
+    return lsp.is_lsp_attached()
+  end,
+  hl = right_ribbon_hl,
+  priority = 3,
   truncate_hide = true,
 })
 --- }}}
 
 --- Lsp feedback {{{
 table.insert(components.active[3], {
-  provider      = 'lsp_progress',
-  enabled       = function() return lsp.is_lsp_attached() end,
+  provider = "lsp_progress",
+  enabled = function()
+    return lsp.is_lsp_attached()
+  end,
   truncate_hide = true,
   hl = right_ribbon_hl,
   left_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      bg    = 'statusline_bg',
-      fg    = 'mid_bg',
-      style = 'bold'
+      bg = "statusline_bg",
+      fg = "mid_bg",
+      style = "bold",
     },
   },
 })
@@ -261,57 +283,67 @@ table.insert(components.active[3], {
 
 --- Diagnostics {{{
 table.insert(components.active[3], {
-  provider = 'diag_errors',
-  enabled  = function() return lsp.diagnostics_exist(vim.diagnostic.ERROR) end,
+  provider = "diag_errors",
+  enabled = function()
+    return lsp.diagnostics_exist(vim.diagnostic.ERROR)
+  end,
   hl = {
-    fg = 'red',
-    bg = 'statusline_bg',
-  }
-})
-
-table.insert(components.active[3], {
-  provider = 'diag_warnings',
-  enabled  = function() return lsp.diagnostics_exist(vim.diagnostic.WARN) end,
-  hl = {
-    fg = 'warn',
-    bg = 'statusline_bg',
-  }
-})
-
-table.insert(components.active[3], {
-  provider = 'diag_hints',
-  enabled  = function() return lsp.diagnostics_exist(vim.diagnostic.HINT) end,
-  hl = {
-    fg = 'green',
-    bg = 'statusline_bg',
+    fg = "red",
+    bg = "statusline_bg",
   },
 })
 
 table.insert(components.active[3], {
-  provider = 'diag_info',
-  enabled  = function() return lsp.diagnostics_exist(vim.diagnostic.INFO) end,
+  provider = "diag_warnings",
+  enabled = function()
+    return lsp.diagnostics_exist(vim.diagnostic.WARN)
+  end,
   hl = {
-    fg = 'nord_blue',
-    bg = 'statusline_bg',
+    fg = "warn",
+    bg = "statusline_bg",
+  },
+})
+
+table.insert(components.active[3], {
+  provider = "diag_hints",
+  enabled = function()
+    return lsp.diagnostics_exist(vim.diagnostic.HINT)
+  end,
+  hl = {
+    fg = "green",
+    bg = "statusline_bg",
+  },
+})
+
+table.insert(components.active[3], {
+  provider = "diag_info",
+  enabled = function()
+    return lsp.diagnostics_exist(vim.diagnostic.INFO)
+  end,
+  hl = {
+    fg = "nord_blue",
+    bg = "statusline_bg",
   },
 })
 --- }}}
 
 --- Spell checker {{{
 table.insert(components.active[3], {
-  provider = '暈',
-  enabled  = function() return vim.wo.spell end,
+  provider = "暈",
+  enabled = function()
+    return vim.wo.spell
+  end,
   hl = {
-    fg    = 'yellow',
-    bg    = 'statusline_bg',
-    style = 'bold'
+    fg = "yellow",
+    bg = "statusline_bg",
+    style = "bold",
   },
   left_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      bg    = 'statusline_bg',
-      fg    = 'mid_bg',
-      style = 'bold'
+      bg = "statusline_bg",
+      fg = "mid_bg",
+      style = "bold",
     },
   },
 })
@@ -320,42 +352,44 @@ table.insert(components.active[3], {
 --- File Icon {{{
 table.insert(components.active[3], {
   provider = function()
-    local filename  = vim.fn.expand('%:t')
-    local extension = vim.fn.expand('%:e')
-    local icon      = require'nvim-web-devicons'.get_icon(filename, extension)
+    local filename = vim.fn.expand("%:t")
+    local extension = vim.fn.expand("%:e")
+    local icon = require("nvim-web-devicons").get_icon(filename, extension)
     if icon == nil then
-      icon = ''
+      icon = ""
     end
     return icon
   end,
-  enabled = function() return vim.fn.expand('%:t') ~= '' end,
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
   hl = function()
     local val = {}
-    local filename = vim.fn.expand('%:t')
-    local extension = vim.fn.expand('%:e')
-    local icon, name  = require'nvim-web-devicons'.get_icon(filename, extension)
+    local filename = vim.fn.expand("%:t")
+    local extension = vim.fn.expand("%:e")
+    local icon, name = require("nvim-web-devicons").get_icon(filename, extension)
     if icon ~= nil then
-      val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
+      val.fg = vim.fn.synIDattr(vim.fn.hlID(name), "fg")
     else
-      val.fg = 'grey_fg'
+      val.fg = "grey_fg"
     end
-    val.bg = 'statusline_bg'
-    val.style = 'bold'
+    val.bg = "statusline_bg"
+    val.style = "bold"
     return val
   end,
   left_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      bg = 'statusline_bg',
-      fg = 'mid_bg',
+      bg = "statusline_bg",
+      fg = "mid_bg",
     },
   },
   right_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      bg    = 'statusline_bg',
-      fg    = 'mid_bg',
-      style = 'bold'
+      bg = "statusline_bg",
+      fg = "mid_bg",
+      style = "bold",
     },
   },
 })
@@ -363,48 +397,50 @@ table.insert(components.active[3], {
 
 --- File type {{{
 table.insert(components.active[3], {
-  provider = 'file_type',
-  enabled = function() return vim.fn.expand('%:t') ~= '' end,
+  provider = "file_type",
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
   hl = function()
-    local val        = {}
-    local filename   = vim.fn.expand('%:t')
-    local extension  = vim.fn.expand('%:e')
-    local icon, name = require'nvim-web-devicons'.get_icon(filename, extension)
+    local val = {}
+    local filename = vim.fn.expand("%:t")
+    local extension = vim.fn.expand("%:e")
+    local icon, name = require("nvim-web-devicons").get_icon(filename, extension)
     if icon ~= nil then
-      val.fg = vim.fn.synIDattr(vim.fn.hlID(name), 'fg')
+      val.fg = vim.fn.synIDattr(vim.fn.hlID(name), "fg")
     else
-      val.fg = 'grey_fg'
+      val.fg = "grey_fg"
     end
-    val.bg    = 'statusline_bg'
-    val.style = 'bold'
+    val.bg = "statusline_bg"
+    val.style = "bold"
     return val
   end,
-  priority      = 7,
+  priority = 7,
   truncate_hide = true,
   right_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      fg    = 'mid_bg',
-      bg    = 'statusline_bg',
-      style = 'bold'
+      fg = "mid_bg",
+      bg = "statusline_bg",
+      style = "bold",
     },
-  }
+  },
 })
 --- }}}
 
 --- Search results key {{{
 table.insert(components.active[3], {
-  provider      = 'search_results',
+  provider = "search_results",
   truncate_hide = true,
-  hl            = right_ribbon_hl,
+  hl = right_ribbon_hl,
   right_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      fg    = 'mid_bg',
-      bg    = 'statusline_bg',
-      style = 'bold'
+      fg = "mid_bg",
+      bg = "statusline_bg",
+      style = "bold",
     },
-  }
+  },
 })
 --- }}}
 
@@ -412,9 +448,9 @@ table.insert(components.active[3], { --- {{{
   provider = "",
   hl = function()
     return {
-      fg    = 'light_bg',
-      bg    = vi_mode_utils.get_mode_color(),
-      style = 'bold',
+      fg = "light_bg",
+      bg = vi_mode_utils.get_mode_color(),
+      style = "bold",
     }
   end,
   left_sep = "left_rounded",
@@ -423,17 +459,17 @@ table.insert(components.active[3], { --- {{{
 
 --- Quickfix count {{{
 table.insert(components.active[3], {
-  provider = 'quickfix_count',
+  provider = "quickfix_count",
   enabled = function()
     return #vim.fn.getqflist() > 0
   end,
-  priority      = 10,
+  priority = 10,
   truncate_hide = true,
   hl = function()
     return {
-      fg    = 'red_dark',
-      bg    = vi_mode_utils.get_mode_color(),
-      style = 'bold',
+      fg = "red_dark",
+      bg = vi_mode_utils.get_mode_color(),
+      style = "bold",
     }
   end,
 })
@@ -441,17 +477,17 @@ table.insert(components.active[3], {
 
 --- Local list count {{{
 table.insert(components.active[3], {
-  provider = 'locallist_count',
+  provider = "locallist_count",
   enabled = function()
     return #vim.fn.getloclist(0) > 0
   end,
-  priority      = 10,
+  priority = 10,
   truncate_hide = true,
   hl = function()
     return {
-      fg    = 'purple',
-      bg    = vi_mode_utils.get_mode_color(),
-      style = 'bold',
+      fg = "purple",
+      bg = vi_mode_utils.get_mode_color(),
+      style = "bold",
     }
   end,
 })
@@ -459,33 +495,33 @@ table.insert(components.active[3], {
 
 --- Line position {{{
 table.insert(components.active[3], {
-  provider = 'position',
+  provider = "position",
   hl = function()
     return {
-      fg    = 'statusline_bg',
-      bg    = vi_mode_utils.get_mode_color(),
-      style = 'bold',
+      fg = "statusline_bg",
+      bg = vi_mode_utils.get_mode_color(),
+      style = "bold",
     }
   end,
   right_sep = {
-    str = ' ',
+    str = " ",
     hl = function()
       return {
-        fg    = vi_mode_utils.get_mode_color(),
-        bg    = 'statusline_bg',
-        style = 'bold',
+        fg = vi_mode_utils.get_mode_color(),
+        bg = "statusline_bg",
+        style = "bold",
       }
     end,
-  }
+  },
 })
 
 table.insert(components.active[3], {
-  provider = 'line_percentage',
+  provider = "line_percentage",
   hl = function()
     return {
-      fg    = vi_mode_utils.get_mode_color(),
-      bg    = 'statusline_bg',
-      style = 'bold',
+      fg = vi_mode_utils.get_mode_color(),
+      bg = "statusline_bg",
+      style = "bold",
     }
   end,
 })
@@ -493,26 +529,28 @@ table.insert(components.active[3], {
 
 --- Git root {{{
 table.insert(components.inactive[1], {
-  provider = 'git_root',
-  enabled = function() return require('feline.providers.git').git_info_exists() end,
+  provider = "git_root",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
   truncate_hide = true,
   hl = {
-    fg    = 'white',
-    bg    = 'mid_bg',
-    style = 'bold'
+    fg = "white",
+    bg = "mid_bg",
+    style = "bold",
   },
   left_sep = {
-    str = 'github_icon',
+    str = "github_icon",
     hl = {
-      fg = 'white',
-      bg = 'short_bg',
+      fg = "white",
+      bg = "short_bg",
     },
   },
   right_sep = {
     str = " ",
     hl = {
-      fg = 'white',
-      bg = 'mid_bg',
+      fg = "white",
+      bg = "mid_bg",
     },
   },
 })
@@ -520,65 +558,73 @@ table.insert(components.inactive[1], {
 
 --- Git branch {{{
 table.insert(components.inactive[1], {
-  provider      = 'git_branch',
-  enabled       = function() return require('feline.providers.git').git_info_exists() end,
+  provider = "git_branch",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
   truncate_hide = true,
   hl = {
-    fg = 'white',
-    bg = 'mid_bg',
+    fg = "white",
+    bg = "mid_bg",
   },
   left_sep = {
-    fg = 'white',
-    bg = 'short_bg',
+    fg = "white",
+    bg = "short_bg",
   },
   right_sep = {
-    fg = 'white',
-    bg = 'short_bg',
+    fg = "white",
+    bg = "short_bg",
   },
 })
 --- }}}
 
 --- Git diff {{{
 table.insert(components.inactive[1], {
-  provider = 'git_diff_added',
-  enabled  = function() return require('feline.providers.git').git_info_exists() end,
+  provider = "git_diff_added",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
   hl = {
-    fg = 'white',
-    bg = 'mid_bg',
+    fg = "white",
+    bg = "mid_bg",
   },
 })
 
 table.insert(components.inactive[1], {
-  provider = 'git_diff_changed',
-  enabled  = function() return require('feline.providers.git').git_info_exists() end,
+  provider = "git_diff_changed",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
   hl = {
-    fg = 'white',
-    bg = 'mid_bg',
+    fg = "white",
+    bg = "mid_bg",
   },
 })
 
 table.insert(components.inactive[1], {
-  provider = 'git_diff_removed',
-  enabled  = function() return require('feline.providers.git').git_info_exists() end,
+  provider = "git_diff_removed",
+  enabled = function()
+    return require("feline.providers.git").git_info_exists()
+  end,
   hl = {
-    fg = 'white',
-    bg = 'mid_bg',
+    fg = "white",
+    bg = "mid_bg",
   },
 })
 --- }}}
 
 --- Left angle {{{
 table.insert(components.inactive[1], {
-  provider = ' ',
+  provider = " ",
   hl = {
-    fg = 'white',
-    bg = 'mid_bg',
+    fg = "white",
+    bg = "mid_bg",
   },
   right_sep = {
-    str = 'slant_right_2',
+    str = "slant_right_2",
     hl = {
-      fg = 'mid_bg',
-      bg = 'short_bg',
+      fg = "mid_bg",
+      bg = "short_bg",
     },
   },
 })
@@ -587,74 +633,76 @@ table.insert(components.inactive[1], {
 --- File info {{{
 table.insert(components.inactive[2], {
   provider = {
-    name = 'file_info',
+    name = "file_info",
     opts = {
-      type               = 'full-path',
-      file_modified_icon = '',
-      file_readonly_icon = '🔒',
-    }
+      type = "full-path",
+      file_modified_icon = "",
+      file_readonly_icon = "🔒",
+    },
   },
   short_provider = {
-    name = 'file_info',
+    name = "file_info",
     opts = {
-      type               = 'relative',
-      file_modified_icon = '',
-      file_readonly_icon = '🔒',
-    }
+      type = "relative",
+      file_modified_icon = "",
+      file_readonly_icon = "🔒",
+    },
   },
-  enabled = function() return vim.fn.expand('%:t') ~= '' end,
+  enabled = function()
+    return vim.fn.expand("%:t") ~= ""
+  end,
   hl = {
-    fg = 'white',
-    bg = 'mid_bg',
+    fg = "white",
+    bg = "mid_bg",
   },
   left_sep = {
     str = "slant_right_2",
     hl = {
-      bg    = 'mid_bg',
-      fg    = 'short_bg',
-      style = 'bold'
+      bg = "mid_bg",
+      fg = "short_bg",
+      style = "bold",
     },
   },
   right_sep = {
     str = "slant_right_2",
     hl = {
-      bg = 'short_bg',
-      fg = 'mid_bg',
-      style = 'bold'
+      bg = "short_bg",
+      fg = "mid_bg",
+      style = "bold",
     },
   },
 })
 --- }}}
 
 table.insert(components.inactive[3], { --- {{{
-  provider = '',
+  provider = "",
   hl = {
-    fg    = 'mid_bg',
-    bg    = 'green_pale',
-    style = 'bold',
+    fg = "mid_bg",
+    bg = "green_pale",
+    style = "bold",
   },
   left_sep = {
-    str = 'slant_left',
+    str = "slant_left",
     hl = {
-      fg = 'green_pale',
-      bg = 'short_bg',
+      fg = "green_pale",
+      bg = "short_bg",
     },
-  }
+  },
 })
 --- }}}
 
 --- Local list count {{{
 table.insert(components.inactive[3], {
-  provider = 'locallist_count',
+  provider = "locallist_count",
   enabled = function()
     return #vim.fn.getloclist(0) > 0
   end,
-  priority      = 10,
+  priority = 10,
   truncate_hide = true,
   hl = function()
     return {
-      fg = 'purple',
-      bg = 'green_pale',
+      fg = "purple",
+      bg = "green_pale",
     }
   end,
 })
@@ -662,27 +710,27 @@ table.insert(components.inactive[3], {
 
 --- Line position {{{
 table.insert(components.inactive[3], {
-  provider = 'position',
+  provider = "position",
   hl = {
-    fg    = 'light_bg',
-    bg    = 'green_pale',
-    style = 'bold'
+    fg = "light_bg",
+    bg = "green_pale",
+    style = "bold",
   },
 })
 
 table.insert(components.inactive[3], {
-  provider = 'line_percentage',
+  provider = "line_percentage",
   hl = {
-    fg = 'green_pale',
-    bg = 'mid_bg',
+    fg = "green_pale",
+    bg = "mid_bg",
   },
   left_sep = {
-    str = ' ',
+    str = " ",
     hl = {
-      fg = 'green_pale',
-      bg = 'mid_bg',
+      fg = "green_pale",
+      bg = "mid_bg",
     },
-  }
+  },
 })
 --- }}}
 

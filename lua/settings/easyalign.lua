@@ -1,4 +1,4 @@
-local util = require('util')
+local util = require("util")
 --[=====[
 #### Alignment options in interactive mode
 
@@ -21,60 +21,58 @@ keys listed below.
 
 --]=====]
 
-local equal_sign = _t{
-  '===',
-  '<=>',
+local equal_sign = _t({
+  "===",
+  "<=>",
   [[\(&&\|||\|<<\|>>\)=]],
   [[=\~[#?]\?]],
-  '=>',
+  "=>",
   [[[:+/*!%^=><&|.-]\?=[#?]\?]],
-  '\\~=',
-}
-local gt_sign = _t{ '>>', '=>', '>' }
-local lt_sign = _t{ '<<', '=<', '<' }
+  "\\~=",
+})
+local gt_sign = _t({ ">>", "=>", ">" })
+local lt_sign = _t({ "<<", "=<", "<" })
 
 vim.g.easy_align_delimiters = {
-  ['>'] = { pattern = table.concat(gt_sign, '\\|') },
-  ['<'] = { pattern = table.concat(lt_sign, '\\|') },
-  ['/'] = {
-    pattern =         [[//\+\|/\*\|\*/]],
-    delimiter_align = 'l',
-    ignore_groups =   {'!Comment'},
+  [">"] = { pattern = table.concat(gt_sign, "\\|") },
+  ["<"] = { pattern = table.concat(lt_sign, "\\|") },
+  ["/"] = {
+    pattern = [[//\+\|/\*\|\*/]],
+    delimiter_align = "l",
+    ignore_groups = { "!Comment" },
   },
-  [']'] = {
-    pattern =       '[[\\]]',
-    left_margin =   0,
-    right_margin =  0,
+  ["]"] = {
+    pattern = "[[\\]]",
+    left_margin = 0,
+    right_margin = 0,
     stick_to_left = 0,
   },
-  [')'] = {
-    pattern =       '[()]',
-    left_margin =   0,
-    right_margin =  0,
+  [")"] = {
+    pattern = "[()]",
+    left_margin = 0,
+    right_margin = 0,
     stick_to_left = 0,
   },
-  ['d'] = {
-    pattern =      [[ \(\S\+\s*[;=]\)\@=]],
-    left_margin =  0,
+  ["d"] = {
+    pattern = [[ \(\S\+\s*[;=]\)\@=]],
+    left_margin = 0,
     right_margin = 0,
   },
   s = {
-    pattern = table.concat(
-    equal_sign:merge(lt_sign:merge(gt_sign)),
-    '\\|'),
-    left_margin =   1,
-    right_margin =  1,
+    pattern = table.concat(equal_sign:merge(lt_sign:merge(gt_sign)), "\\|"),
+    left_margin = 1,
+    right_margin = 1,
     stick_to_left = 0,
   },
   ['"'] = {
     pattern = '\\"',
-    ignore_groups = {'!Comment'},
+    ignore_groups = { "!Comment" },
     ignore_unmatched = 0,
   },
 }
 
 vim.g.easy_align_bypass_fold = 1
 
-util.xmap{'ga',         '<Plug>(EasyAlign)'}
-util.nmap{'ga',         '<Plug>(EasyAlign)'}
-util.nmap{'<leader>ga', '<Plug>(LiveEasyAlign)'}
+util.xmap({ "ga", "<Plug>(EasyAlign)" })
+util.nmap({ "ga", "<Plug>(EasyAlign)" })
+util.nmap({ "<leader>ga", "<Plug>(LiveEasyAlign)" })

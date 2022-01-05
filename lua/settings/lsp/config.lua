@@ -1,25 +1,27 @@
 --- vim.lsp.set_log_level("debug")
-local util = require('util')
+local util = require("util")
 
 --- Enable (broadcasting) snippet capability for completion
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local on_attach = require('settings.lsp.util').on_attach
+local capabilities = require("cmp_nvim_lsp").update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+local on_attach = require("settings.lsp.util").on_attach
 
 local signs = {
   Error = "🔥",
-  Warn  = "💩",
-  Info  = "💬",
-  Hint  = "💡",
+  Warn = "💩",
+  Info = "💬",
+  Hint = "💡",
 }
 
 for type in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   local nr = "DiagnosticLineNr" .. type
   vim.fn.sign_define(hl, {
-    text   = "", --- or the icon
+    text = "", --- or the icon
     texthl = hl,
     linehl = "",
-    numhl  = nr, --- or hl
+    numhl = nr, --- or hl
   })
 end
 
@@ -33,14 +35,13 @@ vim.diagnostic.config({
   severity_sort = true,
   float = {
     focusable = true,
-    source    = "always",
+    source = "always",
   },
 })
 
-
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
 local servers = {
   bashls = {},
@@ -60,7 +61,7 @@ local servers = {
         },
         completeUnimported = true,
         staticcheck = true,
-        buildFlags = {"-tags=integration,e2e"},
+        buildFlags = { "-tags=integration,e2e" },
         hoverKind = "FullDocumentation",
         linkTarget = "pkg.go.dev",
         linksInHover = true,
@@ -74,16 +75,16 @@ local servers = {
         },
         usePlaceholders = true,
 
-        completionDocumentation=true,
-        deepCompletion=true,
+        completionDocumentation = true,
+        deepCompletion = true,
       },
     },
   },
 
-  jsonls =  {
+  jsonls = {
     settings = {
       json = {
-        schemas = require('settings.lsp.schemas').jsonls,
+        schemas = require("settings.lsp.schemas").jsonls,
       },
     },
   },
@@ -97,24 +98,23 @@ local servers = {
         completion = true,
         schemaStore = {
           enable = true,
-          url = 'https://www.schemastore.org/api/json/catalog.json',
+          url = "https://www.schemastore.org/api/json/catalog.json",
         },
-        schemas = require('settings.lsp.schemas').yamlls,
-      }
-    }
+        schemas = require("settings.lsp.schemas").yamlls,
+      },
+    },
   },
 }
 
-
-local lsp_status = require('lsp-status')
-lsp_status.config{}
+local lsp_status = require("lsp-status")
+lsp_status.config({})
 
 lsp_status.register_progress()
 local attach_wrap = function(client, ...)
   lsp_status.on_attach(client)
   on_attach(client, ...)
 end
-capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
+capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
 
 local lsp_installer = require("nvim-lsp-installer")
 
@@ -125,7 +125,7 @@ lsp_installer.on_server_ready(function(server)
     capabilities = capabilities,
   }, conf)
 
-  if server.name == 'sumneko_lua' then
+  if server.name == "sumneko_lua" then
     opts = require("lua-dev").setup({
       lspconfig = {
         on_attach = attach_wrap,
@@ -133,23 +133,23 @@ lsp_installer.on_server_ready(function(server)
         settings = {
           Lua = {
             diagnostics = {
-              globals = { 'vim', 'use', 'require', 'rocks', 'use_rocks' },
+              globals = { "vim", "use", "require", "rocks", "use_rocks" },
             },
             workspace = {
               maxPreload = 100000,
               preloadFileSize = 50000,
             },
-          }
-        }
+          },
+        },
       },
     })
-  elseif server.name == 'sqls' then
+  elseif server.name == "sqls" then
     local fn = function(client, ...)
       client.resolved_capabilities.execute_command = true
-      client.commands = require('sqls').commands
-      require('sqls').setup{
-        picker = 'fzf',
-      }
+      client.commands = require("sqls").commands
+      require("sqls").setup({
+        picker = "fzf",
+      })
       attach_wrap(client, ...)
     end
     opts.on_attach = fn
@@ -178,19 +178,26 @@ lsp_installer.on_server_ready(function(server)
   server:setup(opts)
 end)
 
-util.augroup{"GOPLS_GOMOD", {
-  {"BufNewFile,BufRead", "go.mod", docs="don't wrap me", run=function()
-    vim.bo.formatoptions = vim.bo.formatoptions:gsub('t', '')
-  end},
-
-  {"BufWritePre", "go.mod", docs="run go mod tidy on save", run=function()
-    local filename = vim.fn.expand('%:p')
-    local bufnr = vim.fn.expand('<abuf>')
-    require('util.lsp').go_mod_tidy(tonumber(bufnr), filename)
-  end},
-
-  {"BufRead", "go.mod", docs='check for updates', run=function()
-    local filename = vim.fn.expand('<amatch>')
-    require('util.lsp').go_mod_check_upgrades(filename)
-  end},
-}}
+-- stylua: ignore start
+util.augroup({ "GOPLS_GOMOD", {
+    { "BufNewFile,BufRead", "go.mod", docs = "don't wrap me",
+      run = function()
+        vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
+      end,
+    },
+    { "BufWritePre", "go.mod", docs = "run go mod tidy on save",
+      run = function()
+        local filename = vim.fn.expand("%:p")
+        local bufnr = vim.fn.expand("<abuf>")
+        require("util.lsp").go_mod_tidy(tonumber(bufnr), filename)
+      end,
+    },
+    { "BufRead", "go.mod", docs = "check for updates",
+      run = function()
+        local filename = vim.fn.expand("<amatch>")
+        require("util.lsp").go_mod_check_upgrades(filename)
+      end,
+    },
+  },
+})
+-- stylua: ignore end

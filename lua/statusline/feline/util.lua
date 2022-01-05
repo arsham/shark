@@ -2,17 +2,17 @@ local M = {}
 
 M.force_inactive = {
   filetypes = {
-    'NvimTree',
-    'dbui',
-    'packer',
-    'startify',
-    'fugitive',
-    'fugitiveblame'
+    "NvimTree",
+    "dbui",
+    "packer",
+    "startify",
+    "fugitive",
+    "fugitiveblame",
   },
-  buftypes  = {
-    'terminal'
+  buftypes = {
+    "terminal",
   },
-  bufnames  = {}
+  bufnames = {},
 }
 
 -- stylua: ignore
@@ -34,6 +34,7 @@ M.colors = {
   mid_bg        = "#2B3033",
 }
 
+-- stylua: ignore
 M.mode_mappings = {
   ['n']   = {'Normal',       '-'},
   ['no']  = {'Op·Pending',   'P'},
@@ -66,6 +67,7 @@ M.mode_mappings = {
   ['']    = {'Empty',        '-'},
 }
 
+-- stylua: ignore
 M.vi_mode_colors = {
   NORMAL        = 'green',
   OP            = 'green',
@@ -84,6 +86,7 @@ M.vi_mode_colors = {
   NONE          = 'yellow'
 }
 
+-- stylua: ignore
 M.separators = {
   vertical_bar       = '┃',
   vertical_bar_thin  = '│',
@@ -115,13 +118,13 @@ function M.vim_mode()
   local value = ""
 
   if vim.g.libmodalActiveModeName then
-    mode = { vim.g.libmodalActiveModeName, "U"}
+    mode = { vim.g.libmodalActiveModeName, "U" }
   end
 
   if mode ~= nil then
     value = mode[1]
-    if mode[2] ~= '-' then
-      value = value .. ' [' .. mode[2] .. ']'
+    if mode[2] ~= "-" then
+      value = value .. " [" .. mode[2] .. "]"
     end
   end
   return value
@@ -133,8 +136,10 @@ end
 ---@return string
 local function parent_pathname(path)
   local i = path:find("[\\/:][^\\/:]*$")
-  if not i then return end
-  return path:sub(1, i-1)
+  if not i then
+    return
+  end
+  return path:sub(1, i - 1)
 end
 
 ---Returns the git directory for the current file. Adapted from from
@@ -142,18 +147,19 @@ end
 ---@param path string
 ---@return string
 local function get_git_dir(path)
-
   --- Checks if provided directory contains git directory
   local function has_git_dir(dir)
-    local git_dir = dir..'/.git'
-    if vim.fn.isdirectory(git_dir) == 1 then return git_dir end
+    local git_dir = dir .. "/.git"
+    if vim.fn.isdirectory(git_dir) == 1 then
+      return git_dir
+    end
   end
 
   --- Get git directory from git file if present
   local function has_git_file(dir)
-    local gitfile = io.open(dir..'/.git')
+    local gitfile = io.open(dir .. "/.git")
     if gitfile ~= nil then
-      local git_dir = gitfile:read():match('gitdir: (.*)')
+      local git_dir = gitfile:read():match("gitdir: (.*)")
       gitfile:close()
 
       return git_dir
@@ -163,8 +169,8 @@ local function get_git_dir(path)
   --- Check if git directory is absolute path or a relative
   local function is_path_absolute(dir)
     local patterns = {
-      '^/',        --- unix
-      '^%a:[/\\]', --- windows
+      "^/", --- unix
+      "^%a:[/\\]", --- windows
     }
     for _, pattern in ipairs(patterns) do
       if string.find(dir, pattern) then
@@ -175,7 +181,7 @@ local function get_git_dir(path)
   end
 
   --- If path nil or '.' get the absolute path to current directory
-  if not path or path == '.' then
+  if not path or path == "." then
     path = vim.fn.getcwd()
   end
 
@@ -192,12 +198,14 @@ local function get_git_dir(path)
     path = parent_pathname(path)
   end
 
-  if not git_dir then return end
+  if not git_dir then
+    return
+  end
 
   if is_path_absolute(git_dir) then
     return git_dir
   end
-  return  path .. '/' .. git_dir
+  return path .. "/" .. git_dir
 end
 
 ---Returns the git root of the current file.
@@ -208,58 +216,58 @@ function M.git_root()
     return ""
   end
 
-  local root = git_dir:gsub('/.git/?', '')
+  local root = git_dir:gsub("/.git/?", "")
   --- sub_root is a path to a worktree if exists.
-  local sub_root = git_dir:match('/([^/]+)/.git/worktrees/.+$')
-  local repo = ''
+  local sub_root = git_dir:match("/([^/]+)/.git/worktrees/.+$")
+  local repo = ""
   if sub_root then
-    repo = ' ['..sub_root..']'
+    repo = " [" .. sub_root .. "]"
   end
-  return root:match '^.+/(.+)$' .. repo
+  return root:match("^.+/(.+)$") .. repo
 end
 
 function M.dir_name(_, opts)
   if opts.short then
-    return vim.fn.expand('%:h'):match('[^/\\]+$') or ""
+    return vim.fn.expand("%:h"):match("[^/\\]+$") or ""
   end
   return vim.fn.expand("%:h") or ""
 end
 
 local function filename(short)
-  if #vim.fn.expand '%:p' == 0 then
-    return '-'
+  if #vim.fn.expand("%:p") == 0 then
+    return "-"
   end
   if short then
-    return vim.fn.expand '%:t'
+    return vim.fn.expand("%:t")
   end
-  return vim.fn.expand '%:~'
+  return vim.fn.expand("%:~")
 end
 
 local function file_readonly()
-  if vim.bo.filetype == 'help' then
-    return ''
+  if vim.bo.filetype == "help" then
+    return ""
   end
-  local icon = ''
+  local icon = ""
   if vim.bo.readonly == true then
     return " " .. icon .. " "
   end
-  return ''
+  return ""
 end
 
 function M.filename(_, opts)
   local short = opts.short or false
   local file = filename(short)
   if vim.fn.empty(file) == 1 then
-    return ''
+    return ""
   end
   if string.len(file_readonly()) ~= 0 then
     return file .. file_readonly()
   end
-  local icon = ''
+  local icon = ""
   if vim.bo.modifiable and vim.bo.modified then
-    return file .. ' ' .. icon .. '  '
+    return file .. " " .. icon .. "  "
   end
-  return file .. ' '
+  return file .. " "
 end
 
 function M.search_results()
@@ -267,30 +275,36 @@ function M.search_results()
   if lines > 50000 then
     return ""
   end
-  local search_term = vim.fn.getreg('/')
-  if search_term == "" then return "" end
-  if search_term:find("@") then return "" end
+  local search_term = vim.fn.getreg("/")
+  if search_term == "" then
+    return ""
+  end
+  if search_term:find("@") then
+    return ""
+  end
 
-  local search_count = vim.fn.searchcount({recompute = 1, maxcount = -1})
+  local search_count = vim.fn.searchcount({ recompute = 1, maxcount = -1 })
   local active = false
   if vim.v.hlsearch and vim.v.hlsearch == 1 and search_count.total > 0 then
     active = true
   end
-  if not active then return "" end
+  if not active then
+    return ""
+  end
 
-  search_term = search_term:gsub([[\<]], ''):gsub([[\>]], '')
-  return '/' .. search_term .. '[' .. search_count.current .. '/' .. search_count.total .. ']'
+  search_term = search_term:gsub([[\<]], ""):gsub([[\>]], "")
+  return "/" .. search_term .. "[" .. search_count.current .. "/" .. search_count.total .. "]"
 end
 
 function M.locallist_count()
-  local ll = vim.fn.getloclist(vim.fn.winnr(), {idx=0, size=0})
+  local ll = vim.fn.getloclist(vim.fn.winnr(), { idx = 0, size = 0 })
   local count = ll.size
   local current = ll.idx
   return ("  %d/%d "):format(current, count)
 end
 
 function M.quickfix_count()
-  local qf = vim.fn.getqflist({idx=0, size=0})
+  local qf = vim.fn.getqflist({ idx = 0, size = 0 })
   local count = qf.size
   local current = qf.idx
   return ("  %d/%d "):format(current, count)
@@ -306,7 +320,7 @@ local config = {
 }
 
 function M.get_lsp_progress()
-  local messaging = require('lsp-status/messaging')
+  local messaging = require("lsp-status/messaging")
   local buf_messages = messaging.messages()
   local msgs = {}
   for _, msg in ipairs(buf_messages) do
@@ -325,8 +339,9 @@ function M.get_lsp_progress()
       end
 
       if msg.spinner then
-        contents = config.spinner_frames[(msg.spinner % #config.spinner_frames) + 1] ..
-        ' ' .. contents
+        contents = config.spinner_frames[(msg.spinner % #config.spinner_frames) + 1]
+          .. " "
+          .. contents
       end
     else
       contents = msg.content
