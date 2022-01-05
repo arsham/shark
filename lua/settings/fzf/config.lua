@@ -36,16 +36,23 @@ end
 ---Set selected lines in the quickfix/local list with fzf search.
 ---@param items string[]|table[]
 local function insert_into_list(items, is_local)
-  local lists = require('lists')
+  local lists = require("lists")
   local values = {}
   for _, item in pairs(items) do
-    if type(item) == 'string' then
+    if type(item) == "string" then
       item = {
         filename = item,
         lnum = 1,
-        col  = 1,
+        col = 1,
         text = "Added with fzf selection",
       }
+    end
+    local bufnr = vim.fn.bufnr(item.filename)
+    if bufnr > 0 then
+      local line = vim.api.nvim_buf_get_lines(bufnr, item.lnum - 1, item.lnum, false)[1]
+      if line ~= "" then
+        item.text = line
+      end
     end
     table.insert(values, item)
   end

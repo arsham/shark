@@ -161,57 +161,62 @@ function M.lines_grep()
   local options = table.concat({
     '--prompt="Current Buffer> "',
     '--header="<CR>:jumps to line, <C-w>:adds to locallist, <C-q>:adds to quickfix list"',
-    '--layout reverse-list',
+    "--layout reverse-list",
     '--delimiter="\t"',
-    '--with-nth=3..',
-    '--preview-window nohidden',
-  }, ' ')
-  local filename = vim.fn.fnameescape(vim.fn.expand('%'))
+    "--with-nth=3..",
+    "--preview-window nohidden",
+  }, " ")
+  local filename = vim.fn.fnameescape(vim.fn.expand("%"))
   local rg_cmd = {
-    'rg', '.',
-    '--line-number',
-    '--no-heading',
-    '--color=never',
-    '--smart-case',
+    "rg",
+    ".",
+    "--line-number",
+    "--no-heading",
+    "--color=never",
+    "--smart-case",
     filename,
   }
   local got = vim.fn.systemlist(rg_cmd)
   local source = {}
   for _, line in pairs(got) do
-    local num, content = line:match('^(%d+):(.+)$')
-    if not num then return end
-    table.insert(source, string.format('%s:%d\t%d\t%s', filename, num, num, content))
+    local num, content = line:match("^(%d+):(.+)$")
+    if not num then
+      return
+    end
+    table.insert(source, string.format("%s:%d\t%d\t%s", filename, num, num, content))
   end
   local wrapped = vim.fn["fzf#wrap"]({
     source = source,
     options = options,
-    placeholder = '{1}',
+    placeholder = "{1}",
   })
 
   local preview = vim.fn["fzf#vim#with_preview"](wrapped)
-  preview['sink*'] = function(names)
-    if #names == 0 then return end
+  preview["sink*"] = function(names)
+    if #names == 0 then
+      return
+    end
     local action = names[1]
     if #action > 0 then
-      local fn = require('settings.fzf.config').fzfActions[action]
+      local fn = require("settings.fzf.config").fzfActions[action]
       _t(names)
-      :when(fn)
-      :slice(2)
-      :map(function(v)
-        local name, line = v:match('^([^:]+):([^\t]+)\t')
-        return {
-          filename = vim.fn.fnameescape(name),
-          lnum     = tonumber(line),
-          col      = 1,
-          text     = "Added with fzf selection",
-        }
-      end)
-      :exec(fn)
+        :when(fn)
+        :slice(2)
+        :map(function(v)
+          local name, line, content = v:match("^([^:]+):([^\t]+)\t([^\t]+)\t(.+)")
+          return {
+            filename = vim.fn.fnameescape(name),
+            lnum = tonumber(line),
+            col = 1,
+            text = content,
+          }
+        end)
+        :exec(fn)
     end
 
     if #names == 2 then
-      local num = names[2]:match('^[^:]+:(%d+)\t')
-      util.normal('n', string.format('%dgg', num))
+      local num = names[2]:match("^[^:]+:(%d+)\t")
+      util.normal("n", string.format("%dgg", num))
     end
   end
   vim.fn["fzf#run"](preview)
