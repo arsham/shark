@@ -1,12 +1,6 @@
 --- vim.lsp.set_log_level("debug")
 local util = require("util")
 
---- Enable (broadcasting) snippet capability for completion
-local capabilities = require("cmp_nvim_lsp").update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
-local on_attach = require("settings.lsp.util").on_attach
-
 local signs = {
   Error = "🔥",
   Warn = "💩",
@@ -106,6 +100,7 @@ local servers = {
   },
 }
 
+local on_attach = require("settings.lsp.util").on_attach
 local lsp_status = require("lsp-status")
 lsp_status.config({})
 
@@ -114,7 +109,27 @@ local attach_wrap = function(client, ...)
   lsp_status.on_attach(client)
   on_attach(client, ...)
 end
+
+--- Enable (broadcasting) snippet capability for completion.
+local capabilities = require("cmp_nvim_lsp").update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+
 capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
+
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.fixjson,
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.stylua.with({
+      extra_args = { "--indent-type=Spaces", "--indent-width=2", "--column-width=100" },
+    }),
+    null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.diagnostics.selene,
+  },
+  on_attach = attach_wrap,
+})
 
 local lsp_installer = require("nvim-lsp-installer")
 
@@ -180,24 +195,24 @@ end)
 
 -- stylua: ignore start
 util.augroup({ "GOPLS_GOMOD", {
-    { "BufNewFile,BufRead", "go.mod", docs = "don't wrap me",
-      run = function()
-        vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
-      end,
-    },
-    { "BufWritePre", "go.mod", docs = "run go mod tidy on save",
-      run = function()
-        local filename = vim.fn.expand("%:p")
-        local bufnr = vim.fn.expand("<abuf>")
-        require("util.lsp").go_mod_tidy(tonumber(bufnr), filename)
-      end,
-    },
-    { "BufRead", "go.mod", docs = "check for updates",
-      run = function()
-        local filename = vim.fn.expand("<amatch>")
-        require("util.lsp").go_mod_check_upgrades(filename)
-      end,
-    },
+  { "BufNewFile,BufRead", "go.mod", docs = "don't wrap me",
+    run = function()
+      vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
+    end,
   },
+  { "BufWritePre", "go.mod", docs = "run go mod tidy on save",
+    run = function()
+      local filename = vim.fn.expand("%:p")
+      local bufnr = vim.fn.expand("<abuf>")
+      require("util.lsp").go_mod_tidy(tonumber(bufnr), filename)
+    end,
+  },
+  { "BufRead", "go.mod", docs = "check for updates",
+    run = function()
+      local filename = vim.fn.expand("<amatch>")
+      require("util.lsp").go_mod_check_upgrades(filename)
+    end,
+  },
+},
 })
 -- stylua: ignore end

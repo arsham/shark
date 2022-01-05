@@ -274,6 +274,7 @@ require("packer").startup({
         "cmp-nvim-lsp",
         "lsp-status.nvim",
         "cmp-nvim-lsp",
+        "null-ls.nvim",
       },
       cmd  = "LspInstallInfo",
       cond = full_start,
@@ -291,7 +292,6 @@ require("packer").startup({
         "nvim-lua/plenary.nvim",
         "nvim-lspconfig",
       },
-      config = function() require("settings.null_ls") end,
       event  = { "BufRead", "BufNewFile", "InsertEnter" },
       cond   = full_start,
     })

@@ -1,5 +1,9 @@
+local M = {}
+
 local nvim = require("nvim")
 local util = require("util")
+
+util.augroup({ "LSP_FORMAT_IMPORTS" })
 
 ---Restats the LSP server. Fixes the problem with the LSP server not
 ---restarting with LspRestart command.
@@ -26,14 +30,14 @@ local function lsp_organise_imports()
   end
 
   for _, client in ipairs(vim.lsp.get_active_clients()) do
-    if resp[client.id] then
+    if client.id and resp[client.id] then
       local result = resp[client.id].result
-      if not result or not result[1] then
-        return
+      if result and result[1] and result[1].edit then
+        local edit = result[1].edit
+        if edit then
+          vim.lsp.util.apply_workspace_edit(result[1].edit)
+        end
       end
-
-      local edit = result[1].edit
-      vim.lsp.util.apply_workspace_edit(edit)
     end
   end
 end
@@ -87,6 +91,7 @@ local function attach_mappings_commands(client)
     imports = function() end,
   }
   local caps = client.resolved_capabilities
+
   if caps.code_action then
     util.buffer_command("CodeAction", function(args)
       require("settings.lsp.util").code_action(args.range ~= 0, args.line1, args.line2)
@@ -96,10 +101,8 @@ local function attach_mappings_commands(client)
 
     --- Either is it set to true, or there is a specified set of
     --- capabilities.
-    if
-      type(caps.code_action) == "table"
-      and _t(caps.code_action.codeActionKinds):contains("source.organizeImports")
-    then
+    local can_organise_imports = type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports")
+    if can_organise_imports then
       util.nnoremap({ "<leader>i", lsp_organise_imports, buffer = true, silent = true, desc = "Organise imports" })
       pre_save.imports = lsp_organise_imports
     end
@@ -112,16 +115,15 @@ local function attach_mappings_commands(client)
     end
   end
 
-  util.augroup({ "LSP_FORMAT_IMPORTS", {
-    { "BufWritePre", buffer = true, docs = "format and imports", run = function()
+  util.autocmd({ "BufWritePre", group = "LSP_FORMAT_IMPORTS", buffer = true, docs = "format and imports", run = function()
       pre_save.imports()
       pre_save.format()
-    end},
-  }})
+    end
+  })
 
   if caps.document_range_formatting then
     util.buffer_command("Format", function(args)
-      require("settings.lsp.util").format_command( args.range ~= 0, args.line1, args.line2, args.bang)
+      M.format_command( args.range ~= 0, args.line1, args.line2, args.bang)
     end, { range = true })
     util.vnoremap({ "gq", ":Format<CR>", buffer = true, silent = true, desc = "Format range" })
     vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr()"
@@ -205,11 +207,9 @@ local function attach_mappings_commands(client)
   if caps.workspace_folder_properties.supported then
     util.buffer_command("AddWorkspace", function(args)
       vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
-      require("settings.lsp.util").format_command( args.range ~= 0, args.line1, args.line2, args.bang)
     end, { range = true, nargs = "?", complete = "dir" })
     util.buffer_command("RemoveWorkspace", function(args)
       vim.lsp.buf.remove_workspace_folder(args.args)
-      require("settings.lsp.util").format_command( args.range ~= 0, args.line1, args.line2, args.bang)
     end, { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" })
   end
 
@@ -244,8 +244,6 @@ local function attach_mappings_commands(client)
   util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
 end
 -- stylua: ignore end
-
-local M = {}
 
 ---@alias lsp_client 'vim.lsp.client'
 
