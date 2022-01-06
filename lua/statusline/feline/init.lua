@@ -252,7 +252,7 @@ table.insert(components.active[3], {
 
 --- LSP client names {{{
 table.insert(components.active[3], {
-  provider = "lsp_client_names",
+  provider = "lsp_clients",
   enabled = function()
     return lsp.is_lsp_attached()
   end,
@@ -752,6 +752,7 @@ require("feline").setup({ --- {{{
     diag_info = lsp.diagnostic_info,
     diag_warnings = lsp.diagnostic_warnings,
     diag_hints = lsp.diagnostic_hints,
+    lsp_clients = util.lsp_client_names,
     lsp_progress = util.get_lsp_progress,
     fold_method = util.fold_method,
   },

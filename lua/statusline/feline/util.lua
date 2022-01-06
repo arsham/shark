@@ -317,7 +317,36 @@ local config = {
   hints = "!",
   ok = "",
   spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
+  component_separator = "   ",
 }
+
+local lsp_names = {
+  sumneko_lua = "Lua",
+  ["null-ls"] = "Null",
+  gopls = "GoPLS",
+  bashls = "Bash",
+  vimls = "Vim",
+  dockerls = "Docker",
+  jedi_language_server = "Python",
+  html = "HTML",
+  clangd = "C++",
+  tsserver = "TS",
+  sqls = "SQL",
+  jsonls = "JSON",
+  yamlls = "YAML",
+}
+
+-- Credit goes to the feline author.
+function M.lsp_client_names()
+  local clients = {}
+
+  for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+    local name = lsp_names[client.name] or client.name
+    clients[#clients + 1] = name
+  end
+
+  return table.concat(clients, "   "), " "
+end
 
 function M.get_lsp_progress()
   local messaging = require("lsp-status/messaging")
@@ -327,10 +356,6 @@ function M.get_lsp_progress()
     local contents
     if msg.progress then
       contents = msg.title
-      --- if msg.message then
-      ---     contents = contents .. ' ' .. msg.message
-      --- end
-
       --- this percentage format string escapes a percent sign once to
       --- show a percentage and one more time to prevent errors in vim
       --- statusline's because of it's treatment of % chars
@@ -346,7 +371,7 @@ function M.get_lsp_progress()
     else
       contents = msg.content
     end
-
+    contents = contents:gsub("%s*workspace", "")
     table.insert(msgs, contents)
   end
   return table.concat(msgs, config.component_separator)
