@@ -3,18 +3,7 @@ local M = {}
 local nvim = require("nvim")
 local util = require("util")
 
-util.augroup({ "LSP_FORMAT_IMPORTS" })
-
----Restats the LSP server. Fixes the problem with the LSP server not
----restarting with LspRestart command.
-local function restart_lsp()
-  nvim.ex.LspStop()
-  vim.defer_fn(nvim.ex.LspStart, 1000)
-end
-util.buffer_command("RestartLsp", restart_lsp)
-util.nnoremap({ "<leader>dr", restart_lsp, silent = true, desc = "Restart LSP server" })
-
-local function lsp_organise_imports()
+function M.lsp_organise_imports()
   local context = { source = { organizeImports = true } }
   vim.validate({ context = { context, "table", true } })
 
@@ -78,221 +67,12 @@ local function get_current_node_name()
   return (ts_utils.get_node_text(cur_node:child(index)))[1]
 end
 
----Attaches commands, mappings and autocmds to current buffer based on the
----client's capabilities.
----@param client any
--- stylua: ignore start
-local function attach_mappings_commands(client)
-  --- Contains functions to be run before writing the buffer. The format
-  --- function will format the while buffer, and the imports function will
-  --- organise imports.
-  local pre_save = {
-    format = function() end,
-    imports = function() end,
-  }
-  local caps = client.resolved_capabilities
-
-  if caps.code_action then
-    util.buffer_command("CodeAction", function(args)
-      require("settings.lsp.util").code_action(args.range ~= 0, args.line1, args.line2)
-    end, { range = true })
-    util.nnoremap({ '<leader>ca', vim.lsp.buf.code_action, buffer = true, silent = true, desc = 'Code action' })
-    util.vnoremap({ '<leader>ca', ":'<,'>CodeAction<CR>", buffer = true, silent = true, desc = 'Code action' })
-
-    --- Either is it set to true, or there is a specified set of
-    --- capabilities.
-    local can_organise_imports = type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports")
-    if can_organise_imports then
-      util.nnoremap({ "<leader>i", lsp_organise_imports, buffer = true, silent = true, desc = "Organise imports" })
-      pre_save.imports = lsp_organise_imports
-    end
-  end
-
-  if caps.document_formatting then
-    util.nnoremap({ "<leader>gq", vim.lsp.buf.formatting, buffer = true, silent = true, desc = "Format buffer" })
-    pre_save.format = function()
-      vim.lsp.buf.formatting_sync(nil, 2000)
-    end
-  end
-
-  util.autocmd({ "BufWritePre", group = "LSP_FORMAT_IMPORTS", buffer = true, docs = "format and imports", run = function()
-      pre_save.imports()
-      pre_save.format()
-    end
-  })
-
-  if caps.document_range_formatting then
-    util.buffer_command("Format", function(args)
-      M.format_command( args.range ~= 0, args.line1, args.line2, args.bang)
-    end, { range = true })
-    util.vnoremap({ "gq", ":Format<CR>", buffer = true, silent = true, desc = "Format range" })
-    vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr()"
-  end
-
-  if caps.rename then
-    util.buffer_command("Rename", function(args)
-      if args.args == "" then
-        vim.lsp.buf.rename()
-      else
-        vim.lsp.buf.rename(args.args)
-      end
-    end, { nargs = "?" })
-  end
-
-  if caps.hover then
-    util.nnoremap({ "H", vim.lsp.buf.hover, buffer = true, silent = true, desc = "show hover" })
-    util.inoremap({ "<C-h>", vim.lsp.buf.hover, buffer = true, silent = true, desc = "show hover" })
-  end
-  if caps.signature_help then
-    util.nnoremap({ "K", vim.lsp.buf.signature_help, buffer = true, silent = true, desc = "show signature help" })
-    util.inoremap({ "<C-l>", vim.lsp.buf.signature_help, buffer = true, silent = true, desc = "show signature help" })
-  end
-
-  if caps.goto_definition then
-    util.buffer_command("Definition", function()
-      vim.lsp.buf.definition()
-    end)
-    util.nnoremap({ "gd", vim.lsp.buf.definition, buffer = true, silent = true, desc = "Go to definition" })
-    vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
-  end
-  if caps.declaration then
-    util.nnoremap({ "gD", vim.lsp.buf.declaration, buffer = true, silent = true, desc = "Go to declaration" })
-  end
-
-  if caps.type_definition then
-    util.buffer_command("TypeDefinition", function() vim.lsp.buf.type_definition() end)
-  end
-  if caps.implementation then
-    util.buffer_command("Implementation", function()
-      vim.lsp.buf.implementation()
-    end)
-    util.nnoremap({ "<leader>gi", vim.lsp.buf.implementation, buffer = true, silent = true, desc = "Go to implementation" })
-  end
-
-  if caps.find_references then
-    util.buffer_command("References", function()
-      vim.lsp.buf.references()
-    end)
-    util.nnoremap({ "gr", vim.lsp.buf.references, buffer = true, silent = true, desc = "Go to references" })
-  end
-
-  if caps.document_symbol then
-    util.buffer_command("DocumentSymbol", function()
-      vim.lsp.buf.document_symbol()
-    end)
-    util.nnoremap({ "<leader>@", function() vim.lsp.buf.document_symbol() end, buffer = true, silent = true })
-  end
-  if caps.workspace_symbol then
-    util.buffer_command("WorkspaceSymbols", function()
-      vim.lsp.buf.workspace_symbol()
-    end)
-  end
-
-  if caps.call_hierarchy then
-    util.buffer_command("Callees", function()
-      vim.lsp.buf.outgoing_calls()
-    end)
-    util.buffer_command("Callers", function()
-      vim.lsp.buf.incoming_calls()
-    end)
-    util.nnoremap({ "<leader>gc", vim.lsp.buf.incoming_calls, buffer = true, silent = true, desc = "show incoming calls" })
-  end
-
-  util.buffer_command("ListWorkspace", function()
-    vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
-      title = "Workspace Folders",
-      timeout = 3000,
-    })
-  end)
-  if caps.workspace_folder_properties.supported then
-    util.buffer_command("AddWorkspace", function(args)
-      vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
-    end, { range = true, nargs = "?", complete = "dir" })
-    util.buffer_command("RemoveWorkspace", function(args)
-      vim.lsp.buf.remove_workspace_folder(args.args)
-    end, { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" })
-  end
-
-  util.buffer_command("Log", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()")
-
-  util.buffer_command("Test", function()
-    local name = get_current_node_name()
-    if name == "" then
-      return nil
-    end
-
-    local pattern = "test" .. name
-    vim.lsp.buf.workspace_symbol(pattern)
-  end)
-
-  util.inoremap({ "<C-j>", "<C-n>", buffer = true, silent = true, desc = "next completion items" })
-  util.inoremap({ "<C-k>", "<C-p>", buffer = true, silent = true, desc = "previous completion items" })
-
-  util.nnoremap({ "<leader>dd", vim.diagnostic.open_float, buffer = true, silent = true, desc = "show diagnostics" })
-  util.nnoremap({ "<leader>dq", vim.diagnostic.setqflist, buffer = true, silent = true, desc = "populate quickfix" })
-  util.nnoremap({ "<leader>dw", vim.diagnostic.setloclist, buffer = true, silent = true, desc = "populate local list" })
-  util.nnoremap({ "]d", function()
-    util.call_and_centre(vim.diagnostic.goto_next)
-  end, buffer = true, silent = true, desc = "goto next diagnostic" })
-  util.nnoremap({ "[d", function()
-    util.call_and_centre(vim.diagnostic.goto_prev)
-  end, buffer = true, silent = true, desc = "goto previous diagnostic" })
-
-  util.buffer_command("Diagnostics", function()
-    require("lspfuzzy").diagnostics(0)
-  end)
-  util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
-end
--- stylua: ignore end
-
----@alias lsp_client 'vim.lsp.client'
-
----The function to pass to the LSP's on_attach callback.
----@param client lsp_client
----@param bufnr number
-function M.on_attach(client, bufnr)
-  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-
-  --- TODO: find out how to disable the statuline badges as well.
-  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-    vim.diagnostic.disable()
-  end
-
-  vim.api.nvim_buf_call(bufnr, function()
-    attach_mappings_commands(client)
-  end)
-
-  -- stylua: ignore
-  util.augroup({ "STOP_LSP_TYPES", {
-    { "BufReadPost,BufNewFile", "*/templates/*.yaml,*/templates/*.tpl", "LspStop" },
-  }})
-
-  local caps = client.resolved_capabilities
-  -- stylua: ignore start
-  if caps.code_lens then
-    util.buffer_command("CodeLensRefresh", function()
-      vim.lsp.codelens.refresh()
-    end)
-    util.buffer_command("CodeLensRun", function()
-      vim.lsp.codelens.run()
-    end)
-    util.nnoremap({ "<leader>cr", vim.lsp.codelens.run, buffer = true, silent = true, desc = "run code lenses" })
-
-    util.augroup({ "CODE_LENSES", {
-      { "CursorHold,CursorHoldI,InsertLeave", run = function()
-        vim.lsp.codelens.refresh()
-      end, buffer = true },
-    }})
-  end
-  -- stylua: ignore end
-end
-
 ---Formats a range if given.
 ---@param range_given boolean
 ---@param line1 number
 ---@param line2 number
 ---@param bang boolean
-function M.format_command(range_given, line1, line2, bang)
+local function format_command(range_given, line1, line2, bang)
   if range_given then
     vim.lsp.buf.range_formatting(nil, { line1, 0 }, { line2, 99999999 })
   elseif bang then
@@ -306,12 +86,266 @@ end
 ---@param range_given boolean
 ---@param line1 number
 ---@param line2 number
-function M.code_action(range_given, line1, line2)
+local function code_action(range_given, line1, line2)
   if range_given then
     vim.lsp.buf.range_code_action(nil, { line1, 0 }, { line2, 99999999 })
   else
     vim.lsp.buf.code_action()
   end
+end
+
+local function nnoremap(key, fn, desc, ...)
+  util.nnoremap({ key, fn, buffer = true, silent = true, desc = desc, ... })
+end
+local function vnoremap(key, fn, desc, ...)
+  util.vnoremap({ key, fn, buffer = true, silent = true, desc = desc, ... })
+end
+local function inoremap(key, fn, desc, ...)
+  util.inoremap({ key, fn, buffer = true, silent = true, desc = desc, ... })
+end
+
+function M.code_action()
+  util.buffer_command("CodeAction", function(args)
+    code_action(args.range ~= 0, args.line1, args.line2)
+  end, { range = true })
+  nnoremap("<leader>ca", vim.lsp.buf.code_action, "Code action")
+  vnoremap("<leader>ca", ":'<,'>CodeAction<CR>", "Code action")
+end
+
+function M.setup_organise_imports()
+  nnoremap("<leader>i", M.lsp_organise_imports, "Organise imports")
+end
+
+function M.document_formatting()
+  nnoremap("<leader>gq", vim.lsp.buf.formatting, "Format buffer")
+end
+
+local function document_range_formatting(args)
+  format_command(args.range ~= 0, args.line1, args.line2, args.bang)
+end
+function M.document_range_formatting()
+  util.buffer_command("Format", document_range_formatting, { range = true })
+  vnoremap("gq", document_range_formatting, "Format range")
+  vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr()"
+end
+
+local function rename_symbol(args)
+  if args.args == "" then
+    vim.lsp.buf.rename()
+  else
+    vim.lsp.buf.rename(args.args)
+  end
+end
+function M.rename()
+  util.buffer_command("Rename", rename_symbol, { nargs = "?" })
+end
+
+function M.hover()
+  nnoremap("H", vim.lsp.buf.hover, "show hover")
+  inoremap("<C-h>", vim.lsp.buf.hover, "show hover")
+end
+
+function M.signature_help()
+  nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
+  inoremap("<C-l>", vim.lsp.buf.signature_help, "show signature help")
+end
+
+function M.goto_definition()
+  util.buffer_command("Definition", vim.lsp.buf.definition)
+  nnoremap("gd", vim.lsp.buf.definition, "Go to definition")
+  vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
+end
+
+function M.declaration()
+  nnoremap("gD", vim.lsp.buf.declaration, "Go to declaration")
+end
+
+function M.type_definition()
+  util.buffer_command("TypeDefinition", vim.lsp.buf.type_definition)
+end
+
+function M.implementation()
+  util.buffer_command("Implementation", vim.lsp.buf.implementation)
+  nnoremap("<leader>gi", vim.lsp.buf.implementation, "Go to implementation")
+end
+
+function M.find_references()
+  util.buffer_command("References", vim.lsp.buf.references)
+  nnoremap("gr", vim.lsp.buf.references, "Go to references")
+end
+
+function M.document_symbol()
+  util.buffer_command("DocumentSymbol", vim.lsp.buf.document_symbol)
+  nnoremap("<leader>@", vim.lsp.buf.document_symbol, "Document symbol")
+end
+
+function M.workspace_symbol()
+  util.buffer_command("WorkspaceSymbols", vim.lsp.buf.workspace_symbol)
+end
+
+function M.call_hierarchy()
+  util.buffer_command("Callees", vim.lsp.buf.outgoing_calls)
+  util.buffer_command("Callers", vim.lsp.buf.incoming_calls)
+  nnoremap("<leader>gc", vim.lsp.buf.incoming_calls, "show incoming calls")
+end
+
+util.buffer_command("ListWorkspace", function()
+  vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
+    title = "Workspace Folders",
+    timeout = 3000,
+  })
+end)
+
+function M.workspace_folder_properties()
+  local function add_workspace(args)
+    vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
+  end
+  util.buffer_command(
+    "AddWorkspace",
+    add_workspace,
+    { range = true, nargs = "?", complete = "dir" }
+  )
+  util.buffer_command(
+    "RemoveWorkspace",
+    function(args)
+      vim.lsp.buf.remove_workspace_folder(args.args)
+    end,
+    { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
+  )
+end
+
+util.augroup({ "CODE_LENSES" })
+function M.code_lens()
+  util.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
+  util.buffer_command("CodeLensRun", vim.lsp.codelens.run)
+  nnoremap("<leader>cr", vim.lsp.codelens.run, "run code lenses")
+
+  util.autocmd({
+    "CursorHold,CursorHoldI,InsertLeave",
+    group = "CODE_LENSES",
+    run = vim.lsp.codelens.refresh,
+    buffer = true,
+  })
+end
+
+function M.setup_completions()
+  inoremap("<C-j>", "<C-n>", "next completion items")
+  inoremap("<C-k>", "<C-p>", "previous completion items")
+end
+
+util.augroup({ "LSP_EVENTS" })
+function M.setup_events(imports, format)
+  util.autocmd({
+    "BufWritePre",
+    group = "LSP_EVENTS",
+    buffer = true,
+    docs = "format and imports",
+    run = function()
+      imports()
+      format()
+    end,
+  })
+
+  util.autocmd({
+    "BufReadPost,BufNewFile",
+    "*/templates/*.yaml,*/templates/*.tpl",
+    run = "LspStop",
+    group = "LSP_EVENTS",
+  })
+
+  util.autocmd({
+    "InsertEnter",
+    "go.mod",
+    run = function()
+      vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
+    end,
+    group = "LSP_EVENTS",
+    once = true,
+    docs = "don't wrap me",
+  })
+
+  util.autocmd({
+    "BufWritePre",
+    "go.mod",
+    run = function()
+      local filename = vim.fn.expand("%:p")
+      local bufnr = vim.fn.expand("<abuf>")
+      require("util.lsp").go_mod_tidy(tonumber(bufnr), filename)
+    end,
+    group = "LSP_EVENTS",
+    docs = "run go mod tidy on save",
+  })
+
+  local function go_mod_check()
+    local filename = vim.fn.expand("<amatch>")
+    require("util.lsp").go_mod_check_upgrades(filename)
+  end
+  util.autocmd({
+    "BufRead",
+    "go.mod",
+    run = go_mod_check,
+    group = "LSP_EVENTS",
+    docs = "check for updates",
+  })
+end
+
+function M.fix_null_ls_errors()
+  local default_exe_handler = vim.lsp.handlers["workspace/executeCommand"]
+  vim.lsp.handlers["workspace/executeCommand"] = function(err, ...)
+    -- supress NULL_LS error msg
+    local prefix = "NULL_LS"
+    if err and err.message:sub(1, #prefix) == prefix then
+      return
+    end
+    return default_exe_handler(err, ...)
+  end
+end
+
+function M.support_commands()
+  util.buffer_command("ListWorkspace", function()
+    vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
+      title = "Workspace Folders",
+      timeout = 3000,
+    })
+  end)
+  util.buffer_command("Log", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()")
+
+  util.buffer_command("Test", function()
+    local name = get_current_node_name()
+    if name == "" then
+      return nil
+    end
+
+    local pattern = "test" .. name
+    vim.lsp.buf.workspace_symbol(pattern)
+  end)
+
+  ---Restats the LSP server. Fixes the problem with the LSP server not
+  ---restarting with LspRestart command.
+  local function restart_lsp()
+    nvim.ex.LspStop()
+    vim.defer_fn(nvim.ex.LspStart, 1000)
+  end
+  util.buffer_command("RestartLsp", restart_lsp)
+  nnoremap("<leader>dr", restart_lsp, "Restart LSP server")
+end
+
+function M.setup_diagnostics()
+  nnoremap("<leader>dd", vim.diagnostic.open_float, "show diagnostics")
+  nnoremap("<leader>dq", vim.diagnostic.setqflist, "populate quickfix")
+  nnoremap("<leader>dw", vim.diagnostic.setloclist, "populate local list")
+
+  nnoremap("]d", function()
+    util.call_and_centre(vim.diagnostic.goto_next)
+  end, "goto next diagnostic")
+  nnoremap("[d", function()
+    util.call_and_centre(vim.diagnostic.goto_prev)
+  end, "goto previous diagnostic")
+
+  util.buffer_command("Diagnostics", function()
+    require("lspfuzzy").diagnostics(0)
+  end)
+  util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
 end
 
 return M
