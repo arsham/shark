@@ -1,4 +1,4 @@
-local nvim = require('nvim')
+local nvim = require("nvim")
 local M = {}
 
 ---Adopted from the feline codebase.
@@ -27,7 +27,7 @@ end
 ---@param severity string
 ---@return string
 local function severity_lsp_to_vim(severity)
-  if type(severity) == 'string' then
+  if type(severity) == "string" then
     severity = vim.lsp.protocol.DiagnosticSeverity[severity]
   end
   return severity
@@ -38,7 +38,9 @@ end
 ---@return number
 function M.get_diagnostics_count(severity)
   local active_clients = vim.lsp.buf_get_clients(0)
-  if not active_clients then return 0 end
+  if not active_clients then
+    return 0
+  end
 
   severity = severity_lsp_to_vim(severity)
   local opts = { severity = severity }
@@ -55,35 +57,35 @@ end
 ---Common function used by the diagnostics providers
 local function diagnostics(severity)
   local count = M.get_diagnostics_count(severity)
-  return count ~= 0 and tostring(count) or ''
+  return count ~= 0 and tostring(count) or ""
 end
 
 ---Returns the count of errors and a icon.
 ---@return string
 ---@return string
 function M.diagnostic_errors()
-  return diagnostics(vim.diagnostic.severity.ERROR), '  '
+  return diagnostics(vim.diagnostic.severity.ERROR), "  "
 end
 
 ---Returns the count of warnings and a icon.
 ---@return string
 ---@return string
 function M.diagnostic_warnings()
-  return diagnostics(vim.diagnostic.severity.WARN), '  '
+  return diagnostics(vim.diagnostic.severity.WARN), "  "
 end
 
 ---Returns the count of hints and a icon.
 ---@return string
 ---@return string
 function M.diagnostic_hints()
-  return diagnostics(vim.diagnostic.severity.HINT), '  '
+  return diagnostics(vim.diagnostic.severity.HINT), "  "
 end
 
 ---Returns the count of informations and a icon.
 ---@return string
 ---@return string
 function M.diagnostic_info()
-  return diagnostics(vim.diagnostic.severity.INFO), '  '
+  return diagnostics(vim.diagnostic.severity.INFO), "  "
 end
 
 ---Executes go.mod tidy.
@@ -91,16 +93,19 @@ end
 function M.go_mod_tidy(bufnr, filename)
   local clients = vim.lsp.get_active_clients()
   local command = {
-    command = 'gopls.tidy',
-    arguments = {{
-      URIs = { 'file:/' .. filename },
-    }},
+    command = "gopls.tidy",
+    arguments = { {
+      URIs = { "file:/" .. filename },
+    } },
   }
   for _, client in pairs(clients) do
-    if client.name == 'gopls' then
-      client.request('workspace/executeCommand', command, function(...)
-        local result = vim.lsp.handlers['workspace/executeCommand'](...)
-        vim.lsp.codelens.refresh()
+    if client.name == "gopls" then
+      client.request("workspace/executeCommand", command, function(...)
+        local result = vim.lsp.handlers["workspace/executeCommand"](...)
+        --- if client.resolved_capabilities.codelens then
+        if client.supports_method("textDocument/codeLens") then
+          vim.lsp.codelens.refresh()
+        end
         return result
       end, bufnr)
     end
@@ -111,12 +116,12 @@ end
 ---list.
 ---@param filename string should be the full path of the go.mod file.
 function M.go_mod_check_upgrades(filename)
-  local f = io.open(filename, 'r')
-  local contents = f:read('*a')
+  local f = io.open(filename, "r")
+  local contents = f:read("*a")
   f:close()
   local modules = {}
-  for line in contents:gmatch('[^\r\n]+') do
-    local module = line:match('^%s+([%a\\/\\.-]+)%s+[^%s\\/]+')
+  for line in contents:gmatch("[^\r\n]+") do
+    local module = line:match("^%s+([%a\\/\\.-]+)%s+[^%s\\/]+")
     if module then
       table.insert(modules, module)
     end
@@ -141,11 +146,11 @@ function M.go_mod_check_upgrades(filename)
   end
 
   local command = {
-    command = 'gopls.check_upgrades',
-    arguments = {{
-      URI = 'file:/' .. filename ,
+    command = "gopls.check_upgrades",
+    arguments = { {
+      URI = "file:/" .. filename,
       Modules = modules,
-    }},
+    } },
   }
   vim.lsp.buf.execute_command(command)
 end

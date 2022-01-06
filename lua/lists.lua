@@ -122,54 +122,62 @@ local function add_line(name, is_local)
   vim.fn["repeat#set"](key, vim.v.count)
 end
 
--- stylua: ignore
-util.nnoremap({'<leader>cc', function()
+-- stylua: ignore start
+vim.keymap.set("n", "<leader>cc", function()
   nvim.ex.cclose()
   nvim.ex.lclose()
-end, silent=true, desc='Close quickfix list and local list windows'})
+end, { noremap = true, silent = true, desc = "Close quickfix list and local list windows" })
 
 --- Quickfix list mappings {{{
-util.nnoremap({ "<leader>qo", nvim.ex.copen, silent = true, desc = "open quickfix list" })
+vim.keymap.set("n", "<leader>qo", nvim.ex.copen,
+  { noremap = true, silent = true, desc = "open quickfix list" }
+)
 
--- stylua: ignore
-util.nnoremap({"<Plug>QuickfixAdd", function()
+vim.keymap.set("n", "<Plug>QuickfixAdd", function()
   add_line("<Plug>QuickfixAdd", false)
-end, desc = "add to quickfix list"})
+end, { noremap = true, desc = "add to quickfix list" })
 
-util.nmap({ "<leader>qq", "<Plug>QuickfixAdd", desc = "add to quickfix list" })
-util.nnoremap({
-  "<Plug>QuickfixNote",
-  function()
-    add_note("<Plug>QuickfixNote", false)
-  end,
-  desc = "add to quickfix list with a node",
-})
+vim.keymap.set("n", "<leader>qq", "<Plug>QuickfixAdd",
+  { noremap = true, desc = "add to quickfix list" }
+)
+vim.keymap.set("n", "<Plug>QuickfixNote", function()
+  add_note("<Plug>QuickfixNote", false)
+end, { noremap = true, desc = "add to quickfix list with a node" })
 
-util.nmap({ "<leader>qn", "<Plug>QuickfixNote", desc = "add to quickfix list with node" })
-util.nnoremap({ "<leader>qd", clearqflist, silent = true, desc = "drop quickfix list" })
-util.nnoremap({ "<leader>qc", nvim.ex.cclose, silent = true, desc = "close quickfix list" })
+vim.keymap.set("n", "<leader>qn", "<Plug>QuickfixNote",
+  { noremap = true, desc = "add to quickfix list with node" }
+)
+vim.keymap.set("n", "<leader>qd", clearqflist,
+  { noremap = true, silent = true, desc = "drop quickfix list" }
+)
+vim.keymap.set("n", "<leader>qc", nvim.ex.cclose,
+  { noremap = true, silent = true, desc = "close quickfix list" }
+)
 --- }}}
 
 --- Local list mappings {{{
-util.nnoremap({ "<leader>wo", nvim.ex.lopen, silent = true, desc = "open local list" })
-util.nnoremap({
-  "<Plug>LocallistAdd",
-  function()
-    add_line("<Plug>LocallistAdd", true)
-  end,
-  desc = "add to local list",
-})
-util.nmap({ "<leader>ww", "<Plug>LocallistAdd", desc = "add to local list" })
-util.nnoremap({
-  "<Plug>LocallistNote",
-  function()
-    add_note("<Plug>LocallistNote", true)
-  end,
-  desc = "add to local list with a node",
-})
-util.nmap({ "<leader>wn", "<Plug>LocallistNote", desc = "add to local list with node" })
-util.nnoremap({ "<leader>wd", clearloclist, silent = true, desc = "drop local list" })
-util.nnoremap({ "<leader>wc", nvim.ex.lclose, silent = true, desc = "close local list" })
+vim.keymap.set("n", "<leader>wo", nvim.ex.lopen,
+  { noremap = true, silent = true, desc = "open local list" }
+)
+vim.keymap.set("n", "<Plug>LocallistAdd", function()
+  add_line("<Plug>LocallistAdd", true)
+end, { noremap = true, desc = "add to local list" })
+vim.keymap.set("n", "<leader>ww", "<Plug>LocallistAdd",
+  { noremap = true, desc = "add to local list" }
+)
+vim.keymap.set("n", "<Plug>LocallistNote", function()
+  add_note("<Plug>LocallistNote", true)
+end, { noremap = true, desc = "add to local list with a node" })
+vim.keymap.set("n", "<leader>wn", "<Plug>LocallistNote",
+  { noremap = true, desc = "add to local list with node" }
+)
+vim.keymap.set("n", "<leader>wd", clearloclist,
+  { noremap = true, silent = true, desc = "drop local list" }
+)
+vim.keymap.set("n", "<leader>wc", nvim.ex.lclose,
+  { noremap = true, silent = true, desc = "close local list" }
+)
+-- stylua: ignore end
 --- }}}
 
 ---Creates a mapping for jumping through lists.
@@ -179,7 +187,7 @@ util.nnoremap({ "<leader>wc", nvim.ex.lclose, silent = true, desc = "close local
 ---@param desc string the description of the mapping.
 local function jump_list_mapping(key, next, wrap, desc)
   -- stylua: ignore
-  util.nnoremap({key, function()
+  vim.keymap.set("n", key, function()
     util.cmd_and_centre(([[
       try
         %s
@@ -188,8 +196,8 @@ local function jump_list_mapping(key, next, wrap, desc)
       catch /^Vim\%%((\a\+)\)\=:E42\|E776/
       endtry
       ]]):format(next, wrap))
-    end, desc = desc,
-  })
+    end, {noremap=true, desc = desc }
+  )
 end
 jump_list_mapping("]q", "cnext", "cfirst", "jump to next item in quickfix list")
 jump_list_mapping("[q", "cprevious", "clast", "jump to previous item in quickfix list")
@@ -203,7 +211,7 @@ util.augroup({"QF_LOC_LISTS", {
     vim.opt_local.cursorline = true
   end},
   {"FileType", "qf", docs = "delete from qf/local lists", run = function()
-    util.nnoremap({"dd", delete_list_item, buffer = true, desc = "delete from qf/local lists", })
+    vim.keymap.set("n","dd", delete_list_item,{noremap=true, buffer = true, desc = "delete from qf/local lists", })
   end},
 }})
 -- stylua: ignore end

@@ -1,4 +1,3 @@
-local util = require("util")
 --[=====[
 #### Alignment options in interactive mode
 
@@ -73,6 +72,6 @@ vim.g.easy_align_delimiters = {
 
 vim.g.easy_align_bypass_fold = 1
 
-util.xmap({ "ga", "<Plug>(EasyAlign)" })
-util.nmap({ "ga", "<Plug>(EasyAlign)" })
-util.nmap({ "<leader>ga", "<Plug>(LiveEasyAlign)" })
+vim.keymap.set("x", "ga", "<Plug>(EasyAlign)")
+vim.keymap.set("n", "ga", "<Plug>(EasyAlign)")
+vim.keymap.set("n", "<leader>ga", "<Plug>(LiveEasyAlign)")

@@ -31,7 +31,6 @@ require("packer").startup({
     })
     use("nvim-lua/plenary.nvim")
     use("norcalli/nvim.lua")
-    use("tjdevries/astronauta.nvim")
     --- }}}
 
     --- Core/System utilities {{{
@@ -142,7 +141,7 @@ require("packer").startup({
     use({
       "dhruvasagar/vim-zoom",
       config = function()
-        require("util").nmap({ "<C-W>z", "<Plug>(zoom-toggle)" })
+        vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)" )
       end,
       event = { "BufRead", "BufNewFile" },
       keys = { "<C-w>z" },
@@ -409,8 +408,8 @@ require("packer").startup({
     use({
       "nanotee/sqls.nvim",
       config = function()
-        require("util").nnoremap({ "<C-Space>", ":SqlsExecuteQuery<CR>", buffer = true, silent = true })
-        require("util").vnoremap({ "<C-Space>", ":SqlsExecuteQuery<CR>", buffer = true, silent = true })
+        vim.keymap.set("n", "<C-Space>", ":SqlsExecuteQuery<CR>",{noremap=true, buffer = true, silent = true })
+        vim.keymap.set("v", "<C-Space>", ":SqlsExecuteQuery<CR>",{noremap=true, buffer = true, silent = true })
       end,
       ft   = { "sql" },
       cond = full_start,

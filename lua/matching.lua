@@ -121,60 +121,52 @@ local function do_match(name, exact)
 end
 
 -- stylua: ignore start
-util.nnoremap({ "<Plug>MatchAdd",
-  function()
-    do_match("<Plug>MatchAdd", false)
-  end, desc = "Add any matches containing a word under the cursor",
-})
-util.nmap({ "<leader>ma", "<Plug>MatchAdd", desc = "Add any matches containing a word under the cursor" })
+vim.keymap.set("n", "<Plug>MatchAdd", function()
+  do_match("<Plug>MatchAdd", false)
+end, { noremap = true, desc = "Add any matches containing a word under the cursor" })
+vim.keymap.set("n", "<leader>ma", "<Plug>MatchAdd",
+  { noremap = true, desc = "Add any matches containing a word under the cursor" }
+)
 
-util.nnoremap({ "<Plug>MatchExact",
-  function()
-    do_match("<Plug>MatchExact", true)
-  end, desc = "Add any exact matches containing a word under the cursor",
-})
-util.nmap({ "<leader>me", "<Plug>MatchExact",
-  desc = "Add any exact matches containing a word under the cursor",
-})
+vim.keymap.set("n", "<Plug>MatchExact", function()
+  do_match("<Plug>MatchExact", true)
+end, { noremap = true, desc = "Add any exact matches containing a word under the cursor" })
+vim.keymap.set("n", "<leader>me", "<Plug>MatchExact",
+  { noremap = true, desc = "Add any exact matches containing a word under the cursor" }
+)
 
-util.nnoremap({ "<leader>mp",
-  function()
-    util.user_input({
-      prompt = "Pattern: ",
-      on_submit = function(term)
-        vim.fn.matchadd(next_group(), term)
-      end,
-    })
-  end, desc = "Add any matches containing the input from user",
-})
+vim.keymap.set("n", "<leader>mp", function()
+  util.user_input({
+    prompt = "Pattern: ",
+    on_submit = function(term)
+      vim.fn.matchadd(next_group(), term)
+    end,
+  })
+end, { noremap = true, desc = "Add any matches containing the input from user" })
 
-util.nnoremap({ "<leader>mc",
-  function()
-    local groups = _t()
-    mappings:map(function(v)
-      groups[v.group] = true
-    end)
+vim.keymap.set("n", "<leader>mc", function()
+  local groups = _t()
+  mappings:map(function(v)
+    groups[v.group] = true
+  end)
 
-    _t(vim.fn.getmatches())
+  _t(vim.fn.getmatches())
     :filter(function(v)
       return v and groups[v.group]
     end)
     :map(function(v)
       vim.fn.matchdelete(v.id)
     end)
-  end,
-  desc = "Clear all matches of the current buffer",
-})
+end, { noremap = true, desc = "Clear all matches of the current buffer" })
 
-util.nnoremap({ "<leader>md",
-  function()
-    local source = _t()
-    local groups = _t()
-    mappings:map(function(v)
-      groups[v.group] = v.color
-    end)
+vim.keymap.set("n", "<leader>md", function()
+  local source = _t()
+  local groups = _t()
+  mappings:map(function(v)
+    groups[v.group] = v.color
+  end)
 
-    _t(vim.fn.getmatches())
+  _t(vim.fn.getmatches())
     :filter(function(v)
       return v and groups[v.group]
     end)
@@ -186,31 +178,29 @@ util.nnoremap({ "<leader>md",
       table.insert(source, str)
     end)
 
-    if #source == 0 then
-      return
-    end
+  if #source == 0 then
+    return
+  end
 
-    local wrap = vim.fn["fzf#wrap"]({
-      source = source,
-      options = table.concat({
-        "--multi",
-        "--bind",
-        "ctrl-a:select-all+accept ",
-        "--layout reverse-list",
-        '--delimiter="\t"',
-        "--with-nth=2..",
-      }, " "),
-    })
-    wrap["sink*"] = function(list)
-      for _, name in pairs(list) do
-        local id = string.match(name, "^%s*(%d+)")
-        if id ~= nil then
-          vim.fn.matchdelete(id)
-        end
+  local wrap = vim.fn["fzf#wrap"]({
+    source = source,
+    options = table.concat({
+      "--multi",
+      "--bind",
+      "ctrl-a:select-all+accept ",
+      "--layout reverse-list",
+      '--delimiter="\t"',
+      "--with-nth=2..",
+    }, " "),
+  })
+  wrap["sink*"] = function(list)
+    for _, name in pairs(list) do
+      local id = string.match(name, "^%s*(%d+)")
+      if id ~= nil then
+        vim.fn.matchdelete(id)
       end
     end
-    vim.fn["fzf#run"](wrap)
-  end,
-  desc = "List all matches and remove by user's selection",
-})
+  end
+  vim.fn["fzf#run"](wrap)
+end, { noremap = true, desc = "List all matches and remove by user's selection" })
 -- stylua: ignore end

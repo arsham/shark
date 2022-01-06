@@ -1,4 +1,4 @@
-local util = require('util')
+local util = require("util")
 
 local items = {
   "",
@@ -50,10 +50,13 @@ local last_query = ""
 local last_section = ""
 local last_mode = false
 
+-- stylua: ignore start
 local function curl(section, query, no_comment)
   query = query:gsub("^%s+", "")
   query = query:gsub("%s+$", "")
-  if query == "" then return end
+  if query == "" then
+    return
+  end
 
   last_query = query
   last_mode = no_comment
@@ -71,53 +74,53 @@ local function curl(section, query, no_comment)
   elseif section == "" then
     separator = ""
   end
-  query = query:gsub("%s","+")
+  query = query:gsub("%s", "+")
 
   local cmd = table.concat({
-    'https://cht.sh/',
-    section, separator, query,
-    '?', flag, "T",
+    "https://cht.sh/", section, separator, query, "?", flag, "T",
   }, "")
 
-  local job = require('plenary.job')
-  job:new({
-    command = "curl",
-    args = {"-s", cmd},
-    on_exit = function(j, exit_code)
-      local res = j:result()
-      local has_error = false
-      local error_msg = "404 NOT FOUND"
+  local job = require("plenary.job")
+  job
+    :new({
+      command = "curl",
+      args = { "-s", cmd },
+      on_exit = function(j, exit_code)
+        local res = j:result()
+        local has_error = false
+        local error_msg = "404 NOT FOUND"
 
-      for i = 1, 5 do
-        if res[i] and string.match(res[i], error_msg) then
-          has_error = true
+        for i = 1, 5 do
+          if res[i] and string.match(res[i], error_msg) then
+            has_error = true
+          end
         end
-      end
 
-      if exit_code ~=0 or has_error then
-        res = table.concat({
-          cmd,
-          table.concat(j:stderr_result(), "\n"),
-          table.concat(res, "\n"),
-        }, "\n")
-        local type = vim.lsp.log_levels.ERROR
-        vim.notify(res, type, {
-          title = "Getting cheatsheet",
-          timeout = 4000,
-        })
-        return
-      end
-
-      vim.schedule(function()
-        vim.fn.append(cur_line, res)
-        local motion = ''
-        if #res > 1 then
-          motion = string.format('%dj', #res - 1)
+        if exit_code ~= 0 or has_error then
+          res = table.concat({
+            cmd,
+            table.concat(j:stderr_result(), "\n"),
+            table.concat(res, "\n"),
+          }, "\n")
+          local type = vim.lsp.log_levels.ERROR
+          vim.notify(res, type, {
+            title = "Getting cheatsheet",
+            timeout = 4000,
+          })
+          return
         end
-        util.normal('n', string.format('jV%s', motion))
-      end)
-    end,
-  }):start()
+
+        vim.schedule(function()
+          vim.fn.append(cur_line, res)
+          local motion = ""
+          if #res > 1 then
+            motion = string.format("%dj", #res - 1)
+          end
+          util.normal("n", string.format("jV%s", motion))
+        end)
+      end,
+    })
+    :start()
 end
 
 local function invoke(no_comment, query)
@@ -135,13 +138,9 @@ local function invoke(no_comment, query)
   vim.fn["fzf#run"](wrapped)
 end
 
-util.nnoremap{'<leader>cs', function()
-  invoke(true)
-end,  silent=true}
-util.nnoremap{'<leader>cq', function()
-  invoke(false)
-end, silent=true}
-util.nnoremap{'<leader>cn', function()
+vim.keymap.set("n", "<leader>cs", function() invoke(true) end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cq", function() invoke(false) end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cn", function()
   if last_query == "" then
     vim.notify("No previous cheat query", "error", {
       title = "Error",
@@ -151,11 +150,12 @@ util.nnoremap{'<leader>cn', function()
   end
 
   local query = last_query .. "\\1"
-  local num = last_query:match('\\(%d+)$')
+  local num = last_query:match("\\(%d+)$")
   if num then
     num = tonumber(num) + 1
-    query = last_query:gsub('\\(%d+)$', "\\" .. num)
+    query = last_query:gsub("\\(%d+)$", "\\" .. num)
   end
 
   curl(last_section, query, last_mode)
-end, silent=true}
+end, { noremap = true, silent = true })
+-- stylua: ignore end

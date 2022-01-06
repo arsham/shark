@@ -1,12 +1,13 @@
-local util = require('util')
-vim.opt.wildcharm = vim.fn.char2nr('	')  --- tab
-vim.fn['wilder#enable_cmdline_enter']()
-vim.fn['wilder#set_option']('modes', {':'})
+vim.opt.wildcharm = vim.fn.char2nr("	") --- tab
+vim.fn["wilder#enable_cmdline_enter"]()
+vim.fn["wilder#set_option"]("modes", { ":" })
 
-util.cnoremap{'<TAB>',  'wilder#in_context() ? wilder#next()     : "\\<Tab>"',    expr=true}
-util.cnoremap{'<S-TAB>', 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', expr=true}
-util.cnoremap{'<C-j>',  'wilder#in_context() ? wilder#next()     : "\\<Tab>"',    expr=true}
-util.cnoremap{'<C-k>',  'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"',  expr=true}
+-- stylua: ignore start
+vim.keymap.set("c", "<TAB>", 'wilder#in_context() ? wilder#next() : "\\<Tab>"', { noremap = true, expr = true })
+vim.keymap.set("c", "<S-TAB>", 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', { noremap = true, expr = true })
+vim.keymap.set("c", "<C-j>", 'wilder#in_context() ? wilder#next() : "\\<Tab>"', { noremap = true, expr = true })
+vim.keymap.set("c", "<C-k>", 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', { noremap = true, expr = true })
+-- stylua: ignore end
 
 local function init_wilder()
   local command = {
@@ -47,6 +48,9 @@ local function init_wilder()
 end
 
 ---Lazy loading the setup.
-require('util').augroup{"WILDER", {
-  {"CmdlineEnter", targets="* ++once", run=init_wilder},
-}}
+require("util").augroup({
+  "WILDER",
+  {
+    { "CmdlineEnter", targets = "* ++once", run = init_wilder },
+  },
+})

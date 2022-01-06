@@ -7,25 +7,25 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 --- Disabling arrows {{{
-util.noremap({ "<Up>", "<Nop>", desc = "disabling arrows" })
-util.noremap({ "<Down>", "<Nop>", desc = "disabling arrows" })
-util.noremap({ "<Left>", "<Nop>", desc = "disabling arrows" })
-util.noremap({ "<Right>", "<Nop>", desc = "disabling arrows" })
-util.inoremap({ "<Up>", "<Nop>", desc = "disabling arrows" })
-util.inoremap({ "<Down>", "<Nop>", desc = "disabling arrows" })
-util.inoremap({ "<Left>", "<Nop>", desc = "disabling arrows" })
-util.inoremap({ "<Right>", "<Nop>", desc = "disabling arrows" })
+vim.keymap.set("n", "<Up>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("n", "<Down>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("n", "<Left>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("n", "<Right>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("i", "<Up>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("i", "<Down>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("i", "<Left>", "<Nop>", { noremap = true, desc = "disabling arrows" })
+vim.keymap.set("i", "<Right>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 --- }}}
 
--- stylua: ignore
-util.inoremap({ "<A-j>", [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], silent = true, desc = "move lines down" })
--- stylua: ignore
-util.inoremap({ "<A-k>", [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], silent = true, desc = "move lines up" })
+-- stylua: ignore start
+vim.keymap.set("i", "<A-j>", [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], { noremap = true, silent = true, desc = "move lines down" })
+vim.keymap.set("i", "<A-k>", [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], { noremap = true, silent = true, desc = "move lines up" })
 
-util.xnoremap({ "<", "<gv", desc = "Keep the visually selected area when indenting" })
-util.xnoremap({ ">", ">gv", desc = "Keep the visually selected area when indenting" })
+vim.keymap.set("x", "<", "<gv",{noremap=true, desc = "Keep the visually selected area when indenting" })
+vim.keymap.set("x", ">", ">gv",{noremap=true, desc = "Keep the visually selected area when indenting" })
 
-util.nnoremap({ "g=", "gg=Gg``", desc = "Re-indent the whole buffer" })
+vim.keymap.set("n", "g=", "gg=Gg``",{noremap=true, desc = "Re-indent the whole buffer" })
+-- stylua: ignore end
 
 -- Insert empty lines {{{
 
@@ -48,46 +48,57 @@ local function insert_empty_lines(name, count, add)
   vim.fn["repeat#set"](key, vim.v.count)
 end
 
--- stylua: ignore start
-util.nnoremap({ "<Plug>EmptySpaceAfter", function()
+vim.keymap.set("n", "<Plug>EmptySpaceAfter", function()
   insert_empty_lines("<Plug>EmptySpaceAfter", vim.v.count, 0)
-end, silent = true, desc = "insert [count]empty line(s) below current line",
-})
+end, { noremap = true, silent = true, desc = "insert [count]empty line(s) below current line" })
 
-util.nmap({ "]<space>", "<Plug>EmptySpaceAfter", silent = true,
-  desc = "insert [count]empty line(s) below current line",
-})
+vim.keymap.set(
+  "n",
+  "]<space>",
+  "<Plug>EmptySpaceAfter",
+  { noremap = true, silent = true, desc = "insert [count]empty line(s) below current line" }
+)
 
-util.nnoremap({ "<Plug>EmptySpaceBefore", function()
+-- stylua: ignore start
+vim.keymap.set("n", "<Plug>EmptySpaceBefore", function()
   insert_empty_lines("<Plug>EmptySpaceBefore", vim.v.count, -1)
-end, silent = true, desc = "insert [count]empty line(s) below current line",
-})
-util.nmap({ "[<space>", "<Plug>EmptySpaceBefore",
-  silent = true, desc = "insert [count]empty line(s) below current line",
-})
+end, { noremap = true, silent = true, desc = "insert [count]empty line(s) below current line" })
+vim.keymap.set( "n", "[<space>", "<Plug>EmptySpaceBefore",
+  { noremap = true, silent = true, desc = "insert [count]empty line(s) below current line" }
+)
 --- }}}
 
-util.nnoremap({ "<M-Left>", ":vert resize -2<CR>", silent = true, desc = "decreases vertical size" })
-util.nnoremap({ "<M-Right>", ":vert resize +2<CR>", silent = true, desc = "increase vertical size" })
-util.nnoremap({ "<M-Up>", ":resize +2<CR>", silent = true, desc = "increase horizontal size" })
-util.nnoremap({ "<M-Down>", ":resize -2<CR>", silent = true, desc = "decreases horizontal size" })
+vim.keymap.set("n", "<M-Left>", ":vert resize -2<CR>",
+  { noremap = true, silent = true, desc = "decreases vertical size" }
+)
+vim.keymap.set("n", "<M-Right>", ":vert resize +2<CR>",
+  { noremap = true, silent = true, desc = "increase vertical size" }
+)
+vim.keymap.set("n", "<M-Up>", ":resize +2<CR>",
+  { noremap = true, silent = true, desc = "increase horizontal size" }
+)
+vim.keymap.set("n", "<M-Down>", ":resize -2<CR>",
+  { noremap = true, silent = true, desc = "decreases horizontal size" }
+)
 
-util.nnoremap({ "<C-e>", "2<C-e>" })
-util.nnoremap({ "<C-y>", "2<C-y>" })
+vim.keymap.set("n", "<C-e>", "2<C-e>", { noremap = true })
+vim.keymap.set("n", "<C-y>", "2<C-y>", { noremap = true })
 
-util.nnoremap({ "G", "Gzz", desc = "Auto re-centre when moving around" })
-util.nnoremap({ "g;", "m'g;zz", desc = "Auto re-centre when moving around" })
-util.nnoremap({ "g,", "m'g,zz", desc = "Auto re-centre when moving around" })
+vim.keymap.set("n", "G", "Gzz", { noremap = true, desc = "Auto re-centre when moving around" })
+vim.keymap.set("n", "g;", "m'g;zz", { noremap = true, desc = "Auto re-centre when moving around" })
+vim.keymap.set("n", "g,", "m'g,zz", { noremap = true, desc = "Auto re-centre when moving around" })
 
-util.nnoremap({ "k", [[(v:count > 2 ? "m'" . v:count : '') . 'k']],
-  expr = true, desc = "numbered motions in the jumplist",
-})
-util.nnoremap({ "j", [[(v:count > 2 ? "m'" . v:count : '') . 'j']],
-  expr = true, desc = "numbered motions in the jumplist",
-})
+vim.keymap.set("n", "k", [[(v:count > 2 ? "m'" . v:count : '') . 'k']],
+  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
+)
+vim.keymap.set("n", "j", [[(v:count > 2 ? "m'" . v:count : '') . 'j']],
+  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
+)
+
+vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>",
+  { noremap = true, silent = true, desc = "Clear hlsearch" }
+)
 -- stylua: ignore end
-
-util.nnoremap({ "<Esc><Esc>", ":noh<CR>", silent = true, desc = "Clear hlsearch" })
 
 -- Add/remove to/from the end of line(s) {{{
 ---Add char at the end of a line at the `loc` location.
@@ -148,39 +159,39 @@ for n, tuple in pairs(end_mapping) do
   local name1 = string.format("<Plug>AddEnd%s", n)
   local key1 = "<M-" .. tuple[1] .. ">"
   local desc = string.format("Add %s at the end of line", n)
-  util.nnoremap({ name1, function() change_line_ends(name1, tuple[1]) end, desc = desc })
-  util.nmap({ key1, name1, desc = desc })
-  util.inoremap({ key1, function() change_line_ends(name1, tuple[1]) end, desc = desc })
-  util.vnoremap({ name1, function() change_line_ends(name1, tuple[1]) end, desc = desc })
-  util.vmap({ key1, name1, desc = desc })
+  vim.keymap.set("n", name1, function() change_line_ends(name1, tuple[1]) end, {noremap=true,desc = desc })
+  vim.keymap.set("n", key1, name1,{desc = desc })
+  vim.keymap.set("i", key1, function() change_line_ends(name1, tuple[1]) end, {noremap=true,desc = desc })
+  vim.keymap.set("v", name1, function() change_line_ends(name1, tuple[1]) end, {noremap=true,desc = desc })
+  vim.keymap.set("v", key1, name1,{ desc = desc })
 
   local name2 = string.format("<Plug>DelEnd%s", n)
   local key2 = "<M-" .. tuple[2] .. ">"
   desc = string.format("Remove %s from the end of line", n)
-  util.nnoremap({ name2, function() change_line_ends(name2, tuple[1], true) end, desc = desc })
-  util.nmap({ key2, name2, desc = desc })
-  util.inoremap({ key2, function() change_line_ends(name2, tuple[1], true) end, desc = desc })
-  util.vnoremap({ name2, function() change_line_ends(name2, tuple[1], true) end, desc = desc })
-  util.vmap({ key2, name2, desc = desc })
+  vim.keymap.set("n", name2, function() change_line_ends(name2, tuple[1], true) end, {noremap=true,desc = desc })
+  vim.keymap.set("n", key2, name2,{desc = desc })
+  vim.keymap.set("i", key2, function() change_line_ends(name2, tuple[1], true) end, {noremap=true,desc = desc })
+  vim.keymap.set("v", name2, function() change_line_ends(name2, tuple[1], true) end, {noremap=true,desc = desc })
+  vim.keymap.set("v", key2, name2,{desc = desc })
 end
 --- }}}
 
-util.inoremap({ "<M-{>", "<Esc>A {<CR>}<Esc>O", desc = "Insert a pair of brackets and go into insert mode" })
-util.nnoremap({ "<M-{>", "A {<CR>}<Esc>O", desc = "Insert a pair of brackets and go into insert mode" })
+vim.keymap.set("i", "<M-{>", "<Esc>A {<CR>}<Esc>O",{noremap=true, desc = "Insert a pair of brackets and go into insert mode" })
+vim.keymap.set("n", "<M-{>", "A {<CR>}<Esc>O",{noremap=true, desc = "Insert a pair of brackets and go into insert mode" })
 
-util.nnoremap({ "<Leader>y", '"+y' })
-util.xnoremap({ "<Leader>y", '"+y' })
-util.nnoremap({ "<Leader>p", '"+p' })
-util.nnoremap({ "<Leader>P", '"+P' })
+vim.keymap.set("n",  "<Leader>y", '"+y' )
+vim.keymap.set("x",  "<Leader>y", '"+y' )
+vim.keymap.set("n",  "<Leader>p", '"+p' )
+vim.keymap.set("n",  "<Leader>P", '"+P' )
 
-util.vnoremap({ "p", '"_dP', desc = 'select a text, and this will replace it with the " contents' })
+vim.keymap.set("v", "p", '"_dP',{noremap=true, desc = 'select a text, and this will replace it with the " contents' })
 
-util.nnoremap({ "<leader>gw", ":silent lgrep <cword> % <CR>", silent = true, desc = "grep on local buffer" })
+vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>",{noremap=true, silent = true, desc = "grep on local buffer" })
 
 ---]s and [s to jump.
 ---zg to ignore.
-util.nnoremap({ "<leader>sp", function() vim.wo.spell = not vim.wo.spell end, desc = "toggle spelling" })
-util.nnoremap({ "<leader>sf",
+vim.keymap.set("n", "<leader>sp", function() vim.wo.spell = not vim.wo.spell end, {noremap=true,desc = "toggle spelling" })
+vim.keymap.set("n", "<leader>sf",
   function()
     local spell = vim.wo.spell
     vim.wo.spell = true
@@ -188,17 +199,17 @@ util.nnoremap({ "<leader>sf",
     vim.schedule(function()
       vim.wo.spell = spell
     end)
-  end, desc = "auto correct spelling and jump bak.",
+  end, {noremap=true, desc = "auto correct spelling and jump bak.",
 })
+
+vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>", { noremap = true, desc = "mergetool mapping" })
+vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>", { noremap = true, desc = "mergetool mapping" })
+vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", { noremap = true, desc = "mergetool mapping" })
+
+vim.keymap.set("n", "<leader>jq", ":%!gojq '.'<CR>")
+
+vim.keymap.set("n", "<leader>hh", ":h <CR>", { noremap = true, desc = "Show help for work under the cursor" })
 -- stylua: ignore end
-
-util.nnoremap({ "<leader>1", ":diffget LOCAL<CR>", desc = "mergetool mapping" })
-util.nnoremap({ "<leader>2", ":diffget BASE<CR>", desc = "mergetool mapping" })
-util.nnoremap({ "<leader>3", ":diffget REMOTE<CR>", desc = "mergetool mapping" })
-
-util.nnoremap({ "<leader>jq", ":%!gojq '.'<CR>" })
-
-util.nnoremap({ "<leader>hh", ":h <CR>", desc = "Show help for work under the cursor" })
 
 -- Jump along the indents {{{
 ---Returns the indentation of the next line from the given argument, that is
@@ -291,60 +302,50 @@ local function jump_indent(down)
   util.normal("xt", sequence)
 end
 
--- stylua: ignore start
-util.nnoremap({ "]=", function() jump_indent(true) end, desc = "jump down along the indent" })
-util.nnoremap({ "[=", function() jump_indent(false) end, desc = "jump up along the indent"  })
+vim.keymap.set("n", "]=", function()
+  jump_indent(true)
+end, { noremap = true, desc = "jump down along the indent" })
+vim.keymap.set("n", "[=", function()
+  jump_indent(false)
+end, { noremap = true, desc = "jump up along the indent" })
 --- }}}
 
-util.nnoremap({ "&", ":&&<CR>", desc = "repeat last substitute command" })
-util.xnoremap({ "&", ":&&<CR>", desc = "repeat last substitute command" })
+vim.keymap.set("n", "&", ":&&<CR>", { noremap = true, desc = "repeat last substitute command" })
+vim.keymap.set("x", "&", ":&&<CR>", { noremap = true, desc = "repeat last substitute command" })
 
-util.nnoremap({ "<C-w>b", ":bd<CR>", desc = "delete current buffer" })
-util.nnoremap({ "<C-w><C-b>", ":bd<CR>", desc = "delete current buffer" })
+vim.keymap.set("n", "<C-w>b", ":bd<CR>", { noremap = true, desc = "delete current buffer" })
+vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", { noremap = true, desc = "delete current buffer" })
 
 --- Execute macros over selected range.
-util.xnoremap({ "@",
-  function()
-    local c = vim.fn.getchar()
-    local ch = vim.fn.nr2char(c)
-    local from = vim.fn.getpos("v")[2]
-    local to = vim.fn.getcurpos()[2]
-    vim.cmd(string.format("%d,%d normal! @%s", from, to, ch))
-  end, silent = false, desc = "execute macro over visual range",
-})
+vim.keymap.set("x", "@", function()
+  local c = vim.fn.getchar()
+  local ch = vim.fn.nr2char(c)
+  local from = vim.fn.getpos("v")[2]
+  local to = vim.fn.getcurpos()[2]
+  vim.cmd(string.format("%d,%d normal! @%s", from, to, ch))
+end, { noremap = true, silent = false, desc = "execute macro over visual range" })
 
 --- Easier cgn process by starting with already selected text.
-util.nnoremap({ "cn", "*``cgn" })
+vim.keymap.set("n", "cn", "*``cgn")
 
-util.nnoremap({ "<leader>zm",
-  function()
-    vim.opt_local.foldmethod = "manual"
-  end, silent = true, desc = "set local foldmethod to manual",
-})
+vim.keymap.set("n", "<leader>zm", function()
+  vim.opt_local.foldmethod = "manual"
+end, { noremap = true, silent = true, desc = "set local foldmethod to manual" })
 
-util.nnoremap({ "<leader>ze",
-  function()
-    vim.opt_local.foldmethod = "expr"
-  end, silent = true, desc = "set local foldmethod to expr",
-})
+vim.keymap.set("n", "<leader>ze", function()
+  vim.opt_local.foldmethod = "expr"
+end, { noremap = true, silent = true, desc = "set local foldmethod to expr" })
 
-util.nnoremap({ "<leader>zi",
-  function()
-    vim.opt_local.foldmethod = "indent"
-  end, silent = true, desc = "set local foldmethod to indent",
-})
+vim.keymap.set("n", "<leader>zi", function()
+  vim.opt_local.foldmethod = "indent"
+end, { noremap = true, silent = true, desc = "set local foldmethod to indent" })
 
-util.nnoremap({ "<leader>zk",
-  function()
-    vim.opt_local.foldmethod = "marker"
-  end, silent = true, desc = "set local foldmethod to marker",
-})
+vim.keymap.set("n", "<leader>zk", function()
+  vim.opt_local.foldmethod = "marker"
+end, { noremap = true, silent = true, desc = "set local foldmethod to marker" })
 
-util.nnoremap({ "<leader>zs",
-  function()
-    vim.opt_local.foldmethod = "syntax"
-  end, silent = true, desc = "set local foldmethod to syntax",
-})
--- stylua: ignore end
+vim.keymap.set("n", "<leader>zs", function()
+  vim.opt_local.foldmethod = "syntax"
+end, { noremap = true, silent = true, desc = "set local foldmethod to syntax" })
 
 --- vim: foldmethod=marker

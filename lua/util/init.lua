@@ -393,106 +393,34 @@ function M.file_module(filename)
   return mod, ok
 end
 
----@class mapping_options
----@field lhs? string or first element key to trigger the mapping.
----@field rhs? string or second element. Should be empty if callback is given.
----@field callback? function
----@field buffer? boolean
----@field silent? boolean
----@field noremap? boolean
----@field expr? string
-
----Creates mappings.
----@param mode string
----@param conf mapping_options
-function M.map(mode, conf)
-  local opts, map_opts = {}, {}
-  for k, v in pairs(conf) do
-    if type(k) == "number" then
-      opts[k] = v
-    else
-      map_opts[k] = v
-    end
-  end
-
-  local lhs = opts.lhs or conf[1]
-  local rhs = opts.rhs or conf[2]
-
-  if type(rhs) == "function" then
-    map_opts.callback = rhs
-    rhs = ""
-  end
-
-  vim.validate({
-    mode = { mode, { "s", "t" } },
-    lhs = { lhs, "s" },
-    rhs = { rhs, { "s", "f" } },
-    opts = { opts, "t", true },
-  })
-
-  if conf.buffer then
-    map_opts.buffer = nil
-    vim.api.nvim_buf_set_keymap(0, mode, lhs, rhs, map_opts)
-    return
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, map_opts)
+---Convert a hex color to RGB.
+---@param hex string
+---@return number red
+---@return number green
+---@return number blue
+local function hex_to_rgb(hex)
+  local h = hex:gsub("#", "")
+  return tonumber(h:sub(1, 2), 16), tonumber(h:sub(3, 4), 16), tonumber(h:sub(5), 16)
 end
 
--- stylua: ignore start
-
----Create a normal mode mapping.
----@param conf mapping_options
-function M.nmap(conf) M.map('n', conf) end
----Create a mapping for insert mode.
----@param conf mapping_options
-function M.imap(conf) M.map('i', conf) end
----Create a mapping for visual mode.
----@param conf mapping_options
-function M.vmap(conf) M.map('v', conf) end
----Create a mapping for visual mode.
----@param conf mapping_options
-function M.xmap(conf) M.map('x', conf) end
----Create a mapping for operator-pending mode.
----@param conf mapping_options
-function M.omap(conf) M.map('o', conf) end
----Create a mapping for command-line mode.
----@param conf mapping_options
-function M.cmap(conf) M.map('c', conf) end
----Create a mapping for terminal mode.
----@param conf mapping_options
-function M.tmap(conf) M.map('t', conf) end
-
----Not to be consumed by users.
----@param mode string
----@param conf mapping_options
-function M._noremap(mode, conf)
-  conf.noremap = true
-  M.map(mode, conf)
+local function shift(colour, percent)
+  return math.floor(colour * (100 + percent) / 100)
 end
 
-function M.noremap(conf) M._noremap('', conf) end
+---Darken a specified hex color
+---@param colour string should be in hex
+---@param percent number how much to shift
+---@return string new hex value
+function M.alter_color(colour, percent)
+  local r, g, b = hex_to_rgb(colour)
+  if not r or not g or not b then
+    return "NONE"
+  end
+  r, g, b = shift(r, percent), shift(g, percent), shift(b, percent)
+  r, g, b = math.min(r, 255), math.min(g, 255), math.min(b, 255)
+  return string.format("#%02x%02x%02x", r, g, b)
+end
 
----Create a normal mode mapping.
----@param conf mapping_options
-function M.nnoremap(conf) M._noremap('n', conf) end
----Create a mapping for insert mode.
----@param conf mapping_options
-function M.inoremap(conf) M._noremap('i', conf) end
----Create a mapping for visual mode.
----@param conf mapping_options
-function M.vnoremap(conf) M._noremap('v', conf) end
----Create a mapping for visual mode.
----@param conf mapping_options
-function M.xnoremap(conf) M._noremap('x', conf) end
----Create a mapping for operator-pending mode.
----@param conf mapping_options
-function M.onoremap(conf) M._noremap('o', conf) end
----Create a mapping for command-line mode.
----@param conf mapping_options
-function M.cnoremap(conf) M._noremap('c', conf) end
----Create a mapping for terminal mode.
----@param conf mapping_options
-function M.tnoremap(conf) M._noremap('t', conf) end
+---TODO: create a function to generate colorscheme with shifted palette.
 
--- stylua: ignore end
 return M

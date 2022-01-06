@@ -1,5 +1,3 @@
-local util = require("util")
-
 return {
   setup = function()
     vim.g.nvim_tree_quit_on_open = 1
@@ -64,15 +62,20 @@ return {
       },
     })
 
-    util.nnoremap({ "<leader>kk", nvim_tree.toggle, silent = true, desc = "Toggle tree view" })
-    util.nnoremap({
-      "<leader>kf",
-      function()
-        nvim_tree.find_file(true)
-      end,
-      silent = true,
-      desc = "Find file in tree view",
-    })
-    util.nnoremap({ "<leader><leader>", nvim_tree.toggle, silent = true, desc = "Toggle tree view" })
+    vim.keymap.set(
+      "n",
+      "<leader>kk",
+      nvim_tree.toggle,
+      { noremap = true, silent = true, desc = "Toggle tree view" }
+    )
+    vim.keymap.set("n", "<leader>kf", function()
+      nvim_tree.find_file(true)
+    end, { noremap = true, silent = true, desc = "Find file in tree view" })
+    vim.keymap.set(
+      "n",
+      "<leader><leader>",
+      nvim_tree.toggle,
+      { noremap = true, silent = true, desc = "Toggle tree view" }
+    )
   end,
 }

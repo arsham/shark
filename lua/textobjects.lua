@@ -12,34 +12,34 @@ local function next_obj(motion)
   util.normal("x", sequence)
 end
 
-util.xnoremap({ "an", function() next_obj("a") end, desc = "around next pairs" })
-util.onoremap({ "an", function() next_obj("a") end, desc = "around next pairs" })
-util.xnoremap({ "in", function() next_obj("i") end, desc = "in next pairs" })
-util.onoremap({ "in", function() next_obj("i") end, desc = "in next pairs" })
+vim.keymap.set("x", "an", function() next_obj("a") end, { noremap = true, desc = "around next pairs" })
+vim.keymap.set("o", "an", function() next_obj("a") end, { noremap = true, desc = "around next pairs" })
+vim.keymap.set("x", "in", function() next_obj("i") end, { noremap = true, desc = "in next pairs" })
+vim.keymap.set("o", "in", function() next_obj("i") end, { noremap = true, desc = "in next pairs" })
 
 --- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
 --- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
 local chars = { "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "-", "#" }
 for _, char in ipairs(chars) do
-  util.xnoremap({ "i" .. char, function()
+  vim.keymap.set("x", "i" .. char, function()
     util.normal("xt", "T" .. char .. "ot" .. char)
-  end, desc = "in pairs of " .. char })
-  util.onoremap({ "i" .. char, function()
+  end, { noremap = true, desc = "in pairs of " .. char })
+  vim.keymap.set("o", "i" .. char, function()
     util.normal("x", "vi" .. char)
-  end, desc = "in pairs of " .. char })
-  util.xnoremap({ "a" .. char, function()
+  end, { noremap = true, desc = "in pairs of " .. char })
+  vim.keymap.set("x", "a" .. char, function()
     util.normal("xt", "F" .. char .. "of" .. char)
-  end, desc = "around pairs of " .. char })
-  util.onoremap({ "a" .. char, function()
+  end, { noremap = true, desc = "around pairs of " .. char })
+  vim.keymap.set("o", "a" .. char, function()
     util.normal("x", "va" .. char)
-  end, desc = "around pairs of " .. char })
+  end, { noremap = true, desc = "around pairs of " .. char })
 end
 
 ---line pseudo text objects.
-util.xnoremap({ "il", function() util.normal("xt", "g_o^") end, desc = "in current line" })
-util.onoremap({ "il", function() util.normal("x", "vil") end, desc = "in current line" })
-util.xnoremap({ "al", function() util.normal("xt", "$o0") end, desc = "around current line" })
-util.onoremap({ "al", function() util.normal("x", "val") end, desc = "around current line" })
+vim.keymap.set("x", "il", function() util.normal("xt", "g_o^") end, { noremap = true, desc = "in current line" })
+vim.keymap.set("o", "il", function() util.normal("x", "vil") end, { noremap = true, desc = "in current line" })
+vim.keymap.set("x", "al", function() util.normal("xt", "$o0") end, { noremap = true, desc = "around current line" })
+vim.keymap.set("o", "al", function() util.normal("x", "val") end, { noremap = true, desc = "around current line" })
 
 ---Number pseudo-text object (integer and float)
 ---Exmaple: ciN
@@ -48,8 +48,8 @@ local function visual_number()
   util.normal("x", "v")
   vim.fn.search("\\(^\\|[^0-9\\.]\\d\\)", "becW")
 end
-util.xnoremap({ "iN", visual_number, desc = "in number" })
-util.onoremap({ "iN", visual_number, desc = "in number" })
+vim.keymap.set("x", "iN", visual_number, { noremap = true, desc = "in number" })
+vim.keymap.set("o", "iN", visual_number, { noremap = true, desc = "in number" })
 
 ---Selects all lines with equal or higher indents to the current line in line
 ---visual mode. It ignores any empty lines.
@@ -91,8 +91,8 @@ local function in_indent()
   util.normal("xt", sequence)
 end
 
-util.vnoremap({ "ii", in_indent, silent = true, desc = "in indentation block" })
-util.onoremap({ "ii", function() util.normal("x", "vii") end, desc = "in indentation block" })
+vim.keymap.set("v", "ii", in_indent, { noremap = true, silent = true, desc = "in indentation block" })
+vim.keymap.set("o", "ii", function() util.normal("x", "vii") end, { noremap = true, desc = "in indentation block" })
 
 ---@param include boolean if true, will remove the backticks too.
 local function in_backticks(include)
@@ -112,17 +112,17 @@ local function in_backticks(include)
   util.normal("x", "h")
 end
 
-util.vnoremap({ "i`", function() in_backticks(false) end, silent = true, desc = "in backticks" })
-util.vnoremap({ "a`", function() in_backticks(true) end, silent = true, desc = "around backticks" })
-util.onoremap({ "i`", function() util.normal("x", "vi`") end, silent = true, desc = "in backticks" })
-util.onoremap({ "a`", function() util.normal("x", "va`") end, silent = true, desc = "around backticks" })
+vim.keymap.set("v", "i`", function() in_backticks(false) end, { noremap = true, silent = true, desc = "in backticks" })
+vim.keymap.set("v", "a`", function() in_backticks(true) end, { noremap = true, silent = true, desc = "around backticks" })
+vim.keymap.set("o", "i`", function() util.normal("x", "vi`") end, { noremap = true, silent = true, desc = "in backticks" })
+vim.keymap.set("o", "a`", function() util.normal("x", "va`") end, { noremap = true, silent = true, desc = "around backticks" })
 
-util.onoremap({ "H", "^", desc = "to the beginning of line" })
-util.onoremap({ "L", "$", desc = "to the end of line" })
+vim.keymap.set("o", "H", "^", { noremap = true, desc = "to the beginning of line" })
+vim.keymap.set("o", "L", "$", { noremap = true, desc = "to the end of line" })
 
-util.vnoremap({ "iz", function() util.normal("xt", "[zjo]zk") end, silent = true, desc = "in fold block" })
-util.onoremap({ "iz", function() util.normal("x", "viz") end, desc = "in fold block" })
+vim.keymap.set("v", "iz", function() util.normal("xt", "[zjo]zk") end, { noremap = true, silent = true, desc = "in fold block" })
+vim.keymap.set("o", "iz", function() util.normal("x", "viz") end, { noremap = true, desc = "in fold block" })
 
-util.vnoremap({ "az", function() util.normal("xt", "[zo]z") end, silent = true, desc = "around fold block" })
-util.onoremap({ "az", function() util.normal("x", "vaz") end, desc = "around fold block" })
+vim.keymap.set("v", "az", function() util.normal("xt", "[zo]z") end, { noremap = true, silent = true, desc = "around fold block" })
+vim.keymap.set("o", "az", function() util.normal("x", "vaz") end, { noremap = true, desc = "around fold block" })
 -- stylua: ignore end

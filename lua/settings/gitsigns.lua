@@ -1,3 +1,4 @@
+-- @module lua.util.init
 local util = require("util")
 local gitsigns = require("gitsigns")
 
@@ -30,22 +31,22 @@ gitsigns.setup({
   update_debounce = 750,
 })
 
-util.nnoremap({ "]c", function() util.call_and_centre(gitsigns.next_hunk) end, desc = "go to next hunk" })
-util.nnoremap({ "[c", function() util.call_and_centre(gitsigns.prev_hunk) end, desc = "go to previous hunk" })
-util.nnoremap({ "<leader>hb", function() gitsigns.blame_line({ full = true }) end, desc = "blame line" })
-util.nnoremap({ "<leader>hs", function() gitsigns.stage_hunk() end,      desc = "stage hunk" })
-util.nnoremap({ "<leader>hu", function() gitsigns.undo_stage_hunk() end, desc = "undo last staged hunk" })
-util.nnoremap({ "<leader>hr", function() gitsigns.reset_hunk() end,      desc = "reset hunk" })
-util.nnoremap({ "<leader>hR", function() gitsigns.reset_buffer() end,    desc = "reset buffer" })
-util.nnoremap({ "<leader>hp", function() gitsigns.preview_hunk() end,    desc = "preview hunk" })
-util.nnoremap({ "<leader>hl", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, desc = "stage line" })
-util.vnoremap({ "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, desc = "stage line" })
-util.vnoremap({ "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, desc = "reset line" })
+vim.keymap.set("n", "]c", function() util.call_and_centre(gitsigns.next_hunk) end,     {noremap=true, desc = "go to next hunk" })
+vim.keymap.set("n", "[c", function() util.call_and_centre(gitsigns.prev_hunk) end,     {noremap=true, desc = "go to previous hunk" })
+vim.keymap.set("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end, {noremap=true, desc = "blame line" })
+vim.keymap.set("n", "<leader>hs", function() gitsigns.stage_hunk() end,                {noremap=true, desc = "stage hunk" })
+vim.keymap.set("n", "<leader>hu", function() gitsigns.undo_stage_hunk() end,           {noremap=true, desc = "undo last staged hunk" })
+vim.keymap.set("n", "<leader>hr", function() gitsigns.reset_hunk() end,                {noremap=true, desc = "reset hunk" })
+vim.keymap.set("n", "<leader>hR", function() gitsigns.reset_buffer() end,              {noremap=true, desc = "reset buffer" })
+vim.keymap.set("n", "<leader>hp", function() gitsigns.preview_hunk() end,              {noremap=true, desc = "preview hunk" })
+vim.keymap.set("n", "<leader>hl", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, {noremap=true, desc = "stage line" })
+vim.keymap.set("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, {noremap=true, desc = "stage line" })
+vim.keymap.set("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, {noremap=true, desc = "reset line" })
 -- stylua: ignore end
 
 ---Text objects
 local actions = require("gitsigns.actions")
-util.onoremap({ "ih", actions.select_hunk, desc = "in hunk" })
-util.xnoremap({ "ih", actions.select_hunk, desc = "in hunk" })
-util.onoremap({ "ah", actions.select_hunk, desc = "around hunk" })
-util.xnoremap({ "ah", actions.select_hunk, desc = "around hunk" })
+vim.keymap.set("o", "ih", actions.select_hunk, { noremap = true, desc = "in hunk" })
+vim.keymap.set("x", "ih", actions.select_hunk, { noremap = true, desc = "in hunk" })
+vim.keymap.set("o", "ah", actions.select_hunk, { noremap = true, desc = "around hunk" })
+vim.keymap.set("x", "ah", actions.select_hunk, { noremap = true, desc = "around hunk" })

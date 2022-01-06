@@ -113,7 +113,8 @@ require("util").augroup({
       "FileType",
       "fzf",
       run = function()
-        util.tnoremap({ "<esc>", "<C-c>", buffer = true, desc = "escape fzf with escape" })
+        -- stylua: ignore
+        vim.keymap.set("t", "<esc>", "<C-c>",{noremap=true, buffer = true, desc = "escape fzf with escape" })
       end,
     },
   },

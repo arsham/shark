@@ -1,8 +1,9 @@
-local util = require("util")
 local navigator = require("Navigator")
 navigator.setup()
 
-util.nnoremap({ "<C-h>", navigator.left, silent = true, desc = "navigate to left window or tmux pane" })
-util.nnoremap({ "<C-k>", navigator.up, silent = true, desc = "navigate to upper window or tmux pane" })
-util.nnoremap({ "<C-l>", navigator.right, silent = true, desc = "navigate to right window or tmux pane" })
-util.nnoremap({ "<C-j>", navigator.down, silent = true, desc = "navigate to lower window or tmux pane" })
+-- stylua: ignore start
+vim.keymap.set("n", "<C-h>", navigator.left, { noremap = true, silent = true, desc = "navigate to left window or tmux pane" })
+vim.keymap.set("n", "<C-k>", navigator.up, { noremap = true, silent = true, desc = "navigate to upper window or tmux pane" })
+vim.keymap.set("n", "<C-l>", navigator.right, { noremap = true, silent = true, desc = "navigate to right window or tmux pane" })
+vim.keymap.set("n", "<C-j>", navigator.down, { noremap = true, silent = true, desc = "navigate to lower window or tmux pane" })
+-- stylua: ignore end
