@@ -283,6 +283,9 @@ require("packer").startup({
     use({
       "nvim-lua/lsp-status.nvim",
       after = { "nvim-lspconfig", "fzf.vim" },
+      config = function()
+        require("settings.lspstatus")
+      end,
       cond  = full_start,
     })
 

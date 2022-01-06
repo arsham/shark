@@ -75,6 +75,18 @@ local servers = {
     },
   },
 
+  sumneko_lua = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim", "use", "require", "rocks", "use_rocks" },
+      },
+      workspace = {
+        maxPreload = 100000,
+        preloadFileSize = 50000,
+      },
+    },
+  },
+
   jsonls = {
     settings = {
       json = {
@@ -102,8 +114,6 @@ local servers = {
 
 local on_attach = require("settings.lsp.util").on_attach
 local lsp_status = require("lsp-status")
-lsp_status.config({})
-
 lsp_status.register_progress()
 local attach_wrap = function(client, ...)
   lsp_status.on_attach(client)
@@ -145,17 +155,7 @@ lsp_installer.on_server_ready(function(server)
       lspconfig = {
         on_attach = attach_wrap,
         capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim", "use", "require", "rocks", "use_rocks" },
-            },
-            workspace = {
-              maxPreload = 100000,
-              preloadFileSize = 50000,
-            },
-          },
-        },
+        settings = servers[server.name],
       },
     })
   elseif server.name == "sqls" then
