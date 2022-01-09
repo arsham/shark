@@ -2,6 +2,7 @@ local M = {}
 
 local nvim = require("nvim")
 local quick = require("arshlib.quick")
+local lsp = require("arshlib.lsp")
 
 function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
@@ -288,7 +289,7 @@ function M.setup_events(imports, format) --{{{
     run = function()
       local filename = vim.fn.expand("%:p")
       local bufnr = vim.fn.expand("<abuf>")
-      require("util.lsp").go_mod_tidy(tonumber(bufnr), filename)
+      lsp.go_mod_tidy(tonumber(bufnr), filename)
     end,
     group = "LSP_EVENTS",
     docs = "run go mod tidy on save",
@@ -296,7 +297,7 @@ function M.setup_events(imports, format) --{{{
 
   local function go_mod_check()
     local filename = vim.fn.expand("<amatch>")
-    require("util.lsp").go_mod_check_upgrades(filename)
+    lsp.go_mod_check_upgrades(filename)
   end
   quick.autocmd({
     "BufRead",
