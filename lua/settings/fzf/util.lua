@@ -6,8 +6,8 @@ local quick = require("arshlib.quick")
 local M = {}
 
 ---Launches a ripgrep search with a fzf search interface.
--- @param term? string if empty, the search will only happen on the content.
--- @param no_ignore? string disables the ignore rules.
+---@param term? string if empty, the search will only happen on the content.
+---@param no_ignore? string disables the ignore rules.
 function M.ripgrep_search(term, no_ignore) --{{{
   term = vim.fn.shellescape(term)
   local nth = ""
@@ -49,8 +49,8 @@ function M.ripgrep_search(term, no_ignore) --{{{
 end --}}}
 
 ---Launches a ripgrep search with a fzf search interface.
--- @param term? string if empty, the search will only happen on the content.
--- @param no_ignore? string disables the ignore rules.
+---@param term? string if empty, the search will only happen on the content.
+---@param no_ignore? string disables the ignore rules.
 function M.ripgrep_search_incremental(term, no_ignore) --{{{
   term = vim.fn.shellescape(term)
   local query = ""
@@ -112,8 +112,8 @@ function M.delete_buffer() --{{{
 
   for _, v in pairs(list) do
     local name = vim.fn.fnamemodify(v.name, ":~:.")
-    --- the bufnr can't go to the first item otherwise it breaks the preview
-    --- line
+    -- the bufnr can't go to the first item otherwise it breaks the preview
+    -- line
     local t = {
       string.format("%s:%d", v.name, v.lnum),
       v.lnum,
@@ -166,7 +166,7 @@ function M.delete_buffer() --{{{
 end --}}}
 
 ---Searches in the lines of current buffer. It provides an incremental search
----that would switch to fzf filtering on <Alt-Enter>.
+-- that would switch to fzf filtering on <Alt-Enter>.
 function M.lines_grep() --{{{
   local options = table.concat({
     '--prompt="Current Buffer> "',
@@ -233,7 +233,7 @@ function M.lines_grep() --{{{
 end --}}}
 
 ---Launches a fzf search for reloading config files.
--- @param watch boolean if true it will keep watching for changes.
+---@param watch boolean if true it will keep watching for changes.
 function M.reload_config(watch) --{{{
   local loc = vim.env["MYVIMRC"]
   local base_dir = require("plenary.path"):new(loc):parents()[1]

@@ -7,7 +7,7 @@ local M = {}
 
 ---Shows a fzf search for going to definition.{{{
 -- If LSP is not attached, it uses the BTags functionality.
--- @param lines string[]
+---@param lines string[]
 local function goto_def(lines)
   local file = lines[1]
   vim.api.nvim_command(("e %s"):format(file))
@@ -21,7 +21,7 @@ local function goto_def(lines)
 end
 --}}}
 ---Shows a fzf search for going to a line number.
--- @param lines string[]
+---@param lines string[]
 local function goto_line(lines)
   local file = lines[1]
   vim.api.nvim_command(("e %s"):format(file))
@@ -29,14 +29,14 @@ local function goto_line(lines)
 end
 
 ---Shows a fzf search for line content.
--- @param lines string[]
+---@param lines string[]
 local function search_file(lines)
   local file = lines[1]
   vim.api.nvim_command(("e +BLines %s"):format(file))
 end
 
 ---Set selected lines in the quickfix/local list with fzf search {{{
--- @param items string[]|table[]
+---@param items string[]|table[]
 local function insert_into_list(items, is_local)
   local values = {}
   for _, item in pairs(items) do
@@ -61,14 +61,14 @@ local function insert_into_list(items, is_local)
 end
 
 ---Set selected lines in the quickfix list with fzf search.
--- @param items string[]|table[]
+---@param items string[]|table[]
 local function set_qf_list(items)
   insert_into_list(items, false)
   nvim.ex.copen()
 end
 
 ---Set selected lines in the local list with fzf search.
--- @param items string[]|table[]
+---@param items string[]|table[]
 local function set_loclist(items)
   insert_into_list(items, true)
   nvim.ex.lopen()

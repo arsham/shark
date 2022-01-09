@@ -17,7 +17,7 @@ vim.g.VM_maps = {
   ["Find Subword Under"] = "<C-n>",
 }
 
---- these don't work in the above maps.
+-- these don't work in the above maps.
 vim.keymap.set("n", [[<Leader>\]], function()
   vim.fn["vm#commands#add_cursor_at_pos"](0)
 end, { noremap = true, desc = "add cursor at position" })

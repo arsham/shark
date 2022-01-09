@@ -1,12 +1,12 @@
 local quick = require("arshlib.quick")
 
----vim.v.count
----vim.api.nvim_put(t, 'l', true, false)
+--vim.v.count
+--vim.api.nvim_put(t, 'l', true, false)
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---- Disabling arrows {{{
+-- Disabling arrows {{{
 vim.keymap.set("n", "<Up>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 vim.keymap.set("n", "<Down>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 vim.keymap.set("n", "<Left>", "<Nop>", { noremap = true, desc = "disabling arrows" })
@@ -15,7 +15,7 @@ vim.keymap.set("i", "<Up>", "<Nop>", { noremap = true, desc = "disabling arrows"
 vim.keymap.set("i", "<Down>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 vim.keymap.set("i", "<Left>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 vim.keymap.set("i", "<Right>", "<Nop>", { noremap = true, desc = "disabling arrows" })
---- }}}
+-- }}}
 -- Moving aroung {{{
 -- stylua: ignore start
 vim.keymap.set("i", "<A-j>", [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], { noremap = true, silent = true, desc = "move lines down" })
@@ -48,7 +48,7 @@ vim.keymap.set(
 ---@param name string name of the mapping to register for repeating.
 ---@param count number  Number of lines to insert.
 ---@param add number 0 to insert after current line, -1 to insert before current
----line.
+-- line.
 local function insert_empty_lines(name, count, add)
   if count == 0 then
     count = 1
@@ -81,7 +81,7 @@ end, { noremap = true, silent = true, desc = "insert [count]empty line(s) below 
 vim.keymap.set( "n", "[<space>", "<Plug>EmptySpaceBefore",
   { noremap = true, silent = true, desc = "insert [count]empty line(s) below current line" }
 )
---- }}}
+-- }}}
 -- Resizing windows {{{
 vim.keymap.set("n", "<M-Left>", ":vert resize -2<CR>",
   { noremap = true, silent = true, desc = "decreases vertical size" }
@@ -181,7 +181,7 @@ for n, tuple in pairs(end_mapping) do
   vim.keymap.set("v", name2, function() change_line_ends(name2, tuple[1], true) end, {noremap=true,desc = desc })
   vim.keymap.set("v", key2, name2,{desc = desc })
 end
---- }}}
+-- }}}
 
 vim.keymap.set("i", "<M-{>", "<Esc>A {<CR>}<Esc>O",{noremap=true, desc = "Insert a pair of brackets and go into insert mode" })
 vim.keymap.set("n", "<M-{>", "A {<CR>}<Esc>O",{noremap=true, desc = "Insert a pair of brackets and go into insert mode" })
@@ -196,8 +196,8 @@ vim.keymap.set("v", "p", '"_dP', { noremap=true, desc = 'replace visually select
 vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>",{noremap=true, silent = true, desc = "grep on local buffer" })
 
 -- Language support {{{
----]s and [s to jump.
----zg to ignore.
+-- ]s and [s to jump.
+-- zg to ignore.
 vim.keymap.set("n", "<leader>sp", function() vim.wo.spell = not vim.wo.spell end, {noremap=true,desc = "toggle spelling" })
 vim.keymap.set("n", "<leader>sf",
   function()
@@ -259,4 +259,4 @@ vim.keymap.set("n", "<leader>zs", function()
   vim.opt_local.foldmethod = "syntax"
 end, { noremap = true, silent = true, desc = "set local foldmethod to syntax" })
 --}}}
---- vim: foldmethod=marker
+-- vim: foldmethod=marker

@@ -3,7 +3,7 @@ return {
     vim.g.nvim_tree_quit_on_open = 1
     vim.g.nvim_tree_git_hl = 1
 
-    vim.g.nvim_tree_icons = {
+    vim.g.nvim_tree_icons = { --{{{
       lsp = {
         hint = "💡",
         info = "💬",
@@ -23,13 +23,13 @@ return {
         arrow_open = "▾",
         arrow_closed = "▸",
       },
-    }
+    } --}}}
   end,
 
   config = function()
     local tree_cb = require("nvim-tree.config").nvim_tree_callback
     local nvim_tree = require("nvim-tree")
-    nvim_tree.setup({
+    nvim_tree.setup({ --{{{
       disable_netrw = false,
       hijack_netrw = false,
       hijack_cursor = true,
@@ -60,7 +60,7 @@ return {
           },
         },
       },
-    })
+    }) --}}}
 
     vim.keymap.set(
       "n",

@@ -6,9 +6,9 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
----               ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
----       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
----                                                 
+--               ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
+--       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
+--                                                 
 -- stylua: ignore
 local kind_icons = {--{{{
   Buffers       = " ",
@@ -69,7 +69,7 @@ cmp.setup({
       behavior = cmp.SelectBehavior.Select,
     }),
 
-    --- only use < tab >/<s-tab> for switching between placeholders.
+    -- only use < tab >/<s-tab> for switching between placeholders.
     ["<Tab>"] = cmp.mapping(function(fallback)
       if vim.fn["vsnip#available"](1) == 1 then
         feedkey("<Plug>(vsnip-expand-or-jump)", "")

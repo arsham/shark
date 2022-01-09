@@ -11,7 +11,7 @@ function M.lsp_organise_imports() --{{{
   params.context = context
 
   local method = "textDocument/codeAction"
-  local timeout = 1000 --- ms
+  local timeout = 1000 -- ms
 
   local resp = vim.lsp.buf_request_sync(0, method, params, timeout)
   if not resp then
@@ -339,7 +339,7 @@ function M.support_commands() --{{{
   end)
 
   ---Restats the LSP server. Fixes the problem with the LSP server not
-  ---restarting with LspRestart command.
+  -- restarting with LspRestart command.
   local function restart_lsp()
     nvim.ex.LspStop()
     vim.defer_fn(nvim.ex.LspStart, 1000)

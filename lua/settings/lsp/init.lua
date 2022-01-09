@@ -1,4 +1,4 @@
---- vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 local signs = {
   Error = "🔥",
@@ -7,18 +7,18 @@ local signs = {
   Hint = "💡",
 }
 
-for type in pairs(signs) do
+for type in pairs(signs) do --{{{
   local hl = "DiagnosticSign" .. type
   local nr = "DiagnosticLineNr" .. type
   vim.fn.sign_define(hl, {
-    text = "", --- or the icon
+    text = "", -- or the icon
     texthl = hl,
     linehl = "",
-    numhl = nr, --- or hl
+    numhl = nr, -- or hl
   })
 end
-
-vim.diagnostic.config({
+--}}}
+vim.diagnostic.config({ --{{{
   virtual_text = {
     prefix = "👈",
   },
@@ -30,14 +30,14 @@ vim.diagnostic.config({
     focusable = true,
     source = "always",
   },
-})
+}) --}}}
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 local servers = {
-  gopls = {
+  gopls = { --{{{
     opts = {
       settings = {
         gopls = {
@@ -65,9 +65,9 @@ local servers = {
         },
       },
     },
-  },
+  }, --}}}
 
-  sumneko_lua = {
+  sumneko_lua = { --{{{
     opts = {},
     update = function(on_attach, opts)
       opts = require("lua-dev").setup({
@@ -89,9 +89,9 @@ local servers = {
       })
       return opts
     end,
-  },
+  }, --}}}
 
-  jsonls = {
+  jsonls = { --{{{
     opts = {
       settings = {
         json = {
@@ -100,18 +100,17 @@ local servers = {
       },
     },
     update = function(on_attach, opts)
-      opts.capabilities.document_symbol = false
-      opts.capabilities.document_formatting = false
       opts.on_attach = function(client, bufnr)
         client.resolved_capabilities.document_symbol = false
         client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
         on_attach(client, bufnr)
       end
       return opts
     end,
-  },
+  }, --}}}
 
-  yamlls = {
+  yamlls = { --{{{
     opts = {
       settings = {
         yaml = {
@@ -127,14 +126,13 @@ local servers = {
         },
       },
     },
-  },
+  }, --}}}
 
-  sqls = {
+  sqls = { --{{{
     opts = {},
     update = function(on_attach, opts)
-      --- neovim's LSP client does not currently support dynamic capabilities registration.
-      --- sqls has a bad formatting.
-      opts.capabilities.document_formatting = false
+      -- neovim's LSP client does not currently support dynamic capabilities registration.
+      -- sqls has a bad formatting.
       opts.on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.execute_command = true
@@ -144,7 +142,7 @@ local servers = {
       end
       return opts
     end,
-  },
+  }, --}}}
 }
 
 local lsp_util = require("settings.lsp.util")
@@ -155,28 +153,28 @@ local lsp_util = require("settings.lsp.util")
 ---@param client lsp_client
 ---@param bufnr number
 -- stylua: ignore start
-local function on_attach(client, bufnr)
+local function on_attach(client, bufnr)--{{{
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
-  --- TODO: find out how to disable the statuline badges as well.
+  -- TODO: find out how to disable the statuline badges as well.
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
     vim.diagnostic.disable()
   end
 
   -- TODO: turn these into: client.supports_method("textDocument/codeAction")
-  vim.api.nvim_buf_call(bufnr, function()
-    --- Contains functions to be run before writing the buffer. The format
-    --- function will format the while buffer, and the imports function will
-    --- organise imports.
+  vim.api.nvim_buf_call(bufnr, function()--{{{
+    -- Contains functions to be run before writing the buffer. The format
+    -- function will format the while buffer, and the imports function will
+    -- organise imports.
     local imports_hook = function() end
     local format_hook = function() end
 
     if client.supports_method("textDocument/codeAction") then
       lsp_util.code_action()
 
-      --- Either is it set to true, or there is a specified set of
-      --- capabilities. Sumneko doesn't support it, but the
-      --- client.supports_method returns true.
+      -- Either is it set to true, or there is a specified set of
+      -- capabilities. Sumneko doesn't support it, but the
+      -- client.supports_method returns true.
       local caps = client.resolved_capabilities
       local can_organise_imports = type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports")
       if can_organise_imports then
@@ -208,11 +206,11 @@ local function on_attach(client, bufnr)
 
     lsp_util.setup_diagnostics()
     lsp_util.setup_completions()
-    lsp_util.setup_diagnostics()
+    lsp_util.support_commands()
     lsp_util.setup_events(imports_hook, format_hook)
     lsp_util.fix_null_ls_errors()
-  end)
-end
+  end)--}}}
+end--}}}
 -- stylua: ignore end
 
 local lsp_status = require("lsp-status")
@@ -222,14 +220,14 @@ local attach_wrap = function(client, ...)
   on_attach(client, ...)
 end
 
---- Enable (broadcasting) snippet capability for completion.
-local capabilities = require("cmp_nvim_lsp").update_capabilities(
+-- Enable (broadcasting) snippet capability for completion.
+local capabilities = require("cmp_nvim_lsp").update_capabilities( --{{{
   vim.lsp.protocol.make_client_capabilities()
 )
 
-capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
+capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities) --}}}
 
-local null_ls = require("null-ls")
+local null_ls = require("null-ls") --{{{
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.fixjson,
@@ -241,9 +239,9 @@ null_ls.setup({
     null_ls.builtins.diagnostics.selene,
   },
   on_attach = attach_wrap,
-})
+}) --}}}
 
-require("nvim-lsp-installer").on_server_ready(function(server)
+require("nvim-lsp-installer").on_server_ready(function(server) --{{{
   local srv = servers[server.name] or {}
   local opts = vim.tbl_deep_extend("force", {
     on_attach = attach_wrap,
@@ -255,4 +253,6 @@ require("nvim-lsp-installer").on_server_ready(function(server)
   end
 
   server:setup(opts)
-end)
+end) --}}}
+
+-- vim fdm=marker fdl=0

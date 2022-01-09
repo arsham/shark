@@ -43,7 +43,7 @@ vim.keymap.set("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("
 vim.keymap.set("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, {noremap=true, desc = "reset line" })
 -- stylua: ignore end
 
----Text objects
+-- Text objects
 local actions = require("gitsigns.actions")
 vim.keymap.set("o", "ih", actions.select_hunk, { noremap = true, desc = "in hunk" })
 vim.keymap.set("x", "ih", actions.select_hunk, { noremap = true, desc = "in hunk" })

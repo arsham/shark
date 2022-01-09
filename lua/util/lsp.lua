@@ -1,7 +1,7 @@
 local nvim = require("nvim")
 local M = {}
 
----Adopted from the feline codebase.
+-- Adopted from the feline codebase.
 
 ---Returns true if a LSP server is attached to the current buffer.
 ---@return boolean
@@ -37,7 +37,7 @@ function M.go_mod_tidy(bufnr, filename) --{{{
     if client.name == "gopls" then
       client.request("workspace/executeCommand", command, function(...)
         local result = vim.lsp.handlers["workspace/executeCommand"](...)
-        --- if client.resolved_capabilities.codelens then
+        -- if client.resolved_capabilities.codelens then
         if client.supports_method("textDocument/codeLens") then
           vim.lsp.codelens.refresh()
         end
@@ -48,7 +48,7 @@ function M.go_mod_tidy(bufnr, filename) --{{{
 end --}}}
 
 ---Checks for dependency updates. It adds the found upgrades to the quickfix
----list.
+-- list.
 ---@param filename string should be the full path of the go.mod file.
 function M.go_mod_check_upgrades(filename) --{{{
   local f = io.open(filename, "r")

@@ -13,5 +13,5 @@ vim.keymap.set("n", "<leader>cd", ":Copilot disable<cr>",
   { noremap = true, silent = true, desc = "disable copilot" }
 )
 -- stylua: ignore end
---- disabled by default
+-- disabled by default
 nvim.ex.Copilot("disable")

@@ -4,7 +4,7 @@ local internal = require("ts_context_commentstring.internal")
 
 require("Comment").setup({
   pre_hook = function(ctx)
-    --- Determine the location where to calculate commentstring from
+    -- Determine the location where to calculate commentstring from
     local location = nil
     if ctx.ctype == cmt_utils.ctype.block then
       location = ts_utils.get_cursor_location()
@@ -12,7 +12,7 @@ require("Comment").setup({
       location = ts_utils.get_visual_start_location()
     end
 
-    --- Detemine whether to use linewise or blockwise commentstring
+    -- Detemine whether to use linewise or blockwise commentstring
     local type = ctx.ctype == cmt_utils.ctype.line and "__default" or "__multiline"
 
     return internal.calculate_commentstring({

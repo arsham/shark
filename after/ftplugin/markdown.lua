@@ -45,7 +45,7 @@ end, {expr=true, buffer=true, desc='create lists in markdown'})
 -- stylua: ignore end
 
 -- Jumps to the next heading {{{
--- @param down boolean if goes to next, otherwise to the previous.
+---@param down boolean if goes to next, otherwise to the previous.
 local function nextHeading(down)
   local count = vim.v.count
   local col = vim.fn.col(".")
