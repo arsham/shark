@@ -31,7 +31,12 @@ require("packer").startup({
     })
     use("nvim-lua/plenary.nvim")
     use("norcalli/nvim.lua")
-    --- }}}
+    use({
+      "arsham/arshlib.nvim",
+      requires = { "nvim.lua", "plenary.nvim", "nui.nvim" },
+    })
+
+    -- }}}
 
     --- Core/System utilities {{{
     use("nathom/filetype.nvim")
@@ -125,6 +130,14 @@ require("packer").startup({
     })
     --- }}}
 
+    -- Visuals {{{
+    use({
+      "arsham/arshamiser.nvim",
+      requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
+      config = function() require("settings.arshamiser") end,
+      event = { "VimEnter" },
+    })
+
     --- Visuals {{{
     use({
       "kyazdani42/nvim-web-devicons",
@@ -134,8 +147,6 @@ require("packer").startup({
     use({
       "famiu/feline.nvim",
       after  = "nvim-web-devicons",
-      config = function() require("statusline.feline") end,
-      event  = "VimEnter",
     })
 
     use({

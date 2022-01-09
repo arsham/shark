@@ -6,7 +6,6 @@ end
 
 require("util")
 require("options")
-require("visuals")
 require("autocmd")
 require("mappings")
 
