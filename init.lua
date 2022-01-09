@@ -13,7 +13,6 @@ local async_load_plugin = nil
 async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
   require("textobjects")
   require("commands")
-  require("matching")
   require("yanker")
   require("cheater")
   -- require("lists")

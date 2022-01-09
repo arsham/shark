@@ -149,7 +149,13 @@ require("packer").startup({
       event = { "VimEnter" },
     })
 
-    --- Visuals {{{
+    use({
+      "arsham/matchmaker.nvim",
+      requires = { "arshlib.nvim", "fzf", "fzf.vim" },
+      config = function() require("matchmaker").config({}) end,
+      keys = { "<leader>me", "<leader>ma", },
+    })
+
     use({
       "kyazdani42/nvim-web-devicons",
       event = "UIEnter",
@@ -194,7 +200,7 @@ require("packer").startup({
       event  = "UIEnter",
       cond   = full_start,
     })
-    --- }}}
+    -- }}}
 
     --- Editing {{{
     use({
