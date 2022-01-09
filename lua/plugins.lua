@@ -334,19 +334,14 @@ require("packer").startup({
 
     use({
       "ojroques/nvim-lspfuzzy",
-      requires = {
-        "junegunn/fzf",
-        "junegunn/fzf.vim",
-        "nvim-lspconfig",
-      },
+      requires = { "fzf", "fzf.vim", "nvim-lspconfig" },
       config = function()
         require("lspfuzzy").setup({
-          fzf_preview = {
-            "right:60%:+{2}-/2,nohidden",
-          },
+          fzf_preview = { "right:60%:+{2}-/2,nohidden", },
         })
       end,
       after = { "nvim-lspconfig", "fzf.vim" },
+      event = { "BufRead", "BufNewFile", "InsertEnter" },
       cond  = full_start,
     })
     --}}}
