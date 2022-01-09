@@ -33,6 +33,17 @@ local executables = {
   TheSilverSearcher = { "ag", "yay -S the_silver_searcher" },
 }
 
+local libs = {
+  arshlib = "arsham/arshlib.nvim",
+  listish = "arsham/listish.nvim",
+  matchmaker = "arsham/matchmaker.nvim",
+  yanker = "arsham/yanker.nvim",
+  ["arshamiser.feliniser"] = "arsham/arshamiser.nvim",
+  ["indent-tools"] = "arsham/indent-tools.nvim",
+  plenary = "nvim-lua/plenary.nvim",
+  nvim = "norcalli/nvim.lua",
+}
+
 M.check = function()
   health.report_start("Arsham's Internal")
   for name, aspect in pairs(file_checks) do
@@ -41,6 +52,16 @@ M.check = function()
       health.report_error(name .. " not found at: " .. aspect[1], aspect[2])
     else
       health.report_ok(name .. " was found at: " .. aspect[1])
+    end
+  end
+
+  for name, package in pairs(libs) do
+    if not pcall(require, name) then
+      health.report_error(package .. " was not found", {
+        'Please install "' .. package .. '"',
+      })
+    else
+      health.report_ok(package .. " is installed")
     end
   end
 
