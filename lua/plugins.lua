@@ -1,4 +1,4 @@
---- Packer setup {{{
+-- Packer setup {{{3
 -- stylua: ignore start
 vim.opt.termguicolors = true
 pcall(require, "impatient")
@@ -15,16 +15,16 @@ end
 vim.cmd([[packadd packer.nvim]])
 vim.cmd([[packadd! cfilter]])
 
---- Disables LSP plugins and other heavy plugins.
+-- Disables LSP plugins and other heavy plugins.
 local function full_start()
   return not vim.env.NVIM_START_LIGHT
 end
---- }}}
+-- }}}
 
---- Plugins {{{
+-- Plugins {{{2
 require("packer").startup({
   function(use)
-    --- Libraries {{{
+    -- Libraries {{{
     use({
       "wbthomason/packer.nvim",
       event = "VimEnter",
@@ -38,7 +38,7 @@ require("packer").startup({
 
     -- }}}
 
-    --- Core/System utilities {{{
+    -- Core/System utilities {{{
     use("nathom/filetype.nvim")
     use("lewis6991/impatient.nvim")
 
@@ -49,16 +49,14 @@ require("packer").startup({
 
     use({
       "junegunn/fzf.vim",
-      requires = "junegunn/fzf",
+      requires = "fzf",
       config   = function() require("settings.fzf") end,
       event    = "VimEnter",
     })
 
     use({
       "kevinhwang91/nvim-bqf",
-      requires = {
-        "junegunn/fzf",
-        "nvim-treesitter/nvim-treesitter",
+      requires = { "fzf", "nvim-treesitter",
       },
       config = function() require("bqf").enable() end,
       ft   = { "qf" },
@@ -78,7 +76,7 @@ require("packer").startup({
 
     use({
       "kyazdani42/nvim-tree.lua",
-      requires = { "kyazdani42/nvim-web-devicons" },
+      requires = { "nvim-web-devicons" },
       setup    = function() require("settings.nvim_tree").setup() end,
       config   = function() require("settings.nvim_tree").config() end,
       event    = { "BufRead" },
@@ -111,9 +109,9 @@ require("packer").startup({
       cmd    = { "UndotreeShow", "UndotreeToggle" },
       keys   = { "<leader>u" },
     })
-    --- }}}
+    -- }}}
 
-    --- git {{{
+    -- git {{{
     use({
       "tpope/vim-fugitive",
       config = function() require("settings.fugitive") end,
@@ -121,25 +119,25 @@ require("packer").startup({
 
     use({
       "tpope/vim-rhubarb",
-      requires = "tpope/vim-fugitive",
+      requires = "vim-fugitive",
       after    = "vim-fugitive",
     })
 
     use({
       "lewis6991/gitsigns.nvim",
-      requires = "nvim-lua/plenary.nvim",
+      requires = "plenary.nvim",
       config   = function() require("settings.gitsigns") end,
       event    = { "BufNewFile", "BufRead" },
     })
 
     use({
-      --- create ~/.gist-vim with this content: token xxxxx
+      -- create ~/.gist-vim with this content: token xxxxx
       "mattn/vim-gist",
       requires = "mattn/webapi-vim",
       config   = function() vim.g.gist_per_page_limit = 100 end,
       cmd      = { "Gist" },
     })
-    --- }}}
+    -- }}}
 
     -- Visuals {{{
     use({
@@ -202,7 +200,17 @@ require("packer").startup({
     })
     -- }}}
 
-    --- Editing {{{
+    -- Editing {{{
+
+    use({
+      "arsham/yanker.nvim",
+      -- "~/Projects/arsham/yanker.nvim",
+      config = function() require("yanker").config({}) end,
+      requires = { "arshlib.nvim", "fzf", "fzf.vim" },
+      event = { "BufRead", "BufNewFile" },
+      keys = { "<leader>yh", },
+    })
+
     use({
       "tpope/vim-repeat",
       event = { "BufRead", "BufNewFile", "InsertEnter" },
@@ -221,16 +229,16 @@ require("packer").startup({
     })
 
     use({
-      --- MixedCase/PascalCase:   gsm/gsp
-      --- camelCase:              gsc
-      --- snake_case:             gs_
-      --- UPPER_CASE:             gsu/gsU
-      --- Title Case:             gst
-      --- Sentence case:          gss
-      --- space case:             gs<space>
-      --- dash-case/kebab-case:   gs-/gsk
-      --- Title-Dash/Title-Kebab: gsK
-      --- dot.case:               gs.
+      -- MixedCase/PascalCase:   gsm/gsp
+      -- camelCase:              gsc
+      -- snake_case:             gs_
+      -- UPPER_CASE:             gsu/gsU
+      -- Title Case:             gst
+      -- Sentence case:          gss
+      -- space case:             gs<space>
+      -- dash-case/kebab-case:   gs-/gsk
+      -- Title-Dash/Title-Kebab: gsK
+      -- dot.case:               gs.
       "arthurxavierx/vim-caser",
       keys = { "gs" },
     })
@@ -279,9 +287,11 @@ require("packer").startup({
       "svban/YankAssassin.vim",
       event = { "BufRead", "BufNewFile" },
     })
-    --- }}}
+    -- }}}
 
-    --- Programming {{{
+    -- Programming {{{
+
+    -- LSP {{{
     use({
       "neovim/nvim-lspconfig",
       after = { "nvim-cmp", "lua-dev.nvim" },
@@ -310,18 +320,14 @@ require("packer").startup({
     use({
       "nvim-lua/lsp-status.nvim",
       after = { "nvim-lspconfig", "fzf.vim" },
-      config = function()
-        require("settings.lspstatus")
-      end,
-      cond  = full_start,
+      config = function() require("settings.lspstatus") end,
+      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      cond = full_start,
     })
 
     use({
       "jose-elias-alvarez/null-ls.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-lspconfig",
-      },
+      requires = { "plenary.nvim", "nvim-lspconfig" },
       event  = { "BufRead", "BufNewFile", "InsertEnter" },
       cond   = full_start,
     })
@@ -343,8 +349,9 @@ require("packer").startup({
       after = { "nvim-lspconfig", "fzf.vim" },
       cond  = full_start,
     })
+    --}}}
 
-    --- nvim-cmp {{{
+    -- nvim-cmp {{{
     use({
       "hrsh7th/nvim-cmp",
       event = { "BufRead", "BufNewFile", "InsertEnter" },
@@ -370,17 +377,17 @@ require("packer").startup({
       config = function() require("settings.cmp") end,
       cond   = full_start,
     })
-    --- }}}
+    -- }}}
 
-    --- Treesitter {{{
+    -- Treesitter {{{
     use({
       "nvim-treesitter/nvim-treesitter",
       requires = {
         {
           "nvim-treesitter/nvim-treesitter-textobjects",
           after = "nvim-treesitter",
-          --- This is actually the nvim-treesitter config, but it's
-          --- here to make lazy loading happy.
+          -- This is actually the nvim-treesitter config, but it's
+          -- here to make lazy loading happy.
           config = function() require("settings.treesitter") end,
         },
         {
@@ -408,10 +415,10 @@ require("packer").startup({
 
     use({
       "JoosepAlviste/nvim-ts-context-commentstring",
-      requires = "nvim-treesitter/nvim-treesitter",
+      requires = "nvim-treesitter",
       after    = "nvim-treesitter",
     })
-    --- }}}
+    -- }}}
 
     use({
       "folke/lua-dev.nvim",
@@ -421,7 +428,7 @@ require("packer").startup({
 
     use({
       "numToStr/Comment.nvim",
-      requires = "JoosepAlviste/nvim-ts-context-commentstring",
+      requires = "nvim-ts-context-commentstring",
       after    = "nvim-ts-context-commentstring",
       config   = function() require("settings.comment") end,
     })
@@ -452,7 +459,7 @@ require("packer").startup({
       "towolf/vim-helm",
       ft = { "yaml" },
     })
-    --- }}}
+    -- }}}
 
     --- Text objects {{{
     use({
@@ -471,9 +478,9 @@ require("packer").startup({
       "kana/vim-textobj-user",
       event = { "BufRead", "BufNewFile" },
     })
-    --- }}}
+    -- }}}
 
-    --- Misc {{{
+    -- Misc {{{
     use({
       "iamcco/markdown-preview.nvim",
       run    = function() vim.fn["mkdp#util#install"]() end,
@@ -495,7 +502,7 @@ require("packer").startup({
     })
 
     use({
-      --- creates diagrams from text. Requires diagon from snap.
+      -- creates diagrams from text. Requires diagon from snap.
       "willchao612/vim-diagon",
       cmd = "Diagon",
     })
@@ -512,12 +519,11 @@ require("packer").startup({
       end,
     },
 
-    --- Move to lua dir so impatient.nvim can cache it.
+    -- Move to lua dir so impatient.nvim can cache it.
     compile_path = vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua",
   },
-  --- }}}
+  -- }}}
 })
 -- stylua: ignore end
---- }}}
 
---- vim: foldmethod=marker foldlevel=1
+-- vim: fdm=marker fdl=2
