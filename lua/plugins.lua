@@ -461,7 +461,15 @@ require("packer").startup({
     })
     -- }}}
 
-    --- Text objects {{{
+    -- Text objects {{{
+
+    use({
+      "arsham/indent-tools.nvim",
+      requires = { "arshlib.nvim" },
+      config = function() require("indent-tools").config({}) end,
+      keys = { "]=", "[=", { "v", "ii" }, { "o", "ii" } },
+    })
+
     use({
       "blackCauldron7/surround.nvim",
       config = function() require("settings.surround") end,
@@ -470,7 +478,7 @@ require("packer").startup({
 
     use({
       "glts/vim-textobj-comment",
-      requires = "kana/vim-textobj-user",
+      requires = "vim-textobj-user",
       after    = "vim-textobj-user",
     })
 
@@ -506,8 +514,8 @@ require("packer").startup({
       "willchao612/vim-diagon",
       cmd = "Diagon",
     })
-    --- }}}
-    if packer_bootstrap then --- {{{
+    -- }}}
+    if packer_bootstrap then -- {{{
       require("packer").sync()
     end
   end,

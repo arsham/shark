@@ -1,4 +1,4 @@
-local util = require("util")
+local quick = require("arshlib.quick")
 
 ---vim.v.count
 ---vim.api.nvim_put(t, 'l', true, false)
@@ -16,7 +16,7 @@ vim.keymap.set("i", "<Down>", "<Nop>", { noremap = true, desc = "disabling arrow
 vim.keymap.set("i", "<Left>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 vim.keymap.set("i", "<Right>", "<Nop>", { noremap = true, desc = "disabling arrows" })
 --- }}}
-
+-- Moving aroung {{{
 -- stylua: ignore start
 vim.keymap.set("i", "<A-j>", [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], { noremap = true, silent = true, desc = "move lines down" })
 vim.keymap.set("i", "<A-k>", [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], { noremap = true, silent = true, desc = "move lines up" })
@@ -26,7 +26,22 @@ vim.keymap.set("x", ">", ">gv",{noremap=true, desc = "Keep the visually selected
 
 vim.keymap.set("n", "g=", "gg=Gg``",{noremap=true, desc = "Re-indent the whole buffer" })
 -- stylua: ignore end
+vim.keymap.set("n", "<C-e>", "2<C-e>", { noremap = true })
+vim.keymap.set("n", "<C-y>", "2<C-y>", { noremap = true })
 
+vim.keymap.set(
+  "n",
+  "k",
+  [[(v:count > 2 ? "m'" . v:count : '') . 'k']],
+  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
+)
+vim.keymap.set(
+  "n",
+  "j",
+  [[(v:count > 2 ? "m'" . v:count : '') . 'j']],
+  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
+)
+--}}}
 -- Insert empty lines {{{
 
 ---Inserts empty lines near the cursor.
@@ -67,7 +82,7 @@ vim.keymap.set( "n", "[<space>", "<Plug>EmptySpaceBefore",
   { noremap = true, silent = true, desc = "insert [count]empty line(s) below current line" }
 )
 --- }}}
-
+-- Resizing windows {{{
 vim.keymap.set("n", "<M-Left>", ":vert resize -2<CR>",
   { noremap = true, silent = true, desc = "decreases vertical size" }
 )
@@ -80,20 +95,12 @@ vim.keymap.set("n", "<M-Up>", ":resize +2<CR>",
 vim.keymap.set("n", "<M-Down>", ":resize -2<CR>",
   { noremap = true, silent = true, desc = "decreases horizontal size" }
 )
-
-vim.keymap.set("n", "<C-e>", "2<C-e>", { noremap = true })
-vim.keymap.set("n", "<C-y>", "2<C-y>", { noremap = true })
+--}}}
 
 vim.keymap.set("n", "G", "Gzz", { noremap = true, desc = "Auto re-centre when moving around" })
 vim.keymap.set("n", "g;", "m'g;zz", { noremap = true, desc = "Auto re-centre when moving around" })
 vim.keymap.set("n", "g,", "m'g,zz", { noremap = true, desc = "Auto re-centre when moving around" })
 
-vim.keymap.set("n", "k", [[(v:count > 2 ? "m'" . v:count : '') . 'k']],
-  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
-)
-vim.keymap.set("n", "j", [[(v:count > 2 ? "m'" . v:count : '') . 'j']],
-  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
-)
 
 vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>",
   { noremap = true, silent = true, desc = "Clear hlsearch" }
@@ -178,16 +185,17 @@ end
 
 vim.keymap.set("i", "<M-{>", "<Esc>A {<CR>}<Esc>O",{noremap=true, desc = "Insert a pair of brackets and go into insert mode" })
 vim.keymap.set("n", "<M-{>", "A {<CR>}<Esc>O",{noremap=true, desc = "Insert a pair of brackets and go into insert mode" })
-
+-- Yank related {{{
 vim.keymap.set("n",  "<Leader>y", '"+y' )
 vim.keymap.set("x",  "<Leader>y", '"+y' )
 vim.keymap.set("n",  "<Leader>p", '"+p' )
 vim.keymap.set("n",  "<Leader>P", '"+P' )
 
-vim.keymap.set("v", "p", '"_dP',{noremap=true, desc = 'select a text, and this will replace it with the " contents' })
-
+vim.keymap.set("v", "p", '"_dP', { noremap=true, desc = 'replace visually selected with the " contents' })
+--}}}
 vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>",{noremap=true, silent = true, desc = "grep on local buffer" })
 
+-- Language support {{{
 ---]s and [s to jump.
 ---zg to ignore.
 vim.keymap.set("n", "<leader>sp", function() vim.wo.spell = not vim.wo.spell end, {noremap=true,desc = "toggle spelling" })
@@ -195,120 +203,21 @@ vim.keymap.set("n", "<leader>sf",
   function()
     local spell = vim.wo.spell
     vim.wo.spell = true
-    util.normal("n", "[s1z=``")
+    quick.normal("n", "[s1z=``")
     vim.schedule(function()
       vim.wo.spell = spell
     end)
   end, {noremap=true, desc = "auto correct spelling and jump bak.",
-})
-
+})--}}}
+-- Merge tool {{{
 vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>", { noremap = true, desc = "mergetool mapping" })
 vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>", { noremap = true, desc = "mergetool mapping" })
 vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", { noremap = true, desc = "mergetool mapping" })
-
+--}}}
 vim.keymap.set("n", "<leader>jq", ":%!gojq '.'<CR>")
 
 vim.keymap.set("n", "<leader>hh", ":h <CR>", { noremap = true, desc = "Show help for work under the cursor" })
 -- stylua: ignore end
-
--- Jump along the indents {{{
----Returns the indentation of the next line from the given argument, that is
----not empty. All lines are trimmed before examination.
----@param from number the line number to start from.
----@param step number if positive, the next line is traversed, otherwise the
----previous line.
----@param barier number the maximum I will check. Can be 0 or max lines.
----@return number the indentation of the next line.
-local function next_unempty_line(from, step, barier)
-  for i = from, barier, step do
-    local len = #string.gsub(vim.fn.getline(i), "^%s+", "")
-    if len > 0 then
-      return vim.fn.indent(i)
-    end
-  end
-  return 0
-end
-
----Jumps to the next indentation level equal to current line. It skips empty
----lines, unless the next non-empty line has a lower indentation level. If the
----previous indentation is equal to the current one, and current indentation is
----higher than the nest, it will stop.
----@param down boolean indicates whether we are jumping down.
-local function jump_indent(down)
-  local main_loc = vim.api.nvim_win_get_cursor(0)[1]
-  local main_len = #string.gsub(vim.fn.getline(main_loc), "^%s+", "")
-  local main_indent = main_len > 0 and vim.fn.indent(main_loc) or 0
-  local target = main_loc
-  local barrier = down and vim.api.nvim_buf_line_count(0) or 0
-  local step = down and 1 or -1
-  local in_move = false
-
-  for i = main_loc, barrier, step do
-    local line_len = #string.gsub(vim.fn.getline(i), "^%s+", "")
-
-    if line_len ~= 0 then
-      -- stylua: ignore start
-      local indent      = vim.fn.indent(i)
-      local next_len    = #string.gsub(vim.fn.getline(i + step), "^%s+", "")
-      local next_indent = next_len > 0 and vim.fn.indent(i + step) or 0
-      local prev_empty  = #string.gsub(vim.fn.getline(i - step), "^%s+", "") == 0
-      local prev_indent = prev_empty and 0 or vim.fn.indent(i - step)
-      local far_indent  = next_unempty_line(i + step*2, step, barrier)
-
-      local on_main_level      = indent        ==  main_indent
-      local cruising           = on_main_level and in_move
-      local same_level         = indent        ==  prev_indent
-      local leveling_up        = indent        >   prev_indent
-      local will_go_up         = indent        <   next_indent
-      local may_go_up_the_main = next_indent   >=  main_indent
-      local will_go_down       = indent        >   next_indent
-      local goes_down_the_main = next_indent   <   main_indent
-      local later_will_go_down = indent        >   far_indent
-      local later_lower_main   = main_indent   >   far_indent
-      local prev_not_empty     = next_len      ~=  0
-      local next_is_empty      = next_len      ==  0
-      local road_block         = will_go_down  and prev_not_empty
-      -- stylua: ignore end
-
-      if later_will_go_down and next_is_empty and later_lower_main then
-        break
-      elseif same_level and on_main_level then
-        if road_block then
-          --- the next line also coule be empty.
-          break
-        elseif in_move then
-          if will_go_up or goes_down_the_main then
-            break
-          end
-        end
-      elseif leveling_up then
-        if cruising and prev_empty then
-          break
-        elseif not may_go_up_the_main and prev_not_empty then
-          break
-        end
-      elseif cruising then
-        break
-      elseif road_block and not in_move then
-        break
-      end
-    end
-
-    in_move = true
-    target = i + step
-  end
-
-  local sequence = string.format("%dgg_", target)
-  util.normal("xt", sequence)
-end
-
-vim.keymap.set("n", "]=", function()
-  jump_indent(true)
-end, { noremap = true, desc = "jump down along the indent" })
-vim.keymap.set("n", "[=", function()
-  jump_indent(false)
-end, { noremap = true, desc = "jump up along the indent" })
---- }}}
 
 vim.keymap.set("n", "&", ":&&<CR>", { noremap = true, desc = "repeat last substitute command" })
 vim.keymap.set("x", "&", ":&&<CR>", { noremap = true, desc = "repeat last substitute command" })
@@ -316,7 +225,7 @@ vim.keymap.set("x", "&", ":&&<CR>", { noremap = true, desc = "repeat last substi
 vim.keymap.set("n", "<C-w>b", ":bd<CR>", { noremap = true, desc = "delete current buffer" })
 vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", { noremap = true, desc = "delete current buffer" })
 
---- Execute macros over selected range.
+-- Execute macros over selected range. {{{
 vim.keymap.set("x", "@", function()
   local c = vim.fn.getchar()
   local ch = vim.fn.nr2char(c)
@@ -324,10 +233,12 @@ vim.keymap.set("x", "@", function()
   local to = vim.fn.getcurpos()[2]
   vim.cmd(string.format("%d,%d normal! @%s", from, to, ch))
 end, { noremap = true, silent = false, desc = "execute macro over visual range" })
+-- }}}
 
---- Easier cgn process by starting with already selected text.
+-- Easier cgn process by starting with already selected text.
 vim.keymap.set("n", "cn", "*``cgn")
 
+-- Folding support {{{
 vim.keymap.set("n", "<leader>zm", function()
   vim.opt_local.foldmethod = "manual"
 end, { noremap = true, silent = true, desc = "set local foldmethod to manual" })
@@ -347,5 +258,5 @@ end, { noremap = true, silent = true, desc = "set local foldmethod to marker" })
 vim.keymap.set("n", "<leader>zs", function()
   vim.opt_local.foldmethod = "syntax"
 end, { noremap = true, silent = true, desc = "set local foldmethod to syntax" })
-
+--}}}
 --- vim: foldmethod=marker
