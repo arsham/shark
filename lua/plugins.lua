@@ -66,6 +66,17 @@ require("packer").startup({
     })
 
     use({
+      "arsham/listish.nvim",
+      requires = { "arshlib.nvim", "nvim.lua" },
+      config = function() require("listish").config({}) end,
+      keys = {
+        "<leader>qq", "<leader>qn", "<leader>qo",
+        "<leader>ww", "<leader>wn", "<leader>wo",
+      },
+      ft = { "qf" },
+    })
+
+    use({
       "kyazdani42/nvim-tree.lua",
       requires = { "kyazdani42/nvim-web-devicons" },
       setup    = function() require("settings.nvim_tree").setup() end,
