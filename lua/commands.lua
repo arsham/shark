@@ -1,34 +1,35 @@
-local util = require("util")
+local fs = require("arshlib.fs")
+local quick = require("arshlib.quick")
 local M = {}
 
-util.command("Filename", function()
+quick.command("Filename", function()
   vim.notify(vim.fn.expand("%:p"), vim.lsp.log_levels.INFO, {
     title = "Filename",
     timeout = 3000,
   })
 end)
-util.command("YankFilename", function()
+quick.command("YankFilename", function()
   vim.fn.setreg('"', vim.fn.expand("%:t"))
 end)
-util.command("YankFilenameC", function()
+quick.command("YankFilenameC", function()
   vim.fn.setreg("+", vim.fn.expand("%:t"))
 end)
-util.command("YankFilepath", function()
+quick.command("YankFilepath", function()
   vim.fn.setreg('"', vim.fn.expand("%:p"))
 end)
-util.command("YankFilepathC", function()
+quick.command("YankFilepathC", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
 end)
 
-util.command("MergeConflict", ":grep '<<<<<<< HEAD'")
-util.command("JsonDiff", [[vert ball | windo execute '%!gojq' | windo diffthis]])
+quick.command("MergeConflict", ":grep '<<<<<<< HEAD'")
+quick.command("JsonDiff", [[vert ball | windo execute '%!gojq' | windo diffthis]])
 
 ---Sets up a watch on the filename if it is a lua module.
 ---@param filenames string[]
-local function setup_watch(filenames)
+local function setup_watch(filenames) --{{{
   local modules = {}
   for _, filename in ipairs(filenames) do
-    local mod, ok = util.file_module(filename)
+    local mod, ok = fs.file_module(filename)
 
     if not ok then
       local msg = string.format("Could not figure out the package: %s", filename)
@@ -41,31 +42,30 @@ local function setup_watch(filenames)
     end
   end
   return modules
-end
+end --}}}
 
 local bufname = vim.fn.bufname()
 if vim.fn.getbufvar(bufname, "watch_lua_file_augroup") ~= true then
   vim.fn.setbufvar(bufname, "watch_lua_file_augroup", true)
-  util.augroup({ "WATCH_LUA_FILE" })
+  quick.augroup({ "WATCH_LUA_FILE" })
 end
 
-function M.watch_file_changes(filenames)
+function M.watch_file_changes(filenames) --{{{
+  local reloader = require("plenary.reload")
   local modules = setup_watch(filenames)
   local names = {}
   for _, module in ipairs(modules) do
     table.insert(names, module.name)
-
-    util.autocmd({
+    local watched = module.name
+    if string.find(watched, "/") then
+      watched = "*/" .. watched
+    end
+    quick.autocmd({
       "WATCH_LUA_FILE BufWritePost",
-      module.name,
+      watched,
       run = function()
         for _, mod in ipairs(modules) do
-          package.loaded[mod.module] = nil
-          -- selene: allow(global_usage)
-          local luacache = (_G.__luacache or {}).cache
-          if luacache then
-            luacache[mod.module] = nil
-          end
+          reloader.reload_module(mod.module, false)
           require(mod.module)
         end
 
@@ -84,9 +84,9 @@ function M.watch_file_changes(filenames)
     title = "Watching Changes",
     timeout = 2000,
   })
-end
+end --}}}
 
-util.command("WatchLuaFileChanges", function(arg)
+quick.command("WatchLuaFileChanges", function(arg) --{{{
   local filename = vim.fn.expand("%:p")
   local files = {}
   if arg and arg.args ~= "" then
@@ -94,34 +94,34 @@ util.command("WatchLuaFileChanges", function(arg)
   end
   table.insert(files, filename)
   M.watch_file_changes(files)
-end, { nargs = "*", complete = "file" })
+end, { nargs = "*", complete = "file" }) --}}}
 
-util.command("CC", function()
+quick.command("CC", function() --{{{
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local config = vim.api.nvim_win_get_config(win)
     if config.relative ~= "" then
       vim.api.nvim_win_close(win, false)
     end
   end
-end)
+end) --}}}
 
-util.command("FoldComments", function()
+quick.command("FoldComments", function() --{{{
   vim.wo.foldexpr = [[getline(v:lnum)=~'^\s*//']]
   vim.wo.foldmethod = "expr"
-end)
+end) --}}}
 
-util.buffer_command("Nowrap", function()
+quick.buffer_command("Nowrap", function() --{{{
   vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
   vim.bo.formatoptions = vim.bo.formatoptions:gsub("c", "")
-end)
+end) --}}}
 
-util.command("ToggleRelativeNumbers", function()
+quick.command("ToggleRelativeNumbers", function() --{{{
   vim.opt.relativenumber = vim.g.disable_relative_numbers or false
   vim.opt.number = true
   vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
-end)
+end) --}}}
 
-util.command("InstallDependencies", function()
+quick.command("InstallDependencies", function() --{{{
   local commands = _t({
     golangci = _t({
       "go",
@@ -140,7 +140,7 @@ util.command("InstallDependencies", function()
   local count = 0
 
   local job = require("plenary.job")
-  for name, spec in pairs(commands) do
+  for name, spec in pairs(commands) do --{{{
     job
       :new({
         command = spec[1],
@@ -182,7 +182,9 @@ util.command("InstallDependencies", function()
         end,
       })
       :start()
-  end
-end)
+  end --}}}
+end) --}}}
 
 return M
+
+-- vim: fdm=marker fdl=0

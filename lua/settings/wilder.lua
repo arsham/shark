@@ -45,10 +45,10 @@ local function init_wilder()
   for _, str in pairs(command) do
     vim.cmd(table.concat(str, " "))
   end
-end
+end --}}}
 
 ---Lazy loading the setup.
-require("util").augroup({
+require("arshlib.quick").augroup({
   "WILDER",
   {
     { "CmdlineEnter", targets = "* ++once", run = init_wilder },

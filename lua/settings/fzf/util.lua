@@ -1,12 +1,14 @@
 local nvim = require("nvim")
-local util = require("util")
+local fs = require("arshlib.fs")
+local colour = require("arshlib.colour")
+local quick = require("arshlib.quick")
 
 local M = {}
 
 ---Launches a ripgrep search with a fzf search interface.
----@param term? string if empty, the search will only happen on the content.
----@param no_ignore? string disables the ignore rules.
-function M.ripgrep_search(term, no_ignore)
+-- @param term? string if empty, the search will only happen on the content.
+-- @param no_ignore? string disables the ignore rules.
+function M.ripgrep_search(term, no_ignore) --{{{
   term = vim.fn.shellescape(term)
   local nth = ""
   local with_nth = ""
@@ -44,12 +46,12 @@ function M.ripgrep_search(term, no_ignore)
 
   local preview = vim.fn["fzf#vim#with_preview"](args)
   vim.fn["fzf#vim#grep"](rg_cmd, 1, preview)
-end
+end --}}}
 
 ---Launches a ripgrep search with a fzf search interface.
----@param term? string if empty, the search will only happen on the content.
----@param no_ignore? string disables the ignore rules.
-function M.ripgrep_search_incremental(term, no_ignore)
+-- @param term? string if empty, the search will only happen on the content.
+-- @param no_ignore? string disables the ignore rules.
+function M.ripgrep_search_incremental(term, no_ignore) --{{{
   term = vim.fn.shellescape(term)
   local query = ""
   local nth = ""
@@ -98,9 +100,9 @@ function M.ripgrep_search_incremental(term, no_ignore)
 
   local preview = vim.fn["fzf#vim#with_preview"](args)
   vim.fn["fzf#vim#grep"](initial, 1, preview)
-end
+end --}}}
 
-function M.delete_buffer()
+function M.delete_buffer() --{{{
   local list = vim.fn.getbufinfo({ buflisted = 1 })
   local buf_list = {
     table.concat({ "", "", "", "Buffer", "", "Filename", "" }, "\t"),
@@ -116,14 +118,14 @@ function M.delete_buffer()
       string.format("%s:%d", v.name, v.lnum),
       v.lnum,
       tostring(v.bufnr),
-      string.format("[%s]", util.ansi_color(util.colours.red, v.bufnr)),
+      string.format("[%s]", colour.ansi_color(colour.colours.red, v.bufnr)),
       "",
       name,
       "",
     }
     local signs = ""
     if v.bufnr == cur_buf then
-      signs = signs .. util.ansi_color(util.colours.red, "%")
+      signs = signs .. colour.ansi_color(colour.colours.red, "%")
     end
     if v.bufnr == alt_buf then
       signs = signs .. "#"
@@ -161,11 +163,11 @@ function M.delete_buffer()
     end
   end
   vim.fn["fzf#run"](preview)
-end
+end --}}}
 
 ---Searches in the lines of current buffer. It provides an incremental search
 ---that would switch to fzf filtering on <Alt-Enter>.
-function M.lines_grep()
+function M.lines_grep() --{{{
   local options = table.concat({
     '--prompt="Current Buffer> "',
     '--header="<CR>:jumps to line, <C-w>:adds to locallist, <C-q>:adds to quickfix list"',
@@ -224,15 +226,15 @@ function M.lines_grep()
 
     if #names == 2 then
       local num = names[2]:match("^[^:]+:(%d+)\t")
-      util.normal("n", string.format("%dgg", num))
+      quick.normal("n", string.format("%dgg", num))
     end
   end
   vim.fn["fzf#run"](preview)
-end
+end --}}}
 
 ---Launches a fzf search for reloading config files.
----@param watch boolean if true it will keep watching for changes.
-function M.reload_config(watch)
+-- @param watch boolean if true it will keep watching for changes.
+function M.reload_config(watch) --{{{
   local loc = vim.env["MYVIMRC"]
   local base_dir = require("plenary.path"):new(loc):parents()[1]
   local got = vim.fn.systemlist({ "fd", ".", "-e", "lua", "-t", "f", "-L", base_dir })
@@ -270,7 +272,7 @@ function M.reload_config(watch)
     names
       :filter(function(name)
         name = name:match("^[^\t]*")
-        local mod, ok = util.file_module(name)
+        local mod, ok = fs.file_module(name)
         return ok, mod.module
       end)
       :map(function(mod)
@@ -287,9 +289,9 @@ function M.reload_config(watch)
       end)
   end
   vim.fn["fzf#run"](preview)
-end
+end --}}}
 
-function M.open_config()
+function M.open_config() --{{{
   local path = vim.fn.expand("~/.config/nvim")
   local got = vim.fn.systemlist({ "fd", ".", "-t", "f", "-F", path })
   local source = {}
@@ -319,9 +321,9 @@ function M.open_config()
     end
   end
   vim.fn["fzf#run"](preview)
-end
+end --}}}
 
-function M.delete_marks()
+function M.delete_marks() --{{{
   local mark_list = _t({
     ("666\tmark\t%5s\t%3s\t%s"):format("line", "col", "file/text"),
   })
@@ -349,7 +351,7 @@ function M.delete_marks()
       )
     end)
 
-  local wrapped = vim.fn["fzf#wrap"]({
+  local wrapped = vim.fn["fzf#wrap"]({ --{{{
     source = mark_list,
     options = table.concat({
       '--prompt="Delete Mark> "',
@@ -365,7 +367,7 @@ function M.delete_marks()
       "--tiebreak=index",
     }, " "),
     placeholder = "{1}",
-  })
+  }) --}}}
   local preview = vim.fn["fzf#vim#with_preview"](wrapped)
   preview["sink*"] = function(names)
     _t(names):slice(2):map(function(name)
@@ -374,14 +376,14 @@ function M.delete_marks()
     end)
   end
   vim.fn["fzf#run"](preview)
-end
+end --}}}
 
-function M.git_grep(term)
+function M.git_grep(term) --{{{
   local format = "format:%H\t* %h\t%ar\t%an\t%s\t%d"
   local query = [[git  --no-pager  log  -G '%s' --format='%s']]
   local source = vim.fn.systemlist(string.format(query, term.args, format))
   local reload_cmd = string.format(query, "{q}", format)
-  local wrapped = vim.fn["fzf#wrap"]({
+  local wrapped = vim.fn["fzf#wrap"]({ --{{{
     source = source,
     options = table.concat({
       '--prompt="Search in tree> "',
@@ -405,7 +407,7 @@ function M.git_grep(term)
     }, " "),
     placeholder = "{1}",
   })
-
+  --}}}
   wrapped["sink*"] = function(list)
     for _, sha in pairs(list) do
       sha = sha:match("^[^\t]*")
@@ -418,9 +420,9 @@ function M.git_grep(term)
     end
   end
   vim.fn["fzf#run"](wrapped)
-end
+end --}}}
 
-function M.checkout_branck()
+function M.checkout_branck() --{{{
   local current = vim.fn.system("git symbolic-ref --short HEAD")
   current = current:gsub("\n", "")
   local current_escaped = current:gsub("/", "\\/")
@@ -444,9 +446,9 @@ function M.checkout_branck()
     options = { "--no-multi", "--header=Currently on: " .. current },
   }
   vim.fn["fzf#vim#grep"](cmd, 0, opts)
-end
+end --}}}
 
-function M.open_todo()
+function M.open_todo() --{{{
   local cmd = table.concat({
     "rg",
     "--line-number",
@@ -460,9 +462,9 @@ function M.open_todo()
     '"fixme|todo"',
   }, " ")
   vim.fn["fzf#vim#grep"](cmd, 1, vim.fn["fzf#vim#with_preview"]())
-end
+end --}}}
 
-function M.args_add()
+function M.args_add() --{{{
   local seen = _t()
   _t(vim.fn.argv()):map(function(v)
     seen[v] = true
@@ -494,6 +496,8 @@ function M.args_add()
     nvim.ex.arga(lines)
   end
   vim.fn["fzf#run"](wrapped)
-end
+end --}}}
 
 return M
+
+-- vim: fdm=marker fdl=0

@@ -1,13 +1,13 @@
 local nvim = require("nvim")
-local util = require("util")
+local quick = require("arshlib.quick")
 local util_lsp = require("util.lsp")
 table.insert(vim.opt.rtp, "~/.fzf")
 
 local M = {}
 
----Shows a fzf search for going to definition. If LSP is not attached, it uses
----the BTags functionality.
----@param lines string[]
+---Shows a fzf search for going to definition.{{{
+-- If LSP is not attached, it uses the BTags functionality.
+-- @param lines string[]
 local function goto_def(lines)
   local file = lines[1]
   vim.api.nvim_command(("e %s"):format(file))
@@ -19,26 +19,25 @@ local function goto_def(lines)
   end
   nvim.ex.BTags()
 end
-
+--}}}
 ---Shows a fzf search for going to a line number.
----@param lines string[]
+-- @param lines string[]
 local function goto_line(lines)
   local file = lines[1]
   vim.api.nvim_command(("e %s"):format(file))
-  util.normal("n", ":")
+  quick.normal("n", ":")
 end
 
 ---Shows a fzf search for line content.
----@param lines string[]
+-- @param lines string[]
 local function search_file(lines)
   local file = lines[1]
   vim.api.nvim_command(("e +BLines %s"):format(file))
 end
 
----Set selected lines in the quickfix/local list with fzf search.
----@param items string[]|table[]
+---Set selected lines in the quickfix/local list with fzf search {{{
+-- @param items string[]|table[]
 local function insert_into_list(items, is_local)
-  local lists = require("lists")
   local values = {}
   for _, item in pairs(items) do
     if type(item) == "string" then
@@ -58,24 +57,24 @@ local function insert_into_list(items, is_local)
     end
     table.insert(values, item)
   end
-  lists.insert_list(values, is_local)
+  require("listish").insert_list(values, is_local)
 end
 
 ---Set selected lines in the quickfix list with fzf search.
----@param items string[]|table[]
+-- @param items string[]|table[]
 local function set_qf_list(items)
   insert_into_list(items, false)
   nvim.ex.copen()
 end
 
 ---Set selected lines in the local list with fzf search.
----@param items string[]|table[]
+-- @param items string[]|table[]
 local function set_loclist(items)
   insert_into_list(items, true)
   nvim.ex.lopen()
 end
-
-M.fzfActions = {
+--}}}
+M.fzfActions = { --{{{
   ["ctrl-t"] = "tab split",
   ["ctrl-x"] = "split",
   ["ctrl-v"] = "vsplit",
@@ -86,7 +85,7 @@ M.fzfActions = {
   ["alt-/"] = search_file,
 }
 vim.g.fzf_action = M.fzfActions
-
+--}}}
 vim.g.fzf_commands_expect = "enter"
 vim.g.fzf_layout = {
   window = {
@@ -98,7 +97,7 @@ vim.g.fzf_layout = {
   },
 }
 
-vim.g.fzf_buffers_jump = 1 --- [Buffers] Jump to the existing window if possible
+vim.g.fzf_buffers_jump = 1 -- [Buffers] Jump to the existing window if possible
 vim.g.fzf_preview_window = { "right:50%:+{2}-/2,nohidden", "?" }
 vim.g.fzf_commits_log_options = table.concat({
   [[ --graph --color=always                                    ]],
@@ -106,20 +105,18 @@ vim.g.fzf_commits_log_options = table.concat({
   [[ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)" ]],
 }, " ")
 
-require("util").augroup({
-  "FZF_FIXES",
-  {
-    {
-      "FileType",
-      "fzf",
-      run = function()
-        -- stylua: ignore
-        vim.keymap.set("t", "<esc>", "<C-c>",{noremap=true, buffer = true, desc = "escape fzf with escape" })
-      end,
-    },
+-- stylua: ignore start
+quick.augroup({"FZF_FIX", {--{{{
+  {"FileType", "fzf", run = function()
+      vim.keymap.set("t", "<esc>", "<C-c>",{noremap=true, buffer = true, desc = "escape fzf with escape" })
+    end,
   },
-})
+}})
+-- stylua: ignore end
+--}}}
 
 vim.g.fzf_history_dir = vim.env.HOME .. "/.local/share/fzf-history"
 
 return M
+
+-- vim fdm=marker fdl=0

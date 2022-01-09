@@ -32,7 +32,7 @@ local equal_sign = _t({
 local gt_sign = _t({ ">>", "=>", ">" })
 local lt_sign = _t({ "<<", "=<", "<" })
 
-vim.g.easy_align_delimiters = {
+vim.g.easy_align_delimiters = { --{{{
   [">"] = { pattern = table.concat(gt_sign, "\\|") },
   ["<"] = { pattern = table.concat(lt_sign, "\\|") },
   ["/"] = {
@@ -68,7 +68,7 @@ vim.g.easy_align_delimiters = {
     ignore_groups = { "!Comment" },
     ignore_unmatched = 0,
   },
-}
+} --}}}
 
 vim.g.easy_align_bypass_fold = 1
 

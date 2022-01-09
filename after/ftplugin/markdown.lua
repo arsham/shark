@@ -1,6 +1,8 @@
-local util = require("util")
+local quick = require("arshlib.quick")
 vim.opt_local.spell = true
-vim.opt_local.softtabstop = 1 --- if I have two spaces in a sentence, delete only one.
+vim.opt_local.softtabstop = 1 -- if I have two spaces in a sentence, delete only one.
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 2
 vim.opt_local.autoindent = true
 vim.opt_local.formatoptions = "12crqnot"
 vim.opt_local.comments = "n:>"
@@ -8,7 +10,8 @@ vim.opt_local.wrap = true
 vim.opt_local.breakindent = true
 vim.opt_local.breakindentopt = "min:50,shift:2"
 vim.opt_local.commentstring = "<!--%s-->"
-
+-- Formating support {{{
+-- stylua: ignore start
 local formatlistpat = {'^\\s*'}                         --- Optional leading whitespace
 table.insert(formatlistpat, '[')                        --- Start character class
 table.insert(formatlistpat, '\\[({]\\?')                --- |  Optionally match opening punctuation
@@ -26,8 +29,7 @@ vim.opt_local.formatlistpat = table.concat(formatlistpat, '')
 vim.opt_local.comments = 'b:*,b:-'
 vim.opt_local.foldtext = 'v:lua.custom_foldtext()'
 vim.opt_local.foldmethod = 'expr'
-
--- stylua: ignore start
+--}}}
 vim.keymap.set("i", "<CR>", function()
   local line = vim.fn.getline(vim.fn.line('.')):gsub('^%s*', '')
   local marker = vim.fn.matchstr(line, [[^\(\d\+\.\)\s]])
@@ -42,8 +44,8 @@ vim.keymap.set("i", "<CR>", function()
 end, {expr=true, buffer=true, desc='create lists in markdown'})
 -- stylua: ignore end
 
----Jumps to the next heading.
----@param down boolean if goes to next, otherwise to the previous.
+-- Jumps to the next heading {{{
+-- @param down boolean if goes to next, otherwise to the previous.
 local function nextHeading(down)
   local count = vim.v.count
   local col = vim.fn.col(".")
@@ -58,11 +60,11 @@ local function nextHeading(down)
     if col == 1 then
       count = count - 1
     end
-    util.normal("nx", string.rep("n", count))
+    quick.normal("nx", string.rep("n", count))
   end
 
   local motion = string.format("%d|", col)
-  util.normal("nx", motion)
+  quick.normal("nx", motion)
 end
 
 local desc = "jump to the next heading in markdown document"
@@ -72,3 +74,5 @@ end, { noremap = true, buffer = true, silent = true, desc = desc })
 vim.keymap.set("n", "[[", function()
   nextHeading(true)
 end, { noremap = true, buffer = true, silent = true, desc = desc })
+--}}}
+-- vim: fdm=marker fdl=0

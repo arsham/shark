@@ -1,9 +1,9 @@
 local M = {}
 
 local nvim = require("nvim")
-local util = require("util")
+local quick = require("arshlib.quick")
 
-function M.lsp_organise_imports()
+function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
   vim.validate({ context = { context, "table", true } })
 
@@ -29,11 +29,11 @@ function M.lsp_organise_imports()
       end
     end
   end
-end
+end --}}}
 
 ---Returns the name of the struct, method or function.
 ---@return string
-local function get_current_node_name()
+local function get_current_node_name() --{{{
   local ts_utils = require("nvim-treesitter.ts_utils")
   local cur_node = ts_utils.get_node_at_cursor()
   local type_patterns = {
@@ -65,14 +65,14 @@ local function get_current_node_name()
     return ""
   end
   return (ts_utils.get_node_text(cur_node:child(index)))[1]
-end
+end --}}}
 
 ---Formats a range if given.
 ---@param range_given boolean
 ---@param line1 number
 ---@param line2 number
 ---@param bang boolean
-local function format_command(range_given, line1, line2, bang)
+local function format_command(range_given, line1, line2, bang) --{{{
   if range_given then
     vim.lsp.buf.range_formatting(nil, { line1, 0 }, { line2, 99999999 })
   elseif bang then
@@ -80,162 +80,180 @@ local function format_command(range_given, line1, line2, bang)
   else
     vim.lsp.buf.formatting()
   end
-end
+end --}}}
 
 ---Runs code actions on a given range.
 ---@param range_given boolean
 ---@param line1 number
 ---@param line2 number
-local function code_action(range_given, line1, line2)
+local function code_action(range_given, line1, line2) --{{{
   if range_given then
     vim.lsp.buf.range_code_action(nil, { line1, 0 }, { line2, 99999999 })
   else
     vim.lsp.buf.code_action()
   end
-end
+end --}}}
 
-local function nnoremap(key, fn, desc, ...)
+local function nnoremap(key, fn, desc, ...) --{{{
   vim.keymap.set("n", key, fn, { noremap = true, buffer = true, silent = true, desc = desc, ... })
-end
-local function vnoremap(key, fn, desc, ...)
+end --}}}
+local function vnoremap(key, fn, desc, ...) --{{{
   vim.keymap.set("v", key, fn, { noremap = true, buffer = true, silent = true, desc = desc, ... })
-end
-local function inoremap(key, fn, desc, ...)
+end --}}}
+local function inoremap(key, fn, desc, ...) --{{{
   vim.keymap.set("i", key, fn, { noremap = true, buffer = true, silent = true, desc = desc, ... })
-end
+end --}}}
 
-function M.code_action()
-  util.buffer_command("CodeAction", function(args)
+function M.code_action() --{{{
+  quick.buffer_command("CodeAction", function(args)
     code_action(args.range ~= 0, args.line1, args.line2)
   end, { range = true })
   nnoremap("<leader>ca", vim.lsp.buf.code_action, "Code action")
   vnoremap("<leader>ca", ":'<,'>CodeAction<CR>", "Code action")
-end
+end --}}}
 
-function M.setup_organise_imports()
+function M.setup_organise_imports() --{{{
   nnoremap("<leader>i", M.lsp_organise_imports, "Organise imports")
-end
+end --}}}
 
-function M.document_formatting()
+function M.document_formatting() --{{{
   nnoremap("<leader>gq", vim.lsp.buf.formatting, "Format buffer")
-end
+end --}}}
 
-local function document_range_formatting(args)
+local function document_range_formatting(args) --{{{
   format_command(args.range ~= 0, args.line1, args.line2, args.bang)
-end
-function M.document_range_formatting()
-  util.buffer_command("Format", document_range_formatting, { range = true })
-  vnoremap("gq", document_range_formatting, "Format range")
-  vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr()"
-end
+end --}}}
 
-local function rename_symbol(args)
+-- selene: allow(global_usage)
+local function format_range_operator() --{{{
+  local old_func = vim.go.operatorfunc
+  _G.op_func_formatting = function()
+    local start = vim.api.nvim_buf_get_mark(0, "[")
+    local finish = vim.api.nvim_buf_get_mark(0, "]")
+    vim.lsp.buf.range_formatting({}, start, finish)
+    vim.go.operatorfunc = old_func
+    _G.op_func_formatting = nil
+  end
+  vim.go.operatorfunc = "v:lua.op_func_formatting"
+  vim.api.nvim_feedkeys("g@", "n", false)
+end --}}}
+
+function M.document_range_formatting() --{{{
+  quick.buffer_command("Format", document_range_formatting, { range = true })
+  -- vnoremap("gq", document_range_formatting, "Format range")
+  nnoremap("gq", format_range_operator, "Format range")
+  -- vim.api.nvim_set_keymap("n", "gm", "<cmd>lua format_range_operator()<CR>", { noremap = true })
+
+  vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr()"
+end --}}}
+
+local function rename_symbol(args) --{{{
   if args.args == "" then
     vim.lsp.buf.rename()
   else
     vim.lsp.buf.rename(args.args)
   end
-end
-function M.rename()
-  util.buffer_command("Rename", rename_symbol, { nargs = "?" })
-end
+end --}}}
+function M.rename() --{{{
+  quick.buffer_command("Rename", rename_symbol, { nargs = "?" })
+end --}}}
 
-function M.hover()
+function M.hover() --{{{
   nnoremap("H", vim.lsp.buf.hover, "show hover")
   inoremap("<C-h>", vim.lsp.buf.hover, "show hover")
-end
+end --}}}
 
-function M.signature_help()
+function M.signature_help() --{{{
   nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
   inoremap("<C-l>", vim.lsp.buf.signature_help, "show signature help")
-end
+end --}}}
 
-function M.goto_definition()
-  util.buffer_command("Definition", vim.lsp.buf.definition)
+function M.goto_definition() --{{{
+  quick.buffer_command("Definition", vim.lsp.buf.definition)
   nnoremap("gd", vim.lsp.buf.definition, "Go to definition")
   vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
-end
+end --}}}
 
-function M.declaration()
+function M.declaration() --{{{
   nnoremap("gD", vim.lsp.buf.declaration, "Go to declaration")
-end
+end --}}}
 
-function M.type_definition()
-  util.buffer_command("TypeDefinition", vim.lsp.buf.type_definition)
-end
+function M.type_definition() --{{{
+  quick.buffer_command("TypeDefinition", vim.lsp.buf.type_definition)
+end --}}}
 
-function M.implementation()
-  util.buffer_command("Implementation", vim.lsp.buf.implementation)
+function M.implementation() --{{{
+  quick.buffer_command("Implementation", vim.lsp.buf.implementation)
   nnoremap("<leader>gi", vim.lsp.buf.implementation, "Go to implementation")
-end
+end --}}}
 
-function M.find_references()
-  util.buffer_command("References", vim.lsp.buf.references)
+function M.find_references() --{{{
+  quick.buffer_command("References", vim.lsp.buf.references)
   nnoremap("gr", vim.lsp.buf.references, "Go to references")
-end
+end --}}}
 
-function M.document_symbol()
-  util.buffer_command("DocumentSymbol", vim.lsp.buf.document_symbol)
+function M.document_symbol() --{{{
+  quick.buffer_command("DocumentSymbol", vim.lsp.buf.document_symbol)
   nnoremap("<leader>@", vim.lsp.buf.document_symbol, "Document symbol")
-end
+end --}}}
 
-function M.workspace_symbol()
-  util.buffer_command("WorkspaceSymbols", vim.lsp.buf.workspace_symbol)
-end
+function M.workspace_symbol() --{{{
+  quick.buffer_command("WorkspaceSymbols", vim.lsp.buf.workspace_symbol)
+end --}}}
 
-function M.call_hierarchy()
-  util.buffer_command("Callees", vim.lsp.buf.outgoing_calls)
-  util.buffer_command("Callers", vim.lsp.buf.incoming_calls)
+function M.call_hierarchy() --{{{
+  quick.buffer_command("Callees", vim.lsp.buf.outgoing_calls)
+  quick.buffer_command("Callers", vim.lsp.buf.incoming_calls)
   nnoremap("<leader>gc", vim.lsp.buf.incoming_calls, "show incoming calls")
-end
+end --}}}
 
-util.buffer_command("ListWorkspace", function()
+quick.buffer_command("ListWorkspace", function() --{{{
   vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
     title = "Workspace Folders",
     timeout = 3000,
   })
-end)
+end) --}}}
 
-function M.workspace_folder_properties()
+function M.workspace_folder_properties() --{{{
   local function add_workspace(args)
     vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
   end
-  util.buffer_command(
+  quick.buffer_command(
     "AddWorkspace",
     add_workspace,
     { range = true, nargs = "?", complete = "dir" }
   )
-  util.buffer_command(
+  quick.buffer_command(
     "RemoveWorkspace",
     function(args)
       vim.lsp.buf.remove_workspace_folder(args.args)
     end,
     { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
   )
-end
+end --}}}
 
-util.augroup({ "CODE_LENSES" })
-function M.code_lens()
-  util.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
-  util.buffer_command("CodeLensRun", vim.lsp.codelens.run)
+quick.augroup({ "CODE_LENSES" })
+function M.code_lens() --{{{
+  quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
+  quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
   nnoremap("<leader>cr", vim.lsp.codelens.run, "run code lenses")
 
-  util.autocmd({
+  quick.autocmd({
     "CursorHold,CursorHoldI,InsertLeave",
     group = "CODE_LENSES",
     run = vim.lsp.codelens.refresh,
     buffer = true,
   })
-end
+end --}}}
 
-function M.setup_completions()
+function M.setup_completions() --{{{
   inoremap("<C-j>", "<C-n>", "next completion items")
   inoremap("<C-k>", "<C-p>", "previous completion items")
-end
+end --}}}
 
-util.augroup({ "LSP_EVENTS" })
-function M.setup_events(imports, format)
-  util.autocmd({
+quick.augroup({ "LSP_EVENTS" })
+function M.setup_events(imports, format) --{{{
+  quick.autocmd({
     "BufWritePre",
     group = "LSP_EVENTS",
     buffer = true,
@@ -246,14 +264,14 @@ function M.setup_events(imports, format)
     end,
   })
 
-  util.autocmd({
+  quick.autocmd({
     "BufReadPost,BufNewFile",
     "*/templates/*.yaml,*/templates/*.tpl",
     run = "LspStop",
     group = "LSP_EVENTS",
   })
 
-  util.autocmd({
+  quick.autocmd({
     "InsertEnter",
     "go.mod",
     run = function()
@@ -264,7 +282,7 @@ function M.setup_events(imports, format)
     docs = "don't wrap me",
   })
 
-  util.autocmd({
+  quick.autocmd({
     "BufWritePre",
     "go.mod",
     run = function()
@@ -280,16 +298,16 @@ function M.setup_events(imports, format)
     local filename = vim.fn.expand("<amatch>")
     require("util.lsp").go_mod_check_upgrades(filename)
   end
-  util.autocmd({
+  quick.autocmd({
     "BufRead",
     "go.mod",
     run = go_mod_check,
     group = "LSP_EVENTS",
     docs = "check for updates",
   })
-end
+end --}}}
 
-function M.fix_null_ls_errors()
+function M.fix_null_ls_errors() --{{{
   local default_exe_handler = vim.lsp.handlers["workspace/executeCommand"]
   vim.lsp.handlers["workspace/executeCommand"] = function(err, ...)
     -- supress NULL_LS error msg
@@ -299,18 +317,18 @@ function M.fix_null_ls_errors()
     end
     return default_exe_handler(err, ...)
   end
-end
+end --}}}
 
-function M.support_commands()
-  util.buffer_command("ListWorkspace", function()
+function M.support_commands() --{{{
+  quick.buffer_command("ListWorkspace", function()
     vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
       title = "Workspace Folders",
       timeout = 3000,
     })
   end)
-  util.buffer_command("Log", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()")
+  quick.buffer_command("Log", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()")
 
-  util.buffer_command("Test", function()
+  quick.buffer_command("Test", function()
     local name = get_current_node_name()
     if name == "" then
       return nil
@@ -326,26 +344,28 @@ function M.support_commands()
     nvim.ex.LspStop()
     vim.defer_fn(nvim.ex.LspStart, 1000)
   end
-  util.buffer_command("RestartLsp", restart_lsp)
+  quick.buffer_command("RestartLsp", restart_lsp)
   nnoremap("<leader>dr", restart_lsp, "Restart LSP server")
-end
+end --}}}
 
-function M.setup_diagnostics()
+function M.setup_diagnostics() --{{{
   nnoremap("<leader>dd", vim.diagnostic.open_float, "show diagnostics")
   nnoremap("<leader>dq", vim.diagnostic.setqflist, "populate quickfix")
   nnoremap("<leader>dw", vim.diagnostic.setloclist, "populate local list")
 
   nnoremap("]d", function()
-    util.call_and_centre(vim.diagnostic.goto_next)
+    quick.call_and_centre(vim.diagnostic.goto_next)
   end, "goto next diagnostic")
   nnoremap("[d", function()
-    util.call_and_centre(vim.diagnostic.goto_prev)
+    quick.call_and_centre(vim.diagnostic.goto_prev)
   end, "goto previous diagnostic")
 
-  util.buffer_command("Diagnostics", function()
+  quick.buffer_command("Diagnostics", function()
     require("lspfuzzy").diagnostics(0)
   end)
-  util.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
-end
+  quick.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
+end --}}}
 
 return M
+
+-- vim: fdm=marker fdl=0

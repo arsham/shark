@@ -1,6 +1,6 @@
 local nvim = require("nvim")
 local util = require("settings.fzf.util")
-local command = require("util").command
+local command = require("arshlib.quick").command
 
 command("GGrep", util.git_grep, { bang = true, nargs = "*" })
 command("BLines", util.lines_grep)
@@ -13,8 +13,8 @@ command("Todo", util.open_todo)
 command("Notes", "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", { bang = true })
 command("Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", { bang = true })
 
----Delete marks interactivly with fzf.
-command("MarksDelete", util.delete_marks)
+-- Marks {{{
+command("MarksDelete", util.delete_marks, { desc = "Delete marks interactivly with fzf." })
 
 command("Marks", function()
   local home = vim.fn["fzf#shellescape"](vim.fn.expand("%"))
@@ -30,7 +30,8 @@ command("Marks", function()
   })
   vim.fn["fzf#vim#marks"](preview, 0)
 end, { bang = true, bar = true })
-
+--}}}
+-- Args {{{
 command("ArgAdd", util.args_add)
 
 ---Delete args interactivly with fzf.
@@ -45,6 +46,7 @@ command("ArgsDelete", function()
   vim.fn["fzf#run"](wrapped)
 end)
 command("ArgDelete", "ArgsDelete")
+--}}}
 
 ---Replacing the default ordering.
 command("History", function()
@@ -69,3 +71,5 @@ command("Worktree", function()
   vim.fn["fzf#run"](wrapped)
 end)
 command("WT", "Worktree")
+
+-- vim: foldmethod=marker foldlevel=0

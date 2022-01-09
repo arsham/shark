@@ -1,19 +1,19 @@
 local nvim = require("nvim")
-local util = require("util")
+local quick = require("arshlib.quick")
 
 -- stylua: ignore start
-util.augroup({ "PACKER_RELOAD", {
+quick.augroup({"PACKER_RELOAD", {--{{{
   { "BufWritePost", "lua/plugins.lua", function()
     nvim.ex.source("<afile>")
     nvim.ex.PackerCompile()
     nvim.ex.PackerInstall()
   end, docs = "auto compile and install new plugins",
   }},
-})
+})--}}}
 
-util.augroup({ "LINE_RETURN", {
+quick.augroup({"LINE_RETURN", {--{{{
   { "BufRead", "*", function()
-    util.autocmd({ "FileType", run = function()
+    quick.autocmd({ "FileType", run = function()
       local types = _t({
         "nofile",
         "fugitive",
@@ -34,12 +34,12 @@ util.augroup({ "LINE_RETURN", {
     })
   end,
   }},
-})
+})--}}}
 
-util.augroup({ "SPECIAL_SETTINGS", {
+quick.augroup({ "SPECIAL_SETTINGS", {
   { "VimResized", "*", docs = "resize split on window resize", run = ":wincmd =" },
 
-  { "BufRead", "*", docs = "large file enhancements", run = function()
+  { "BufRead", "*", docs = "large file enhancements", run = function()--{{{
     if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
       return
     end
@@ -59,7 +59,7 @@ util.augroup({ "SPECIAL_SETTINGS", {
       vim.opt.lazyredraw = true
       vim.opt.showmatch = false
 
-      util.autocmd({
+      quick.autocmd({
         "BufDelete",
         buffer = true,
         run = function()
@@ -69,13 +69,13 @@ util.augroup({ "SPECIAL_SETTINGS", {
         end,
       })
     end
-  end},
+  end},--}}}
 
   { "BufWritePre", "COMMIT_EDITMSG,MERGE_MSG,gitcommit,*.tmp,*.log", function()
     vim.bo.undofile = false
   end },
 
-  { "BufEnter,FocusGained,InsertLeave,WinEnter", "*", run = function()
+  { "BufEnter,FocusGained,InsertLeave,WinEnter", "*", run = function()--{{{
     if vim.g.disable_relative_numbers then
       return
     end
@@ -89,34 +89,34 @@ util.augroup({ "SPECIAL_SETTINGS", {
         vim.wo.relativenumber = true
       end
     end
-  end, docs = "set relative number when focused" },
+  end, docs = "set relative number when focused" },--}}}
 
-  { "BufLeave,FocusLost,InsertEnter,WinLeave", "*", run = function()
+  { "BufLeave,FocusLost,InsertEnter,WinLeave", "*", run = function()--{{{
     if vim.wo.number then
       vim.wo.relativenumber = false
     end
-  end, docs = "unset relative number when unfocused" },
+  end, docs = "unset relative number when unfocused" },--}}}
 
-  { "TermOpen", "term:\\/\\/*", function()
+  { "TermOpen", "term:\\/\\/*", function()--{{{
     vim.wo.statusline = "%{b:term_title}"
     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], {noremap=true, buffer = true, desc = "entern normal mode" })
     nvim.ex.startinsert()
     vim.wo.number = false
     vim.wo.relativenumber = false
-  end, docs = "start in insert mode and set the status line" },
+  end, docs = "start in insert mode and set the status line" },--}}}
 
   --- See neovim/neovim#15440
-  { "TermClose", "*", function()
+  { "TermClose", "*", function()--{{{
     if vim.v.event.status == 0 then
       local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)
       if info and info.argv[1] == vim.env.SHELL then
         pcall(vim.api.nvim_buf_delete, 0, {})
       end
     end
-  end, docs = "auto close shell terminals" },
+  end, docs = "auto close shell terminals" },--}}}
 
-  { "BufNewFile", "*", run = function()
-    util.autocmd({
+  { "BufNewFile", "*", run = function()--{{{
+    quick.autocmd({
       "BufWritePre",
       buffer = true,
       once = true,
@@ -130,11 +130,11 @@ util.augroup({ "SPECIAL_SETTINGS", {
       docs = "create missing parent directories automatically",
     })
   end,
-  }},
+  }},--}}}
 })
 
-if vim.fn.exists("$TMUX") == 1 then
-  util.augroup({ "TMUX_RENAME", {
+if vim.fn.exists("$TMUX") == 1 then--{{{
+  quick.augroup({ "TMUX_RENAME", {
     { "BufEnter", "*", function()
       if vim.bo.buftype == "" then
         local bufname = vim.fn.expand("%:t:S")
@@ -148,8 +148,8 @@ if vim.fn.exists("$TMUX") == 1 then
     },
   }})
 end
-
-util.augroup({ "FILETYPE_COMMANDS", {
+--}}}
+quick.augroup({ "FILETYPE_COMMANDS", {--{{{
   { events = "Filetype", targets = "python,proto", run = function()
     vim.bo.tabstop = 4
     vim.bo.softtabstop = 4
@@ -191,11 +191,11 @@ util.augroup({ "FILETYPE_COMMANDS", {
     vim.keymap.set("n", "gq", nvim.ex.close, {noremap=true, buffer = true, desc = "close help/man pages" })
   end,
   },
-}})
+}})--}}}
 
-local async_load_plugin = nil
+local async_load_plugin = nil--{{{
 async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-  util.augroup({ "TRIM_WHITE_SPACES", {
+  quick.augroup({ "TRIM_WHITE_SPACES", {
     { "BufWritePre,FileWritePre,FileAppendPre,FilterWritePre", "*",
       docs = "trim spaces", run = function()
         if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
@@ -210,5 +210,7 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
   }})
   async_load_plugin:close()
 end))
-async_load_plugin:send()
+async_load_plugin:send()--}}}
 -- stylua: ignore end
+
+-- fdm=marker fdl=0

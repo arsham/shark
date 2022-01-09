@@ -1,4 +1,4 @@
-local util = require("util")
+local util = require("arshlib.quick")
 local nvim = require("nvim")
 
 local store = {}

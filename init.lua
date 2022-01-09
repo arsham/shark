@@ -4,7 +4,6 @@ if not pcall(require, "nvim") then
   return
 end
 
-require("util")
 require("options")
 require("autocmd")
 require("mappings")

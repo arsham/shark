@@ -1,5 +1,4 @@
--- @module lua.util.init
-local util = require("util")
+local quick = require("arshlib.quick")
 local gitsigns = require("gitsigns")
 
 -- stylua: ignore start
@@ -31,8 +30,8 @@ gitsigns.setup({
   update_debounce = 750,
 })
 
-vim.keymap.set("n", "]c", function() util.call_and_centre(gitsigns.next_hunk) end,     {noremap=true, desc = "go to next hunk" })
-vim.keymap.set("n", "[c", function() util.call_and_centre(gitsigns.prev_hunk) end,     {noremap=true, desc = "go to previous hunk" })
+vim.keymap.set("n", "]c", function() quick.call_and_centre(gitsigns.next_hunk) end,     {noremap=true, desc = "go to next hunk" })
+vim.keymap.set("n", "[c", function() quick.call_and_centre(gitsigns.prev_hunk) end,     {noremap=true, desc = "go to previous hunk" })
 vim.keymap.set("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end, {noremap=true, desc = "blame line" })
 vim.keymap.set("n", "<leader>hs", function() gitsigns.stage_hunk() end,                {noremap=true, desc = "stage hunk" })
 vim.keymap.set("n", "<leader>hu", function() gitsigns.undo_stage_hunk() end,           {noremap=true, desc = "undo last staged hunk" })

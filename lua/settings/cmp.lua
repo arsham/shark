@@ -10,7 +10,7 @@ end
 ---       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
 ---                                                 
 -- stylua: ignore
-local kind_icons = {
+local kind_icons = {--{{{
   Buffers       = " ",
   Class         = " ",
   Color         = " ",
@@ -37,7 +37,7 @@ local kind_icons = {
   Value         = " ",
   Variable      = " ",
   Text          = " ",
-}
+}--}}}
 
 cmp.setup({
   snippet = {
@@ -48,7 +48,7 @@ cmp.setup({
 
   preselect = cmp.PreselectMode.None,
 
-  mapping = {
+  mapping = { --{{{
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -85,9 +85,9 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-  },
+  }, --}}}
 
-  sources = cmp.config.sources({
+  sources = cmp.config.sources({ --{{{
     { name = "nvim_lsp", priority = 80 },
     { name = "nvim_lua", priority = 80 },
     { name = "path", priority = 40 },
@@ -105,9 +105,9 @@ cmp.setup({
       },
     },
     { name = "rg", keyword_length = 3, max_item_count = 10 },
-  }),
+  }), --}}}
 
-  formatting = {
+  formatting = { --{{{
     fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
       vim_item.menu = string.format(
@@ -137,13 +137,13 @@ cmp.setup({
 
       return vim_item
     end,
-  },
+  }, --}}}
 
   documentation = {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
 
-  sorting = {
+  sorting = { --{{{
     comparators = {
       function(...)
         return require("cmp_buffer"):compare_locality(...)
@@ -157,11 +157,13 @@ cmp.setup({
       compare.length,
       compare.order,
     },
-  },
+  }, --}}}
 })
 
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline("/", { --{{{
   sources = {
     { name = "buffer" },
   },
-})
+}) --}}}
+
+-- vim: fdm=marker fdl=0
