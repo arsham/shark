@@ -50,14 +50,19 @@ require("packer").startup({
     use({
       "junegunn/fzf.vim",
       requires = "fzf",
-      config   = function() require("settings.fzf") end,
       event    = "VimEnter",
     })
 
     use({
+      "arsham/fzfmania.nvim",
+      requires = { "arshlib.nvim", "fzf.vim", "plenary.nvim" },
+      after = {"listish.nvim"},
+      config   = function() require("settings.fzf") end,
+    })
+
+    use({
       "kevinhwang91/nvim-bqf",
-      requires = { "fzf", "nvim-treesitter",
-      },
+      requires = { "fzf", "nvim-treesitter" },
       config = function() require("bqf").enable() end,
       ft   = { "qf" },
       cond = full_start,
@@ -66,12 +71,7 @@ require("packer").startup({
     use({
       "arsham/listish.nvim",
       requires = { "arshlib.nvim", "nvim.lua" },
-      config = function() require("listish").config({}) end,
-      keys = {
-        "<leader>qq", "<leader>qn", "<leader>qo",
-        "<leader>ww", "<leader>wn", "<leader>wo",
-      },
-      ft = { "qf" },
+      config = function() require("listish").config({ }) end,
     })
 
     use({

@@ -88,6 +88,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [arsham/arshlib.nvim](https://github.com/arsham/arshlib.nvim)                                                 | Supporting library                                     |
 | [arsham/arshamiser.nvim](https://github.com/arsham/arshamiser.nvim)                                           | Status line, colour scheme and folds                   |
 | [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                                                 | Supporting quickfix and local lists                    |
+| [arsham/fzfmania.nvim](https://github.com/arsham/fzfmania.nvim)                                               | Very powerful FZF setup in lua                         |
 | [arsham/indent-tool.nvim](https://github.com/arsham/indent-tool.nvim)                                         | Indent mappings and text object                        |
 | [arsham/matchmaker.nvim](https://github.com/arsham/matchmaker.nvim)                                           | Creates highlight for user matches                     |
 | [arsham/yanker.nvim](https://github.com/arsham/yanker.nvim)                                                   | Yank history                                           |
