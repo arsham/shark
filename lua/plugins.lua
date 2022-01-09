@@ -462,7 +462,12 @@ require("packer").startup({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
       config = function() require("indent-tools").config({}) end,
-      keys = { "]=", "[=", { "v", "ii" }, { "o", "ii" } },
+    })
+
+    use({
+      "arsham/archer.nvim",
+      requires = { "arsham/arshlib.nvim", "tpope/vim-repeat", "norvalli/nvim.lua" },
+      config = function() require("archer").config({}) end,
     })
 
     use({

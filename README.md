@@ -85,6 +85,12 @@ Some plugins are not listed here. You can find the complete list in the
 | [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                                           | Package manager                                        |
 | [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                                       | Fuzzy matching a lot of actions                        |
 | [junegunn/fzf](https://github.com/junegunn/fzf)                                                               |                                                        |
+| [arsham/arshlib.nvim](https://github.com/arsham/arshlib.nvim)                                                 | Supporting library                                     |
+| [arsham/arshamiser.nvim](https://github.com/arsham/arshamiser.nvim)                                           | Status line, colour scheme and folds                   |
+| [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                                                 | Supporting quickfix and local lists                    |
+| [arsham/indent-tool.nvim](https://github.com/arsham/indent-tool.nvim)                                         | Indent mappings and text object                        |
+| [arsham/matchmaker.nvim](https://github.com/arsham/matchmaker.nvim)                                           | Creates highlight for user matches                     |
+| [arsham/yanker.nvim](https://github.com/arsham/yanker.nvim)                                                   | Yank history                                           |
 | [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                             | LSP configuration                                      |
 | [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)                         | Automatically install LSP servers                      |
 | [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions                        |
