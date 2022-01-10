@@ -44,10 +44,25 @@ there are a few other **LSP** servers setup as well.
    - [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
 
+![folds](https://user-images.githubusercontent.com/428611/148667078-25211d3c-116a-4c6f-938a-bb52b8bb1163.png)
+
+<details>
+    <summary>Click to view another image</summary>
+
+![go](https://user-images.githubusercontent.com/428611/148667079-f441fc97-4157-4ed3-b2bb-81a64d358107.png)
+
+</details>
+
 ## Setup
 
-Just use **Stow** and stow this folder. Once you start Neovim, it will install
-the package manager and installs the listed plugins.
+Just clone this project:
+
+```bash
+$ git clone https://github.com/arsham/shark.git ~/.config/nvim
+```
+
+Once you start `Neovim`, it will install the package manager and installs the
+listed plugins.
 
 You need to run the `InstallDependencies` command to install some dependencies.
 Run `TSUpdate` to satisfy treesitter dependencies, and finally run
@@ -239,8 +254,8 @@ There are more specialised mappings provided, keep reading please!
 | `H`         | To the beginning of line                    |
 | `L`         | To the end of line                          |
 | `ii`        | **I**n **I**ndentation                      |
-| i`          | **I**n backtick (`) pairs (multi-line)      |
-| a`          | **A**round backtick (`) pairs (multi-line)  |
+| `` i` ``    | **I**n backtick pairs (multi-line)          |
+| `` a` ``    | **A**round backtick pairs (multi-line)      |
 | `an`        | **A**round **N**ext pairs (current lint)    |
 | `in`        | **I**n **N**ext pairs (current line)        |
 | `il`        | **I**n line                                 |

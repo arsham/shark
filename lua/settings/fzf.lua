@@ -2,11 +2,7 @@ local command = require("arshlib.quick").command
 
 table.insert(vim.opt.rtp, "~/.fzf")
 
-require("fzfmania").config({
-  commands = {
-    work_tree = "WT",
-  },
-})
+require("fzfmania").config({})
 
 command("Notes", "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", { bang = true })
 command("Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", { bang = true })
