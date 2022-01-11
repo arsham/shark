@@ -169,9 +169,9 @@ quick.augroup({ "FILETYPE_COMMANDS", {--{{{
   end,
   },
 
-  { "FileType", "lspinfo", docs = "close lspinfo popup", run = function()
+  { "FileType", "lspinfo,lsp-installer,null-ls-info", run = function()
     vim.keymap.set("n", "q", nvim.ex.close, {noremap=true, buffer = true, silent = true, desc = "close lspinfo popup" })
-  end,
+  end, docs = "close lspinfo popup",
   },
 
   { "Filetype", "sql,sqls", docs = "don't wrap me", run = function()
