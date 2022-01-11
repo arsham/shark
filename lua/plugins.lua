@@ -514,6 +514,12 @@ require("packer").startup({
       "willchao612/vim-diagon",
       cmd = "Diagon",
     })
+
+    use({
+      "jbyuki/venn.nvim",
+      config = function() require("settings.venn") end,
+      keys = { "<leader>v" },
+    })
     -- }}}
     if packer_bootstrap then -- {{{
       require("packer").sync()
