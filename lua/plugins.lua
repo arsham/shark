@@ -437,10 +437,7 @@ require("packer").startup({
 
     use({
       "nanotee/sqls.nvim",
-      config = function()
-        vim.keymap.set("n", "<C-Space>", ":SqlsExecuteQuery<CR>",{noremap=true, buffer = true, silent = true })
-        vim.keymap.set("v", "<C-Space>", ":SqlsExecuteQuery<CR>",{noremap=true, buffer = true, silent = true })
-      end,
+      config = function() require("settings.sqls") end,
       ft   = { "sql" },
       cond = full_start,
     })
