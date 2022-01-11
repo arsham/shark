@@ -199,24 +199,32 @@ local function tm_completion(arg)
   return ret
 end
 
-quick.command("TMStart", function(args)
+local function do_tmuxinator(command, project)
   tmuxinator_store = {}
   require("plenary.job")
     :new({
       command = "tmuxinator",
-      args = { "start", args.args },
+      args = { command, project },
       on_exit = function(j, exit_code)
         if exit_code ~= 0 then
           local res = table.concat(j:stderr_result(), "\n")
           vim.notify(res, vim.lsp.log_levels.ERROR, {
-            title = "Starting Tmux Session",
+            title = "Executing tmuxinator " .. command,
             timeout = 5000,
           })
         end
       end,
     })
     :start()
+end
+
+quick.command("TMStart", function(args)
+  do_tmuxinator("start", args.args)
 end, { nargs = "+", complete = tm_completion, desc = "start a tmuxinator project" })
+
+quick.command("TMStop", function(args)
+  do_tmuxinator("stop", args.args)
+end, { nargs = "+", complete = tm_completion, desc = "stop a tmuxinator project" })
 
 return M
 

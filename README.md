@@ -554,6 +554,7 @@ The following list of commands do not fit into any specific categories.
 | `MergeConflict`       | Search for merge conflicts                   |
 | `JsonDiff`            | Diff json files after formatting them        |
 | `TMStart`             | Start a tmuxinator project                   |
+| `TMStop`              | Stop a tmuxinator project                    |
 
 After running `InstallDependencies` you will be notified to install some
 programs.
