@@ -185,6 +185,39 @@ quick.command("InstallDependencies", function() --{{{
   end --}}}
 end) --}}}
 
+local tmuxinator_store = {}
+local function tm_completion(arg)
+  if #tmuxinator_store == 0 then
+    tmuxinator_store = vim.fn.systemlist("tmuxinator completions start")
+  end
+  local ret = {}
+  for _, p in ipairs(tmuxinator_store) do
+    if string.find(p, "^" .. arg) then
+      table.insert(ret, p)
+    end
+  end
+  return ret
+end
+
+quick.command("TMStart", function(args)
+  tmuxinator_store = {}
+  require("plenary.job")
+    :new({
+      command = "tmuxinator",
+      args = { "start", args.args },
+      on_exit = function(j, exit_code)
+        if exit_code ~= 0 then
+          local res = table.concat(j:stderr_result(), "\n")
+          vim.notify(res, vim.lsp.log_levels.ERROR, {
+            title = "Starting Tmux Session",
+            timeout = 5000,
+          })
+        end
+      end,
+    })
+    :start()
+end, { nargs = "+", complete = tm_completion, desc = "start a tmuxinator project" })
+
 return M
 
 -- vim: fdm=marker fdl=0
