@@ -180,8 +180,9 @@ quick.augroup({ "FILETYPE_COMMANDS", {--{{{
   end,
   },
 
-  { "Filetype", "help,man", docs = "exit help with gq", run = function()
-    vim.keymap.set("n", "gq", nvim.ex.close, {noremap=true, buffer = true, desc = "close help/man pages" })
+  { "Filetype", "help,man,qf", docs = "exit help with gq", run = function()
+    local opts = {noremap=true, buffer = true, desc = "close help/man,qf buffers" }
+    vim.keymap.set("n", "q", nvim.ex.close, opts)
   end,
   },
 }})--}}}
