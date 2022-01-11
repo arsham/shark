@@ -1,36 +1,40 @@
-local nvim = require('nvim')
-vim.bo.expandtab   = true
-vim.bo.tabstop     = 2
-vim.bo.softtabstop = 2
-vim.bo.shiftwidth  = 2
+local nvim = require("nvim")
+vim.opt_local.expandtab = true
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.shiftwidth = 2
+vim.opt_local.formatoptions = vim.bo.formatoptions:gsub("t", "")
+vim.opt_local.formatoptions = vim.bo.formatoptions:gsub("c", "")
 
-nvim.ex.abbreviate{'<buffer>', 'as',         'AS'}
-nvim.ex.abbreviate{'<buffer>', 'by',         'BY'}
-nvim.ex.abbreviate{'<buffer>', 'cascade',    'CASCADE'}
-nvim.ex.abbreviate{'<buffer>', 'delete',     'DELETE'}
-nvim.ex.abbreviate{'<buffer>', 'else',       'ELSE'}
-nvim.ex.abbreviate{'<buffer>', 'end',        'END'}
-nvim.ex.abbreviate{'<buffer>', 'foreign',    'FOREIGN'}
-nvim.ex.abbreviate{'<buffer>', 'from',       'FROM'}
-nvim.ex.abbreviate{'<buffer>', 'group',      'GROUP'}
-nvim.ex.abbreviate{'<buffer>', 'having',     'HAVING'}
-nvim.ex.abbreviate{'<buffer>', 'index',      'INDEX'}
-nvim.ex.abbreviate{'<buffer>', 'insert',     'INSERT'}
-nvim.ex.abbreviate{'<buffer>', 'into',       'INTO'}
-nvim.ex.abbreviate{'<buffer>', 'join',       'JOIN'}
-nvim.ex.abbreviate{'<buffer>', 'key',        'KEY'}
-nvim.ex.abbreviate{'<buffer>', 'limit',      'LIMIT'}
-nvim.ex.abbreviate{'<buffer>', 'offset',     'OFFSET'}
-nvim.ex.abbreviate{'<buffer>', 'on',         'ON'}
-nvim.ex.abbreviate{'<buffer>', 'order',      'ORDER'}
-nvim.ex.abbreviate{'<buffer>', 'primary',    'PRIMARY'}
-nvim.ex.abbreviate{'<buffer>', 'references', 'REFERENCES'}
-nvim.ex.abbreviate{'<buffer>', 'select',     'SELECT'}
-nvim.ex.abbreviate{'<buffer>', 'set',        'SET'}
-nvim.ex.abbreviate{'<buffer>', 'then',       'THEN'}
-nvim.ex.abbreviate{'<buffer>', 'union',      'UNION'}
-nvim.ex.abbreviate{'<buffer>', 'unique',     'UNIQUE'}
-nvim.ex.abbreviate{'<buffer>', 'update',     'UPDATE'}
-nvim.ex.abbreviate{'<buffer>', 'values',     'VALUES'}
-nvim.ex.abbreviate{'<buffer>', 'when',       'WHEN'}
-nvim.ex.abbreviate{'<buffer>', 'where',      'WHERE'}
+-- stylua: ignore start
+nvim.ex.iabbrev{"<buffer>", "as",         "AS"}
+nvim.ex.iabbrev{"<buffer>", "by",         "BY"}
+nvim.ex.iabbrev{"<buffer>", "cascade",    "CASCADE"}
+nvim.ex.iabbrev{"<buffer>", "delete",     "DELETE"}
+nvim.ex.iabbrev{"<buffer>", "else",       "ELSE"}
+nvim.ex.iabbrev{"<buffer>", "end",        "END"}
+nvim.ex.iabbrev{"<buffer>", "foreign",    "FOREIGN"}
+nvim.ex.iabbrev{"<buffer>", "from",       "FROM"}
+nvim.ex.iabbrev{"<buffer>", "group",      "GROUP"}
+nvim.ex.iabbrev{"<buffer>", "having",     "HAVING"}
+nvim.ex.iabbrev{"<buffer>", "index",      "INDEX"}
+nvim.ex.iabbrev{"<buffer>", "insert",     "INSERT"}
+nvim.ex.iabbrev{"<buffer>", "into",       "INTO"}
+nvim.ex.iabbrev{"<buffer>", "join",       "JOIN"}
+nvim.ex.iabbrev{"<buffer>", "key",        "KEY"}
+nvim.ex.iabbrev{"<buffer>", "limit",      "LIMIT"}
+nvim.ex.iabbrev{"<buffer>", "offset",     "OFFSET"}
+nvim.ex.iabbrev{"<buffer>", "on",         "ON"}
+nvim.ex.iabbrev{"<buffer>", "order",      "ORDER"}
+nvim.ex.iabbrev{"<buffer>", "primary",    "PRIMARY"}
+nvim.ex.iabbrev{"<buffer>", "references", "REFERENCES"}
+nvim.ex.iabbrev{"<buffer>", "select",     "SELECT"}
+nvim.ex.iabbrev{"<buffer>", "set",        "SET"}
+nvim.ex.iabbrev{"<buffer>", "then",       "THEN"}
+nvim.ex.iabbrev{"<buffer>", "union",      "UNION"}
+nvim.ex.iabbrev{"<buffer>", "unique",     "UNIQUE"}
+nvim.ex.iabbrev{"<buffer>", "update",     "UPDATE"}
+nvim.ex.iabbrev{"<buffer>", "values",     "VALUES"}
+nvim.ex.iabbrev{"<buffer>", "when",       "WHEN"}
+nvim.ex.iabbrev{"<buffer>", "where",      "WHERE"}
+-- stylua: ignore end
