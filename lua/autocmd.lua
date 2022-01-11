@@ -147,16 +147,9 @@ if vim.fn.exists("$TMUX") == 1 then--{{{
     end,
     },
   }})
-end
---}}}
-quick.augroup({ "FILETYPE_COMMANDS", {--{{{
-  { events = "Filetype", targets = "python,proto", run = function()
-    vim.bo.tabstop = 4
-    vim.bo.softtabstop = 4
-    vim.bo.shiftwidth = 4
-  end,
-  },
+end --}}}
 
+quick.augroup({ "FILETYPE_COMMANDS", {--{{{
   { "Filetype", "make,automake", docs = "makefile tabs", run = function()
     vim.bo.expandtab = false
   end,
