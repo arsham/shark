@@ -43,6 +43,7 @@ local libs = {
   ["indent-tools"] = "arsham/indent-tools.nvim",
   plenary = "nvim-lua/plenary.nvim",
   nvim = "norcalli/nvim.lua",
+  ["bk-tree"] = "bk-tree",
 }
 
 M.check = function()

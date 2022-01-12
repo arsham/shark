@@ -202,42 +202,44 @@ local function running_tmuxinator_projects() --{{{
   return sessions
 end --}}}
 
+local bktree = require("bk-tree")
 local tmuxinator_store = false
-local function tm_completion(arg) --{{{
+---@param fn fun(v: string):boolean includes value if returns true
+local function tm_completion(arg, fn) --{{{
   if not tmuxinator_store then
-    tmuxinator_store = vim.fn.systemlist("tmuxinator completions start")
+    local projects = vim.fn.systemlist("tmuxinator completions start")
+    tmuxinator_store = bktree:new()
+    for _, p in ipairs(projects) do
+      tmuxinator_store:insert(p)
+    end
   end
+
   local ret = {}
-  for _, p in ipairs(tmuxinator_store) do
-    if string.find(p, "^" .. arg) then
-      table.insert(ret, p)
+  local max = 15
+  if arg == "" then
+    max = 100
+  end
+  local result = tmuxinator_store:query(arg, max)
+  for _, v in pairs(result) do
+    if fn(v.str) then
+      table.insert(ret, v.str)
     end
   end
   return ret
 end --}}}
 
 local function start_completion(arg) --{{{
-  local ret = {}
   local store = running_tmuxinator_projects()
-  local all_projects = tm_completion(arg)
-  for _, p in ipairs(all_projects) do
-    if not store[p] then
-      table.insert(ret, p)
-    end
-  end
-  return ret
+  return tm_completion(arg, function(v)
+    return not store[v]
+  end)
 end --}}}
 
 local function stop_completion(arg) --{{{
-  local ret = {}
   local store = running_tmuxinator_projects()
-  local all_projects = tm_completion(arg)
-  for _, p in ipairs(all_projects) do
-    if store[p] then
-      table.insert(ret, p)
-    end
-  end
-  return ret
+  return tm_completion(arg, function(v)
+    return store[v]
+  end)
 end --}}}
 
 local function do_tmuxinator(command, project) --{{{

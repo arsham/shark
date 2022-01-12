@@ -35,7 +35,7 @@ require("packer").startup({
       "arsham/arshlib.nvim",
       requires = { "nvim.lua", "plenary.nvim", "nui.nvim" },
     })
-
+    use_rocks({"bk-tree"})
     -- }}}
 
     -- Core/System utilities {{{
