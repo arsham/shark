@@ -1,11 +1,13 @@
-local nvim = require('nvim')
+local nvim = require("nvim")
 
 vim.opt_local.textwidth = 72
 vim.opt_local.colorcolumn = "50,72"
 vim.opt_local.spell = true
+vim.wo.cursorline = true
+vim.opt_local.formatoptions = vim.bo.formatoptions:gsub("[croq]", "")
 nvim.ex.startinsert()
 
-vim.bo.formatoptions = vim.bo.formatoptions .. 'cn'
+-- stylua: ignore start
 local formatlistpat = {'^\\s*'}                         --- Optional leading whitespace
 table.insert(formatlistpat, '[')                        --- Start character class
 table.insert(formatlistpat, '\\[({]\\?')                --- |  Optionally match opening punctuation
@@ -20,4 +22,4 @@ table.insert(formatlistpat, '\\s\\+')                   --- One or more spaces
 table.insert(formatlistpat, [[\\\|]])                   --- or
 table.insert(formatlistpat, '^\\s*[-+*]\\s\\+')         --- Bullet points
 vim.bo.formatlistpat = table.concat(formatlistpat, '')
-vim.wo.cursorline = true
+-- stylua: ignore end
