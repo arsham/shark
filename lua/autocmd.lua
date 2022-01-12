@@ -75,7 +75,7 @@ quick.augroup({ "SPECIAL_SETTINGS", {
     vim.bo.undofile = false
   end },
 
-  { "BufEnter,FocusGained,InsertLeave,WinEnter", "*", run = function()--{{{
+  { "BufEnter,FocusGained,WinEnter", "*", run = function()--{{{
     if vim.g.disable_relative_numbers then
       return
     end
@@ -91,7 +91,7 @@ quick.augroup({ "SPECIAL_SETTINGS", {
     end
   end, docs = "set relative number when focused" },--}}}
 
-  { "BufLeave,FocusLost,InsertEnter,WinLeave", "*", run = function()--{{{
+  { "BufLeave,FocusLost,WinLeave", "*", run = function()--{{{
     if vim.wo.number then
       vim.wo.relativenumber = false
     end
