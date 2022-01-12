@@ -193,7 +193,8 @@ local function running_tmuxinator_projects() --{{{
   local tmux_sessions = vim.fn.systemlist("tmux list-sessions -F '#{session_name}'")
   local sessions = {}
   for _, name in ipairs(tmux_sessions) do
-    local session_file = vim.fn.system("rg -l '" .. name .. "' ~/.config/tmuxinator/*.yml")
+    local cmd = string.format("rg -l '%s' %s/.config/tmuxinator/*.yml", name, vim.env.HOME)
+    local session_file = vim.fn.system(cmd)
     if session_file ~= "" then
       sessions[vim.fn.fnamemodify(session_file, ":t:r")] = true
     end
