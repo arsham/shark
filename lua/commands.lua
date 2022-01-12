@@ -185,9 +185,26 @@ quick.command("InstallDependencies", function() --{{{
   end --}}}
 end) --}}}
 
-local tmuxinator_store = {}
-local function tm_completion(arg)
-  if #tmuxinator_store == 0 then
+local project_store = false
+local function running_tmuxinator_projects() --{{{
+  if project_store then
+    return project_store
+  end
+  local tmux_sessions = vim.fn.systemlist("tmux list-sessions -F '#{session_name}'")
+  local sessions = {}
+  for _, name in ipairs(tmux_sessions) do
+    local session_file = vim.fn.system("rg -l '" .. name .. "' ~/.config/tmuxinator/*.yml")
+    if session_file ~= "" then
+      sessions[vim.fn.fnamemodify(session_file, ":t:r")] = true
+    end
+  end
+  project_store = sessions
+  return sessions
+end --}}}
+
+local tmuxinator_store = false
+local function tm_completion(arg) --{{{
+  if not tmuxinator_store then
     tmuxinator_store = vim.fn.systemlist("tmuxinator completions start")
   end
   local ret = {}
@@ -197,10 +214,35 @@ local function tm_completion(arg)
     end
   end
   return ret
-end
+end --}}}
 
-local function do_tmuxinator(command, project)
-  tmuxinator_store = {}
+local function start_completion(arg) --{{{
+  local ret = {}
+  local store = running_tmuxinator_projects()
+  local all_projects = tm_completion(arg)
+  for _, p in ipairs(all_projects) do
+    if not store[p] then
+      table.insert(ret, p)
+    end
+  end
+  return ret
+end --}}}
+
+local function stop_completion(arg) --{{{
+  local ret = {}
+  local store = running_tmuxinator_projects()
+  local all_projects = tm_completion(arg)
+  for _, p in ipairs(all_projects) do
+    if store[p] then
+      table.insert(ret, p)
+    end
+  end
+  return ret
+end --}}}
+
+local function do_tmuxinator(command, project) --{{{
+  tmuxinator_store = false
+  project_store = false
   require("plenary.job")
     :new({
       command = "tmuxinator",
@@ -216,15 +258,15 @@ local function do_tmuxinator(command, project)
       end,
     })
     :start()
-end
+end --}}}
 
 quick.command("TMStart", function(args)
   do_tmuxinator("start", args.args)
-end, { nargs = "+", complete = tm_completion, desc = "start a tmuxinator project" })
+end, { nargs = "+", complete = start_completion, desc = "start a tmuxinator project" })
 
 quick.command("TMStop", function(args)
   do_tmuxinator("stop", args.args)
-end, { nargs = "+", complete = tm_completion, desc = "stop a tmuxinator project" })
+end, { nargs = "+", complete = stop_completion, desc = "stop a tmuxinator project" })
 
 return M
 
