@@ -6,3 +6,6 @@ any = true
 
 [_t]
 any = true
+
+[use_rocks]
+any = true
