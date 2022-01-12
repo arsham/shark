@@ -19,6 +19,7 @@ local executables = {
   Ripgrep = { "rg", "yay -S rg" },
   FZF = { "fzf", "yay -S fzf" },
   tmux = { "tmux", "yay -S tmux" },
+  tmuxinator = { "tmuxinator", "yay -S tmuxinator" },
   fd = { "fd", "yay -S fd" },
   bat = { "bat", "yay -S bat" },
   ctags = { "ctags", "yay -S ctags" },
