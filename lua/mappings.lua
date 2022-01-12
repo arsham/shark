@@ -28,19 +28,6 @@ vim.keymap.set("n", "g=", "gg=Gg``",{noremap=true, desc = "Re-indent the whole b
 -- stylua: ignore end
 vim.keymap.set("n", "<C-e>", "2<C-e>", { noremap = true })
 vim.keymap.set("n", "<C-y>", "2<C-y>", { noremap = true })
-
-vim.keymap.set(
-  "n",
-  "k",
-  [[(v:count > 2 ? "m'" . v:count : '') . 'k']],
-  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
-)
-vim.keymap.set(
-  "n",
-  "j",
-  [[(v:count > 2 ? "m'" . v:count : '') . 'j']],
-  { noremap = true, expr = true, desc = "numbered motions in the jumplist" }
-)
 --}}}
 
 -- Resizing windows {{{
