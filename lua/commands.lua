@@ -110,7 +110,7 @@ quick.command("FoldComments", function() --{{{
   vim.wo.foldmethod = "expr"
 end) --}}}
 
-quick.buffer_command("Nowrap", function() --{{{
+quick.command("Nowrap", function() --{{{
   vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
   vim.bo.formatoptions = vim.bo.formatoptions:gsub("c", "")
 end) --}}}
