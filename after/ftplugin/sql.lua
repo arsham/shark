@@ -10,7 +10,9 @@ vim.opt_local.formatoptions = vim.bo.formatoptions:gsub("c", "")
 nvim.ex.iabbrev{"<buffer>", "as",         "AS"}
 nvim.ex.iabbrev{"<buffer>", "by",         "BY"}
 nvim.ex.iabbrev{"<buffer>", "cascade",    "CASCADE"}
+nvim.ex.iabbrev{"<buffer>", "create",     "CREATE"}
 nvim.ex.iabbrev{"<buffer>", "delete",     "DELETE"}
+nvim.ex.iabbrev{"<buffer>", "drop",       "DROP"}
 nvim.ex.iabbrev{"<buffer>", "else",       "ELSE"}
 nvim.ex.iabbrev{"<buffer>", "end",        "END"}
 nvim.ex.iabbrev{"<buffer>", "foreign",    "FOREIGN"}
@@ -30,6 +32,7 @@ nvim.ex.iabbrev{"<buffer>", "primary",    "PRIMARY"}
 nvim.ex.iabbrev{"<buffer>", "references", "REFERENCES"}
 nvim.ex.iabbrev{"<buffer>", "select",     "SELECT"}
 nvim.ex.iabbrev{"<buffer>", "set",        "SET"}
+nvim.ex.iabbrev{"<buffer>", "table",      "TABLE"}
 nvim.ex.iabbrev{"<buffer>", "then",       "THEN"}
 nvim.ex.iabbrev{"<buffer>", "union",      "UNION"}
 nvim.ex.iabbrev{"<buffer>", "unique",     "UNIQUE"}
