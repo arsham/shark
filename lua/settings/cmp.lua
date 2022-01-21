@@ -59,7 +59,7 @@ cmp.setup({
     }),
 
     ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
+      behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     }),
     ["<C-j>"] = cmp.mapping.select_next_item({
