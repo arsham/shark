@@ -20,12 +20,13 @@ function M.lsp_organise_imports() --{{{
   end
 
   for _, client in ipairs(vim.lsp.get_active_clients()) do
+    local offset_encoding = client.offset_encoding or "utf-16"
     if client.id and resp[client.id] then
       local result = resp[client.id].result
       if result and result[1] and result[1].edit then
         local edit = result[1].edit
         if edit then
-          vim.lsp.util.apply_workspace_edit(result[1].edit)
+          vim.lsp.util.apply_workspace_edit(result[1].edit, offset_encoding)
         end
       end
     end
