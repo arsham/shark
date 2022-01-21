@@ -255,59 +255,38 @@ end --}}}
 
 quick.augroup({ "LSP_EVENTS" })
 function M.setup_events(imports, format) --{{{
-  quick.autocmd({
-    "BufWritePre",
-    group = "LSP_EVENTS",
-    buffer = true,
-    docs = "format and imports",
-    run = function()
+  quick.autocmd({"BufWritePre", group = "LSP_EVENTS", buffer = true, run = function()
       imports()
       format()
-    end,
+    end, docs = "format and imports",
   })
 
-  quick.autocmd({
-    "BufReadPost,BufNewFile",
+  quick.autocmd({"BufReadPost,BufNewFile", group = "LSP_EVENTS",
     "*/templates/*.yaml,*/templates/*.tpl",
     run = "LspStop",
-    group = "LSP_EVENTS",
   })
 
-  quick.autocmd({
-    "InsertEnter",
-    "go.mod",
-    run = function()
+  quick.autocmd({"InsertEnter", "go.mod", group = "LSP_EVENTS", run = function()
       vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
-    end,
-    group = "LSP_EVENTS",
-    once = true,
-    docs = "don't wrap me",
+    end, once = true, docs = "don't wrap me",
   })
 
-  quick.autocmd({
-    "BufWritePre",
-    "go.mod",
-    run = function()
+  quick.autocmd({"BufWritePre", "go.mod", group = "LSP_EVENTS", run = function()
       local filename = vim.fn.expand("%:p")
       local bufnr = vim.fn.expand("<abuf>")
       lsp.go_mod_tidy(tonumber(bufnr), filename)
-    end,
-    group = "LSP_EVENTS",
-    docs = "run go mod tidy on save",
+    end, docs = "run go mod tidy on save",
   })
 
   local function go_mod_check()
     local filename = vim.fn.expand("<amatch>")
     lsp.go_mod_check_upgrades(filename)
   end
-  quick.autocmd({
-    "BufRead",
-    "go.mod",
-    run = go_mod_check,
-    group = "LSP_EVENTS",
-    docs = "check for updates",
+  quick.autocmd({"BufRead", "go.mod", group = "LSP_EVENTS",
+    run = go_mod_check, docs = "check for updates",
   })
 end --}}}
+-- stylua: ignore end
 
 function M.fix_null_ls_errors() --{{{
   local default_exe_handler = vim.lsp.handlers["workspace/executeCommand"]
