@@ -253,7 +253,14 @@ function M.setup_completions() --{{{
   inoremap("<C-k>", "<C-p>", "previous completion items")
 end --}}}
 
-quick.augroup({ "LSP_EVENTS" })
+-- stylua: ignore start
+quick.augroup({"LSP_EVENTS", {
+  {"BufReadPost,BufNewFile", "go.mod", function()
+      vim.opt_local.filetype = "gomod"
+    end,
+  }},
+})
+
 function M.setup_events(imports, format) --{{{
   quick.autocmd({"BufWritePre", group = "LSP_EVENTS", buffer = true, run = function()
       imports()
