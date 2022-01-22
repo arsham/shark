@@ -1,5 +1,3 @@
-local nvim = require("nvim")
-local quick = require("arshlib.quick")
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 vim.opt.foldmethod = "expr"
@@ -30,7 +28,9 @@ require("nvim-treesitter.configs").setup({
   highlight = { --{{{
     enable = true,
     use_languagetree = false,
-    disable = { "json", "markdown" },
+    disable = function(_, bufnr)
+      return vim.api.nvim_buf_line_count(bufnr) > vim.g.treesitter_highlight_maxlines
+    end,
     custom_captures = {
       ["function.call"] = "TSFunction",
       ["function.bracket"] = "Type",
@@ -137,26 +137,3 @@ require("nvim-treesitter.configs").setup({
 
   autopairs = { enable = true },
 })
-
--- stylua: ignore start
-quick.augroup({ "TREESITTER_LARGE_FILES", {--{{{
-  {"BufRead", "*", docs = "large file enhancements", run = function()
-    if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
-      return
-    end
-    local size = vim.fn.getfsize(vim.fn.expand("%"))
-    if size > 64 * 1024 then
-      vim.schedule(function()
-        nvim.ex.TSBufDisable("refactor.highlight_definitions")
-      end)
-    end
-
-    if size > 512 * 1024 then
-      vim.schedule(function()
-        nvim.ex.TSBufDisable("highlight")
-      end)
-    end
-  end,
-  },
-}})--}}}
--- stylua: ignore end

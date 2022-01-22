@@ -183,4 +183,7 @@ vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.python_host_prog = "/usr/bin/python2"
 
+vim.g.treesitter_refactor_maxlines = 10 * 1024
+vim.g.treesitter_highlight_maxlines = 12 * 1024
+
 -- vim: fdm=marker fdl=0
