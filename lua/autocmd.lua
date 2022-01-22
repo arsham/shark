@@ -59,15 +59,11 @@ quick.augroup({ "SPECIAL_SETTINGS", {
       vim.opt.lazyredraw = true
       vim.opt.showmatch = false
 
-      quick.autocmd({
-        "BufDelete",
-        buffer = true,
-        run = function()
+      quick.autocmd({"BufDelete", buffer = true, run = function()
           vim.opt.hlsearch = hlsearch
           vim.opt.lazyredraw = lazyredraw
           vim.opt.showmatch = showmatch
-        end,
-      })
+        end, docs = "set the global settings back to what they were before"})
     end
   end},--}}}
 
@@ -152,39 +148,32 @@ end --}}}
 quick.augroup({ "FILETYPE_COMMANDS", {--{{{
   { "Filetype", "make,automake", docs = "makefile tabs", run = function()
     vim.bo.expandtab = false
-  end,
-  },
+  end},
 
   { "BufNewFile,BufRead", ".*aliases", run = function()
     vim.bo.filetype = "sh"
-  end,
-  },
+  end},
   { "BufNewFile,BufRead", "Makefile*", run = function()
     vim.bo.filetype = "make"
-  end,
-  },
+  end},
 
   { "TextYankPost", "*", docs = "highlihgt yanking", run = function()
     vim.highlight.on_yank({ higroup = "Substitute", timeout = 150 })
-  end,
-  },
+  end},
 
   { "FileType", "lspinfo,lsp-installer,null-ls-info", run = function()
     vim.keymap.set("n", "q", nvim.ex.close, {noremap=true, buffer = true, silent = true, desc = "close lspinfo popup" })
-  end, docs = "close lspinfo popup",
-  },
+  end, docs = "close lspinfo popup"},
 
   { "Filetype", "sql,sqls", docs = "don't wrap me", run = function()
     vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
     vim.bo.formatoptions = vim.bo.formatoptions:gsub("c", "")
-  end,
-  },
+  end},
 
   { "Filetype", "help,man,qf", docs = "exit help with gq", run = function()
     local opts = {noremap=true, buffer = true, desc = "close help/man,qf buffers" }
     vim.keymap.set("n", "q", nvim.ex.close, opts)
-  end,
-  },
+  end},
 }})--}}}
 
 local async_load_plugin = nil--{{{

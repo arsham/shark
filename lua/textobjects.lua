@@ -27,6 +27,5 @@ end, { noremap = true, silent = true, desc = "around fold block" })
 vim.keymap.set("o", "az", function()
   quick.normal("x", "vaz")
 end, { noremap = true, desc = "around fold block" })
--- stylua: ignore end
 
--- fdm=marker fdl=0
+-- vim: fdm=marker fdl=0
