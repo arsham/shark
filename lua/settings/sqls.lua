@@ -21,7 +21,7 @@ quick.augroup({
       "FileType",
       "sqls_output",
       function()
-        vim.keymap.set("n", "q", nvim.ex.close, { noremap = true })
+        vim.keymap.set("n", "q", nvim.ex.close, { noremap = true, buffer = true })
       end,
     },
   },
