@@ -129,6 +129,7 @@ quick.command("InstallDependencies", function() --{{{
       "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.44.0",
     }),
     gojq = _t({ "go", "install", "github.com/itchyny/gojq/cmd/gojq@latest" }),
+    sqls = _t({ "go", "install", "github.com/lighttiger2505/sqls@latest" }),
     fixjson = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest" }),
     prettier = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest" }),
     neovim = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest" }),
