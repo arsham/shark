@@ -429,7 +429,8 @@ require("packer").startup({
 
     use({
       "github/copilot.vim",
-      config = function() require("settings.copilot") end,
+      setup = function() require("settings.copilot").setup() end,
+      config = function() require("settings.copilot").config() end,
       event  = { "InsertEnter" },
       cond   = full_start,
     })
