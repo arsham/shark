@@ -358,16 +358,15 @@ require("packer").startup({
         { "hrsh7th/cmp-cmdline",  after = "nvim-cmp" },
         { "hrsh7th/cmp-calc",     after = "nvim-cmp" },
         { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
-        { "hrsh7th/cmp-vsnip",    after = "nvim-cmp" },
-        {
-          "hrsh7th/vim-vsnip",
-          after = "nvim-cmp",
-          config = function()
-            vim.g.vsnip_snippet_dir = vim.env.HOME .. "/.config/nvim/vsnip"
-          end,
-          requires = "rafamadriz/friendly-snippets",
-        },
         { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+        {
+          "L3MON4D3/LuaSnip",
+          requires = "rafamadriz/friendly-snippets",
+          config   = function() require("settings.luasnip") end,
+          event    = { "BufRead", "BufNewFile", "InsertEnter" },
+          cond     = full_start,
+        },
+        { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
       config = function() require("settings.cmp") end,
       cond   = full_start,

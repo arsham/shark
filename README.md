@@ -112,6 +112,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions                        |
 | [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)                         |                                                        |
 | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                                       | Completion, and its related plugins.                   |
+| [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                                       | Snippet engine                                         |
 | [nanotee/sqls.nvim](https://github.com/nanotee/sqls.nvim)                                                     | SQL LSP                                                |
 | [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                         | Highlighting engine                                    |
 | [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)       |                                                        |
@@ -461,9 +462,11 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 | `<leader>@`   | Document Symbols                                           |
 | `<leader>gc`  | Show **C**allers (incoming calls)                          |
 | `H`           | **H**over popup                                            |
-| `<Ctrl-h>`    | (insert mode) Show **H**over popup                         |
+| `<Alt-h>`     | (insert mode) Show **H**over popup                         |
 | `K`           | Show **S**ignature help                                    |
-| `<Ctrl-l>`    | (insert mode) Show **S**ignature help                      |
+| `<Alt-l>`     | (insert mode) Show **S**ignature help                      |
+| `<Ctrl-l>`    | (insert/select mode) next snippet choice                   |
+| `<Ctrl-h>`    | (insert/select mode) previous snippet choice               |
 | `<Tab>`       | (insert mode) Next completion item                         |
 | `<Shift-Tab>` | (insert mode) Previous completion item                     |
 | `<Ctrl-j>`    | (insert mode) Next completion item                         |

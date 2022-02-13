@@ -162,12 +162,12 @@ end --}}}
 
 function M.hover() --{{{
   nnoremap("H", vim.lsp.buf.hover, "show hover")
-  inoremap("<C-h>", vim.lsp.buf.hover, "show hover")
+  inoremap("<M-h>", vim.lsp.buf.hover, "show hover")
 end --}}}
 
 function M.signature_help() --{{{
   nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
-  inoremap("<C-l>", vim.lsp.buf.signature_help, "show signature help")
+  inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")
 end --}}}
 
 function M.goto_definition() --{{{

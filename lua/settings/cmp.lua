@@ -1,10 +1,7 @@
 ---@diagnostic disable
 local cmp = require("cmp")
 local compare = require("cmp.config.compare")
-
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
+local ls = require("luasnip")
 
 --               ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
 --       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
@@ -39,10 +36,16 @@ local kind_icons = {--{{{
   Text          = " ",
 }--}}}
 
+local function has_words_before()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0
+    and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
 
@@ -71,16 +74,18 @@ cmp.setup({
 
     -- only use < tab >/<s-tab> for switching between placeholders.
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn["vsnip#available"](1) == 1 then
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      if ls.expand_or_locally_jumpable() then
+        ls.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
     end, { "i", "s" }),
 
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
+      if ls.jumpable(-1) then
+        ls.jump(-1)
       else
         fallback()
       end
@@ -91,7 +96,7 @@ cmp.setup({
     { name = "nvim_lsp", priority = 80 },
     { name = "nvim_lua", priority = 80 },
     { name = "path", priority = 40 },
-    { name = "vsnip", priority = 10 },
+    { name = "luasnip", priority = 10 },
     { name = "calc" },
     { name = "nvim_lsp_signature_help" },
     {
