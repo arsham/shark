@@ -142,14 +142,13 @@ Some plugins are not listed here. You can find the complete list in the
 | [mbbill/undotree](https://github.com/mbbill/undotree)                                                         | Undo tree browser                                      |
 | [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                                        |
 | [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                                        |
-| [blackCauldron7/surround.nvim](https://github.com/blackCauldron7/surround.nvim)                               |                                                        |
+| [echasnovski/mini.nvim](https://github.com/echasnovski/mini.nvim)                                             | For surround and trailing spaces                       |
 | [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                                       |                                                        |
 | [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                                             |                                                        |
 | [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)                               |                                                        |
 | [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                                               |                                                        |
 | [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                                 |                                                        |
 | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)                               |                                                        |
-| [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)                         |                                                        |
 | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                                        |
 | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                                           | Make diagrams from text                                |
 | [jbyuki/venn.nvim](https://github.com/jbyuki/venn.nvim)                                                       | Create diagrams easier                                 |

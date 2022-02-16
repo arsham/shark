@@ -222,13 +222,6 @@ require("packer").startup({
     })
 
     use({
-      "ntpeters/vim-better-whitespace",
-      config = function() require("settings.vim_better_whitespace") end,
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
-      cond   = full_start,
-    })
-
-    use({
       -- MixedCase/PascalCase:   gsm/gsp
       -- camelCase:              gsc
       -- snake_case:             gs_
@@ -468,9 +461,9 @@ require("packer").startup({
     })
 
     use({
-      "blackCauldron7/surround.nvim",
-      config = function() require("settings.surround") end,
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+      "echasnovski/mini.nvim",
+      config = function() require("settings.mini-nvim") end,
+      event = { "BufRead", "BufNewFile", "InsertEnter" },
     })
 
     use({
