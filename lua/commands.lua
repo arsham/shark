@@ -1,5 +1,7 @@
 local fs = require("arshlib.fs")
 local quick = require("arshlib.quick")
+local session = require("luasnip.session")
+
 local M = {}
 
 quick.command("Filename", function()
@@ -271,6 +273,26 @@ end, { nargs = "+", complete = start_completion, desc = "start a tmuxinator proj
 quick.command("TMStop", function(args)
   do_tmuxinator("stop", args.args)
 end, { nargs = "+", complete = stop_completion, desc = "stop a tmuxinator project" })
+
+quick.command("UnlinkSnippets", function()
+  local cur_buf = vim.api.nvim_get_current_buf()
+
+  while true do
+    local node = session.current_nodes[cur_buf]
+    if not node then
+      return
+    end
+    local user_expanded_snip = node.parent
+    -- find 'outer' snippet.
+    while user_expanded_snip.parent do
+      user_expanded_snip = user_expanded_snip.parent
+    end
+
+    user_expanded_snip:remove_from_jumplist()
+    -- prefer setting previous/outer insertNode as current node.
+    session.current_nodes[cur_buf] = user_expanded_snip.prev.prev or user_expanded_snip.next.next
+  end
+end, { desc = "Unlink all open snippets" })
 
 return M
 
