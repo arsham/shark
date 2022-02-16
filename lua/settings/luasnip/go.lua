@@ -131,20 +131,28 @@ return {
     in_func
   ), --}}}
 
+  -- Mockery {{{
+  ls.s(
+    { trig = "mockery", name = "Mockery", dscr = "Create an interface for making mocks" },
     fmt(
       [[
-        internal.GrpcError({},
-          codes.{}, "{}", "{}", {})
+        // {} mocks {} interface for testing purposes.
+        //go:generate mockery --name {} --filename {}_mock.go
+        type {} interface {{
+          {}
+        }}
       ]],
       {
-        ls.i(1, "err"),
-        ls.i(2, "Internal"),
-        ls.i(3, "Description"),
-        ls.i(4, "Field"),
-        ls.i(5, "fields"),
+        rep(1),
+        rep(2),
+        rep(1),
+        ls.f(function(args)
+          return util.snake_case(args[1][1])
+        end, { 1 }),
+        ls.i(1, "Client"),
+        ls.i(2, "pkg.Interface"),
       }
-    ),
-    { show_condition = util.is_in_function }
+    )
   ), --}}}
 
   -- Nolint {{{
