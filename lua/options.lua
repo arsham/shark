@@ -186,4 +186,6 @@ vim.g.python_host_prog = "/usr/bin/python2"
 vim.g.treesitter_refactor_maxlines = 10 * 1024
 vim.g.treesitter_highlight_maxlines = 12 * 1024
 
+vim.g.markdown_fenced_languages = { "python", "go", "bash", "json", "lua", "zsh" }
+
 -- vim: fdm=marker fdl=0
