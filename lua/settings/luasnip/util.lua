@@ -70,6 +70,14 @@ local function transform(text, info) --{{{
     return new_sn("nil")
   end
 
+  text = text:match("[^ ]+$")
+  if text == "context.Context" then
+    text = "context.Background()"
+  else
+    -- when the type is concrete
+    text = text .. "{}"
+  end
+
   return ls.t(text)
 end --}}}
 
@@ -229,6 +237,7 @@ M.random_string = function(length)
   end
   return M.random_string(length - 1) .. charset[math.random(1, #charset)]
 end --}}}
+
 M.snake_case = function(titlecase) --{{{
   -- lowercase the first letter otherwise it causes the result to start with an
   -- underscore.
@@ -238,6 +247,35 @@ M.snake_case = function(titlecase) --{{{
   end)
 end --}}}
 
+M.create_t_run = function(args) --{{{
+  return ls.c(1, {
+    ls.t({ "" }),
+    ls.sn(
+      nil,
+      fmt('\tt.Run("{}", {}{})\n{}', {
+        ls.i(1, "Case"),
+        ls.t(args[1]),
+        rep(1),
+        ls.d(2, M.create_t_run, ai[1]),
+      })
+    ),
+  })
+end --}}}
+
+M.mirror_t_run_funcs = function(args) --{{{
+  local strs = {}
+  for _, v in ipairs(args[1]) do
+    local name = v:match('^%s*t%.Run%s*%(%s*".*", (.*)%)')
+    if name then
+      local node = string.format("func %s(t *testing.T) {{\n\tt.Parallel()\n}}\n\n", name)
+      table.insert(strs, node)
+    end
+  end
+  local str = table.concat(strs, "")
+  if #str == 0 then
+    return ls.t("")
+  end
+  return ls.sn(nil, fmt(str, {}))
 end --}}}
 
 return M

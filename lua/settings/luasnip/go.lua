@@ -242,6 +242,17 @@ return {
     in_test_func
   ), --}}}
 
+  -- Subtests {{{
+  ls.s(
+    { trig = "Test", name = "Test/Subtest", dscr = "Create subtests" },
+    fmta("func <>(t *testing.T) {\n<>\n}\n\n <>", {
+      ls.i(1),
+      ls.d(2, util.create_t_run, ai({ 1 })),
+      ls.d(3, util.mirror_t_run_funcs, ai({ 2 })),
+    }),
+    in_test_file
+  ), --}}}
+
   -- Stringer {{{
   ls.s(
     { trig = "strigner", name = "Stringer", dscr = "Create a stringer go:generate" },
