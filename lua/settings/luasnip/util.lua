@@ -47,6 +47,16 @@ local function transform(text, info) --{{{
     return ls.c(info.index, {
       ls.sn(nil, fmt('errors.Wrap({}, "{}")', { ls.t(info.err_name), ls.i(1) })),
       ls.sn(nil, fmt('errors.Wrapf({}, "{}", {})', { ls.t(info.err_name), ls.i(1), ls.i(2) })),
+      ls.sn(
+        nil,
+        fmt('internal.GrpcError({},\n\t\tcodes.{}, "{}", "{}", {})', {
+          ls.t(info.err_name),
+          ls.i(1, "Internal"),
+          ls.i(2, "Description"),
+          ls.i(3, "Field"),
+          ls.i(4, "fields"),
+        })
+      ),
       ls.t(info.err_name),
     })
   elseif text == "bool" then
