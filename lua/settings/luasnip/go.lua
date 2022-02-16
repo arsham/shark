@@ -241,6 +241,15 @@ return {
     }),
     in_test_func
   ), --}}}
+
+  -- Stringer {{{
+  ls.s(
+    { trig = "strigner", name = "Stringer", dscr = "Create a stringer go:generate" },
+    fmt("//go:generate stringer -type={} -output={}_string.go", {
+      ls.i(1, "Type"),
+      partial(vim.fn.expand, "%:t:r"),
+    })
+  ), --}}}
 }
 
 -- vim: fdm=marker fdl=0
