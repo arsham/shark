@@ -1,21 +1,13 @@
+-- Requires {{{
 local ls = require("luasnip")
 local fmt = require("luasnip.extras.fmt").fmt
 local ts_utils = require("nvim-treesitter.ts_utils")
 local ts_locals = require("nvim-treesitter.locals")
+local rep = require("luasnip.extras").rep
+local ai = require("luasnip.nodes.absolute_indexer")
+--}}}
 
-vim.treesitter.set_query( --{{{
-  "go",
-  "LuaSnip_Result",
-  [[
-    [
-      (method_declaration result: (_) @id)
-      (function_declaration result: (_) @id)
-      (func_literal result: (_) @id)
-    ]
-  ]]
-) --}}}
-
--- transform makes a node from the given text.
+---Transform makes a node from the given text.
 local function transform(text, info) --{{{
   local string_sn = function(template, default)
     info.index = info.index + 1
@@ -93,6 +85,18 @@ local handlers = { --{{{
   end,
 } --}}}
 
+vim.treesitter.set_query( --{{{
+  "go",
+  "LuaSnip_Result",
+  [[
+    [
+      (method_declaration result: (_) @id)
+      (function_declaration result: (_) @id)
+      (func_literal result: (_) @id)
+    ]
+  ]]
+) --}}}
+
 local function return_value_nodes(info) --{{{
   local cursor_node = ts_utils.get_node_at_cursor()
   local scope_tree = ts_locals.get_scope_tree(cursor_node, 0)
@@ -123,14 +127,16 @@ end --}}}
 
 local M = {}
 
--- make_return_nodes transforms the given arguments into nodes wrapped in a
--- snippet node.
+---Transforms the given arguments into nodes wrapped in a snippet node.
 M.make_return_nodes = function(args) --{{{
   local info = { index = 0, err_name = args[1][1] }
   return ls.sn(nil, return_value_nodes(info))
 end --}}}
 
-M.shell = function(_, _, command) --{{{
+---Runs the command in shell.
+-- @param command string
+-- @return table
+M.shell = function(command) --{{{
   local file = io.popen(command, "r")
   local res = {}
   for line in file:lines() do
@@ -154,7 +160,8 @@ M.last_lua_module_section = function(args) --{{{
   })
 end --}}}
 
--- Returns true if the cursor in a function body.
+---Returns true if the cursor in a function body.
+-- @return boolean
 function M.is_in_function() --{{{
   local current_node = ts_utils.get_node_at_cursor()
   if not current_node then
@@ -171,13 +178,47 @@ function M.is_in_function() --{{{
   return false
 end --}}}
 
--- Returns true if the cursor in a function body in a test file.
-function M.is_in_test_function() --{{{
+---Returns true if the cursor in a test file.
+-- @return boolean
+function M.is_in_test_file() --{{{
   local filename = vim.fn.expand("%:p")
-  if vim.endswith(filename, "_test.go") then
-    return M.is_in_function()
+  return vim.endswith(filename, "_test.go")
+end --}}}
+
+---Returns true if the cursor in a function body in a test file.
+-- @return boolean
+function M.is_in_test_function() --{{{
+  return M.is_in_test_file() and M.is_in_function()
+end --}}}
+
+math.randomseed(os.time())
+M.uuid = function() --{{{
+  local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+  local out
+  local function subs(c)
+    local v = (((c == "x") and math.random(0, 15)) or math.random(8, 11))
+    return string.format("%x", v)
   end
-  return false
+  out = template:gsub("[xy]", subs)
+  return out
+end --}}}
+
+local charset = {} -- Random String {{{
+for i = 48, 57 do
+  table.insert(charset, string.char(i))
+end
+for i = 65, 90 do
+  table.insert(charset, string.char(i))
+end
+for i = 97, 122 do
+  table.insert(charset, string.char(i))
+end
+M.random_string = function(length)
+  if length == 0 then
+    return ""
+  end
+  return M.random_string(length - 1) .. charset[math.random(1, #charset)]
+end --}}}
 end --}}}
 
 return M

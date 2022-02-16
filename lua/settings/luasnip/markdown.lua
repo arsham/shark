@@ -6,7 +6,7 @@ return {
     {
       trig = "link",
       name = "markdown_link",
-      dscr = "Create markdown link [txt](url). Select link, press C-s, type link.",
+      dscr = "Create markdown link [txt](url).\nSelect link, press C-s, type link.",
     },
     fmt("[{}]({})\n{}", {
       ls.i(1),

@@ -13,15 +13,17 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 ls.config.set_config({ --{{{
   store_selection_keys = "<c-s>",
+  updateevents = "TextChanged,TextChangedI",
+
   ext_opts = {
     [types.choiceNode] = {
       active = {
-        virt_text = { { "●", "TSTextReference" } },
+        virt_text = { { " ", "TSTextReference" } },
       },
     },
     [types.insertNode] = {
       active = {
-        virt_text = { { "●", "TSEmphasis" } },
+        virt_text = { { " ", "TSEmphasis" } },
       },
     },
   },

@@ -10,7 +10,7 @@ local function make(trig, name)
         ls.t(name .. ":"),
       }),
       ls.i(2, "title"),
-      ls.i(0, "body"),
+      ls.i(0),
     })
   )
 end
@@ -26,4 +26,5 @@ return {
   make("docs", "docs"),
   make("chore", "chore"),
   make("chore", "chore"),
+  make("ci", "ci"),
 }
