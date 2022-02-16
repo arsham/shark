@@ -261,6 +261,81 @@ return {
       partial(vim.fn.expand, "%:t:r"),
     })
   ), --}}}
+
+  -- Query Database {{{
+  ls.s(
+    { trig = "queryrows", name = "Query Rows", dscr = "Query rows from database" },
+    fmta(
+      [[
+      const <> = `<>`
+      <> := make([]<>, 0, <>)
+
+      <> := <>.Do(func() error {
+      	<>, <> := <>.Query(<>, <>, <>)
+      	if errors.Is(<>, pgx.ErrNoRows) {
+      		return &retry.StopError{Err: <>}
+      	}
+      	if <> != nil {
+      		return errors.Wrap(<>, "making query")
+      	}
+      	defer <>.Close()
+
+      	<> = <>[:0]
+      	for <>.Next() {
+      		var <> <>
+      		<> := <>.Scan(<>)
+      		if <> != nil {
+      			return errors.Wrap(<>, "scanning row")
+      		}
+
+      		<>
+      		<> = append(<>, <>)
+      	}
+
+      	return errors.Wrap(<>.Err(), "iterating rows")
+      })
+      return <>, <>
+      ]],
+      {
+        ls.i(1, "query"),
+        ls.i(2, "SELECT 1"),
+        ls.i(3, "ret"),
+        ls.i(4, "Type"),
+        ls.i(5, "cap"),
+        ls.i(6, "err"),
+        ls.i(7, "retrier"),
+        ls.i(8, "rows"),
+        ls.i(9, "err"),
+        ls.i(10, "db"),
+        ls.i(11, "ctx"),
+        rep(1), --query
+        ls.i(12, "args"),
+        rep(9), -- pgx.ErrNoRows
+        rep(9), -- pgx.ErrNoRows
+        rep(9), -- other errors
+        rep(9), -- other errors
+        rep(8), -- rows close
+        rep(3), -- ret
+        rep(3), -- ret
+        rep(8), -- rows next
+        ls.i(13, "doc"),
+        rep(4), -- type
+        ls.i(14, "err"),
+        rep(8), -- rows
+        ls.i(15, "&val"),
+        rep(14), -- err
+        rep(14), -- err
+        ls.i(0),
+        rep(3), -- ret
+        rep(3), -- ret
+        rep(13), -- doc
+        rep(8), -- rows error
+        rep(3), -- ret
+        rep(6), -- error
+      }
+    )
+  ),
+  -- }}}
 }
 
 -- vim: fdm=marker fdl=0
