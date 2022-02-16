@@ -152,6 +152,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)                               |                                                        |
 | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                                           | Make diagrams from text                                |
 | [jbyuki/venn.nvim](https://github.com/jbyuki/venn.nvim)                                                       | Create diagrams easier                                 |
+| [monaqa/dial.nvim](https://github.com/monaqa/dial.nvim)                                                       | Enhanced increment/decrement values                    |
 
 </details>
 

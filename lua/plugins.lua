@@ -280,6 +280,12 @@ require("packer").startup({
       "svban/YankAssassin.vim",
       event = { "BufRead", "BufNewFile" },
     })
+
+    use({
+      "monaqa/dial.nvim",
+      config = function() require("settings.dial-nvim") end,
+      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+    })
     -- }}}
 
     -- Programming {{{
