@@ -175,6 +175,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **[**           | Jumps to the previous item                                 |
 | **h**           | **H**unk                                                   |
 | **z**           | Folds, language/spelling                                   |
+| **i**           | **I**ndent                                                 |
 
 The `leader` key is `space`!
 
@@ -198,8 +199,8 @@ The `leader` key is `space`!
 | `<Alt-{>`          | Adds curly brackets at the end of line into insert mode (repeatable) |
 | [count]`]<space>`  | Inserts [count] empty lines after (repeatable)                       |
 | [count]`[<space>`  | Inserts [count] empty lines before (repeatable)                      |
-| `]=`               | Jump down along the indents                                          |
-| `[=`               | Jump up along the indents                                            |
+| `]i`               | Jump down along the **i**ndents                                      |
+| `[i`               | Jump up along the **i**ndents                                        |
 | `<leader>gw`       | **G**reps for current **W**ord in buffer. Populates the locallist    |
 | `<leader>sp`       | Toggles **Sp**elling on current buffer                               |
 | `<leader>sf`       | Auto **f**ixes previous misspelled word                              |
