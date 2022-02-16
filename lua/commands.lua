@@ -1,6 +1,5 @@
 local fs = require("arshlib.fs")
 local quick = require("arshlib.quick")
-local session = require("luasnip.session")
 
 local M = {}
 
@@ -275,6 +274,7 @@ quick.command("TMStop", function(args)
 end, { nargs = "+", complete = stop_completion, desc = "stop a tmuxinator project" })
 
 quick.command("UnlinkSnippets", function()
+  local session = require("luasnip.session")
   local cur_buf = vim.api.nvim_get_current_buf()
 
   while true do
