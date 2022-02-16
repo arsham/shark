@@ -20,6 +20,19 @@ local function rec_ls() --{{{
   })
 end --}}}
 
+local function lorem(lines) --{{{
+  local ret = {}
+  for i = 1, lines + 1, 1 do
+    table.insert(
+      ret,
+      ls.f(function()
+        return vim.fn.systemlist("lorem -lines " .. i)
+      end)
+    )
+  end
+  return ret
+end --}}}
+
 return {
   ls.s( -- Modeline {{{
     { trig = "modeline", dscr = "Add modeline to the file" },
@@ -43,8 +56,15 @@ return {
   }),
   --}}}
 
+  -- Lorem Ipsum {{{
+  ls.s("lorem", ls.c(1, lorem(15))),
+  ls.s(
+    { trig = "(%d+)lorem", regTrig = true },
+    ls.f(function(_, snip)
+      return vim.fn.systemlist("lorem -lines " .. snip.captures[1])
     end)
-  ), --}}}
+  ),
+  --}}}
 
   -- Misc {{{
   ls.s("shrug", { ls.t("¯\\_(ツ)_/¯") }),
