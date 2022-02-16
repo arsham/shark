@@ -1,28 +1,49 @@
+-- Requires {{{
 local ls = require("luasnip")
-
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local util = require("settings.luasnip.util")
+local ai = require("luasnip.nodes.absolute_indexer")
+local partial = require("luasnip.extras").partial
+--}}}
 
+-- Conditions {{{
 local function not_in_function()
   return not util.is_in_function()
 end
 
+local in_test_func = {
+  show_condition = util.is_in_test_function,
+  condition = util.is_in_test_function,
+}
+
+local in_test_file = {
+  show_condition = util.is_in_test_file,
+  condition = util.is_in_test_file,
+}
+
+local in_func = {
+  show_condition = util.is_in_function,
+  condition = util.is_in_function,
+}
+
+local not_in_func = {
+  show_condition = not_in_function,
+  condition = not_in_function,
+}
+--}}}
+
 return {
-  ls.s( -- Main {{{
-    { trig = "main", name = "MAIN", dscr = "Create a main function" },
-    fmt(
-      [[
-        func main() {{
-          {}
-        }}
-      ]],
-      ls.i(0)
-    ),
-    { show_condition = not_in_function }
+  -- Main {{{
+  ls.s(
+    { trig = "main", name = "Main", dscr = "Create a main function" },
+    fmta("func main() {\n\t<>\n}", ls.i(0)),
+    not_in_func
   ), --}}}
 
-  ls.s( -- If call error {{{
+  -- If call error {{{
+  ls.s(
     { trig = "ifcall", name = "IF CALL", dscr = "Call a function and check the error" },
     fmt(
       [[
@@ -42,10 +63,11 @@ return {
         ls.i(0),
       }
     ),
-    { show_condition = util.is_in_function }
+    in_func
   ), --}}}
 
-  ls.s( -- Function {{{
+  -- Function {{{
+  ls.s(
     { trig = "fn", name = "Function", dscr = "Create a function or a method" },
     fmt(
       [[
@@ -82,29 +104,33 @@ return {
         ls.i(0),
       }
     ),
-    { show_condition = not_in_function }
+    not_in_func
   ), --}}}
 
-  ls.s( -- If error {{{
+  -- If error {{{
+  ls.s(
     { trig = "ife", name = "If error", dscr = "If error, return wrapped" },
-    fmt(
-      [[
-        if {} != nil {{
-        	return {}
-        }}
-        {}
-      ]],
-      {
-        ls.i(1, "err"),
-        ls.d(2, util.make_return_nodes, { 1 }),
-        ls.i(0),
-      }
-    ),
-    { show_condition = util.is_in_function }
+    fmt("if {} != nil {{\n\treturn {}\n}}\n{}", {
+      ls.i(1, "err"),
+      ls.d(2, util.make_return_nodes, { 1 }),
+      ls.i(0),
+    }),
+    in_func
   ), --}}}
 
-  ls.s( -- gRPC Error{{{
+  -- gRPC Error{{{
+  ls.s(
     { trig = "gerr", dscr = "Return an instrumented gRPC error" },
+    fmt('internal.GrpcError({},\n\tcodes.{}, "{}", "{}", {})', {
+      ls.i(1, "err"),
+      ls.i(2, "Internal"),
+      ls.i(3, "Description"),
+      ls.i(4, "Field"),
+      ls.i(5, "fields"),
+    }),
+    in_func
+  ), --}}}
+
     fmt(
       [[
         internal.GrpcError({},
@@ -121,7 +147,8 @@ return {
     { show_condition = util.is_in_function }
   ), --}}}
 
-  ls.s( -- Nolint {{{
+  -- Nolint {{{
+  ls.s(
     { trig = "nolint", dscr = "ignore linter" },
     fmt([[// nolint:{} // {}]], {
       ls.i(1, "names"),
@@ -129,8 +156,9 @@ return {
     })
   ), --}}}
 
-  ls.s( -- Allocate Slices and Maps {{{
-    { trig = "alloc", name = "Allocate", dscr = "Allocate map or slice" },
+  -- Allocate Slices and Maps {{{
+  ls.s(
+    { trig = "make", name = "Make", dscr = "Allocate map or slice" },
     fmt("{} {}= make({})\n{}", {
       ls.i(1, "name"),
       ls.i(2),
@@ -140,31 +168,34 @@ return {
         fmt("map[{}]{}, {}", { ls.i(1, "keys"), ls.i(2, "values"), ls.i(3, "len") }),
       }),
       ls.i(0),
-    })
+    }),
+    in_func
   ), --}}}
 
-  ls.s( -- Test Cases {{{
+  -- Test Cases {{{
+  ls.s(
     { trig = "tcs", dscr = "create test cases for testing" },
-    fmt(
+    fmta(
       [[
-        tcs := map[string]struct {{
-        	{}
-        }} {{
+        tcs := map[string]struct {
+        	<>
+        } {
         	// Test cases here
-        }}
-        for name, tc := range tcs {{
+        }
+        for name, tc := range tcs {
         	tc := tc
-        	t.Run(name, func(t *testing.T) {{
-        		{}
-        	}})
-        }}
+        	t.Run(name, func(t *testing.T) {
+        		<>
+        	})
+        }
       ]],
       { ls.i(1), ls.i(2) }
     ),
-    { show_condition = util.is_in_test_function }
+    in_test_func
   ), --}}}
 
-  ls.s( -- Go CMP {{{
+  -- Go CMP {{{
+  ls.s(
     { trig = "gocmp", dscr = "cmp.Diff" },
     fmt(
       [[
@@ -177,35 +208,30 @@ return {
         ls.i(2, "got"),
       }
     ),
-    { show_condition = util.is_in_test_function }
+    in_test_func
   ), --}}}
 
-  ls.s( -- Create Mocks {{{
+  -- Create Mocks {{{
+  ls.s(
     { trig = "mock", name = "Mocks", dscr = "Create a mock with defering assertion" },
-    fmt(
-      [[
-        {} := &mocks.{}{{}}
-        defer {}.AssertExpectations(t)
-        {}
-      ]],
-      {
-        ls.i(1, "m"),
-        ls.i(2, "Mocked"),
-        rep(1),
-        ls.i(0),
-      }
-    ),
-    { show_condition = util.is_in_test_function }
+    fmt("{} := &mocks.{}{{}}\ndefer {}.AssertExpectations(t)\n{}", {
+      ls.i(1, "m"),
+      ls.i(2, "Mocked"),
+      rep(1),
+      ls.i(0),
+    }),
+    in_test_func
   ), --}}}
 
-  ls.s( -- Require NoError {{{
+  -- Require NoError {{{
+  ls.s(
     { trig = "noerr", name = "Require No Error", dscr = "Add a require.NoError call" },
     ls.c(1, {
       ls.sn(nil, fmt("require.NoError(t, {})", { ls.i(1, "err") })),
       ls.sn(nil, fmt('require.NoError(t, {}, "{}")', { ls.i(1, "err"), ls.i(2) })),
       ls.sn(nil, fmt('require.NoErrorf(t, {}, "{}", {})', { ls.i(1, "err"), ls.i(2), ls.i(3) })),
     }),
-    { show_condition = util.is_in_test_function }
+    in_test_func
   ), --}}}
 }
 

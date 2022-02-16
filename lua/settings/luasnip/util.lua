@@ -219,6 +219,15 @@ M.random_string = function(length)
   end
   return M.random_string(length - 1) .. charset[math.random(1, #charset)]
 end --}}}
+M.snake_case = function(titlecase) --{{{
+  -- lowercase the first letter otherwise it causes the result to start with an
+  -- underscore.
+  titlecase = string.lower(string.sub(titlecase, 1, 1)) .. string.sub(titlecase, 2)
+  return titlecase:gsub("%u", function(c)
+    return "_" .. c:lower()
+  end)
+end --}}}
+
 end --}}}
 
 return M
