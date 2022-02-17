@@ -13,7 +13,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 vim.cmd([[packadd packer.nvim]])
-vim.cmd([[packadd! cfilter]])
 
 -- Disables LSP plugins and other heavy plugins.
 local function full_start()
@@ -35,7 +34,7 @@ require("packer").startup({
       "arsham/arshlib.nvim",
       requires = { "nvim.lua", "plenary.nvim", "nui.nvim" },
     })
-    use_rocks({"bk-tree"})
+    use_rocks({ "bk-tree" })
     -- }}}
 
     -- Core/System utilities {{{
@@ -56,29 +55,32 @@ require("packer").startup({
     use({
       "arsham/fzfmania.nvim",
       requires = { "arshlib.nvim", "fzf.vim", "plenary.nvim" },
-      after = {"listish.nvim"},
-      config   = function() require("settings.fzf") end,
+      after    = { "listish.nvim" },
+      config   = function() require("settings.fzfmania") end,
     })
 
     use({
       "kevinhwang91/nvim-bqf",
       requires = { "fzf", "nvim-treesitter" },
-      config = function() require("bqf").enable() end,
-      ft   = { "qf" },
-      cond = full_start,
+      config   = function() require("bqf").enable() end,
+      ft       = { "qf" },
+      cond     = full_start,
     })
 
     use({
       "arsham/listish.nvim",
       requires = { "arshlib.nvim", "nvim.lua" },
-      config = function() require("listish").config({ }) end,
+      config = function()
+        require("listish").config({})
+        vim.cmd([[packadd! cfilter]])
+      end,
     })
 
     use({
       "kyazdani42/nvim-tree.lua",
       requires = { "nvim-web-devicons" },
-      setup    = function() require("settings.nvim_tree").setup() end,
-      config   = function() require("settings.nvim_tree").config() end,
+      setup    = function() require("settings.nvim-tree").setup() end,
+      config   = function() require("settings.nvim-tree").config() end,
       event    = { "BufRead" },
       cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
       keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
@@ -134,8 +136,10 @@ require("packer").startup({
       -- create ~/.gist-vim with this content: token xxxxx
       "mattn/vim-gist",
       requires = "mattn/webapi-vim",
-      config   = function() vim.g.gist_per_page_limit = 100 end,
-      cmd      = { "Gist" },
+      config = function()
+        vim.g.gist_per_page_limit = 100
+      end,
+      cmd = { "Gist" },
     })
     -- }}}
 
@@ -150,8 +154,8 @@ require("packer").startup({
     use({
       "arsham/matchmaker.nvim",
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
-      config = function() require("matchmaker").config({}) end,
-      keys = { "<leader>me", "<leader>ma", },
+      config   = function() require("matchmaker").config({}) end,
+      keys     = { "<leader>me", "<leader>ma" },
     })
 
     use({
@@ -167,10 +171,10 @@ require("packer").startup({
     use({
       "dhruvasagar/vim-zoom",
       config = function()
-        vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)" )
+        vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)")
       end,
       event = { "BufRead", "BufNewFile" },
-      keys = { "<C-w>z" },
+      keys  = { "<C-w>z" },
     })
 
     local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown" }
@@ -183,7 +187,7 @@ require("packer").startup({
 
     use({
       "rcarriga/nvim-notify",
-      config = function() require("settings.nvim_notify") end,
+      config = function() require("settings.nvim-notify") end,
       event  = "VimEnter",
     })
 
@@ -205,10 +209,10 @@ require("packer").startup({
     use({
       "arsham/yanker.nvim",
       -- "~/Projects/arsham/yanker.nvim",
-      config = function() require("yanker").config({}) end,
+      config   = function() require("yanker").config({}) end,
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
-      event = { "BufRead", "BufNewFile" },
-      keys = { "<leader>yh", },
+      event    = { "BufRead", "BufNewFile" },
+      keys     = { "<leader>yh" },
     })
 
     use({
@@ -244,7 +248,8 @@ require("packer").startup({
 
     use({
       "mg979/vim-visual-multi",
-      branch = "master", config = function() require("settings.visual_multi") end,
+      branch = "master",
+      config = function() require("settings.visual_multi") end,
       keys   = { "<C-n>", "<C-Down>", "<C-Up>" },
     })
 
@@ -272,7 +277,7 @@ require("packer").startup({
 
     use({
       "booperlv/nvim-gomove",
-      config = function() require("settings.gomove") end,
+      config = function() require("settings.nvim-gomove") end,
       event  = { "BufRead", "BufNewFile", "InsertEnter" },
     })
 
@@ -309,7 +314,6 @@ require("packer").startup({
         "nvim-cmp",
         "cmp-nvim-lsp",
         "lsp-status.nvim",
-        "cmp-nvim-lsp",
         "null-ls.nvim",
       },
       cmd  = "LspInstallInfo",
@@ -336,7 +340,7 @@ require("packer").startup({
       requires = { "fzf", "fzf.vim", "nvim-lspconfig" },
       config = function()
         require("lspfuzzy").setup({
-          fzf_preview = { "right:60%:+{2}-/2,nohidden", },
+          fzf_preview = { "right:60%:+{2}-/2,nohidden" },
         })
       end,
       after = { "nvim-lspconfig", "fzf.vim" },
@@ -428,7 +432,7 @@ require("packer").startup({
 
     use({
       "github/copilot.vim",
-      setup = function() require("settings.copilot").setup() end,
+      setup  = function() require("settings.copilot").setup() end,
       config = function() require("settings.copilot").config() end,
       event  = { "InsertEnter" },
       cond   = full_start,
@@ -457,19 +461,19 @@ require("packer").startup({
     use({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
-      config = function() require("indent-tools").config({}) end,
+      config   = function() require("indent-tools").config({}) end,
     })
 
     use({
       "arsham/archer.nvim",
       requires = { "arsham/arshlib.nvim", "tpope/vim-repeat", "norvalli/nvim.lua" },
-      config = function() require("archer").config({}) end,
+      config   = function() require("archer").config({}) end,
     })
 
     use({
       "echasnovski/mini.nvim",
       config = function() require("settings.mini-nvim") end,
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event  = { "BufRead", "BufNewFile", "InsertEnter" },
     })
 
     use({
@@ -514,7 +518,7 @@ require("packer").startup({
     use({
       "jbyuki/venn.nvim",
       config = function() require("settings.venn") end,
-      keys = { "<leader>v" },
+      keys   = { "<leader>v" },
     })
     -- }}}
     if packer_bootstrap then -- {{{
