@@ -10,7 +10,9 @@ vim.keymap.set("n", "<leader>v", function()
     vim.keymap.set("n", "K", "<C-v>k:VBox<CR>", { buffer = true, noremap = true })
     vim.keymap.set("n", "L", "<C-v>l:VBox<CR>", { buffer = true, noremap = true })
     vim.keymap.set("v", "f", ":VBox<CR>", { buffer = true, noremap = true })
-    vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
+    vim.keymap.set("v", "F", ":VBoxH<CR>", { buffer = true, noremap = true })
+    vim.keymap.set("v", "o", ":VBoxO<CR>", { buffer = true, noremap = true })
+    vim.keymap.set("v", "d", ":VBoxD<CR>", { buffer = true, noremap = true })
     return
   end
 
