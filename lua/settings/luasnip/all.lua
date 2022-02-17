@@ -20,7 +20,7 @@ local function rec_ls() --{{{
   })
 end --}}}
 
-local function lorem(lines) --{{{
+local function generate_lorem(lines) --{{{
   local ret = {}
   for i = 1, lines + 1, 1 do
     table.insert(
@@ -57,11 +57,23 @@ return {
   --}}}
 
   -- Lorem Ipsum {{{
-  ls.s("lorem", ls.c(1, lorem(15))),
   ls.s(
-    { trig = "(%d+)lorem", regTrig = true },
+    { trig = "lorem", name = "Lorem Ipsum (Choice)", dscr = "Choose next for more lines" },
+    ls.c(1, generate_lorem(20))
+  ),
+  ls.s(
+    {
+      trig = "(%d+)lorem",
+      name = "Lorem Ipsum",
+      regTrig = true,
+      dscr = "Start with a count for lines",
+    },
     ls.f(function(_, snip)
-      return vim.fn.systemlist("lorem -lines " .. snip.captures[1])
+      local lines = snip.captures[1]
+      if not tonumber(lines) then
+        lines = 1
+      end
+      return vim.fn.systemlist("lorem -lines " .. lines)
     end)
   ),
   --}}}
