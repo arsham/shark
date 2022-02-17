@@ -273,6 +273,16 @@ quick.command("TMStop", function(args)
   do_tmuxinator("stop", args.args)
 end, { nargs = "+", complete = stop_completion, desc = "stop a tmuxinator project" })
 
+quick.command("Lorem", function(args)
+  local count = args.count
+  if count == 0 then
+    count = 1
+  end
+  local lorem = vim.fn.systemlist("lorem -lines " .. count)
+  local cur_line = vim.api.nvim_win_get_cursor(0)[1]
+  vim.api.nvim_buf_set_lines(0, cur_line - 1, cur_line - 1, false, lorem)
+end, { desc = "insert lorem ipsum text", count = true })
+
 quick.command("UnlinkSnippets", function()
   local session = require("luasnip.session")
   local cur_buf = vim.api.nvim_get_current_buf()

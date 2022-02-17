@@ -559,6 +559,7 @@ The following list of commands do not fit into any specific categories.
 | `JsonDiff`            | Diff json files after formatting them        |
 | `TMStart`             | Start a tmuxinator project                   |
 | `TMStop`              | Stop a tmuxinator project                    |
+| [count]`Lorem`        | Insert (count) line(s) Lorem Ipsum text      |
 
 After running `InstallDependencies` you will be notified to install some
 programs.
