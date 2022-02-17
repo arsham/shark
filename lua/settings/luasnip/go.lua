@@ -276,7 +276,7 @@ return {
       		return &retry.StopError{Err: <err4>}
       	}
       	if <err5> != nil {
-      		return errors.Wrap(<err6>, "making query")
+      		return <err6>
       	}
       	defer <rows2>.Close()
 
@@ -285,16 +285,17 @@ return {
       		var <doc1> <type2>
       		<err7> := <rows4>.Scan(<vals>)
       		if <err8> != nil {
-      			return errors.Wrap(<err9>, "scanning row")
+      			return <err9>
       		}
 
       		<last>
       		<ret4> = append(<ret5>, <doc2>)
       	}
 
-      	return errors.Wrap(<err10>.Err(), "iterating rows")
+      	<err10> = <rows5>.Err()
+      	return <err11>
       })
-      return <ret6>, <err11>
+      return <ret6>, <err12>
       ]],
       {
         query1 = ls.i(1, "query"),
@@ -313,25 +314,27 @@ return {
         err3 = rep(9),
         err4 = rep(9),
         err5 = rep(9),
-        err6 = rep(9),
+        err6 = ls.d(13, util.go_err_snippet, { 9 }, { msg = "making query" }),
         rows2 = rep(8),
         ret2 = rep(3),
         ret3 = rep(3),
         rows3 = rep(8),
-        doc1 = ls.i(13, "doc"),
+        doc1 = ls.i(14, "doc"),
         type2 = rep(4),
-        err7 = ls.i(14, "err"),
+        err7 = ls.i(15, "err"),
         rows4 = rep(8),
-        vals = ls.i(15, "&val"),
-        err8 = rep(14),
-        err9 = rep(14),
+        vals = ls.i(16, "&val"),
+        err8 = rep(15),
+        err9 = ls.d(17, util.go_err_snippet, { 15 }, { msg = "scanning row" }),
         last = ls.i(0),
         ret4 = rep(3),
         ret5 = rep(3),
-        doc2 = rep(13),
-        err10 = rep(8),
+        doc2 = rep(14),
+        err10 = rep(9),
+        rows5 = rep(8),
+        err11 = ls.d(18, util.go_err_snippet, { 9 }, { msg = "iterating rows" }),
         ret6 = rep(3),
-        err11 = rep(6),
+        err12 = ls.d(19, util.go_err_snippet, { 6 }),
       }
     )
   ),

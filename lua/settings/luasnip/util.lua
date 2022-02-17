@@ -7,6 +7,32 @@ local rep = require("luasnip.extras").rep
 local ai = require("luasnip.nodes.absolute_indexer")
 --}}}
 
+local M = {}
+
+---Returns a choice node for errors.
+-- @param choice_index integer
+-- @param err_name string
+M.go_err_snippet = function(args, _, _, spec)
+  local err_name = args[1][1]
+  local index = spec and spec.index or nil
+  local msg = spec and spec.msg or ""
+  return ls.c(index, {
+    ls.sn(nil, fmt('errors.Wrap({}, "{}")', { ls.t(err_name), ls.i(1, msg) })),
+    ls.sn(nil, fmt('errors.Wrapf({}, "{}", {})', { ls.t(err_name), ls.i(1, msg), ls.i(2) })),
+    ls.sn(
+      nil,
+      fmt('internal.GrpcError({},\n\t\tcodes.{}, "{}", "{}", {})', {
+        ls.t(err_name),
+        ls.i(1, "Internal"),
+        ls.i(2, "Description"),
+        ls.i(3, "Field"),
+        ls.i(4, "fields"),
+      })
+    ),
+    ls.t(err_name),
+  })
+end
+
 ---Transform makes a node from the given text.
 local function transform(text, info) --{{{
   local string_sn = function(template, default)
@@ -44,21 +70,7 @@ local function transform(text, info) --{{{
     end
 
     info.index = info.index + 1
-    return ls.c(info.index, {
-      ls.sn(nil, fmt('errors.Wrap({}, "{}")', { ls.t(info.err_name), ls.i(1) })),
-      ls.sn(nil, fmt('errors.Wrapf({}, "{}", {})', { ls.t(info.err_name), ls.i(1), ls.i(2) })),
-      ls.sn(
-        nil,
-        fmt('internal.GrpcError({},\n\t\tcodes.{}, "{}", "{}", {})', {
-          ls.t(info.err_name),
-          ls.i(1, "Internal"),
-          ls.i(2, "Description"),
-          ls.i(3, "Field"),
-          ls.i(4, "fields"),
-        })
-      ),
-      ls.t(info.err_name),
-    })
+    return M.go_err_snippet({ { info.err_name } }, nil, nil, { index = info.index })
   elseif text == "bool" then
     info.index = info.index + 1
     return ls.c(info.index, { ls.i(1, "false"), ls.i(2, "true") })
@@ -142,8 +154,6 @@ local function return_value_nodes(info) --{{{
     end
   end
 end --}}}
-
-local M = {}
 
 ---Transforms the given arguments into nodes wrapped in a snippet node.
 M.make_return_nodes = function(args) --{{{
