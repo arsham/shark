@@ -13,6 +13,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 vim.cmd([[packadd packer.nvim]])
+vim.g.loaded_matchit = 1
 
 -- Disables LSP plugins and other heavy plugins.
 local function full_start()
@@ -283,6 +284,11 @@ require("packer").startup({
 
     use({
       "svban/YankAssassin.vim",
+      event = { "BufRead", "BufNewFile" },
+    })
+
+    use({
+      "andymass/vim-matchup",
       event = { "BufRead", "BufNewFile" },
     })
 
