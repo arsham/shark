@@ -47,19 +47,19 @@ return {
     { trig = "ifcall", name = "IF CALL", dscr = "Call a function and check the error" },
     fmt(
       [[
-      {}, {} := {}({})
+      {val}, {err} := {func}({args})
       if {} != nil {{
-      	return {}
+      	return {ret_err}
       }}
       {}
     ]],
       {
-        ls.i(1, { "val" }),
-        ls.i(2, { "err" }),
-        ls.i(3, { "Func" }),
-        ls.i(4),
+        val = ls.i(1, { "val" }),
+        err = ls.i(2, { "err" }),
+        func = ls.i(3, { "Func" }),
+        args = ls.i(4),
         rep(2),
-        ls.d(5, util.make_return_nodes, { 2 }),
+        ret_err = ls.d(5, util.make_return_nodes, { 2 }),
         ls.i(0),
       }
     ),
@@ -267,71 +267,71 @@ return {
     { trig = "queryrows", name = "Query Rows", dscr = "Query rows from database" },
     fmta(
       [[
-      const <> = `<>`
-      <> := make([]<>, 0, <>)
+      const <query1> = `<query2>`
+      <ret1> := make([]<type1>, 0, <cap>)
 
-      <> := <>.Do(func() error {
-      	<>, <> := <>.Query(<>, <>, <>)
-      	if errors.Is(<>, pgx.ErrNoRows) {
-      		return &retry.StopError{Err: <>}
+      <err1> := <retrier>.Do(func() error {
+      	<rows1>, <err2> := <db>.Query(<ctx>, <query3>, <args>)
+      	if errors.Is(<err3>, pgx.ErrNoRows) {
+      		return &retry.StopError{Err: <err4>}
       	}
-      	if <> != nil {
-      		return errors.Wrap(<>, "making query")
+      	if <err5> != nil {
+      		return errors.Wrap(<err6>, "making query")
       	}
-      	defer <>.Close()
+      	defer <rows2>.Close()
 
-      	<> = <>[:0]
-      	for <>.Next() {
-      		var <> <>
-      		<> := <>.Scan(<>)
-      		if <> != nil {
-      			return errors.Wrap(<>, "scanning row")
+      	<ret2> = <ret3>[:0]
+      	for <rows3>.Next() {
+      		var <doc1> <type2>
+      		<err7> := <rows4>.Scan(<vals>)
+      		if <err8> != nil {
+      			return errors.Wrap(<err9>, "scanning row")
       		}
 
-      		<>
-      		<> = append(<>, <>)
+      		<last>
+      		<ret4> = append(<ret5>, <doc2>)
       	}
 
-      	return errors.Wrap(<>.Err(), "iterating rows")
+      	return errors.Wrap(<err10>.Err(), "iterating rows")
       })
-      return <>, <>
+      return <ret6>, <err11>
       ]],
       {
-        ls.i(1, "query"),
-        ls.i(2, "SELECT 1"),
-        ls.i(3, "ret"),
-        ls.i(4, "Type"),
-        ls.i(5, "cap"),
-        ls.i(6, "err"),
-        ls.i(7, "retrier"),
-        ls.i(8, "rows"),
-        ls.i(9, "err"),
-        ls.i(10, "db"),
-        ls.i(11, "ctx"),
-        rep(1), --query
-        ls.i(12, "args"),
-        rep(9), -- pgx.ErrNoRows
-        rep(9), -- pgx.ErrNoRows
-        rep(9), -- other errors
-        rep(9), -- other errors
-        rep(8), -- rows close
-        rep(3), -- ret
-        rep(3), -- ret
-        rep(8), -- rows next
-        ls.i(13, "doc"),
-        rep(4), -- type
-        ls.i(14, "err"),
-        rep(8), -- rows
-        ls.i(15, "&val"),
-        rep(14), -- err
-        rep(14), -- err
-        ls.i(0),
-        rep(3), -- ret
-        rep(3), -- ret
-        rep(13), -- doc
-        rep(8), -- rows error
-        rep(3), -- ret
-        rep(6), -- error
+        query1 = ls.i(1, "query"),
+        query2 = ls.i(2, "SELECT 1"),
+        ret1 = ls.i(3, "ret"),
+        type1 = ls.i(4, "Type"),
+        cap = ls.i(5, "cap"),
+        err1 = ls.i(6, "err"),
+        retrier = ls.i(7, "retrier"),
+        rows1 = ls.i(8, "rows"),
+        err2 = ls.i(9, "err"),
+        db = ls.i(10, "db"),
+        ctx = ls.i(11, "ctx"),
+        query3 = rep(1),
+        args = ls.i(12, "args"),
+        err3 = rep(9),
+        err4 = rep(9),
+        err5 = rep(9),
+        err6 = rep(9),
+        rows2 = rep(8),
+        ret2 = rep(3),
+        ret3 = rep(3),
+        rows3 = rep(8),
+        doc1 = ls.i(13, "doc"),
+        type2 = rep(4),
+        err7 = ls.i(14, "err"),
+        rows4 = rep(8),
+        vals = ls.i(15, "&val"),
+        err8 = rep(14),
+        err9 = rep(14),
+        last = ls.i(0),
+        ret4 = rep(3),
+        ret5 = rep(3),
+        doc2 = rep(13),
+        err10 = rep(8),
+        ret6 = rep(3),
+        err11 = rep(6),
       }
     )
   ),
