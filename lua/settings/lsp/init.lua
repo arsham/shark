@@ -158,7 +158,7 @@ local function on_attach(client, bufnr)--{{{
 
   -- TODO: find out how to disable the statuline badges as well.
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-    vim.diagnostic.disable()
+    vim.diagnostic.disable(bufnr)
   end
 
   -- TODO: turn these into: client.supports_method("textDocument/codeAction")

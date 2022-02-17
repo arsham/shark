@@ -29,7 +29,7 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     use_languagetree = false,
     disable = function(_, bufnr)
-      return vim.api.nvim_buf_line_count(bufnr) > vim.g.treesitter_highlight_maxlines
+      return vim.api.nvim_buf_line_count(bufnr or 0) > vim.g.treesitter_highlight_maxlines
     end,
     custom_captures = {
       ["function.call"] = "TSFunction",
