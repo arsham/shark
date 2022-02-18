@@ -16,6 +16,9 @@ M.go_err_snippet = function(args, _, _, spec)
   local err_name = args[1][1]
   local index = spec and spec.index or nil
   local msg = spec and spec.msg or ""
+  if spec and spec.postfix then
+    err_name = err_name .. spec.postfix
+  end
   return ls.c(index, {
     ls.sn(nil, fmt('errors.Wrap({}, "{}")', { ls.t(err_name), ls.i(1, msg) })),
     ls.sn(nil, fmt('errors.Wrapf({}, "{}", {})', { ls.t(err_name), ls.i(1, msg), ls.i(2) })),

@@ -292,7 +292,6 @@ return {
       		<ret4> = append(<ret5>, <doc2>)
       	}
 
-      	<err10> = <rows5>.Err()
       	return <err11>
       })
       return <ret6>, <err12>
@@ -330,9 +329,12 @@ return {
         ret4 = rep(3),
         ret5 = rep(3),
         doc2 = rep(14),
-        err10 = rep(9),
-        rows5 = rep(8),
-        err11 = ls.d(18, util.go_err_snippet, { 9 }, { msg = "iterating rows" }),
+        err11 = ls.d(
+          18,
+          util.go_err_snippet,
+          { 8 },
+          { msg = "iterating rows", postfix = ".Err()" }
+        ),
         ret6 = rep(3),
         err12 = ls.d(19, util.go_err_snippet, { 6 }),
       }
