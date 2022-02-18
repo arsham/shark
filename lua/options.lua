@@ -64,6 +64,7 @@ vim.opt.suffixesadd = {
   ".py",
   ".lua",
 }
+vim.opt.signcolumn = "auto:3"
 
 -- Wildmenu {{{
 -- enable ctrl-n and ctrl-p to scroll through matches
