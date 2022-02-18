@@ -41,6 +41,7 @@ there are a few other **LSP** servers setup as well.
    - [Highlight Matching](#highlight-matching)
    - [FZF](#fzf)
    - [LSP](#lsp)
+   - [Snippets](#snippets)
    - [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
 
@@ -50,6 +51,17 @@ there are a few other **LSP** servers setup as well.
     <summary>Click to view another image</summary>
 
 ![go](https://user-images.githubusercontent.com/428611/148667079-f441fc97-4157-4ed3-b2bb-81a64d358107.png)
+
+</details>
+
+<details>
+    <summary>Click to view advance snippets demo</summary>
+
+See [snippets](#snippets) section for more information.
+
+![queryrows](https://user-images.githubusercontent.com/428611/154764948-b620896d-3303-42db-ad09-dcde94a18764.gif)
+
+![ife](https://user-images.githubusercontent.com/428611/154764941-6398c245-01f8-4c5e-b226-302d10dc1fef.gif)
 
 </details>
 
@@ -563,6 +575,28 @@ The following list of commands do not fit into any specific categories.
 
 After running `InstallDependencies` you will be notified to install some
 programs.
+
+</details>
+
+### Snippets
+
+I never was a fan of snippets, until I discovered the
+[LuaSnip](https://github.com/L3MON4D3/LuaSnip) plugin and it changed my mind.
+Here is a demo of a couple of snippets shipped with this setup:
+
+<details>
+    <summary>Click to view advance snippets demo</summary>
+
+Queryrows snippet creates a useful code in Go that uses the
+[Retry](https://github.com/arsham/retry) library for querying postgres.
+
+![queryrows](https://user-images.githubusercontent.com/428611/154764948-b620896d-3303-42db-ad09-dcde94a18764.gif)
+
+Ife snippet is an improvement over a snippet by
+[tjdevries](https://github.com/tjdevries/config_manager/blob/6e48802a9c6acc9f8f2c9768fcb57d6ce1f05e00/xdg_config/nvim/lua/tj/snips/ft/go.lua)
+that tries to work better with return values.
+
+![ife](https://user-images.githubusercontent.com/428611/154764941-6398c245-01f8-4c5e-b226-302d10dc1fef.gif)
 
 </details>
 
