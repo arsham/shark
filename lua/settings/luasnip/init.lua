@@ -14,6 +14,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 ls.config.set_config({ --{{{
   store_selection_keys = "<c-s>",
   updateevents = "TextChanged,TextChangedI",
+  ft_func = require("luasnip.extras.filetype_functions").from_pos_or_filetype,
 
   ext_opts = {
     [types.choiceNode] = {
