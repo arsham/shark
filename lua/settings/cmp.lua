@@ -95,42 +95,44 @@ cmp.setup({
   sources = cmp.config.sources({ --{{{
     { name = "nvim_lsp", priority = 80 },
     { name = "nvim_lua", priority = 80 },
-    { name = "path", priority = 40 },
+    { name = "path", priority = 40, max_item_count = 4 },
     { name = "luasnip", priority = 10 },
     { name = "calc" },
     { name = "nvim_lsp_signature_help" },
     {
       name = "buffer",
+      priority = 5,
       keyword_length = 3,
-      max_item_count = 10,
+      max_item_count = 5,
       option = {
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
         end,
       },
     },
-    { name = "rg", keyword_length = 3, max_item_count = 10 },
+    { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1 },
   }), --}}}
 
   formatting = { --{{{
     fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
-      vim_item.menu = string.format(
-        "%-8s[%s]",
-        vim_item.kind,
-        ({
-          buffer = "Buffer",
-          nvim_lsp = "LSP",
-          luasnip = "LuaSnip",
-          vsnip = "VSnip",
-          nvim_lua = "Lua",
-          latex_symbols = "LaTeX",
-          path = "Path",
-          rg = "RG",
-          omni = "Omni",
-          copilot = "Copilot",
-        })[entry.source.name]
-      )
+      local client_name = ""
+      if entry.source.name == "nvim_lsp" then
+        client_name = "/" .. entry.source.source.client.name
+      end
+
+      vim_item.menu = string.format("%-9s[%s%s]", vim_item.kind, ({
+        buffer = "Buffer",
+        nvim_lsp = "LSP",
+        luasnip = "LuaSnip",
+        vsnip = "VSnip",
+        nvim_lua = "Lua",
+        latex_symbols = "LaTeX",
+        path = "Path",
+        rg = "RG",
+        omni = "Omni",
+        copilot = "Copilot",
+      })[entry.source.name] or entry.source.name, client_name)
 
       vim_item.kind = kind_icons[vim_item.kind]
       vim_item.dup = {
@@ -139,7 +141,6 @@ cmp.setup({
         nvim_lsp = 0,
         luasnip = 1,
       }
-
       return vim_item
     end,
   }, --}}}
