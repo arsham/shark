@@ -43,6 +43,9 @@ require("nvim-treesitter.configs").setup({
     enable_autocmd = false,
     config = {
       c = "// %s",
+      go = "// %s",
+      sql = "-- %s",
+      vim = '" %s',
     },
   }, --}}}
 
