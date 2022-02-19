@@ -306,7 +306,7 @@ return {
         type2   = rep(4),
         err7    = ls.i(15, "err"),
         rows4   = rep(8),
-        vals    = ls.i(16, "val"),
+        vals    = ls.d(16, function(args) return ls.sn(nil, ls.i(1, args[1][1])) end, { 14 }),
         err8    = rep(15),
         err9    = ls.d(17, util.go_err_snippet, { 15 }, { msg = "scanning row" }),
         last    = ls.i(0),
