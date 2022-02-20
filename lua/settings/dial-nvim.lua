@@ -55,8 +55,27 @@ config.augends:register_group({
     augend.constant.new({
       elements = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" },
     }),
+
+    augend.constant.new({
+      elements = {
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      },
+    }),
+
     augend.constant.new({ elements = { "int", "int64", "int32" } }),
     augend.constant.new({ elements = { "float64", "float32" } }),
+
     -- copied from an old commit from the author of the plugin.
     augend.user.new({
       desc = "fixed-digit decimal natural number (e.g. 00, 01, 02, ..., 97, 98, 99)",
