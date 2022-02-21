@@ -147,7 +147,15 @@ require("packer").startup({
     -- Visuals {{{
     use({
       "arsham/arshamiser.nvim",
-      requires = { "arshlib.nvim", "nvim.lua", "feline.nvim", "nvim-web-devicons", "lsp-status.nvim" },
+      requires = {
+        "rebelot/heirline.nvim",
+        "arshlib.nvim",
+        "nvim.lua",
+        "feline.nvim",
+        "nvim-web-devicons",
+        "sqls.nvim",
+        "fidget.nvim",
+      },
       config = function() require("settings.arshamiser") end,
       event = { "VimEnter" },
     })
@@ -319,7 +327,6 @@ require("packer").startup({
         "nvim-lspconfig",
         "nvim-cmp",
         "cmp-nvim-lsp",
-        "lsp-status.nvim",
         "null-ls.nvim",
       },
       cmd  = "LspInstallInfo",
@@ -327,9 +334,9 @@ require("packer").startup({
     })
 
     use({
-      "nvim-lua/lsp-status.nvim",
-      after = { "nvim-lspconfig", "fzf.vim" },
-      config = function() require("settings.lspstatus") end,
+      "j-hui/fidget.nvim",
+      after = { "nvim-lspconfig" },
+      config = function() require("settings.fidget-nvim") end,
       event = { "BufRead", "BufNewFile", "InsertEnter" },
       cond = full_start,
     })

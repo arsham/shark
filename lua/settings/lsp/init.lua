@@ -229,10 +229,7 @@ local function on_attach(client, bufnr)--{{{
 end--}}}
 -- stylua: ignore end
 
-local lsp_status = require("lsp-status")
-lsp_status.register_progress()
 local attach_wrap = function(client, ...)
-  lsp_status.on_attach(client)
   on_attach(client, ...)
 end
 
@@ -240,7 +237,6 @@ end
 local capabilities = require("cmp_nvim_lsp").update_capabilities( --{{{
   vim.lsp.protocol.make_client_capabilities()
 )
-capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
 --}}}
 
 local null_ls = require("null-ls") --{{{

@@ -122,6 +122,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                                             | LSP configuration                                      |
 | [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)                         | Automatically install LSP servers                      |
 | [ojroques/nvim-lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)                                           | Use FZF for various LSP actions                        |
+| [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim)                                                     | Spinner for LSP status                                 |
 | [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)                         |                                                        |
 | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                                       | Completion, and its related plugins.                   |
 | [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                                       | Snippet engine                                         |
