@@ -133,7 +133,6 @@ Some plugins are not listed here. You can find the complete list in the
 | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                                         | Seamlessly navigate between tmux panes and vim windows |
 | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                                       | File explorer tree                                     |
 | [famiu/feline.nvim](https://github.com/famiu/feline.nvim)                                                     | Statusline (default)                                   |
-| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                                         | Statusline                                             |
 | [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                                   | Fuzzy completion for command mode                      |
 | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                                             | Better quickfix list manager                           |
 | [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                                           | Better quickfix list manager                           |
@@ -688,45 +687,6 @@ more in plugin settings and lsp folder. The same goes for the commands.
 
 The reason for this is because I wanted to make sure if I disable a plugin,
 none of its associated mappings or commands are loaded.
-
-<details>
-    <summary>Click to view the tree</summary>
-
-```bash
-.
-├── init.lua                         # Entry point.
-├── colors
-│   └── arsham.vim
-├── lua
-│   ├── arsham.lua                   # My colorscheme.
-│   ├── autocmd.lua
-│   ├── commands.lua
-│   ├── textobjects.lua
-│   ├── lists.lua                    # Manages quickfix and local lists.
-│   ├── matching.lua                 # To highlight matched words.
-│   ├── mappings.lua
-│   ├── options.lua                  # Core settings.
-│   ├── plugins.lua                  # Plugings are loaded here.
-│   ├── settings                     # Pluging settings are here.
-│   │   ├── init.lua
-│   │   ├── cmp.lua
-│   │   ├── fzf
-│   │   │   └── init.lua
-│   │   ├── gitsigns.lua
-│   │   ├── lsp
-│   │   │   └── init.lua
-│   │   ├── treesitter.lua
-│   │   └── wilder.lua               # For fuzzy Ex commands.
-│   ├── statusline
-│   │   ├── feline                   # Feline config.
-│   │   └── galaxyline               # Galaxyline config.
-│   ├── util
-│   │   └── init.lua                 # Common utilities.
-│   └── visuals.lua
-└── spell
-```
-
-</details>
 
 <!--
 vim: foldlevel=2
