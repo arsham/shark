@@ -111,6 +111,9 @@ end, { noremap = true, silent = false, desc = "execute macro over visual range" 
 -- Easier cgn process by starting with already selected text.
 vim.keymap.set("n", "cn", "*``cgn")
 
+-- Make the last change as an initiation for cgn.
+vim.keymap.set("n", "g.", [[/\V<C-r>"<CR>cgn<C-a><Esc>]])
+
 -- Folding support {{{
 vim.keymap.set("n", "<leader>zm", function()
   vim.opt_local.foldmethod = "manual"
