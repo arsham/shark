@@ -365,6 +365,7 @@ Note that all these mappings are bound to the current window.
 | `<leader>ma` | **A**dd current word as a sub-pattern to the highlights. |
 | `<leader>me` | Add an **e**xact match on current term.                  |
 | `<leader>mp` | Add an match by asking for a **p**attern.                |
+| `<leader>ml` | Add current line                                         |
 | `<leader>md` | **D**elete **M**atches with fzf search.                  |
 | `<leader>mc` | **C**lear all matched patterns on current window.        |
 

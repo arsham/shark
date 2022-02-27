@@ -164,7 +164,7 @@ require("packer").startup({
       "arsham/matchmaker.nvim",
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
       config   = function() require("matchmaker").config({}) end,
-      keys     = { "<leader>me", "<leader>ma" },
+      keys     = { "<leader>me", "<leader>ma", "<leader>ml" },
     })
 
     use({
