@@ -21,7 +21,6 @@ local function full_start()
 end
 -- }}}
 
--- Plugins {{{2
 require("packer").startup({
   function(use)
     -- Libraries {{{
@@ -214,10 +213,8 @@ require("packer").startup({
     -- }}}
 
     -- Editing {{{
-
     use({
       "arsham/yanker.nvim",
-      -- "~/Projects/arsham/yanker.nvim",
       config   = function() require("yanker").config({}) end,
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
       event    = { "BufRead", "BufNewFile" },
@@ -536,6 +533,7 @@ require("packer").startup({
       keys   = { "<leader>v" },
     })
     -- }}}
+
     if packer_bootstrap then -- {{{
       require("packer").sync()
     end
