@@ -365,7 +365,6 @@ require("packer").startup({
     -- nvim-cmp {{{
     use({
       "hrsh7th/nvim-cmp",
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
       requires = {
         { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
@@ -384,7 +383,9 @@ require("packer").startup({
         },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
+      after = { "LuaSnip", "nvim-treesitter" } ,
       config = function() require("settings.cmp") end,
+      event = { "BufRead", "BufNewFile", "InsertEnter" },
       cond   = full_start,
     })
     -- }}}
