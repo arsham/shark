@@ -19,6 +19,24 @@ require("mini.surround").setup({
 })
 
 require("mini.trailspace").setup({})
+require("mini.indentscope").setup({
+  draw = {
+    delay = 100,
+    animation = function()
+      return 5
+    end,
+  },
+
+  mappings = {
+    object_scope = "",
+    object_scope_with_border = "",
+    goto_top = "",
+    goto_bottom = "",
+  },
+
+  symbol = "╎",
+})
+
 require("mini.misc").setup({
   make_global = { "put", "put_text" },
 })
