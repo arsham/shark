@@ -449,6 +449,7 @@ require("packer").startup({
       setup  = function() require("settings.copilot").setup() end,
       config = function() require("settings.copilot").config() end,
       event  = { "InsertEnter" },
+      keys   = { "<leader>ce" },
       cond   = full_start,
     })
 
