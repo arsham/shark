@@ -1,6 +1,7 @@
-require("arshlib.quick").highlight("MiniTrailspace", { link = "ExtraWhitespace" })
-require("arshlib.quick").highlight("MiniSurround", { link = "Substitute" })
-require("arshlib.quick").highlight("MiniIndentscopeSymbol", { link = "VertSplit" })
+local quick = require("arshlib.quick")
+quick.highlight("MiniTrailspace", { link = "ExtraWhitespace" })
+quick.highlight("MiniSurround", { link = "Substitute" })
+quick.highlight("MiniIndentscopeSymbol", { link = "VertSplit" })
 
 require("mini.surround").setup({
   n_lines = 40,

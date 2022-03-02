@@ -3,9 +3,9 @@ vim.opt.guifont = "DejaVuSansMono Nerd Font:h10"
 
 -- Defer setting the colorscheme until the UI loads.
 require("arshlib.quick").autocmd({
-  "UIEnter",
-  "*",
-  function()
+  events = "UIEnter",
+  pattern = "*",
+  callback = function()
     require("nvim").ex.colorscheme("arshamiser_light")
     require("arshamiser.feliniser")
     -- selene: allow(global_usage)

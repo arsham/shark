@@ -234,16 +234,16 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-quick.augroup({ "CODE_LENSES" })
+quick.augroup("CODE_LENSES")
 function M.code_lens() --{{{
   quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
   quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
   nnoremap("<leader>cr", vim.lsp.codelens.run, "run code lenses")
 
   quick.autocmd({
-    "CursorHold,CursorHoldI,InsertLeave",
+    events = { "CursorHold", "CursorHoldI", "InsertLeave" },
     group = "CODE_LENSES",
-    run = vim.lsp.codelens.refresh,
+    callback = vim.lsp.codelens.refresh,
     buffer = true,
   })
 end --}}}
@@ -254,43 +254,43 @@ function M.setup_completions() --{{{
 end --}}}
 
 -- stylua: ignore start
-quick.augroup({"LSP_EVENTS", {
-  {"BufReadPost,BufNewFile", "go.mod", function()
+quick.augroup("LSP_EVENTS", {
+  { events = "BufReadPost,BufNewFile", pattern = "go.mod", callback = function()
       vim.opt_local.filetype = "gomod"
     end,
-  }},
+  },
 })
 
 function M.setup_events(imports, format) --{{{
-  quick.autocmd({"BufWritePre", group = "LSP_EVENTS", buffer = true, run = function()
+  quick.autocmd({ events = "BufWritePre", group = "LSP_EVENTS", buffer = true, callback = function()
       imports()
       format()
-    end, docs = "format and imports",
+    end, desc = "format and imports",
   })
 
-  quick.autocmd({"BufReadPost,BufNewFile", group = "LSP_EVENTS",
-    "*/templates/*.yaml,*/templates/*.tpl",
-    run = "LspStop",
+  quick.autocmd({ events = "BufReadPost,BufNewFile", group = "LSP_EVENTS",
+    pattern = "*/templates/*.yaml,*/templates/*.tpl",
+    callback = "LspStop",
   })
 
-  quick.autocmd({"InsertEnter", "go.mod", group = "LSP_EVENTS", run = function()
+  quick.autocmd({ events = "InsertEnter", pattern = "go.mod", group = "LSP_EVENTS", callback = function()
       vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
-    end, once = true, docs = "don't wrap me",
+    end, once = true, desc = "don't wrap me",
   })
 
-  quick.autocmd({"BufWritePre", "go.mod", group = "LSP_EVENTS", run = function()
+  quick.autocmd({ events = "BufWritePre", pattern = "go.mod", group = "LSP_EVENTS", callback = function()
       local filename = vim.fn.expand("%:p")
       local bufnr = vim.fn.expand("<abuf>")
       lsp.go_mod_tidy(tonumber(bufnr), filename)
-    end, docs = "run go mod tidy on save",
+    end, desc = "run go mod tidy on save",
   })
 
   local function go_mod_check()
     local filename = vim.fn.expand("<amatch>")
     lsp.go_mod_check_upgrades(filename)
   end
-  quick.autocmd({"BufRead", "go.mod", group = "LSP_EVENTS",
-    run = go_mod_check, docs = "check for updates",
+  quick.autocmd({ events = "BufRead", pattern = "go.mod", group = "LSP_EVENTS",
+    callback = go_mod_check, desc = "check for updates",
   })
 end --}}}
 -- stylua: ignore end

@@ -9,7 +9,7 @@ quick.command("Filename", function()
     timeout = 3000,
   })
 end)
-quick.command("YankFilename", function()
+quick.command("YankFilename", function() --{{{
   vim.fn.setreg('"', vim.fn.expand("%:t"))
 end)
 quick.command("YankFilenameC", function()
@@ -20,7 +20,7 @@ quick.command("YankFilepath", function()
 end)
 quick.command("YankFilepathC", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
-end)
+end) --}}}
 
 quick.command("MergeConflict", ":grep '<<<<<<< HEAD'")
 quick.command("JsonDiff", [[vert ball | windo execute '%!gojq' | windo diffthis]])
@@ -45,11 +45,11 @@ local function setup_watch(filenames) --{{{
   return modules
 end --}}}
 
-local bufname = vim.fn.bufname()
+local bufname = vim.fn.bufname() --{{{
 if vim.fn.getbufvar(bufname, "watch_lua_file_augroup") ~= true then
   vim.fn.setbufvar(bufname, "watch_lua_file_augroup", true)
-  quick.augroup({ "WATCH_LUA_FILE" })
-end
+  quick.augroup("WATCH_LUA_FILE")
+end --}}}
 
 function M.watch_file_changes(filenames) --{{{
   local reloader = require("plenary.reload")
@@ -62,9 +62,10 @@ function M.watch_file_changes(filenames) --{{{
       watched = "*/" .. watched
     end
     quick.autocmd({
-      "WATCH_LUA_FILE BufWritePost",
-      watched,
-      run = function()
+      group = "WATCH_LUA_FILE",
+      events = "BufWritePost",
+      pattern = watched,
+      callback = function()
         for _, mod in ipairs(modules) do
           reloader.reload_module(mod.module, false)
           require(mod.module)
@@ -76,7 +77,7 @@ function M.watch_file_changes(filenames) --{{{
           timeout = 1000,
         })
       end,
-      docs = string.format("watching %s", module.name),
+      desc = string.format("watching %s", module.name),
     })
   end
 
@@ -273,7 +274,7 @@ quick.command("TMStop", function(args)
   do_tmuxinator("stop", args.args)
 end, { nargs = "+", complete = stop_completion, desc = "stop a tmuxinator project" })
 
-quick.command("Lorem", function(args)
+quick.command("Lorem", function(args) --{{{
   local count = args.count
   if count == 0 then
     count = 1
@@ -281,9 +282,9 @@ quick.command("Lorem", function(args)
   local lorem = vim.fn.systemlist("lorem -lines " .. count)
   local cur_line = vim.api.nvim_win_get_cursor(0)[1]
   vim.api.nvim_buf_set_lines(0, cur_line - 1, cur_line - 1, false, lorem)
-end, { desc = "insert lorem ipsum text", count = true })
+end, { desc = "insert lorem ipsum text", count = true }) --}}}
 
-quick.command("UnlinkSnippets", function()
+quick.command("UnlinkSnippets", function() --{{{
   local session = require("luasnip.session")
   local cur_buf = vim.api.nvim_get_current_buf()
 
@@ -302,7 +303,7 @@ quick.command("UnlinkSnippets", function()
     -- prefer setting previous/outer insertNode as current node.
     session.current_nodes[cur_buf] = user_expanded_snip.prev.prev or user_expanded_snip.next.next
   end
-end, { desc = "Unlink all open snippets" })
+end, { desc = "Unlink all open snippets" }) --}}}
 
 return M
 

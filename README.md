@@ -608,7 +608,7 @@ These are commands you can use in **Lua** land. Assign the required module to a
 variable and re-use.
 
 ```lua
-local util = require('util')
+local quick = require('arshlib.quick')
 ```
 
 #### Normal
@@ -616,7 +616,7 @@ local util = require('util')
 Executes a normal command. For example:
 
 ```lua
-util.normal('n', 'y2k')
+quick.normal('n', 'y2k')
 ```
 
 See `:h feedkeys()` for values of the mode.
@@ -624,23 +624,23 @@ See `:h feedkeys()` for values of the mode.
 #### Augroup and Autocmd
 
 ```lua
-util.augroup{"SOME_AUTOMATION", {
-    {"BufReadPost", "*", function()
+quick.augroup("SOME_AUTOMATION", {
+    { events = "BufReadPost", pattern = "*", callback = function()
         vim.notify("This just happened!", vim.lsp.log_levels.INFO)
     end},
-    {"BufReadPost", buffer=true, run=":LspStop"},
-    {"BufReadPost", "*.go", docs="an example of nested autocmd", run=function()
+    { events = "BufReadPost", buffer = true, callback = ":LspStop"},
+    { events = "BufReadPost", pattern = "*.go", desc = "an example of nested autocmd", callback = function()
         vim.notify("Buffer is read", vim.lsp.log_levels.INFO)
-        util.autocmd{"BufDelete", buffer=true, run=function()
+        quick.autocmd({ events = "BufDelete", buffer = true, callback = function()
             vim.notify("Buffer deleted", vim.lsp.log_levels.INFO)
-        end}
+        end})
     end},
-}}
+})
 
 -- Or on its own.
-util.autocmd{"BufLeave", "*", function()
+quick.autocmd({ events = "BufLeave", pattern = "*", callback = function()
     vim.notify("Don't do this though", vim.lsp.log_levels.INFO)
-end},
+end)
 ```
 
 #### Highlight
@@ -648,7 +648,7 @@ end},
 Create `highlight` groups:
 
 ```lua
-util.highlight("LspReferenceRead",  {ctermbg=180, guibg='#43464F', style='bold'})
+quick.highlight("LspReferenceRead",  {ctermbg=180, guibg='#43464F', style='bold'})
 ```
 
 #### Call and Centre
@@ -656,8 +656,8 @@ util.highlight("LspReferenceRead",  {ctermbg=180, guibg='#43464F', style='bold'}
 These functions will call your function/command and then centres the buffer:
 
 ```lua
-util.call_and_centre(function() print("Yolo!") end)
-util.cmd_and_centre("SomeCommand")
+quick.call_and_centre(function() print("Yolo!") end)
+quick.cmd_and_centre("SomeCommand")
 ```
 
 #### User Input
@@ -665,7 +665,7 @@ util.cmd_and_centre("SomeCommand")
 This launches a popup buffer for the input:
 
 ```lua
-util.user_input{
+require("arshlib.util").user_input{
     prompt = "Message: ",
     on_submit = function(value)
         print("Thank you for your note: " .. value)

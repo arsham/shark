@@ -48,9 +48,6 @@ local function init_wilder()
 end --}}}
 
 -- Lazy loading the setup.
-require("arshlib.quick").augroup({
-  "WILDER",
-  {
-    { "CmdlineEnter", targets = "* ++once", run = init_wilder },
-  },
+require("arshlib.quick").augroup("WILDER", {
+  { events = "CmdlineEnter", pattern = "*", once = true, callback = init_wilder },
 })
