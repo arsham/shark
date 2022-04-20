@@ -59,8 +59,8 @@ require("nvim-treesitter.configs").setup({
     },
   }, --}}}
 
-  textobjects = {
-    select = { --{{{
+  textobjects = { --{{{
+    select = {
       enable = true,
       keymaps = {
         ["af"] = "@function.outer",
@@ -112,12 +112,12 @@ require("nvim-treesitter.configs").setup({
       },
     }, --}}}
 
-    lsp_interop = {
+    lsp_interop = { --{{{
       enable = true,
       peek_definition_code = {
         ["<leader>df"] = "@function.outer",
       },
-    },
+    }, --}}}
   },
 
   playground = { --{{{
@@ -140,3 +140,5 @@ require("nvim-treesitter.configs").setup({
 
   autopairs = { enable = true },
 })
+
+-- vim: fdm=marker fdl=0
