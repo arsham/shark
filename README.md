@@ -7,6 +7,8 @@ programming fun.
 This setup is mostly customised to for **Go** (**Golang**) development. But
 there are a few other **LSP** servers setup as well.
 
+This project supports Neovim version `0.7` or later.
+
 ## Highlights
 
 - Besides in a few places that Neovim doesn't provide an API in Lua, most
@@ -14,9 +16,6 @@ there are a few other **LSP** servers setup as well.
 - It loads really fast! With over **60 plugins**, it takes **7ms** to
   **15ms** on average to load up. (benchmarked with the `StartupTime` benchmark
   tool).
-- There are a few **Lua** functions available for setting up
-  **autocmd/augroup** that accept **Lua functions** to run.
-  They are super cool, check them out!
 - **LSP**, **Treesitter**, and **FZF** are setup to work together.
 - Completion with **nvim-cmp** plugin is setup.
 - It is optimised to handle very **large** files.
@@ -26,10 +25,9 @@ there are a few other **LSP** servers setup as well.
 - You can **manipulate** quickfix/local lists.
 - It comes with integration with **git** and gist.
 - Has a lot of useful feedback in the gutter.
-- Bindings for using the **cht.sh** service.
 - Statusline is configures with **feline**. It is set to give a lot of useful
   information about the buffer.
-- Prettier quickfix buffer.
+- Prettier quickfix buffer and quickfix tools.
 - The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
@@ -116,6 +114,7 @@ Some plugins are not listed here. You can find the complete list in the
 | [arsham/arshamiser.nvim](https://github.com/arsham/arshamiser.nvim)                                           | Status line, colour scheme and folds                   |
 | [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                                                 | Supporting quickfix and local lists                    |
 | [arsham/fzfmania.nvim](https://github.com/arsham/fzfmania.nvim)                                               | Very powerful FZF setup in lua                         |
+| [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)                                                       | fzf :heart: lua - fzf frontend                         |
 | [arsham/indent-tool.nvim](https://github.com/arsham/indent-tool.nvim)                                         | Indent mappings and text object                        |
 | [arsham/matchmaker.nvim](https://github.com/arsham/matchmaker.nvim)                                           | Creates highlight for user matches                     |
 | [arsham/yanker.nvim](https://github.com/arsham/yanker.nvim)                                                   | Yank history                                           |
@@ -197,6 +196,7 @@ The `leader` key is `space`!
 
 | Mapping            | Description                                                          |
 | :----------------- | :------------------------------------------------------------------- |
+| `<Ctrl-Shift-p>`   | Show **C**ontrol panel (commands)                                    |
 | `<Ctrl-w>b`        | Delete current **B**uffer                                            |
 | `<leader>kk`       | Toggles Neovim tree                                                  |
 | `<leader><leader>` | Toggles Neovim tree                                                  |
