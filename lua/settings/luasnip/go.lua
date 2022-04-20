@@ -103,7 +103,7 @@ return {
     { trig = "ife", name = "If error", dscr = "If error, return wrapped" },
     fmt("if {} != nil {{\n\treturn {}\n}}\n{}", {
       ls.i(1, "err"),
-      ls.d(2, util.make_return_nodes, { 1 }),
+      ls.d(2, util.make_return_nodes, { 1 }, { user_args = { { "a1", "a2" } } }),
       ls.i(0),
     }),
     in_func
@@ -158,9 +158,13 @@ return {
       ls.i(1, "name"),
       ls.i(2),
       ls.c(3, {
-        fmt("[]{}, {}", { ls.i(1, "type"), ls.i(2, "len") }),
-        fmt("[]{}, 0, {}", { ls.i(1, "type"), ls.i(2, "len") }),
-        fmt("map[{}]{}, {}", { ls.i(1, "keys"), ls.i(2, "values"), ls.i(3, "len") }),
+        fmt("[]{}, {}", { ls.r(1, "type"), ls.i(2, "len") }),
+        fmt("[]{}, 0, {}", { ls.r(1, "type"), ls.i(2, "len") }),
+        fmt("map[{}]{}, {}", { ls.r(1, "type"), ls.i(2, "values"), ls.i(3, "len") }),
+      }, {
+        stored = { -- FIXME: the default value is not set.
+          type = ls.i(1, "type"),
+        },
       }),
       ls.i(0),
     }),
@@ -297,7 +301,7 @@ return {
         err3    = rep(9),
         err4    = rep(9),
         err5    = rep(9),
-        err6    = ls.d(13, util.go_err_snippet, { 9 }, { msg = "making query" }),
+        err6    = ls.d(13, util.go_err_snippet, { 9 }, { user_args = { { "making query" } } }),
         rows2   = rep(8),
         ret2    = rep(3),
         ret3    = rep(3),
@@ -308,15 +312,16 @@ return {
         rows4   = rep(8),
         vals    = ls.d(16, function(args) return ls.sn(nil, ls.i(1, args[1][1])) end, { 14 }),
         err8    = rep(15),
-        err9    = ls.d(17, util.go_err_snippet, { 15 }, { msg = "scanning row" }),
+        err9    = ls.d(17, util.go_err_snippet, { 15 }, { user_args = { { "scanning row" } } }),
         last    = ls.i(0),
         ret4    = rep(3),
         ret5    = rep(3),
         doc2    = rep(14),
-        err11   = ls.d(18, util.go_err_snippet, { 8 }, { msg = "iterating rows", postfix = ".Err()" }),
+        err11   = ls.d(18, util.go_err_snippet, { 8 }, { user_args = { { "iterating rows", ".Err()" } } }),
         ret6    = rep(3),
-        err12   = ls.d(19, util.go_err_snippet, { 6 }),
-    })
+        err12   = ls.d(19, util.go_err_snippet, { 6 }, { user_args = { { "error in row iteration" } } }),
+      }
+    )
   ),
   -- }}}
 }

@@ -1,15 +1,15 @@
 local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
-ls.snippets = { --{{{
-  all = require("settings.luasnip.all"),
-  go = require("settings.luasnip.go"),
-  lua = require("settings.luasnip.lua"),
-  gitcommit = require("settings.luasnip.gitcommit"),
-  markdown = require("settings.luasnip.markdown"),
-} --}}}
+ls.add_snippets("all", require("settings.luasnip.all"))
+ls.add_snippets("go", require("settings.luasnip.go"))
+ls.add_snippets("lua", require("settings.luasnip.lua"))
+ls.add_snippets("gitcommit", require("settings.luasnip.gitcommit"))
+ls.add_snippets("markdown", require("settings.luasnip.markdown"))
 
-require("luasnip.loaders.from_vscode").lazy_load()
+vim.schedule(function()
+  require("luasnip.loaders.from_vscode").load()
+end)
 
 ls.config.set_config({ --{{{
   store_selection_keys = "<c-s>",

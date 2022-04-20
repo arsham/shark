@@ -15,24 +15,26 @@ local M = {}
 M.go_err_snippet = function(args, _, _, spec)
   local err_name = args[1][1]
   local index = spec and spec.index or nil
-  local msg = spec and spec.msg or ""
-  if spec and spec.postfix then
-    err_name = err_name .. spec.postfix
+  local msg = spec and spec[1] or ""
+  if spec and spec[2] then
+    err_name = err_name .. spec[2]
   end
-  return ls.c(index, {
-    ls.sn(nil, fmt('errors.Wrap({}, "{}")', { ls.t(err_name), ls.i(1, msg) })),
-    ls.sn(nil, fmt('errors.Wrapf({}, "{}", {})', { ls.t(err_name), ls.i(1, msg), ls.i(2) })),
-    ls.sn(
-      nil,
-      fmt('internal.GrpcError({},\n\t\tcodes.{}, "{}", "{}", {})', {
-        ls.t(err_name),
-        ls.i(1, "Internal"),
-        ls.i(2, "Description"),
-        ls.i(3, "Field"),
-        ls.i(4, "fields"),
-      })
-    ),
-    ls.t(err_name),
+  return ls.sn(index, {
+    ls.c(1, {
+      ls.sn(nil, fmt('errors.Wrap({}, "{}")', { ls.t(err_name), ls.i(1, msg) })),
+      ls.sn(nil, fmt('errors.Wrapf({}, "{}", {})', { ls.t(err_name), ls.i(1, msg), ls.i(2) })),
+      ls.sn(
+        nil,
+        fmt('internal.GrpcError({},\n\t\tcodes.{}, "{}", "{}", {})', {
+          ls.t(err_name),
+          ls.i(1, "Internal"),
+          ls.i(2, "Description"),
+          ls.i(3, "Field"),
+          ls.i(4, "fields"),
+        })
+      ),
+      ls.t(err_name),
+    }),
   })
 end
 
@@ -96,7 +98,7 @@ local function transform(text, info) --{{{
   return ls.t(text)
 end --}}}
 
-local get_node_text = vim.treesitter.get_node_text
+local get_node_text = vim.treesitter.query.get_node_text
 local handlers = { --{{{
   parameter_list = function(node, info)
     local result = {}
@@ -118,19 +120,28 @@ local handlers = { --{{{
   end,
 } --}}}
 
-vim.treesitter.set_query( --{{{
-  "go",
-  "LuaSnip_Result",
-  [[
-    [
-      (method_declaration result: (_) @id)
-      (function_declaration result: (_) @id)
-      (func_literal result: (_) @id)
-    ]
+local query_is_set = false
+
+local function set_query()
+  if query_is_set then
+    return
+  end
+  query_is_set = true
+  vim.treesitter.set_query( --{{{
+    "go",
+    "LuaSnip_Result",
+    [[
+      [
+        (method_declaration result: (_) @id)
+        (function_declaration result: (_) @id)
+        (func_literal result: (_) @id)
+      ]
   ]]
-) --}}}
+  ) --}}}
+end
 
 local function return_value_nodes(info) --{{{
+  set_query()
   local cursor_node = ts_utils.get_node_at_cursor()
   local scope_tree = ts_locals.get_scope_tree(cursor_node, 0)
 
@@ -156,6 +167,7 @@ local function return_value_nodes(info) --{{{
       return handlers[node:type()](node, info)
     end
   end
+  return ls.t({ "" })
 end --}}}
 
 ---Transforms the given arguments into nodes wrapped in a snippet node.
@@ -261,17 +273,19 @@ M.snake_case = function(titlecase) --{{{
 end --}}}
 
 M.create_t_run = function(args) --{{{
-  return ls.c(1, {
-    ls.t({ "" }),
-    ls.sn(
-      nil,
-      fmt('\tt.Run("{}", {}{})\n{}', {
-        ls.i(1, "Case"),
-        ls.t(args[1]),
-        rep(1),
-        ls.d(2, M.create_t_run, ai[1]),
-      })
-    ),
+  return ls.sn(1, {
+    ls.c(1, {
+      ls.t({ "" }),
+      ls.sn(
+        nil,
+        fmt('\tt.Run("{}", {}{})\n{}', {
+          ls.i(1, "Case"),
+          ls.t(args[1]),
+          rep(1),
+          ls.d(2, M.create_t_run, ai[1]),
+        })
+      ),
+    }),
   })
 end --}}}
 
@@ -286,9 +300,9 @@ M.mirror_t_run_funcs = function(args) --{{{
   end
   local str = table.concat(strs, "")
   if #str == 0 then
-    return ls.t("")
+    return ls.sn(1, ls.t(""))
   end
-  return ls.sn(nil, fmt(str, {}))
+  return ls.sn(1, fmt(str, {}))
 end --}}}
 
 return M
