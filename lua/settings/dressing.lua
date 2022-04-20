@@ -10,6 +10,13 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
     },
 
     select = {
+      backend = { "fzf_lua", "fzf", "nui", "builtin" },
+      fzf_lua = {
+        winopts = {
+          width = 0.5,
+          height = 0.5,
+        },
+      },
       fzf = {
         window = {
           width = 0.5,
