@@ -1,20 +1,24 @@
 require("fidget").setup({
   text = {
     spinner = {
-      "∙∙∙∙∙∙",
-      "●∙∙∙∙∙",
-      "∙●∙∙∙∙",
-      "∙∙●∙∙∙",
-      "∙∙∙●∙∙",
-      "∙∙∙∙●∙",
-      "∙∙∙∙∙●",
-      "∙∙∙∙∙∙",
+      "⏺∙∙∙∙",
+      "∙⏺∙∙∙",
+      "∙∙⏺∙∙",
+      "∙∙∙⏺∙",
+      "∙∙∙∙⏺",
+      "∙∙∙⏺∙",
+      "∙∙⏺∙∙",
+      "∙⏺∙∙∙",
     },
     done = "✔",
     commenced = "Started",
     completed = "Completed",
   },
+  window = {
+    blend = 0, -- &winblend for the window
+  },
   fmt = {
+    stack_upwards = false,
     fidget = function(fidget_name, spinner)
       return string.format("%s %s", spinner, fidget_name)
     end,
