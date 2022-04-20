@@ -11,13 +11,13 @@ return {
     vim.keymap.set("n", "<leader>ce", function()
       nvim.ex.Copilot("enable")
       vim.keymap.set("i", "<C-y>", [[copilot#Accept("")]],
-      { noremap = true, silent = true, expr = true, script = true, desc = "copilot accept suggestion" })
-    end, { noremap = true, silent = true, desc = "enable copilot" })
+      { silent = true, expr = true, script = true, desc = "copilot accept suggestion" })
+    end, { silent = true, desc = "enable copilot" })
 
     vim.keymap.set("n", "<leader>cd", function()
       nvim.ex.Copilot("disable")
       vim.keymap.del("i", "<C-y>")
-    end, { noremap = true, silent = true, desc = "disable copilot" })
+    end, { silent = true, desc = "disable copilot" })
     -- stylua: ignore end
 
     -- disabled by default

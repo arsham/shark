@@ -47,7 +47,7 @@ local libs = {
 }
 
 M.check = function()
-  health.report_start("Arsham's Internal")
+  health.report_start("Shark Health Check")
   for name, aspect in pairs(file_checks) do
     local p = require("plenary.path"):new(aspect[1])
     if not p:exists() then

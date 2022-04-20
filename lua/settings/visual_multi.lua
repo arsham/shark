@@ -20,7 +20,7 @@ vim.g.VM_maps = {
 -- these don't work in the above maps.
 vim.keymap.set("n", [[<Leader>\]], function()
   vim.fn["vm#commands#add_cursor_at_pos"](0)
-end, { noremap = true, desc = "add cursor at position" })
+end, { desc = "add cursor at position" })
 vim.keymap.set("n", "<Leader>A", function()
   vim.fn["vm#commands#find_all"](0, 1)
-end, { noremap = true, desc = "find all matches" })
+end, { desc = "find all matches" })

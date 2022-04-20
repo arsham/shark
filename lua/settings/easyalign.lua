@@ -52,7 +52,7 @@ vim.g.easy_align_delimiters = { --{{{
     right_margin = 0,
     stick_to_left = 0,
   },
-  ["d"] = {
+  d = {
     pattern = [[ \(\S\+\s*[;=]\)\@=]],
     left_margin = 0,
     right_margin = 0,

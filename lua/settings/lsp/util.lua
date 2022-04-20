@@ -98,13 +98,13 @@ local function code_action(range_given, line1, line2) --{{{
 end --}}}
 
 local function nnoremap(key, fn, desc, ...) --{{{
-  vim.keymap.set("n", key, fn, { noremap = true, buffer = true, silent = true, desc = desc, ... })
+  vim.keymap.set("n", key, fn, { buffer = true, silent = true, desc = desc, ... })
 end --}}}
 local function vnoremap(key, fn, desc, ...) --{{{
-  vim.keymap.set("v", key, fn, { noremap = true, buffer = true, silent = true, desc = desc, ... })
+  vim.keymap.set("v", key, fn, { buffer = true, silent = true, desc = desc, ... })
 end --}}}
 local function inoremap(key, fn, desc, ...) --{{{
-  vim.keymap.set("i", key, fn, { noremap = true, buffer = true, silent = true, desc = desc, ... })
+  vim.keymap.set("i", key, fn, { buffer = true, silent = true, desc = desc, ... })
 end --}}}
 
 function M.code_action() --{{{
