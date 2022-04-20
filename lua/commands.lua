@@ -304,6 +304,16 @@ quick.command("UnlinkSnippets", function() --{{{
   end
 end, { desc = "Unlink all open snippets" }) --}}}
 
+quick.command("PackerLoadAll", function()
+  local packer = require("packer")
+  -- selene: allow(global_usage)
+  for name, plugin in pairs(_G.packer_plugins) do
+    if not plugin.loaded then
+      packer.loader(name)
+    end
+  end
+end, { desc = "Load all unloaded plugins. Only invoke for health checks" })
+
 return M
 
 -- vim: fdm=marker fdl=0
