@@ -70,9 +70,9 @@ end
 local desc = "jump to the next heading in markdown document"
 vim.keymap.set("n", "]]", function()
   nextHeading(false)
-end, { noremap = true, buffer = true, silent = true, desc = desc })
+end, { buffer = true, silent = true, desc = desc })
 vim.keymap.set("n", "[[", function()
   nextHeading(true)
-end, { noremap = true, buffer = true, silent = true, desc = desc })
+end, { buffer = true, silent = true, desc = desc })
 --}}}
 -- vim: fdm=marker fdl=0

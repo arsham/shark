@@ -45,10 +45,10 @@ local function setup_watch(filenames) --{{{
   return modules
 end --}}}
 
-local bufname = vim.fn.bufname() --{{{
-if vim.fn.getbufvar(bufname, "watch_lua_file_augroup") ~= true then
-  vim.fn.setbufvar(bufname, "watch_lua_file_augroup", true)
-  quick.augroup("WATCH_LUA_FILE")
+-- selene: allow(global_usage)
+if not _G.watch_lua_file_group_set then --{{{
+  vim.api.nvim_create_augroup("WATCH_LUA_FILE", { clear = true })
+  _G.watch_lua_file_group_set = true
 end --}}}
 
 function M.watch_file_changes(filenames) --{{{
@@ -61,9 +61,8 @@ function M.watch_file_changes(filenames) --{{{
     if string.find(watched, "/") then
       watched = "*/" .. watched
     end
-    quick.autocmd({
+    vim.api.nvim_create_autocmd("BufWritePost", {
       group = "WATCH_LUA_FILE",
-      events = "BufWritePost",
       pattern = watched,
       callback = function()
         for _, mod in ipairs(modules) do
@@ -186,7 +185,7 @@ quick.command("InstallDependencies", function() --{{{
       })
       :start()
   end --}}}
-end) --}}}
+end, { desc = "Install shark's required dependencies" }) --}}}
 
 local project_store = false
 local function running_tmuxinator_projects() --{{{

@@ -3,6 +3,7 @@ local M = {}
 local nvim = require("nvim")
 local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
+local fzf = require("fzf-lua")
 
 function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
@@ -240,11 +241,10 @@ function M.code_lens() --{{{
   quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
   nnoremap("<leader>cr", vim.lsp.codelens.run, "run code lenses")
 
-  quick.autocmd({
-    events = { "CursorHold", "CursorHoldI", "InsertLeave" },
-    group = "CODE_LENSES",
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "InsertLeave" }, {
+    group = code_lenses_group,
     callback = vim.lsp.codelens.refresh,
-    buffer = true,
+    buffer = 0,
   })
 end --}}}
 
@@ -253,44 +253,60 @@ function M.setup_completions() --{{{
   inoremap("<C-k>", "<C-p>", "previous completion items")
 end --}}}
 
--- stylua: ignore start
-quick.augroup("LSP_EVENTS", {
-  { events = "BufReadPost,BufNewFile", pattern = "go.mod", callback = function()
-      vim.opt_local.filetype = "gomod"
-    end,
-  },
+local lsp_events_group = vim.api.nvim_create_augroup("LSP_EVENTS", { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  group = lsp_events_group,
+  pattern = "go.mod",
+  callback = function()
+    vim.opt_local.filetype = "gomod"
+  end,
 })
 
 function M.setup_events(imports, format) --{{{
-  quick.autocmd({ events = "BufWritePre", group = "LSP_EVENTS", buffer = true, callback = function()
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = lsp_events_group,
+    buffer = 0,
+    callback = function()
       imports()
       format()
-    end, desc = "format and imports",
+    end,
+    desc = "format and imports",
   })
 
-  quick.autocmd({ events = "BufReadPost,BufNewFile", group = "LSP_EVENTS",
-    pattern = "*/templates/*.yaml,*/templates/*.tpl",
-    callback = "LspStop",
+  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+    group = lsp_events_group,
+    pattern = { "*/templates/*.yaml", "*/templates/*.tpl" },
+    callback = "silent LspStop",
   })
 
-  quick.autocmd({ events = "InsertEnter", pattern = "go.mod", group = "LSP_EVENTS", callback = function()
+  vim.api.nvim_create_autocmd("InsertEnter", {
+    group = lsp_events_group,
+    pattern = "go.mod",
+    callback = function()
       vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
-    end, once = true, desc = "don't wrap me",
+    end,
+    once = true,
+    desc = "don't wrap me",
   })
 
-  quick.autocmd({ events = "BufWritePre", pattern = "go.mod", group = "LSP_EVENTS", callback = function()
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = lsp_events_group,
+    pattern = "go.mod",
+    callback = function(args)
       local filename = vim.fn.expand("%:p")
-      local bufnr = vim.fn.expand("<abuf>")
-      lsp.go_mod_tidy(tonumber(bufnr), filename)
-    end, desc = "run go mod tidy on save",
+      lsp.go_mod_tidy(tonumber(args.buf), filename)
+    end,
+    desc = "run go mod tidy on save",
   })
 
-  local function go_mod_check()
-    local filename = vim.fn.expand("<amatch>")
-    lsp.go_mod_check_upgrades(filename)
+  local function go_mod_check(args)
+    lsp.go_mod_check_upgrades(args.match)
   end
-  quick.autocmd({ events = "BufRead", pattern = "go.mod", group = "LSP_EVENTS",
-    callback = go_mod_check, desc = "check for updates",
+  vim.api.nvim_create_autocmd("BufRead", {
+    group = lsp_events_group,
+    pattern = "go.mod",
+    callback = go_mod_check,
+    desc = "check for updates",
   })
 end --}}}
 -- stylua: ignore end
@@ -349,9 +365,11 @@ function M.setup_diagnostics() --{{{
   end, "goto previous diagnostic")
 
   quick.buffer_command("Diagnostics", function()
-    require("lspfuzzy").diagnostics(0)
+    fzflsp.diagnostics({})
   end)
-  quick.buffer_command("DiagnosticsAll", "LspDiagnosticsAll")
+  quick.buffer_command("DiagnosticsAll", function()
+    fzflsp.workspace_diagnostics({})
+  end)
 end --}}}
 
 return M

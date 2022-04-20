@@ -1,45 +1,64 @@
 local nvim = require("nvim")
-local quick = require("arshlib.quick")
 
--- stylua: ignore start
-quick.augroup({"PACKER_RELOAD", {--{{{
-  { "BufWritePost", "lua/plugins.lua", function()
+-- Packer Reload {{{
+local packer_reload_group = vim.api.nvim_create_augroup("PACKER_RELOAD", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = packer_reload_group,
+  pattern = "lua/plugins.lua",
+  callback = function()
     nvim.ex.source("<afile>")
     nvim.ex.PackerCompile()
     nvim.ex.PackerInstall()
-  end, docs = "auto compile and install new plugins",
-  }},
-})--}}}
+  end,
+  desc = "auto compile and install new plugins",
+}) --}}}
 
-quick.augroup({"LINE_RETURN", {--{{{
-  { "BufRead", "*", function()
-    quick.autocmd({ "FileType", run = function()
-      local types = _t({
-        "nofile",
-        "fugitive",
-        "gitcommit",
-        "gitrebase",
-        "commit",
-        "rebase",
-      })
-      if vim.fn.expand("%") == "" or types:contains(vim.bo.filetype) then
-        return
-      end
-      local line = vim.fn.line
+-- Line Return {{{
+local line_return_group = vim.api.nvim_create_augroup("LINE_RETURN", { clear = true })
+vim.api.nvim_create_autocmd("BufRead", {
+  group = line_return_group,
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      buffer = 0,
+      once = true,
+      callback = function()
+        local types = _t({
+          "nofile",
+          "fugitive",
+          "gitcommit",
+          "gitrebase",
+          "commit",
+          "rebase",
+        })
+        if vim.fn.expand("%") == "" or types:contains(vim.bo.filetype) then
+          return
+        end
+        local line = vim.fn.line
 
-      if line("'\"") > 0 and line("'\"") <= line("$") then
-        nvim.ex.normal_([[g`"zv']])
-      end
-    end, buffer = true, once = true,
+        if line("'\"") > 0 and line("'\"") <= line("$") then
+          nvim.ex.normal_([[g`"zv']])
+        end
+      end,
     })
   end,
-  }},
-})--}}}
+}) --}}}
 
-quick.augroup({ "SPECIAL_SETTINGS", {
-  { "VimResized", "*", docs = "resize split on window resize", run = ":wincmd =" },
+local special_settings_group = vim.api.nvim_create_augroup("SPECIAL_SETTINGS", { clear = true })
+-- Resize Split On Resize {{{
+vim.api.nvim_create_autocmd("VimResized", {
+  group = special_settings_group,
+  pattern = "*",
+  command = "wincmd =",
+  desc = "resize split on window resize",
+}) --}}}
 
-  { "BufRead", "*", docs = "large file enhancements", run = function()--{{{
+-- Large File Enhancements {{{
+vim.api.nvim_create_autocmd("BufRead", {
+  group = special_settings_group,
+  pattern = "*",
+  desc = "large file enhancements. Invokes a User LargeBufRead event",
+  callback = function()
     if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
       return
     end
@@ -59,19 +78,33 @@ quick.augroup({ "SPECIAL_SETTINGS", {
       vim.opt.lazyredraw = true
       vim.opt.showmatch = false
 
-      quick.autocmd({"BufDelete", buffer = true, run = function()
+      vim.api.nvim_create_autocmd("BufDelete", {
+        buffer = 0,
+        callback = function()
           vim.opt.hlsearch = hlsearch
           vim.opt.lazyredraw = lazyredraw
           vim.opt.showmatch = showmatch
-        end, docs = "set the global settings back to what they were before"})
+        end,
+        desc = "set the global settings back to what they were before",
+      })
     end
-  end},--}}}
+  end,
+}) --}}}
 
-  { "BufWritePre", "COMMIT_EDITMSG,MERGE_MSG,gitcommit,*.tmp,*.log", function()
+-- No Undo Fies {{{
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = special_settings_group,
+  pattern = { "COMMIT_EDITMSG", "MERGE_MSG", "gitcommit", "*.tmp", "*.log" },
+  callback = function()
     vim.bo.undofile = false
-  end },
+  end,
+}) --}}}
 
-  { "BufEnter,FocusGained,WinEnter", "*", run = function()--{{{
+-- Relative Number Toggling {{{
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeave" }, {
+  group = special_settings_group,
+  pattern = "*",
+  callback = function()
     if vim.g.disable_relative_numbers then
       return
     end
@@ -85,115 +118,185 @@ quick.augroup({ "SPECIAL_SETTINGS", {
         vim.wo.relativenumber = true
       end
     end
-  end, docs = "set relative number when focused" },--}}}
+  end,
+  desc = "set relative number when focused",
+})
 
-  { "BufLeave,FocusLost,WinLeave", "*", run = function()--{{{
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave", "InsertEnter" }, {
+  group = special_settings_group,
+  pattern = "*",
+  callback = function()
     if vim.wo.number then
       vim.wo.relativenumber = false
     end
-  end, docs = "unset relative number when unfocused" },--}}}
+  end,
+  desc = "unset relative number when unfocused",
+}) --}}}
 
-  { "TermOpen", "term:\\/\\/*", function()--{{{
+-- Terminal Start Insert Mode {{{
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = special_settings_group,
+  pattern = "term:\\/\\/*",
+  callback = function()
     vim.wo.statusline = "%{b:term_title}"
-    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], {noremap=true, buffer = true, desc = "entern normal mode" })
+    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true, desc = "enter normal mode" })
     nvim.ex.startinsert()
     vim.wo.number = false
     vim.wo.relativenumber = false
-  end, docs = "start in insert mode and set the status line" },--}}}
+  end,
+  desc = "start in insert mode and set the status line",
+}) --}}}
 
-  -- See neovim/neovim#15440
-  { "TermClose", "*", function()--{{{
+-- Autoclose Shell Terminals {{{
+-- See neovim/neovim#15440
+vim.api.nvim_create_autocmd("TermClose", {
+  group = special_settings_group,
+  pattern = "*",
+  callback = function()
     if vim.v.event.status == 0 then
       local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)
       if info and info.argv[1] == vim.env.SHELL then
         pcall(vim.api.nvim_buf_delete, 0, {})
       end
     end
-  end, docs = "auto close shell terminals" },--}}}
+  end,
+  desc = "auto close shell terminals",
+}) --}}}
 
-  { "BufNewFile", "*", run = function()--{{{
-    quick.autocmd({
-      "BufWritePre",
-      buffer = true,
+-- Create Missing Parent Directories {{{
+vim.api.nvim_create_autocmd("BufNewFile", {
+  group = special_settings_group,
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = 0,
       once = true,
-      run = function()
+      callback = function()
         local path = vim.fn.expand("%:h")
         local p = require("plenary.path"):new(path)
         if not p:exists() then
           p:mkdir({ parents = true })
         end
       end,
-      docs = "create missing parent directories automatically",
+      desc = "create missing parent directories automatically",
     })
   end,
-  }},--}}}
-})
+}) --}}}
 
-if vim.fn.exists("$TMUX") == 1 then--{{{
-  quick.augroup({ "TMUX_RENAME", {
-    { "BufEnter", "*", function()
+-- Tmux Automatic Rename {{{
+if vim.fn.exists("$TMUX") == 1 then
+  local tmux_rename_group = vim.api.nvim_create_augroup("TMUX_RENAME", { clear = true })
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = tmux_rename_group,
+    pattern = "*",
+    callback = function()
       if vim.bo.buftype == "" then
         local bufname = vim.fn.expand("%:t:S")
-        vim.fn.system("tmux rename-window " .. bufname)
+        pcall(vim.fn.system, "tmux rename-window " .. bufname)
       end
     end,
-    },
-    { "VimLeave", "*", function()
-      vim.fn.system("tmux set-window automatic-rename on")
+  })
+
+  vim.api.nvim_create_autocmd("VimLeave", {
+    group = special_settings_group,
+    pattern = "*",
+    callback = function()
+      pcall(vim.fn.system, "tmux set-window automatic-rename on")
     end,
-    },
-  }})
+  })
 end --}}}
 
-quick.augroup({ "FILETYPE_COMMANDS", {--{{{
-  { "Filetype", "make,automake", docs = "makefile tabs", run = function()
+local filetype_commands_group = vim.api.nvim_create_augroup("FILETYPE_COMMANDS", { clear = true })
+-- Makefile Tabs {{{
+vim.api.nvim_create_autocmd("Filetype", {
+  group = filetype_commands_group,
+  pattern = "make,automake",
+  desc = "makefile tabs",
+  callback = function()
     vim.bo.expandtab = false
-  end},
+  end,
+}) --}}}
 
-  { "BufNewFile,BufRead", ".*aliases", run = function()
+-- Aliase Filetype {{{
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = filetype_commands_group,
+  pattern = ".*aliases",
+  callback = function()
     vim.bo.filetype = "sh"
-  end},
-  { "BufNewFile,BufRead", "Makefile*", run = function()
+  end,
+}) --}}}
+
+-- Makefile filetype {{{
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = filetype_commands_group,
+  pattern = "Makefile*",
+  callback = function()
     vim.bo.filetype = "make"
-  end},
+  end,
+}) --}}}
 
-  { "TextYankPost", "*", docs = "highlihgt yanking", run = function()
+-- Highlight Yanks {{{
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = filetype_commands_group,
+  pattern = "*",
+  desc = "highlihgt yanking",
+  callback = function()
     vim.highlight.on_yank({ higroup = "Substitute", timeout = 150 })
-  end},
+  end,
+}) --}}}
 
-  { "FileType", "lspinfo,lsp-installer,null-ls-info", run = function()
-    vim.keymap.set("n", "q", nvim.ex.close, {noremap=true, buffer = true, silent = true, desc = "close lspinfo popup" })
-  end, docs = "close lspinfo popup"},
+-- Close LSP Info Popup {{{
+vim.api.nvim_create_autocmd("FileType", {
+  group = filetype_commands_group,
+  pattern = { "lspinfo", "lsp-installer", "null-ls-info" },
+  callback = function()
+    local opts = { buffer = true, silent = true, desc = "close lspinfo popup" }
+    vim.keymap.set("n", "q", nvim.ex.close, opts)
+  end,
+  desc = "close lspinfo popup",
+}) --}}}
 
-  { "Filetype", "sql,sqls", docs = "don't wrap me", run = function()
+-- Don't Wrap Me {{{
+vim.api.nvim_create_autocmd("Filetype", {
+  group = filetype_commands_group,
+  pattern = { "sql", "sqls" },
+  desc = "don't wrap me",
+  callback = function()
     vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
     vim.bo.formatoptions = vim.bo.formatoptions:gsub("c", "")
-  end},
+  end,
+}) --}}}
 
-  { "Filetype", "help,man,qf", docs = "exit help with gq", run = function()
-    local opts = {noremap=true, buffer = true, desc = "close help/man,qf buffers" }
+-- Exit Help/man/qf With q {{{
+vim.api.nvim_create_autocmd("Filetype", {
+  group = filetype_commands_group,
+  pattern = { "help", "man", "qf" },
+  desc = "exit help with q",
+  callback = function()
+    local opts = { buffer = true, desc = "close help/man,qf buffers" }
     vim.keymap.set("n", "q", nvim.ex.close, opts)
-  end},
-}})--}}}
+  end,
+}) --}}}
 
-local async_load_plugin = nil--{{{
+local async_load_plugin = nil --{{{
 async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-  quick.augroup({ "TRIM_WHITE_SPACES", {
-    { "BufWritePre,FileWritePre,FileAppendPre,FilterWritePre", "*",
-      docs = "trim spaces", run = function()
-        if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
-          return
-        end
-        local save = vim.fn.winsaveview()
-        nvim.ex.keeppatterns([[%s/\s\+$//e]])
-        nvim.ex.silent_([[%s#\($\n\s*\)\+\%$##]])
-        vim.fn.winrestview(save)
-      end,
-    },
-  }})
+  local trim_whitespace_group = vim.api.nvim_create_augroup("TRIM_WHITESPACE", { clear = true })
+  vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "FilterWritePre" }, {
+    group = trim_whitespace_group,
+    pattern = "*",
+    desc = "trim spaces",
+    callback = function()
+      if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
+        return
+      end
+      local save = vim.fn.winsaveview()
+      nvim.ex.keeppatterns([[%s/\s\+$//e]])
+      nvim.ex.silent_([[%s#\($\n\s*\)\+\%$##]])
+      vim.fn.winrestview(save)
+    end,
+  })
   async_load_plugin:close()
 end))
-async_load_plugin:send()--}}}
--- stylua: ignore end
+async_load_plugin:send() --}}}
 
--- fdm=marker fdl=0
+-- vim: fdm=marker fdl=0

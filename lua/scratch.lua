@@ -1,4 +1,4 @@
-local util = require("arshlib.quick")
+local quick = require("arshlib.quick")
 local nvim = require("nvim")
 
 local store = {}
@@ -20,7 +20,7 @@ function store.delete(id)
   store[id] = nil
 end
 
-util.command("Scratch", function()
+quick.command("Scratch", function()
   local name = string.format("Scratch %d", store.next())
   nvim.ex.vsplit()
   nvim.ex.enew()
@@ -28,11 +28,10 @@ util.command("Scratch", function()
   vim.bo.buftype = "nofile"
   vim.bo.swapfile = false
 
-  util.autocmd({
-    "BufDelete",
-    buffer = true,
-    run = function()
-      local num = tonumber(vim.fn.expand("<afile>"):match("Scratch (%d+)"))
+  vim.api.nvim_create_autocmd("BufDelete", {
+    buffer = 0,
+    callback = function(args)
+      local num = tonumber(args.file:match("Scratch (%d+)"))
       store.delete(num)
     end,
   })

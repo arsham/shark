@@ -621,28 +621,6 @@ quick.normal('n', 'y2k')
 
 See `:h feedkeys()` for values of the mode.
 
-#### Augroup and Autocmd
-
-```lua
-quick.augroup("SOME_AUTOMATION", {
-    { events = "BufReadPost", pattern = "*", callback = function()
-        vim.notify("This just happened!", vim.lsp.log_levels.INFO)
-    end},
-    { events = "BufReadPost", buffer = true, callback = ":LspStop"},
-    { events = "BufReadPost", pattern = "*.go", desc = "an example of nested autocmd", callback = function()
-        vim.notify("Buffer is read", vim.lsp.log_levels.INFO)
-        quick.autocmd({ events = "BufDelete", buffer = true, callback = function()
-            vim.notify("Buffer deleted", vim.lsp.log_levels.INFO)
-        end})
-    end},
-})
-
--- Or on its own.
-quick.autocmd({ events = "BufLeave", pattern = "*", callback = function()
-    vim.notify("Don't do this though", vim.lsp.log_levels.INFO)
-end)
-```
-
 #### Highlight
 
 Create `highlight` groups:
