@@ -72,7 +72,7 @@ require("packer").startup({
     use({
       "kevinhwang91/nvim-bqf",
       requires = { "fzf", "nvim-treesitter" },
-      config   = function() require("bqf").enable() end,
+      config   = function() require("settings.nvim-bqf") end,
       ft       = { "qf" },
       cond     = full_start,
     })
