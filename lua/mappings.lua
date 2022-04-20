@@ -126,4 +126,8 @@ vim.keymap.set("n", "<leader>zs", function()
 end, { silent = true, desc = "set local foldmethod to syntax" })
 --}}}
 
+vim.keymap.set("n", "<C-S-P>", function()
+  require("fzf-lua.providers.nvim").commands()
+end, { silent = true, desc = "open command pallete" })
+
 -- vim: fdm=marker fdl=0
