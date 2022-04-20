@@ -6,7 +6,6 @@ quick.highlight("MiniIndentscopeSymbol", { link = "VertSplit" })
 require("mini.surround").setup({
   n_lines = 40,
   highlight_duration = 1000,
-  funname_pattern = "[%w_%.]+",
 
   mappings = {
     add = "ys",
@@ -41,3 +40,11 @@ require("mini.indentscope").setup({
 require("mini.misc").setup({
   make_global = { "put", "put_text" },
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "term:\\/\\/*",
+  callback = function()
+    vim.b.minicursorword_disable = true
+  end,
+  desc = "disable indentscope in terminal buffers",
+}) --}}}
