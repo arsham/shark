@@ -4,6 +4,7 @@ local nvim = require("nvim")
 local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")
+local fzflsp = require("fzf-lua.providers.lsp")
 
 function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
@@ -67,7 +68,7 @@ local function get_current_node_name() --{{{
     })
     return ""
   end
-  return (ts_utils.get_node_text(cur_node:child(index)))[1]
+  return (vim.treesitter.query.get_node_text(cur_node:child(index)))[1]
 end --}}}
 
 ---Formats a range if given.
@@ -93,7 +94,7 @@ local function code_action(range_given, line1, line2) --{{{
   if range_given then
     vim.lsp.buf.range_code_action(nil, { line1, 0 }, { line2, 99999999 })
   else
-    vim.lsp.buf.code_action()
+    fzf.lsp_code_actions()
   end
 end --}}}
 
@@ -111,7 +112,7 @@ function M.code_action() --{{{
   quick.buffer_command("CodeAction", function(args)
     code_action(args.range ~= 0, args.line1, args.line2)
   end, { range = true })
-  nnoremap("<leader>ca", vim.lsp.buf.code_action, "Code action")
+  nnoremap("<leader>ca", fzf.lsp_code_actions, "Code action")
   vnoremap("<leader>ca", ":'<,'>CodeAction<CR>", "Code action")
 end --}}}
 
@@ -172,46 +173,62 @@ function M.signature_help() --{{{
 end --}}}
 
 function M.goto_definition() --{{{
-  quick.buffer_command("Definition", vim.lsp.buf.definition)
-  nnoremap("gd", vim.lsp.buf.definition, "Go to definition")
+  local perform = function()
+    fzf.lsp_definitions({ jump_to_single_result = true })
+  end
+  quick.buffer_command("Definition", perform)
+  nnoremap("gd", perform, "Go to definition")
   vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
 end --}}}
 
 function M.declaration() --{{{
-  nnoremap("gD", vim.lsp.buf.declaration, "Go to declaration")
+  nnoremap("gD", function()
+    fzf.lsp_declarations({ jump_to_single_result = true })
+  end, "Go to declaration")
 end --}}}
 
 function M.type_definition() --{{{
-  quick.buffer_command("TypeDefinition", vim.lsp.buf.type_definition)
+  quick.buffer_command("TypeDefinition", function()
+    fzf.lsp_typedefs({ jump_to_single_result = true })
+  end)
 end --}}}
 
 function M.implementation() --{{{
-  quick.buffer_command("Implementation", vim.lsp.buf.implementation)
-  nnoremap("<leader>gi", vim.lsp.buf.implementation, "Go to implementation")
+  local perform = function()
+    fzf.lsp_implementations({ jump_to_single_result = true })
+  end
+  quick.buffer_command("Implementation", perform)
+  nnoremap("<leader>gi", perform, "Go to implementation")
 end --}}}
 
 function M.find_references() --{{{
-  quick.buffer_command("References", vim.lsp.buf.references)
-  nnoremap("gr", vim.lsp.buf.references, "Go to references")
+  local perform = function()
+    fzf.lsp_references({ jump_to_single_result = true })
+  end
+  quick.buffer_command("References", perform)
+  nnoremap("gr", perform, "Go to references")
 end --}}}
 
 function M.document_symbol() --{{{
-  quick.buffer_command("DocumentSymbol", vim.lsp.buf.document_symbol)
-  nnoremap("<leader>@", vim.lsp.buf.document_symbol, "Document symbol")
+  local perform = function()
+    fzf.lsp_document_symbols({ jump_to_single_result = true })
+  end
+  quick.buffer_command("DocumentSymbol", perform)
+  nnoremap("<leader>@", perform, "Document symbol")
 end --}}}
 
 function M.workspace_symbol() --{{{
-  quick.buffer_command("WorkspaceSymbols", vim.lsp.buf.workspace_symbol)
+  quick.buffer_command("WorkspaceSymbols", fzf.lsp_workspace_symbols)
 end --}}}
 
 function M.call_hierarchy() --{{{
+  quick.buffer_command("Callers", fzflsp.incoming_calls)
+  nnoremap("<leader>gc", fzflsp.incoming_calls, "show incoming calls")
   quick.buffer_command("Callees", vim.lsp.buf.outgoing_calls)
-  quick.buffer_command("Callers", vim.lsp.buf.incoming_calls)
-  nnoremap("<leader>gc", vim.lsp.buf.incoming_calls, "show incoming calls")
 end --}}}
 
 quick.buffer_command("ListWorkspace", function() --{{{
-  vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
+  vim.notify(vim.lsp.buf.list_workspace_folders() or {}, vim.lsp.log_levels.INFO, {
     title = "Workspace Folders",
     timeout = 3000,
   })
@@ -235,7 +252,7 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-quick.augroup("CODE_LENSES")
+local code_lenses_group = vim.api.nvim_create_augroup("CODE_LENSES", { clear = true })
 function M.code_lens() --{{{
   quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
   quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
