@@ -27,7 +27,16 @@ gitsigns.setup({
   diff_opts = {
     internal = true,
   },
-  update_debounce = 750,
+  on_attach = function(bufnr)
+    local name = vim.api.nvim_buf_get_name(bufnr)
+    if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
+      return
+    end
+    local size = vim.fn.getfsize(name)
+    if size > 1024 * 1024 * 5 then
+      return false
+    end
+  end,
 })
 
 vim.keymap.set("n", "]c", function() quick.call_and_centre(gitsigns.next_hunk) end,    { desc = "go to next hunk" })
