@@ -85,13 +85,6 @@ config.augends:register_group({
       end,
     }),
 
-    augend.user.new({
-      desc = "fixed-digit decimal natural number (e.g. ␣0, ␣1, ␣2, ..., 97, 98, 99)",
-      find = common.find_pattern(" *%d+"),
-      add = function(text, addend)
-        return increase_decimal(text, addend)
-      end,
-    }),
 
     augend.user.new({
       desc = "Markdown Header (# Title)",

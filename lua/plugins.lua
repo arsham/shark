@@ -43,13 +43,13 @@ require("packer").startup({
 
     use({
       "junegunn/fzf",
-      event = "VimEnter",
+      event = "UIEnter",
     })
 
     use({
       "junegunn/fzf.vim",
       requires = "fzf",
-      event    = "VimEnter",
+      event    = "UIEnter",
     })
 
     use({
@@ -84,6 +84,7 @@ require("packer").startup({
         require("listish").config({})
         vim.cmd([[packadd! cfilter]])
       end,
+      event = "UIEnter",
     })
 
     use({
@@ -168,7 +169,7 @@ require("packer").startup({
         "fidget.nvim",
       },
       config = function() require("settings.arshamiser") end,
-      event = { "VimEnter" },
+      event = { "UIEnter" },
     })
 
     use({
@@ -208,7 +209,7 @@ require("packer").startup({
     use({
       "rcarriga/nvim-notify",
       config = function() require("settings.nvim-notify") end,
-      event  = "VimEnter",
+      event  = "UIEnter",
     })
 
     use({
@@ -235,7 +236,7 @@ require("packer").startup({
 
     use({
       "tpope/vim-repeat",
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event = { "BufRead", "BufNewFile" },
     })
 
     use({
@@ -312,7 +313,7 @@ require("packer").startup({
     use({
       "monaqa/dial.nvim",
       config = function() require("settings.dial-nvim") end,
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+      event  = { "BufRead", "BufNewFile" },
     })
     -- }}}
 
@@ -346,14 +347,14 @@ require("packer").startup({
       "j-hui/fidget.nvim",
       after = { "nvim-lspconfig" },
       config = function() require("settings.fidget-nvim") end,
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event = { "BufRead", "BufNewFile" },
       cond = full_start,
     })
 
     use({
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "plenary.nvim", "nvim-lspconfig" },
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+      event  = { "BufRead", "BufNewFile" },
       cond   = full_start,
     })
 
@@ -392,7 +393,7 @@ require("packer").startup({
         },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
-      after = { "LuaSnip", "nvim-treesitter" } ,
+      after  = { "LuaSnip", "nvim-treesitter" } ,
       config = function() require("settings.cmp") end,
       event = { "BufRead", "BufNewFile", "InsertEnter" },
       cond   = full_start,
@@ -442,7 +443,7 @@ require("packer").startup({
 
     use({
       "folke/lua-dev.nvim",
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event = { "BufRead", "BufNewFile" },
       cond  = full_start,
     })
 
@@ -451,13 +452,13 @@ require("packer").startup({
       requires = "nvim-ts-context-commentstring",
       after    = "nvim-ts-context-commentstring",
       config   = function() require("settings.comment") end,
+      event    = { "BufNewFile", "BufRead" },
     })
 
     use({
       "github/copilot.vim",
       setup  = function() require("settings.copilot").setup() end,
       config = function() require("settings.copilot").config() end,
-      event  = { "InsertEnter" },
       keys   = { "<leader>ce" },
       cond   = full_start,
     })
@@ -486,18 +487,20 @@ require("packer").startup({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
       config   = function() require("indent-tools").config({}) end,
+      event  = { "BufRead", "BufNewFile" },
     })
 
     use({
       "arsham/archer.nvim",
       requires = { "arsham/arshlib.nvim", "tpope/vim-repeat", "norvalli/nvim.lua" },
       config   = function() require("archer").config({}) end,
+      event    = { "BufNewFile", "BufRead" },
     })
 
     use({
       "echasnovski/mini.nvim",
       config = function() require("settings.mini-nvim") end,
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+      event  = { "BufRead", "BufNewFile" },
     })
 
     use({
