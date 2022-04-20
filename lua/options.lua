@@ -27,6 +27,7 @@ vim.opt.relativenumber = true
 vim.opt.lazyredraw = false
 vim.opt.synmaxcol = 256
 vim.opt.history = 10000
+vim.opt.laststatus = 3
 
 vim.opt.shada = "!,'10000,<1000,s100,h,f1,:100000,@10000,/1000"
 vim.opt.showcmd = true
