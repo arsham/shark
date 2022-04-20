@@ -82,6 +82,9 @@ vim.keymap.set("n", "<leader>jq", ":%!gojq '.'<CR>")
 
 vim.keymap.set("n", "<leader>hh", ":h <CR>", { desc = "Show help for work under the cursor" })
 
+vim.keymap.set("n", "&", ":&&<CR>", { desc = "repeat last substitute command" })
+vim.keymap.set("x", "&", ":&&<CR>", { desc = "repeat last substitute command" })
+
 vim.keymap.set("n", "<C-w>b", ":bd<CR>", { desc = "delete current buffer" })
 vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", { desc = "delete current buffer" })
 
