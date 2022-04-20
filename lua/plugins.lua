@@ -53,10 +53,20 @@ require("packer").startup({
     })
 
     use({
-      "arsham/fzfmania.nvim",
-      requires = { "arshlib.nvim", "fzf.vim", "plenary.nvim" },
-      after    = { "listish.nvim" },
+      "~/Projects/arsham/fzfmania.nvim",
+      requires = {
+        "arshlib.nvim",
+        "fzf.vim",
+        "plenary.nvim",
+        {
+          "ibhagwan/fzf-lua",
+          requires = { "kyazdani42/nvim-web-devicons" },
+          cond     = full_start,
+        },
+      },
+      after    = { "listish.nvim", "fzf-lua" },
       config   = function() require("settings.fzfmania") end,
+      event    = { "UIEnter" },
     })
 
     use({
