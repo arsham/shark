@@ -77,16 +77,6 @@ require("packer").startup({
     })
 
     use({
-      "kyazdani42/nvim-tree.lua",
-      requires = { "nvim-web-devicons" },
-      setup    = function() require("settings.nvim-tree").setup() end,
-      config   = function() require("settings.nvim-tree").config() end,
-      event    = { "BufRead" },
-      cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
-      keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
-    })
-
-    use({
       "tweekmonster/startuptime.vim",
       cmd = { "StartupTime" },
     })
@@ -96,6 +86,18 @@ require("packer").startup({
       config = function() require("settings.wilder") end,
       run    = ":UpdateRemotePlugins",
       event  = "VimEnter",
+    })
+    -- }}}
+
+    -- Navigation {{{
+    use({
+      "kyazdani42/nvim-tree.lua",
+      requires = { "nvim-web-devicons" },
+      setup    = function() require("settings.nvim_tree").setup() end,
+      config   = function() require("settings.nvim_tree").config() end,
+      event    = { "BufRead" },
+      cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
+      keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
     })
 
     use({

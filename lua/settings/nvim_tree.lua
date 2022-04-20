@@ -1,16 +1,15 @@
 return {
   setup = function()
-    vim.g.nvim_tree_quit_on_open = 1
     vim.g.nvim_tree_git_hl = 1
 
-    vim.g.nvim_tree_icons = { --{{{
-      lsp = {
+    vim.g.nvim_tree_icons = {
+      lsp = { --{{{
         hint = "💡",
         info = "💬",
         warning = "💩",
         error = "🔥",
-      },
-      git = {
+      }, --}}}
+      git = { --{{{
         deleted = "",
         ignored = "◌",
         renamed = "➜",
@@ -18,23 +17,22 @@ return {
         unmerged = "",
         unstaged = "",
         untracked = "★",
-      },
-      folder = {
+      }, --}}}
+      folder = { --{{{
         arrow_open = "▾",
         arrow_closed = "▸",
-      },
-    } --}}}
+      }, --}}}
+    }
   end,
 
   config = function()
     local tree_cb = require("nvim-tree.config").nvim_tree_callback
     local nvim_tree = require("nvim-tree")
-    nvim_tree.setup({ --{{{
+    nvim_tree.setup({
       disable_netrw = false,
       hijack_netrw = false,
       hijack_cursor = true,
-      auto_close = true,
-      diagnostics = {
+      diagnostics = { --{{{
         enable = true,
         icons = {
           hint = "",
@@ -42,40 +40,59 @@ return {
           warning = "",
           error = "",
         },
-      },
-      filters = {
+      }, --}}}
+      filters = { --{{{
         dotfiles = false,
         custom = { ".git", "node_modules", ".cache" },
-      },
-      git = {
+        exclude = { ".github", "tmp" },
+      }, --}}}
+      git = { --{{{
         enable = true,
         ignore = false,
         timeout = 500,
-      },
-      view = {
+      }, --}}}
+      view = { --{{{
         mappings = {
           custom_only = false,
           list = {
             { key = "h", cb = tree_cb("close_node") },
           },
         },
-      },
-    }) --}}}
+      }, --}}}
+      actions = { --{{{
+        open_file = {
+          quit_on_open = true,
+        },
+      }, --}}}
+    })
 
+    -- Mappings {{{
     vim.keymap.set(
       "n",
       "<leader>kk",
       nvim_tree.toggle,
-      { noremap = true, silent = true, desc = "Toggle tree view" }
+      { silent = true, desc = "Toggle tree view" }
     )
     vim.keymap.set("n", "<leader>kf", function()
       nvim_tree.find_file(true)
-    end, { noremap = true, silent = true, desc = "Find file in tree view" })
+    end, { silent = true, desc = "Find file in tree view" })
     vim.keymap.set(
       "n",
       "<leader><leader>",
       nvim_tree.toggle,
-      { noremap = true, silent = true, desc = "Toggle tree view" }
-    )
+      { silent = true, desc = "Toggle tree view" }
+    ) --}}}
+
+    vim.api.nvim_create_autocmd("BufEnter", { --{{{
+      pattern = "*",
+      nested = true,
+      callback = function()
+        if vim.fn.winnr("$") == 1 and vim.fn.bufname() == "NvimTree_" .. vim.fn.tabpagenr() then
+          vim.api.nvim_command(":silent q")
+        end
+      end,
+    }) --}}}
   end,
 }
+
+-- vim: fdm=marker fdl=0
