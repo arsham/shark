@@ -232,9 +232,6 @@ The `leader` key is `space`!
 | `<leader>hR`       | (gitsigns) **R**eset buffer                                          |
 | `<leader>hp`       | (gitsigns) **P**review **h**unk                                      |
 | `<leader>hh`       | Opens the **help** for current word                                  |
-| `<leader>cs`       | Search for **C**heat**S**heets with cht.sh service                   |
-| `<leader>cq`       | **C**heat**S**heets with quotes                                      |
-| `<leader>cn`       | **C**heat**S**heet **N**ext example                                  |
 | `<Alt-Left>`       | Reduce vertical size                                                 |
 | `<Alt-Right>`      | Increase vertical size                                               |
 | `<Alt-Up>`         | Reduce horizontal size                                               |
@@ -249,12 +246,6 @@ The `leader` key is `space`!
 | `<leader>zi`       | Set folding method to **I**ndent                                     |
 | `<leader>zm`       | Set folding method to Mar**k**er                                     |
 | `<leader>zs`       | Set folding method to **S**yntax                                     |
-
-To use the **C**heat**S**heet functionality, type your query in the buffer and
-invoke the key binding. The response will be inserted on the next lint in the
-buffer and puts you in the `SELECT` mode. If you want the results just hit
-`Esc` key. The `<leader>cn` will append the next available `\N` value and runs
-the query again.
 
 </details>
 
