@@ -211,20 +211,23 @@ end --}}}
 
 function M.document_symbol() --{{{
   local perform = function()
-    fzf.lsp_document_symbols({ jump_to_single_result = true })
+    fzf.lsp_document_symbols({
+      jump_to_single_result = true,
+      fzf_cli_args = "--nth 2..",
+    })
   end
   quick.buffer_command("DocumentSymbol", perform)
   nnoremap("<leader>@", perform, "Document symbol")
 end --}}}
 
 function M.workspace_symbol() --{{{
-  quick.buffer_command("WorkspaceSymbols", fzf.lsp_workspace_symbols)
+  quick.buffer_command("WorkspaceSymbols", fzf.lsp_live_workspace_symbols)
 end --}}}
 
 function M.call_hierarchy() --{{{
-  quick.buffer_command("Callers", fzflsp.incoming_calls)
-  nnoremap("<leader>gc", fzflsp.incoming_calls, "show incoming calls")
-  quick.buffer_command("Callees", vim.lsp.buf.outgoing_calls)
+  quick.buffer_command("Callers", fzf.lsp_incoming_calls)
+  nnoremap("<leader>gc", fzf.lsp_incoming_calls, "show incoming calls")
+  quick.buffer_command("Callees", fzf.lsp_outgoing_calls)
 end --}}}
 
 quick.buffer_command("ListWorkspace", function() --{{{
