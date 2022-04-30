@@ -16,8 +16,8 @@ function M.lsp_organise_imports() --{{{
   local method = "textDocument/codeAction"
   local timeout = 1000 -- ms
 
-  local resp = vim.lsp.buf_request_sync(0, method, params, timeout)
-  if not resp then
+  local ok, resp = pcall(vim.lsp.buf_request_sync, 0, method, params, timeout)
+  if not ok or not resp then
     return
   end
 
@@ -80,9 +80,9 @@ local function format_command(range_given, line1, line2, bang) --{{{
   if range_given then
     vim.lsp.buf.range_formatting(nil, { line1, 0 }, { line2, 99999999 })
   elseif bang then
-    vim.lsp.buf.formatting_sync()
+    vim.lsp.buf.format({ async = false })
   else
-    vim.lsp.buf.formatting()
+    vim.lsp.buf.format({ async = true })
   end
 end --}}}
 
