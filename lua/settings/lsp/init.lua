@@ -88,8 +88,8 @@ local servers = {
         },
       })
       opts.on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
         on_attach(client, bufnr)
       end
       return opts
@@ -106,9 +106,8 @@ local servers = {
     },
     update = function(on_attach, opts)
       opts.on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_symbol = false
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
         on_attach(client, bufnr)
       end
       return opts
@@ -139,8 +138,8 @@ local servers = {
       -- neovim's LSP client does not currently support dynamic capabilities registration.
       -- sqls has a bad formatting.
       opts.on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.execute_command = true
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.executeCommandProvider = true
         client.commands = require("sqls").commands
         require("sqls").setup({ picker = "fzf" })
         on_attach(client, bufnr)
@@ -152,8 +151,8 @@ local servers = {
   html = {
     update = function(on_attach, opts)
       opts.on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
         on_attach(client, bufnr)
       end
       return opts
@@ -184,41 +183,48 @@ local function on_attach(client, bufnr)--{{{
     -- organise imports.
     local imports_hook = function() end
     local format_hook = function() end
+    local caps = client.server_capabilities
 
-    if client.supports_method("textDocument/codeAction") then
+    if caps.codeActionProvider then
       lsp_util.code_action()
 
       -- Either is it set to true, or there is a specified set of
       -- capabilities. Sumneko doesn't support it, but the
       -- client.supports_method returns true.
-      local caps = client.resolved_capabilities
-      local can_organise_imports = type(caps.code_action) == "table" and _t(caps.code_action.codeActionKinds):contains("source.organizeImports")
+      local can_organise_imports = type(caps.codeActionProvider) == "table" and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
       if can_organise_imports then
         lsp_util.setup_organise_imports()
         imports_hook = lsp_util.lsp_organise_imports
       end
     end
 
-    if client.supports_method("textDocument/formatting") then
+    if caps.documentFormattingProvider then
       lsp_util.document_formatting()
-      format_hook = function() vim.lsp.buf.formatting_sync(nil, 2000) end
+      format_hook = function() vim.lsp.buf.format({
+        filter = function(clients)
+          return vim.tbl_filter(
+            function(cl) return cl.name == client.name end,
+            clients
+          )
+        end
+      }, 2000) end
     end
 
-    local caps = client.resolved_capabilities
-    if caps.workspace_folder_properties.supported then lsp_util.workspace_folder_properties() end
-    if client.supports_method("workspace/symbol")            then lsp_util.workspace_symbol() end
-    if client.supports_method("textDocument/hover")          then lsp_util.hover()            end
-    if client.supports_method("textDocument/rename")         then lsp_util.rename()           end
-    if client.supports_method("textDocument/codeLens")       then lsp_util.code_lens()        end
-    if client.supports_method("textDocument/definition")     then lsp_util.goto_definition()  end
-    if client.supports_method("textDocument/references")     then lsp_util.find_references()  end
-    if client.supports_method("textDocument/declaration")    then lsp_util.declaration()      end
-    if client.supports_method("textDocument/signatureHelp")  then lsp_util.signature_help()   end
-    if client.supports_method("textDocument/implementation") then lsp_util.implementation()   end
-    if client.supports_method("textDocument/typeDefinition") then lsp_util.type_definition()  end
-    if client.supports_method("textDocument/documentSymbol") then lsp_util.document_symbol()  end
-    if client.supports_method("textDocument/rangeFormatting") then lsp_util.document_range_formatting() end
-    if client.supports_method("textDocument/prepareCallHierarchy") then lsp_util.call_hierarchy() end
+    local workspace_folder_supported = caps.workspace and caps.workspace.workspaceFolders.supported
+    if workspace_folder_supported           then lsp_util.workspace_folder_properties() end
+    if caps.workspaceSymbolProvider         then lsp_util.workspace_symbol()            end
+    if caps.hoverProvider                   then lsp_util.hover()                       end
+    if caps.renameProvider                  then lsp_util.rename()                      end
+    if caps.codeLensProvider                then lsp_util.code_lens()                   end
+    if caps.definitionProvider              then lsp_util.goto_definition()             end
+    if caps.referencesProvider              then lsp_util.find_references()             end
+    if caps.declarationProvider             then lsp_util.declaration()                 end
+    if caps.signatureHelpProvider           then lsp_util.signature_help()              end
+    if caps.implementationProvider          then lsp_util.implementation()              end
+    if caps.typeDefinitionProvider          then lsp_util.type_definition()             end
+    if caps.documentSymbolProvider          then lsp_util.document_symbol()             end
+    if caps.documentRangeFormattingProvider then lsp_util.document_range_formatting()   end
+    if caps.callHierarchyProvider           then lsp_util.call_hierarchy()              end
 
     lsp_util.setup_diagnostics()
     lsp_util.setup_completions()
