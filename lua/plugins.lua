@@ -321,18 +321,17 @@ require("packer").startup({
 
     -- LSP {{{
     use({
-      "neovim/nvim-lspconfig",
-      after = { "nvim-cmp", "lua-dev.nvim" },
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
-      cond  = full_start,
-    })
-
-    use({
       "williamboman/nvim-lsp-installer",
-      config = function()
-        require("settings.lsp_installer")
-        require("settings.lsp")
-      end,
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("settings.lsp_installer")
+          require("settings.lsp")
+        end,
+        after = { "nvim-cmp", "lua-dev.nvim" },
+        event = { "BufRead", "BufNewFile", "InsertEnter" },
+        cond  = { full_start },
+      },
       after = {
         "nvim-lspconfig",
         "nvim-cmp",

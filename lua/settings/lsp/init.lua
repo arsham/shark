@@ -148,7 +148,7 @@ local servers = {
     end,
   }, --}}}
 
-  html = {
+  html = { --{{{
     update = function(on_attach, opts)
       opts.on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
@@ -157,7 +157,13 @@ local servers = {
       end
       return opts
     end,
-  },
+  }, --}}}
+
+  bashls = {},
+  dockerls = {},
+  jedi_language_server = {},
+  tsserver = {},
+  vimls = {},
 }
 
 local lsp_util = require("settings.lsp.util")
@@ -245,7 +251,7 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities( --{{{
 )
 --}}}
 
-local null_ls = require("null-ls") --{{{
+local null_ls = require("null-ls") -- NULL LS Setup {{{
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.fixjson,
@@ -261,18 +267,17 @@ null_ls.setup({
   on_attach = attach_wrap,
 }) --}}}
 
-require("nvim-lsp-installer").on_server_ready(function(server) --{{{
-  local srv = servers[server.name] or {}
+local lspconfig = require("lspconfig") -- LSP Config Setup {{{
+for name, server in pairs(servers) do
   local opts = vim.tbl_deep_extend("force", {
     on_attach = attach_wrap,
     capabilities = capabilities,
-  }, srv.opts or {})
+  }, server.opts or {})
 
-  if srv.update then
-    opts = srv.update(attach_wrap, opts)
+  if server.update then
+    opts = server.update(attach_wrap, opts)
   end
+  lspconfig[name].setup(opts)
+end --}}}
 
-  server:setup(opts)
-end) --}}}
-
--- vim fdm=marker fdl=0
+-- vim: fdm=marker fdl=0
