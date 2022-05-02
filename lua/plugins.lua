@@ -328,7 +328,7 @@ require("packer").startup({
           require("settings.lsp_installer")
           require("settings.lsp")
         end,
-        after = { "nvim-cmp", "lua-dev.nvim" },
+        wants = { "nvim-cmp", "lua-dev.nvim", "null-ls.nvim" },
         event = { "BufRead", "BufNewFile", "InsertEnter" },
         cond  = { full_start },
       },
