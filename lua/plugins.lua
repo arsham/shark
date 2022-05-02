@@ -356,19 +356,6 @@ require("packer").startup({
       event  = { "BufRead", "BufNewFile" },
       cond   = full_start,
     })
-
-    use({
-      "ojroques/nvim-lspfuzzy",
-      requires = { "fzf", "fzf.vim", "nvim-lspconfig" },
-      config = function()
-        require("lspfuzzy").setup({
-          fzf_preview = { "right:60%:+{2}-/2,nohidden" },
-        })
-      end,
-      after = { "nvim-lspconfig", "fzf.vim" },
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
-      cond  = full_start,
-    })
     --}}}
 
     -- nvim-cmp {{{
