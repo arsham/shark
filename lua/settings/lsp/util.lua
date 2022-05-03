@@ -296,7 +296,7 @@ function M.setup_events(imports, format) --{{{
   vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     group = lsp_events_group,
     pattern = { "*/templates/*.yaml", "*/templates/*.tpl" },
-    callback = "silent LspStop",
+    command = "silent LspStop",
   })
 
   vim.api.nvim_create_autocmd("InsertEnter", {
