@@ -206,14 +206,7 @@ local function on_attach(client, bufnr)--{{{
 
     if caps.documentFormattingProvider then
       lsp_util.document_formatting()
-      format_hook = function() vim.lsp.buf.format({
-        filter = function(clients)
-          return vim.tbl_filter(
-            function(cl) return cl.name == client.name end,
-            clients
-          )
-        end
-      }, 2000) end
+      format_hook = function() vim.lsp.buf.format({ async = false }) end
     end
 
     local workspace_folder_supported = caps.workspace and caps.workspace.workspaceFolders.supported
