@@ -60,6 +60,7 @@ vim.opt.viewdir = vim.env.HOME .. "/.cache/nvim/views"
 -- better diff view. This will make sure the inserted part is separated, rather
 -- than mangled in the previous blob.
 vim.opt.diffopt:append("indent-heuristic")
+vim.opt.diffopt:append("algorithm:patience")
 vim.opt.suffixesadd = {
   ".go",
   ".py",
