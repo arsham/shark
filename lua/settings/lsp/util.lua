@@ -121,7 +121,7 @@ function M.setup_organise_imports() --{{{
 end --}}}
 
 function M.document_formatting() --{{{
-  nnoremap("<leader>gq", vim.lsp.buf.formatting, "Format buffer")
+  nnoremap("<leader>gq", vim.lsp.buf.format, "Format buffer")
 end --}}}
 
 local function document_range_formatting(args) --{{{
