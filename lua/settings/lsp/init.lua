@@ -164,6 +164,7 @@ local servers = {
   jedi_language_server = {},
   tsserver = {},
   vimls = {},
+  clangd = {},
 }
 
 local lsp_util = require("settings.lsp.util")
