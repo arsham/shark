@@ -204,6 +204,9 @@ vim.g.markdown_fenced_languages = {
   "ts=typescript",
   "yaml",
   "json",
+  "go",
 }
+
+vim.api.nvim_command("set rtp-=/usr/share/vim/vimfiles")
 
 -- vim: fdm=marker fdl=0
