@@ -15,7 +15,8 @@ require("fidget").setup({
     completed = "Completed",
   },
   window = {
-    blend = 0, -- &winblend for the window
+    relative = "editor",
+    blend = 0,
   },
   fmt = {
     stack_upwards = false,
