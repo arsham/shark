@@ -1,7 +1,10 @@
 ---@diagnostic disable
 local cmp = require("cmp")
 local compare = require("cmp.config.compare")
-local ls = require("luasnip")
+local ok, ls = pcall(require, "luasnip")
+if not ok then
+  return
+end
 
 --               ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
 --       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
