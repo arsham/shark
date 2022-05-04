@@ -414,16 +414,14 @@ require("packer").startup({
           cmd   = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
           cond  = full_start,
         },
+        {
+          "JoosepAlviste/nvim-ts-context-commentstring",
+          after    = "nvim-treesitter",
+        },
       },
       run = ":TSUpdate",
       cmd = "TSUpdate",
       event = { "BufRead", "BufNewFile", "InsertEnter" },
-    })
-
-    use({
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      requires = "nvim-treesitter",
-      after    = "nvim-treesitter",
     })
     -- }}}
 
