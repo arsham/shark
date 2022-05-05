@@ -3,49 +3,49 @@ local health = require("health")
 local home = vim.env.HOME
 
 local file_checks = {
-  ["Words dictionary"] = { "/usr/share/dict/words-insane", { "yay -S words-insane" } },
+  backdir = { home .. "/.cache/nvim/backdir", { "Create the required folder" } },
+  spellfile = { home .. "/.config/nvim/spell", { "Create the required folder" } },
+  undodir = { home .. "/.cache/nvim/undodir", { "Create the required folder" } },
   thesaurus = {
     home .. "/.local/share/thesaurus/moby.txt",
     { "Visit https://github.com/words/moby" },
   },
   viewdir = { home .. "/.cache/nvim/views", { "Create the required folder" } },
-  spellfile = { home .. "/.config/nvim/spell", { "Create the required folder" } },
-  undodir = { home .. "/.cache/nvim/undodir", { "Create the required folder" } },
-  backdir = { home .. "/.cache/nvim/backdir", { "Create the required folder" } },
+  ["Words dictionary"] = { "/usr/share/dict/words-insane", { "yay -S words-insane" } },
 }
 
 local executables = {
-  buf = { "buf", "Run :IntallDependencies" },
-  git = { "git", "yay -S git" },
-  Ripgrep = { "rg", "yay -S rg" },
-  FZF = { "fzf", "yay -S fzf" },
-  tmux = { "tmux", "yay -S tmux" },
-  tmuxinator = { "tmuxinator", "yay -S tmuxinator" },
-  fd = { "fd", "yay -S fd" },
   bat = { "bat", "yay -S bat" },
+  buf = { "buf", "Run :IntallDependencies" },
   ctags = { "ctags", "yay -S ctags" },
   diagon = { "diagon", "snap install diagon" },
-  golangci = { "golangci-lint", "Run :IntallDependencies" },
-  gojq = { "gojq", "Run :IntallDependencies" },
+  fd = { "fd", "yay -S fd" },
   fixjson = { "fixjson", "Run :IntallDependencies" },
+  fzf = { "fzf", "yay -S fzf" },
+  git = { "git", "yay -S git" },
+  gojq = { "gojq", "Run :IntallDependencies" },
+  golangci = { "golangci-lint", "Run :IntallDependencies" },
   prettier = { "prettier", "Run :IntallDependencies" },
+  ["Python-pip"] = { "pip3", "yay -S python-pip" },
+  ripgrep = { "rg", "yay -S rg" },
   selene = { "selene", "Run :IntallDependencies" },
   stylua = { "stylua", "Run :IntallDependencies" },
-  ["Python-pip"] = { "pip3", "yay -S python-pip" },
   TheSilverSearcher = { "ag", "yay -S the_silver_searcher" },
+  tmux = { "tmux", "yay -S tmux" },
+  tmuxinator = { "tmuxinator", "yay -S tmuxinator" },
   uncrustify = { "uncrustify", "yay -S uncrustify" },
 }
 
 local libs = {
+  ["arshamiser.feliniser"] = "arsham/arshamiser.nvim",
   arshlib = "arsham/arshlib.nvim",
+  ["bk-tree"] = "bk-tree",
+  ["indent-tools"] = "arsham/indent-tools.nvim",
   listish = "arsham/listish.nvim",
   matchmaker = "arsham/matchmaker.nvim",
-  yanker = "arsham/yanker.nvim",
-  ["arshamiser.feliniser"] = "arsham/arshamiser.nvim",
-  ["indent-tools"] = "arsham/indent-tools.nvim",
-  plenary = "nvim-lua/plenary.nvim",
   nvim = "norcalli/nvim.lua",
-  ["bk-tree"] = "bk-tree",
+  plenary = "nvim-lua/plenary.nvim",
+  yanker = "arsham/yanker.nvim",
 }
 
 M.check = function()

@@ -124,17 +124,18 @@ end) --}}}
 
 quick.command("InstallDependencies", function() --{{{
   local commands = _t({
+    buf = _t({ "go", "install", "github.com/bufbuild/buf/cmd/buf@latest" }),
+    fixjson = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest" }),
+    gojq = _t({ "go", "install", "github.com/itchyny/gojq/cmd/gojq@latest" }),
     golangci = _t({
       "go",
       "install",
       "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.44.2",
     }),
-    gojq = _t({ "go", "install", "github.com/itchyny/gojq/cmd/gojq@latest" }),
-    sqls = _t({ "go", "install", "github.com/lighttiger2505/sqls@latest" }),
-    fixjson = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest" }),
-    prettier = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest" }),
     neovim = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest" }),
+    prettier = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest" }),
     selene = _t({ "cargo", "install", "selene" }),
+    sqls = _t({ "go", "install", "github.com/lighttiger2505/sqls@latest" }),
     stylua = _t({ "cargo", "install", "stylua" }),
   })
 
