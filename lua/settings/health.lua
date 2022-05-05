@@ -32,6 +32,7 @@ local executables = {
   stylua = { "stylua", "Run :IntallDependencies" },
   ["Python-pip"] = { "pip3", "yay -S python-pip" },
   TheSilverSearcher = { "ag", "yay -S the_silver_searcher" },
+  uncrustify = { "uncrustify", "yay -S uncrustify" },
 }
 
 local libs = {

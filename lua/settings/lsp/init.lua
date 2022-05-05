@@ -257,6 +257,15 @@ null_ls.setup({
     }),
     null_ls.builtins.diagnostics.golangci_lint,
     null_ls.builtins.diagnostics.selene,
+    null_ls.builtins.formatting.uncrustify.with({
+      extra_args = function()
+        return {
+          "-c",
+          vim.fn.findfile("uncrustify.cfg", ".;"),
+          "--no-backup",
+        }
+      end,
+    }),
   },
   on_attach = attach_wrap,
 }) --}}}
