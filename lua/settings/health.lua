@@ -15,6 +15,7 @@ local file_checks = {
 }
 
 local executables = {
+  buf = { "buf", "Run :IntallDependencies" },
   git = { "git", "yay -S git" },
   Ripgrep = { "rg", "yay -S rg" },
   FZF = { "fzf", "yay -S fzf" },
