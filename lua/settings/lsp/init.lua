@@ -164,7 +164,18 @@ local servers = {
   jedi_language_server = {},
   tsserver = {},
   vimls = {},
-  clangd = {},
+  clangd = {
+    update = function(on_attach, opts)
+      opts.on_attach = function(client, bufnr)
+        if vim.fn.findfile("uncrustify.cfg", ".;") ~= "" then
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end
+        on_attach(client, bufnr)
+      end
+      return opts
+    end,
+  },
 }
 
 local lsp_util = require("settings.lsp.util")
