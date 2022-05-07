@@ -380,10 +380,14 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>@`        | Search in **ctags** or **LSP** symbols (see below).    |
 | `<leader>:`        | Commands                                               |
 | `<leader>ff`       | **F**ind in contents of all files in current folder.   |
+| `<leader>fF`       | Like `<leader>ff`, but you can filter filenames too    |
 | `<leader>fa`       | **F**ind **A**ll disabling `.gitignore` handling.      |
+| `<leader>fA`       | Like `<leader>fA`, but you can filter filenames too    |
 | `<leader>fi`       | **I**ncrementally **F**ind.                            |
 | `<leader>rg`       | Search (**rg**) with current word.                     |
+| `<leader>fG`       | Like `<leader>fG`, but you can filter filenames too    |
 | `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
+| `<leader>fA`       | Like `<leader>fA`, but you can filter filenames too    |
 | `<leader>ri`       | **I**ncrementally search (**rg**) with current word.   |
 | `<leader>fh`       | **F**ile **H**istory                                   |
 | `<leader>fl`       | **F**ile **l**ocate (requires mlocate)                 |
