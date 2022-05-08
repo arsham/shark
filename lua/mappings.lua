@@ -129,6 +129,10 @@ end, { silent = true, desc = "set local foldmethod to syntax" })
 vim.keymap.set("i", "<C-u>", "<C-g>u<C-u>", { silent = true, desc = "undoable insert edits" })
 vim.keymap.set("i", "<C-w>", "<C-g>u<C-w>", { silent = true, desc = "undoable insert edits" })
 
+-- Beginning and end of line in `:` command mode
+vim.keymap.set("c", "<M-a>", "<home>", {})
+vim.keymap.set("c", "<M-e>", "<end>", {})
+
 vim.keymap.set("n", "<C-S-P>", function()
   require("fzf-lua.providers.nvim").commands()
 end, { silent = true, desc = "open command pallete" })
