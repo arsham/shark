@@ -269,10 +269,10 @@ vim.api.nvim_create_autocmd("Filetype", {
 -- Exit Help/man/qf With q {{{
 vim.api.nvim_create_autocmd("Filetype", {
   group = filetype_commands_group,
-  pattern = { "help", "man", "qf" },
+  pattern = { "help", "qf" },
   desc = "exit help with q",
   callback = function()
-    local opts = { buffer = true, desc = "close help/man,qf buffers" }
+    local opts = { buffer = true, desc = "close help,qf buffers" }
     vim.keymap.set("n", "q", nvim.ex.close, opts)
   end,
 }) --}}}
