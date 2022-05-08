@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 vim.api.nvim_create_autocmd("BufRead", {
   group = special_settings_group,
   pattern = "*",
-  desc = "large file enhancements. Invokes a User LargeBufRead event",
+  desc = "large file enhancements.",
   callback = function()
     if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
       return
@@ -262,8 +262,7 @@ vim.api.nvim_create_autocmd("Filetype", {
   pattern = { "sql", "sqls" },
   desc = "don't wrap me",
   callback = function()
-    vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
-    vim.bo.formatoptions = vim.bo.formatoptions:gsub("c", "")
+    vim.opt_local.formatoptions:remove({ "t", "c" })
   end,
 }) --}}}
 

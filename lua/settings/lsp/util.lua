@@ -303,7 +303,7 @@ function M.setup_events(imports, format) --{{{
     group = lsp_events_group,
     pattern = "go.mod",
     callback = function()
-      vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
+      vim.opt_local.formatoptions:remove({ "t" })
     end,
     once = true,
     desc = "don't wrap me",

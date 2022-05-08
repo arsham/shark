@@ -4,7 +4,7 @@ vim.opt_local.textwidth = 72
 vim.opt_local.colorcolumn = "50,72"
 vim.opt_local.spell = true
 vim.wo.cursorline = true
-vim.opt_local.formatoptions = vim.bo.formatoptions:gsub("[croq]", "")
+vim.opt_local.formatoptions:remove({ "c", "r", "o", "q" })
 nvim.ex.startinsert()
 
 -- stylua: ignore start

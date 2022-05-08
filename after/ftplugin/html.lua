@@ -1,2 +1,1 @@
-vim.bo.formatoptions = vim.bo.formatoptions:gsub("t", "")
-vim.bo.formatoptions = vim.bo.formatoptions:gsub("c", "")
+vim.opt_local.formatoptions:remove({ "t", "c" })
