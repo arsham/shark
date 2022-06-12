@@ -3,7 +3,6 @@ vim.opt.guifont = "DejaVuSansMono Nerd Font:h10"
 
 -- Defer setting the colorscheme until the UI loads.
 vim.api.nvim_create_autocmd("UIEnter", {
-  pattern = "*",
   callback = function()
     require("nvim").ex.colorscheme("arshamiser_light")
     require("arshamiser.feliniser")

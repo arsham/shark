@@ -8,4 +8,4 @@ test_watch:
 
 .PHONY: lint
 lint:
-	@selene lua after colors syntax
+	@selene lua after syntax

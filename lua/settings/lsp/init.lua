@@ -186,7 +186,7 @@ local lsp_util = require("settings.lsp.util")
 ---@param client lsp_client
 ---@param bufnr number
 -- stylua: ignore start
-local function on_attach(client, bufnr)--{{{
+local function on_attach(client, bufnr) --{{{
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
   -- TODO: find out how to disable the statuline badges as well.
@@ -194,8 +194,7 @@ local function on_attach(client, bufnr)--{{{
     vim.diagnostic.disable(bufnr)
   end
 
-  -- TODO: turn these into: client.supports_method("textDocument/codeAction")
-  vim.api.nvim_buf_call(bufnr, function()--{{{
+  vim.api.nvim_buf_call(bufnr, function() --{{{
     -- Contains functions to be run before writing the buffer. The format
     -- function will format the while buffer, and the imports function will
     -- organise imports.
@@ -242,8 +241,8 @@ local function on_attach(client, bufnr)--{{{
     lsp_util.support_commands()
     lsp_util.setup_events(imports_hook, format_hook)
     lsp_util.fix_null_ls_errors()
-  end)--}}}
-end--}}}
+  end) --}}}
+end --}}}
 -- stylua: ignore end
 
 local attach_wrap = function(client, ...)

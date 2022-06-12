@@ -21,10 +21,10 @@ vim.keymap.set("i", "<Right>", "<Nop>", { desc = "disabling arrows" })
 vim.keymap.set("i", "<A-j>", [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], { silent = true, desc = "move lines down" })
 vim.keymap.set("i", "<A-k>", [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], { silent = true, desc = "move lines up" })
 
-vim.keymap.set("x", "<", "<gv", { desc = "Keep the visually selected area when indenting" })
-vim.keymap.set("x", ">", ">gv", { desc = "Keep the visually selected area when indenting" })
+vim.keymap.set("x", "<", "<gv", { desc = "keep the visually selected area when indenting" })
+vim.keymap.set("x", ">", ">gv", { desc = "keep the visually selected area when indenting" })
 
-vim.keymap.set("n", "g=",    "gg=Gg``", { desc = "Re-indent the whole buffer" })
+vim.keymap.set("n", "g=",    "gg=Gg``", { desc = "re-indent the whole buffer" })
 vim.keymap.set("n", "<C-e>", "2<C-e>",  {})
 vim.keymap.set("n", "<C-y>", "2<C-y>",  {})
 --}}}
@@ -36,11 +36,11 @@ vim.keymap.set("n", "<M-Up>",    ":resize +2<CR>",      { silent = true, desc = 
 vim.keymap.set("n", "<M-Down>",  ":resize -2<CR>",      { silent = true, desc = "decreases horizontal size" })
 --}}}
 
-vim.keymap.set("n", "G", "Gzz",     { desc = "Auto re-centre when moving around" })
-vim.keymap.set("n", "g;", "m'g;zz", { desc = "Auto re-centre when moving around" })
-vim.keymap.set("n", "g,", "m'g,zz", { desc = "Auto re-centre when moving around" })
+vim.keymap.set("n", "G", "Gzz",     { desc = "auto re-centre when moving around" })
+vim.keymap.set("n", "g;", "m'g;zz", { desc = "auto re-centre when moving around" })
+vim.keymap.set("n", "g,", "m'g,zz", { desc = "auto re-centre when moving around" })
 
-vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>", { silent = true, desc = "Clear hlsearch" })
+vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>", { silent = true, desc = "clear hlsearch" })
 
 -- Yank related {{{
 vim.keymap.set("n", "<Leader>y", '"+y')
@@ -55,6 +55,7 @@ vim.keymap.set("v", "p", '"_dP',
 vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>",
   { silent = true, desc = "grep on local buffer" }
 )
+-- stylua: ignore end
 
 -- Language support {{{
 -- ]s and [s to jump.
@@ -76,11 +77,10 @@ vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>",  { desc = "mergetool mapp
 vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>",   { desc = "mergetool mapping" })
 vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", { desc = "mergetool mapping" })
 --}}}
--- stylua: ignore end
 
 vim.keymap.set("n", "<leader>jq", ":%!gojq '.'<CR>")
 
-vim.keymap.set("n", "<leader>hh", ":h <CR>", { desc = "Show help for work under the cursor" })
+vim.keymap.set("n", "<leader>hh", ":h <CR>", { desc = "show help for work under the cursor" })
 
 vim.keymap.set("n", "&", ":&&<CR>", { desc = "repeat last substitute command" })
 vim.keymap.set("x", "&", ":&&<CR>", { desc = "repeat last substitute command" })

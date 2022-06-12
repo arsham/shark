@@ -14,10 +14,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 }) --}}}
 
 -- Line Return {{{
-local line_return_group = vim.api.nvim_create_augroup("LINE_RETURN", { clear = true })
 vim.api.nvim_create_autocmd("BufRead", {
-  group = line_return_group,
-  pattern = "*",
+  group = vim.api.nvim_create_augroup("LINE_RETURN", {}),
+  desc = "auto line return",
   callback = function()
     vim.api.nvim_create_autocmd("FileType", {
       buffer = 0,
@@ -36,7 +35,7 @@ vim.api.nvim_create_autocmd("BufRead", {
         end
         local line = vim.fn.line
 
-        if line("'\"") > 0 and line("'\"") <= line("$") then
+        if line([['"]]) > 0 and line([['"]]) <= line("$") then
           nvim.ex.normal_([[g`"zv']])
         end
       end,
@@ -48,7 +47,6 @@ local special_settings_group = vim.api.nvim_create_augroup("SPECIAL_SETTINGS", {
 -- Resize Split On Resize {{{
 vim.api.nvim_create_autocmd("VimResized", {
   group = special_settings_group,
-  pattern = "*",
   command = "wincmd =",
   desc = "resize split on window resize",
 }) --}}}
@@ -56,7 +54,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- Large File Enhancements {{{
 vim.api.nvim_create_autocmd("BufRead", {
   group = special_settings_group,
-  pattern = "*",
   desc = "large file enhancements.",
   callback = function()
     if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
@@ -91,7 +88,7 @@ vim.api.nvim_create_autocmd("BufRead", {
   end,
 }) --}}}
 
--- No Undo Fies {{{
+-- No Undo Files {{{
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = special_settings_group,
   pattern = { "COMMIT_EDITMSG", "MERGE_MSG", "gitcommit", "*.tmp", "*.log" },
@@ -103,7 +100,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Relative Number Toggling {{{
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeave" }, {
   group = special_settings_group,
-  pattern = "*",
   callback = function()
     if vim.g.disable_relative_numbers then
       return
@@ -124,7 +120,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeav
 
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave", "InsertEnter" }, {
   group = special_settings_group,
-  pattern = "*",
   callback = function()
     if vim.wo.number then
       vim.wo.relativenumber = false
@@ -151,7 +146,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- See neovim/neovim#15440
 vim.api.nvim_create_autocmd("TermClose", {
   group = special_settings_group,
-  pattern = "*",
   callback = function()
     if vim.v.event.status == 0 then
       local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)
@@ -166,7 +160,6 @@ vim.api.nvim_create_autocmd("TermClose", {
 -- Create Missing Parent Directories {{{
 vim.api.nvim_create_autocmd("BufNewFile", {
   group = special_settings_group,
-  pattern = "*",
   callback = function()
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = 0,
@@ -188,7 +181,6 @@ if vim.fn.exists("$TMUX") == 1 then
   local tmux_rename_group = vim.api.nvim_create_augroup("TMUX_RENAME", { clear = true })
   vim.api.nvim_create_autocmd("BufEnter", {
     group = tmux_rename_group,
-    pattern = "*",
     callback = function()
       if vim.bo.buftype == "" then
         local bufname = vim.fn.expand("%:t:S")
@@ -199,7 +191,6 @@ if vim.fn.exists("$TMUX") == 1 then
 
   vim.api.nvim_create_autocmd("VimLeave", {
     group = special_settings_group,
-    pattern = "*",
     callback = function()
       pcall(vim.fn.system, "tmux set-window automatic-rename on")
     end,
@@ -238,7 +229,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 -- Highlight Yanks {{{
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = filetype_commands_group,
-  pattern = "*",
   desc = "highlihgt yanking",
   callback = function()
     vim.highlight.on_yank({ higroup = "Substitute", timeout = 150 })
@@ -282,7 +272,6 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
   local trim_whitespace_group = vim.api.nvim_create_augroup("TRIM_WHITESPACE", { clear = true })
   vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "FilterWritePre" }, {
     group = trim_whitespace_group,
-    pattern = "*",
     desc = "trim spaces",
     callback = function()
       if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then

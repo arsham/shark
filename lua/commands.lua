@@ -3,13 +3,13 @@ local quick = require("arshlib.quick")
 
 local M = {}
 
-quick.command("Filename", function()
+quick.command("Filename", function() --{{{
   vim.notify(vim.fn.expand("%:p"), vim.lsp.log_levels.INFO, {
     title = "Filename",
     timeout = 3000,
   })
 end)
-quick.command("YankFilename", function() --{{{
+quick.command("YankFilename", function()
   vim.fn.setreg('"', vim.fn.expand("%:t"))
 end)
 quick.command("YankFilenameC", function()
@@ -104,7 +104,7 @@ quick.command("CC", function() --{{{
       vim.api.nvim_win_close(win, false)
     end
   end
-end) --}}}
+end, { desc = "close all floating buffers" }) --}}}
 
 quick.command("FoldComments", function() --{{{
   vim.wo.foldexpr = [[getline(v:lnum)=~'^\s*//']]
@@ -304,7 +304,7 @@ quick.command("UnlinkSnippets", function() --{{{
   end
 end, { desc = "Unlink all open snippets" }) --}}}
 
-quick.command("PackerLoadAll", function()
+quick.command("PackerLoadAll", function() --{{{
   local packer = require("packer")
   -- selene: allow(global_usage)
   for name, plugin in pairs(_G.packer_plugins) do
@@ -312,7 +312,7 @@ quick.command("PackerLoadAll", function()
       packer.loader(name)
     end
   end
-end, { desc = "Load all unloaded plugins. Only invoke for health checks" })
+end, { desc = "Load all unloaded plugins. Only invoke for health checks" }) --}}}
 
 return M
 

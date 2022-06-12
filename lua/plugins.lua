@@ -318,7 +318,6 @@ require("packer").startup({
     -- }}}
 
     -- Programming {{{
-
     -- LSP {{{
     use({
       "williamboman/nvim-lsp-installer",
@@ -358,7 +357,7 @@ require("packer").startup({
     })
     --}}}
 
-    -- nvim-cmp {{{
+    -- CMP {{{
     use({
       "hrsh7th/nvim-cmp",
       requires = {
@@ -466,7 +465,6 @@ require("packer").startup({
     -- }}}
 
     -- Text objects {{{
-
     use({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
