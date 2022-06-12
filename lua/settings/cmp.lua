@@ -135,7 +135,7 @@ cmp.setup({
         client_name = "/" .. entry.source.source.client.name
       end
 
-      vim_item.menu = string.format("%-9s[%s%s]", vim_item.kind, ({
+      vim_item.menu = string.format("[%s%s]", ({
         buffer = "Buffer",
         nvim_lsp = "LSP",
         luasnip = "LuaSnip",
@@ -149,7 +149,7 @@ cmp.setup({
         dap = "DAP",
       })[entry.source.name] or entry.source.name, client_name)
 
-      vim_item.kind = kind_icons[vim_item.kind]
+      vim_item.kind = string.format("%s %-9s", kind_icons[vim_item.kind], vim_item.kind)
       vim_item.dup = {
         buffer = 1,
         path = 1,
@@ -160,9 +160,8 @@ cmp.setup({
     end,
   }, --}}}
 
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+  view = {
+    max_height = 20,
   },
 
   sorting = { --{{{
