@@ -104,8 +104,7 @@ require("packer").startup({
     use({
       "kyazdani42/nvim-tree.lua",
       requires = { "nvim-web-devicons" },
-      setup    = function() require("settings.nvim_tree").setup() end,
-      config   = function() require("settings.nvim_tree").config() end,
+      config   = function() require("settings.nvim_tree") end,
       event    = { "BufRead" },
       cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
       keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
