@@ -20,7 +20,7 @@ function store.delete(id)
   store[id] = nil
 end
 
-quick.command("Scratch", function()
+local function new_scratch_buffer()
   local name = string.format("Scratch %d", store.next())
   nvim.ex.vsplit()
   nvim.ex.enew()
@@ -35,4 +35,12 @@ quick.command("Scratch", function()
       store.delete(num)
     end,
   })
+end
+
+quick.command("Scratch", function()
+  new_scratch_buffer()
 end)
+
+return {
+  new_scratch_buffer = new_scratch_buffer,
+}

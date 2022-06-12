@@ -300,6 +300,16 @@ quick.command("PackerLoadAll", function() --{{{
   end
 end, { desc = "Load all unloaded plugins. Only invoke for health checks" }) --}}}
 
+quick.command("Decrypt", function() --{{{
+  local contents = vim.fn.system("gpg -d " .. vim.fn.expand("%"))
+  require("scratch").new_scratch_buffer()
+  local lines = {}
+  for s in contents:gmatch("[^\r\n]+") do
+    table.insert(lines, s)
+  end
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+end, { desc = "decrypt the content of the file into d register" }) --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0
