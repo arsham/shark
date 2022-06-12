@@ -233,6 +233,15 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 }) --}}}
 
+-- Systemd Filetype {{{
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = filetype_commands_group,
+  pattern = "**/systemd/**/*.service",
+  callback = function()
+    vim.bo.filetype = "systemd"
+  end,
+}) --}}}
+
 -- Makefile filetype {{{
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = filetype_commands_group,
