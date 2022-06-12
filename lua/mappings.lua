@@ -1,4 +1,5 @@
 local quick = require("arshlib.quick")
+local util = require("util")
 
 --vim.api.nvim_put(t, 'l', true, false)
 
@@ -73,9 +74,17 @@ vim.keymap.set("n", "<leader>sf", function()
 end, { desc = "auto correct spelling and jump bak." }) --}}}
 
 -- Merge tool {{{
-vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>",  { desc = "mergetool mapping" })
-vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>",   { desc = "mergetool mapping" })
-vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", { desc = "mergetool mapping" })
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = vim.api.nvim_create_augroup("DIFFTOOL", { clear = true }),
+  callback = function()
+    if vim.opt.diff:get() and not util.buffer_has_var("difftool_special_keys") then
+      local o = { desc = "Mergetool mapping" }
+      vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>", o)
+      vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>", o)
+      vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", o)
+    end
+  end,
+})
 --}}}
 
 vim.keymap.set("n", "<leader>jq", ":%!gojq '.'<CR>")

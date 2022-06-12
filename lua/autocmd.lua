@@ -1,4 +1,5 @@
 local nvim = require("nvim")
+local util = require("util")
 
 -- Packer Reload {{{
 local packer_reload_group = vim.api.nvim_create_augroup("PACKER_RELOAD", { clear = true })
@@ -6,6 +7,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   group = packer_reload_group,
   pattern = "lua/plugins.lua",
   callback = function()
+    if util.buffer_has_var("packer_reload_commands") then
+      return
+    end
     nvim.ex.source("<afile>")
     nvim.ex.PackerCompile()
     nvim.ex.PackerInstall()
@@ -149,7 +153,10 @@ vim.api.nvim_create_autocmd("TermClose", {
   callback = function()
     if vim.v.event.status == 0 then
       local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)
-      if info and info.argv[1] == vim.env.SHELL then
+      if not info or not info.argv then
+        return
+      end
+      if info.argv[1] == vim.env.SHELL then
         pcall(vim.api.nvim_buf_delete, 0, {})
       end
     end

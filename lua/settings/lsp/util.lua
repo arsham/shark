@@ -5,6 +5,7 @@ local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")
 local fzflsp = require("fzf-lua.providers.lsp")
+local util = require("util")
 
 function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
@@ -213,7 +214,9 @@ function M.document_symbol() --{{{
   local perform = function()
     fzf.lsp_document_symbols({
       jump_to_single_result = true,
-      fzf_cli_args = "--nth 2..",
+      fzf_opts = {
+        ["--with-nth"] = "2..",
+      },
     })
   end
   quick.buffer_command("DocumentSymbol", perform)
@@ -257,6 +260,9 @@ end --}}}
 
 local code_lenses_group = vim.api.nvim_create_augroup("CODE_LENSES", { clear = true })
 function M.code_lens() --{{{
+  if util.buffer_has_var("code_lens") then
+    return
+  end
   quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
   quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
   nnoremap("<leader>cr", vim.lsp.codelens.run, "run code lenses")
@@ -282,16 +288,18 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   end,
 })
 
-function M.setup_events(imports, format) --{{{
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = lsp_events_group,
-    buffer = 0,
-    callback = function()
-      imports()
-      format()
-    end,
-    desc = "format and imports",
-  })
+function M.setup_events(client, imports, format) --{{{
+  if not util.buffer_has_var("lsp_formatting_imports_" .. client) then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = lsp_events_group,
+      buffer = 0,
+      callback = function()
+        imports()
+        format()
+      end,
+      desc = "format and imports",
+    })
+  end
 
   vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     group = lsp_events_group,
@@ -322,12 +330,14 @@ function M.setup_events(imports, format) --{{{
   local function go_mod_check(args)
     lsp.go_mod_check_upgrades(args.match)
   end
-  vim.api.nvim_create_autocmd("BufRead", {
-    group = lsp_events_group,
-    pattern = "go.mod",
-    callback = go_mod_check,
-    desc = "check for updates",
-  })
+  if not util.buffer_has_var("lsp_go_mod_check") then
+    vim.api.nvim_create_autocmd("BufRead", {
+      group = lsp_events_group,
+      pattern = "go.mod",
+      callback = go_mod_check,
+      desc = "check for updates",
+    })
+  end
 end --}}}
 -- stylua: ignore end
 
