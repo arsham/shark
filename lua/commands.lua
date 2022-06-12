@@ -188,14 +188,14 @@ quick.command("InstallDependencies", function() --{{{
 end, { desc = "Install shark's required dependencies" }) --}}}
 
 local project_store = false
-local function running_tmuxinator_projects() --{{{
+local function running_tmuxp_projects() --{{{
   if project_store then
     return project_store
   end
   local tmux_sessions = vim.fn.systemlist("tmux list-sessions -F '#{session_name}'")
   local sessions = {}
   for _, name in ipairs(tmux_sessions) do
-    local cmd = string.format("rg -l '%s$' %s/.config/tmuxinator/*.yml", name, vim.env.HOME)
+    local cmd = string.format("rg -l '%s$' %s/.config/tmuxp/*.yaml", name, vim.env.HOME)
     local session_file = vim.fn.system(cmd)
     if session_file ~= "" then
       sessions[vim.fn.fnamemodify(session_file, ":t:r")] = true
@@ -206,14 +206,14 @@ local function running_tmuxinator_projects() --{{{
 end --}}}
 
 local bktree = require("bk-tree")
-local tmuxinator_store = false
+local tmuxp_store = false
 ---@param fn fun(v: string):boolean includes value if returns true
 local function tm_completion(arg, fn) --{{{
-  if not tmuxinator_store then
-    local projects = vim.fn.systemlist("tmuxinator completions start")
-    tmuxinator_store = bktree:new()
+  if not tmuxp_store then
+    local projects = vim.fn.systemlist("tmuxp ls")
+    tmuxp_store = bktree:new()
     for _, p in ipairs(projects) do
-      tmuxinator_store:insert(p)
+      tmuxp_store:insert(p)
     end
   end
 
@@ -222,7 +222,7 @@ local function tm_completion(arg, fn) --{{{
   if arg == "" then
     max = 100
   end
-  local result = tmuxinator_store:query(arg, max)
+  local result = tmuxp_store:query(arg, max)
   for _, v in pairs(result) do
     if fn(v.str) then
       table.insert(ret, v.str)
@@ -232,46 +232,31 @@ local function tm_completion(arg, fn) --{{{
 end --}}}
 
 local function start_completion(arg) --{{{
-  local store = running_tmuxinator_projects()
+  local store = running_tmuxp_projects()
   return tm_completion(arg, function(v)
     return not store[v]
   end)
 end --}}}
 
-local function stop_completion(arg) --{{{
-  local store = running_tmuxinator_projects()
-  return tm_completion(arg, function(v)
-    return store[v]
-  end)
-end --}}}
-
-local function do_tmuxinator(command, project) --{{{
-  tmuxinator_store = false
+quick.command("Tmux", function(args) --{{{
+  tmuxp_store = false
   project_store = false
   require("plenary.job")
     :new({
-      command = "tmuxinator",
-      args = { command, project },
+      command = "tmuxp",
+      args = { "load", "-y", args.args },
       on_exit = function(j, exit_code)
         if exit_code ~= 0 then
           local res = table.concat(j:stderr_result(), "\n")
           vim.notify(res, vim.lsp.log_levels.ERROR, {
-            title = "Executing tmuxinator " .. command,
+            title = "Loading project: " .. args.args,
             timeout = 5000,
           })
         end
       end,
     })
     :start()
-end --}}}
-
-quick.command("TMStart", function(args)
-  do_tmuxinator("start", args.args)
-end, { nargs = "+", complete = start_completion, desc = "start a tmuxinator project" })
-
-quick.command("TMStop", function(args)
-  do_tmuxinator("stop", args.args)
-end, { nargs = "+", complete = stop_completion, desc = "stop a tmuxinator project" })
+end, { nargs = "+", complete = start_completion, desc = "load a tmuxp project" }) --}}}
 
 quick.command("Lorem", function(args) --{{{
   local count = args.count

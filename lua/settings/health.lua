@@ -1,5 +1,5 @@
 local M = {}
-local health = require("health")
+local health = vim.health or require("health")
 local home = vim.env.HOME
 
 local file_checks = {
@@ -32,7 +32,7 @@ local executables = {
   stylua = { "stylua", "Run :IntallDependencies" },
   TheSilverSearcher = { "ag", "yay -S the_silver_searcher" },
   tmux = { "tmux", "yay -S tmux" },
-  tmuxinator = { "tmuxinator", "yay -S tmuxinator" },
+  tmuxp = { "tmuxp", "yay -S tmuxp" },
   uncrustify = { "uncrustify", "yay -S uncrustify" },
 }
 

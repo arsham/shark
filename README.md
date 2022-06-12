@@ -566,8 +566,7 @@ The following list of commands do not fit into any specific categories.
 | `YankFilepathC`       | Yank the file path to `+` register           |
 | `MergeConflict`       | Search for merge conflicts                   |
 | `JsonDiff`            | Diff json files after formatting them        |
-| `TMStart`             | Start a tmuxinator project                   |
-| `TMStop`              | Stop a tmuxinator project                    |
+| `Tmux`                | Start a tmux project (using tmuxp)           |
 | [count]`Lorem`        | Insert (count) line(s) Lorem Ipsum text      |
 
 After running `InstallDependencies` you will be notified to install some
