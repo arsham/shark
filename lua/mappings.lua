@@ -146,4 +146,20 @@ vim.keymap.set("n", "<C-S-P>", function()
   require("fzf-lua.providers.nvim").commands()
 end, { silent = true, desc = "open command pallete" })
 
+-- Base64 Encode/Decode {{{
+vim.keymap.set("v", "<leader>be", function()
+  local contents = quick.selection_contents()
+  local got = vim.fn.system("base64 --wrap=0", { contents })
+  got = got:gsub("\n$", "")
+  quick.normal("n", "s" .. got .. "")
+end, { desc = "base64 encode selection" })
+
+vim.keymap.set("v", "<leader>bd", function()
+  local contents = quick.selection_contents()
+  local got = vim.fn.system("base64 --wrap=0 --ignore-garbage --decode", { contents })
+  got = got:gsub("\n$", "")
+  quick.normal("n", "s" .. got .. "")
+end, { desc = "base64 decode selection" })
+--}}}
+
 -- vim: fdm=marker fdl=0
