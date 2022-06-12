@@ -112,6 +112,7 @@ cmp.setup({
     { name = "luasnip", priority = 10 },
     { name = "calc" },
     { name = "nvim_lsp_signature_help" },
+    { name = "dap" },
     {
       name = "buffer",
       priority = 5,
@@ -145,6 +146,7 @@ cmp.setup({
         rg = "RG",
         omni = "Omni",
         copilot = "Copilot",
+        dap = "DAP",
       })[entry.source.name] or entry.source.name, client_name)
 
       vim_item.kind = kind_icons[vim_item.kind]

@@ -461,6 +461,31 @@ require("packer").startup({
       "towolf/vim-helm",
       ft = { "yaml" },
     })
+
+    -- DAP {{{
+    use({
+      "mfussenegger/nvim-dap",
+      requires = {
+        {
+          "rcarriga/nvim-dap-ui",
+        },
+        {
+          "jbyuki/one-small-step-for-vimkind",
+        },
+        {
+          "theHamsta/nvim-dap-virtual-text",
+        },
+        {
+          "leoluz/nvim-dap-go",
+          config = function () require('dap-go').setup() end,
+          event    = { "BufNewFile", "BufRead" },
+        },
+      },
+      config = function() require("settings.nvim-dap") end,
+      after  = { "nvim-dap-ui", "nvim-dap-virtual-text" },
+      cond   = { full_start, lsp_enabled },
+      event    = { "BufNewFile", "BufRead" },
+    }) --}}}
     -- }}}
 
     -- Text objects {{{

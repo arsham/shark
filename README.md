@@ -130,6 +130,10 @@ Some plugins are not listed here. You can find the complete list in the
 | [nvim-treesitter/nvim-treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)       |                                                        |
 | [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) |                                                        |
 | [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                                   |                                                        |
+| [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)                                             | Debug Adapter Protocol                                 |
+| [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)                         | DAP related                                            |
+| [leoluz/nvim-dap-go](https://github.com/leoluz/nvim-dap-go)                                                   | DAP related                                            |
+| [jbyuki/one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)                     | DAP related                                            |
 | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                                         | Seamlessly navigate between tmux panes and vim windows |
 | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                                       | File explorer tree                                     |
 | [famiu/feline.nvim](https://github.com/famiu/feline.nvim)                                                     | Statusline (default)                                   |

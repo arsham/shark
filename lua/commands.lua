@@ -135,6 +135,7 @@ quick.command("InstallDependencies", function() --{{{
     prettier = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest" }),
     selene = _t({ "cargo", "install", "selene" }),
     sqls = _t({ "go", "install", "github.com/lighttiger2505/sqls@latest" }),
+    dlv = _t({ "go", "install", "github.com/go-delve/delve/cmd/dlv@latest" }),
     stylua = _t({ "cargo", "install", "stylua" }),
   })
 
