@@ -224,6 +224,15 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 }) --}}}
 
+-- Aliase Filetype {{{
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = filetype_commands_group,
+  pattern = ".gitignore",
+  callback = function()
+    vim.bo.filetype = "conf"
+  end,
+}) --}}}
+
 -- Makefile filetype {{{
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = filetype_commands_group,
