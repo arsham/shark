@@ -23,10 +23,13 @@ gitsigns.setup({
     [9] = "₉",
     ["+"] = "₊",
   },
-  keymaps = {},
+
   diff_opts = {
     internal = true,
+    algorithm = "patience",
+    indent_heuristic = true,
   },
+
   on_attach = function(bufnr)
     local name = vim.api.nvim_buf_get_name(bufnr)
     if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
@@ -36,25 +39,25 @@ gitsigns.setup({
     if size > 1024 * 1024 * 5 then
       return false
     end
+
+    vim.keymap.set("n", "]c", function() quick.call_and_centre(gitsigns.next_hunk) end,    { desc = "go to next hunk" })
+    vim.keymap.set("n", "[c", function() quick.call_and_centre(gitsigns.prev_hunk) end,    { desc = "go to previous hunk" })
+    vim.keymap.set("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end, { desc = "blame line" })
+    vim.keymap.set("n", "<leader>hs", function() gitsigns.stage_hunk() end,                { desc = "stage hunk" })
+    vim.keymap.set("n", "<leader>hu", function() gitsigns.undo_stage_hunk() end,           { desc = "undo last staged hunk" })
+    vim.keymap.set("n", "<leader>hr", function() gitsigns.reset_hunk() end,                { desc = "reset hunk" })
+    vim.keymap.set("n", "<leader>hR", function() gitsigns.reset_buffer() end,              { desc = "reset buffer" })
+    vim.keymap.set("n", "<leader>hp", function() gitsigns.preview_hunk() end,              { desc = "preview hunk" })
+    vim.keymap.set("n", "<leader>hl", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
+    vim.keymap.set("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
+    vim.keymap.set("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "reset line" })
+
+    -- Text objects
+    local actions = require("gitsigns.actions")
+    vim.keymap.set("o", "ih", actions.select_hunk, { desc = "in hunk" })
+    vim.keymap.set("x", "ih", actions.select_hunk, { desc = "in hunk" })
+    vim.keymap.set("o", "ah", actions.select_hunk, { desc = "around hunk" })
+    vim.keymap.set("x", "ah", actions.select_hunk, { desc = "around hunk" })
   end,
 })
-
-vim.keymap.set("n", "]c", function() quick.call_and_centre(gitsigns.next_hunk) end,    { desc = "go to next hunk" })
-vim.keymap.set("n", "[c", function() quick.call_and_centre(gitsigns.prev_hunk) end,    { desc = "go to previous hunk" })
-vim.keymap.set("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end, { desc = "blame line" })
-vim.keymap.set("n", "<leader>hs", function() gitsigns.stage_hunk() end,                { desc = "stage hunk" })
-vim.keymap.set("n", "<leader>hu", function() gitsigns.undo_stage_hunk() end,           { desc = "undo last staged hunk" })
-vim.keymap.set("n", "<leader>hr", function() gitsigns.reset_hunk() end,                { desc = "reset hunk" })
-vim.keymap.set("n", "<leader>hR", function() gitsigns.reset_buffer() end,              { desc = "reset buffer" })
-vim.keymap.set("n", "<leader>hp", function() gitsigns.preview_hunk() end,              { desc = "preview hunk" })
-vim.keymap.set("n", "<leader>hl", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
-vim.keymap.set("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
-vim.keymap.set("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "reset line" })
 -- stylua: ignore end
-
--- Text objects
-local actions = require("gitsigns.actions")
-vim.keymap.set("o", "ih", actions.select_hunk, { desc = "in hunk" })
-vim.keymap.set("x", "ih", actions.select_hunk, { desc = "in hunk" })
-vim.keymap.set("o", "ah", actions.select_hunk, { desc = "around hunk" })
-vim.keymap.set("x", "ah", actions.select_hunk, { desc = "around hunk" })
