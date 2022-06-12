@@ -13,8 +13,8 @@ This project supports Neovim version `0.7` or later.
 
 - Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
-- It loads really fast! With over **60 plugins**, it takes **7ms** to
-  **15ms** on average to load up. (benchmarked with the `StartupTime` benchmark
+- It loads really fast! With over **70 plugins**, it takes **12ms** to
+  **20ms** on average to load up. (benchmarked with the `StartupTime` benchmark
   tool).
 - **LSP**, **Treesitter**, and **FZF** are setup to work together.
 - Completion with **nvim-cmp** plugin is setup.
@@ -168,6 +168,8 @@ Some plugins are not listed here. You can find the complete list in the
 | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                                           | Make diagrams from text                                |
 | [jbyuki/venn.nvim](https://github.com/jbyuki/venn.nvim)                                                       | Create diagrams easier                                 |
 | [monaqa/dial.nvim](https://github.com/monaqa/dial.nvim)                                                       | Enhanced increment/decrement values                    |
+| [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)                                                 | Current code context with LSP                          |
+| [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)                                                     | Current code context with Treesitter                   |
 
 </details>
 

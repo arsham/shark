@@ -1,5 +1,7 @@
 -- vim.lsp.set_log_level("debug")
 
+local util = require("util")
+
 local signs = {
   Error = "🔥",
   Warn = "💩",
@@ -245,8 +247,19 @@ local function on_attach(client, bufnr) --{{{
 end --}}}
 -- stylua: ignore end
 
+local ok, navic = pcall(require, "nvim-navic")
 local attach_wrap = function(client, ...)
   on_attach(client, ...)
+  local caps = client.server_capabilities
+  if not ok or not caps.documentSymbolProvider then
+    return
+  end
+  if client.name == "bashls" then
+    return
+  end
+  if not util.buffer_has_var("navic_attached") then
+    navic.attach(client, ...)
+  end
 end
 
 -- Enable (broadcasting) snippet capability for completion.

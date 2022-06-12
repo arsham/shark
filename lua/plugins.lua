@@ -421,6 +421,30 @@ require("packer").startup({
       cmd = "TSUpdate",
       event = { "BufRead", "BufNewFile", "InsertEnter" },
     })
+
+    use({
+      "SmiteshP/nvim-navic",
+      requires = {
+        {
+          "SmiteshP/nvim-gps",
+          cond  = { full_start },
+          after ={
+            "nvim-treesitter",
+          },
+        },
+        "neovim/nvim-lspconfig",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      config   = function ()
+        require("settings.nvim-navic")
+      end,
+      after ={
+        "nvim-gps",
+        "nvim-treesitter",
+      },
+      cond  = { full_start },
+      event = { "BufRead", "BufNewFile", "InsertEnter" },
+    })
     -- }}}
 
     use({
