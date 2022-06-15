@@ -1,5 +1,4 @@
 local quick = require("arshlib.quick")
-local nvim = require("nvim")
 
 local store = {}
 __Scratch_buffer_storage = __Scratch_buffer_storage or {}
@@ -22,9 +21,9 @@ end
 
 local function new_scratch_buffer()
   local name = string.format("Scratch %d", store.next())
-  nvim.ex.vsplit()
-  nvim.ex.enew()
-  nvim.ex.file(name)
+  vim.api.nvim_command("vsplit")
+  vim.api.nvim_command("enew")
+  vim.api.nvim_command("file " .. name)
   vim.bo.buftype = "nofile"
   vim.bo.swapfile = false
 

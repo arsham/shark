@@ -29,10 +29,9 @@ require("packer").startup({
       event = "VimEnter",
     })
     use("nvim-lua/plenary.nvim")
-    use("norcalli/nvim.lua")
     use({
       "arsham/arshlib.nvim",
-      requires = { "nvim.lua", "plenary.nvim", "nui.nvim" },
+      requires = { "plenary.nvim", "nui.nvim" },
     })
     use_rocks({ "bk-tree" })
     -- }}}
@@ -79,7 +78,7 @@ require("packer").startup({
 
     use({
       "arsham/listish.nvim",
-      requires = { "arshlib.nvim", "nvim.lua" },
+      requires = { "arshlib.nvim" },
       config = function()
         require("listish").config({})
         vim.cmd([[packadd! cfilter]])
@@ -161,7 +160,6 @@ require("packer").startup({
       requires = {
         "rebelot/heirline.nvim",
         "arshlib.nvim",
-        "nvim.lua",
         "feline.nvim",
         "nvim-web-devicons",
         "sqls.nvim",
@@ -522,9 +520,9 @@ require("packer").startup({
 
     use({
       "arsham/archer.nvim",
-      requires = { "arsham/arshlib.nvim", "tpope/vim-repeat", "norvalli/nvim.lua" },
       config   = function() require("archer").config({}) end,
       event    = { "BufNewFile", "BufRead" },
+      requires = { "arsham/arshlib.nvim", "tpope/vim-repeat" },
     })
 
     use({

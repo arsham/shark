@@ -1,4 +1,3 @@
-local nvim = require("nvim")
 vim.opt_local.expandtab = true
 vim.opt_local.tabstop = 2
 vim.opt_local.softtabstop = 2
@@ -6,37 +5,37 @@ vim.opt_local.shiftwidth = 2
 vim.opt_local.formatoptions:remove({ "t", "c" })
 
 -- stylua: ignore start
-nvim.ex.iabbrev{"<buffer>", "as",         "AS"}
-nvim.ex.iabbrev{"<buffer>", "by",         "BY"}
-nvim.ex.iabbrev{"<buffer>", "cascade",    "CASCADE"}
-nvim.ex.iabbrev{"<buffer>", "create",     "CREATE"}
-nvim.ex.iabbrev{"<buffer>", "delete",     "DELETE"}
-nvim.ex.iabbrev{"<buffer>", "drop",       "DROP"}
-nvim.ex.iabbrev{"<buffer>", "else",       "ELSE"}
-nvim.ex.iabbrev{"<buffer>", "end",        "END"}
-nvim.ex.iabbrev{"<buffer>", "foreign",    "FOREIGN"}
-nvim.ex.iabbrev{"<buffer>", "from",       "FROM"}
-nvim.ex.iabbrev{"<buffer>", "group",      "GROUP"}
-nvim.ex.iabbrev{"<buffer>", "having",     "HAVING"}
-nvim.ex.iabbrev{"<buffer>", "index",      "INDEX"}
-nvim.ex.iabbrev{"<buffer>", "insert",     "INSERT"}
-nvim.ex.iabbrev{"<buffer>", "into",       "INTO"}
-nvim.ex.iabbrev{"<buffer>", "join",       "JOIN"}
-nvim.ex.iabbrev{"<buffer>", "key",        "KEY"}
-nvim.ex.iabbrev{"<buffer>", "limit",      "LIMIT"}
-nvim.ex.iabbrev{"<buffer>", "offset",     "OFFSET"}
-nvim.ex.iabbrev{"<buffer>", "on",         "ON"}
-nvim.ex.iabbrev{"<buffer>", "order",      "ORDER"}
-nvim.ex.iabbrev{"<buffer>", "primary",    "PRIMARY"}
-nvim.ex.iabbrev{"<buffer>", "references", "REFERENCES"}
-nvim.ex.iabbrev{"<buffer>", "select",     "SELECT"}
-nvim.ex.iabbrev{"<buffer>", "set",        "SET"}
-nvim.ex.iabbrev{"<buffer>", "table",      "TABLE"}
-nvim.ex.iabbrev{"<buffer>", "then",       "THEN"}
-nvim.ex.iabbrev{"<buffer>", "union",      "UNION"}
-nvim.ex.iabbrev{"<buffer>", "unique",     "UNIQUE"}
-nvim.ex.iabbrev{"<buffer>", "update",     "UPDATE"}
-nvim.ex.iabbrev{"<buffer>", "values",     "VALUES"}
-nvim.ex.iabbrev{"<buffer>", "when",       "WHEN"}
-nvim.ex.iabbrev{"<buffer>", "where",      "WHERE"}
+vim.api.nvim_command("iabbrev <buffer> as         AS")
+vim.api.nvim_command("iabbrev <buffer> by         BY")
+vim.api.nvim_command("iabbrev <buffer> cascade    CASCADE")
+vim.api.nvim_command("iabbrev <buffer> create     CREATE")
+vim.api.nvim_command("iabbrev <buffer> delete     DELETE")
+vim.api.nvim_command("iabbrev <buffer> drop       DROP")
+vim.api.nvim_command("iabbrev <buffer> else       ELSE")
+vim.api.nvim_command("iabbrev <buffer> end        END")
+vim.api.nvim_command("iabbrev <buffer> foreign    FOREIGN")
+vim.api.nvim_command("iabbrev <buffer> from       FROM")
+vim.api.nvim_command("iabbrev <buffer> group      GROUP")
+vim.api.nvim_command("iabbrev <buffer> having     HAVING")
+vim.api.nvim_command("iabbrev <buffer> index      INDEX")
+vim.api.nvim_command("iabbrev <buffer> insert     INSERT")
+vim.api.nvim_command("iabbrev <buffer> into       INTO")
+vim.api.nvim_command("iabbrev <buffer> join       JOIN")
+vim.api.nvim_command("iabbrev <buffer> key        KEY")
+vim.api.nvim_command("iabbrev <buffer> limit      LIMIT")
+vim.api.nvim_command("iabbrev <buffer> offset     OFFSET")
+vim.api.nvim_command("iabbrev <buffer> on         ON")
+vim.api.nvim_command("iabbrev <buffer> order      ORDER")
+vim.api.nvim_command("iabbrev <buffer> primary    PRIMARY")
+vim.api.nvim_command("iabbrev <buffer> references REFERENCES")
+vim.api.nvim_command("iabbrev <buffer> select     SELECT")
+vim.api.nvim_command("iabbrev <buffer> set        SET")
+vim.api.nvim_command("iabbrev <buffer> table      TABLE")
+vim.api.nvim_command("iabbrev <buffer> then       THEN")
+vim.api.nvim_command("iabbrev <buffer> union      UNION")
+vim.api.nvim_command("iabbrev <buffer> unique     UNIQUE")
+vim.api.nvim_command("iabbrev <buffer> update     UPDATE")
+vim.api.nvim_command("iabbrev <buffer> values     VALUES")
+vim.api.nvim_command("iabbrev <buffer> when       WHEN")
+vim.api.nvim_command("iabbrev <buffer> where      WHERE")
 -- stylua: ignore end

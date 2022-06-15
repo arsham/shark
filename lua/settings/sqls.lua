@@ -1,12 +1,12 @@
-local nvim = require("nvim")
-
 -- stylua: ignore start
 local sqls_settings_group = vim.api.nvim_create_augroup("SQLS_SETTINGS", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = sqls_settings_group,
   pattern = "sqls_output",
   callback = function()
-    vim.keymap.set("n", "q", nvim.ex.close, { buffer = true })
+    vim.keymap.set("n", "q", function()
+      vim.api.nvim_command("close")
+    end, { buffer = true })
   end,
 })
 

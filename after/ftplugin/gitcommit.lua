@@ -1,11 +1,9 @@
-local nvim = require("nvim")
-
 vim.opt_local.textwidth = 72
 vim.opt_local.colorcolumn = "50,72"
 vim.opt_local.spell = true
 vim.wo.cursorline = true
 vim.opt_local.formatoptions:remove({ "c", "r", "o", "q" })
-nvim.ex.startinsert()
+vim.api.nvim_command("startinsert")
 
 -- stylua: ignore start
 local formatlistpat = {'^\\s*'}                         --- Optional leading whitespace

@@ -1,18 +1,12 @@
-local nvim = require("nvim")
-local util = require("util")
-
 -- Packer Reload {{{
 local packer_reload_group = vim.api.nvim_create_augroup("PACKER_RELOAD", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = packer_reload_group,
   pattern = "lua/plugins.lua",
-  callback = function()
-    if util.buffer_has_var("packer_reload_commands") then
-      return
-    end
-    nvim.ex.source("<afile>")
-    nvim.ex.PackerCompile()
-    nvim.ex.PackerInstall()
+  callback = function(args)
+    vim.api.nvim_command("source " .. args.file)
+    vim.api.nvim_command("PackerCompile")
+    vim.api.nvim_command("PackerInstall")
   end,
   desc = "auto compile and install new plugins",
 }) --}}}
@@ -40,7 +34,7 @@ vim.api.nvim_create_autocmd("BufRead", {
         local line = vim.fn.line
 
         if line([['"]]) > 0 and line([['"]]) <= line("$") then
-          nvim.ex.normal_([[g`"zv']])
+          vim.api.nvim_command("normal! " .. [[g`"zv']])
         end
       end,
     })
@@ -139,7 +133,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     vim.wo.statusline = "%{b:term_title}"
     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true, desc = "enter normal mode" })
-    nvim.ex.startinsert()
+    vim.api.nvim_command("startinsert")
     vim.wo.number = false
     vim.wo.relativenumber = false
   end,
@@ -266,7 +260,9 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "lspinfo", "lsp-installer", "null-ls-info" },
   callback = function()
     local opts = { buffer = true, silent = true, desc = "close lspinfo popup" }
-    vim.keymap.set("n", "q", nvim.ex.close, opts)
+    vim.keymap.set("n", "q", function()
+      vim.api.nvim_command("close")
+    end, opts)
   end,
   desc = "close lspinfo popup",
 }) --}}}
@@ -288,7 +284,9 @@ vim.api.nvim_create_autocmd("Filetype", {
   desc = "exit help with q",
   callback = function()
     local opts = { buffer = true, desc = "close help,qf buffers" }
-    vim.keymap.set("n", "q", nvim.ex.close, opts)
+    vim.keymap.set("n", "q", function()
+      vim.api.nvim_command("close")
+    end, opts)
   end,
 }) --}}}
 
@@ -303,8 +301,8 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
         return
       end
       local save = vim.fn.winsaveview()
-      nvim.ex.keeppatterns([[%s/\s\+$//e]])
-      nvim.ex.silent_([[%s#\($\n\s*\)\+\%$##]])
+      vim.api.nvim_command([[keeppatterns %s/\s\+$//e]])
+      vim.api.nvim_command([[silent! %s#\($\n\s*\)\+\%$##]])
       vim.fn.winrestview(save)
     end,
   })

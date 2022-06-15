@@ -1,6 +1,5 @@
 local M = {}
 
-local nvim = require("nvim")
 local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")
@@ -375,8 +374,10 @@ function M.support_commands() --{{{
   ---Restats the LSP server. Fixes the problem with the LSP server not
   -- restarting with LspRestart command.
   local function restart_lsp()
-    nvim.ex.LspStop()
-    vim.defer_fn(nvim.ex.LspStart, 1000)
+    vim.api.nvim_command("LspStop")
+    vim.defer_fn(function()
+      vim.api.nvim_command("LspStart")
+    end, 1000)
   end
   quick.buffer_command("RestartLsp", restart_lsp)
   nnoremap("<leader>dr", restart_lsp, "Restart LSP server")

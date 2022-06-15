@@ -1,6 +1,5 @@
 local actions = require("fzf-lua.actions")
 local util = require("fzfmania.util")
-local nvim = require("nvim")
 local quick = require("arshlib.quick")
 local fzf = require("fzf-lua")
 
@@ -45,14 +44,14 @@ end
 local function insert_qflist()
   return function(items)
     util.insert_into_list(prepare_list_items(items), false)
-    nvim.ex.copen()
+    vim.api.nvim_command("copen")
   end
 end
 
 local function insert_locallist()
   return function(items)
     util.insert_into_list(prepare_list_items(items), true)
-    nvim.ex.lopen()
+    vim.api.nvim_command("lopen")
   end
 end
 

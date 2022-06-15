@@ -43,7 +43,6 @@ local libs = {
   ["indent-tools"] = "arsham/indent-tools.nvim",
   listish = "arsham/listish.nvim",
   matchmaker = "arsham/matchmaker.nvim",
-  nvim = "norcalli/nvim.lua",
   plenary = "nvim-lua/plenary.nvim",
   yanker = "arsham/yanker.nvim",
 }

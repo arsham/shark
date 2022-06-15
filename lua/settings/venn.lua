@@ -1,5 +1,3 @@
-local nvim = require("nvim")
-
 vim.keymap.set("n", "<leader>v", function()
   local venn_enabled = vim.inspect(vim.b.venn_enabled)
   if venn_enabled == "nil" then
@@ -17,6 +15,6 @@ vim.keymap.set("n", "<leader>v", function()
   end
 
   vim.opt_local.ve = ""
-  nvim.ex.mapclear("<buffer>")
+  vim.api.nvim_command("mapclear <buffer>")
   vim.b.venn_enabled = nil
 end, {})
