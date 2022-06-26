@@ -194,6 +194,9 @@ local function on_attach(client, bufnr) --{{{
   -- TODO: find out how to disable the statuline badges as well.
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
     vim.diagnostic.disable(bufnr)
+    vim.defer_fn(function()
+      vim.diagnostic.reset(nil, bufnr)
+    end, 1000)
   end
 
   vim.api.nvim_buf_call(bufnr, function() --{{{
