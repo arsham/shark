@@ -129,7 +129,7 @@ quick.command("InstallDependencies", function() --{{{
     golangci = _t({
       "go",
       "install",
-      "github.com/golangci/golangci-lint/cmd/golangci-lint@v1.44.2",
+      "github.com/golangci/golangci-lint/cmd/golangci-lint@latest",
     }),
     neovim = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest" }),
     prettier = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest" }),
