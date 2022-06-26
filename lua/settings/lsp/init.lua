@@ -254,13 +254,17 @@ end --}}}
 -- stylua: ignore end
 
 local ok, navic = pcall(require, "nvim-navic")
+local ignore_navic = {
+  bashls = true,
+  dockerls = true,
+}
 local attach_wrap = function(client, ...)
   on_attach(client, ...)
   local caps = client.server_capabilities
   if not ok or not caps.documentSymbolProvider then
     return
   end
-  if client.name == "bashls" then
+  if ignore_navic[client.name] ~= nil then
     return
   end
   if not util.buffer_has_var("navic_attached") then
