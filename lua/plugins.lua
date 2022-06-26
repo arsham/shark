@@ -11,6 +11,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     install_path,
   })
 end
+-- stylua: ignore end
 
 vim.cmd([[packadd packer.nvim]])
 vim.g.loaded_matchit = 1
@@ -22,6 +23,7 @@ end
 -- }}}
 
 require("packer").startup({
+-- stylua: ignore start
   function(use)
     -- Libraries {{{
     use({
@@ -499,14 +501,14 @@ require("packer").startup({
         },
         {
           "leoluz/nvim-dap-go",
-          config = function () require('dap-go').setup() end,
-          event    = { "BufNewFile", "BufRead" },
+          config = function() require('dap-go').setup() end,
+          event  = { "BufNewFile", "BufRead" },
         },
       },
       config = function() require("settings.nvim-dap") end,
       after  = { "nvim-dap-ui", "nvim-dap-virtual-text" },
       cond   = { full_start, lsp_enabled },
-      event    = { "BufNewFile", "BufRead" },
+      event  = { "BufNewFile", "BufRead" },
     }) --}}}
     -- }}}
 
@@ -515,14 +517,14 @@ require("packer").startup({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
       config   = function() require("indent-tools").config({}) end,
-      event  = { "BufRead", "BufNewFile" },
+      event    = { "BufRead", "BufNewFile" },
     })
 
     use({
       "arsham/archer.nvim",
+      requires = { "arsham/arshlib.nvim", "tpope/vim-repeat" },
       config   = function() require("archer").config({}) end,
       event    = { "BufNewFile", "BufRead" },
-      requires = { "arsham/arshlib.nvim", "tpope/vim-repeat" },
     })
 
     use({
