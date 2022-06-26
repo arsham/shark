@@ -210,7 +210,8 @@ local function on_attach(client, bufnr) --{{{
       -- Either is it set to true, or there is a specified set of
       -- capabilities. Sumneko doesn't support it, but the
       -- client.supports_method returns true.
-      local can_organise_imports = type(caps.codeActionProvider) == "table" and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
+      local can_organise_imports = type(caps.codeActionProvider) == "table"
+        and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
       if can_organise_imports then
         lsp_util.setup_organise_imports()
         imports_hook = lsp_util.lsp_organise_imports
@@ -222,7 +223,9 @@ local function on_attach(client, bufnr) --{{{
       format_hook = function() vim.lsp.buf.format({ async = false }) end
     end
 
-    local workspace_folder_supported = caps.workspace and caps.workspace.workspaceFolders.supported
+    local workspace_folder_supported = caps.workspace
+      and caps.workspace.workspaceFolders
+      and caps.workspace.workspaceFolders.supported
     if workspace_folder_supported           then lsp_util.workspace_folder_properties() end
     if caps.workspaceSymbolProvider         then lsp_util.workspace_symbol()            end
     if caps.hoverProvider                   then lsp_util.hover()                       end
@@ -241,7 +244,7 @@ local function on_attach(client, bufnr) --{{{
     lsp_util.setup_diagnostics()
     lsp_util.setup_completions()
     lsp_util.support_commands()
-    lsp_util.setup_events(imports_hook, format_hook)
+    lsp_util.setup_events(client.name, imports_hook, format_hook)
     lsp_util.fix_null_ls_errors()
   end) --}}}
 end --}}}
