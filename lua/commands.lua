@@ -167,7 +167,7 @@ quick.command("InstallDependencies", function() --{{{
           count = count + 1
           if count == total then
             local str =
-              "yay -S ripgrep bat words-insane ctags python-pip the_silver_searcher && snap install diagon"
+              "paru -S ripgrep bat words-insane ctags python-pip the_silver_searcher && snap install diagon"
             vim.schedule(function()
               vim.fn.setreg("+", str)
             end)
