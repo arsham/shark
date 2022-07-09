@@ -300,6 +300,10 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
       if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
         return
       end
+      local ok, val = pcall(vim.api.nvim_buf_get_var, 0, "DISABLE_TRIM_WHITESPACES")
+      if ok and val then
+        return
+      end
       local save = vim.fn.winsaveview()
       vim.api.nvim_command([[keeppatterns %s/\s\+$//e]])
       vim.api.nvim_command([[silent! %s#\($\n\s*\)\+\%$##]])

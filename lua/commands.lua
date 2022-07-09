@@ -310,6 +310,16 @@ quick.command("Decrypt", function() --{{{
   vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
 end, { desc = "decrypt the content of the file into d register" }) --}}}
 
+quick.command("ToggleTrimWhitespaces", function()
+  local name = "DISABLE_TRIM_WHITESPACES"
+  local set_to = true
+  local ok, val = pcall(vim.api.nvim_buf_get_var, 0, name)
+  if ok and val then
+    set_to = false
+  end
+  vim.api.nvim_buf_set_var(0, name, set_to)
+end, { desc = "toggle trimming whitespaces on current buffer" })
+
 return M
 
 -- vim: fdm=marker fdl=0
