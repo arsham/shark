@@ -78,10 +78,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   group = vim.api.nvim_create_augroup("DIFFTOOL", { clear = true }),
   callback = function()
     if vim.opt.diff:get() and not util.buffer_has_var("difftool_special_keys") then
-      local o = { desc = "Mergetool mapping" }
-      vim.keymap.set("n", "<leader>1", ":diffget LOCAL<CR>", o)
-      vim.keymap.set("n", "<leader>2", ":diffget BASE<CR>", o)
-      vim.keymap.set("n", "<leader>3", ":diffget REMOTE<CR>", o)
+      local o = { buffer = true, desc = "Mergetool mapping" }
+      vim.keymap.set("n", "<localleader>1", ":diffget LOCAL<CR>", o)
+      vim.keymap.set("n", "<localleader>2", ":diffget BASE<CR>", o)
+      vim.keymap.set("n", "<localleader>3", ":diffget REMOTE<CR>", o)
     end
   end,
 })

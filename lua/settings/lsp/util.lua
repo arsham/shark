@@ -112,16 +112,16 @@ function M.code_action() --{{{
   quick.buffer_command("CodeAction", function(args)
     code_action(args.range ~= 0, args.line1, args.line2)
   end, { range = true })
-  nnoremap("<leader>ca", fzf.lsp_code_actions, "Code action")
-  vnoremap("<leader>ca", ":'<,'>CodeAction<CR>", "Code action")
+  nnoremap("<localleader>ca", fzf.lsp_code_actions, "Code action")
+  vnoremap("<localleader>ca", ":'<,'>CodeAction<CR>", "Code action")
 end --}}}
 
 function M.setup_organise_imports() --{{{
-  nnoremap("<leader>i", M.lsp_organise_imports, "Organise imports")
+  nnoremap("<localleader>i", M.lsp_organise_imports, "Organise imports")
 end --}}}
 
 function M.document_formatting() --{{{
-  nnoremap("<leader>gq", vim.lsp.buf.format, "Format buffer")
+  nnoremap("<localleader>gq", vim.lsp.buf.format, "Format buffer")
 end --}}}
 
 local function document_range_formatting(args) --{{{
@@ -198,7 +198,7 @@ function M.implementation() --{{{
     fzf.lsp_implementations({ jump_to_single_result = true })
   end
   quick.buffer_command("Implementation", perform)
-  nnoremap("<leader>gi", perform, "Go to implementation")
+  nnoremap("<localleader>gi", perform, "Go to implementation")
 end --}}}
 
 function M.find_references() --{{{
@@ -219,7 +219,7 @@ function M.document_symbol() --{{{
     })
   end
   quick.buffer_command("DocumentSymbol", perform)
-  nnoremap("<leader>@", perform, "Document symbol")
+  nnoremap("<localleader>@", perform, "Document symbol")
 end --}}}
 
 function M.workspace_symbol() --{{{
@@ -228,7 +228,7 @@ end --}}}
 
 function M.call_hierarchy() --{{{
   quick.buffer_command("Callers", fzf.lsp_incoming_calls)
-  nnoremap("<leader>gc", fzf.lsp_incoming_calls, "show incoming calls")
+  nnoremap("<localleader>gc", fzf.lsp_incoming_calls, "show incoming calls")
   quick.buffer_command("Callees", fzf.lsp_outgoing_calls)
 end --}}}
 
@@ -264,7 +264,7 @@ function M.code_lens() --{{{
   end
   quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
   quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
-  nnoremap("<leader>cr", vim.lsp.codelens.run, "run code lenses")
+  nnoremap("<localleader>cr", vim.lsp.codelens.run, "run code lenses")
 
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "InsertLeave" }, {
     group = code_lenses_group,
@@ -380,13 +380,13 @@ function M.support_commands() --{{{
     end, 1000)
   end
   quick.buffer_command("RestartLsp", restart_lsp)
-  nnoremap("<leader>dr", restart_lsp, "Restart LSP server")
+  nnoremap("<localleader>dr", restart_lsp, "Restart LSP server")
 end --}}}
 
 function M.setup_diagnostics() --{{{
-  nnoremap("<leader>dd", vim.diagnostic.open_float, "show diagnostics")
-  nnoremap("<leader>dq", vim.diagnostic.setqflist, "populate quickfix")
-  nnoremap("<leader>dw", vim.diagnostic.setloclist, "populate local list")
+  nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
+  nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
+  nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
 
   nnoremap("]d", function()
     quick.call_and_centre(vim.diagnostic.goto_next)
