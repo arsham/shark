@@ -1,7 +1,6 @@
 -- Packer setup {{{3
 -- stylua: ignore start
 vim.opt.termguicolors = true
-pcall(require, "impatient")
 local packer_bootstrap = false
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -40,7 +39,6 @@ require("packer").startup({
 
     -- Core/System utilities {{{
     use("nathom/filetype.nvim")
-    use("lewis6991/impatient.nvim")
 
     use({
       "junegunn/fzf",
