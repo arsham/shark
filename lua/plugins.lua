@@ -272,8 +272,9 @@ require("packer").startup({
     })
 
     use({
-      "tommcdo/vim-exchange",
-      keys = { { "n", "cx" }, { "v", "X" } },
+      "gbprod/substitute.nvim",
+      config = function() require("settings.substitute-nvim") end,
+      keys = { { "n", "cx" }, { "n", "cxx" }, { "v", "X" } },
     })
 
     use({
