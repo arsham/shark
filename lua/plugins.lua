@@ -444,6 +444,11 @@ packer.startup({
     -- }}}
 
     use({
+      "sheerun/vim-polyglot",
+      event = { "BufRead", "BufNewFile", "InsertEnter" },
+    })
+
+    use({
       "folke/lua-dev.nvim",
       event = { "BufRead", "BufNewFile" },
       cond  = { full_start, lsp_enabled },
