@@ -178,6 +178,14 @@ local servers = {
       return opts
     end,
   },
+  rust_analyzer = {
+    update = function(on_attach, opts)
+      opts.on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+      end
+      return opts
+    end,
+  },
 }
 
 local lsp_util = require("settings.lsp.util")

@@ -9,6 +9,7 @@ lsp_installer.setup({
     "html",
     "jedi_language_server",
     "jsonls",
+    "rust_analyzer",
     "sqls",
     "sumneko_lua",
     "tsserver",
