@@ -136,6 +136,10 @@ require("nvim-treesitter.configs").setup({
   }, --}}}
 
   autopairs = { enable = true },
+
+  matchup = {
+    enable = true,
+  },
 })
 
 -- vim: fdm=marker fdl=0
