@@ -601,9 +601,32 @@ packer.startup({
   end,
   config = {
     log = { level = "info" },
+    auto_clean = true,
+    auto_reload_compiled = true,
+    autoremove = false,
+    ensure_dependencies = true,
+    compile_on_sync = true,
     display = {
+      non_interactive = false,
+      header_lines = 2,
+      title = " packer.nvim",
+      working_sym = " ",
+      error_sym = "",
+      done_sym = "",
+      removed_sym = "",
+      moved_sym = " ",
+      show_all_info = true,
+      prompt_border = "rounded",
+      open_cmd = "tabedit",
+      keybindings = {
+        prompt_revert = "R",
+        diff = "D",
+        retry = "r",
+        quit = "q",
+        toggle_info = "<CR>",
+      },
       open_fn = function()
-        return require("packer.util").float({ border = "single" })
+        return require("packer.util").float({ border = "rounded" })
       end,
     },
 
