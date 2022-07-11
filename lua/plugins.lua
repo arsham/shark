@@ -444,6 +444,13 @@ require("packer").startup({
     })
 
     use({
+      "ray-x/go.nvim",
+      config = function() require("settings.go-nvim") end,
+      ft     = { "go" },
+      cond   = full_start,
+    })
+
+    use({
       "numToStr/Comment.nvim",
       requires = { "nvim-ts-context-commentstring", "nvim-treesitter" },
       after    = { "nvim-ts-context-commentstring", "nvim-treesitter" },
