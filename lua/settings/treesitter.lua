@@ -9,21 +9,13 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.indentexpr = "nvim_treesitter#indent()"
 
-parser_config.sql = { --{{{
-  install_info = {
-    url = "https://github.com/DerekStride/tree-sitter-sql",
-    files = { "src/parser.c" },
-    branch = "main",
-  },
-} --}}}
-
 parser_config.gotmpl = { --{{{
   install_info = {
     url = "https://github.com/ngalaiko/tree-sitter-go-template",
     files = { "src/parser.c" },
   },
   filetype = "gotmpl",
-  used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
+  used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl" },
 } --}}}
 
 require("nvim-treesitter.configs").setup({
