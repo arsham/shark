@@ -11,17 +11,16 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 -- stylua: ignore end
 
-vim.cmd([[packadd packer.nvim]])
+vim.api.nvim_command("packadd packer.nvim")
 
 -- Disables LSP plugins and other heavy plugins.
 local function full_start()
   return not vim.env.NVIM_START_LIGHT
 end
--- }}}
-
 local function lsp_enabled()
   return not vim.env.NVIM_STOP_LSP
 end
+-- }}}
 
 local packer = require("packer")
 
@@ -85,7 +84,7 @@ packer.startup({
       requires = { "arshlib.nvim" },
       config = function()
         require("listish").config({})
-        vim.cmd([[packadd! cfilter]])
+        vim.api.nvim_command("packadd! cfilter")
       end,
       event = "UIEnter",
     })
@@ -124,6 +123,14 @@ packer.startup({
       branch = "search",
       cmd    = { "UndotreeShow", "UndotreeToggle" },
       keys   = { "<leader>u" },
+    })
+
+    use({
+      "dhruvasagar/vim-zoom",
+      config = function()
+        vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)")
+      end,
+      keys  = { "<C-w>z" },
     })
     -- }}}
 
@@ -185,14 +192,6 @@ packer.startup({
       event = "UIEnter",
     })
 
-    use({
-      "dhruvasagar/vim-zoom",
-      config = function()
-        vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)")
-      end,
-      keys  = { "<C-w>z" },
-    })
-
     local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown" }
     use({
       "norcalli/nvim-colorizer.lua",
@@ -218,6 +217,18 @@ packer.startup({
       event  = "UIEnter",
       cond   = full_start,
     })
+
+    use({
+      "SmiteshP/nvim-navic",
+      requires = {
+        "neovim/nvim-lspconfig",
+        "nvim-treesitter/nvim-treesitter",
+        "feline-nvim/feline.nvim",
+      },
+      config = function () require("settings.nvim-navic") end,
+      after  = { "nvim-treesitter", "feline.nvim" },
+      cond   = { full_start, lsp_enabled },
+    })
     -- }}}
 
     -- Editing {{{
@@ -225,6 +236,7 @@ packer.startup({
       "arsham/yanker.nvim",
       config   = function() require("yanker").config({}) end,
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
+      after    = { "arshlib.nvim" },
       event    = { "BufRead", "BufNewFile" },
     })
 
@@ -256,6 +268,7 @@ packer.startup({
     use({
       "junegunn/vim-easy-align",
       config = function() require("settings.easyalign") end,
+      after  = { "arshlib.nvim" },
       keys   = { "ga" },
     })
 
@@ -328,6 +341,13 @@ packer.startup({
           require("settings.lsp")
         end,
         wants = {
+          "cmp-nvim-lsp",
+          "fzf-lua",
+          "lua-dev.nvim",
+          "null-ls.nvim",
+          "nvim-cmp",
+        },
+        after = {
           "cmp-nvim-lsp",
           "fzf-lua",
           "lua-dev.nvim",
@@ -429,18 +449,6 @@ packer.startup({
       cmd = "TSUpdate",
       event = { "BufRead", "BufNewFile", "InsertEnter" },
     })
-
-    use({
-      "SmiteshP/nvim-navic",
-      requires = {
-        "neovim/nvim-lspconfig",
-        "nvim-treesitter/nvim-treesitter",
-        "feline-nvim/feline.nvim",
-      },
-      config = function () require("settings.nvim-navic") end,
-      after  = { "nvim-treesitter", "feline.nvim" },
-      cond   = { full_start, lsp_enabled },
-    })
     -- }}}
 
     use({
@@ -459,6 +467,12 @@ packer.startup({
       config = function() require("settings.nvim-luadev") end,
       cmd    = { "Luadev" },
       cond   = { full_start, lsp_enabled },
+    })
+
+    use({
+      "milisims/nvim-luaref",
+      ft   = { "lua" },
+      cond = full_start,
     })
 
     use({
@@ -572,12 +586,6 @@ packer.startup({
     })
 
     use({
-      "milisims/nvim-luaref",
-      ft   = { "lua" },
-      cond = full_start,
-    })
-
-    use({
       "tmux-plugins/vim-tmux",
       ft = "tmux",
     })
@@ -630,7 +638,6 @@ packer.startup({
       end,
     },
 
-    -- Move to lua dir so impatient.nvim can cache it.
     compile_path = vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua",
   },
   -- }}}
