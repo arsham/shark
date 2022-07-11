@@ -137,6 +137,8 @@ end, { silent = true, desc = "set local foldmethod to syntax" })
 
 vim.keymap.set("i", "<C-u>", "<C-g>u<C-u>", { silent = true, desc = "undoable insert edits" })
 vim.keymap.set("i", "<C-w>", "<C-g>u<C-w>", { silent = true, desc = "undoable insert edits" })
+vim.keymap.set("i", "<M-e>", "<C-g>u<C-o>D", { silent = true, desc = "delete to the end of line" })
+vim.keymap.set("i", "<M-a>", "<C-g>u<C-o>de", { silent = true, desc = "delete a word in front" })
 
 -- Beginning and end of line in `:` command mode
 vim.keymap.set("c", "<M-a>", "<home>", {})
