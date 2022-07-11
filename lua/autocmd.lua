@@ -320,4 +320,75 @@ async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
 end))
 async_load_plugin:send() --}}}
 
+-- CMD height hacks {{{
+local cmdheight_hacks_group = vim.api.nvim_create_augroup("CMDHEIGHT_HACKS", { clear = true })
+-- cmdline_calls is used to prevent setting cmdheight to 0 on fast command
+-- invokations.
+local cmdline_calls = -1
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+  pattern = "*:[vV\\x16]",
+  group = cmdheight_hacks_group,
+  callback = function()
+    cmdline_calls = cmdline_calls + 1
+    vim.opt.cmdheight = 1
+  end,
+  desc = "increase cmdheight when entering visual mode",
+})
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+  group = cmdheight_hacks_group,
+  pattern = "[vV\\x16]:*",
+  callback = function()
+    cmdline_calls = cmdline_calls - 1
+    vim.opt.cmdheight = 0
+  end,
+  desc = "decrease cmdheight when exiting visual mode",
+})
+
+vim.api.nvim_create_autocmd("RecordingEnter", {
+  group = cmdheight_hacks_group,
+  callback = function()
+    cmdline_calls = cmdline_calls + 1
+    vim.opt.cmdheight = 1
+  end,
+  desc = "increase cmdheight when entering macro recording",
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+  group = cmdheight_hacks_group,
+  callback = function()
+    cmdline_calls = cmdline_calls - 1
+    vim.opt.cmdheight = 0
+  end,
+  desc = "decrease cmdheight when exiting macro recording",
+})
+
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  group = cmdheight_hacks_group,
+  callback = function()
+    cmdline_calls = cmdline_calls + 1
+    vim.opt.cmdheight = 1
+  end,
+  desc = "increase cmdheight when entering command mode",
+})
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+  group = cmdheight_hacks_group,
+  callback = function()
+    vim.defer_fn(function()
+      -- For an unknown reason, it is set to zero. Let's set it to 1 shortly.
+      vim.opt.cmdheight = 1
+    end, 5)
+    vim.defer_fn(function()
+      cmdline_calls = cmdline_calls - 1
+      if cmdline_calls == 0 then
+        vim.opt.cmdheight = 0
+      end
+    end, 1000)
+  end,
+  desc = "decrease cmdheight when entering command mode after 2 seconds",
+})
+--}}}
+
 -- vim: fdm=marker fdl=0
