@@ -444,6 +444,13 @@ require("packer").startup({
     })
 
     use({
+      "bfredl/nvim-luadev",
+      config = function() require("settings.nvim-luadev") end,
+      cmd    = { "Luadev" },
+      cond   = full_start,
+    })
+
+    use({
       "ray-x/go.nvim",
       config = function() require("settings.go-nvim") end,
       ft     = { "go" },
