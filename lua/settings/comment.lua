@@ -1,10 +1,5 @@
 local cmt_utils = require("Comment.utils")
-local ts_utils, ok
-ok, ts_utils = pcall(require, "ts_context_commentstring.utils")
-if not ok then
-  require("packer").loader("nvim-ts-context-commentstring")
-  ts_utils = require("ts_context_commentstring.utils")
-end
+local ts_utils = require("ts_context_commentstring.utils")
 local internal = require("ts_context_commentstring.internal")
 
 require("Comment").setup({

@@ -206,10 +206,10 @@ local function running_tmuxp_projects() --{{{
   return sessions
 end --}}}
 
-local bktree = require("bk-tree")
 local tmuxp_store = false
 ---@param fn fun(v: string):boolean includes value if returns true
 local function tm_completion(arg, fn) --{{{
+  local bktree = require("bk-tree")
   if not tmuxp_store then
     local projects = vim.fn.systemlist("tmuxp ls")
     tmuxp_store = bktree:new()

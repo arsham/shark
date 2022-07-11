@@ -19,6 +19,8 @@ return {
     -- stylua: ignore end
 
     -- disabled by default
-    vim.api.nvim_command("Copilot disable")
+    vim.schedule(function()
+      vim.api.nvim_command("Copilot disable")
+    end)
   end,
 }

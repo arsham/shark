@@ -1,6 +1,5 @@
 -- Packer setup {{{3
 -- stylua: ignore start
-vim.opt.termguicolors = true
 local packer_bootstrap = false
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -13,7 +12,6 @@ end
 -- stylua: ignore end
 
 vim.cmd([[packadd packer.nvim]])
-vim.g.loaded_matchit = 1
 
 -- Disables LSP plugins and other heavy plugins.
 local function full_start()
@@ -95,7 +93,7 @@ require("packer").startup({
       "gelguy/wilder.nvim",
       config = function() require("settings.wilder") end,
       run    = ":UpdateRemotePlugins",
-      event  = "VimEnter",
+      event  = "CmdlineEnter",
     })
     -- }}}
 
@@ -104,7 +102,6 @@ require("packer").startup({
       "kyazdani42/nvim-tree.lua",
       requires = { "nvim-web-devicons" },
       config   = function() require("settings.nvim_tree") end,
-      event    = { "BufRead" },
       cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
       keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
     })
@@ -128,12 +125,10 @@ require("packer").startup({
     use({
       "tpope/vim-fugitive",
       config = function() require("settings.fugitive") end,
-    })
-
-    use({
-      "tpope/vim-rhubarb",
-      requires = "vim-fugitive",
-      after    = "vim-fugitive",
+      requires = {
+        "tpope/vim-git",
+        "tpope/vim-rhubarb",
+      },
     })
 
     use({
@@ -160,10 +155,13 @@ require("packer").startup({
       requires = {
         "rebelot/heirline.nvim",
         "arshlib.nvim",
-        "feline.nvim",
         "nvim-web-devicons",
         "sqls.nvim",
         "fidget.nvim",
+        {
+          "feline-nvim/feline.nvim",
+          after = "nvim-web-devicons",
+        },
       },
       config = function() require("settings.arshamiser") end,
       event = { "UIEnter" },
@@ -182,16 +180,10 @@ require("packer").startup({
     })
 
     use({
-      "famiu/feline.nvim",
-      after  = "nvim-web-devicons",
-    })
-
-    use({
       "dhruvasagar/vim-zoom",
       config = function()
         vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)")
       end,
-      event = { "BufRead", "BufNewFile" },
       keys  = { "<C-w>z" },
     })
 
@@ -228,7 +220,6 @@ require("packer").startup({
       config   = function() require("yanker").config({}) end,
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
       event    = { "BufRead", "BufNewFile" },
-      keys     = { "<leader>yh" },
     })
 
     use({
@@ -238,7 +229,7 @@ require("packer").startup({
 
     use({
       "vim-scripts/visualrepeat",
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event    = { "BufRead", "BufNewFile" },
     })
 
     use({
@@ -277,9 +268,9 @@ require("packer").startup({
 
     use({
       "windwp/nvim-autopairs",
-      wants  = "nvim-cmp",
+      wants  = { "nvim-cmp", "nvim-treesitter" },
+      after  = { "nvim-cmp", "nvim-treesitter" },
       config = function() require("settings.autopairs") end,
-      event  = { "InsertEnter" },
     })
 
     use({
@@ -295,7 +286,7 @@ require("packer").startup({
     use({
       "booperlv/nvim-gomove",
       config = function() require("settings.nvim-gomove") end,
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+      keys   = { "<M-h>", "<M-j>", "<M-k>", "<M-l>" },
     })
 
     use({
@@ -305,13 +296,18 @@ require("packer").startup({
 
     use({
       "andymass/vim-matchup",
-      event = { "BufRead", "BufNewFile" },
+      config = function() require("settings.vim-matchup") end,
+      event  = { "BufRead", "BufNewFile" },
     })
 
     use({
       "monaqa/dial.nvim",
       config = function() require("settings.dial-nvim") end,
-      event  = { "BufRead", "BufNewFile" },
+      keys = {
+        { "n", "<C-a>" }, { "n", "<C-x>" },
+        { "v", "<C-a>" }, { "v", "<C-x>" },
+        { "v", "g<C-a>" }, { "v", "g<C-x>" },
+      },
     })
     -- }}}
 
@@ -325,17 +321,22 @@ require("packer").startup({
           require("settings.lsp_installer")
           require("settings.lsp")
         end,
-        wants = { "nvim-cmp", "lua-dev.nvim", "null-ls.nvim" },
+        wants = {
+          "cmp-nvim-lsp",
+          "fzf-lua",
+          "lua-dev.nvim",
+          "null-ls.nvim",
+          "nvim-cmp",
+        },
         event = { "BufRead", "BufNewFile", "InsertEnter" },
         cond  = { full_start },
       },
       after = {
-        "nvim-lspconfig",
-        "nvim-cmp",
         "cmp-nvim-lsp",
         "null-ls.nvim",
+        "nvim-cmp",
+        "nvim-lspconfig",
       },
-      cmd  = "LspInstallInfo",
       cond = full_start,
     })
 
@@ -369,17 +370,20 @@ require("packer").startup({
         { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
         {
           "L3MON4D3/LuaSnip",
-          requires = "rafamadriz/friendly-snippets",
+          requires = { "rafamadriz/friendly-snippets" },
           config   = function() require("settings.luasnip") end,
-          event    = { "BufRead", "BufNewFile", "InsertEnter" },
           cond     = full_start,
+          -- TODO: find a better event for this. Removing causes a lot of
+          -- plugins to load automatically.
+          event    = "InsertEnter",
         },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
       after  = { "LuaSnip", "nvim-treesitter" } ,
+      wants  = { "LuaSnip" },
       config = function() require("settings.cmp") end,
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
       cond   = full_start,
+      event  = "InsertEnter",
     })
     -- }}}
 
@@ -406,14 +410,13 @@ require("packer").startup({
         },
         {
           "nvim-treesitter/playground",
-          after = "nvim-treesitter",
           run   = ":TSInstall query",
           cmd   = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
           cond  = full_start,
         },
         {
           "JoosepAlviste/nvim-ts-context-commentstring",
-          after    = "nvim-treesitter",
+          after = "nvim-treesitter",
         },
       },
       run = ":TSUpdate",
@@ -424,25 +427,13 @@ require("packer").startup({
     use({
       "SmiteshP/nvim-navic",
       requires = {
-        {
-          "SmiteshP/nvim-gps",
-          cond  = { full_start },
-          after ={
-            "nvim-treesitter",
-          },
-        },
         "neovim/nvim-lspconfig",
         "nvim-treesitter/nvim-treesitter",
-      },
-      config   = function ()
-        require("settings.nvim-navic")
-      end,
-      after ={
-        "nvim-gps",
-        "nvim-treesitter",
+        "feline-nvim/feline.nvim",
       },
       cond  = { full_start },
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      config = function () require("settings.nvim-navic") end,
+      after  = { "nvim-treesitter", "feline.nvim" },
     })
     -- }}}
 
@@ -454,10 +445,9 @@ require("packer").startup({
 
     use({
       "numToStr/Comment.nvim",
-      requires = "nvim-ts-context-commentstring",
-      after    = "nvim-ts-context-commentstring",
+      requires = { "nvim-ts-context-commentstring", "nvim-treesitter" },
+      after    = { "nvim-ts-context-commentstring", "nvim-treesitter" },
       config   = function() require("settings.comment") end,
-      event    = { "BufNewFile", "BufRead" },
     })
 
     use({
@@ -473,6 +463,7 @@ require("packer").startup({
       config = function() require("settings.sqls") end,
       ft   = { "sql" },
       cond = full_start,
+      wants = { "nvim-lspconfig" },
     })
 
     use({
@@ -486,23 +477,29 @@ require("packer").startup({
       requires = {
         {
           "rcarriga/nvim-dap-ui",
+          opt = true,
         },
         {
           "jbyuki/one-small-step-for-vimkind",
+          opt = true,
         },
         {
           "theHamsta/nvim-dap-virtual-text",
+          opt = true,
         },
         {
           "leoluz/nvim-dap-go",
           config = function() require('dap-go').setup() end,
-          event  = { "BufNewFile", "BufRead" },
+          wants  = { "nvim-dap" },
+          after  = { "nvim-dap" },
+          opt = true,
         },
       },
       config = function() require("settings.nvim-dap") end,
+      wants  = { "nvim-dap-ui", "nvim-dap-virtual-text" },
       after  = { "nvim-dap-ui", "nvim-dap-virtual-text" },
       cond   = { full_start, lsp_enabled },
-      event  = { "BufNewFile", "BufRead" },
+      keys   = { "<leader>db", "<leader>dB", "<leader>dl" },
     }) --}}}
     -- }}}
 

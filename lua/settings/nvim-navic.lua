@@ -1,9 +1,5 @@
-local navic, gps, ok
+local navic, ok
 ok, navic = pcall(require, "nvim-navic")
-if not ok then
-  return
-end
-ok, gps = pcall(require, "nvim-gps")
 if not ok then
   return
 end
@@ -44,39 +40,6 @@ local icons = { --{{{
   variable      = " ",
   watch         = " ",
 } --}}}
-
-gps.setup({ --{{{
-  icons = {
-    ["array-name"]        = "%#CmpItemKindProperty#" .. icons.array    .. "%*",
-    ["boolean-name"]      = "%#CmpItemKindValue#"    .. icons.boolean  .. "%*",
-    ["class-name"]        = "%#CmpItemKindClass#"    .. icons.class    .. "%*",
-    ["container-name"]    = "%#CmpItemKindProperty#" .. icons.object   .. "%*", -- example: lua tables
-    ["date-name"]         = "%#CmpItemKindValue#"    .. icons.calendar .. "%*",
-    ["date-time-name"]    = "%#CmpItemKindValue#"    .. icons.table    .. "%*",
-    ["float-name"]        = "%#CmpItemKindValue#"    .. icons.number   .. "%*",
-    ["function-name"]     = "%#CmpItemKindFunction#" .. icons.func     .. "%*",
-    ["inline-table-name"] = "%#CmpItemKindProperty#" .. icons.calendar .. "%*",
-    ["integer-name"]      = "%#CmpItemKindValue#"    .. icons.number   .. "%*",
-    ["mapping-name"]      = "%#CmpItemKindProperty#" .. icons.object   .. "%*",
-    ["method-name"]       = "%#CmpItemKindMethod#"   .. icons.method   .. "%*",
-    ["module-name"]       = "%#CmpItemKindModule#"   .. icons.module   .. "%*",
-    ["null-name"]         = "%#CmpItemKindField#"    .. icons.field    .. "%*",
-    ["number-name"]       = "%#CmpItemKindValue#"    .. icons.number   .. "%*",
-    ["object-name"]       = "%#CmpItemKindProperty#" .. icons.object   .. "%*",
-    ["sequence-name"]     = "%#CmpItemKindProperty#" .. icons.array    .. "%*",
-    ["string-name"]       = "%#CmpItemKindValue#"    .. icons.string   .. "%*",
-    ["table-name"]        = "%#CmpItemKindProperty#" .. icons.table    .. "%*",
-    ["tag-name"]          = "%#CmpItemKindKeyword#"  .. icons.tag      .. "%*", -- example: html tags
-    ["time-name"]         = "%#CmpItemKindValue#"    .. icons.watch    .. "%*",
-  },
-  languages = {
-    ["html"] = false,
-  },
-  separator = separator,
-  depth = 0,
-  depth_limit_indicator = "..",
-  text_hl = "LineNr",
-}) --}}}
 
 navic.setup({ --{{{
   icons = {
@@ -142,9 +105,6 @@ local bar = { --{{{
     if navic.is_available() then
       extra = " " .. navic.get_location()
     end
-    if extra == " " and gps.is_available() then
-      extra = " " .. gps.get_location()
-    end
     return ret .. extra
   end,
 } --}}}
@@ -154,6 +114,8 @@ local components = {
   inactive = { { bar } },
 }
 
-require("feline").winbar.setup({ components = components })
+vim.schedule(function()
+  require("feline").winbar.setup({ components = components })
+end)
 
 -- vim: fdm=marker fdl=0
