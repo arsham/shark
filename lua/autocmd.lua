@@ -20,16 +20,22 @@ vim.api.nvim_create_autocmd("BufRead", {
       buffer = 0,
       once = true,
       callback = function()
-        local types = _t({
+        local types = {
           "nofile",
           "fugitive",
           "gitcommit",
           "gitrebase",
           "commit",
           "rebase",
-        })
-        if vim.fn.expand("%") == "" or types:contains(vim.bo.filetype) then
+        }
+        if vim.fn.expand("%") == "" then
           return
+        end
+
+        for _, item in pairs(types) do
+          if item == vim.bo.filetype then
+            return
+          end
         end
         local line = vim.fn.line
 

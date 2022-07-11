@@ -38,10 +38,10 @@ return {
   ),
   ls.s(
     {
-      trig = "(%d+)lorem",
+      trig = "lorem(%d+)",
       name = "Lorem Ipsum",
       regTrig = true,
-      dscr = "Start with a count for lines",
+      dscr = "Give it a count for more lines",
     },
     ls.f(function(_, snip)
       local lines = snip.captures[1]
