@@ -19,8 +19,14 @@ local function full_start()
 end
 -- }}}
 
-require("packer").startup({
+local function lsp_enabled()
+  return not vim.env.NVIM_STOP_LSP
+end
+
+local packer = require("packer")
+
 -- stylua: ignore start
+packer.startup({
   function(use)
     -- Libraries {{{
     use({
@@ -329,7 +335,7 @@ require("packer").startup({
           "nvim-cmp",
         },
         event = { "BufRead", "BufNewFile", "InsertEnter" },
-        cond  = { full_start },
+        cond  = { full_start, lsp_enabled },
       },
       after = {
         "cmp-nvim-lsp",
@@ -337,22 +343,22 @@ require("packer").startup({
         "nvim-cmp",
         "nvim-lspconfig",
       },
-      cond = full_start,
+      cond  = { full_start, lsp_enabled },
     })
 
     use({
       "j-hui/fidget.nvim",
-      after = { "nvim-lspconfig" },
+      after  = { "nvim-lspconfig" },
       config = function() require("settings.fidget-nvim") end,
-      event = { "BufRead", "BufNewFile" },
-      cond = full_start,
+      event  = { "BufRead", "BufNewFile" },
+      cond   = { full_start, lsp_enabled },
     })
 
     use({
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "plenary.nvim", "nvim-lspconfig" },
-      event  = { "BufRead", "BufNewFile" },
-      cond   = full_start,
+      event    = { "BufRead", "BufNewFile" },
+      cond     = { full_start, lsp_enabled },
     })
     --}}}
 
@@ -372,18 +378,18 @@ require("packer").startup({
           "L3MON4D3/LuaSnip",
           requires = { "rafamadriz/friendly-snippets" },
           config   = function() require("settings.luasnip") end,
-          cond     = full_start,
           -- TODO: find a better event for this. Removing causes a lot of
           -- plugins to load automatically.
           event    = "InsertEnter",
+          cond     = { full_start, lsp_enabled },
         },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
       after  = { "LuaSnip", "nvim-treesitter" } ,
       wants  = { "LuaSnip" },
       config = function() require("settings.cmp") end,
-      cond   = full_start,
       event  = "InsertEnter",
+      cond   = { full_start, lsp_enabled },
     })
     -- }}}
 
@@ -431,30 +437,30 @@ require("packer").startup({
         "nvim-treesitter/nvim-treesitter",
         "feline-nvim/feline.nvim",
       },
-      cond  = { full_start },
       config = function () require("settings.nvim-navic") end,
       after  = { "nvim-treesitter", "feline.nvim" },
+      cond   = { full_start, lsp_enabled },
     })
     -- }}}
 
     use({
       "folke/lua-dev.nvim",
       event = { "BufRead", "BufNewFile" },
-      cond  = full_start,
+      cond  = { full_start, lsp_enabled },
     })
 
     use({
       "bfredl/nvim-luadev",
       config = function() require("settings.nvim-luadev") end,
       cmd    = { "Luadev" },
-      cond   = full_start,
+      cond   = { full_start, lsp_enabled },
     })
 
     use({
       "ray-x/go.nvim",
       config = function() require("settings.go-nvim") end,
       ft     = { "go" },
-      cond   = full_start,
+      cond   = { full_start, lsp_enabled },
     })
 
     use({
@@ -475,9 +481,9 @@ require("packer").startup({
     use({
       "nanotee/sqls.nvim",
       config = function() require("settings.sqls") end,
-      ft   = { "sql" },
-      cond = full_start,
-      wants = { "nvim-lspconfig" },
+      wants  = { "nvim-lspconfig" },
+      ft     = { "sql" },
+      cond   = { full_start, lsp_enabled },
     })
 
     use({
@@ -585,7 +591,7 @@ require("packer").startup({
     -- }}}
 
     if packer_bootstrap then -- {{{
-      require("packer").sync()
+      packer.sync()
     end
   end,
   config = {
