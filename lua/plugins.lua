@@ -476,11 +476,6 @@ require("packer").startup({
     })
 
     use({
-      "uarun/vim-protobuf",
-      ft = { "proto" },
-    })
-
-    use({
       "towolf/vim-helm",
       ft = { "yaml" },
     })

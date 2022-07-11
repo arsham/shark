@@ -155,7 +155,6 @@ Some plugins are not listed here. You can find the complete list in the
 | [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                                               | Better notification UI                                 |
 | [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                                               | UI component                                           |
 | [mbbill/undotree](https://github.com/mbbill/undotree)                                                         | Undo tree browser                                      |
-| [uarun/vim-protobuf](https://github.com/uarun/vim-protobuf)                                                   |                                                        |
 | [towolf/vim-helm](https://github.com/towolf/vim-helm)                                                         |                                                        |
 | [echasnovski/mini.nvim](https://github.com/echasnovski/mini.nvim)                                             | For surround and trailing spaces                       |
 | [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                                       |                                                        |
