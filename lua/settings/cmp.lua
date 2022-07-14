@@ -113,6 +113,7 @@ cmp.setup({
     { name = "calc" },
     { name = "nvim_lsp_signature_help" },
     { name = "dap" },
+    { name = "neorg", keyword_length = 1 },
     {
       name = "buffer",
       priority = 5,
@@ -147,6 +148,7 @@ cmp.setup({
         omni = "Omni",
         copilot = "Copilot",
         dap = "DAP",
+        neorg = "ORG",
       })[entry.source.name] or entry.source.name, client_name)
 
       vim_item.kind = string.format("%s %-9s", kind_icons[vim_item.kind], vim_item.kind)

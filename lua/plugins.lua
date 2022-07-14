@@ -55,7 +55,7 @@ packer.startup({
     })
 
     use({
-      "~/Projects/arsham/fzfmania.nvim",
+      "arsham/fzfmania.nvim",
       requires = {
         "arshlib.nvim",
         "fzf.vim",
@@ -600,6 +600,15 @@ packer.startup({
       "jbyuki/venn.nvim",
       config = function() require("settings.venn") end,
       keys   = { "<leader>v" },
+    })
+
+    use({
+      "nvim-neorg/neorg",
+      config = function() require("settings.neorg") end,
+      wants  = { "nvim-treesitter", "nvim-lspconfig", "nvim-cmp" },
+      cmd    = { "NeorgStart" },
+      keys   = { "<leader>oo" },
+      event  = { "BufRead", "BufNewFile", "InsertEnter" },
     })
     -- }}}
 

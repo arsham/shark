@@ -1,7 +1,7 @@
 local wilder = require("wilder")
 vim.opt.wildcharm = vim.fn.char2nr("	") -- tab
 wilder.enable_cmdline_enter()
-wilder.setup({ modes = { ":", "/", "?" } })
+wilder.setup({ modes = { ":" } })
 
 local function init_wilder()
   -- stylua: ignore start
