@@ -107,7 +107,7 @@ quick.command("CC", function() --{{{
 end, { desc = "close all floating buffers" }) --}}}
 
 quick.command("FoldComments", function() --{{{
-  vim.wo.foldexpr = [[getline(v:lnum)=~'^\s*//']]
+  vim.wo.foldexpr = "getline(v:lnum)=~'^\\s*'.&commentstring[0]"
   vim.wo.foldmethod = "expr"
 end) --}}}
 
