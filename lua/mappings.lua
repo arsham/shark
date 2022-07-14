@@ -21,6 +21,10 @@ vim.keymap.set("i", "<Right>", "<Nop>", { desc = "disabling arrows" })
 -- stylua: ignore start
 vim.keymap.set("i", "<A-j>", [[<Esc>:<c-u>execute 'm +'. v:count1<cr>==gi]], { silent = true, desc = "move lines down" })
 vim.keymap.set("i", "<A-k>", [[<Esc>:<c-u>execute 'm -1-'. v:count1<cr>==gi]], { silent = true, desc = "move lines up" })
+vim.keymap.set("n", "<A-j>", [[:<c-u>execute 'm +'. v:count1<cr>==]], { silent = true, desc = "move lines down" })
+vim.keymap.set("n", "<A-k>", [[:<c-u>execute 'm -1-'. v:count1<cr>==]], { silent = true, desc = "move lines up" })
+vim.keymap.set("v", "<A-j>", [[:m '>+1<CR>gv=gv]], { silent = true, desc = "move lines down" })
+vim.keymap.set("v", "<A-k>", [[:m '<-2<CR>gv=gv]], { silent = true, desc = "move lines up" })
 
 vim.keymap.set("x", "<", "<gv", { desc = "keep the visually selected area when indenting" })
 vim.keymap.set("x", ">", ">gv", { desc = "keep the visually selected area when indenting" })

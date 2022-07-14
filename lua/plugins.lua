@@ -303,12 +303,6 @@ packer.startup({
     })
 
     use({
-      "booperlv/nvim-gomove",
-      config = function() require("settings.nvim-gomove") end,
-      keys   = { "<M-h>", "<M-j>", "<M-k>", "<M-l>" },
-    })
-
-    use({
       "svban/YankAssassin.vim",
       event = { "BufRead", "BufNewFile" },
     })
