@@ -124,28 +124,7 @@ local handlers = { --{{{
   end,
 } --}}}
 
-local query_is_set = false
-
-local function set_query()
-  if query_is_set then
-    return
-  end
-  query_is_set = true
-  vim.treesitter.set_query( --{{{
-    "go",
-    "LuaSnip_Result",
-    [[
-      [
-        (method_declaration result: (_) @id)
-        (function_declaration result: (_) @id)
-        (func_literal result: (_) @id)
-      ]
-  ]]
-  ) --}}}
-end
-
 local function return_value_nodes(info) --{{{
-  set_query()
   local cursor_node = ts_utils.get_node_at_cursor()
   local scope_tree = ts_locals.get_scope_tree(cursor_node, 0)
 
@@ -165,7 +144,7 @@ local function return_value_nodes(info) --{{{
     return
   end
 
-  local query = vim.treesitter.get_query("go", "LuaSnip_Result")
+  local query = vim.treesitter.get_query("go", "luasnip")
   for _, node in query:iter_captures(function_node, 0) do
     if handlers[node:type()] then
       return handlers[node:type()](node, info)
