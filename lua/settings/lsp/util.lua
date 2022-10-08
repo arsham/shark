@@ -108,14 +108,17 @@ local function code_action(range_given, line1, line2) --{{{
   end
 end --}}}
 
-local function nnoremap(key, fn, desc, ...) --{{{
-  vim.keymap.set("n", key, fn, { buffer = true, silent = true, desc = desc, ... })
+local function nnoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("n", key, fn, opts)
 end --}}}
-local function vnoremap(key, fn, desc, ...) --{{{
-  vim.keymap.set("v", key, fn, { buffer = true, silent = true, desc = desc, ... })
+local function vnoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("v", key, fn, opts)
 end --}}}
-local function inoremap(key, fn, desc, ...) --{{{
-  vim.keymap.set("i", key, fn, { buffer = true, silent = true, desc = desc, ... })
+local function inoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("i", key, fn, opts)
 end --}}}
 
 function M.code_action() --{{{
@@ -341,17 +344,6 @@ function M.setup_events(client, imports, format) --{{{
     desc = "run go mod tidy on save",
   })
 
-  local function go_mod_check(args)
-    lsp.go_mod_check_upgrades(args.match)
-  end
-  if not util.buffer_has_var("lsp_go_mod_check") then
-    vim.api.nvim_create_autocmd("BufRead", {
-      group = lsp_events_group,
-      pattern = "go.mod",
-      callback = go_mod_check,
-      desc = "check for updates",
-    })
-  end
 end --}}}
 -- stylua: ignore end
 
