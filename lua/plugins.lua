@@ -607,7 +607,7 @@ packer.startup({
       "iamcco/markdown-preview.nvim",
       run    = function() vim.fn["mkdp#util#install"]() end,
       setup  = function() vim.g.mkdp_filetypes = { "markdown" } end,
-      config = function() vim.g.mkdp_browser = "brave" end,
+      config = function() vim.g.mkdp_browser = "firefox" end,
       ft     = { "markdown" },
       cond   = full_start,
     })
