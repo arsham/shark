@@ -34,13 +34,11 @@ local function init_wilder()
         pumblend = 10,
         left = { " ", wilder.popupmenu_devicons() },
       }),
-      ["/"] = wilder.popupmenu_renderer({
+      ["/"] = wilder.wildmenu_renderer({
         highlighter = highlighters,
-        pumblend = 10,
       }),
-      ["?"] = wilder.popupmenu_renderer({
+      ["?"] = wilder.wildmenu_renderer({
         highlighter = highlighters,
-        pumblend = 10,
       }),
     })
   )
