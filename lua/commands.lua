@@ -123,20 +123,9 @@ end) --}}}
 
 quick.command("InstallDependencies", function() --{{{
   local commands = _t({
-    buf = _t({ "go", "install", "github.com/bufbuild/buf/cmd/buf@latest" }),
-    fixjson = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "fixjson@latest" }),
     gojq = _t({ "go", "install", "github.com/itchyny/gojq/cmd/gojq@latest" }),
-    golangci = _t({
-      "go",
-      "install",
-      "github.com/golangci/golangci-lint/cmd/golangci-lint@latest",
-    }),
     neovim = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest" }),
-    prettier = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "prettier@latest" }),
-    selene = _t({ "cargo", "install", "selene" }),
-    sqls = _t({ "go", "install", "github.com/lighttiger2505/sqls@latest" }),
-    dlv = _t({ "go", "install", "github.com/go-delve/delve/cmd/dlv@latest" }),
-    stylua = _t({ "cargo", "install", "stylua" }),
+    neovim_pip = _t({ "pip3", "install", "--user", "--upgrade", "neovim" }),
   })
 
   local total = commands:map_length()
@@ -167,7 +156,7 @@ quick.command("InstallDependencies", function() --{{{
           count = count + 1
           if count == total then
             local str =
-              "paru -S ripgrep bat words-insane ctags python-pip the_silver_searcher && snap install diagon"
+              "paru -S ripgrep bat words-insane ctags python-pip the_silver_searcher diagon-git"
             vim.schedule(function()
               vim.fn.setreg("+", str)
             end)
