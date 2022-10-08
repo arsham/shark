@@ -42,6 +42,7 @@ require("nvim-treesitter.configs").setup({
       c = "// %s",
       go = "// %s",
       sql = "-- %s",
+      lua = "-- %s",
       vim = '" %s',
     },
   }, --}}}
