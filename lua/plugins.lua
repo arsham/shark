@@ -632,6 +632,12 @@ packer.startup({
       keys   = { "<leader>oo" },
       event  = { "User LoadTicker3" },
     })
+
+    use({
+      "ziontee113/color-picker.nvim",
+      config = function() require("settings.color-picker") end,
+      keys   = { "<leader>cp" },
+    })
     -- }}}
 
     if packer_bootstrap then -- {{{

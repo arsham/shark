@@ -170,7 +170,8 @@ Some plugins are not listed here. You can find the complete list in the
 | Text Object | [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                          |                                                      |
 | Visuals     | [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)            |                                                      |
 | Tool        | [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                            |                                                      |
-| Visuals     | [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)                  |                                                      |
+| Visuals     | [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)                  | Colourise matched colours in buffer                  |
+| Visuals     | [ziontee113/color-picker.nvim](https://github.com/ziontee113/color-picker.nvim)            | Slider for changing colours in buffer                |
 | Tool        | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)            |                                                      |
 | Core        | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)            |                                                      |
 | Tool        | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                        | Make diagrams from text                              |
