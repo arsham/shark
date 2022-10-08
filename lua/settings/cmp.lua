@@ -64,6 +64,11 @@ local function shift_tab_function(fallback)
 end
 
 cmp.setup({
+  performance = {
+    debounce = 50,
+    throttle = 10,
+  },
+
   snippet = {
     expand = function(args)
       ls.lsp_expand(args.body)
@@ -75,7 +80,47 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({ --{{{
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
+
+    ["<C-Space>"] = cmp.mapping.complete({
+      config = {
+        sources = {
+          { name = "nvim_lsp", priority = 80 },
+          { name = "nvim_lua", priority = 80 },
+          { name = "path", priority = 40, max_item_count = 4 },
+          { name = "luasnip", priority = 10 },
+          { name = "nvim_lsp_signature_help" },
+          { name = "calc" },
+          { name = "dap" },
+        },
+      },
+    }),
+    ["<C-s>"] = cmp.mapping.complete({
+      config = {
+        sources = {
+          { name = "neorg", keyword_length = 1 },
+          {
+            name = "buffer",
+            priority = 5,
+            keyword_length = 3,
+            max_item_count = 10,
+            option = {
+              get_bufnrs = function()
+                return vim.api.nvim_list_bufs()
+              end,
+            },
+          },
+          { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1 },
+        },
+      },
+    }),
+    ["<C-x><C-o>"] = cmp.mapping.complete({
+      config = {
+        sources = {
+          { name = "nvim_lsp" },
+        },
+      },
+    }),
+
     ["<C-y>"] = cmp.config.disable,
     ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
@@ -146,7 +191,7 @@ cmp.setup({
         path = "Path",
         rg = "RG",
         omni = "Omni",
-        copilot = "Copilot",
+        copilot = "[ﯙ]",
         dap = "DAP",
         neorg = "ORG",
       })[entry.source.name] or entry.source.name, client_name)
@@ -167,14 +212,16 @@ cmp.setup({
   },
 
   sorting = { --{{{
+    priority_weight = 2,
     comparators = {
+      compare.offset,
+      compare.score,
+      compare.exact,
+      compare.recently_used,
+      compare.locality,
       function(...)
         return require("cmp_buffer"):compare_locality(...)
       end,
-      compare.offset,
-      compare.exact,
-      compare.score,
-      compare.recently_used,
       compare.kind,
       compare.sort_text,
       compare.length,

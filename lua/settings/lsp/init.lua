@@ -189,11 +189,6 @@ local servers = {
 }
 
 
--- Enable (broadcasting) snippet capability for completion.
-local capabilities = require("cmp_nvim_lsp").update_capabilities( --{{{
-  vim.lsp.protocol.make_client_capabilities()
-)
---}}}
 local on_attach = require("settings.lsp.on_attach").on_attach
 
 local null_ls = require("null-ls") -- NULL LS Setup {{{
@@ -221,6 +216,13 @@ null_ls.setup({
   },
   on_attach = on_attach,
 }) --}}}
+
+-- Enable (broadcasting) snippet capability for completion.
+local capabilities = require("cmp_nvim_lsp").update_capabilities( --{{{
+  vim.lsp.protocol.make_client_capabilities()
+)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+--}}}
 
 local lspconfig = require("lspconfig") -- LSP Config Setup {{{
 for name, server in pairs(servers) do
