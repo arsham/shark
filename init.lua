@@ -11,3 +11,8 @@ vim.schedule(function()
   require("commands")
   require("scratch")
 end)
+
+-- stylua: ignore start
+vim.defer_fn(function() vim.cmd.doautocmd("User LoadTicker1") end, 100)
+vim.defer_fn(function() vim.cmd.doautocmd("User LoadTicker2") end, 200)
+vim.defer_fn(function() vim.cmd.doautocmd("User LoadTicker3") end, 300)

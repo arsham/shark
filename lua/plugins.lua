@@ -45,13 +45,13 @@ packer.startup({
 
     use({
       "junegunn/fzf",
-      event = "UIEnter",
+      event = "User LoadTicker1",
     })
 
     use({
       "junegunn/fzf.vim",
       requires = "fzf",
-      event    = "UIEnter",
+      event    = "User LoadTicker1",
     })
 
     use({
@@ -62,13 +62,13 @@ packer.startup({
         "plenary.nvim",
         {
           "ibhagwan/fzf-lua",
+          event    = "User LoadTicker1",
           requires = { "kyazdani42/nvim-web-devicons" },
-          cond     = full_start,
         },
       },
       after    = { "listish.nvim", "fzf-lua" },
       config   = function() require("settings.fzfmania") end,
-      event    = { "UIEnter" },
+      event    = "User LoadTicker1",
     })
 
     use({
@@ -82,11 +82,11 @@ packer.startup({
     use({
       "arsham/listish.nvim",
       requires = { "arshlib.nvim" },
-      config = function()
+      event    = "User LoadTicker3",
+      config   = function()
         require("listish").config({})
         vim.api.nvim_command("packadd! cfilter")
       end,
-      event = "UIEnter",
     })
 
     use({
@@ -109,12 +109,13 @@ packer.startup({
       config   = function() require("settings.nvim_tree") end,
       cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
       keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
+      event    = { "User LoadTicker3" },
     })
 
     use({
       "numToStr/Navigator.nvim",
       config = function() require("settings.navigator") end,
-      event  = "UIEnter",
+      event  = { "User LoadTicker2" },
     })
 
     use({
@@ -148,13 +149,17 @@ packer.startup({
       "lewis6991/gitsigns.nvim",
       requires = "plenary.nvim",
       config   = function() require("settings.gitsigns") end,
-      event    = { "BufNewFile", "BufRead" },
+      event    = { "User LoadTicker2" },
+      cond     = full_start,
     })
 
     use({
       -- create ~/.gist-vim with this content: token xxxxx
       "mattn/vim-gist",
-      requires = "mattn/webapi-vim",
+      requires = {
+        { "mattn/webapi-vim", opt = true },
+      },
+      wants = "webapi-vim",
       config = function()
         vim.g.gist_per_page_limit = 100
       end,
@@ -183,8 +188,10 @@ packer.startup({
     use({
       "arsham/matchmaker.nvim",
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
+      after    = { "arshlib.nvim" },
       config   = function() require("matchmaker").config({}) end,
-      keys     = { "<leader>me", "<leader>ma", "<leader>ml" },
+      keys     = { "<leader>me", "<leader>ma", "<leader>ml", "<leader>mp" },
+      cond     = full_start,
     })
 
     use({
@@ -236,17 +243,20 @@ packer.startup({
       config   = function() require("yanker").config({}) end,
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
       after    = { "arshlib.nvim" },
-      event    = { "BufRead", "BufNewFile" },
+      event    = {"User LoadTicker3"},
+      cond     = full_start,
     })
 
     use({
       "tpope/vim-repeat",
-      event = { "BufRead", "BufNewFile" },
+      event = { "BufReadPost", "BufNewFile" },
     })
 
     use({
       "vim-scripts/visualrepeat",
-      event    = { "BufRead", "BufNewFile" },
+      requires = { "inkarkat/vim-ingo-library" },
+      event    = { "BufReadPost", "BufNewFile" },
+      cond     = full_start,
     })
 
     use({
@@ -276,6 +286,7 @@ packer.startup({
       branch = "master",
       config = function() require("settings.visual_multi") end,
       keys   = { "<C-n>", "<C-Down>", "<C-Up>" },
+      cond   = full_start,
     })
 
     use({
@@ -303,13 +314,15 @@ packer.startup({
 
     use({
       "svban/YankAssassin.vim",
-      event = { "BufRead", "BufNewFile" },
+      event    = {"User LoadTicker3"},
+      cond  = full_start,
     })
 
     use({
       "andymass/vim-matchup",
       config = function() require("settings.vim-matchup") end,
-      event  = { "BufRead", "BufNewFile" },
+      event  = { "BufReadPost", "BufNewFile" },
+      cond   = full_start,
     })
 
     use({
@@ -320,6 +333,7 @@ packer.startup({
         { "v", "<C-a>" }, { "v", "<C-x>" },
         { "v", "g<C-a>" }, { "v", "g<C-x>" },
       },
+      cond = full_start,
     })
     -- }}}
 
@@ -351,7 +365,7 @@ packer.startup({
           "lua-dev.nvim",
           "null-ls.nvim",
         },
-        event = { "BufRead", "BufNewFile", "InsertEnter" },
+        event = { "User LoadTicker1" },
         cond  = { full_start, lsp_enabled },
       },
       after = {
@@ -369,16 +383,14 @@ packer.startup({
 
     use({
       "j-hui/fidget.nvim",
-      after  = { "nvim-lspconfig" },
       config = function() require("settings.fidget-nvim") end,
-      event  = { "BufRead", "BufNewFile" },
-      cond   = { full_start, lsp_enabled },
+      event  = { "LspAttach" },
     })
 
     use({
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "plenary.nvim", "nvim-lspconfig" },
-      event    = { "BufRead", "BufNewFile" },
+      event = { "User LoadTicker3" },
       cond     = { full_start, lsp_enabled },
     })
 
@@ -407,15 +419,15 @@ packer.startup({
           config   = function() require("settings.luasnip") end,
           -- TODO: find a better event for this. Removing causes a lot of
           -- plugins to load automatically.
-          event    = "InsertEnter",
+          event = { "User LoadTicker1" },
           cond     = { full_start, lsp_enabled },
         },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
       after  = { "LuaSnip", "nvim-treesitter" } ,
-      wants  = { "LuaSnip" },
+      wants  = { "LuaSnip", "nvim-treesitter" } ,
       config = function() require("settings.cmp") end,
-      event  = "InsertEnter",
+      event = { "User LoadTicker1" },
       cond   = { full_start, lsp_enabled },
     })
     -- }}}
@@ -454,18 +466,19 @@ packer.startup({
       },
       run = ":TSUpdate",
       cmd = "TSUpdate",
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
     })
     -- }}}
 
     use({
       "sheerun/vim-polyglot",
-      event = { "BufRead", "BufNewFile", "InsertEnter" },
+      event = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
+      cond  = full_start,
     })
 
     use({
       "folke/lua-dev.nvim",
-      event = { "BufRead", "BufNewFile" },
+      ft = { "lua" },
       cond  = { full_start, lsp_enabled },
     })
 
@@ -554,20 +567,22 @@ packer.startup({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
       config   = function() require("indent-tools").config({}) end,
-      event    = { "BufRead", "BufNewFile" },
+      event    = { "User LoadTicker3" },
+      cond     = full_start,
     })
 
     use({
       "arsham/archer.nvim",
       requires = { "arsham/arshlib.nvim", "tpope/vim-repeat" },
       config   = function() require("archer").config({}) end,
-      event    = { "BufNewFile", "BufRead" },
+      event    = { "User LoadTicker2" },
     })
 
     use({
       "echasnovski/mini.nvim",
       config = function() require("settings.mini-nvim") end,
-      event  = { "BufRead", "BufNewFile" },
+      event  = { "User LoadTicker2" },
+      cond   = full_start,
     })
 
     use({
@@ -578,7 +593,8 @@ packer.startup({
 
     use({
       "kana/vim-textobj-user",
-      event = { "BufRead", "BufNewFile" },
+      event = { "User LoadTicker2" },
+    })
     })
     -- }}}
 
@@ -601,12 +617,14 @@ packer.startup({
       -- creates diagrams from text. Requires diagon from snap.
       "willchao612/vim-diagon",
       cmd = "Diagon",
+      cond = full_start,
     })
 
     use({
       "jbyuki/venn.nvim",
       config = function() require("settings.venn") end,
       keys   = { "<leader>v" },
+      cond   = full_start,
     })
 
     use({
@@ -615,7 +633,7 @@ packer.startup({
       wants  = { "nvim-treesitter", "nvim-lspconfig", "nvim-cmp" },
       cmd    = { "NeorgStart" },
       keys   = { "<leader>oo" },
-      event  = { "BufRead", "BufNewFile", "InsertEnter" },
+      event  = { "User LoadTicker3" },
     })
     -- }}}
 
