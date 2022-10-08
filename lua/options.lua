@@ -10,6 +10,9 @@ vim.opt.expandtab = true
 vim.opt.wrap = false
 vim.opt.pumheight = 20
 vim.opt.cmdheight = 1
+vim.opt.conceallevel = 2
+vim.opt.mouse = nil
+vim.g.ts_highlight_lua = true
 
 vim.opt.whichwrap:append("h,l")
 vim.opt.linebreak = true -- Wrap lines at convenient points
@@ -36,28 +39,28 @@ vim.opt.showcmd = true
 vim.opt.showmode = true
 
 -- Shortmess {{{
--- vim.opt.shortmess = vim.opt.shortmess + "f"     -- Use "(3 of 5)" instead of "(file 3 of 5)"
--- vim.opt.shortmess = vim.opt.shortmess + "i"     -- Use "[noeol]" instead of "[Incomplete last line]"
--- vim.opt.shortmess = vim.opt.shortmess + "l"     -- Use "999L, 888C" instead of "999 lines, 888 characters"
--- vim.opt.shortmess = vim.opt.shortmess + "m"     -- Use "[+]" instead of "[Modified]"
--- vim.opt.shortmess = vim.opt.shortmess + "n"     -- Use "[New]" instead of "[New File]"
--- vim.opt.shortmess = vim.opt.shortmess + "r"     -- Use "[RO]" instead of "[readonly]"
--- vim.opt.shortmess = vim.opt.shortmess + "x"     -- Use "[dos]" instead of "[dos format]", "[unix]" instead of [unix format]" and "[mac]" instead of "[mac format]".
---   set shortmess+=a     " All of the above abbreviations
--- vim.opt.shortmess = vim.opt.shortmess + "o"     -- Overwrite message for writing a file with subsequent message for reading a file (useful for ":wn" or when 'autowrite' on)
--- vim.opt.shortmess = vim.opt.shortmess + "O"     -- Message for reading a file overwrites any previous message.  Also for quickfix message (e.g., ":cn").
--- vim.opt.shortmess = vim.opt.shortmess + "t"     -- Truncate file message at the start if it is too long to fit on the command-line, "<" will appear in the left most column.  Ignored in Ex mode.
--- vim.opt.shortmess = vim.opt.shortmess + "T"     -- Truncate other messages in the middle if they are too long to fit on the command line.  "..." will appear in the middle.  Ignored in Ex mode.
--- vim.opt.shortmess = vim.opt.shortmess + "A"     -- Don't give the "ATTENTION" message when an existing swap file is found.
--- vim.opt.shortmess = vim.opt.shortmess + "I"     -- Don't give the intro message when starting Vim |:intro|.
--- vim.opt.shortmess = vim.opt.shortmess + "c"     -- Avoid showing message extra message when using completion
+-- f -> Use "(3 of 5)" instead of "(file 3 of 5)"
+-- i -> Use "[noeol]" instead of "[Incomplete last line]"
+-- l -> Use "999L, 888C" instead of "999 lines, 888 characters"
+-- m -> Use "[+]" instead of "[Modified]"
+-- n -> Use "[New]" instead of "[New File]"
+-- r -> Use "[RO]" instead of "[readonly]"
+-- x -> Use "[dos]" instead of "[dos format]", "[unix]" instead of [unix format]" and "[mac]" instead of "[mac format]".
+-- a -> All of the above abbreviations
+-- o -> Overwrite message for writing a file with subsequent message for reading a file (useful for ":wn" or when 'autowrite' on)
+-- O -> Message for reading a file overwrites any previous message.  Also for quickfix message (e.g., ":cn").
+-- t -> Truncate file message at the start if it is too long to fit on the command-line, "<" will appear in the left most column.  Ignored in Ex mode.
+-- T -> Truncate other messages in the middle if they are too long to fit on the command line.  "..." will appear in the middle.  Ignored in Ex mode.
+-- A -> Don't give the "ATTENTION" message when an existing swap file is found.
+-- I -> Don't give the intro message when starting Vim |:intro|.
+-- c -> Avoid showing message extra message when using completion
 vim.opt.shortmess:append("filmnrxoOtTAIc")
 --}}}
 
 vim.opt.hidden = true
 
 vim.opt.viewoptions:append("localoptions")
-vim.opt.viewdir = vim.env.HOME .. "/.cache/nvim/views"
+vim.opt.viewdir = vim.fs.normalize("~/.cache/nvim/views")
 
 -- better diff view. This will make sure the inserted part is separated, rather
 -- than mangled in the previous blob.
@@ -118,14 +121,13 @@ vim.g.markdown_folding = 1
 -- Language support {{{
 vim.opt.spelllang = "en_gb"
 vim.opt.spell = false
-vim.opt.thesaurus = vim.env.HOME .. "/.local/share/thesaurus/moby.txt"
+vim.opt.thesaurus = vim.fs.normalize("~/.local/share/thesaurus/moby.txt")
 -- install words-insane package
 vim.opt.dictionary = {
   "/usr/share/dict/words-insane",
 }
 
-local spellfile = vim.env.HOME .. "/.config/nvim/spell"
--- require('util').mkdir_home(spellfile)
+local spellfile = vim.fs.normalize("~/.config/nvim/spell")
 vim.opt.spellfile = spellfile .. "/en.utf-8.add"
 --}}}
 
@@ -160,22 +162,14 @@ vim.opt.sessionoptions:append("tabpages,globals")
 -- Undo / Backup {{{
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
-local undodir = "/.cache/nvim/undodir"
-local backdir = "/.cache/nvim/backdir"
+local undodir = "~/.cache/nvim/undodir"
+local backdir = "~/.cache/nvim/backdir"
 
--- require('util').mkdir_home(undodir)
--- require('util').mkdir_home(backdir)
-
-vim.opt.undodir = vim.env.HOME .. undodir
-vim.opt.backupdir = vim.env.HOME .. backdir
-vim.opt.directory = vim.env.HOME .. backdir
+vim.opt.undodir = vim.fs.normalize(undodir)
+vim.opt.backupdir = vim.fs.normalize(backdir)
+vim.opt.directory = vim.fs.normalize(backdir)
 --}}}
 vim.opt.termguicolors = true
--- if exists('+termguicolors')
---    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
---    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
---    set termguicolors
--- endif
 
 vim.g.netrw_winsize = 20
 vim.g.netrw_liststyle = 3
@@ -186,7 +180,6 @@ vim.g.netrw_browsex_viewer = "xdg-open"
 vim.opt.completeopt = "menuone,noinsert,noselect"
 
 vim.g.python3_host_prog = "/usr/bin/python3"
-vim.g.python_host_prog = "/usr/bin/python2"
 
 vim.g.treesitter_refactor_maxlines = 10 * 1024
 vim.g.treesitter_highlight_maxlines = 12 * 1024
