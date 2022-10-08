@@ -6,9 +6,17 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function(args)
     vim.api.nvim_command("source " .. args.file)
     vim.api.nvim_command("PackerCompile")
+  end,
+  desc = "auto compile plugins module after save",
+})
+
+vim.api.nvim_create_autocmd("User", {
+  group = packer_reload_group,
+  pattern = "PackerCompileDone",
+  callback = function()
     vim.api.nvim_command("PackerInstall")
   end,
-  desc = "auto compile and install new plugins",
+  desc = "auto install new plugins after compilation",
 }) --}}}
 
 -- Line Return {{{
@@ -271,16 +279,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end, opts)
   end,
   desc = "close lspinfo popup",
-}) --}}}
-
--- Don't Wrap Me {{{
-vim.api.nvim_create_autocmd("Filetype", {
-  group = filetype_commands_group,
-  pattern = { "sql", "sqls" },
-  desc = "don't wrap me",
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "t", "c" })
-  end,
 }) --}}}
 
 -- Exit Help/man/qf With q {{{
