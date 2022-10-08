@@ -1,3 +1,4 @@
+vim.g.fugitive_legacy_commands = 0
 vim.keymap.set("n", "<leader>gg", ":Git<cr>", { silent = true, desc = "Open fugitive" })
 vim.keymap.set("n", "<leader>gd", ":Git diff %<cr>", { silent = true, desc = "View buffer's diff" })
 local opts = {
