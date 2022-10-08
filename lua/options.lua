@@ -9,7 +9,7 @@ vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.wrap = false
 vim.opt.pumheight = 20
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 
 vim.opt.whichwrap:append("h,l")
 vim.opt.linebreak = true -- Wrap lines at convenient points
