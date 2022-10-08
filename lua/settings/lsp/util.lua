@@ -78,7 +78,12 @@ end --}}}
 ---@param bang boolean
 local function format_command(range_given, line1, line2, bang) --{{{
   if range_given then
-    vim.lsp.buf.range_formatting(nil, { line1, 0 }, { line2, 99999999 })
+    vim.lsp.buf.format({
+      range = {
+        start = { line1, 0 },
+        ["end"] = { line2, 99999999 },
+      },
+    })
   elseif bang then
     vim.lsp.buf.format({ async = false })
   else
@@ -92,7 +97,12 @@ end --}}}
 ---@param line2 number
 local function code_action(range_given, line1, line2) --{{{
   if range_given then
-    vim.lsp.buf.range_code_action(nil, { line1, 0 }, { line2, 99999999 })
+    vim.lsp.buf.code_action({
+      range = {
+        start = { line1, 0 },
+        ["end"] = { line2, 99999999 },
+      },
+    })
   else
     fzf.lsp_code_actions()
   end
@@ -134,7 +144,14 @@ local function format_range_operator() --{{{
   _G.op_func_formatting = function()
     local start = vim.api.nvim_buf_get_mark(0, "[")
     local finish = vim.api.nvim_buf_get_mark(0, "]")
-    vim.lsp.buf.range_formatting({}, start, finish)
+    finish[2] = 99999999
+    vim.lsp.buf.format({
+      range = {
+        start = start,
+        ["end"] = finish,
+      },
+      async = true,
+    })
     vim.go.operatorfunc = old_func
     _G.op_func_formatting = nil
   end
@@ -144,11 +161,9 @@ end --}}}
 
 function M.document_range_formatting() --{{{
   quick.buffer_command("Format", document_range_formatting, { range = true })
-  -- vnoremap("gq", document_range_formatting, "Format range")
-  nnoremap("gq", format_range_operator, "Format range")
   -- vim.api.nvim_set_keymap("n", "gm", "<cmd>lua format_range_operator()<CR>", { noremap = true })
 
-  vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr()"
+  vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:3000})"
 end --}}}
 
 local function rename_symbol(args) --{{{
