@@ -211,6 +211,12 @@ cmp.setup({
     max_height = 20,
   },
 
+  window = {
+    completion = cmp.config.window.bordered({
+      winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
+    }),
+  },
+
   sorting = { --{{{
     priority_weight = 2,
     comparators = {
