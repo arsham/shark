@@ -8,3 +8,4 @@ vim.keymap.set(
   ":Neorg keybind norg core.looking-glass.magnify-code-block<CR>",
   { buffer = true }
 )
+vim.opt_local.spell = true

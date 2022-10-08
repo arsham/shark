@@ -1,3 +1,8 @@
+require("arshlib.quick").command("NG", function(args) --{{{
+  require("neorg.modules.core.neorgcmd.module").public.function_callback(unpack(args.fargs))
+end, { nargs = "*", complete = "customlist,v:lua._neorgcmd_generate_completions" })
+--}}}
+
 vim.keymap.set("n", "<leader>oo", function() --{{{
   vim.keymap.set("n", "<leader>oo", ":Neorg workspace home<CR>")
   vim.api.nvim_command("vert new | Neorg workspace home")
@@ -11,7 +16,10 @@ vim.keymap.set("n", "<leader>ov", ":Neorg keybind norg core.gtd.base.views<CR>")
 vim.keymap.set("n", "<leader>oc", ":Neorg keybind norg core.gtd.base.capture<CR>")
 --}}}
 
+vim.api.nvim_create_user_command("Journal", ":Neorg journal", {})
+
 require("neorg").setup({
+  lazy_loading = false,
   load = {
     ["core.defaults"] = {},
     ["core.norg.dirman"] = { --{{{
@@ -60,6 +68,8 @@ require("neorg").setup({
         strategy = "flat",
       },
     }, --}}}
+    ["core.export"] = {},
+    ["core.export.markdown"] = {},
   },
 })
 
