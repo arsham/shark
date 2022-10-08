@@ -7,7 +7,18 @@ autopairs.setup({
   -- will ignore alphanumeric and `.` symbol
   ignored_next_char = "[%w%.]",
   ts_config = {
-    lua = { "string" },
+    lua = { "string", "source" },
+  },
+  fast_wrap = {
+    map = "<M-e>",
+    chars = { "{", "[", "(", '"', "'" },
+    pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+    offset = 0, -- Offset from pattern match
+    end_key = "$",
+    keys = "qwertyuiopzxcvbnmasdfghjkl",
+    check_comma = true,
+    highlight = "PmenuSel",
+    highlight_grey = "LineNr",
   },
 })
 
