@@ -275,13 +275,6 @@ packer.startup({
     })
 
     use({
-      "junegunn/vim-easy-align",
-      config = function() require("settings.easyalign") end,
-      after  = { "arshlib.nvim" },
-      keys   = { "ga" },
-    })
-
-    use({
       "mg979/vim-visual-multi",
       branch = "master",
       config = function() require("settings.visual_multi") end,
