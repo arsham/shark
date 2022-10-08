@@ -142,6 +142,7 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [leoluz/nvim-dap-go](https://github.com/leoluz/nvim-dap-go)                                | DAP related                                          |
 | LSP         | [one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)         | DAP related                                          |
 | LSP         | [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)                              | Current code context with LSP                        |
+| LSP         | [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)                             | Show LSP diagnostics in extmarks                     |
 | Core        | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                      | Seamlessly navigate between tmux and vim             |
 | Tool        | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                    | File explorer tree                                   |
 | Visuals     | [famiu/feline.nvim](https://github.com/famiu/feline.nvim)                                  | Statusline (default)                                 |

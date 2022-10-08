@@ -381,6 +381,12 @@ packer.startup({
       event    = { "BufRead", "BufNewFile" },
       cond     = { full_start, lsp_enabled },
     })
+
+    use({
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function() require("settings.lsp_lines-nvim") end,
+      event  = { "LspAttach" },
+    })
     --}}}
 
     -- CMP {{{
