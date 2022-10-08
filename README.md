@@ -179,6 +179,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Tool        | [bfredl/nvim-luadev](https://github.com/bfredl/nvim-luadev)                                | REPL/debug console for nvim lua plugins              |
 | Core        | [nathom/filetype.nvim](https://github.com/nathom/filetype.nvim)                            | A faster version of filetype.vim                     |
 | Tool        | [sQVe/sort.nvim](https://github.com/sQVe/sort.nvim)                                        | Sort plugin with line-wise and delimiter sorting     |
+| Tool        | [ralismark/opsort.vim](https://github.com/ralismark/opsort.vim)                            | Sort operator                                        |
 | Core        | [svban/YankAssassin.vim](https://github.com/svban/YankAssassin.vim)                        | Stay where you are after yanking                     |
 | Core        | [tmux-plugins/vim-tmux](https://github.com/tmux-plugins/vim-tmux)                          |                                                      |
 | Core        | [tpope/vim-git](https://github.com/tpope/vim-git)                                          |                                                      |
