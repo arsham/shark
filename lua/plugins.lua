@@ -199,9 +199,9 @@ packer.startup({
       event = "UIEnter",
     })
 
-    local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown" }
+    local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown", "norg" }
     use({
-      "norcalli/nvim-colorizer.lua",
+      "NvChad/nvim-colorizer.lua",
       config = function() require("colorizer").setup(colorizer_ft) end,
       ft     = colorizer_ft,
       cond   = full_start,
