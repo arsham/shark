@@ -1,7 +1,6 @@
 local autopairs = require("nvim-autopairs")
 local Rule = require("nvim-autopairs.rule")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp = require("cmp")
 
 autopairs.setup({
   check_ts = true,
@@ -19,4 +18,7 @@ autopairs.add_rules({
   Rule("|", "|", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
 })
 
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+local ok, cmp = pcall(require, "cmp")
+if ok then
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+end
