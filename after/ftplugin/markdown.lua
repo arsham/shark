@@ -10,6 +10,7 @@ vim.opt_local.wrap = true
 vim.opt_local.breakindent = true
 vim.opt_local.breakindentopt = "min:50,shift:2"
 vim.opt_local.commentstring = "<!--%s-->"
+vim.opt_local.conceallevel = 2
 -- Formating support {{{
 -- stylua: ignore start
 local formatlistpat = {'^\\s*'}                         --- Optional leading whitespace
