@@ -1,5 +1,4 @@
 local quick = require("arshlib.quick")
-local util = require("util")
 
 --vim.api.nvim_put(t, 'l', true, false)
 
@@ -30,8 +29,8 @@ vim.keymap.set("x", "<", "<gv", { desc = "keep the visually selected area when i
 vim.keymap.set("x", ">", ">gv", { desc = "keep the visually selected area when indenting" })
 
 vim.keymap.set("n", "g=",    "gg=Gg``", { desc = "re-indent the whole buffer" })
-vim.keymap.set("n", "<C-e>", "2<C-e>",  {})
-vim.keymap.set("n", "<C-y>", "2<C-y>",  {})
+vim.keymap.set("n", "<C-e>", "2<C-e>")
+vim.keymap.set("n", "<C-y>", "2<C-y>")
 --}}}
 
 -- Resizing windows {{{
@@ -81,12 +80,10 @@ end, { desc = "auto correct spelling and jump bak." }) --}}}
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = vim.api.nvim_create_augroup("DIFFTOOL", { clear = true }),
   callback = function()
-    if vim.opt.diff:get() and not util.buffer_has_var("difftool_special_keys") then
-      local o = { buffer = true, desc = "Mergetool mapping" }
-      vim.keymap.set("n", "<localleader>1", ":diffget LOCAL<CR>", o)
-      vim.keymap.set("n", "<localleader>2", ":diffget BASE<CR>", o)
-      vim.keymap.set("n", "<localleader>3", ":diffget REMOTE<CR>", o)
-    end
+    local o = { buffer = true, desc = "Mergetool mapping" }
+    vim.keymap.set("n", "<localleader>1", ":diffget LOCAL<CR>", o)
+    vim.keymap.set("n", "<localleader>2", ":diffget BASE<CR>", o)
+    vim.keymap.set("n", "<localleader>3", ":diffget REMOTE<CR>", o)
   end,
 })
 --}}}
@@ -108,7 +105,7 @@ vim.keymap.set("x", "@", function()
   local from = vim.fn.getpos("v")[2]
   local to = vim.fn.getcurpos()[2]
   vim.cmd(string.format("%d,%d normal! @%s", from, to, ch))
-end, { silent = false, desc = "execute macro over visual range" })
+end, { silent = true, desc = "execute macro over visual range" })
 -- }}}
 
 -- Easier cgn process by starting with already selected text.
@@ -145,8 +142,8 @@ vim.keymap.set("i", "<M-e>", "<C-g>u<C-o>D", { silent = true, desc = "delete to 
 vim.keymap.set("i", "<M-a>", "<C-g>u<C-o>de", { silent = true, desc = "delete a word in front" })
 
 -- Beginning and end of line in `:` command mode
-vim.keymap.set("c", "<M-a>", "<home>", {})
-vim.keymap.set("c", "<M-e>", "<end>", {})
+vim.keymap.set("c", "<M-a>", "<home>")
+vim.keymap.set("c", "<M-e>", "<end>")
 
 vim.keymap.set("n", "<C-S-P>", function()
   require("fzf-lua.providers.nvim").commands()
@@ -167,5 +164,21 @@ vim.keymap.set("v", "<leader>bd", function()
   quick.normal("n", "s" .. got .. "")
 end, { desc = "base64 decode selection" })
 --}}}
+
+vim.keymap.set("n", "<C-w>y", function()
+  local window = vim.api.nvim_win_get_number(0)
+  local buffer = vim.api.nvim_buf_get_number(0)
+  vim.keymap.set("n", "<C-w>x", function()
+    local view = vim.fn.winsaveview()
+    local cur_buf = vim.api.nvim_buf_get_number(0)
+    local cur_win = vim.api.nvim_win_get_number(0)
+    vim.api.nvim_command("buffer " .. buffer)
+    vim.api.nvim_command(tostring(window) .. "wincmd w")
+    vim.api.nvim_command("buffer " .. cur_buf)
+    vim.api.nvim_command(tostring(cur_win) .. "wincmd w")
+    vim.fn.winrestview(view)
+    vim.keymap.del("n", "<C-w>x")
+  end, { desc = "exchange with yanked buffer" })
+end, { desc = "yank current window for swapping" })
 
 -- vim: fdm=marker fdl=0
