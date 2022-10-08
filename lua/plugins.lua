@@ -510,14 +510,6 @@ packer.startup({
     })
 
     use({
-      "github/copilot.vim",
-      setup  = function() require("settings.copilot").setup() end,
-      config = function() require("settings.copilot").config() end,
-      keys   = { "<leader>ce" },
-      cond   = full_start,
-    })
-
-    use({
       "nanotee/sqls.nvim",
       config = function() require("settings.sqls") end,
       wants  = { "nvim-lspconfig" },
