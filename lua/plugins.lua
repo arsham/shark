@@ -326,11 +326,17 @@ packer.startup({
     -- Programming {{{
     -- LSP {{{
     use({
-      "williamboman/nvim-lsp-installer",
+      "williamboman/mason.nvim",
+      {
+        "williamboman/mason-lspconfig.nvim",
+      },
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+      },
       {
         "neovim/nvim-lspconfig",
         config = function()
-          require("settings.lsp_installer")
+          require("settings.mason-nvim")
           require("settings.lsp")
         end,
         wants = {
@@ -338,14 +344,12 @@ packer.startup({
           "fzf-lua",
           "lua-dev.nvim",
           "null-ls.nvim",
-          "nvim-cmp",
         },
         after = {
           "cmp-nvim-lsp",
           "fzf-lua",
           "lua-dev.nvim",
           "null-ls.nvim",
-          "nvim-cmp",
         },
         event = { "BufRead", "BufNewFile", "InsertEnter" },
         cond  = { full_start, lsp_enabled },
@@ -353,7 +357,11 @@ packer.startup({
       after = {
         "cmp-nvim-lsp",
         "null-ls.nvim",
-        "nvim-cmp",
+        "nvim-lspconfig",
+      },
+      wants = {
+        "cmp-nvim-lsp",
+        "null-ls.nvim",
         "nvim-lspconfig",
       },
       cond  = { full_start, lsp_enabled },
