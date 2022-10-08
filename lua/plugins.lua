@@ -226,8 +226,7 @@ packer.startup({
         "feline-nvim/feline.nvim",
       },
       config = function () require("settings.nvim-navic") end,
-      after  = { "nvim-treesitter", "feline.nvim" },
-      cond   = { full_start, lsp_enabled },
+      event  = { "LspAttach" },
     })
     -- }}}
 

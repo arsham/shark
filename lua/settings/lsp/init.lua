@@ -261,25 +261,6 @@ local function on_attach(client, bufnr) --{{{
 end --}}}
 -- stylua: ignore end
 
-local ok, navic = pcall(require, "nvim-navic")
-local ignore_navic = {
-  bashls = true,
-  dockerls = true,
-}
-local attach_wrap = function(client, ...)
-  on_attach(client, ...)
-  local caps = client.server_capabilities
-  if not ok or not caps.documentSymbolProvider then
-    return
-  end
-  if ignore_navic[client.name] ~= nil then
-    return
-  end
-  if not util.buffer_has_var("navic_attached") then
-    navic.attach(client, ...)
-  end
-end
-
 -- Enable (broadcasting) snippet capability for completion.
 local capabilities = require("cmp_nvim_lsp").update_capabilities( --{{{
   vim.lsp.protocol.make_client_capabilities()
@@ -309,18 +290,18 @@ null_ls.setup({
       end,
     }),
   },
-  on_attach = attach_wrap,
+  on_attach = on_attach,
 }) --}}}
 
 local lspconfig = require("lspconfig") -- LSP Config Setup {{{
 for name, server in pairs(servers) do
   local opts = vim.tbl_deep_extend("force", {
-    on_attach = attach_wrap,
+    on_attach = on_attach,
     capabilities = capabilities,
   }, server.opts or {})
 
   if server.update then
-    opts = server.update(attach_wrap, opts)
+    opts = server.update(on_attach, opts)
   end
   lspconfig[name].setup(opts)
 end --}}}

@@ -118,4 +118,26 @@ vim.schedule(function()
   require("feline").winbar.setup({ components = components })
 end)
 
+local ignore_navic = {
+  bashls = true,
+  dockerls = true,
+  ["null-ls"] = true,
+}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    if args.data == nil then
+      return
+    end
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if ignore_navic[client.name] then
+      return
+    end
+    if not client.server_capabilities.documentSymbolProvider then
+      return
+    end
+    navic.attach(client, args.buf)
+  end,
+})
+
 -- vim: fdm=marker fdl=0
