@@ -31,19 +31,20 @@ vim.opt_local.comments = 'b:*,b:-'
 vim.opt_local.foldtext = 'v:lua.custom_foldtext()'
 vim.opt_local.foldmethod = 'expr'
 --}}}
+-- stylua: ignore end
+
 vim.keymap.set("i", "<CR>", function()
-  local line = vim.fn.getline(vim.fn.line('.')):gsub('^%s*', '')
+  local line = vim.fn.getline(vim.fn.line(".")):gsub("^%s*", "")
   local marker = vim.fn.matchstr(line, [[^\(\d\+\.\)\s]])
   if not marker and marker == line then
-    return "<c-u>"
+    return vim.api.nvim_replace_termcodes("<c-u>", true, false, true) .. marker
   end
   local m = tonumber(marker)
   if m then
-    marker = tostring(m + 1) .. '. '
+    marker = tostring(m + 1) .. ". "
   end
-  return "<cr>" .. marker
-end, {expr=true, buffer=true, desc='create lists in markdown'})
--- stylua: ignore end
+  return vim.api.nvim_replace_termcodes("<cr>", true, false, true) .. marker
+end, { expr = true, buffer = true, desc = "create lists in markdown" })
 
 -- Jumps to the next heading {{{
 ---@param down boolean if goes to next, otherwise to the previous.
