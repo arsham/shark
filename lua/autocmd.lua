@@ -223,41 +223,21 @@ vim.api.nvim_create_autocmd("Filetype", {
   end,
 }) --}}}
 
--- Aliase Filetype {{{
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = filetype_commands_group,
-  pattern = ".*aliases",
-  callback = function()
-    vim.bo.filetype = "sh"
-  end,
-}) --}}}
-
--- Aliase Filetype {{{
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = filetype_commands_group,
-  pattern = ".gitignore",
-  callback = function()
-    vim.bo.filetype = "conf"
-  end,
-}) --}}}
-
--- Systemd Filetype {{{
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = filetype_commands_group,
-  pattern = "**/systemd/**/*.service",
-  callback = function()
-    vim.bo.filetype = "systemd"
-  end,
-}) --}}}
-
--- Makefile filetype {{{
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = filetype_commands_group,
-  pattern = "Makefile*",
-  callback = function()
-    vim.bo.filetype = "make"
-  end,
-}) --}}}
+vim.filetype.add({
+  pattern = {
+    [".*aliases"] = "zsh",
+    [".gitignore"] = "conf",
+    ["**/systemd/**/*.service"] = "systemd",
+    [".*[mM]akefile*"] = "make",
+    ["README.(a+)$"] = function(_, _, ext)
+      if ext == "md" then
+        return "markdown"
+      elseif ext == "rst" then
+        return "rst"
+      end
+    end,
+  },
+})
 
 -- Highlight Yanks {{{
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -301,6 +281,5 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
 })
 
 
---}}}
 
 -- vim: fdm=marker fdl=0

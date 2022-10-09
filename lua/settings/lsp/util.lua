@@ -297,13 +297,6 @@ function M.setup_completions() --{{{
 end --}}}
 
 local lsp_events_group = vim.api.nvim_create_augroup("LSP_EVENTS", { clear = true })
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-  group = lsp_events_group,
-  pattern = "go.mod",
-  callback = function()
-    vim.opt_local.filetype = "gomod"
-  end,
-})
 
 function M.setup_events(client, imports, format) --{{{
   if not util.buffer_has_var("lsp_formatting_imports_" .. client) then

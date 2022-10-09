@@ -28,7 +28,7 @@ packer.startup({
     -- Libraries {{{
     use({
       "wbthomason/packer.nvim",
-      event = "VimEnter",
+      event = { "VimEnter" },
     })
     use("nvim-lua/plenary.nvim")
     use({
@@ -39,17 +39,16 @@ packer.startup({
     -- }}}
 
     -- Core/System utilities {{{
-    use("nathom/filetype.nvim")
 
     use({
       "junegunn/fzf",
-      event = "User LoadTicker1",
+      event = { "User LoadTicker1" },
     })
 
     use({
       "junegunn/fzf.vim",
       requires = "fzf",
-      event    = "User LoadTicker1",
+      event    = { "User LoadTicker1" },
     })
 
     use({
@@ -60,13 +59,14 @@ packer.startup({
         "plenary.nvim",
         {
           "ibhagwan/fzf-lua",
-          event    = "User LoadTicker1",
+          event    = { "User LoadTicker1" },
           requires = { "kyazdani42/nvim-web-devicons" },
         },
       },
       after    = { "listish.nvim", "fzf-lua" },
+      wants    = { "listish.nvim", "fzf-lua" },
       config   = function() require("settings.fzfmania") end,
-      event    = "User LoadTicker1",
+      event    = { "User LoadTicker1" },
     })
 
     use({
@@ -80,10 +80,10 @@ packer.startup({
     use({
       "arsham/listish.nvim",
       requires = { "arshlib.nvim" },
-      event    = "User LoadTicker3",
+      event    = { "User LoadTicker3" },
       config   = function()
         require("listish").config({})
-        vim.api.nvim_command("packadd! cfilter")
+        vim.cmd.packadd({ "cfilter", bang=true })
       end,
     })
 
@@ -96,7 +96,7 @@ packer.startup({
       "gelguy/wilder.nvim",
       config = function() require("settings.wilder") end,
       run    = ":UpdateRemotePlugins",
-      event  = "CmdlineEnter",
+      event  = { "CmdlineEnter" },
     })
     -- }}}
 
@@ -136,7 +136,7 @@ packer.startup({
     -- git {{{
     use({
       "tpope/vim-fugitive",
-      config = function() require("settings.fugitive") end,
+      config   = function() require("settings.fugitive") end,
       requires = {
         "tpope/vim-git",
         "tpope/vim-rhubarb",
@@ -157,11 +157,11 @@ packer.startup({
       requires = {
         { "mattn/webapi-vim", opt = true },
       },
-      wants = "webapi-vim",
+      wants  = "webapi-vim",
       config = function()
         vim.g.gist_per_page_limit = 100
       end,
-      cmd = { "Gist" },
+      cmd    = { "Gist" },
     })
     -- }}}
 
@@ -180,7 +180,7 @@ packer.startup({
         },
       },
       config = function() require("settings.arshamiser") end,
-      event = { "UIEnter" },
+      event  = { "UIEnter" },
     })
 
     use({
@@ -194,7 +194,7 @@ packer.startup({
 
     use({
       "kyazdani42/nvim-web-devicons",
-      event = "UIEnter",
+      event = { "UIEnter" },
     })
 
     local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown", "norg" }
@@ -208,18 +208,18 @@ packer.startup({
     use({
       "rcarriga/nvim-notify",
       config = function() require("settings.nvim-notify") end,
-      event  = "UIEnter",
+      event  = { "UIEnter" },
     })
 
     use({
       "MunifTanjim/nui.nvim",
-      event = "UIEnter",
+      event  = { "UIEnter" },
     })
 
     use({
       "stevearc/dressing.nvim",
       config = function() require("settings.dressing") end,
-      event  = "UIEnter",
+      event  = { "UIEnter" },
       cond   = full_start,
     })
 
@@ -283,7 +283,7 @@ packer.startup({
     use({
       "gbprod/substitute.nvim",
       config = function() require("settings.substitute-nvim") end,
-      keys = { { "n", "cx" }, { "n", "cxx" }, { "v", "X" } },
+      keys   = { { "n", "cx" }, { "n", "cxx" }, { "v", "X" } },
     })
 
     use({
@@ -305,7 +305,7 @@ packer.startup({
 
     use({
       "svban/YankAssassin.vim",
-      event    = {"User LoadTicker3"},
+      event = {"User LoadTicker3"},
       cond  = full_start,
     })
 
@@ -319,7 +319,7 @@ packer.startup({
     use({
       "monaqa/dial.nvim",
       config = function() require("settings.dial-nvim") end,
-      keys = {
+      keys   = {
         { "n", "<C-a>" }, { "n", "<C-x>" },
         { "v", "<C-a>" }, { "v", "<C-x>" },
         { "v", "g<C-a>" }, { "v", "g<C-x>" },
@@ -381,7 +381,7 @@ packer.startup({
     use({
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "plenary.nvim", "nvim-lspconfig" },
-      event = { "User LoadTicker3" },
+      event    = { "User LoadTicker3" },
       cond     = { full_start, lsp_enabled },
     })
 
@@ -418,7 +418,7 @@ packer.startup({
       after  = { "LuaSnip", "nvim-treesitter" } ,
       wants  = { "LuaSnip", "nvim-treesitter" } ,
       config = function() require("settings.cmp") end,
-      event = { "User LoadTicker1" },
+      event  = { "User LoadTicker1" },
       cond   = { full_start, lsp_enabled },
     })
     -- }}}
@@ -455,21 +455,24 @@ packer.startup({
           after = "nvim-treesitter",
         },
       },
-      run = ":TSUpdate",
-      cmd = "TSUpdate",
+      run   = ":TSUpdate",
+      cmd   = "TSUpdate",
       event = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
     })
     -- }}}
 
     use({
       "sheerun/vim-polyglot",
+      setup = function ()
+        vim.g.polyglot_disabled = { "ftdetect" }
+      end,
       event = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
       cond  = full_start,
     })
 
     use({
       "folke/lua-dev.nvim",
-      ft = { "lua" },
+      ft    = { "lua" },
       cond  = { full_start, lsp_enabled },
     })
 
@@ -534,7 +537,7 @@ packer.startup({
           config = function() require('dap-go').setup() end,
           wants  = { "nvim-dap" },
           after  = { "nvim-dap" },
-          opt = true,
+          opt    = true,
         },
       },
       config = function() require("settings.nvim-dap") end,
@@ -611,7 +614,7 @@ packer.startup({
     use({
       -- creates diagrams from text. Requires diagon from snap.
       "willchao612/vim-diagon",
-      cmd = "Diagon",
+      cmd  = "Diagon",
       cond = full_start,
     })
 
