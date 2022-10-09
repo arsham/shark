@@ -165,6 +165,7 @@ vim.keymap.set("v", "<leader>bd", function()
 end, { desc = "base64 decode selection" })
 --}}}
 
+-- Exchange windows {{{
 vim.keymap.set("n", "<C-w>y", function()
   local window = vim.api.nvim_win_get_number(0)
   local buffer = vim.api.nvim_buf_get_number(0)
@@ -180,5 +181,9 @@ vim.keymap.set("n", "<C-w>y", function()
     vim.keymap.del("n", "<C-w>x")
   end, { desc = "exchange with yanked buffer" })
 end, { desc = "yank current window for swapping" })
+-- }}}
+
+vim.keymap.set("n", "[t", "<cmd>tabprev<cr>")
+vim.keymap.set("n", "]t", "<cmd>tabnext<cr>")
 
 -- vim: fdm=marker fdl=0
