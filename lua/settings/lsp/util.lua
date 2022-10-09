@@ -169,15 +169,10 @@ function M.document_range_formatting() --{{{
   vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:3000})"
 end --}}}
 
-local function rename_symbol(args) --{{{
-  if args.args == "" then
-    vim.lsp.buf.rename()
-  else
-    vim.lsp.buf.rename(args.args)
-  end
-end --}}}
 function M.rename() --{{{
-  quick.buffer_command("Rename", rename_symbol, { nargs = "?" })
+  vim.keymap.set("n", "<localleader>rn", function()
+    return ":Rename " .. vim.fn.expand("<cword>")
+  end, { expr = true })
 end --}}}
 
 function M.hover() --{{{

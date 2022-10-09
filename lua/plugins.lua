@@ -390,6 +390,16 @@ packer.startup({
       config = function() require("settings.lsp_lines-nvim") end,
       event  = { "LspAttach" },
     })
+
+    use ({
+      "smjonas/inc-rename.nvim",
+      config = function ()
+        require("inc_rename").setup({
+          cmd_name = "Rename",
+        })
+      end,
+      event  = { "LspAttach" },
+    })
     --}}}
 
     -- CMP {{{

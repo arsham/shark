@@ -567,7 +567,6 @@ additions.
 | Command            | Description                                   |
 | :----------------- | :-------------------------------------------- |
 | `RestartLsp`       | Restart LSP with a delay.                     |
-| `Rename`           | Rename a symbol                               |
 | `CodeAction`       | Also works on a visually selected text.       |
 | `WorkspaceSymbols` |                                               |
 | `DocumentSymbol`   |                                               |
