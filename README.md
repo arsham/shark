@@ -264,6 +264,9 @@ The `leader` key is `space`!
 | `g=`               | Re-indents the hole buffer                                           |
 | `]c`               | (gitsigns) Next hunk                                                 |
 | `[c`               | (gitsigns) Previous hunk                                             |
+| `<leader>ch`       | **C**ommand **H**eight toggle (between 0 and 1)                      |
+| [V]`<leader>be`    | **B**ase64 **e**ncode visually selected text                         |
+| [V]`<leader>bd`    | **B**ase64 **d**ecode visually selected text                         |
 | `<leader>gg`       | Fu**g**itive git buffer                                              |
 | `<leader>hb`       | (gitsigns) **B**lame line                                            |
 | `<leader>hs`       | (gitsigns) **S**tage **h**unk                                        |
@@ -287,8 +290,6 @@ The `leader` key is `space`!
 | `<leader>zi`       | Set folding method to **I**ndent                                     |
 | `<leader>zm`       | Set folding method to Mar**k**er                                     |
 | `<leader>zs`       | Set folding method to **S**yntax                                     |
-| [V]`<leader>be`    | **B**ase64 **e**ncode visually selected text                         |
-| [V]`<leader>bd`    | **B**ase64 **d**ecode visually selected text                         |
 
 </details>
 

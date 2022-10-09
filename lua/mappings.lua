@@ -186,4 +186,14 @@ end, { desc = "yank current window for swapping" })
 vim.keymap.set("n", "[t", "<cmd>tabprev<cr>")
 vim.keymap.set("n", "]t", "<cmd>tabnext<cr>")
 
+vim.keymap.set("n", "<leader>ch", function()
+  local height = vim.opt.cmdheight:get()
+  if height == 0 then
+    height = 1
+  else
+    height = 0
+  end
+  vim.opt.cmdheight = height
+end, { desc = "toggle cmdheight value between 0 and 1" })
+
 -- vim: fdm=marker fdl=0
