@@ -69,7 +69,6 @@ local servers = {
           completionDocumentation = true,
           deepCompletion = true,
           semanticTokens = true,
-          completionBudget = "0",
           verboseOutput = false, -- useful for debugging when true.
         },
       },
