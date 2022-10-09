@@ -4,8 +4,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   group = packer_reload_group,
   pattern = "lua/plugins.lua",
   callback = function(args)
-    vim.api.nvim_command("source " .. args.file)
-    vim.api.nvim_command("PackerCompile")
+    vim.cmd.source(args.file)
+    vim.cmd.PackerCompile()
   end,
   desc = "auto compile plugins module after save",
 })
@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("User", {
   group = packer_reload_group,
   pattern = "PackerCompileDone",
   callback = function()
-    vim.api.nvim_command("PackerInstall")
+    vim.cmd.PackerInstall()
   end,
   desc = "auto install new plugins after compilation",
 }) --}}}
@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd("BufRead", {
         local line = vim.fn.line
 
         if line([['"]]) > 0 and line([['"]]) <= line("$") then
-          vim.api.nvim_command("normal! " .. [[g`"zv']])
+          vim.cmd.normal({ [[g`"zv']], bang = true })
         end
       end,
     })
@@ -147,7 +147,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     vim.wo.statusline = "%{b:term_title}"
     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true, desc = "enter normal mode" })
-    vim.api.nvim_command("startinsert")
+    vim.cmd.startinsert()
     vim.wo.number = false
     vim.wo.relativenumber = false
   end,
@@ -275,7 +275,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     local opts = { buffer = true, silent = true, desc = "close lspinfo popup" }
     vim.keymap.set("n", "q", function()
-      vim.api.nvim_command("close")
+      vim.cmd.close()
     end, opts)
   end,
   desc = "close lspinfo popup",

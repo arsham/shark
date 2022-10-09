@@ -1,5 +1,5 @@
 local M = {}
-local health = vim.health or require("health")
+local health = vim.health
 local home = vim.env.HOME
 
 local file_checks = {

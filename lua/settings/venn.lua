@@ -15,6 +15,6 @@ vim.keymap.set("n", "<leader>v", function()
   end
 
   vim.opt_local.ve = ""
-  vim.api.nvim_command("mapclear <buffer>")
+  vim.cmd.mapclear("<buffer>")
   vim.b.venn_enabled = nil
 end, {})

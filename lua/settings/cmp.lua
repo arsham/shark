@@ -45,7 +45,7 @@ local function has_words_before()
     and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local function tab_function(fallback)
+local function tab_function(fallback) -- {{{
   if ls.expand_or_locally_jumpable() then
     ls.expand_or_jump()
   elseif has_words_before() then
@@ -53,15 +53,15 @@ local function tab_function(fallback)
   else
     fallback()
   end
-end
+end -- }}}
 
-local function shift_tab_function(fallback)
+local function shift_tab_function(fallback) -- {{{
   if ls.jumpable(-1) then
     ls.jump(-1)
   else
     fallback()
   end
-end
+end -- }}}
 
 cmp.setup({
   performance = {

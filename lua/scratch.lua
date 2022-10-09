@@ -21,9 +21,9 @@ end
 
 local function new_scratch_buffer()
   local name = string.format("Scratch %d", store.next())
-  vim.api.nvim_command("vsplit")
-  vim.api.nvim_command("enew")
-  vim.api.nvim_command("file " .. name)
+  vim.cmd.vsplit()
+  vim.cmd.enew()
+  vim.cmd.file(name)
   vim.bo.buftype = "nofile"
   vim.bo.swapfile = false
 

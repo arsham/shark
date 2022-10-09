@@ -9,9 +9,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     install_path,
   })
 end
--- stylua: ignore end
 
-vim.api.nvim_command("packadd packer.nvim")
+vim.cmd.packadd("packer.nvim")
 
 -- Disables LSP plugins and other heavy plugins.
 local function full_start()
@@ -24,7 +23,6 @@ end
 
 local packer = require("packer")
 
--- stylua: ignore start
 packer.startup({
   function(use)
     -- Libraries {{{

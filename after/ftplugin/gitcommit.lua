@@ -3,7 +3,7 @@ vim.opt_local.colorcolumn = "50,72"
 vim.opt_local.spell = true
 vim.wo.cursorline = true
 vim.opt_local.formatoptions:remove({ "c", "r", "o", "q" })
-vim.api.nvim_command("startinsert")
+vim.cmd.startinsert()
 
 -- stylua: ignore start
 local formatlistpat = {'^\\s*'}                         --- Optional leading whitespace

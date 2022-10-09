@@ -381,9 +381,9 @@ function M.support_commands() --{{{
   ---Restats the LSP server. Fixes the problem with the LSP server not
   -- restarting with LspRestart command.
   local function restart_lsp()
-    vim.api.nvim_command("LspStop")
+    vim.cmd.LspStop()
     vim.defer_fn(function()
-      vim.api.nvim_command("LspStart")
+      vim.cmd.LspStart()
     end, 1000)
   end
   quick.buffer_command("RestartLsp", restart_lsp)
