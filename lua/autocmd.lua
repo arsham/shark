@@ -271,56 +271,34 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Close LSP Info Popup {{{
 vim.api.nvim_create_autocmd("FileType", {
   group = filetype_commands_group,
-  pattern = { "lspinfo", "lsp-installer", "null-ls-info" },
+  pattern = { "lspinfo", "lsp-installer", "null-ls-info", "help", "qf" },
   callback = function()
-    local opts = { buffer = true, silent = true, desc = "close lspinfo popup" }
+    local opts = { buffer = true, silent = true, desc = "close lspinfo popup and help,qf buffers" }
     vim.keymap.set("n", "q", function()
       vim.cmd.close()
     end, opts)
   end,
-  desc = "close lspinfo popup",
+  desc = "close lspinfo popup and help,qf buffers with q",
 }) --}}}
 
--- Exit Help/man/qf With q {{{
-vim.api.nvim_create_autocmd("Filetype", {
-  group = filetype_commands_group,
-  pattern = { "help", "qf" },
-  desc = "exit help with q",
+local trim_whitespace_group = vim.api.nvim_create_augroup("TRIM_WHITESPACE", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "FilterWritePre" }, {
+  group = trim_whitespace_group,
+  desc = "trim spaces",
   callback = function()
-    local opts = { buffer = true, desc = "close help,qf buffers" }
-    vim.keymap.set("n", "q", function()
-      vim.api.nvim_command("close")
-    end, opts)
+    if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
+      return
+    end
+    local ok, val = pcall(vim.api.nvim_buf_get_var, 0, "DISABLE_TRIM_WHITESPACES")
+    if ok and val then
+      return
+    end
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    vim.api.nvim_command([[keeppatterns %s/\s\+$//e]])
+    vim.api.nvim_command([[silent! %s#\($\n\s*\)\+\%$##]])
+    vim.api.nvim_win_set_cursor(0, cursor)
   end,
-}) --}}}
-
-local async_load_plugin = nil --{{{
-async_load_plugin = vim.loop.new_async(vim.schedule_wrap(function()
-  local trim_whitespace_group = vim.api.nvim_create_augroup("TRIM_WHITESPACE", { clear = true })
-  vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "FilterWritePre" }, {
-    group = trim_whitespace_group,
-    desc = "trim spaces",
-    callback = function()
-      if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
-        return
-      end
-      local ok, val = pcall(vim.api.nvim_buf_get_var, 0, "DISABLE_TRIM_WHITESPACES")
-      if ok and val then
-        return
-      end
-      local save = vim.fn.winsaveview()
-      vim.api.nvim_command([[keeppatterns %s/\s\+$//e]])
-      vim.api.nvim_command([[silent! %s#\($\n\s*\)\+\%$##]])
-      vim.fn.winrestview(save)
-    end,
-  })
-  async_load_plugin:close()
-end))
-async_load_plugin:send() --}}}
-
--- CMD height hacks {{{
--- cmdline_calls is used to prevent setting cmdheight to 0 on fast command
--- invokations.
+})
 
 
 --}}}
