@@ -7,27 +7,29 @@ programming fun.
 This setup is mostly customised to for **Go** (**Golang**) development. But
 there are a few other **LSP** servers setup as well.
 
-This project supports Neovim version `0.7` and newer.
+This project supports Neovim version `0.8.0` and newer.
 
 ## Highlights
 
 - Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
 - It loads really fast! With over **90 plugins**, it takes **5ms** to
-  **20ms** on average to load up. (benchmarked with the `StartupTime` benchmark
-  tool).
-- **LSP**, **Treesitter**, and **FZF** are setup to work together. Completion
-- with **nvim-cmp** plugin is setup. It is optimised to handle very **large**
-- files. There are some handy **textobjects** such as **backticks** and
-- **indents**. You can add the current location of the cursor or make
-- **notes** on the
+  **20ms** on average to load up. This has become possible With the new
+  `filetype.lua` and heavily lazy loading plugins. (benchmarked with the
+  `StartupTime` benchmark tool).
+- **LSP**, **Treesitter**, and **FZF** are setup to work together.
+- Completion with **nvim-cmp** plugin is setup.
+- It is optimised to handle very **large** files.
+- There are some handy **textobjects** such as **backticks** and **indents**.
+- You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
-- You can **manipulate** quickfix/local lists. It comes with integration with
-- **git** and gist. Has a lot of useful feedback in the gutter. Statusline is
-- configures with **feline**. It is set to give a lot of useful
-  information about the buffer.
-- Prettier quickfix buffer and quickfix tools. The theme is setup with Lua to
-- take advantage of its performance.
+- You can **manipulate** quickfix/local lists.
+- It comes with integration with **git** and gist.
+- Has a lot of useful feedback in the gutter.
+- Statusline is configures with **feline**.
+- It is set to give a lot of useful information about the buffer.
+- Prettier quickfix buffer and quickfix tools.
+- The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
@@ -125,8 +127,18 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)  | Install and upgrade mason servers                    |
 | LSP         | [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim)                                  | Spinner for LSP status                               |
 | LSP         | [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)      | External Tool to LSP bridge                          |
-| LSP         | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                    | Completion, and its related plugins                  |
+| LSP         | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                    | Completion with LSP                                  |
+| LSP         | [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)                                | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-calc](https://github.com/hrsh7th/cmp-calc)                                    | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)                              | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)                            | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/lsp-signature-help](https://github.com/hrsh7th/cmp-nvim-lsp-signature-help)       | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)                            | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)                                    | Extension for nvim-cmp                               |
+| LSP         | [lukas-reineke/cmp-rg](https://github.com/lukas-reineke/cmp-rg)                            | Extension for nvim-cmp                               |
+| LSP         | [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)                    | Extension for nvim-cmp                               |
 | LSP         | [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                    | Snippet engine                                       |
+| LSP         | [smjonas/inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim)                      | Incremental renaming with inccommand support         |
 | LSP         | [ray-x/go.nvim](https://github.com/ray-x/go.nvim)                                          | Modern Go Plugin for Neovim                          |
 | LSP         | [nanotee/sqls.nvim](https://github.com/nanotee/sqls.nvim)                                  | SQL LSP                                              |
 | Visuals     | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                      | Highlighting engine                                  |
@@ -145,7 +157,7 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)                             | Show LSP diagnostics in extmarks                     |
 | Core        | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                      | Seamlessly navigate between tmux and vim             |
 | Tool        | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                    | File explorer tree                                   |
-| Visuals     | [famiu/feline.nvim](https://github.com/famiu/feline.nvim)                                  | Statusline (default)                                 |
+| Visuals     | [feline-nvim/feline.nvim](https://github.com/feline-nvim/feline.nvim)                      | Statusline (default)                                 |
 | Tool        | [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                | Fuzzy completion for command mode                    |
 | Lists       | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                          | Better quickfix list manager                         |
 | Visuals     | [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                        |                                                      |
@@ -178,7 +190,6 @@ Some plugins are not listed here. You can find the complete list in the
 | Tool        | [jbyuki/venn.nvim](https://github.com/jbyuki/venn.nvim)                                    | Create diagrams easier                               |
 | Editing     | [monaqa/dial.nvim](https://github.com/monaqa/dial.nvim)                                    | Enhanced increment/decrement values                  |
 | Tool        | [bfredl/nvim-luadev](https://github.com/bfredl/nvim-luadev)                                | REPL/debug console for nvim lua plugins              |
-| Core        | [nathom/filetype.nvim](https://github.com/nathom/filetype.nvim)                            | A faster version of filetype.vim                     |
 | Tool        | [sQVe/sort.nvim](https://github.com/sQVe/sort.nvim)                                        | Sort plugin with line-wise and delimiter sorting     |
 | Tool        | [ralismark/opsort.vim](https://github.com/ralismark/opsort.vim)                            | Sort operator                                        |
 | Core        | [svban/YankAssassin.vim](https://github.com/svban/YankAssassin.vim)                        | Stay where you are after yanking                     |
@@ -223,6 +234,8 @@ The `leader` key is `space`!
 | :----------------- | :------------------------------------------------------------------- |
 | `<Ctrl-Shift-p>`   | Show **C**ontrol panel (commands)                                    |
 | `<Ctrl-w>b`        | Delete current **B**uffer                                            |
+| `<Ctrl-w>y`        | **Y**ank current window for exchange (see next mapping)              |
+| `<Ctrl-w>x`        | E**x**change current window with previously yanked window            |
 | `<leader>kk`       | Toggles Neovim tree                                                  |
 | `<leader><leader>` | Toggles Neovim tree                                                  |
 | `<leader>kf`       | **F**inds current file in the Neovim tree                            |
@@ -271,6 +284,8 @@ The `leader` key is `space`!
 | `<leader>zi`       | Set folding method to **I**ndent                                     |
 | `<leader>zm`       | Set folding method to Mar**k**er                                     |
 | `<leader>zs`       | Set folding method to **S**yntax                                     |
+| [V]`<leader>be`    | **B**ase64 **e**ncode visually selected text                         |
+| [V]`<leader>bd`    | **B**ase64 **d**ecode visually selected text                         |
 
 </details>
 
@@ -578,21 +593,20 @@ The following list of commands do not fit into any specific categories.
 <details>
     <summary>Click to view the commands</summary>
 
-| Command               | Description                                  |
-| :-------------------- | :------------------------------------------- |
-| `InstallDependencies` | Install required dependencies                |
-| `WatchLuaFileChanges` | Watch for changes in current file and reload |
-| `CC`                  | Close all floating windows                   |
-| `Scratch`             | Create a scratch buffer                      |
-| `Filename`            | View the filename                            |
-| `YankFilename`        | Yank the filename to `"` register            |
-| `YankFilenameC`       | Yank the filename to `+` register            |
-| `YankFilepath`        | Yank the file path to `"` register           |
-| `YankFilepathC`       | Yank the file path to `+` register           |
-| `MergeConflict`       | Search for merge conflicts                   |
-| `JsonDiff`            | Diff json files after formatting them        |
-| `Tmux`                | Start a tmux project (using tmuxp)           |
-| [count]`Lorem`        | Insert (count) line(s) Lorem Ipsum text      |
+| Command               | Description                             |
+| :-------------------- | :-------------------------------------- |
+| `InstallDependencies` | Install required dependencies           |
+| `CC`                  | Close all floating windows              |
+| `Scratch`             | Create a scratch buffer                 |
+| `Filename`            | View the filename                       |
+| `YankFilename`        | Yank the filename to `"` register       |
+| `YankFilenameC`       | Yank the filename to `+` register       |
+| `YankFilepath`        | Yank the file path to `"` register      |
+| `YankFilepathC`       | Yank the file path to `+` register      |
+| `MergeConflict`       | Search for merge conflicts              |
+| `JsonDiff`            | Diff json files after formatting them   |
+| `Tmux`                | Start a tmux project (using tmuxp)      |
+| [count]`Lorem`        | Insert (count) line(s) Lorem Ipsum text |
 
 After running `InstallDependencies` you will be notified to install some
 programs.
