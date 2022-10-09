@@ -483,7 +483,6 @@ There are a few added commands to what fzf provides.
 
 | Command     | Description                                |
 | :---------- | :----------------------------------------- |
-| Reload      | Reload one or more lua config files        |
 | ArgAdd      | Select and add files to the args list      |
 | ArgDelete   | Select and delete files from the args list |
 | GGrep       | Run **git grep**                           |

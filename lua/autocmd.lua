@@ -281,5 +281,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
 })
 
 
+vim.api.nvim_create_augroup("RELOAD_CONFIGS", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = "RELOAD_CONFIGS",
+  pattern = "*/shark/lua/*.lua",
+  callback = function(args)
+    vim.notify("Reloaded " .. args.file)
+    vim.cmd.source("<afile>")
+  end,
+})
 
 -- vim: fdm=marker fdl=0

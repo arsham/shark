@@ -4,6 +4,7 @@ local quick = require("arshlib.quick")
 local M = {}
 
 quick.command("Filename", function() --{{{
+  ---@diagnostic disable-next-line: param-type-mismatch
   vim.notify(vim.fn.expand("%:p"), vim.lsp.log_levels.INFO, {
     title = "Filename",
     timeout = 3000,
@@ -25,77 +26,11 @@ end) --}}}
 quick.command("MergeConflict", ":grep '<<<<<<< HEAD'")
 quick.command("JsonDiff", [[vert ball | windo execute '%!gojq' | windo diffthis]])
 
----Sets up a watch on the filename if it is a lua module.
----@param filenames string[]
-local function setup_watch(filenames) --{{{
-  local modules = {}
-  for _, filename in ipairs(filenames) do
-    local mod, ok = fs.file_module(filename)
-
-    if not ok then
-      local msg = string.format("Could not figure out the package: %s", filename)
-      vim.notify(msg, vim.lsp.log_levels.ERROR, {
-        title = "Reload Error",
-        timeout = 2000,
-      })
-    else
-      table.insert(modules, mod)
-    end
-  end
-  return modules
-end --}}}
-
 -- selene: allow(global_usage)
 if not _G.watch_lua_file_group_set then --{{{
   vim.api.nvim_create_augroup("WATCH_LUA_FILE", { clear = true })
   _G.watch_lua_file_group_set = true
 end --}}}
-
-function M.watch_file_changes(filenames) --{{{
-  local reloader = require("plenary.reload")
-  local modules = setup_watch(filenames)
-  local names = {}
-  for _, module in ipairs(modules) do
-    table.insert(names, module.name)
-    local watched = module.name
-    if string.find(watched, "/") then
-      watched = "*/" .. watched
-    end
-    vim.api.nvim_create_autocmd("BufWritePost", {
-      group = "WATCH_LUA_FILE",
-      pattern = watched,
-      callback = function()
-        for _, mod in ipairs(modules) do
-          reloader.reload_module(mod.module, false)
-          require(mod.module)
-        end
-
-        local msg = table.concat(names, "\n")
-        vim.notify(msg, vim.lsp.log_levels.INFO, {
-          title = "Reloaded",
-          timeout = 1000,
-        })
-      end,
-      desc = string.format("watching %s", module.name),
-    })
-  end
-
-  local msg = table.concat(names, "\n")
-  vim.notify(msg, vim.lsp.log_levels.INFO, {
-    title = "Watching Changes",
-    timeout = 2000,
-  })
-end --}}}
-
-quick.command("WatchLuaFileChanges", function(arg) --{{{
-  local filename = vim.fn.expand("%:p")
-  local files = {}
-  if arg and arg.args ~= "" then
-    files = vim.split(arg.args, " ") or {}
-  end
-  table.insert(files, filename)
-  M.watch_file_changes(files)
-end, { nargs = "*", complete = "file" }) --}}}
 
 quick.command("CC", function() --{{{
   for _, win in ipairs(vim.api.nvim_list_wins()) do
