@@ -312,6 +312,7 @@ There are more specialised mappings provided, keep reading please!
 | `il`        | **I**n line                                 |
 | `al`        | **A**round line                             |
 | `iN`        | **I**n **N**umeric value (can be float too) |
+| `aN`        | **A**round **N**umeric value                |
 | `ih`        | **I**n **H**unk                             |
 | `af`        | **A**round **F**unction                     |
 | `if`        | **I**n **F**unction                         |
