@@ -3,7 +3,7 @@ local M = {}
 local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")
-local fzflsp = require("fzf-lua.providers.lsp")
+local diagnostics = require("fzf-lua.providers.diagnostic")
 local util = require("util")
 
 function M.lsp_organise_imports() --{{{
@@ -391,10 +391,10 @@ function M.setup_diagnostics() --{{{
   end, "goto previous diagnostic")
 
   quick.buffer_command("Diagnostics", function()
-    fzflsp.diagnostics({})
+    diagnostics.diagnostics({})
   end)
   quick.buffer_command("DiagnosticsAll", function()
-    fzflsp.workspace_diagnostics({})
+    diagnostics.all({})
   end)
 end --}}}
 
