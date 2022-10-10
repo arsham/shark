@@ -196,4 +196,8 @@ vim.keymap.set("n", "<leader>ch", function()
   vim.opt.cmdheight = height
 end, { desc = "toggle cmdheight value between 0 and 1" })
 
+vim.keymap.set("n", "<leader>sb", function()
+  vim.opt_local.scrollbind = not vim.opt_local.scrollbind:get()
+end, { desc = "toggle scroll bind on current buffer" })
+
 -- vim: fdm=marker fdl=0

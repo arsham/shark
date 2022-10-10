@@ -276,6 +276,7 @@ The `leader` key is `space`!
 | `<leader>hR`       | (gitsigns) **R**eset buffer                                          |
 | `<leader>hp`       | (gitsigns) **P**review **h**unk                                      |
 | `<leader>hh`       | Opens the **help** for current word                                  |
+| `<leader>sb`       | Toggle **s**croll **b**ind on current buffer                         |
 | `<Alt-Left>`       | Reduce vertical size                                                 |
 | `<Alt-Right>`      | Increase vertical size                                               |
 | `<Alt-Up>`         | Reduce horizontal size                                               |
