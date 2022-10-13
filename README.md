@@ -259,6 +259,7 @@ The `leader` key is `space`!
 | `<leader>sp`       | Toggles **Sp**elling on current buffer                               |
 | `<leader>sf`       | Auto **f**ixes previous misspelled word                              |
 | `cn`               | Initiate a `cgn` on current `word`                                   |
+| [V]`cn`            | Initiate a `cgn` on current visually selected string                 |
 | `g.`               | Use last change (anything) as the initiate a `cgn` on current `word` |
 | `z=`               | Show spell recommendations                                           |
 | `g=`               | Re-indents the hole buffer                                           |
