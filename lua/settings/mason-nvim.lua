@@ -1,7 +1,7 @@
 local path = require("mason-core.path")
 
 require("mason").setup({
-  install_root_dir = path.concat({ vim.fn.stdpath("data"), "mason" }),
+  install_root_dir = path.concat({ vim.fn.stdpath("cache"), "mason" }),
   ui = {
     icons = {
       package_installed = "✓",
