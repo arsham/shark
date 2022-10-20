@@ -276,7 +276,6 @@ null_ls.setup({
     null_ls.builtins.formatting.autopep8,
     null_ls.builtins.diagnostics.buf,
     null_ls.builtins.formatting.buf,
-    locallinters.api_linter,
     null_ls.builtins.formatting.uncrustify.with({
       extra_args = function()
         return {
