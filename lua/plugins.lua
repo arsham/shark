@@ -42,13 +42,13 @@ packer.startup({
 
     use({
       "junegunn/fzf",
-      event = { "User LoadTicker1" },
+      event = { "User LoadQuickest" },
     })
 
     use({
       "junegunn/fzf.vim",
       requires = "fzf",
-      event    = { "User LoadTicker1" },
+      event    = { "User LoadQuickest" },
     })
 
     use({
@@ -59,14 +59,13 @@ packer.startup({
         "plenary.nvim",
         {
           "ibhagwan/fzf-lua",
-          event    = { "User LoadTicker1" },
+          event    = { "User LoadQuickest" },
           requires = { "kyazdani42/nvim-web-devicons" },
         },
       },
-      after    = { "listish.nvim", "fzf-lua" },
-      wants    = { "listish.nvim", "fzf-lua" },
-      config   = function() require("settings.fzfmania") end,
-      event    = { "User LoadTicker1" },
+      wants  = { "listish.nvim", "fzf-lua" },
+      config = function() require("settings.fzfmania") end,
+      event  = { "User LoadQuickest" },
     })
 
     use({
@@ -80,10 +79,10 @@ packer.startup({
     use({
       "arsham/listish.nvim",
       requires = { "arshlib.nvim" },
-      event    = { "User LoadTicker3" },
+      event    = { "User LoadQuickest" },
       config   = function()
         require("listish").config({})
-        vim.cmd.packadd({ "cfilter", bang=true })
+        vim.cmd.packadd({ "cfilter", bang = true })
       end,
     })
 
@@ -115,13 +114,12 @@ packer.startup({
       config   = function() require("settings.nvim_tree") end,
       cmd      = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
       keys     = { "<leader>kk", "<leader>kf", "<leader><leader>" },
-      event    = { "User LoadTicker3" },
     })
 
     use({
       "numToStr/Navigator.nvim",
       config = function() require("settings.navigator") end,
-      event  = { "User LoadTicker2" },
+      keys   = { "<C-h>", "<C-j>", "<C-k>", "<C-l>" },
     })
 
     use({
@@ -137,7 +135,7 @@ packer.startup({
       config = function()
         vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)")
       end,
-      keys  = { "<C-w>z" },
+      keys   = { "<C-w>z" },
     })
     -- }}}
 
@@ -155,7 +153,7 @@ packer.startup({
       "lewis6991/gitsigns.nvim",
       requires = "plenary.nvim",
       config   = function() require("settings.gitsigns") end,
-      event    = { "User LoadTicker2" },
+      event    = { "User LoadTicker3" },
       cond     = full_start,
     })
 
@@ -165,11 +163,11 @@ packer.startup({
       requires = {
         { "mattn/webapi-vim", opt = true },
       },
-      wants  = "webapi-vim",
-      config = function()
+      wants    = "webapi-vim",
+      config   = function()
         vim.g.gist_per_page_limit = 100
       end,
-      cmd    = { "Gist" },
+      cmd      = { "Gist" },
     })
     -- }}}
 
@@ -186,8 +184,8 @@ packer.startup({
           after = "nvim-web-devicons",
         },
       },
-      config = function() require("settings.arshamiser") end,
-      event  = { "UIEnter" },
+      config   = function() require("settings.arshamiser") end,
+      event    = { "UIEnter" },
     })
 
     use({
@@ -220,7 +218,7 @@ packer.startup({
 
     use({
       "MunifTanjim/nui.nvim",
-      event  = { "UIEnter" },
+      event = { "UIEnter" },
     })
 
     use({
@@ -237,8 +235,8 @@ packer.startup({
         "nvim-treesitter/nvim-treesitter",
         "feline-nvim/feline.nvim",
       },
-      config = function () require("settings.nvim-navic") end,
-      event  = { "LspAttach" },
+      config   = function() require("settings.nvim-navic") end,
+      event    = { "LspAttach" },
     })
     -- }}}
 
@@ -248,7 +246,7 @@ packer.startup({
       config   = function() require("yanker").config({}) end,
       requires = { "arshlib.nvim", "fzf", "fzf.vim" },
       after    = { "arshlib.nvim" },
-      event    = {"User LoadTicker3"},
+      event    = { "User LoadTicker4" },
       cond     = full_start,
     })
 
@@ -312,7 +310,7 @@ packer.startup({
 
     use({
       "svban/YankAssassin.vim",
-      event = {"User LoadTicker3"},
+      event = { "User LoadTicker4" },
       cond  = full_start,
     })
 
@@ -331,7 +329,7 @@ packer.startup({
         { "v", "<C-a>" }, { "v", "<C-x>" },
         { "v", "g<C-a>" }, { "v", "g<C-x>" },
       },
-      cond = full_start,
+      cond   = full_start,
     })
     -- }}}
 
@@ -351,20 +349,18 @@ packer.startup({
           require("settings.mason-nvim")
           require("settings.lsp")
         end,
-        wants = {
+        wants  = {
           "cmp-nvim-lsp",
           "fzf-lua",
-          "lua-dev.nvim",
           "null-ls.nvim",
         },
-        after = {
+        after  = {
           "cmp-nvim-lsp",
           "fzf-lua",
-          "lua-dev.nvim",
           "null-ls.nvim",
         },
-        event = { "User LoadTicker1" },
-        cond  = { full_start, lsp_enabled },
+        event  = { "User LoadTicker2" },
+        cond   = { full_start, lsp_enabled },
       },
       after = {
         "cmp-nvim-lsp",
@@ -382,7 +378,7 @@ packer.startup({
     use({
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "plenary.nvim", "nvim-lspconfig" },
-      event    = { "User LoadTicker3" },
+      event    = { "LspAttach" },
       cond     = { full_start, lsp_enabled },
     })
 
@@ -392,9 +388,9 @@ packer.startup({
       event  = { "LspAttach" },
     })
 
-    use ({
+    use({
       "smjonas/inc-rename.nvim",
-      config = function ()
+      config = function()
         require("inc_rename").setup({
           cmd_name = "Rename",
         })
@@ -421,16 +417,16 @@ packer.startup({
           config   = function() require("settings.luasnip") end,
           -- TODO: find a better event for this. Removing causes a lot of
           -- plugins to load automatically.
-          event = { "User LoadTicker1" },
+          event    = { "InsertEnter" },
           cond     = { full_start, lsp_enabled },
         },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
-      after  = { "LuaSnip", "nvim-treesitter" } ,
-      wants  = { "LuaSnip", "nvim-treesitter" } ,
-      config = function() require("settings.cmp") end,
-      event  = { "User LoadTicker1" },
-      cond   = { full_start, lsp_enabled },
+      after    = { "LuaSnip", "nvim-treesitter" },
+      wants    = { "LuaSnip", "nvim-treesitter" },
+      config   = function() require("settings.cmp") end,
+      event    = { "InsertEnter" },
+      cond     = { full_start, lsp_enabled },
     })
     -- }}}
 
@@ -457,9 +453,9 @@ packer.startup({
         },
         {
           "nvim-treesitter/playground",
-          run   = ":TSInstall query",
-          cmd   = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-          cond  = full_start,
+          run  = ":TSInstall query",
+          cmd  = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+          cond = full_start,
         },
         {
           "JoosepAlviste/nvim-ts-context-commentstring",
@@ -468,16 +464,16 @@ packer.startup({
       },
       run   = ":TSUpdate",
       cmd   = "TSUpdate",
-      event = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
+      event = { "User LoadTicker1", "BufReadPost", "BufNewFile" },
     })
     -- }}}
 
     use({
       "sheerun/vim-polyglot",
-      setup = function ()
+      setup = function()
         vim.g.polyglot_disabled = { "ftdetect" }
       end,
-      event = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
+      event = { "User LoadTicker4" },
       cond  = full_start,
     })
 
@@ -551,11 +547,11 @@ packer.startup({
           opt    = true,
         },
       },
-      config = function() require("settings.nvim-dap") end,
-      wants  = { "nvim-dap-ui", "nvim-dap-virtual-text" },
-      after  = { "nvim-dap-ui", "nvim-dap-virtual-text" },
-      cond   = { full_start, lsp_enabled },
-      keys   = { "<leader>db", "<leader>dB", "<leader>dl" },
+      config   = function() require("settings.nvim-dap") end,
+      wants    = { "nvim-dap-ui", "nvim-dap-virtual-text" },
+      after    = { "nvim-dap-ui", "nvim-dap-virtual-text" },
+      cond     = { full_start, lsp_enabled },
+      keys     = { "<leader>db", "<leader>dB", "<leader>dl" },
     }) --}}}
     -- }}}
 
@@ -564,7 +560,7 @@ packer.startup({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
       config   = function() require("indent-tools").config({}) end,
-      event    = { "User LoadTicker3" },
+      event    = { "User LoadTicker4" },
       cond     = full_start,
     })
 
@@ -572,13 +568,13 @@ packer.startup({
       "arsham/archer.nvim",
       requires = { "arsham/arshlib.nvim", "tpope/vim-repeat" },
       config   = function() require("archer").config({}) end,
-      event    = { "User LoadTicker2" },
+      event    = { "User LoadTicker4" },
     })
 
     use({
       "echasnovski/mini.nvim",
       config = function() require("settings.mini-nvim") end,
-      event  = { "User LoadTicker2" },
+      event  = { "User LoadTicker3" },
       cond   = full_start,
     })
 
@@ -590,20 +586,20 @@ packer.startup({
 
     use({
       "kana/vim-textobj-user",
-      event = { "User LoadTicker2" },
+      event = { "User LoadTicker4" },
     })
 
     use({
       "ralismark/opsort.vim",
-      setup = function ()
+      setup = function()
         vim.g.opsort_no_mappings = true
       end,
-      config = function ()
-        vim.keymap.set("x", "gso", "<plug>Opsort", {silent = true})
-        vim.keymap.set("n", "gso", "<plug>Opsort", {silent = true})
-        vim.keymap.set("n", "gsoo", "<plug>OpsortLines", {silent = true})
+      config = function()
+        vim.keymap.set("x", "gso", "<plug>Opsort", { silent = true })
+        vim.keymap.set("n", "gso", "<plug>Opsort", { silent = true })
+        vim.keymap.set("n", "gsoo", "<plug>OpsortLines", { silent = true })
       end,
-      event = { "User LoadTicker3" },
+      event  = { "BufReadPost", "BufNewFile", "InsertEnter" },
     })
     -- }}}
 
@@ -642,7 +638,8 @@ packer.startup({
       wants  = { "nvim-treesitter", "nvim-lspconfig", "nvim-cmp" },
       cmd    = { "NeorgStart" },
       keys   = { "<leader>oo" },
-      event  = { "User LoadTicker3" },
+      event  = { "User LoadTicker4" },
+      cond   = { full_start, lsp_enabled },
     })
 
     use({
@@ -663,6 +660,10 @@ packer.startup({
     autoremove = false,
     ensure_dependencies = true,
     compile_on_sync = true,
+    profile = {
+      enable = false,
+      threshold = 1,
+    },
     display = {
       non_interactive = false,
       header_lines = 2,
