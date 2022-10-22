@@ -10,6 +10,9 @@ vim.schedule(function()
   require("textobjects")
   require("commands")
   require("scratch")
+
+  -- Hack! A litter later we trigger the rest of plugins to load seamlessly.
+  vim.cmd.doautocmd("User LoadQuickest")
 end)
 
 -- stylua: ignore start
