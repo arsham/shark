@@ -102,6 +102,12 @@ vim.keymap.set("x", "&", ":&&<CR>", { desc = "repeat last substitute command" })
 
 vim.keymap.set("n", "<C-w>b", ":bd<CR>", opts("delete current buffer"))
 vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", opts("delete current buffer"))
+vim.keymap.set("n", "<C-w><C-t>", ":tabnew %<CR>", opts("open current buffer in new tab"))
+vim.keymap.set("n", "<C-w>t", ":tabnew %<CR>", opts("open current buffer in new tab"))
+vim.keymap.set("n", "<leader>bd", ":bd<CR>", opts("delete current buffer"))
+vim.keymap.set("n", "<leader>bc", ":close<CR>", opts("close current buffer"))
+vim.keymap.set("n", "<leader>tb", ":windo bd<CR>", opts("delete all buffers of current tab"))
+vim.keymap.set("n", "<leader>tc", ":windo close<CR>", opts("close all buffers of current tab"))
 
 -- Execute macros over selected range. {{{
 vim.keymap.set("x", "@", function()
