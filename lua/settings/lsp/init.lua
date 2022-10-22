@@ -78,7 +78,7 @@ local servers = {
   sumneko_lua = { --{{{
     opts = {},
     update = function(on_attach, opts)
-      opts = require("lua-dev").setup({
+      opts = {
         library = {
           plugins = { "arshlib.nvim", "plenary.nvim" },
         },
@@ -113,7 +113,7 @@ local servers = {
             },
           },
         },
-      })
+      }
       opts.on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false

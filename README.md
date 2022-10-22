@@ -196,7 +196,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Core        | [tmux-plugins/vim-tmux](https://github.com/tmux-plugins/vim-tmux)                          |                                                      |
 | Core        | [tpope/vim-git](https://github.com/tpope/vim-git)                                          |                                                      |
 | Core        | [andymass/vim-matchup](https://github.com/andymass/vim-matchup)                            |                                                      |
-| Core        | [folke/lua-dev.nvim](https://github.com/folke/lua-dev.nvim)                                |                                                      |
+| Core        | [folke/neodev.nvim](https://github.com/folke/neodev.nvim)                                  |                                                      |
 | Core        | [mattn/webapi-vim](https://github.com/mattn/webapi-vim)                                    |                                                      |
 | Core        | [milisims/nvim-luaref](https://github.com/milisims/nvim-luaref)                            |                                                      |
 | Core        | [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)                          |                                                      |

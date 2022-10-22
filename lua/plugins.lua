@@ -478,9 +478,14 @@ packer.startup({
     })
 
     use({
-      "folke/lua-dev.nvim",
-      ft    = { "lua" },
-      cond  = { full_start, lsp_enabled },
+      "folke/neodev.nvim",
+      config = function()
+        require("neodev").setup({})
+      end,
+      wants  = { "nvim-lspconfig" },
+      after  = { "nvim-lspconfig" },
+      ft     = { "lua" },
+      cond   = { full_start, lsp_enabled },
     })
 
     use({
