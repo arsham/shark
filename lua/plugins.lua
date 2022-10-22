@@ -98,6 +98,14 @@ packer.startup({
       run    = ":UpdateRemotePlugins",
       event  = { "CmdlineEnter" },
     })
+
+    use({
+      "folke/noice.nvim",
+      wants  = { "nui.nvim", "nvim-notify" },
+      config = function() require("settings.noice-nvim") end,
+      event  = { "UIEnter" },
+    })
+
     -- }}}
 
     -- Navigation {{{

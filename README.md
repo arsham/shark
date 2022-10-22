@@ -174,6 +174,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Editing     | [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                          |                                                      |
 | Visuals     | [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                            | Better notification UI                               |
 | Visuals     | [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                            | UI component                                         |
+| Visuals     | [folke/noice.nvim](https://github.com/folke/noice.nvim)                                    | Replaces the UI for messages                         |
 | Editing     | [mbbill/undotree](https://github.com/mbbill/undotree)                                      | Undo tree browser                                    |
 | Visuals     | [towolf/vim-helm](https://github.com/towolf/vim-helm)                                      | Helm syntax highlighting                             |
 | Editing     | [echasnovski/mini.nvim](https://github.com/echasnovski/mini.nvim)                          | For surround, trailing spaces and alignments         |
