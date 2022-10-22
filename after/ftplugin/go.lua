@@ -6,4 +6,6 @@ vim.bo.expandtab = false
 
 vim.cmd.compiler("go")
 vim.opt_local.conceallevel = 2
-vim.opt_local.foldlevel = 3
+if not vim.opt_local.diff:get() then
+  vim.opt_local.foldlevel = 3
+end
