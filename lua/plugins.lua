@@ -173,7 +173,6 @@ packer.startup({
         "arshlib.nvim",
         "nvim-web-devicons",
         "sqls.nvim",
-        "fidget.nvim",
         {
           "feline-nvim/feline.nvim",
           after = "nvim-web-devicons",
@@ -370,12 +369,6 @@ packer.startup({
         "nvim-lspconfig",
       },
       cond  = { full_start, lsp_enabled },
-    })
-
-    use({
-      "j-hui/fidget.nvim",
-      config = function() require("settings.fidget-nvim") end,
-      event  = { "LspAttach" },
     })
 
     use({

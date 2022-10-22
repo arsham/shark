@@ -125,7 +125,6 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [mason.nvim](https://github.com/williamboman/mason.nvim)                                   | Package manager for LSP, DAP, formatters and linters |
 | LSP         | [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)               | LSP config bridge for mason.nvim                     |
 | LSP         | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)  | Install and upgrade mason servers                    |
-| LSP         | [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim)                                  | Spinner for LSP status                               |
 | LSP         | [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)      | External Tool to LSP bridge                          |
 | LSP         | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                    | Completion with LSP                                  |
 | LSP         | [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)                                | Extension for nvim-cmp                               |
