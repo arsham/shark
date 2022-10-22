@@ -198,4 +198,8 @@ vim.keymap.set("n", "<leader>sb", function()
   vim.opt_local.scrollbind = not vim.opt_local.scrollbind:get()
 end, opts("toggle scroll bind on current buffer"))
 
+vim.keymap.set("s", "p", function ()
+  vim.api.nvim_feedkeys("p", "n", false)
+end, {silent = true, remap = false, desc = "don't paste in select mode"})
+
 -- vim: fdm=marker fdl=0
