@@ -108,12 +108,8 @@ vim.keymap.set("n", "<leader>tc", ":windo close<CR>", opts("close all buffers of
 
 -- Execute macros over selected range. {{{
 vim.keymap.set("x", "@", function()
-  local c = vim.fn.getchar()
-  local ch = vim.fn.nr2char(c)
-  local from = vim.fn.getpos("v")[2]
-  local to = vim.fn.getcurpos()[2]
-  vim.cmd(string.format("%d,%d normal! @%s", from, to, ch))
-end, { silent = true, desc = "execute macro over visual range" })
+  return ":norm @" .. vim.fn.getcharstr() .. "<cr>"
+end, { silent = true, expr = true, desc = "execute macro over visual range" })
 -- }}}
 
 -- Easier cgn process by starting with already selected text.
