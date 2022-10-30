@@ -9,7 +9,6 @@ require("fzfmania").config({
   frontend = "fzf-lua",
 })
 
-command("Notes", "call fzf#vim#files('~/Dropbox/Notes', <bang>0)", { bang = true })
 command("Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", { bang = true })
 
 vim.keymap.set("n", "<leader>fl", function()
@@ -24,5 +23,7 @@ vim.keymap.set("n", "<leader>fl", function()
     end
   end)
 end, { silent = true, desc = "run locate" })
+
+vim.cmd.FzfLua("register_ui_select")
 
 -- vim: foldmethod=marker foldlevel=0
