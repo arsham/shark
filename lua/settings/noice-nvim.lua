@@ -12,18 +12,39 @@ local top_right = vim.tbl_deep_extend("force", require("noice.config.views").def
 })
 
 local routes = {
+  -- Skippers {{{
+  {
+    opts = { skip = true },
+    filter = {
+      any = {
+        { event = "msg_show", find = "written" },
+        { event = "msg_show", find = "%d+ lines indented ?$" },
+        { event = "msg_show", find = "%d+ lines to indent... ?$" },
+        { event = "msg_show", find = "No active Snippet" },
+      },
+    },
+  },
+  -- }}}
   -- Core {{{
   {
     view = "split",
-    filter = { min_width = 500 },
-  },
-  { -- always route any messages with more than 20 lines to the split view
-    view = "split",
-    filter = { event = "msg_show", min_height = 20 },
+    filter = {
+      any = {
+        { min_width = 500 },
+        -- always route any messages with more than 20 lines to the split view
+        { event = "msg_show", min_height = 20 },
+      },
+    },
   },
   {
     view = "mini",
-    filter = { event = "msg_show", kind = "return_prompt" },
+    filter = {
+      any = {
+        { event = "msg_show", kind = "return_prompt" },
+        { event = "msg_show", kind = "echo" },
+        { event = "msg_show", kind = "echomsg" },
+      },
+    },
   },
   -- }}}
   -- Errors {{{
@@ -33,84 +54,60 @@ local routes = {
   },
   {
     view = "notify",
-    filter = { event = "msg_show", kind = "emsg" },
-  },
-  {
-    view = "notify",
-    filter = { event = "msg_show", kind = "echoerr" },
-  },
-  {
-    view = "notify",
-    filter = { event = "msg_show", kind = "lua_error" },
-  },
-  {
-    view = "notify",
-    filter = { event = "msg_show", kind = "rpc_error" },
-  },
-  {
-    view = "notify",
-    filter = { event = "msg_show", kind = "wmsg" },
+    filter = {
+      any = {
+        { event = "msg_show", kind = "emsg" },
+        { event = "msg_show", kind = "echoerr" },
+        { event = "msg_show", kind = "lua_error" },
+        { event = "msg_show", kind = "rpc_error" },
+        { event = "msg_show", kind = "wmsg" },
+      },
+    },
   },
   -- }}}
   -- Misc {{{
   {
     view = "mini",
-    filter = { event = "msg_show", kind = "quickfix" },
+    filter = {
+      any = {
+        { event = "msg_show", kind = "quickfix" },
+        { event = "msg_show", find = "[tree-sitter]" },
+        { event = "notify", find = "[mason-lspconfig]" },
+      },
+    },
   },
-  { -- shows macro recording
+  -- shows macro recording
+  { view = "top_right", filter = { event = "msg_showmode", find = "recording @%w$" } },
+  -- }}}
+
+  -- Hijacking notifications {{{
+  {
     view = "top_right",
-    filter = { event = "msg_showmode", find = "recording @%w$" },
+    filter = {
+      any = {
+        { event = "msg_show", find = "%d+ fewer lines" },
+        { event = "msg_show", find = "%d+ more lines" },
+        { event = "msg_show", find = "%d+ changes; before" },
+        { event = "msg_show", find = "%d+ changes; after" },
+        { event = "msg_show", find = "%d+ more lines; before" },
+        { event = "msg_show", find = "%d+ more lines; after" },
+        { event = "msg_show", find = "%d+ changes; before #%d+  %d+ seconds ago" },
+        { event = "msg_show", find = "%d+ lines >ed %d+ time" },
+        { event = "msg_show", find = "%d+ lines <ed %d+ time" },
+        { event = "msg_show", find = "search hit BOTTOM, continuing at TOP" },
+        { event = "msg_show", find = "%d+ lines yanked" },
+        -- "%[master .+%] check[\r%s]+%d+ files? changed, %d+ insertions?",
+      },
+    },
   },
   -- }}}
-}
-
--- Skippers {{{
-local skippers = {
-  msg_show = {
-    "written", -- hide "written" message
-    "%d+ lines indented ?$",
-    "%d+ lines to indent... ?$",
-    "No active Snippet",
+  {
+    view = "confirm", -- any view you want
+    filter = {
+      find = "OK to remove",
+    },
   },
 }
-for event, msgs in pairs(skippers) do
-  for _, msg in ipairs(msgs) do
-    table.insert(routes, {
-      filter = { event = event, find = msg },
-      opts = { skip = true },
-    })
-  end
-end
--- }}}
-
--- Hijacking notifications {{{
-local highjackers = {
-  notify = {
-    "Reloaded .+.lua ?$",
-    "Format request failed, no matching language servers",
-  },
-  msg_show = {
-    "%d+ fewer lines",
-    "%d+ more lines",
-    "%d+ changes; before",
-    "%d+ changes; after",
-    "%d+ more lines; before",
-    "%d+ more lines; after",
-    "%d+ changes; before #%d+  %d+ seconds ago",
-    "%d+ lines >ed %d+ time",
-    "%d+ lines <ed %d+ time",
-    "search hit BOTTOM, continuing at TOP",
-  },
-}
-for event, msgs in pairs(highjackers) do
-  for _, msg in ipairs(msgs) do
-    table.insert(routes, {
-      view = "top_right",
-      filter = { event = event, find = msg },
-    })
-  end
-end
--- }}}
 
 noice.setup({
   cmdline = { -- {{{
