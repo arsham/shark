@@ -177,6 +177,7 @@ noice.setup({
   -- }}}
 
   routes = routes,
+  presets = { inc_rename = true },
 })
 
 -- vim: fdm=marker fdl=0
