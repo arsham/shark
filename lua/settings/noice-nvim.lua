@@ -147,12 +147,24 @@ noice.setup({
     view = "notify",
   },
   -- }}}
-  lsp_progress = { -- {{{
-    enabled = true,
-    format = "lsp_progress",
-    format_done = "lsp_progress_done",
-    throttle = 1000 / 30,
-    view = "mini",
+  lsp = { -- {{{
+    progress = {
+      enabled = true,
+      format = "lsp_progress",
+      format_done = "lsp_progress_done",
+      throttle = 1000 / 30,
+      view = "mini",
+    },
+    signature = {
+      enabled = false,
+      auto_open = false,
+    },
+    hover = {
+      enabled = false,
+    },
+    message = {
+      enabled = true,
+    },
   },
   -- }}}
   throttle = 1000 / 30,
