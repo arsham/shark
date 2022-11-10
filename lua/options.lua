@@ -54,7 +54,7 @@ vim.opt.showmode = true
 -- A -> Don't give the "ATTENTION" message when an existing swap file is found.
 -- I -> Don't give the intro message when starting Vim |:intro|.
 -- c -> Avoid showing message extra message when using completion
-vim.opt.shortmess:append("filmnrxoOtTAIc")
+vim.opt.shortmess:append("filmnrxoOtTAIcCs")
 --}}}
 
 vim.opt.hidden = true
