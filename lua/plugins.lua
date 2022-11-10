@@ -213,18 +213,18 @@ packer.startup({
     use({
       "rcarriga/nvim-notify",
       config = function() require("settings.nvim-notify") end,
-      event  = { "UIEnter" },
+      event  = { "User LoadTicker2" },
     })
 
     use({
       "MunifTanjim/nui.nvim",
-      event = { "UIEnter" },
+      event  = { "User LoadTicker2" },
     })
 
     use({
       "stevearc/dressing.nvim",
       config = function() require("settings.dressing") end,
-      event  = { "UIEnter" },
+      event  = { "User LoadTicker2" },
       cond   = full_start,
     })
 
@@ -359,7 +359,7 @@ packer.startup({
           "fzf-lua",
           "null-ls.nvim",
         },
-        event  = { "User LoadTicker2" },
+        event  = { "User LoadTicker2", "BufReadPost", "BufNewFile" },
         cond   = { full_start, lsp_enabled },
       },
       after = {
@@ -473,7 +473,7 @@ packer.startup({
       setup = function()
         vim.g.polyglot_disabled = { "ftdetect" }
       end,
-      event = { "User LoadTicker4" },
+      event = { "BufReadPost", "BufNewFile" },
       cond  = full_start,
     })
 
@@ -565,15 +565,15 @@ packer.startup({
       "arsham/indent-tools.nvim",
       requires = { "arshlib.nvim" },
       config   = function() require("indent-tools").config({}) end,
-      event    = { "User LoadTicker4" },
+      event    = { "User LoadTicker3" },
       cond     = full_start,
     })
 
     use({
       "arsham/archer.nvim",
-      requires = { "arsham/arshlib.nvim", "tpope/vim-repeat" },
+      requires = { "arsham/arshlib.nvim" },
       config   = function() require("archer").config({}) end,
-      event    = { "User LoadTicker4" },
+      event    = { "User LoadTicker1" },
     })
 
     use({
