@@ -1,6 +1,9 @@
 local noice = require("noice")
+local mini = require("noice.config.views").defaults.mini
+mini.timeout = 5000
 
-local top_right = vim.tbl_deep_extend("force", require("noice.config.views").defaults.mini, {
+-- Top Right Setup {{{
+local top_right = vim.tbl_deep_extend("force", mini, {
   timeout = 6000,
   position = {
     row = 0,
@@ -9,7 +12,7 @@ local top_right = vim.tbl_deep_extend("force", require("noice.config.views").def
   win_options = {
     winblend = 30,
   },
-})
+}) -- }}}
 
 local routes = {
   -- Skippers {{{
