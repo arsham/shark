@@ -66,6 +66,9 @@ vim.opt.viewdir = vim.fs.normalize("~/.cache/nvim/views")
 -- than mangled in the previous blob.
 vim.opt.diffopt:append("indent-heuristic")
 vim.opt.diffopt:append("algorithm:patience")
+vim.opt.diffopt:append("context:3")
+vim.opt.diffopt:append("foldcolumn:1")
+vim.opt.diffopt:append("linematch:60")
 vim.opt.suffixesadd = {
   ".go",
   ".py",
@@ -136,7 +139,7 @@ vim.opt.sidescrolloff = 15
 vim.opt.sidescroll = 1
 
 vim.opt.ignorecase = true
-vim.opt.inccommand = "nosplit" -- allow for live substitution
+vim.opt.inccommand = "nosplit" -- live substitution preview in another buffer
 vim.opt.smartcase = true
 -- Searches current directory recursively.
 vim.opt.path = ".,**,~/.config/nvim/**"
