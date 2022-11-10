@@ -24,11 +24,16 @@ local routes = {
         { event = "msg_show", find = "%d+ lines indented ?$" },
         { event = "msg_show", find = "%d+ lines to indent... ?$" },
         { event = "msg_show", find = "No active Snippet" },
+        { event = "msg_show", kind = "redraw" },
+        { event = "msg_show", kind = "search_count" },
+        { event = "msg_show", find = "^/[^/]+$" }, -- search display
+        { event = "msg_show", find = "/[^/]+/[^ ]+ %d+L, %d+B" },
+        { event = "msg_show", kind = "emsg", find = "Pattern not found" }, -- when search term is not found.
       },
     },
   },
   -- }}}
-  -- Core {{{
+  -- Split {{{
   {
     view = "split",
     filter = {
@@ -36,25 +41,15 @@ local routes = {
         { min_width = 500 },
         -- always route any messages with more than 20 lines to the split view
         { event = "msg_show", min_height = 20 },
-      },
-    },
-  },
-  {
-    view = "mini",
-    filter = {
-      any = {
-        { event = "msg_show", kind = "return_prompt" },
-        { event = "msg_show", kind = "echo" },
-        { event = "msg_show", kind = "echomsg" },
+        { event = "msg_show", find = "Last set from .+ line %d+" },
+        { event = "msg_show", find = "No mapping found" },
+        { event = "msg_show", find = "Last set from Lua" }, -- result of verbose <cmd>
+        { event = "msg_show", find = "^/.+/" }, -- filepath
       },
     },
   },
   -- }}}
-  -- Errors {{{
-  { -- when search term is not found.
-    filter = { event = "msg_show", kind = "emsg", find = "Pattern not found" },
-    opts = { skip = true },
-  },
+  -- Notify {{{
   {
     view = "notify",
     filter = {
@@ -68,48 +63,62 @@ local routes = {
     },
   },
   -- }}}
-  -- Misc {{{
+  -- Mini {{{
   {
     view = "mini",
     filter = {
       any = {
         { event = "msg_show", kind = "quickfix" },
-        { event = "msg_show", find = "[tree-sitter]" },
-        { event = "notify", find = "[mason-lspconfig]" },
+        { event = "msg_show", kind = "info", find = "%[tree%-sitter%]" },
+        { event = "msg_show", kind = "info", find = "%[nvim%-treesitter%]" },
+        { event = "notify", kind = "info", find = "%[mason%-lspconfig.*%]" },
+        { event = "msg_show", kind = "return_prompt" },
+        { event = "notify", kind = "info", find = "packer.nvim" },
+        { event = "notify", kind = "info", find = "%[mason%-tool%-installer%]" },
+        { event = "notify", kind = "info", find = "was successfully installed" },
+        { event = "notify", kind = "info", find = "was successfully uninstalled" },
+        { event = "msg_show", find = "Unception prevented inception!" },
+        { event = "msg_show", kind = "echo", find = "^%[VM%] *$" },
+        { event = "msg_show", kind = "echo", max_length = 1 },
       },
     },
   },
-  -- shows macro recording
-  { view = "top_right", filter = { event = "msg_showmode", find = "recording @%w$" } },
   -- }}}
-
-  -- Hijacking notifications {{{
+  -- Hijacking notifications to top right {{{
   {
     view = "top_right",
     filter = {
       any = {
         { event = "msg_show", find = "%d+ fewer lines" },
         { event = "msg_show", find = "%d+ more lines" },
-        { event = "msg_show", find = "%d+ changes; before" },
-        { event = "msg_show", find = "%d+ changes; after" },
-        { event = "msg_show", find = "%d+ more lines; before" },
-        { event = "msg_show", find = "%d+ more lines; after" },
+        { event = "msg_show", find = "%d+ changes?; before" },
+        { event = "msg_show", find = "%d+ changes?; after" },
+        { event = "msg_show", find = "%d+ more lines?; before" },
+        { event = "msg_show", find = "%d+ more lines?; after" },
+        { event = "msg_show", find = "%d+ lines? less; before" },
         { event = "msg_show", find = "%d+ changes; before #%d+  %d+ seconds ago" },
+        { event = "msg_show", find = "Already at newest change" },
         { event = "msg_show", find = "%d+ lines >ed %d+ time" },
         { event = "msg_show", find = "%d+ lines <ed %d+ time" },
         { event = "msg_show", find = "search hit BOTTOM, continuing at TOP" },
         { event = "msg_show", find = "%d+ lines yanked" },
+        { event = "msg_show", find = "fetching" },
+        { event = "msg_show", find = "successfully fetched all PR state" },
+        { event = "msg_show", find = "Hunk %d+ of %d+" },
+        { event = "msg_showmode", find = "recording @%w$" }, -- shows macro recording
         -- "%[master .+%] check[\r%s]+%d+ files? changed, %d+ insertions?",
       },
     },
   },
   -- }}}
+  -- Confirm {{{
   {
-    view = "confirm", -- any view you want
+    view = "confirm",
     filter = {
       find = "OK to remove",
     },
   },
+  -- }}}
 }
 
 noice.setup({
@@ -138,13 +147,46 @@ noice.setup({
     backend = "nui",
   },
   -- }}}
-  history = { -- {{{
-    view = "split",
-    opts = { enter = true, format = "details" },
-    -- if you want to filter items in the history.
-    -- filter = { event = "msg_show", ["not"] = { kind = { "search_count", "echo" } } },
-  },
-  -- }}}
+  commands = { -- {{{
+    history = {
+      view = "split",
+      opts = { enter = true, format = "details" },
+      filter = {
+        any = {
+          { error = true },
+          { warning = true },
+          { event = "msg_show", kind = { "" } },
+          { event = "lsp", kind = "message" },
+          {
+            event = { "msg_show", "notify" },
+            ["not"] = {
+              kind = { "search_count", "echo" },
+            },
+          },
+        },
+      },
+    },
+    -- :Noice last
+    last = {
+      view = "popup",
+      opts = { enter = true, format = "details" },
+      filter = {
+        event = { "msg_show", "notify" },
+        ["not"] = {
+          kind = { "search_count", "echo" },
+        },
+      },
+      filter_opts = { count = 1 },
+    },
+    -- :Noice errors
+    errors = {
+      -- options for the message history that you get with `:Noice`
+      view = "popup",
+      opts = { enter = true, format = "details" },
+      filter = { error = true },
+      filter_opts = { reverse = true },
+    },
+  }, -- }}}
   notify = { -- {{{
     enabled = true,
     view = "notify",
@@ -164,9 +206,6 @@ noice.setup({
     },
     hover = {
       enabled = false,
-    },
-    message = {
-      enabled = true,
     },
   },
   -- }}}
