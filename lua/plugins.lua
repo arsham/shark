@@ -219,6 +219,9 @@ packer.startup({
     use({
       "MunifTanjim/nui.nvim",
       event  = { "User LoadTicker2" },
+      patches = {
+        "nui.nvim-removed_window",
+      },
     })
 
     use({
