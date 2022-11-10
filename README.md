@@ -33,6 +33,7 @@ This project supports Neovim version `0.8.0` and newer.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
+   - [Plugin Patching](#plugin-patching)
    - [Plugins](#plugins)
    - [Core Mappings](#core-mappings)
    - [Text Objects](#text-objects)
@@ -95,6 +96,33 @@ are left out either because they are not used too often, or they are defined
 after writing this document and I've forgot to document.
 
 I would recommend you have a look at the code to see what is available to you.
+
+### Plugin Patching
+
+You can apply patches for plugins by providing a patch file in
+`scripts/patches` folder and providing the patch name to the plugin. For
+example to patch the `archer.nvim` plugin:
+
+```lua
+use({
+	"arsham/archer.nvim",
+	requires = { "arsham/arshlib.nvim" },
+	config = function()
+		require("archer").config({})
+	end,
+	patches = {
+		"make_it_better",
+		"even_better",
+	},
+})
+```
+
+You need to have the files in patch format:
+
+```bash
+scripts/patches/make_it_better.patch
+scripts/patches/even_better.patch
+```
 
 ### Plugins
 

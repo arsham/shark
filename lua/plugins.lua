@@ -699,4 +699,49 @@ packer.startup({
 })
 -- stylua: ignore end
 
+-- Run a job that requires changing to the directory in the window, keeping the
+-- main working directory intact.
+local function run_job(plugin, command, args, msg) -- {{{
+  local cwd = vim.fn.getcwd()
+  vim.cmd("silent! lcd " .. plugin.install_path)
+  table.insert(args, 1, command)
+  local res = vim.fn.system(args)
+  if vim.v.shell_error ~= 0 then
+    local s = ("Unable to %s to %s (at %s):\n%s"):format(msg, plugin.name, plugin.install_path, res)
+    ---@diagnostic disable-next-line: redundant-parameter
+    vim.notify(s, vim.lsp.log_levels.ERROR)
+  end
+  vim.cmd("silent! lcd " .. cwd)
+end -- }}}
+
+local handlers = {
+  -- Cleaning up the repository, preparing it for a patch.
+  unpatch = function(_, plugin)
+    -- Do not remove the following condition or your uncommited changes will be
+    -- gone!
+    if plugin.patches or plugin.cleanup then
+      run_job(plugin, "git", { "restore", "." }, "reseting git")
+      run_job(plugin, "git", { "clean", "-d", "-f" }, "cleaning repo")
+    end
+  end,
+
+  patches = function(_, plugin, value) -- {{{
+    vim.validate({
+      value = { value, "table", plugin.short_name .. " must be a table" },
+    })
+
+    for _, name in ipairs(plugin.patches) do
+      local patch = ("%s/scripts/patches/%s.patch"):format(vim.fn.stdpath("config"), name)
+      if vim.loop.fs_stat(patch) then
+        ---@diagnostic disable-next-line: redundant-parameter
+        vim.notify("Patching " .. patch)
+        run_job(plugin, "patch", { "-s", "-N", "-p1", "-i", patch }, "apply patch")
+      end
+    end
+  end, -- }}}
+}
+
+packer.set_handler(1, handlers.unpatch)
+packer.set_handler("patches", handlers.patches)
+
 -- vim: fdm=marker fdl=2
