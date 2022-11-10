@@ -138,6 +138,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Function    | Plugin                                                                                     | Description                                          |
 | :---------- | :----------------------------------------------------------------------------------------- | :--------------------------------------------------- |
 | Core        | [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                        | Package manager                                      |
+| Core        | [samjwill/nvim-unception](https://github.com/samjwill/nvim-unception)                      | Neovim in Neovim = 1 Neovim                          |
 | Finder      | [junegunn/fzf](https://github.com/junegunn/fzf)                                            | Fuzzy finder                                         |
 | Finder      | [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                    | fzf plugin for vim                                   |
 | Core        | [arsham/arshlib.nvim](https://github.com/arsham/arshlib.nvim)                              | Supporting library                                   |

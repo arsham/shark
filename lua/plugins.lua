@@ -105,6 +105,9 @@ packer.startup({
       event  = { "UIEnter" },
     })
 
+    use({
+      "samjwill/nvim-unception",
+    })
     -- }}}
 
     -- Navigation {{{
