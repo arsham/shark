@@ -333,35 +333,35 @@ function M.setup_events(client, imports, format) --{{{
       desc = "format and imports",
     })
   end
-
-  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-    group = lsp_events_group,
-    pattern = { "*/templates/*.yaml", "*/templates/*.tpl" },
-    command = "silent LspStop",
-  })
-
-  vim.api.nvim_create_autocmd("InsertEnter", {
-    group = lsp_events_group,
-    pattern = "go.mod",
-    callback = function()
-      vim.opt_local.formatoptions:remove({ "t" })
-    end,
-    once = true,
-    desc = "don't wrap me",
-  })
-
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = lsp_events_group,
-    pattern = "go.mod",
-    callback = function(args)
-      local filename = vim.fn.expand("%:p")
-      lsp.go_mod_tidy(tonumber(args.buf), filename)
-    end,
-    desc = "run go mod tidy on save",
-  })
-
 end --}}}
 -- stylua: ignore end
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  group = lsp_events_group,
+  pattern = { "*/templates/*.yaml", "*/templates/*.tpl" },
+  command = "silent LspStop",
+  desc = "disable lsp on helm charts",
+})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = lsp_events_group,
+  pattern = "go.mod",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "t" })
+  end,
+  once = true,
+  desc = "don't wrap me",
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = lsp_events_group,
+  pattern = "go.mod",
+  callback = function(args)
+    local filename = vim.fn.expand("%:p")
+    lsp.go_mod_tidy(tonumber(args.buf), filename)
+  end,
+  desc = "run go mod tidy on save",
+})
 
 function M.fix_null_ls_errors() --{{{
   local default_exe_handler = vim.lsp.handlers["workspace/executeCommand"]
