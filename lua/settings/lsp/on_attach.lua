@@ -12,9 +12,25 @@ local function on_attach(client, bufnr) --{{{
   if not vim.g._lsp_loaded_successfully then
     vim.g._lsp_loaded_successfully = true
     vim.api.nvim_exec_autocmds("BufRead", {})
+    return
   end
 
   vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+  local buf_name = vim.api.nvim_buf_get_name(bufnr)
+  if
+    buf_name:match("^%a+://")
+    or buf_name:match(".+_LOCAL_.+")
+    or buf_name:match(".+_REMOTE_.+")
+    or buf_name:match(".+_BASE_.+")
+    or buf_name:match("^/tmp/.+")
+  then
+    local old_notify = vim.notify
+    vim.notify = function () end
+    vim.lsp.buf_detach_client(bufnr, client.id)
+    vim.diagnostic.disable(bufnr)
+    vim.notify = old_notify
+    return true
+  end
 
   -- TODO: find out how to disable the statuline badges as well.
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
