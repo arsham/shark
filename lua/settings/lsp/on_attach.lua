@@ -15,7 +15,6 @@ local function on_attach(client, bufnr) --{{{
     return
   end
 
-  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
   local buf_name = vim.api.nvim_buf_get_name(bufnr)
   if
     buf_name:match("^%a+://")
@@ -105,6 +104,12 @@ local function on_attach(client, bufnr) --{{{
     if caps.typeDefinitionProvider          then lsp_util.type_definition()             end
     if caps.documentSymbolProvider          then lsp_util.document_symbol()             end
     if caps.callHierarchyProvider           then lsp_util.call_hierarchy()              end
+    if caps.completionProvider then
+      vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+    end
+    if caps.definitionProvider then
+      vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
+    end
 
     lsp_util.setup_diagnostics()
     lsp_util.setup_completions()
@@ -114,6 +119,16 @@ local function on_attach(client, bufnr) --{{{
   end) --}}}
 end --}}}
 -- stylua: ignore end
+
+local lsp_detach_group = vim.api.nvim_create_augroup("LSP_DETACH_GROUP", { clear = true })
+vim.api.nvim_create_autocmd("LspDetach", {
+  group = lsp_detach_group,
+  callback = function(args)
+    local bufnr = args.buf
+    vim.bo[bufnr].tagfunc = nil
+    vim.bo[bufnr].omnifunc = nil
+  end,
+})
 
 return {
   on_attach = on_attach,
