@@ -1,4 +1,4 @@
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("error")
 
 require("arshlib.tables")
 local quick = require("arshlib.quick")
@@ -114,11 +114,6 @@ local servers = {
           },
         },
       }
-      opts.on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-        on_attach(client, bufnr)
-      end
       return opts
     end,
   }, --}}}
@@ -131,14 +126,6 @@ local servers = {
         },
       },
     },
-    update = function(on_attach, opts)
-      opts.on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-        on_attach(client, bufnr)
-      end
-      return opts
-    end,
   }, --}}}
 
   yamlls = { --{{{
@@ -179,7 +166,6 @@ local servers = {
       -- registration.
       opts.on_attach = function(client, bufnr)
         -- sqls has a bad formatting.
-        client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.executeCommandProvider = true
         client.server_capabilities.codeActionProvider = { resolveProvider = false }
         local sqls = require("sqls")
@@ -201,17 +187,7 @@ local servers = {
     end,
   }, --}}}
 
-  html = { --{{{
-    update = function(on_attach, opts)
-      opts.on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-        on_attach(client, bufnr)
-      end
-      return opts
-    end,
-  }, --}}}
-
+  html = {},
   bashls = {},
   dockerls = {},
   jedi_language_server = {},

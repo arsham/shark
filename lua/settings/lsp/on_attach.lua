@@ -47,8 +47,30 @@ local function on_attach(client, bufnr) --{{{
     end
 
     if caps.documentFormattingProvider then
+      local disabled_servers = {
+        "sumneko_lua",
+        "jsonls",
+        "sqls",
+        "html",
+      }
       lsp_util.document_formatting()
-      format_hook = function() vim.lsp.buf.format({ async = false }) end
+      format_hook = function()
+        vim.lsp.buf.format({
+          async = false,
+          filter = function(server)
+            return not vim.tbl_contains(disabled_servers, server.name)
+          end,
+        })
+      end
+    end
+    if caps.documentRangeFormattingProvider then
+      local disabled_servers = {
+        "sumneko_lua",
+        "jsonls",
+        "html",
+        "clangd",
+      }
+      lsp_util.document_range_formatting(disabled_servers)
     end
 
     local workspace_folder_supported = caps.workspace
@@ -66,7 +88,6 @@ local function on_attach(client, bufnr) --{{{
     if caps.implementationProvider          then lsp_util.implementation()              end
     if caps.typeDefinitionProvider          then lsp_util.type_definition()             end
     if caps.documentSymbolProvider          then lsp_util.document_symbol()             end
-    if caps.documentRangeFormattingProvider then lsp_util.document_range_formatting()   end
     if caps.callHierarchyProvider           then lsp_util.call_hierarchy()              end
 
     lsp_util.setup_diagnostics()
