@@ -448,6 +448,13 @@ function M.setup_diagnostics(bufnr) --{{{
   })
 end --}}}
 
+function M.setup_semantic_tokens(bufnr) -- {{{
+  vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+    buffer = bufnr,
+    callback = vim.lsp.buf.semantic_tokens_full,
+  })
+end -- }}}
+
 return M
 
 -- vim: fdm=marker fdl=0
