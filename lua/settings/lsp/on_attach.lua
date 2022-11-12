@@ -111,7 +111,7 @@ local function on_attach(client, bufnr) --{{{
       vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
 
-    lsp_util.setup_diagnostics()
+    lsp_util.setup_diagnostics(bufnr)
     lsp_util.setup_completions()
     lsp_util.support_commands()
     lsp_util.setup_events(client.name, imports_hook, format_hook)

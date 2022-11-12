@@ -406,7 +406,18 @@ function M.support_commands() --{{{
   nnoremap("<localleader>dr", restart_lsp, "Restart LSP server")
 end --}}}
 
-function M.setup_diagnostics() --{{{
+local diagnostic_ns = vim.api.nvim_create_namespace("diagnostics")
+local function show_diagnostics()
+  vim.schedule(function()
+    local line = vim.api.nvim_win_get_cursor(0)[1] - 1
+    local bufnr = vim.api.nvim_get_current_buf()
+    local dg = vim.diagnostic.get(bufnr, { lnum = line })
+    vim.diagnostic.show(diagnostic_ns, bufnr, dg, { virtual_text = true })
+  end)
+end
+
+local diagnostics_group = vim.api.nvim_create_augroup("LSP_DIAGNOSTICS_GROUP", { clear = true })
+function M.setup_diagnostics(bufnr) --{{{
   nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
   nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
   nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
@@ -424,6 +435,17 @@ function M.setup_diagnostics() --{{{
   quick.buffer_command("DiagnosticsAll", function()
     diagnostics.all({})
   end)
+
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = diagnostics_group,
+    buffer = bufnr,
+    callback = show_diagnostics,
+  })
+  vim.api.nvim_create_autocmd("DiagnosticChanged", {
+    group = diagnostics_group,
+    buffer = bufnr,
+    callback = show_diagnostics,
+  })
 end --}}}
 
 return M
