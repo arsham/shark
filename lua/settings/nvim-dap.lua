@@ -4,26 +4,14 @@ local dapui = require("dapui")
 local widgets = require("dap.ui.widgets")
 
 local function opt(msg)
-  return { desc = "DAP: " .. msg }
+  return { desc = "DAP: " .. msg, silent = true }
 end
 
--- stylua: ignore start
-vim.keymap.set("n", "<leader>db",  function() dap.toggle_breakpoint() end, opt("breakpoint"))
-vim.keymap.set("n", "<F2>",        function() dap.continue()          end, opt("continue"))
-vim.keymap.set("n", "<F3>",        function() dap.step_into()         end, opt("step into"))
-vim.keymap.set("n", "<F4>",        function() dap.step_over()         end, opt("step over"))
-vim.keymap.set("n", "<F5>",        function() dap.step_out()          end, opt("step out"))
-vim.keymap.set("n", "<leader>dui", function() dapui.toggle()          end, opt("toggle ui"))
-vim.keymap.set("n", "<leader>duh", function() widgets.hover()         end, opt("hover"))
-vim.keymap.set("n", "<leader>duf", function() widgets.centered_float(widgets.scopes) end, opt("float view"))
--- stylua: ignore end
-
-vim.keymap.set("n", "<leader>dB", function()
-  dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-end, opt("contitional breakpoint"))
-vim.keymap.set("n", "<leader>dl", function()
-  dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-end, opt("log point message"))
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, opt("breakpoint"))
+vim.keymap.set("n", "<F2>", dap.continue, opt("continue"))
+vim.keymap.set("n", "<F3>", dap.step_into, opt("step into"))
+vim.keymap.set("n", "<F4>", dap.step_over, opt("step over"))
+vim.keymap.set("n", "<F5>", dap.step_out, opt("step out"))
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
@@ -58,5 +46,34 @@ dap.configurations.lua = {
 }
 
 require("nvim-dap-virtual-text").setup()
+
+dap.listeners.after["event_initialized"]["my_mappings"] = function()
+  vim.opt.mouse = "nvi"
+  local function o(bufnr, msg)
+    return { desc = "DAP: " .. msg, silent = true, buffer = bufnr }
+  end
+  for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
+    vim.keymap.set("n", "<localleader>dc", dap.continue, opt("continue"))
+    vim.keymap.set("n", "<localleader>di", dap.step_into, o(bufnr, "step into"))
+    vim.keymap.set("n", "<localleader>do", dap.step_over, o(bufnr, "step over"))
+    vim.keymap.set("n", "<localleader>dO", dap.step_out, o(bufnr, "step out"))
+    vim.keymap.set("n", "<localleader>dT", dap.terminate, o(bufnr, "terminate"))
+    vim.keymap.set("n", "<localleader>du", dapui.toggle, o(bufnr, "toggle ui"))
+    vim.keymap.set("n", "<localleader>dh", widgets.hover, o(bufnr, "hover"))
+    vim.keymap.set("n", "<localleader>df", function()
+      widgets.centered_float(widgets.scopes)
+    end, o(bufnr, "float view"))
+    vim.keymap.set("n", "<localleader>dB", function()
+      dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end, o(bufnr, "contitional breakpoint"))
+    vim.keymap.set("n", "<localleader>dl", function()
+      dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+    end, o(bufnr, "log point message"))
+  end
+end
+
+dap.listeners.after["event_terminated"]["my_mappings"] = function()
+  vim.opt.mouse = nil
+end
 
 -- vim: fdm=marker

@@ -242,7 +242,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **b**           | **B**uffer                                                 |
 | **q**           | **Q**uickfix list mappings                                 |
 | **w**           | **L**ocal list mappings (because it's beside **q**)        |
-| **d**           | LSP **D**iagnostics                                        |
+| **d**           | LSP **D**iagnostics or **D**AP bindings                    |
 | **g**           | **G**o to, Jump to, run something that goes to or jumps to |
 | **m**           | **M**atch highlighting, **m**arks                          |
 | **f**           | **F**ile, **F**ind                                         |
@@ -321,6 +321,15 @@ The `leader` key is `space`!
 | `<leader>zi`       | Set folding method to **I**ndent                                     |
 | `<leader>zm`       | Set folding method to Mar**k**er                                     |
 | `<leader>zs`       | Set folding method to **S**yntax                                     |
+| `<leader>db`       | Set **d**ebugger **b**reakpoint                                      |
+| `<localleader>dB`  | **D**ebugger **b**reakpoint condition                                |
+| `<localleader>dc`  | **D**ebugger **c**ontinue                                            |
+| `<localleader>di`  | **D**ebugger step **i**nto                                           |
+| `<localleader>do`  | **D**ebugger step **o**ver                                           |
+| `<localleader>dO`  | **D**ebugger step **o**ut                                            |
+| `<localleader>dT`  | **D**ebugger **t**ermination                                         |
+| `<localleader>du`  | Toggle **d**ebugger **U**I                                           |
+| `<localleader>dh`  | **D**ebugger **h**over                                               |
 
 </details>
 
