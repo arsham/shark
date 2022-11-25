@@ -212,8 +212,61 @@ local servers = {
   }, --}}}
 
   rust_analyzer = { --{{{
+    opts = {
+      settings = {
+        ["rust-analyzer"] = {
+          imports = {
+            ["granularity.group"] = "module",
+            prefix = "self",
+          },
+          cargo = {
+            ["buildScripts.enable"] = true,
+            extraEnv = { RUSTC_BOOTSTRAP = "1" },
+            features = "all",
+          },
+          procMacro = {
+            enable = true,
+          },
+          files = {
+            excludeDirs = { "target" },
+          },
+          ["lru.capacity"] = 1024,
+          workspace = {
+            symbol = {
+              ["search.limit"] = 2048,
+            },
+          },
+          checkOnSave = {
+            command = "clippy",
+            allFeatures = true,
+            features = "all",
+            overrideCommand = {
+              "cargo",
+              "clippy",
+              "--workspace",
+              "--message-format=json",
+              "--all-targets",
+              "--all-features",
+            },
+          },
+        },
+      },
+    },
     update = function(on_attach, opts)
       opts.on_attach = function(client, bufnr)
+        -- enable auto-import
+        client.server_capabilities["textDocument.completion.completionItem.resolveSupport"] = {
+          properties = { "documentation", "detail", "additionalTextEdits" },
+        }
+        client.server_capabilities.experimental.commands = {
+          commands = {
+            "rust-analyzer.runSingle",
+            "rust-analyzer.debugSingle",
+            "rust-analyzer.showReferences",
+            "rust-analyzer.gotoLocation",
+            "editor.action.triggerParameterHints",
+          },
+        }
         on_attach(client, bufnr)
       end
       return opts

@@ -435,6 +435,12 @@ function M.setup_diagnostics(bufnr) --{{{
   quick.buffer_command("DiagnosticsAll", function()
     diagnostics.all({})
   end)
+  quick.buffer_command("DiagnosticsDisable", function()
+    vim.diagnostic.disable(bufnr)
+  end)
+  quick.buffer_command("DiagnosticsEnable", function()
+    vim.diagnostic.enable(bufnr)
+  end)
 
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     group = diagnostics_group,
@@ -454,6 +460,43 @@ function M.setup_semantic_tokens(bufnr) -- {{{
     callback = vim.lsp.buf.semantic_tokens_full,
   })
 end -- }}}
+
+local handler = function(err)
+  if err then
+    local msg = string.format("Error reloading Rust workspace: %v", err)
+    ---@diagnostic disable-next-line: redundant-parameter
+    vim.notify(msg, vim.lsp.log_levels.ERROR, {
+      title = "Reloading Rust workspace",
+      timeout = 3000,
+    })
+  else
+    vim.notify("Workspace has been reloaded")
+  end
+end
+
+local function reload_rust_workspace()
+  local clients = vim.lsp.get_active_clients()
+  for _, client in ipairs(clients) do
+    if client.name == "rust_analyzer" then
+      client.request("rust-analyzer/reloadWorkspace", nil, handler, 0)
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  pattern = "*.rs",
+  callback = function()
+    quick.buffer_command("ReloadWorkspace", function()
+      vim.lsp.buf_request(0, "rust-analyzer/reloadWorkspace", nil, handler)
+    end, { range = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = vim.api.nvim_create_augroup("LSP_RUST_GROUP", { clear = true }),
+  pattern = "*/Cargo.toml",
+  callback = reload_rust_workspace,
+})
 
 return M
 

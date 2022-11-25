@@ -37,6 +37,7 @@ require("mason-tool-installer").setup({
     "golangci-lint",
     "hadolint",
     "prettier",
+    "rustfmt",
     "selene",
     "shellcheck",
     "stylua",
