@@ -57,7 +57,7 @@ vim.keymap.set("x", "<Leader>y", '"+y')
 vim.keymap.set("n", "<Leader>p", '"+p')
 vim.keymap.set("n", "<Leader>P", '"+P')
 
-vim.keymap.set("v", "p", '"_dP', opts('replace visually selected with the " contents'))
+vim.keymap.set("x", "p", '"_dP', opts('replace visually selected with the " contents'))
 --}}}
 
 vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>", opts("grep on local buffer"))
@@ -110,7 +110,7 @@ end, { silent = true, expr = true, desc = "execute macro over visual range" })
 
 -- Easier cgn process by starting with already selected text.
 vim.keymap.set("n", "cn", "*``cgn")
-vim.keymap.set("v", "cn", function()
+vim.keymap.set("x", "cn", function()
   quick.normal("n", 'y/"<CR>Ncgn', true)
 end, { silent = true })
 
@@ -144,14 +144,14 @@ vim.keymap.set("n", "<C-S-P>", function()
 end, opts("open command pallete"))
 
 -- Base64 Encode/Decode {{{
-vim.keymap.set("v", "<leader>be", function()
+vim.keymap.set("x", "<leader>be", function()
   local contents = quick.selection_contents()
   local got = vim.fn.system("base64 --wrap=0", { contents })
   got = got:gsub("\n$", "")
   quick.normal("n", "s" .. got .. "")
 end, opts("base64 encode selection"))
 
-vim.keymap.set("v", "<leader>bd", function()
+vim.keymap.set("x", "<leader>bd", function()
   local contents = quick.selection_contents()
   local got = vim.fn.system("base64 --wrap=0 --ignore-garbage --decode", { contents })
   got = got:gsub("\n$", "")

@@ -85,7 +85,6 @@ config.augends:register_group({
       end,
     }),
 
-
     augend.user.new({
       desc = "Markdown Header (# Title)",
 
@@ -115,7 +114,7 @@ config.augends:register_group({
 
 vim.keymap.set("n", "<C-a>", require("dial.map").inc_normal(), {})
 vim.keymap.set("n", "<C-x>", require("dial.map").dec_normal(), {})
-vim.keymap.set("v", "<C-a>", require("dial.map").inc_visual(), {})
-vim.keymap.set("v", "<C-x>", require("dial.map").dec_visual(), {})
-vim.keymap.set("v", "g<C-a>", require("dial.map").inc_gvisual(), {})
-vim.keymap.set("v", "g<C-x>", require("dial.map").dec_gvisual(), {})
+vim.keymap.set("x", "<C-a>", require("dial.map").inc_visual(), {})
+vim.keymap.set("x", "<C-x>", require("dial.map").dec_visual(), {})
+vim.keymap.set("x", "g<C-a>", require("dial.map").inc_gvisual(), {})
+vim.keymap.set("x", "g<C-x>", require("dial.map").dec_gvisual(), {})

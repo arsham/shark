@@ -179,9 +179,9 @@ local servers = {
         end, { range = true })
         local o = { desc = "SQL code action", buffer = true }
         vim.keymap.set("n", "<localleader>ca", vim.lsp.buf.code_action, o)
-        vim.keymap.set("v", ":'<,'>CodeAction<CR>", "Code action", { buffer = true, silent = true })
+        vim.keymap.set("x", ":'<,'>CodeAction<CR>", "Code action", { buffer = true, silent = true })
         vim.keymap.set("n", "<C-Space>", ":SqlsExecuteQuery<CR>", { buffer = true, silent = true })
-        vim.keymap.set("v", "<C-Space>", ":SqlsExecuteQuery<CR>", { buffer = true, silent = true })
+        vim.keymap.set("x", "<C-Space>", ":SqlsExecuteQuery<CR>", { buffer = true, silent = true })
       end
       return opts
     end,

@@ -7,10 +7,10 @@ vim.keymap.set("n", "<leader>v", function()
     vim.keymap.set("n", "J", "<C-v>j:VBox<CR>", { buffer = true })
     vim.keymap.set("n", "K", "<C-v>k:VBox<CR>", { buffer = true })
     vim.keymap.set("n", "L", "<C-v>l:VBox<CR>", { buffer = true })
-    vim.keymap.set("v", "f", ":VBox<CR>", { buffer = true })
-    vim.keymap.set("v", "F", ":VBoxH<CR>", { buffer = true })
-    vim.keymap.set("v", "o", ":VBoxO<CR>", { buffer = true })
-    vim.keymap.set("v", "d", ":VBoxD<CR>", { buffer = true })
+    vim.keymap.set("x", "f", ":VBox<CR>", { buffer = true })
+    vim.keymap.set("x", "F", ":VBoxH<CR>", { buffer = true })
+    vim.keymap.set("x", "o", ":VBoxO<CR>", { buffer = true })
+    vim.keymap.set("x", "d", ":VBoxD<CR>", { buffer = true })
     return
   end
 

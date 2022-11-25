@@ -126,9 +126,9 @@ local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
   vim.keymap.set("n", key, fn, opts)
 end --}}}
-local function vnoremap(key, fn, desc, opts) --{{{
+local function xnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
-  vim.keymap.set("v", key, fn, opts)
+  vim.keymap.set("x", key, fn, opts)
 end --}}}
 local function inoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
@@ -140,7 +140,7 @@ function M.code_action() --{{{
     code_action(args.range ~= 0, args.line1, args.line2)
   end, { range = true })
   nnoremap("<localleader>ca", fzf.lsp_code_actions, "Code action")
-  vnoremap("<localleader>ca", ":'<,'>CodeAction<CR>", "Code action")
+  xnoremap("<localleader>ca", ":'<,'>CodeAction<CR>", "Code action")
 end --}}}
 
 function M.setup_organise_imports() --{{{
@@ -182,7 +182,7 @@ function M.document_range_formatting(disabled_servers) --{{{
   quick.buffer_command("Format", function(args)
     document_range_formatting(disabled_servers, args)
   end, { range = true })
-  vnoremap("gq", function(args)
+  xnoremap("gq", function(args)
     local line1, _ = unpack(vim.api.nvim_buf_get_mark(0, "["))
     local line2, _ = unpack(vim.api.nvim_buf_get_mark(0, "]"))
     if line1 > line2 then

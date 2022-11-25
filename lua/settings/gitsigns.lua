@@ -52,8 +52,8 @@ vim.keymap.set("n", "<leader>hr", function() gitsigns.reset_hunk() end,         
 vim.keymap.set("n", "<leader>hR", function() gitsigns.reset_buffer() end,              { desc = "reset buffer" })
 vim.keymap.set("n", "<leader>hp", function() gitsigns.preview_hunk() end,              { desc = "preview hunk" })
 vim.keymap.set("n", "<leader>hl", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
-vim.keymap.set("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
-vim.keymap.set("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "reset line" })
+vim.keymap.set("x", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "stage line" })
+vim.keymap.set("x", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."),   vim.fn.line(".") }) end, { desc = "reset line" })
 
 -- Text objects
 local actions = require("gitsigns.actions")
