@@ -3,6 +3,7 @@ local types = require("luasnip.util.types")
 
 ls.add_snippets("all", require("settings.luasnip.all"))
 ls.add_snippets("go", require("settings.luasnip.go"))
+ls.add_snippets("rust", require("settings.luasnip.rust"))
 ls.add_snippets("lua", require("settings.luasnip.lua"))
 ls.add_snippets("gitcommit", require("settings.luasnip.gitcommit"))
 ls.add_snippets("markdown", require("settings.luasnip.markdown"))
