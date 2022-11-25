@@ -224,6 +224,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Tool        | [bfredl/nvim-luadev](https://github.com/bfredl/nvim-luadev)                                | REPL/debug console for nvim lua plugins              |
 | Tool        | [sQVe/sort.nvim](https://github.com/sQVe/sort.nvim)                                        | Sort plugin with line-wise and delimiter sorting     |
 | Tool        | [ralismark/opsort.vim](https://github.com/ralismark/opsort.vim)                            | Sort operator                                        |
+| Tool        | [kiran94/s3edit.nvim](https://github.com/kiran94/s3edit.nvim)                              | Edit files on S3 bucket                              |
 | Core        | [svban/YankAssassin.vim](https://github.com/svban/YankAssassin.vim)                        | Stay where you are after yanking                     |
 | Core        | [tmux-plugins/vim-tmux](https://github.com/tmux-plugins/vim-tmux)                          |                                                      |
 | Core        | [tpope/vim-git](https://github.com/tpope/vim-git)                                          |                                                      |

@@ -679,6 +679,12 @@ packer.startup({
       wants = { "litee.nvim", "fzf-lua" },
       cmd   = "GH*",
     })
+
+    use({
+      "kiran94/s3edit.nvim",
+      config = function () require('s3edit').setup() end,
+      cmd    = "S3Edit",
+    })
     -- }}}
 
     if packer_bootstrap then -- {{{
