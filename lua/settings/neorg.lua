@@ -70,6 +70,7 @@ require("neorg").setup({
     }, --}}}
     ["core.export"] = {},
     ["core.export.markdown"] = {},
+    ["core.norg.qol.toc"] = {},
   },
 })
 
