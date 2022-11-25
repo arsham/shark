@@ -666,6 +666,19 @@ packer.startup({
       config = function() require("settings.color-picker") end,
       keys   = { "<leader>cp" },
     })
+
+    use({
+      "ldelossa/gh.nvim",
+      config   = function() require("settings.gh-nvim") end,
+      requires = {
+        {
+          "ldelossa/litee.nvim",
+          cmd   = "GH*",
+        },
+      },
+      wants = { "litee.nvim", "fzf-lua" },
+      cmd   = "GH*",
+    })
     -- }}}
 
     if packer_bootstrap then -- {{{

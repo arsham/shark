@@ -194,6 +194,8 @@ Some plugins are not listed here. You can find the complete list in the
 | GIT         | [tpope/vim-rhubarb](https://github.com/tpope/vim-rhubarb)                                  | Go to code's Github page for selection               |
 | GIT         | [mattn/vim-gist](https://github.com/mattn/vim-gist)                                        | gist integration                                     |
 | GIT/Visuals | [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                      | git signs in the gutter                              |
+| GIT         | [ldelossa/gh.nvim](https://github.com/ldelossa/gh.nvim)                                    | Code review plugin                                   |
+| GIT         | [ldelossa/litee.nvim](https://github.com/ldelossa/litee.nvim)                              | Dependency for `gh.nvim`                             |
 | Editing     | [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                          |                                                      |
 | Editing     | [ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |                                                      |
 | Core        | [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                    |                                                      |
