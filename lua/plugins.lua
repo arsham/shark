@@ -649,7 +649,6 @@ packer.startup({
       wants  = { "nvim-treesitter", "nvim-lspconfig", "nvim-cmp" },
       cmd    = { "NeorgStart" },
       keys   = { "<leader>oo" },
-      event  = { "User LoadTicker4" },
       cond   = { full_start, lsp_enabled },
     })
 
