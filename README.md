@@ -11,38 +11,38 @@ This project supports Neovim version `0.8.0` and newer.
 
 ## Highlights
 
-- Besides in a few places that Neovim doesn't provide an API in Lua, most
-  configuration is done in **Lua**.
-- It loads really fast! With over **90 plugins**, it takes **5ms** to
-  **20ms** on average to load up. This has become possible With the new
-  `filetype.lua` and heavily lazy loading plugins. (benchmarked with the
-  `StartupTime` benchmark tool).
-- **LSP**, **Treesitter**, and **FZF** are setup to work together.
-- Completion with **nvim-cmp** plugin is setup.
-- It is optimised to handle very **large** files.
-- There are some handy **textobjects** such as **backticks** and **indents**.
-- You can add the current location of the cursor or make **notes** on the
-  current location in the **quickfix/local** lists with repeatable mappings.
-- You can **manipulate** quickfix/local lists.
-- It comes with integration with **git** and gist.
-- Has a lot of useful feedback in the gutter.
-- Statusline is configures with **feline**.
-- It is set to give a lot of useful information about the buffer.
-- Prettier quickfix buffer and quickfix tools.
-- The theme is setup with Lua to take advantage of its performance.
+-  Besides in a few places that Neovim doesn't provide an API in Lua, most
+   configuration is done in **Lua**.
+-  It loads really fast! With over **90 plugins**, it takes **5ms** to
+   **20ms** on average to load up. This has become possible With the new
+   `filetype.lua` and heavily lazy loading plugins. (benchmarked with the
+   `StartupTime` benchmark tool).
+-  **LSP**, **Treesitter**, and **FZF** are setup to work together.
+-  Completion with **nvim-cmp** plugin is setup.
+-  It is optimised to handle very **large** files.
+-  There are some handy **textobjects** such as **backticks** and **indents**.
+-  You can add the current location of the cursor or make **notes** on the
+   current location in the **quickfix/local** lists with repeatable mappings.
+-  You can **manipulate** quickfix/local lists.
+-  It comes with integration with **git** and gist.
+-  Has a lot of useful feedback in the gutter.
+-  Statusline is configures with **feline**.
+-  It is set to give a lot of useful information about the buffer.
+-  Prettier quickfix buffer and quickfix tools.
+-  The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
-   - [Plugin Patching](#plugin-patching)
-   - [Plugins](#plugins)
-   - [Core Mappings](#core-mappings)
-   - [Text Objects](#text-objects)
-   - [Lists](#lists)
-   - [Highlight Matching](#highlight-matching)
-   - [FZF](#fzf)
-   - [LSP](#lsp)
-   - [Snippets](#snippets)
-   - [Utilities](#utilities)
+   -  [Plugin Patching](#plugin-patching)
+   -  [Plugins](#plugins)
+   -  [Core Mappings](#core-mappings)
+   -  [Text Objects](#text-objects)
+   -  [Lists](#lists)
+   -  [Highlight Matching](#highlight-matching)
+   -  [FZF](#fzf)
+   -  [LSP](#lsp)
+   -  [Snippets](#snippets)
+   -  [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
 
 ![folds](https://user-images.githubusercontent.com/428611/148667078-25211d3c-116a-4c6f-938a-bb52b8bb1163.png)
@@ -593,9 +593,9 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 
 ### Notes
 
-- The `<leader>@` binding will use the `LSP` symbols if is attached to the
-  buffer, or `ctags` otherwise.
-- Invoke `<leader>df` twice to enter the flowing window. `q` exits.
+-  The `<leader>@` binding will use the `LSP` symbols if is attached to the
+   buffer, or `ctags` otherwise.
+-  Invoke `<leader>df` twice to enter the flowing window. `q` exits.
 
 Please see the code for all available mappings.
 
