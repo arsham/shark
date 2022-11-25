@@ -395,6 +395,15 @@ packer.startup({
     })
 
     use({
+      "saecki/crates.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
+      config   = function() require("settings.crates-nvim") end,
+      event    = { "BufRead Cargo.toml" },
+      after    = { "nvim-cmp", },
+      wants    = { "nvim-cmp", },
+    })
+
+    use({
       "smjonas/inc-rename.nvim",
       config = function()
         require("inc_rename").setup({

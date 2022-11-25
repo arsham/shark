@@ -183,6 +183,7 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)         | DAP related                                          |
 | LSP         | [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)                              | Current code context with LSP                        |
 | LSP         | [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)                             | Show LSP diagnostics in extmarks                     |
+| Tools       | [saecki/crates.nvim](https://github.com/saecki/crates.nvim)                                | Crate.toml helper                                    |
 | Core        | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                      | Seamlessly navigate between tmux and vim             |
 | Tool        | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                    | File explorer tree                                   |
 | Visuals     | [feline-nvim/feline.nvim](https://github.com/feline-nvim/feline.nvim)                      | Statusline (default)                                 |
