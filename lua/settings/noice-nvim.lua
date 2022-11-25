@@ -1,18 +1,24 @@
+---@diagnostic disable: redundant-parameter
 local noice = require("noice")
 local mini = require("noice.config.views").defaults.mini
 mini.timeout = 5000
+mini.align = "message-left"
 
 -- Top Right Setup {{{
 local top_right = vim.tbl_deep_extend("force", mini, {
   timeout = 6000,
   position = {
-    row = 0,
+    row = 1,
   },
   zindex = 60,
   win_options = {
     winblend = 30,
   },
 }) -- }}}
+
+local error = vim.tbl_deep_extend("force", top_right, {
+  timeout = 10000,
+})
 
 local routes = {
   -- Skippers {{{
@@ -29,6 +35,8 @@ local routes = {
         { event = "msg_show", find = "^/[^/]+$" }, -- search display
         { event = "msg_show", find = "/[^/]+/[^ ]+ %d+L, %d+B" },
         { event = "msg_show", kind = "emsg", find = "Pattern not found" }, -- when search term is not found.
+        { event = "msg_show", find = "%d+ lines >ed %d+ time" },
+        { event = "msg_show", find = "%d+ lines <ed %d+ time" },
       },
     },
   },
@@ -48,10 +56,15 @@ local routes = {
       },
     },
   },
-  -- }}}
-  -- Notify {{{
   {
-    view = "notify",
+    view = "split",
+    opts = { lang = "lua" },
+    filter = { event = "notify", kind = "debug" },
+  },
+  -- }}}
+  -- Errors {{{
+  {
+    view = "error",
     filter = {
       any = {
         { event = "msg_show", kind = "emsg" },
@@ -59,6 +72,7 @@ local routes = {
         { event = "msg_show", kind = "lua_error" },
         { event = "msg_show", kind = "rpc_error" },
         { event = "msg_show", kind = "wmsg" },
+        { event = "notify", kind = "error" },
       },
     },
   },
@@ -70,7 +84,7 @@ local routes = {
       any = {
         { event = "msg_show", kind = "quickfix" },
         { event = "msg_show", kind = "info", find = "%[tree%-sitter%]" },
-        { event = "msg_show", kind = "info", find = "%[nvim%-treesitter%]" },
+        { event = "msg_show", find = "%[nvim%-treesitter%]" },
         { event = "notify", kind = "info", find = "%[mason%-lspconfig.*%]" },
         { event = "msg_show", kind = "return_prompt" },
         { event = "notify", kind = "info", find = "packer.nvim" },
@@ -80,15 +94,6 @@ local routes = {
         { event = "msg_show", find = "Unception prevented inception!" },
         { event = "msg_show", kind = "echo", find = "^%[VM%] *$" },
         { event = "msg_show", kind = "echo", max_length = 1 },
-      },
-    },
-  },
-  -- }}}
-  -- Hijacking notifications to top right {{{
-  {
-    view = "top_right",
-    filter = {
-      any = {
         { event = "msg_show", find = "%d+ fewer lines" },
         { event = "msg_show", find = "%d+ more lines" },
         { event = "msg_show", find = "%d+ changes?; before" },
@@ -98,15 +103,21 @@ local routes = {
         { event = "msg_show", find = "%d+ lines? less; before" },
         { event = "msg_show", find = "%d+ changes; before #%d+  %d+ seconds ago" },
         { event = "msg_show", find = "Already at newest change" },
-        { event = "msg_show", find = "%d+ lines >ed %d+ time" },
-        { event = "msg_show", find = "%d+ lines <ed %d+ time" },
         { event = "msg_show", find = "search hit BOTTOM, continuing at TOP" },
         { event = "msg_show", find = "%d+ lines yanked" },
+      },
+    },
+  },
+  -- }}}
+  -- Hijacking notifications to top right {{{
+  {
+    view = "top_right",
+    filter = {
+      any = {
         { event = "msg_show", find = "fetching" },
         { event = "msg_show", find = "successfully fetched all PR state" },
         { event = "msg_show", find = "Hunk %d+ of %d+" },
         { event = "msg_showmode", find = "recording @%w$" }, -- shows macro recording
-        -- "%[master .+%] check[\r%s]+%d+ files? changed, %d+ insertions?",
       },
     },
   },
@@ -119,6 +130,16 @@ local routes = {
     },
   },
   -- }}}
+
+  { -- anything that doesn't match goes to top right view.
+    view = "top_right",
+    filter = {
+      any = {
+        { event = "msg_show" },
+        { event = "notify" },
+      },
+    },
+  },
 }
 
 noice.setup({
@@ -215,6 +236,7 @@ noice.setup({
       enter = true,
     },
     top_right = top_right,
+    error = error,
   },
   -- }}}
 
