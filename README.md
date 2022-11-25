@@ -650,6 +650,8 @@ The following list of commands do not fit into any specific categories.
 | `JsonDiff`            | Diff json files after formatting them   |
 | `Tmux`                | Start a tmux project (using tmuxp)      |
 | [count]`Lorem`        | Insert (count) line(s) Lorem Ipsum text |
+| `Faster`              | Disable feature to make Neovim smoother |
+| `Slower`              | Undoes the `Faster` changes             |
 
 After running `InstallDependencies` you will be notified to install some
 programs.

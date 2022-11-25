@@ -244,7 +244,7 @@ quick.command("Decrypt", function() --{{{
   vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
 end, { desc = "decrypt the content of the file into d register" }) --}}}
 
-quick.command("ToggleTrimWhitespaces", function()
+quick.command("ToggleTrimWhitespaces", function() -- {{{
   local name = "DISABLE_TRIM_WHITESPACES"
   local set_to = true
   local ok, val = pcall(vim.api.nvim_buf_get_var, 0, name)
@@ -253,6 +253,19 @@ quick.command("ToggleTrimWhitespaces", function()
   end
   vim.api.nvim_buf_set_var(0, name, set_to)
 end, { desc = "toggle trimming whitespaces on current buffer" })
+-- }}}
+
+quick.command("Faster", function()
+  require("gitsigns").detach()
+  vim.cmd.TSBufDisable("refactor.highlight_definitions")
+  vim.diagnostic.disable()
+end, { desc = "disables some visual plugins on the buffer for performance improvements" })
+
+quick.command("Slower", function()
+  require("gitsigns").attach()
+  vim.cmd.TSBufEnable("refactor.highlight_definitions")
+  vim.diagnostic.enable()
+end, { desc = "enable the disabled features by Faster command" })
 
 return M
 
