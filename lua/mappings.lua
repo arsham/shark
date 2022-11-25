@@ -11,14 +11,10 @@ end
 
 -- Disabling arrows {{{
 local o = opts("disabling arrows")
-vim.keymap.set("n", "<Up>", "<Nop>", o)
-vim.keymap.set("n", "<Down>", "<Nop>", o)
-vim.keymap.set("n", "<Left>", "<Nop>", o)
-vim.keymap.set("n", "<Right>", "<Nop>", o)
-vim.keymap.set("i", "<Up>", "<Nop>", o)
-vim.keymap.set("i", "<Down>", "<Nop>", o)
-vim.keymap.set("i", "<Left>", "<Nop>", o)
-vim.keymap.set("i", "<Right>", "<Nop>", o)
+vim.keymap.set({ "n", "i" }, "<Up>", "<Nop>", o)
+vim.keymap.set({ "n", "i" }, "<Down>", "<Nop>", o)
+vim.keymap.set({ "n", "i" }, "<Left>", "<Nop>", o)
+vim.keymap.set({ "n", "i" }, "<Right>", "<Nop>", o)
 -- }}}
 
 -- Moving around {{{
