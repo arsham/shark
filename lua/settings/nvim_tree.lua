@@ -67,12 +67,7 @@ vim.keymap.set("n", "<leader>kk", nvim_tree.toggle, { silent = true, desc = "tog
 vim.keymap.set("n", "<leader>kf", function()
   nvim_tree.find_file(true)
 end, { silent = true, desc = "find file in tree view" })
-vim.keymap.set(
-  "n",
-  "<leader><leader>",
-  nvim_tree.toggle,
-  { silent = true, desc = "toggle tree view" }
-) --}}}
+--}}}
 
 vim.api.nvim_create_autocmd("BufEnter", { --{{{
   nested = true,
