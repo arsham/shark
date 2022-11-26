@@ -180,6 +180,9 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)                            | A UI for nvim-dap                                    |
 | LSP         | [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)      | DAP related                                          |
 | LSP         | [leoluz/nvim-dap-go](https://github.com/leoluz/nvim-dap-go)                                | DAP related                                          |
+| Testing     | [nvim-neotest/neotest](https://github.com/nvim-neotest/neotest)                            | Run tests                                            |
+| Testing     | [nvim-neotest/neotest-go](https://github.com/nvim-neotest/neotest-go)                      | Neotest Go driver                                    |
+| Testing     | [rouge8/neotest-rust](https://github.com/rouge8/neotest-rust)                              | Neotest Rust driver                                  |
 | LSP         | [one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)         | DAP related                                          |
 | LSP         | [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)                              | Current code context with LSP                        |
 | LSP         | [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)                             | Show LSP diagnostics in extmarks                     |
@@ -257,7 +260,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **h**           | **H**unk                                                   |
 | **z**           | Folds, language/spelling                                   |
 | **i**           | **I**ndent                                                 |
-| **t**           | **T**ab                                                    |
+| **t**           | **T**ab, **T**est                                          |
 
 The `leader` key is `space`!
 
@@ -334,6 +337,14 @@ The `leader` key is `space`!
 | `<localleader>dT`  | **D**ebugger **t**ermination                                         |
 | `<localleader>du`  | Toggle **d**ebugger **U**I                                           |
 | `<localleader>dh`  | **D**ebugger **h**over                                               |
+| `<localleader>tu`  | Run nearest **T**est **u**nit                                        |
+| `<localleader>ta`  | **A**tach to the nearest **t**est                                    |
+| `<localleader>tU`  | Stop the nearest **T**est **u**nit                                   |
+| `<localleader>tf`  | Run **T**ests for current **f**ile                                   |
+| `<localleader>tf`  | Run **T**ests for entire **F**older                                  |
+| `<localleader>tr`  | **R**e-run last **t**est                                             |
+| `<localleader>to`  | Show **T**est **o**utput window                                      |
+| `<localleader>ts`  | Show **T**est **s**ummary tree                                       |
 
 </details>
 

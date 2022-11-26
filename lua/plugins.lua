@@ -517,6 +517,17 @@ packer.startup({
     })
 
     use({
+      "nvim-neotest/neotest",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-neotest/neotest-go",
+        "rouge8/neotest-rust",
+      },
+      config = function () require("settings.neotest") end,
+    })
+
+    use({
       "ray-x/go.nvim",
       config = function() require("settings.go-nvim") end,
       ft     = { "go" },
