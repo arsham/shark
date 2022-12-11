@@ -409,10 +409,18 @@ end --}}}
 local diagnostic_ns = vim.api.nvim_create_namespace("diagnostics")
 local function show_diagnostics()
   vim.schedule(function()
+    if vim.diagnostic.config().virtual_lines then
+      -- If the lsp_lines is activated we bail, otherwise we get duplicates.
+      return
+    end
     local line = vim.api.nvim_win_get_cursor(0)[1] - 1
     local bufnr = vim.api.nvim_get_current_buf()
     local dg = vim.diagnostic.get(bufnr, { lnum = line })
-    vim.diagnostic.show(diagnostic_ns, bufnr, dg, { virtual_text = true })
+    vim.diagnostic.show(diagnostic_ns, bufnr, dg, {
+      virtual_text = {
+        source = true,
+      },
+    })
   end)
 end
 
