@@ -40,6 +40,8 @@ require("mason-tool-installer").setup({
     "rustfmt",
     "selene",
     "shellcheck",
+    "shellharden",
+    "shfmt",
     "stylua",
   },
 

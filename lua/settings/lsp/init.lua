@@ -320,6 +320,8 @@ null_ls.setup({
     null_ls.builtins.formatting.autopep8,
     null_ls.builtins.diagnostics.buf,
     null_ls.builtins.formatting.buf,
+    null_ls.builtins.formatting.shellharden,
+    null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.uncrustify.with({
       extra_args = function()
         return {
