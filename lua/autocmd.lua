@@ -244,7 +244,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = filetype_commands_group,
   desc = "highlihgt yanking",
   callback = function()
-    vim.highlight.on_yank({ higroup = "Substitute", timeout = 150 })
+    vim.highlight.on_yank({ higroup = "Substitute", timeout = 300 })
   end,
 }) --}}}
 
