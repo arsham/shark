@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("User", {
 
 -- Line Return {{{
 vim.api.nvim_create_autocmd("BufRead", {
-  group = vim.api.nvim_create_augroup("LINE_RETURN", {}),
+  group = vim.api.nvim_create_augroup("LINE_RETURN", { clear = true }),
   desc = "auto line return",
   callback = function()
     vim.api.nvim_create_autocmd("FileType", {
@@ -282,13 +282,5 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
 
 
 vim.api.nvim_create_augroup("RELOAD_CONFIGS", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = "RELOAD_CONFIGS",
-  pattern = "*/shark/lua/*.lua",
-  callback = function(args)
-    vim.notify("Reloaded " .. args.file)
-    vim.cmd.source("<afile>")
-  end,
-})
 
 -- vim: fdm=marker fdl=0
