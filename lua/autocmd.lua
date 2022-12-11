@@ -280,6 +280,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
   end,
 })
 
+local misc_commands_group = vim.api.nvim_create_augroup("MISC_COMMANDS_GROUP", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  group = misc_commands_group,
+  pattern = { "*" },
+  callback = function()
+    pcall(vim.cmd.checktime)
+  end,
+})
 
 vim.api.nvim_create_augroup("RELOAD_CONFIGS", { clear = true })
 
