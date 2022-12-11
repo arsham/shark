@@ -48,7 +48,7 @@ neotest.setup({
 local group = vim.api.nvim_create_augroup("NEOTEST_MAPPINGS", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
-  pattern = { "go", "rs" },
+  pattern = { "go", "rust" },
   callback = function()
     -- vim.keymap.set("n", "[n", function()
     --   neotest.jump.prev({})
