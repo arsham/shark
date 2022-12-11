@@ -5,9 +5,16 @@ end
 
 table.insert(vim.opt.rtp, "~/.fzf")
 
-require("fzfmania").config({
-  frontend = "fzf-lua",
-})
+local config = {
+  mappings = {
+    fzf_builtin = "<leader>tt",
+  },
+}
+if not vim.env.NVIM_START_LIGHT then
+  config.frontend = "fzf-lua"
+end
+
+require("fzfmania").config(config)
 
 command("Dotfiles", "call fzf#vim#files('~/dotfiles/', <bang>0)", { bang = true })
 
