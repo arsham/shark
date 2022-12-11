@@ -2,9 +2,12 @@ require("dressing").setup({
   input = {
     default_prompt = "➤ ",
     insert_only = false,
-    winblend = 0,
     prefer_width = 100,
     min_width = 20,
+  },
+
+  win_options = {
+    winblend = 0,
   },
 
   select = {
