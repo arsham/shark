@@ -118,7 +118,7 @@ local function code_action(range_given, line1, line2) --{{{
       },
     })
   else
-    fzf.lsp_code_actions()
+    vim.lsp.buf.code_action()
   end
 end --}}}
 
@@ -139,7 +139,7 @@ function M.code_action() --{{{
   quick.buffer_command("CodeAction", function(args)
     code_action(args.range ~= 0, args.line1, args.line2)
   end, { range = true })
-  nnoremap("<localleader>ca", fzf.lsp_code_actions, "Code action")
+  nnoremap("<localleader>ca", code_action, "Code action")
   xnoremap("<localleader>ca", ":'<,'>CodeAction<CR>", "Code action")
 end --}}}
 
