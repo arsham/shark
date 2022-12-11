@@ -763,7 +763,7 @@ local handlers = {
   unpatch = function(_, plugin)
     -- Do not remove the following condition or your uncommited changes will be
     -- gone!
-    if plugin.patches or plugin.cleanup then
+    if (plugin.patches or plugin.cleanup) and not plugin.disable then
       run_job(plugin, "git", { "restore", "." }, "reseting git")
       run_job(plugin, "git", { "clean", "-d", "-f" }, "cleaning repo")
     end
@@ -773,6 +773,15 @@ local handlers = {
     vim.validate({
       value = { value, "table", plugin.short_name .. " must be a table" },
     })
+
+    -- Cleaning up the repository, preparing it for a patch. Do not remove the
+    -- following condition or your uncommited changes will be gone!
+    if (plugin.patches or plugin.cleanup) and not plugin.disable then
+      ---@diagnostic disable-next-line: redundant-parameter
+      vim.notify("Cleaning up " .. plugin.name)
+      run_job(plugin, "git", { "restore", "." }, "reseting git")
+      run_job(plugin, "git", { "clean", "-d", "-f" }, "cleaning repo")
+    end
 
     for _, name in ipairs(plugin.patches) do
       local patch = ("%s/scripts/patches/%s.patch"):format(vim.fn.stdpath("config"), name)
