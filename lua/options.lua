@@ -110,7 +110,7 @@ vim.opt.wildignore = {
 } --}}}
 
 vim.opt.omnifunc = "syntaxcomplete#Complete"
-vim.opt.updatetime = 100
+vim.opt.updatetime = 300
 
 -- adds <> to % matchpairs
 vim.opt.matchpairs:append("<:>")
