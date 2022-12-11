@@ -1,4 +1,3 @@
-local fs = require("arshlib.fs")
 local quick = require("arshlib.quick")
 
 local M = {}
@@ -266,6 +265,18 @@ quick.command("Slower", function()
   vim.cmd.TSBufEnable("refactor.highlight_definitions")
   vim.diagnostic.enable()
 end, { desc = "enable the disabled features by Faster command" })
+
+quick.command("Profile", function()
+  vim.cmd.profile("start /tmp/profile.log")
+  vim.cmd.profile("file *")
+  vim.cmd.profile("func *")
+  vim.keymap.set("n", "<localleader>ss", function()
+    vim.cmd.profile("dump")
+    vim.cmd.profile("stop")
+    vim.keymap.del("n", "<localleader>ss")
+    vim.notify("Profile has been saved!")
+  end)
+end, { desc = "start profiling to /tmp/profile.log. <leader>ss to stop!" })
 
 return M
 
