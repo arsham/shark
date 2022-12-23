@@ -213,6 +213,14 @@ quick.command("UnlinkSnippets", function() --{{{
   end
 end, { desc = "Unlink all open snippets" }) --}}}
 
+quick.command("LazyLoadAll", function() --{{{
+  local loader = require("lazy.core.loader")
+  for _, plugin in pairs(require("lazy.core.config").plugins) do
+    if not plugin._.loaded then
+      loader.load(plugin, { start = "start" })
+    end
+  end
+end, { desc = "Load all unloaded plugins. Only invoke for health checks" }) --}}}
 
 quick.command("Decrypt", function() --{{{
   local contents = vim.fn.system("gpg -d " .. vim.fn.expand("%"))

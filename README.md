@@ -84,7 +84,8 @@ be installed with this tool (yet), therefore you need to install them manually.
 The command will let you know what you need to install in the notification.
 
 You can check the health of your installation by running the `checkhealth`
-command.
+command. To make sure health of all plugins are run invoke `:LazyLoadAll`
+before `checkhealth`.
 
 ## Functionality
 
