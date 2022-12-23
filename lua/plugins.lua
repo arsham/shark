@@ -283,15 +283,6 @@ return {
     event = { "VeryLazy" },
   }, -- }}}
 
-  { -- Mini {{{
-    "echasnovski/mini.nvim",
-    config = function()
-      require("settings.mini-nvim")
-    end,
-    event = { "VeryLazy" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Textobj Comment {{{
     "glts/vim-textobj-comment",
     dependencies = {
