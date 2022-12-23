@@ -13,8 +13,6 @@ local function config()
   -- Mappings {{{
   vim.keymap.set("n", "<leader>oh", ":Neorg workspace home<CR>")
   vim.keymap.set("n", "<leader>ow", ":Neorg workspace <TAB>")
-  vim.keymap.set("n", "<leader>ov", ":Neorg keybind norg core.gtd.base.views<CR>")
-  vim.keymap.set("n", "<leader>oc", ":Neorg keybind norg core.gtd.base.capture<CR>")
   --}}}
 
   vim.api.nvim_create_user_command("Journal", ":Neorg journal", {})
@@ -44,11 +42,6 @@ local function config()
           engine = "nvim-cmp",
         },
       }, --}}}
-      ["core.gtd.base"] = { --{{{
-        config = {
-          workspace = "home",
-        },
-      }, --}}}
 
       ["core.keybinds"] = { --{{{
         config = {
@@ -58,7 +51,6 @@ local function config()
             keybinds.remap_key("norg", "n", "gtu", "<leader>ou")
             keybinds.remap_key("norg", "n", "gtp", "<leader>op")
             keybinds.remap_key("norg", "n", leader .. "tv", "<leader>ov")
-            keybinds.remap_event("norg", "n", "<leader>oc", "core.gtd.base.capture")
             keybinds.remap_event("norg", "n", "]]", "core.integrations.treesitter.next.heading")
             keybinds.remap_event("norg", "n", "[[", "core.integrations.treesitter.previous.heading")
           end,
@@ -85,6 +77,7 @@ return {
     "neovim/nvim-lspconfig",
     "hrsh7th/nvim-cmp",
   },
+  build = ":Neorg sync-parsers",
   cmd = { "NeorgStart" },
   keys = { "<leader>oo" },
   enabled = require("util").full_start_with_lsp,
