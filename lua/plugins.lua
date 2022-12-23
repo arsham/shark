@@ -251,15 +251,6 @@ return {
     enabled = full_start_with_lsp,
   }, -- }}}
 
-  { -- Luadev {{{
-    "bfredl/nvim-luadev",
-    config = function()
-      require("settings.nvim-luadev")
-    end,
-    cmd = { "Luadev" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- Luaref {{{
     "milisims/nvim-luaref",
     ft = { "lua" },
