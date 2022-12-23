@@ -41,16 +41,6 @@ return {
     ft = { "yaml" },
   }, -- }}}
 
-  -- Text objects {{{1
-  { -- Textobj Comment {{{
-    "glts/vim-textobj-comment",
-    dependencies = {
-      "kana/vim-textobj-user",
-    },
-    event = { "VeryLazy" },
-  }, -- }}}
-  -- }}}
-
   -- Misc {{{
   { -- Tmux {{{
     "tmux-plugins/vim-tmux",
