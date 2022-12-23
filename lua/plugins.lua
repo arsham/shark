@@ -40,13 +40,6 @@ return {
     "towolf/vim-helm",
     ft = { "yaml" },
   }, -- }}}
-
-  -- Misc {{{
-  { -- Tmux {{{
-    "tmux-plugins/vim-tmux",
-    ft = "tmux",
-  }, -- }}}
-
   -- }}}
 }
 
