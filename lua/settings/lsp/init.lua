@@ -204,6 +204,7 @@ local servers = {
     opts = {
       settings = {
         ["rust-analyzer"] = {
+          ["server.extraEnv"] = { RUSTUP_TOOLCHAIN = "nightly" },
           imports = {
             ["granularity.group"] = "module",
             prefix = "self",
@@ -219,11 +220,15 @@ local servers = {
           files = {
             excludeDirs = { "target" },
           },
-          ["lru.capacity"] = 1024,
+          ["lru.capacity"] = 2048,
           workspace = {
             symbol = {
               ["search.limit"] = 2048,
             },
+          },
+          diagnostics = {
+            enable = true,
+            enableExperimental = true,
           },
           checkOnSave = {
             command = "clippy",
