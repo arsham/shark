@@ -51,20 +51,6 @@ return {
   -- }}}
 
   -- Visuals {{{
-  { -- Match Maker {{{
-    "arsham/matchmaker.nvim",
-    dependencies = {
-      "arsham/arshlib.nvim",
-      "junegunn/fzf",
-      "junegunn/fzf.vim",
-    },
-    config = function()
-      require("matchmaker").config({})
-    end,
-    keys = { "<leader>me", "<leader>ma", "<leader>ml", "<leader>mp" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Devicons {{{
     "kyazdani42/nvim-web-devicons",
     event = { "UIEnter" },
