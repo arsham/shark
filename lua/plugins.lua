@@ -44,15 +44,6 @@ return {
     cmd = { "StartupTime" },
   }, -- }}}
 
-  { -- Wilder {{{
-    "gelguy/wilder.nvim",
-    config = function()
-      require("settings.wilder")
-    end,
-    build = ":lua vim.defer_fn(function() vim.cmd.UpdateRemotePlugins() end, 500)",
-    event = { "CmdlineEnter" },
-  }, -- }}}
-
   { -- Noice {{{
     "folke/noice.nvim",
     dependencies = {
