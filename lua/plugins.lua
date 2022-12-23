@@ -161,18 +161,6 @@ return {
   }, -- }}}
   -- }}}
 
-  -- LSP {{{
-  { -- Inc Rename {{{
-    "smjonas/inc-rename.nvim",
-    config = function()
-      require("inc_rename").setup({
-        cmd_name = "Rename",
-      })
-    end,
-    event = { "LspAttach" },
-  }, -- }}}
-  --}}}
-
   -- Lua Dev {{{1
   { -- Luaref {{{
     "milisims/nvim-luaref",
