@@ -258,20 +258,6 @@ return {
   }, -- }}}
   -- }}}
 
-  { -- Neotest {{{2
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-go",
-      "rouge8/neotest-rust",
-    },
-    config = function()
-      require("settings.neotest")
-    end,
-    event = { "VeryLazy" },
-  }, -- }}}
-
   { -- Comment {{{
     "numToStr/Comment.nvim",
     dependencies = {
