@@ -48,16 +48,6 @@ return {
   -- }}}
 
   -- Navigation {{{
-  { -- NvimTree {{{
-    "kyazdani42/nvim-tree.lua",
-    dependencies = { "kyazdani42/nvim-web-devicons" },
-    config = function()
-      require("settings.nvim_tree")
-    end,
-    cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile" },
-    keys = { "<leader>kk", "<leader>kf", "<leader><leader>" },
-  }, -- }}}
-
   { -- Navigator {{{
     "numToStr/Navigator.nvim",
     config = function()
