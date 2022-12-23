@@ -247,13 +247,7 @@ return {
     "hrsh7th/cmp-calc",
     "lukas-reineke/cmp-rg",
     "hrsh7th/cmp-nvim-lsp-signature-help",
-    {
-      "L3MON4D3/LuaSnip",
-      dependencies = { "rafamadriz/friendly-snippets" },
-      config = function()
-        require("settings.luasnip")
-      end,
-    },
+    "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "nvim-treesitter/nvim-treesitter",
   },
