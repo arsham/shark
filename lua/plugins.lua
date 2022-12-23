@@ -16,12 +16,6 @@ return {
     event = { "UIEnter" },
   }, -- }}}
   -- }}}
-
-  { -- Helm {{{
-    "towolf/vim-helm",
-    ft = { "yaml" },
-  }, -- }}}
-  -- }}}
 }
 
 -- vim: fdm=marker fdl=1
