@@ -241,16 +241,6 @@ return {
   --}}}
 
   -- Lua Dev {{{1
-  { -- Neodev {{{2
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup({})
-    end,
-    dependencies = { "neovim/nvim-lspconfig" },
-    ft = { "lua" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- Luaref {{{
     "milisims/nvim-luaref",
     ft = { "lua" },
