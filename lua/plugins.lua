@@ -9,13 +9,6 @@ return {
 
   "samjwill/nvim-unception",
   -- }}}
-
-  -- Visuals {{{
-  { -- Devicons {{{
-    "kyazdani42/nvim-web-devicons",
-    event = { "UIEnter" },
-  }, -- }}}
-  -- }}}
 }
 
 -- vim: fdm=marker fdl=1
