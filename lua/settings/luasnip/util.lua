@@ -1,11 +1,7 @@
 -- Requires {{{
 local ls = require("luasnip")
 local fmt = require("luasnip.extras.fmt").fmt
-local ok, ts_utils = pcall(require, "nvim-treesitter.ts_utils")
-if not ok then
-  require("packer").loader("nvim-treesitter")
-  ts_utils = require("nvim-treesitter.ts_utils")
-end
+local ts_utils = require("nvim-treesitter.ts_utils")
 local ts_locals = require("nvim-treesitter.locals")
 local rep = require("luasnip.extras").rep
 local ai = require("luasnip.nodes.absolute_indexer")

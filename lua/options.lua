@@ -14,6 +14,9 @@ vim.opt.conceallevel = 2
 vim.opt.mouse = nil
 vim.g.ts_highlight_lua = true
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.whichwrap:append("h,l")
 vim.opt.linebreak = true -- Wrap lines at convenient points
 
@@ -62,8 +65,9 @@ vim.opt.hidden = true
 vim.opt.viewoptions:append("localoptions")
 vim.opt.viewdir = vim.fs.normalize("~/.cache/nvim/views")
 
--- better diff view. This will make sure the inserted part is separated, rather
--- than mangled in the previous blob.
+-- Better diff view {{{
+-- This will make sure the inserted part is separated, rather than mangled in
+-- the previous blob.
 vim.opt.diffopt:append("indent-heuristic")
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("context:3")
@@ -74,6 +78,7 @@ vim.opt.suffixesadd = {
   ".py",
   ".lua",
 }
+-- }}}
 vim.opt.signcolumn = "auto:3"
 
 -- Wildmenu {{{

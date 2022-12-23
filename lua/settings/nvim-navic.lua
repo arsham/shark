@@ -1,8 +1,4 @@
-local navic, ok
-ok, navic = pcall(require, "nvim-navic")
-if not ok then
-  return
-end
+local navic = require("nvim-navic")
 
 local separator = " %#CmpItemKindDefault#▶ %*"
 

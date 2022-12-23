@@ -1,23 +1,3 @@
--- Packer Reload {{{
-local packer_reload_group = vim.api.nvim_create_augroup("PACKER_RELOAD", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = packer_reload_group,
-  pattern = "lua/plugins.lua",
-  callback = function(args)
-    vim.cmd.source(args.file)
-    vim.cmd.PackerCompile()
-  end,
-  desc = "auto compile plugins module after save",
-})
-
-vim.api.nvim_create_autocmd("User", {
-  group = packer_reload_group,
-  pattern = "PackerCompileDone",
-  callback = function()
-    vim.cmd.PackerInstall()
-  end,
-  desc = "auto install new plugins after compilation",
-}) --}}}
 
 -- Line Return {{{
 vim.api.nvim_create_autocmd("BufRead", {

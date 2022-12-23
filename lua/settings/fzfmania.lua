@@ -1,7 +1,4 @@
 local command = require("arshlib.quick").command
-if not pcall(require, "listish") then
-  require("packer").loader("listish.nvim")
-end
 
 table.insert(vim.opt.rtp, "~/.fzf")
 

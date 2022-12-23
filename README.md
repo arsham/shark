@@ -4,45 +4,46 @@ The goal of this project is to have a fast Neovim startup, provide mappings
 that can be easily memorised, interact with the **Lua** API, and make
 programming fun.
 
-This setup is mostly customised to for **Go** (**Golang**) development. But
-there are a few other **LSP** servers setup as well.
+This setup is mostly customised to for **Go** (**Golang**) and **Rust**
+development. There is also a few other **LSP** servers setup for other LSP
+servers to work with various file types.
 
 This project supports Neovim version `0.8.0` and newer.
 
 ## Highlights
 
--  Besides in a few places that Neovim doesn't provide an API in Lua, most
-   configuration is done in **Lua**.
--  It loads really fast! With over **90 plugins**, it takes **5ms** to
-   **20ms** on average to load up. This has become possible With the new
-   `filetype.lua` and heavily lazy loading plugins. (benchmarked with the
-   `StartupTime` benchmark tool).
--  **LSP**, **Treesitter**, and **FZF** are setup to work together.
--  Completion with **nvim-cmp** plugin is setup.
--  It is optimised to handle very **large** files.
--  There are some handy **textobjects** such as **backticks** and **indents**.
--  You can add the current location of the cursor or make **notes** on the
-   current location in the **quickfix/local** lists with repeatable mappings.
--  You can **manipulate** quickfix/local lists.
--  It comes with integration with **git** and gist.
--  Has a lot of useful feedback in the gutter.
--  Statusline is configures with **feline**.
--  It is set to give a lot of useful information about the buffer.
--  Prettier quickfix buffer and quickfix tools.
--  The theme is setup with Lua to take advantage of its performance.
+- Besides in a few places that Neovim doesn't provide an API in Lua, most
+  configuration is done in **Lua**.
+- It loads really fast! With over **100 plugins**, it takes **1ms** to
+  **10ms** on average to load up. This has become possible With the new
+  `filetype.lua` and heavily lazy-loaded plugins (benchmarked with the
+  `StartupTime` benchmark tool). Hyperfine benchmarks shows a full
+  startup/shutdow cycle of **70ms** on average.
+- **LSP**, **Treesitter**, and **FZF** are setup to work together.
+- Completion with **nvim-cmp** plugin is setup.
+- It is optimised to handle very **large** files.
+- There are some handy **textobjects** such as **backticks** and **indents**.
+- You can add the current location of the cursor or make **notes** on the
+  current location in the **quickfix/local** lists with repeatable mappings.
+- You can **manipulate** quickfix/local lists.
+- It comes with integration with **git** and gist.
+- Has a lot of useful feedback in the gutter.
+- Statusline is configures with **feline**.
+- It is set to give a lot of useful information about the buffer.
+- Prettier quickfix buffer and quickfix tools.
+- The theme is setup with Lua to take advantage of its performance.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
-   -  [Plugin Patching](#plugin-patching)
-   -  [Plugins](#plugins)
-   -  [Core Mappings](#core-mappings)
-   -  [Text Objects](#text-objects)
-   -  [Lists](#lists)
-   -  [Highlight Matching](#highlight-matching)
-   -  [FZF](#fzf)
-   -  [LSP](#lsp)
-   -  [Snippets](#snippets)
-   -  [Utilities](#utilities)
+   - [Plugins](#plugins)
+   - [Core Mappings](#core-mappings)
+   - [Text Objects](#text-objects)
+   - [Lists](#lists)
+   - [Highlight Matching](#highlight-matching)
+   - [FZF](#fzf)
+   - [LSP](#lsp)
+   - [Snippets](#snippets)
+   - [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
 
 ![folds](https://user-images.githubusercontent.com/428611/148667078-25211d3c-116a-4c6f-938a-bb52b8bb1163.png)
@@ -83,8 +84,7 @@ be installed with this tool (yet), therefore you need to install them manually.
 The command will let you know what you need to install in the notification.
 
 You can check the health of your installation by running the `checkhealth`
-command. To make sure health of all plugins are run invoke `:PackerLoadAll`
-before `checkhealth`.
+command.
 
 ## Functionality
 
@@ -96,33 +96,6 @@ are left out either because they are not used too often, or they are defined
 after writing this document and I've forgot to document.
 
 I would recommend you have a look at the code to see what is available to you.
-
-### Plugin Patching
-
-You can apply patches for plugins by providing a patch file in
-`scripts/patches` folder and providing the patch name to the plugin. For
-example to patch the `archer.nvim` plugin:
-
-```lua
-use({
-	"arsham/archer.nvim",
-	requires = { "arsham/arshlib.nvim" },
-	config = function()
-		require("archer").config({})
-	end,
-	patches = {
-		"make_it_better",
-		"even_better",
-	},
-})
-```
-
-You need to have the files in patch format:
-
-```bash
-scripts/patches/make_it_better.patch
-scripts/patches/even_better.patch
-```
 
 ### Plugins
 
@@ -137,15 +110,18 @@ Some plugins are not listed here. You can find the complete list in the
 
 | Function    | Plugin                                                                                     | Description                                          |
 | :---------- | :----------------------------------------------------------------------------------------- | :--------------------------------------------------- |
-| Core        | [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)                        | Package manager                                      |
+| Core        | [folke/lazy.nvim](https://github.com/folke/lazy.nvim)                                      | Package manager                                      |
 | Core        | [samjwill/nvim-unception](https://github.com/samjwill/nvim-unception)                      | Neovim in Neovim = 1 Neovim                          |
+| Core        | [arsham/arshlib.nvim](https://github.com/arsham/arshlib.nvim)                              | Supporting library                                   |
+| Core        | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                      | Seamlessly navigate between tmux and vim             |
+| Core        | [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                    |                                                      |
 | Finder      | [junegunn/fzf](https://github.com/junegunn/fzf)                                            | Fuzzy finder                                         |
 | Finder      | [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                    | fzf plugin for vim                                   |
-| Core        | [arsham/arshlib.nvim](https://github.com/arsham/arshlib.nvim)                              | Supporting library                                   |
-| Visuals     | [arsham/arshamiser.nvim](https://github.com/arsham/arshamiser.nvim)                        | Status line, colour scheme and folds                 |
-| Lists       | [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                              | Supporting quickfix and local lists                  |
 | Finder      | [arsham/fzfmania.nvim](https://github.com/arsham/fzfmania.nvim)                            | Very powerful FZF setup in lua                       |
 | Finder      | [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)                                    | fzf :heart: lua - fzf frontend                       |
+| Visuals     | [arsham/arshamiser.nvim](https://github.com/arsham/arshamiser.nvim)                        | Status line, colour scheme and folds                 |
+| Lists       | [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                              | Supporting quickfix and local lists                  |
+| Lists       | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                          | Better quickfix list manager                         |
 | Text Object | [arsham/archer.nvim](https://github.com/arsham/archer.nvim)                                | Mappings and text objects for archers                |
 | Text Object | [arsham/indent-tool.nvim](https://github.com/arsham/indent-tool.nvim)                      | Indent mappings and text object                      |
 | Visuals     | [arsham/matchmaker.nvim](https://github.com/arsham/matchmaker.nvim)                        | Creates highlight for user matches                   |
@@ -154,6 +130,7 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [mason.nvim](https://github.com/williamboman/mason.nvim)                                   | Package manager for LSP, DAP, formatters and linters |
 | LSP         | [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)               | LSP config bridge for mason.nvim                     |
 | LSP         | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)  | Install and upgrade mason servers                    |
+| LSP         | [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim)                                  | Spinner for LSP status                               |
 | LSP         | [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)      | External Tool to LSP bridge                          |
 | LSP         | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                    | Completion with LSP                                  |
 | LSP         | [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)                                | Extension for nvim-cmp                               |
@@ -174,7 +151,6 @@ Some plugins are not listed here. You can find the complete list in the
 | Text Object | [treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)   | Treesitter Text Objects                              |
 | Visuals     | [nvim-treesitter/playground](https://github.com/nvim-treesitter/playground)                | Treesitter plugin                                    |
 | Visuals     | [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                | Treesitter plugin                                    |
-| Visuals     | [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)                            | To provide highlighting where treesitter misses      |
 | Tool        | [nvim-neorg/neorg](https://github.com/nvim-neorg/neorg)                                    | Note taking tool                                     |
 | LSP         | [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)                          | Debug Adapter Protocol                               |
 | LSP         | [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)                            | A UI for nvim-dap                                    |
@@ -187,11 +163,9 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)                              | Current code context with LSP                        |
 | LSP         | [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)                             | Show LSP diagnostics in extmarks                     |
 | Tools       | [saecki/crates.nvim](https://github.com/saecki/crates.nvim)                                | Crate.toml helper                                    |
-| Core        | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                      | Seamlessly navigate between tmux and vim             |
 | Tool        | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                    | File explorer tree                                   |
 | Visuals     | [feline-nvim/feline.nvim](https://github.com/feline-nvim/feline.nvim)                      | Statusline (default)                                 |
 | Tool        | [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                | Fuzzy completion for command mode                    |
-| Lists       | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                          | Better quickfix list manager                         |
 | Visuals     | [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                        |                                                      |
 | GIT         | [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                                | git integration                                      |
 | GIT         | [tpope/vim-rhubarb](https://github.com/tpope/vim-rhubarb)                                  | Go to code's Github page for selection               |
@@ -201,7 +175,6 @@ Some plugins are not listed here. You can find the complete list in the
 | GIT         | [ldelossa/litee.nvim](https://github.com/ldelossa/litee.nvim)                              | Dependency for `gh.nvim`                             |
 | Editing     | [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                          |                                                      |
 | Editing     | [ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |                                                      |
-| Core        | [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                    |                                                      |
 | Editing     | [vim-scripts/visualrepeat](https://github.com/vim-scripts/visualrepeat)                    | Repeat in visual mode                                |
 | Editing     | [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                      | Case conversion                                      |
 | Editing     | [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                        | Multiple cursors                                     |
@@ -220,7 +193,6 @@ Some plugins are not listed here. You can find the complete list in the
 | Visuals     | [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)                  | Colourise matched colours in buffer                  |
 | Visuals     | [ziontee113/color-picker.nvim](https://github.com/ziontee113/color-picker.nvim)            | Slider for changing colours in buffer                |
 | Tool        | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)            |                                                      |
-| Core        | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)            |                                                      |
 | Tool        | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                        | Make diagrams from text                              |
 | Tool        | [jbyuki/venn.nvim](https://github.com/jbyuki/venn.nvim)                                    | Create diagrams easier                               |
 | Editing     | [monaqa/dial.nvim](https://github.com/monaqa/dial.nvim)                                    | Enhanced increment/decrement values                  |
@@ -228,6 +200,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Tool        | [sQVe/sort.nvim](https://github.com/sQVe/sort.nvim)                                        | Sort plugin with line-wise and delimiter sorting     |
 | Tool        | [ralismark/opsort.vim](https://github.com/ralismark/opsort.vim)                            | Sort operator                                        |
 | Tool        | [kiran94/s3edit.nvim](https://github.com/kiran94/s3edit.nvim)                              | Edit files on S3 bucket                              |
+| Core        | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)            |                                                      |
 | Core        | [svban/YankAssassin.vim](https://github.com/svban/YankAssassin.vim)                        | Stay where you are after yanking                     |
 | Core        | [tmux-plugins/vim-tmux](https://github.com/tmux-plugins/vim-tmux)                          |                                                      |
 | Core        | [tpope/vim-git](https://github.com/tpope/vim-git)                                          |                                                      |
@@ -605,9 +578,9 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 
 ### Notes
 
--  The `<leader>@` binding will use the `LSP` symbols if is attached to the
-   buffer, or `ctags` otherwise.
--  Invoke `<leader>df` twice to enter the flowing window. `q` exits.
+- The `<leader>@` binding will use the `LSP` symbols if is attached to the
+  buffer, or `ctags` otherwise.
+- Invoke `<leader>df` twice to enter the flowing window. `q` exits.
 
 Please see the code for all available mappings.
 

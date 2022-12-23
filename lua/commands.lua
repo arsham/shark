@@ -213,25 +213,6 @@ quick.command("UnlinkSnippets", function() --{{{
   end
 end, { desc = "Unlink all open snippets" }) --}}}
 
-quick.command("PackerLoadAll", function() --{{{
-  local packer = require("packer")
-  local defer_loads = {}
-  -- selene: allow(global_usage)
-  for name, plugin in pairs(_G.packer_plugins) do
-    if not plugin.loaded then
-      local ok = pcall(packer.loader, name)
-      if not ok then
-        table.insert(defer_loads, name)
-      end
-    end
-  end
-  for _, name in ipairs(defer_loads) do
-    local ok = pcall(packer.loader, name)
-    if not ok then
-      vim.notify("Could not load " .. name)
-    end
-  end
-end, { desc = "Load all unloaded plugins. Only invoke for health checks" }) --}}}
 
 quick.command("Decrypt", function() --{{{
   local contents = vim.fn.system("gpg -d " .. vim.fn.expand("%"))

@@ -1,8 +1,4 @@
-local ok, parsers = pcall(require, "nvim-treesitter.parsers")
-if not ok then
-  require("packer").loader("nvim-treesitter")
-  parsers = require("nvim-treesitter.parsers")
-end
+local parsers = require("nvim-treesitter.parsers")
 local parser_config = parsers.get_parser_configs()
 
 vim.opt.foldmethod = "expr"

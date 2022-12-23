@@ -1,10 +1,5 @@
 local quick = require("arshlib.quick")
 
---vim.api.nvim_put(t, 'l', true, false)
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local function opts(desc)
   return { silent = true, desc = desc }
 end
