@@ -85,15 +85,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- Archer {{{
-    "arsham/archer.nvim",
-    dependencies = { "arsham/arshlib.nvim" },
-    config = function()
-      require("archer").config({})
-    end,
-    event = { "VeryLazy" },
-  }, -- }}}
-
   { -- Textobj Comment {{{
     "glts/vim-textobj-comment",
     dependencies = {
