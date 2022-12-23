@@ -2,12 +2,6 @@
 local function full_start()
   return not vim.env.NVIM_START_LIGHT
 end
-local function lsp_enabled()
-  return not vim.env.NVIM_STOP_LSP
-end
-local function full_start_with_lsp()
-  return full_start() and lsp_enabled()
-end
 -- }}}
 local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown", "norg" }
 
@@ -168,16 +162,6 @@ return {
   -- }}}
 
   -- LSP {{{
-  { -- Null LS {{{
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    event = { "LspAttach" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- Crates {{{
     "saecki/crates.nvim",
     -- tag = "v0.3.0",
