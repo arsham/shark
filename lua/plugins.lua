@@ -75,21 +75,6 @@ return {
   -- }}}
 
   -- Misc {{{
-  { -- Markdown Preview {{{
-    "iamcco/markdown-preview.nvim",
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    config = function()
-      vim.g.mkdp_browser = "firefox"
-    end,
-    ft = { "markdown" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Tmux {{{
     "tmux-plugins/vim-tmux",
     ft = "tmux",
