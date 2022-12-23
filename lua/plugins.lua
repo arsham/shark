@@ -206,14 +206,6 @@ return {
     enabled = full_start_with_lsp,
   }, -- }}}
 
-  { -- Fidget {{{
-    "j-hui/fidget.nvim",
-    config = function()
-      require("settings.fidget-nvim")
-    end,
-    event = { "LspAttach" },
-  }, -- }}}
-
   { -- Null LS {{{
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = {
