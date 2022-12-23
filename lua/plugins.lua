@@ -72,20 +72,6 @@ return {
   -- }}}
 
   -- Visuals {{{
-  { -- Arshamiser {{{
-    "arsham/arshamiser.nvim",
-    config = function()
-      require("settings.arshamiser")
-    end,
-    dependencies = {
-      "kyazdani42/nvim-web-devicons",
-      {
-        "feline-nvim/feline.nvim",
-        dependencies = "kyazdani42/nvim-web-devicons",
-      },
-    },
-  }, -- }}}
-
   { -- Match Maker {{{
     "arsham/matchmaker.nvim",
     dependencies = {
