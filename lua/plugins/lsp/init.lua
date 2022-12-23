@@ -45,7 +45,7 @@ local function config()
   end, 2000)
 
   -- Now we can setup lsp, not before!
-  require("settings.lsp")
+  require("plugins.lsp.lsp_config")
 end
 
 return {

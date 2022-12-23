@@ -1,4 +1,4 @@
-local lsp_util = require("settings.lsp.util")
+local lsp_util = require("plugins.lsp.util")
 
 vim.api.nvim_create_autocmd("BufRead", {
   group = vim.api.nvim_create_augroup("ONCE_DO_THIS", { clear = true }),

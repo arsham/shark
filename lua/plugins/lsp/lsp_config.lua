@@ -110,7 +110,7 @@ local servers = {
     opts = {
       settings = {
         json = {
-          schemas = require("settings.lsp.schemas").jsonls,
+          schemas = require("plugins.lsp.schemas").jsonls,
         },
       },
     },
@@ -128,7 +128,7 @@ local servers = {
             enable = true,
             url = "https://www.schemastore.org/api/json/catalog.json",
           },
-          schemas = require("settings.lsp.schemas").yamlls,
+          schemas = require("plugins.lsp.schemas").yamlls,
         },
       },
     },
@@ -282,10 +282,8 @@ local servers = {
   }, --}}}
 }
 
-
-local on_attach = require("settings.lsp.on_attach").on_attach
-
 local null_ls = require("null-ls") -- NULL LS Setup {{{
+
 null_ls.setup({
   debug = false,
   sources = {
