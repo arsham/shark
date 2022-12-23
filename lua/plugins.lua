@@ -47,13 +47,6 @@ return {
     ft = "tmux",
   }, -- }}}
 
-  { -- Diagon {{{
-    -- creates diagrams from text. dependencies diagon from snap.
-    "willchao612/vim-diagon",
-    cmd = "Diagon",
-    enabled = full_start,
-  }, -- }}}
-
   { -- S3 Edit {{{
     "kiran94/s3edit.nvim",
     config = function()
