@@ -44,18 +44,6 @@ return {
     cmd = { "StartupTime" },
   }, -- }}}
 
-  { -- Noice {{{
-    "folke/noice.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require("settings.noice-nvim")
-    end,
-    event = { "UIEnter" },
-  }, -- }}}
-
   "samjwill/nvim-unception",
   -- }}}
 
