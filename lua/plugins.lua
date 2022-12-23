@@ -58,17 +58,6 @@ return {
   -- }}}
 
   -- Git {{{
-  { -- Fugitive {{{
-    "tpope/vim-fugitive",
-    dependencies = {
-      "tpope/vim-git",
-      "tpope/vim-rhubarb",
-    },
-    config = function()
-      require("settings.fugitive")
-    end,
-  }, -- }}}
-
   { -- Git Signs {{{
     "lewis6991/gitsigns.nvim",
     dependencies = "nvim-lua/plenary.nvim",
