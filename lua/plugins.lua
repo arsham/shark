@@ -75,16 +75,6 @@ return {
   }, -- }}}
 
   -- Text objects {{{1
-  { -- Indent Tools {{{
-    "arsham/indent-tools.nvim",
-    dependencies = { "arsham/arshlib.nvim" },
-    config = function()
-      require("indent-tools").config({})
-    end,
-    event = { "VeryLazy" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Textobj Comment {{{
     "glts/vim-textobj-comment",
     dependencies = {
