@@ -8,15 +8,6 @@ return {
   -- Core/System utilities {{{
   "nvim-lua/plenary.nvim",
 
-  { -- Arshlib {{{
-    "arsham/arshlib.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    event = { "VeryLazy" },
-  }, -- }}}
-
   { -- FZF {{{
     "junegunn/fzf.vim",
     dependencies = "junegunn/fzf",
