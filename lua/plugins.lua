@@ -216,14 +216,6 @@ return {
     enabled = full_start_with_lsp,
   }, -- }}}
 
-  { -- LSP Lines {{{
-    url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("settings.lsp_lines-nvim")
-    end,
-    event = { "LspAttach" },
-  }, -- }}}
-
   { -- Crates {{{
     "saecki/crates.nvim",
     -- tag = "v0.3.0",
