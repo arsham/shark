@@ -23,15 +23,6 @@ return {
     event = { "VeryLazy" },
   }, -- }}}
 
-  { -- Listish {{{
-    "arsham/listish.nvim",
-    dependencies = { "arsham/arshlib.nvim" },
-    event = { "VeryLazy" },
-    config = function()
-      require("listish").config({})
-    end,
-  }, -- }}}
-
   { -- Startup Time {{{
     "tweekmonster/startuptime.vim",
     cmd = { "StartupTime" },
