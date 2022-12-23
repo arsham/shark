@@ -1,5 +1,17 @@
 local lsp_util = require("settings.lsp.util")
 
+vim.api.nvim_create_autocmd("BufRead", {
+  group = vim.api.nvim_create_augroup("ONCE_DO_THIS", { clear = true }),
+  pattern = "*",
+  once = true,
+  callback = function()
+    -- The first time some LSP servers are not attached currectly, therefore we
+    -- force another read just once.
+    vim.cmd("silent! e")
+  end,
+  desc = "just reload once to make lsp happy",
+})
+
 ---@alias lsp_client 'vim.lsp.client'
 
 ---The function to pass to the LSP's on_attach callback.
@@ -9,11 +21,6 @@ local lsp_util = require("settings.lsp.util")
 local function on_attach(client, bufnr) --{{{
   -- The first time some LSP servers are not attached currectly, therefore we
   -- force another read just once.
-  if not vim.g._lsp_loaded_successfully then
-    vim.g._lsp_loaded_successfully = true
-    vim.api.nvim_exec_autocmds("BufRead", {})
-    return
-  end
 
   local buf_name = vim.api.nvim_buf_get_name(bufnr)
   if
