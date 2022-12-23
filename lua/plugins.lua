@@ -238,34 +238,6 @@ return {
     end,
     event = { "LspAttach" },
   }, -- }}}
-
-  { -- CMP {{{2
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-calc",
-      "lukas-reineke/cmp-rg",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      {
-        "L3MON4D3/LuaSnip",
-        dependencies = { "rafamadriz/friendly-snippets" },
-        config = function()
-          require("settings.luasnip")
-        end,
-      },
-      "saadparwaiz1/cmp_luasnip",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("settings.cmp")
-    end,
-    event = { "InsertEnter" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
   --}}}
 
   -- Treesitter {{{2
