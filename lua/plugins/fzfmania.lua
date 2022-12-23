@@ -1,7 +1,10 @@
 return {
   "arsham/fzfmania.nvim",
   dependencies = {
-    "junegunn/fzf.vim",
+    {
+      "junegunn/fzf.vim",
+      dependencies = "junegunn/fzf",
+    },
     "nvim-lua/plenary.nvim",
     "arsham/arshlib.nvim",
     "arsham/listish.nvim",

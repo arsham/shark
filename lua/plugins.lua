@@ -8,12 +8,6 @@ return {
   -- Core/System utilities {{{
   "nvim-lua/plenary.nvim",
 
-  { -- FZF {{{
-    "junegunn/fzf.vim",
-    dependencies = "junegunn/fzf",
-    event = { "VeryLazy" },
-  }, -- }}}
-
   { -- Startup Time {{{
     "tweekmonster/startuptime.vim",
     cmd = { "StartupTime" },
