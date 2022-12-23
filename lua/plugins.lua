@@ -333,18 +333,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- GH {{{
-    "ldelossa/gh.nvim",
-    config = function()
-      require("settings.gh-nvim")
-    end,
-    dependencies = {
-      "ldelossa/litee.nvim",
-      "ibhagwan/fzf-lua",
-    },
-    cmd = "GH",
-  }, -- }}}
-
   { -- S3 Edit {{{
     "kiran94/s3edit.nvim",
     config = function()
