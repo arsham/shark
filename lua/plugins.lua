@@ -16,16 +16,6 @@ return {
   "samjwill/nvim-unception",
   -- }}}
 
-  -- Navigation {{{
-  { -- Zoom {{{
-    "dhruvasagar/vim-zoom",
-    config = function()
-      vim.keymap.set("n", "<C-W>z", "<Plug>(zoom-toggle)")
-    end,
-    keys = { "<C-w>z" },
-  }, -- }}}
-  -- }}}
-
   -- Visuals {{{
   { -- Devicons {{{
     "kyazdani42/nvim-web-devicons",
