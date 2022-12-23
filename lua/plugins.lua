@@ -63,20 +63,6 @@ return {
   -- }}}
 
   -- Editing {{{
-  { -- Yanker {{{
-    "arsham/yanker.nvim",
-    config = function()
-      require("yanker").config({})
-    end,
-    dependencies = {
-      "arsham/arshlib.nvim",
-      "junegunn/fzf",
-      "junegunn/fzf.vim",
-    },
-    event = { "VeryLazy" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Repeat {{{
     "tpope/vim-repeat",
     event = { "BufReadPost", "BufNewFile" },
