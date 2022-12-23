@@ -48,16 +48,6 @@ return {
   -- }}}
 
   -- Navigation {{{
-  { -- Undo tree {{{
-    "mbbill/undotree",
-    config = function()
-      require("settings.undotree")
-    end,
-    branch = "search",
-    cmd = { "UndotreeShow", "UndotreeToggle" },
-    keys = { "<leader>u" },
-  }, -- }}}
-
   { -- Zoom {{{
     "dhruvasagar/vim-zoom",
     config = function()
