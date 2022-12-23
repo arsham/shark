@@ -182,30 +182,6 @@ return {
   -- }}}
 
   -- LSP {{{
-  { -- Mason {{{
-    "williamboman/mason.nvim",
-    dependencies = {
-      {
-        "neovim/nvim-lspconfig",
-        config = function()
-          require("settings.mason-nvim")
-          require("settings.lsp")
-        end,
-        dependencies = {
-          "hrsh7th/cmp-nvim-lsp",
-          "ibhagwan/fzf-lua",
-          "jose-elias-alvarez/null-ls.nvim",
-        },
-      },
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "hrsh7th/cmp-nvim-lsp",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
-    event = { "VeryLazy" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- Null LS {{{
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = {
