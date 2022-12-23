@@ -3,7 +3,6 @@ local function full_start()
   return not vim.env.NVIM_START_LIGHT
 end
 -- }}}
-local colorizer_ft = { "css", "scss", "sass", "html", "lua", "markdown", "norg" }
 
 return {
   -- Core/System utilities {{{
@@ -83,17 +82,6 @@ return {
   { -- Devicons {{{
     "kyazdani42/nvim-web-devicons",
     event = { "UIEnter" },
-  }, -- }}}
-
-  { -- Colorizer {{{
-    "NvChad/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({
-        filetypes = colorizer_ft,
-      })
-    end,
-    ft = colorizer_ft,
-    enabled = full_start,
   }, -- }}}
 
   { -- Nui {{{
