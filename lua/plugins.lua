@@ -44,16 +44,6 @@ return {
     keys = { "gs" },
   }, -- }}}
 
-  { -- Sort {{{
-    "sQVe/sort.nvim",
-    config = function()
-      require("sort").setup({
-        delimiters = { ",", "|", ";", ":", "s", "t" },
-      })
-    end,
-    cmd = { "Sort" },
-  }, -- }}}
-
   { -- Yank Assasin {{{
     "svban/YankAssassin.vim",
     event = { "VeryLazy" },
