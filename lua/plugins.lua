@@ -15,11 +15,6 @@ return {
     "kyazdani42/nvim-web-devicons",
     event = { "UIEnter" },
   }, -- }}}
-
-  { -- Nui {{{
-    "MunifTanjim/nui.nvim",
-    event = { "VeryLazy" },
-  }, -- }}}
   -- }}}
 
   { -- Helm {{{
