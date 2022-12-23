@@ -47,13 +47,6 @@ return {
     ft = "tmux",
   }, -- }}}
 
-  { -- S3 Edit {{{
-    "kiran94/s3edit.nvim",
-    config = function()
-      require("s3edit").setup()
-    end,
-    cmd = "S3Edit",
-  }, -- }}}
   -- }}}
 }
 
