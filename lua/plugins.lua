@@ -179,22 +179,6 @@ return {
     event = { "VeryLazy" },
     enabled = full_start,
   }, -- }}}
-
-  { -- Dial {{{
-    "monaqa/dial.nvim",
-    config = function()
-      require("settings.dial-nvim")
-    end,
-    keys = {
-      { "<C-a>", mode = "n" },
-      { "<C-x>", mode = "n" },
-      { "<C-a>", mode = "v" },
-      { "<C-x>", mode = "v" },
-      { "g<C-a>", mode = "v" },
-      { "g<C-x>", mode = "v" },
-    },
-    enabled = full_start,
-  }, -- }}}
   -- }}}
 
   -- LSP {{{
