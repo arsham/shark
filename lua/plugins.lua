@@ -559,15 +559,6 @@ return {
     event = { "VeryLazy" },
   }, -- }}}
 
-  { -- Go {{{
-    "ray-x/go.nvim",
-    config = function()
-      require("settings.go-nvim")
-    end,
-    ft = { "go" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- Comment {{{
     "numToStr/Comment.nvim",
     dependencies = {

@@ -13,6 +13,16 @@ function M.buffer_has_var(name) --{{{
   return false
 end --}}}
 
+function M.full_start()
+  return not vim.env.NVIM_START_LIGHT
+end
+function M.lsp_enabled()
+  return not vim.env.NVIM_STOP_LSP
+end
+function M.full_start_with_lsp()
+  return M.full_start() and M.lsp_enabled()
+end
+
 return M
 
 -- vim: fdm=marker fdl=0
