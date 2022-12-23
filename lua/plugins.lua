@@ -333,15 +333,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- Venn {{{
-    "jbyuki/venn.nvim",
-    config = function()
-      require("settings.venn")
-    end,
-    keys = { "<leader>v" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Neorg {{{
     "nvim-neorg/neorg",
     config = function()
