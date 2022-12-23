@@ -263,38 +263,6 @@ return {
     ft = { "yaml" },
   }, -- }}}
 
-  -- DAP {{{
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      {
-        "rcarriga/nvim-dap-ui",
-        lazy = true,
-      },
-      {
-        "jbyuki/one-small-step-for-vimkind",
-        lazy = true,
-      },
-      {
-        "theHamsta/nvim-dap-virtual-text",
-        lazy = true,
-      },
-      {
-        "leoluz/nvim-dap-go",
-        config = function()
-          require("dap-go").setup()
-        end,
-        lazy = true,
-      },
-    },
-    config = function()
-      require("settings.nvim-dap")
-    end,
-    enabled = full_start_with_lsp,
-    keys = { "<leader>db", "<leader>dB", "<leader>dl" },
-  },
-  -- }}}
-
   -- Text objects {{{1
   { -- Indent Tools {{{
     "arsham/indent-tools.nvim",
