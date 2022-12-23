@@ -30,19 +30,6 @@ return {
     event = { "VeryLazy" },
   }, -- }}}
 
-  { -- BQF {{{
-    "kevinhwang91/nvim-bqf",
-    dependencies = {
-      "junegunn/fzf",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("settings.nvim-bqf")
-    end,
-    ft = { "qf" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Listish {{{
     "arsham/listish.nvim",
     dependencies = { "arsham/arshlib.nvim" },
