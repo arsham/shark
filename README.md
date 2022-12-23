@@ -124,7 +124,7 @@ Some plugins are not listed here. You can find the complete list in the
 | Lists       | [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                              | Supporting quickfix and local lists                  |
 | Lists       | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                          | Better quickfix list manager                         |
 | Text Object | [arsham/archer.nvim](https://github.com/arsham/archer.nvim)                                | Mappings and text objects for archers                |
-| Text Object | [arsham/indent-tool.nvim](https://github.com/arsham/indent-tool.nvim)                      | Indent mappings and text object                      |
+| Text Object | [arsham/indent-tools.nvim](https://github.com/arsham/indent-tools.nvim)                    | Indent mappings and text object                      |
 | Visuals     | [arsham/matchmaker.nvim](https://github.com/arsham/matchmaker.nvim)                        | Creates highlight for user matches                   |
 | Tool        | [arsham/yanker.nvim](https://github.com/arsham/yanker.nvim)                                | Yank history                                         |
 | LSP         | [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                          | LSP configuration                                    |
@@ -145,6 +145,7 @@ Some plugins are not listed here. You can find the complete list in the
 | LSP         | [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)                    | Extension for nvim-cmp                               |
 | LSP         | [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                    | Snippet engine                                       |
 | LSP         | [smjonas/inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim)                      | Incremental renaming with inccommand support         |
+| LSP         | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)            |                                                      |
 | LSP         | [ray-x/go.nvim](https://github.com/ray-x/go.nvim)                                          | Modern Go Plugin for Neovim                          |
 | LSP         | [nanotee/sqls.nvim](https://github.com/nanotee/sqls.nvim)                                  | SQL LSP                                              |
 | Visuals     | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                      | Highlighting engine                                  |
