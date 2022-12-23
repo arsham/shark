@@ -1,9 +1,3 @@
--- Disables LSP plugins and other heavy plugins. {{{2
-local function full_start()
-  return not vim.env.NVIM_START_LIGHT
-end
--- }}}
-
 return {
   -- Core/System utilities {{{
   "nvim-lua/plenary.nvim",
@@ -25,14 +19,6 @@ return {
   { -- Nui {{{
     "MunifTanjim/nui.nvim",
     event = { "VeryLazy" },
-  }, -- }}}
-  -- }}}
-
-  -- Lua Dev {{{1
-  { -- Luaref {{{
-    "milisims/nvim-luaref",
-    ft = { "lua" },
-    enabled = full_start,
   }, -- }}}
   -- }}}
 
