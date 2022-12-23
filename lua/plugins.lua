@@ -116,14 +116,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- Notify {{{
-    "rcarriga/nvim-notify",
-    config = function()
-      require("settings.nvim-notify")
-    end,
-    event = { "VeryLazy" },
-  }, -- }}}
-
   { -- Nui {{{
     "MunifTanjim/nui.nvim",
     event = { "VeryLazy" },
