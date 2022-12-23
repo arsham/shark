@@ -58,16 +58,6 @@ return {
   -- }}}
 
   -- Git {{{
-  { -- Git Signs {{{
-    "lewis6991/gitsigns.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("settings.gitsigns")
-    end,
-    event = { "VeryLazy" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Gist {{{
     -- create ~/.gist-vim with this content: token xxxxx
     "mattn/vim-gist",
