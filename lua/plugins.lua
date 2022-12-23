@@ -121,15 +121,6 @@ return {
     event = { "VeryLazy" },
   }, -- }}}
 
-  { -- Dressing {{{
-    "stevearc/dressing.nvim",
-    config = function()
-      require("settings.dressing")
-    end,
-    event = { "VeryLazy" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Navic {{{
     "SmiteshP/nvim-navic",
     dependencies = {
