@@ -76,46 +76,34 @@ local servers = {
   }, --}}}
 
   sumneko_lua = { --{{{
-    opts = {},
-    update = function(on_attach, opts)
-      opts = {
-        library = {
-          plugins = { "arshlib.nvim", "plenary.nvim" },
-        },
-        runtime_path = true,
-        lspconfig = {
-          on_attach = on_attach,
-          capabilities = opts.capabilities,
-          settings = {
-            Lua = {
-              runtime = {
-                version = "LuaJIT",
-                path = {
-                  "?/init.lua",
-                  "?.lua",
-                },
-              },
-              diagnostics = {
-                globals = {
-                  "vim",
-                  "use",
-                  "require",
-                  "rocks",
-                  "use_rocks",
-                },
-              },
-              workspace = {
-                ignoreDir = "tmp/",
-                useGitIgnore = false,
-                maxPreload = 100000000,
-                preloadFileSize = 500000,
-              },
+    opts = {
+      settings = {
+        Lua = {
+          runtime = {
+            version = "LuaJIT",
+            path = {
+              "?/init.lua",
+              "?.lua",
             },
           },
+          diagnostics = {
+            globals = {
+              "vim",
+              "use",
+              "require",
+              "rocks",
+              "use_rocks",
+            },
+          },
+          workspace = {
+            ignoreDir = "tmp/",
+            useGitIgnore = false,
+            maxPreload = 100000000,
+            preloadFileSize = 500000,
+          },
         },
-      }
-      return opts
-    end,
+      },
+    },
   }, --}}}
 
   jsonls = { --{{{
