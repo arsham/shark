@@ -333,14 +333,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- Color Picker {{{
-    "ziontee113/color-picker.nvim",
-    config = function()
-      require("settings.color-picker")
-    end,
-    keys = { "<leader>cp" },
-  }, -- }}}
-
   { -- GH {{{
     "ldelossa/gh.nvim",
     config = function()
