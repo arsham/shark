@@ -239,16 +239,6 @@ return {
     event = { "LspAttach" },
   }, -- }}}
 
-  { -- SQLS {{{
-    "nanotee/sqls.nvim",
-    config = function()
-      require("settings.sqls")
-    end,
-    dependencies = { "neovim/nvim-lspconfig" },
-    ft = { "sql" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- CMP {{{2
     "hrsh7th/nvim-cmp",
     dependencies = {
