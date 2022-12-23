@@ -164,17 +164,6 @@ return {
     keys = { "gs" },
   }, -- }}}
 
-  { -- Visual Multi {{{
-    "mg979/vim-visual-multi",
-    branch = "master",
-    config = function()
-      vim.g.VM_leader = "<space><space>"
-      require("settings.visual_multi")
-    end,
-    keys = { "<C-n>", "<C-Down>", "<C-Up>", "<space><space>" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Substitute {{{
     "gbprod/substitute.nvim",
     config = function()
