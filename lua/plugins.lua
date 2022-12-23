@@ -240,44 +240,6 @@ return {
   }, -- }}}
   --}}}
 
-  -- Treesitter {{{2
-  {
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        -- This is actually the nvim-treesitter config, but it's here to make
-        -- lazy loading happy.
-        config = function()
-          require("settings.treesitter")
-        end,
-      },
-      {
-        "nvim-treesitter/nvim-treesitter-refactor",
-        config = function()
-          require("settings.treesitter_refactor")
-        end,
-      },
-      {
-        "David-Kunz/treesitter-unit",
-        config = function()
-          require("settings.treesitter_unit")
-        end,
-      },
-      {
-        "nvim-treesitter/playground",
-        build = ":TSInstall query",
-        cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-        enabled = full_start,
-      },
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-    build = ":TSUpdate",
-    cmd = "TSUpdate",
-    event = { "VeryLazy" },
-  },
-  -- }}}
-
   -- Lua Dev {{{1
   { -- Neodev {{{2
     "folke/neodev.nvim",
