@@ -48,14 +48,6 @@ return {
   -- }}}
 
   -- Navigation {{{
-  { -- Navigator {{{
-    "numToStr/Navigator.nvim",
-    config = function()
-      require("settings.navigator")
-    end,
-    keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>" },
-  }, -- }}}
-
   { -- Undo tree {{{
     "mbbill/undotree",
     config = function()
