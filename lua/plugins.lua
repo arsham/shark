@@ -180,15 +180,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- Matchup {{{
-    "andymass/vim-matchup",
-    config = function()
-      require("settings.vim-matchup")
-    end,
-    event = { "BufReadPost", "BufNewFile" },
-    enabled = full_start,
-  }, -- }}}
-
   { -- Dial {{{
     "monaqa/dial.nvim",
     config = function()
