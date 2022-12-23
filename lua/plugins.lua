@@ -164,18 +164,6 @@ return {
     keys = { "gs" },
   }, -- }}}
 
-  { -- Autopairs {{{
-    "windwp/nvim-autopairs",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("settings.autopairs")
-    end,
-    event = { "InsertEnter" },
-  }, -- }}}
-
   { -- Sort {{{
     "sQVe/sort.nvim",
     config = function()
