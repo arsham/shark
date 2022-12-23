@@ -1,6 +1,6 @@
-local navic = require("nvim-navic")
-
-local separator = " %#CmpItemKindDefault#▶ %*"
+local function config()
+  local navic = require("nvim-navic")
+  local separator = " %#CmpItemKindDefault#▶ %*"
 
 -- stylua: ignore start
 local icons = { --{{{
@@ -37,6 +37,7 @@ local icons = { --{{{
   watch         = " ",
 } --}}}
 
+vim.g.navic_silence = true
 navic.setup({ --{{{
   icons = {
     Array         = icons.array,
@@ -69,71 +70,82 @@ navic.setup({ --{{{
   separator = separator,
   highlight = true,
 }) --}}}
--- stylua: ignore end
+  -- stylua: ignore end
 
-local cache = {}
-local function get_name(filename) --{{{
-  local ret = cache[filename]
-  if ret ~= nil then
+  local cache = {}
+  local function get_name(filename) --{{{
+    local ret = cache[filename]
+    if ret ~= nil then
+      return ret
+    end
+
+    ret = filename
+    local extension = vim.fn.expand("%:e")
+    local icon, name = require("nvim-web-devicons").get_icon(filename, extension)
+    if icon ~= nil then
+      ret = " %#" .. name .. "#" .. icon .. " " .. filename
+    end
+
+    cache[filename] = ret
     return ret
-  end
+  end --}}}
 
-  ret = filename
-  local extension = vim.fn.expand("%:e")
-  local icon, name = require("nvim-web-devicons").get_icon(filename, extension)
-  if icon ~= nil then
-    ret = " %#" .. name .. "#" .. icon .. " " .. filename
-  end
+  local bar = { --{{{
+    provider = function()
+      local filename = vim.fn.expand("%:t")
+      if filename == "NvimTree_1" then
+        return "Nvim Tree"
+      end
 
-  cache[filename] = ret
-  return ret
-end --}}}
+      local ret = get_name(filename)
+      local extra = ""
+      if navic.is_available() then
+        extra = " " .. navic.get_location()
+      end
+      return ret .. extra
+    end,
+  } --}}}
 
-local bar = { --{{{
-  provider = function()
-    local filename = vim.fn.expand("%:t")
-    if filename == "NvimTree_1" then
-      return "Nvim Tree"
-    end
+  local components = {
+    active = { { bar } },
+    inactive = { { bar } },
+  }
 
-    local ret = get_name(filename)
-    local extra = ""
-    if navic.is_available() then
-      extra = " " .. navic.get_location()
-    end
-    return ret .. extra
-  end,
-} --}}}
+  vim.schedule(function()
+    require("feline").winbar.setup({ components = components })
+  end)
 
-local components = {
-  active = { { bar } },
-  inactive = { { bar } },
+  local ignore_navic = {
+    bashls = true,
+    dockerls = true,
+    ["null-ls"] = true,
+  }
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      if args.data == nil then
+        return
+      end
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if ignore_navic[client.name] then
+        return
+      end
+      if not client.server_capabilities.documentSymbolProvider then
+        return
+      end
+      navic.attach(client, args.buf)
+    end,
+  })
+end
+
+return {
+  "SmiteshP/nvim-navic",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  config = config,
+  event = { "LspAttach" },
 }
-
-vim.schedule(function()
-  require("feline").winbar.setup({ components = components })
-end)
-
-local ignore_navic = {
-  bashls = true,
-  dockerls = true,
-  ["null-ls"] = true,
-}
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    if args.data == nil then
-      return
-    end
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if ignore_navic[client.name] then
-      return
-    end
-    if not client.server_capabilities.documentSymbolProvider then
-      return
-    end
-    navic.attach(client, args.buf)
-  end,
-})
 
 -- vim: fdm=marker fdl=0

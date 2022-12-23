@@ -120,18 +120,6 @@ return {
     "MunifTanjim/nui.nvim",
     event = { "VeryLazy" },
   }, -- }}}
-
-  { -- Navic {{{
-    "SmiteshP/nvim-navic",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("settings.nvim-navic")
-    end,
-    event = { "LspAttach" },
-  }, -- }}}
   -- }}}
 
   -- Editing {{{
