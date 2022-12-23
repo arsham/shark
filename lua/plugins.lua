@@ -30,24 +30,6 @@ return {
     event = { "VeryLazy" },
   }, -- }}}
 
-  { -- FZF Mania {{{
-    "arsham/fzfmania.nvim",
-    dependencies = {
-      "junegunn/fzf.vim",
-      "nvim-lua/plenary.nvim",
-      "arsham/arshlib.nvim",
-      "arsham/listish.nvim",
-      {
-        "ibhagwan/fzf-lua",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
-      },
-    },
-    config = function()
-      require("settings.fzfmania")
-    end,
-    event = { "VeryLazy" },
-  }, -- }}}
-
   { -- BQF {{{
     "kevinhwang91/nvim-bqf",
     dependencies = {
