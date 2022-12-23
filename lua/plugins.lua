@@ -28,14 +28,6 @@ return {
   }, -- }}}
   -- }}}
 
-  -- Editing {{{
-  { -- Yank Assasin {{{
-    "svban/YankAssassin.vim",
-    event = { "VeryLazy" },
-    enabled = full_start,
-  }, -- }}}
-  -- }}}
-
   -- Lua Dev {{{1
   { -- Luaref {{{
     "milisims/nvim-luaref",
