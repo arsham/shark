@@ -333,21 +333,6 @@ return {
     enabled = full_start,
   }, -- }}}
 
-  { -- Neorg {{{
-    "nvim-neorg/neorg",
-    config = function()
-      require("settings.neorg")
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "neovim/nvim-lspconfig",
-      "hrsh7th/nvim-cmp",
-    },
-    cmd = { "NeorgStart" },
-    keys = { "<leader>oo" },
-    enabled = full_start_with_lsp,
-  }, -- }}}
-
   { -- Color Picker {{{
     "ziontee113/color-picker.nvim",
     config = function()
