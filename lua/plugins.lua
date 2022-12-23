@@ -164,14 +164,6 @@ return {
     keys = { "gs" },
   }, -- }}}
 
-  { -- Substitute {{{
-    "gbprod/substitute.nvim",
-    config = function()
-      require("settings.substitute-nvim")
-    end,
-    keys = { { "cx", "cxx", mode = "n" }, { "X", mode = "v" } },
-  }, -- }}}
-
   { -- Autopairs {{{
     "windwp/nvim-autopairs",
     dependencies = {
