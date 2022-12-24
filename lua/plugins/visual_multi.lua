@@ -1,5 +1,4 @@
 local function config()
-  vim.g.VM_leader = "<space><space>"
   vim.g.VM_theme = "ocean"
   vim.g.VM_highlight_matches = "underline"
   vim.g.VM_show_warnings = 0
@@ -23,19 +22,22 @@ local function config()
     group = group,
     pattern = "visual_multi_start",
     callback = function()
-      vim.cmd.Noice("disable")
+      vim.cmd("silent! Noice disable")
+      vim.g._last_cmdheight = vim.opt.cmdheight:get()
       vim.opt.cmdheight = 1
-      vim.keymap.set("n", "<Up>", "<Up>", { remap = true, buffer = true })
-      vim.keymap.set("n", "<Down>", "<Down>", { remap = true, buffer = true })
-      vim.keymap.set("n", "<Left>", "<Left>", { remap = true, buffer = true })
-      vim.keymap.set("n", "<Right>", "<Right>", { remap = true, buffer = true })
+      local o = { buffer = true, silent = true, desc = "temporarily enabling arrows" }
+      vim.keymap.set("n", "<Up>", "<Up>", o)
+      vim.keymap.set("n", "<Down>", "<Down>", o)
+      vim.keymap.set("n", "<Left>", "<Left>", o)
+      vim.keymap.set("n", "<Right>", "<Right>", o)
     end,
   })
   vim.api.nvim_create_autocmd("User", {
     group = group,
     pattern = "visual_multi_exit",
     callback = function()
-      vim.cmd.Noice("enable")
+      vim.cmd("silent! Noice enable")
+      vim.opt.cmdheight = vim.g._last_cmdheight
       local o = { silent = true, desc = "disabling arrows" }
       vim.keymap.set("n", "<Up>", "<Nop>", o)
       vim.keymap.set("n", "<Down>", "<Nop>", o)
@@ -48,7 +50,10 @@ end
 return {
   "mg979/vim-visual-multi",
   branch = "master",
+  init = function()
+    vim.g.VM_leader = "<space><space>"
+  end,
   config = config,
-  keys = { "<C-n>", "<C-Down>", "<C-Up>", "<space><space>" },
+  keys = { "<C-n>", "<C-Down>", "<C-Up>", { "<space><space>", mode = { "n", "v" } } },
   enabled = require("util").full_start,
 }
