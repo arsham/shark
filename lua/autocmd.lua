@@ -1,6 +1,6 @@
 
 -- Line Return {{{
-vim.api.nvim_create_autocmd("BufRead", {
+vim.api.nvim_create_autocmd("BufReadPre", {
   group = vim.api.nvim_create_augroup("LINE_RETURN", { clear = true }),
   desc = "auto line return",
   callback = function()
