@@ -1,6 +1,7 @@
 return {
   "arsham/arshamiser.nvim",
-  dev = true,
+  lazy = false,
+  priority = 1000,
   config = function()
     vim.opt.background = "dark"
     vim.opt.guifont = "MesloLGS NF:h10"
