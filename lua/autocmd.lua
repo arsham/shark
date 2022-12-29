@@ -241,6 +241,14 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "close lspinfo popup and help,qf buffers with q",
 }) --}}}
 
+-- Make quickfix list take the whole horizontal space {{{
+vim.api.nvim_create_autocmd("FileType", {
+  group = filetype_commands_group,
+  pattern = "qf",
+  command = "wincmd J",
+  desc = "Make quickfix list take the whole horizontal space",
+}) --}}}
+
 local trim_whitespace_group = vim.api.nvim_create_augroup("TRIM_WHITESPACE", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "FilterWritePre" }, {
   group = trim_whitespace_group,
