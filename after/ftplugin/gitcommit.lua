@@ -5,6 +5,9 @@ vim.wo.cursorline = true
 vim.opt_local.formatoptions:remove({ "c", "r", "o", "q" })
 vim.cmd.startinsert()
 
+-- From 50's character of the first line to the end.
+vim.fn.matchaddpos("Error", { { 1, 50, 10000 } })
+
 -- stylua: ignore start
 local formatlistpat = {'^\\s*'}                         --- Optional leading whitespace
 table.insert(formatlistpat, '[')                        --- Start character class
