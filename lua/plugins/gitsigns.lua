@@ -13,6 +13,8 @@ local function config()
     },
     update_debounce = 500,
     sign_priority = 10,
+    numhl = true,
+    signcolumn = false,
     count_chars = {
       [1] = "",
       [2] = "₂",
@@ -45,6 +47,7 @@ local function config()
     end,
   })
 
+  vim.keymap.set("n", "<leader>gs", function() gitsigns.toggle_signs() end,              { desc = "toggle gitsigns sign column" })
   vim.keymap.set("n", "]c", function() quick.call_and_centre(gitsigns.next_hunk) end,    { desc = "go to next hunk" })
   vim.keymap.set("n", "[c", function() quick.call_and_centre(gitsigns.prev_hunk) end,    { desc = "go to previous hunk" })
   vim.keymap.set("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end, { desc = "blame line" })
