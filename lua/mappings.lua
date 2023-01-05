@@ -191,6 +191,8 @@ end, opts("toggle scroll bind on current buffer"))
 
 vim.keymap.set("s", "p", function ()
   vim.api.nvim_feedkeys("p", "n", false)
-end, {silent = true, remap = false, desc = "don't paste in select mode"})
+end, { silent = true, remap = false, desc = "don't paste in select mode" })
+
+vim.keymap.set("x", "/", "<Esc>/\\%V", { desc = "Search in visually selected region" })
 
 -- vim: fdm=marker fdl=0
