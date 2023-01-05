@@ -245,7 +245,13 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = filetype_commands_group,
   pattern = "qf",
-  command = "wincmd J",
+  callback = function()
+    local win_id = vim.fn.win_getid()
+    local is_loc = vim.fn.getwininfo(win_id)[1].loclist == 1
+    if not is_loc then
+      vim.cmd.wincmd("J")
+    end
+  end,
   desc = "Make quickfix list take the whole horizontal space",
 }) --}}}
 
