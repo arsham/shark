@@ -1,4 +1,4 @@
-# NeoVim
+# NeoVim setup, fast as a shark
 
 The goal of this project is to have a fast Neovim startup, provide mappings
 that can be easily memorised, interact with the **Lua** API, and make
@@ -45,6 +45,7 @@ This project supports Neovim version `0.8.0` and newer.
    - [Snippets](#snippets)
    - [Utilities](#utilities)
 3. [Folder Structure](#folder-structure)
+4. [Plugin Licence List](#plugin-license-list)
 
 ![folds](https://user-images.githubusercontent.com/428611/148667078-25211d3c-116a-4c6f-938a-bb52b8bb1163.png)
 
@@ -109,108 +110,110 @@ replacement or the requirement changes.
 Some plugins are not listed here. You can find the complete list in the
 [plugins.lua](./lua/plugins.lua) file.
 
-| Function    | Plugin                                                                                     | Description                                          |
-| :---------- | :----------------------------------------------------------------------------------------- | :--------------------------------------------------- |
-| Core        | [folke/lazy.nvim](https://github.com/folke/lazy.nvim)                                      | Package manager                                      |
-| Core        | [samjwill/nvim-unception](https://github.com/samjwill/nvim-unception)                      | Neovim in Neovim = 1 Neovim                          |
-| Core        | [arsham/arshlib.nvim](https://github.com/arsham/arshlib.nvim)                              | Supporting library                                   |
-| Core        | [numToStr/Navigator.nvim](https://github.com/numToStr/Navigator.nvim)                      | Seamlessly navigate between tmux and vim             |
-| Core        | [tpope/vim-repeat](https://github.com/tpope/vim-repeat)                                    |                                                      |
-| Finder      | [junegunn/fzf](https://github.com/junegunn/fzf)                                            | Fuzzy finder                                         |
-| Finder      | [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)                                    | fzf plugin for vim                                   |
-| Finder      | [arsham/fzfmania.nvim](https://github.com/arsham/fzfmania.nvim)                            | Very powerful FZF setup in lua                       |
-| Finder      | [ibhagwan/fzf-lua](https://github.com/ibhagwan/fzf-lua)                                    | fzf :heart: lua - fzf frontend                       |
-| Visuals     | [arsham/arshamiser.nvim](https://github.com/arsham/arshamiser.nvim)                        | Status line, colour scheme and folds                 |
-| Lists       | [arsham/listish.nvim](https://github.com/arsham/listish.nvim)                              | Supporting quickfix and local lists                  |
-| Lists       | [kevinhwang91/nvim-bqf](https://github.com/kevinhwang91/nvim-bqf)                          | Better quickfix list manager                         |
-| Text Object | [arsham/archer.nvim](https://github.com/arsham/archer.nvim)                                | Mappings and text objects for archers                |
-| Text Object | [arsham/indent-tools.nvim](https://github.com/arsham/indent-tools.nvim)                    | Indent mappings and text object                      |
-| Visuals     | [arsham/matchmaker.nvim](https://github.com/arsham/matchmaker.nvim)                        | Creates highlight for user matches                   |
-| Tool        | [arsham/yanker.nvim](https://github.com/arsham/yanker.nvim)                                | Yank history                                         |
-| LSP         | [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                          | LSP configuration                                    |
-| LSP         | [mason.nvim](https://github.com/williamboman/mason.nvim)                                   | Package manager for LSP, DAP, formatters and linters |
-| LSP         | [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)               | LSP config bridge for mason.nvim                     |
-| LSP         | [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)  | Install and upgrade mason servers                    |
-| LSP         | [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim)                                  | Spinner for LSP status                               |
-| LSP         | [jose-elias-alvarez/null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)      | External Tool to LSP bridge                          |
-| LSP         | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                                    | Completion with LSP                                  |
-| LSP         | [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)                                | Extension for nvim-cmp                               |
-| LSP         | [hrsh7th/cmp-calc](https://github.com/hrsh7th/cmp-calc)                                    | Extension for nvim-cmp                               |
-| LSP         | [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)                              | Extension for nvim-cmp                               |
-| LSP         | [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)                            | Extension for nvim-cmp                               |
-| LSP         | [hrsh7th/lsp-signature-help](https://github.com/hrsh7th/cmp-nvim-lsp-signature-help)       | Extension for nvim-cmp                               |
-| LSP         | [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)                            | Extension for nvim-cmp                               |
-| LSP         | [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)                                    | Extension for nvim-cmp                               |
-| LSP         | [lukas-reineke/cmp-rg](https://github.com/lukas-reineke/cmp-rg)                            | Extension for nvim-cmp                               |
-| LSP         | [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)                    | Extension for nvim-cmp                               |
-| LSP         | [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                                    | Snippet engine                                       |
-| LSP         | [smjonas/inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim)                      | Incremental renaming with inccommand support         |
-| LSP         | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)            |                                                      |
-| LSP         | [ray-x/go.nvim](https://github.com/ray-x/go.nvim)                                          | Modern Go Plugin for Neovim                          |
-| LSP         | [nanotee/sqls.nvim](https://github.com/nanotee/sqls.nvim)                                  | SQL LSP                                              |
-| Visuals     | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                      | Highlighting engine                                  |
-| Visuals     | [treesitter-refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)         | Treesitter plugin                                    |
-| Text Object | [treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)   | Treesitter Text Objects                              |
-| Visuals     | [nvim-treesitter/playground](https://github.com/nvim-treesitter/playground)                | Treesitter plugin                                    |
-| Visuals     | [David-Kunz/treesitter-unit](https://github.com/David-Kunz/treesitter-unit)                | Treesitter plugin                                    |
-| Tool        | [nvim-neorg/neorg](https://github.com/nvim-neorg/neorg)                                    | Note taking tool                                     |
-| LSP         | [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)                          | Debug Adapter Protocol                               |
-| LSP         | [rcarriga/nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)                            | A UI for nvim-dap                                    |
-| LSP         | [theHamsta/nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)      | DAP related                                          |
-| LSP         | [leoluz/nvim-dap-go](https://github.com/leoluz/nvim-dap-go)                                | DAP related                                          |
-| Testing     | [nvim-neotest/neotest](https://github.com/nvim-neotest/neotest)                            | Run tests                                            |
-| Testing     | [nvim-neotest/neotest-go](https://github.com/nvim-neotest/neotest-go)                      | Neotest Go driver                                    |
-| Testing     | [rouge8/neotest-rust](https://github.com/rouge8/neotest-rust)                              | Neotest Rust driver                                  |
-| LSP         | [one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)         | DAP related                                          |
-| LSP         | [SmiteshP/nvim-navic](https://github.com/SmiteshP/nvim-navic)                              | Current code context with LSP                        |
-| LSP         | [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim)                             | Show LSP diagnostics in extmarks                     |
-| Tools       | [saecki/crates.nvim](https://github.com/saecki/crates.nvim)                                | Crate.toml helper                                    |
-| Tool        | [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                    | File explorer tree                                   |
-| Visuals     | [feline-nvim/feline.nvim](https://github.com/feline-nvim/feline.nvim)                      | Statusline (default)                                 |
-| Tool        | [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                                | Fuzzy completion for command mode                    |
-| Visuals     | [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim)                        |                                                      |
-| GIT         | [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                                | git integration                                      |
-| GIT         | [tpope/vim-rhubarb](https://github.com/tpope/vim-rhubarb)                                  | Go to code's Github page for selection               |
-| GIT         | [mattn/vim-gist](https://github.com/mattn/vim-gist)                                        | gist integration                                     |
-| GIT/Visuals | [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                      | git signs in the gutter                              |
-| GIT         | [ldelossa/gh.nvim](https://github.com/ldelossa/gh.nvim)                                    | Code review plugin                                   |
-| GIT         | [ldelossa/litee.nvim](https://github.com/ldelossa/litee.nvim)                              | Dependency for `gh.nvim`                             |
-| Editing     | [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)                          |                                                      |
-| Editing     | [ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |                                                      |
-| Editing     | [vim-scripts/visualrepeat](https://github.com/vim-scripts/visualrepeat)                    | Repeat in visual mode                                |
-| Editing     | [arthurxavierx/vim-caser](https://github.com/arthurxavierx/vim-caser)                      | Case conversion                                      |
-| Editing     | [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)                        | Multiple cursors                                     |
-| Editing     | [gbprod/substitute.nvim](https://github.com/gbprod/substitute.nvim)                        | Text exchange operator                               |
-| Editing     | [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                          |                                                      |
-| Visuals     | [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)                            | Better notification UI                               |
-| Visuals     | [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim)                            | UI component                                         |
-| Visuals     | [folke/noice.nvim](https://github.com/folke/noice.nvim)                                    | Replaces the UI for messages                         |
-| Editing     | [mbbill/undotree](https://github.com/mbbill/undotree)                                      | Undo tree browser                                    |
-| Visuals     | [towolf/vim-helm](https://github.com/towolf/vim-helm)                                      | Helm syntax highlighting                             |
-| Editing     | [echasnovski/mini.nvim](https://github.com/echasnovski/mini.nvim)                          | For surround, trailing spaces and alignments         |
-| Text Object | [glts/vim-textobj-comment](https://github.com/glts/vim-textobj-comment)                    |                                                      |
-| Text Object | [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)                          |                                                      |
-| Visuals     | [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)            |                                                      |
-| Tool        | [dhruvasagar/vim-zoom](https://github.com/dhruvasagar/vim-zoom)                            |                                                      |
-| Visuals     | [NvChad/nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)                  | Colourise matched colours in buffer                  |
-| Visuals     | [ziontee113/color-picker.nvim](https://github.com/ziontee113/color-picker.nvim)            | Slider for changing colours in buffer                |
-| Tool        | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)            |                                                      |
-| Tool        | [willchao612/vim-diagon](https://github.com/willchao612/vim-diagon)                        | Make diagrams from text                              |
-| Tool        | [jbyuki/venn.nvim](https://github.com/jbyuki/venn.nvim)                                    | Create diagrams easier                               |
-| Editing     | [monaqa/dial.nvim](https://github.com/monaqa/dial.nvim)                                    | Enhanced increment/decrement values                  |
-| Tool        | [bfredl/nvim-luadev](https://github.com/bfredl/nvim-luadev)                                | REPL/debug console for nvim lua plugins              |
-| Tool        | [sQVe/sort.nvim](https://github.com/sQVe/sort.nvim)                                        | Sort plugin with line-wise and delimiter sorting     |
-| Tool        | [ralismark/opsort.vim](https://github.com/ralismark/opsort.vim)                            | Sort operator                                        |
-| Tool        | [kiran94/s3edit.nvim](https://github.com/kiran94/s3edit.nvim)                              | Edit files on S3 bucket                              |
-| Core        | [tweekmonster/startuptime.vim](https://github.com/tweekmonster/startuptime.vim)            |                                                      |
-| Core        | [svban/YankAssassin.vim](https://github.com/svban/YankAssassin.vim)                        | Stay where you are after yanking                     |
-| Core        | [tmux-plugins/vim-tmux](https://github.com/tmux-plugins/vim-tmux)                          |                                                      |
-| Core        | [tpope/vim-git](https://github.com/tpope/vim-git)                                          |                                                      |
-| Core        | [andymass/vim-matchup](https://github.com/andymass/vim-matchup)                            |                                                      |
-| Core        | [folke/neodev.nvim](https://github.com/folke/neodev.nvim)                                  |                                                      |
-| Core        | [mattn/webapi-vim](https://github.com/mattn/webapi-vim)                                    |                                                      |
-| Core        | [milisims/nvim-luaref](https://github.com/milisims/nvim-luaref)                            |                                                      |
-| Core        | [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)                          |                                                      |
+Licenses for plugins can be found [here](#plugin-license-list).
+
+| Function    | Plugin                                            | Description                                          |
+| :---------- | :------------------------------------------------ | :--------------------------------------------------- |
+| Core        | [folke/lazy.nvim][folke/lazy.nvim]                | Package manager                                      |
+| Core        | [arsham/arshlib.nvim][arsham/arshlib.nvim]        | Supporting library                                   |
+| Core        | [numToStr/Navigator.nvim][navigator.nvim]         | Seamlessly navigate between tmux and vim             |
+| Core        | [tpope/vim-repeat][tpope/vim-repeat]              |                                                      |
+| Finder      | [junegunn/fzf][junegunn/fzf]                      | Fuzzy finder                                         |
+| Finder      | [junegunn/fzf.vim][junegunn/fzf.vim]              | fzf plugin for vim                                   |
+| Finder      | [arsham/fzfmania.nvim][arsham/fzfmania.nvim]      | Very powerful FZF setup in lua                       |
+| Finder      | [ibhagwan/fzf-lua][ibhagwan/fzf-lua]              | fzf :heart: lua - fzf frontend                       |
+| Visuals     | [arsham/arshamiser.nvim][arsham/arshamiser.nvim]  | Status line, colour scheme and folds                 |
+| Lists       | [arsham/listish.nvim][arsham/listish.nvim]        | Supporting quickfix and local lists                  |
+| Lists       | [kevinhwang91/nvim-bqf][kevinhwang91/nvim-bqf]    | Better quickfix list manager                         |
+| Text Object | [arsham/archer.nvim][arsham/archer.nvim]          | Mappings and text objects for archers                |
+| Text Object | [arsham/indent-tools.nvim][indent-tools.nvim]     | Indent mappings and text object                      |
+| Visuals     | [arsham/matchmaker.nvim][arsham/matchmaker.nvim]  | Creates highlight for user matches                   |
+| Tool        | [arsham/yanker.nvim][arsham/yanker.nvim]          | Yank history                                         |
+| LSP         | [neovim/nvim-lspconfig][neovim/nvim-lspconfig]    | LSP configuration                                    |
+| LSP         | [mason.nvim][mason.nvim]                          | Package manager for LSP, DAP, formatters and linters |
+| LSP         | [mason-lspconfig.nvim][mason-lspconfig.nvim]      | LSP config bridge for mason.nvim                     |
+| LSP         | [mason-tool-installer][mason-tool-installer]      | Install and upgrade mason servers                    |
+| LSP         | [j-hui/fidget.nvim][j-hui/fidget.nvim]            | Spinner for LSP status                               |
+| LSP         | [null-ls.nvim][null-ls.nvim]                      | External Tool to LSP bridge                          |
+| LSP         | [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]              | Completion with LSP                                  |
+| LSP         | [hrsh7th/cmp-buffer][hrsh7th/cmp-buffer]          | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-calc][hrsh7th/cmp-calc]              | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]        | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-nvim-lsp][hrsh7th/cmp-nvim-lsp]      | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/lsp-signature-help][lsp-signature-help]  | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-nvim-lua][hrsh7th/cmp-nvim-lua]      | Extension for nvim-cmp                               |
+| LSP         | [hrsh7th/cmp-path][hrsh7th/cmp-path]              | Extension for nvim-cmp                               |
+| LSP         | [lukas-reineke/cmp-rg][lukas-reineke/cmp-rg]      | Extension for nvim-cmp                               |
+| LSP         | [saadparwaiz1/cmp_luasnip][cmp_luasnip]           | Extension for nvim-cmp                               |
+| LSP         | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]              | Snippet engine                                       |
+| LSP         | [smjonas/inc-rename.nvim][inc-rename.nvim]        | Incremental renaming with inccommand support         |
+| LSP         | [friendly-snippets][friendly-snippets]            |                                                      |
+| LSP         | [ray-x/go.nvim][ray-x/go.nvim]                    | Modern Go Plugin for Neovim                          |
+| LSP         | [nanotee/sqls.nvim][nanotee/sqls.nvim]            | SQL LSP                                              |
+| Visuals     | [nvim-treesitter][nvim-treesitter]                | Highlighting engine                                  |
+| Visuals     | [treesitter-refactor][nvim-treesitter-refactor]   | Treesitter plugin                                    |
+| Text Object | [treesitter-textobjects][treesitter-textobjects]  | Treesitter Text Objects                              |
+| Visuals     | [nvim-treesitter/playground][playground]          | Treesitter plugin                                    |
+| Visuals     | [David-Kunz/treesitter-unit][treesitter-unit]     | Treesitter plugin                                    |
+| Tool        | [nvim-neorg/neorg][nvim-neorg/neorg]              | Note taking tool                                     |
+| LSP         | [mfussenegger/nvim-dap][mfussenegger/nvim-dap]    | Debug Adapter Protocol                               |
+| LSP         | [rcarriga/nvim-dap-ui][rcarriga/nvim-dap-ui]      | A UI for nvim-dap                                    |
+| LSP         | [nvim-dap-virtual-text][dap-virtual-text]         | DAP related                                          |
+| LSP         | [leoluz/nvim-dap-go][leoluz/nvim-dap-go]          | DAP related                                          |
+| Testing     | [nvim-neotest/neotest][nvim-neotest/neotest]      | Run tests                                            |
+| Testing     | [nvim-neotest/neotest-go][neotest-go]             | Neotest Go driver                                    |
+| Testing     | [rouge8/neotest-rust][rouge8/neotest-rust]        | Neotest Rust driver                                  |
+| LSP         | [one-small-step-for-vimkind][vimkind]             | DAP related                                          |
+| LSP         | [SmiteshP/nvim-navic][smiteshp/nvim-navic]        | Current code context with LSP                        |
+| LSP         | [lsp_lines.nvim][lsp_lines.nvim]                  | Show LSP diagnostics in extmarks                     |
+| Tools       | [saecki/crates.nvim][saecki/crates.nvim]          | Crate.toml helper                                    |
+| Tool        | [kyazdani42/nvim-tree.lua][nvim-tree.lua]         | File explorer tree                                   |
+| Visuals     | [feline-nvim/feline.nvim][feline.nvim]            | Statusline (default)                                 |
+| Tool        | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | Fuzzy completion for command mode                    |
+| Visuals     | [stevearc/dressing.nvim][stevearc/dressing.nvim]  |                                                      |
+| GIT         | [tpope/vim-fugitive][tpope/vim-fugitive]          | git integration                                      |
+| GIT         | [tpope/vim-rhubarb][tpope/vim-rhubarb]            | Go to code's Github page for selection               |
+| GIT         | [mattn/vim-gist][mattn/vim-gist]                  | gist integration                                     |
+| GIT/Visuals | [lewis6991/gitsigns.nvim][gitsigns.nvim]          | git signs in the gutter                              |
+| GIT         | [ldelossa/gh.nvim][ldelossa/gh.nvim]              | Code review plugin                                   |
+| GIT         | [ldelossa/litee.nvim][ldelossa/litee.nvim]        | Dependency for `gh.nvim`                             |
+| Editing     | [numToStr/Comment.nvim][numtostr/comment.nvim]    |                                                      |
+| Editing     | [ts-context-commentstring][context-commentstring] |                                                      |
+| Editing     | [vim-scripts/visualrepeat][visualrepeat]          | Repeat in visual mode                                |
+| Editing     | [arthurxavierx/vim-caser][vim-caser]              | Case conversion                                      |
+| Editing     | [mg979/vim-visual-multi][mg979/vim-visual-multi]  | Multiple cursors                                     |
+| Editing     | [gbprod/substitute.nvim][gbprod/substitute.nvim]  | Text exchange operator                               |
+| Editing     | [windwp/nvim-autopairs][windwp/nvim-autopairs]    |                                                      |
+| Visuals     | [rcarriga/nvim-notify][rcarriga/nvim-notify]      | Better notification UI                               |
+| Visuals     | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]      | UI component                                         |
+| Visuals     | [folke/noice.nvim][folke/noice.nvim]              | Replaces the UI for messages                         |
+| Editing     | [mbbill/undotree][mbbill/undotree]                | Undo tree browser                                    |
+| Visuals     | [towolf/vim-helm][towolf/vim-helm]                | Helm syntax highlighting                             |
+| Editing     | [echasnovski/mini.nvim][echasnovski/mini.nvim]    | For surround, trailing spaces and alignments         |
+| Text Object | [glts/vim-textobj-comment][vim-textobj-comment]   |                                                      |
+| Text Object | [kana/vim-textobj-user][kana/vim-textobj-user]    |                                                      |
+| Visuals     | [kyazdani42/nvim-web-devicons][nvim-web-devicons] |                                                      |
+| Tool        | [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      |                                                      |
+| Visuals     | [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | Colourise matched colours in buffer                  |
+| Visuals     | [ziontee113/color-picker.nvim][color-picker]      | Slider for changing colours in buffer                |
+| Tool        | [iamcco/markdown-preview.nvim][markdown-preview]  |                                                      |
+| Tool        | [willchao612/vim-diagon][willchao612/vim-diagon]  | Make diagrams from text                              |
+| Tool        | [jbyuki/venn.nvim][jbyuki/venn.nvim]              | Create diagrams easier                               |
+| Editing     | [monaqa/dial.nvim][monaqa/dial.nvim]              | Enhanced increment/decrement values                  |
+| Tool        | [bfredl/nvim-luadev][bfredl/nvim-luadev]          | REPL/debug console for nvim lua plugins              |
+| Tool        | [sQVe/sort.nvim][sqve/sort.nvim]                  | Sort plugin with line-wise and delimiter sorting     |
+| Tool        | [ralismark/opsort.vim][ralismark/opsort.vim]      | Sort operator                                        |
+| Tool        | [kiran94/s3edit.nvim][kiran94/s3edit.nvim]        | Edit files on S3 bucket                              |
+| Core        | [tweekmonster/startuptime.vim][startuptime.vim]   |                                                      |
+| Core        | [svban/YankAssassin.vim][svban/yankassassin.vim]  | Stay where you are after yanking                     |
+| Core        | [tmux-plugins/vim-tmux][tmux-plugins/vim-tmux]    |                                                      |
+| Core        | [tpope/vim-git][tpope/vim-git]                    |                                                      |
+| Core        | [andymass/vim-matchup][andymass/vim-matchup]      |                                                      |
+| Core        | [folke/neodev.nvim][folke/neodev.nvim]            |                                                      |
+| Core        | [mattn/webapi-vim][mattn/webapi-vim]              |                                                      |
+| Core        | [milisims/nvim-luaref][milisims/nvim-luaref]      |                                                      |
+| Core        | [nvim-lua/plenary.nvim][nvim-lua/plenary.nvim]    |                                                      |
+| Core        | [samjwill/nvim-unception][nvim-unception]         | Neovim in Neovim = 1 Neovim                          |
 
 </details>
 
@@ -236,6 +239,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **z**           | Folds, language/spelling                                   |
 | **i**           | **I**ndent                                                 |
 | **t**           | **T**ab, **T**est                                          |
+| **w**           | **W**indow                                                 |
 
 The `leader` key is `space`!
 
@@ -248,6 +252,8 @@ The `leader` key is `space`!
 | `<Ctrl-w>b`        | Delete current **B**uffer                                            |
 | `<Ctrl-w>y`        | **Y**ank current window for exchange (see next mapping)              |
 | `<Ctrl-w>x`        | E**x**change current window with previously yanked window            |
+| `<Ctrl-w><Ctrl-e>` | Run **e**dit silently on current window                              |
+| `<leader>e`        | Run edit silently on all windows of the current tab                  |
 | `<leader>kk`       | Toggles Neovim tree                                                  |
 | `<leader><leader>` | Toggles Neovim tree                                                  |
 | `<leader>kf`       | **F**inds current file in the Neovim tree                            |
@@ -737,6 +743,217 @@ more in plugin settings and lsp folder. The same goes for the commands.
 
 The reason for this is because I wanted to make sure if I disable a plugin,
 none of its associated mappings or commands are loaded.
+
+## Plugin License List
+
+<details>
+    <summary>Click to view the plugin list</summary>
+
+| Plugin                                            | License                                                                                                  |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [folke/lazy.nvim][folke/lazy.nvim]                | [Apache-2.0 license](https://github.com/folke/lazy.nvim/blob/main/LICENSE)                               |
+| [arsham/arshlib.nvim][arsham/arshlib.nvim]        | [MIT license](https://github.com/arsham/arshlib.nvim/blob/master/LICENSE)                                |
+| [numToStr/Navigator.nvim][navigator.nvim]         | [MIT license](https://github.com/numToStr/Navigator.nvim/blob/master/LICENSE)                            |
+| [tpope/vim-repeat][tpope/vim-repeat]              | [N/A][tpope/vim-repeat]                                                                                  |
+| [junegunn/fzf][junegunn/fzf]                      | [MIT license](https://github.com/junegunn/fzf/blob/master/LICENSE)                                       |
+| [junegunn/fzf.vim][junegunn/fzf.vim]              | [MIT license](https://github.com/junegunn/fzf.vim/blob/master/LICENSE)                                   |
+| [arsham/fzfmania.nvim][arsham/fzfmania.nvim]      | [MIT license](https://github.com/arsham/fzfmania.nvim/blob/master/LICENSE)                               |
+| [ibhagwan/fzf-lua][ibhagwan/fzf-lua]              | [AGPL-3.0 license](https://github.com/ibhagwan/fzf-lua/blob/main/LICENSE)                                |
+| [arsham/arshamiser.nvim][arsham/arshamiser.nvim]  | [MIT license](https://github.com/arsham/arshamiser.nvim/blob/master/LICENSE)                             |
+| [arsham/listish.nvim][arsham/listish.nvim]        | [MIT license](https://github.com/arsham/listish.nvim/blob/master/LICENSE)                                |
+| [kevinhwang91/nvim-bqf][kevinhwang91/nvim-bqf]    | [BSD-3-Clause license](https://github.com/kevinhwang91/nvim-bqf/blob/main/LICENSE)                       |
+| [arsham/archer.nvim][arsham/archer.nvim]          | [MIT license](https://github.com/arsham/archer.nvim/blob/master/LICENSE)                                 |
+| [arsham/indent-tools.nvim][indent-tools.nvim]     | [MIT license](https://github.com/arsham/indent-tools.nvim/blob/master/LICENSE)                           |
+| [arsham/matchmaker.nvim][arsham/matchmaker.nvim]  | [MIT license](https://github.com/arsham/matchmaker.nvim/blob/master/LICENSE)                             |
+| [arsham/yanker.nvim][arsham/yanker.nvim]          | [MIT license](https://github.com/arsham/yanker.nvim/blob/master/LICENSE)                                 |
+| [neovim/nvim-lspconfig][neovim/nvim-lspconfig]    | [View license](https://github.com/neovim/nvim-lspconfig/blob/master/LICENSE.md)                          |
+| [mason.nvim][mason.nvim]                          | [Apache-2.0 license](https://github.com/williamboman/mason.nvim/blob/main/LICENSE)                       |
+| [mason-lspconfig.nvim][mason-lspconfig.nvim]      | [Apache-2.0 license](https://github.com/williamboman/mason-lspconfig.nvim/blob/main/LICENSE)             |
+| [mason-tool-installer][mason-tool-installer]      | [MIT license](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/blob/main/LICENSE)            |
+| [j-hui/fidget.nvim][j-hui/fidget.nvim]            | [MIT license](https://github.com/j-hui/fidget.nvim/blob/main/LICENSE)                                    |
+| [null-ls.nvim][null-ls.nvim]                      | [View license](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/LICENSE)                     |
+| [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]              | [MIT license](https://github.com/hrsh7th/nvim-cmp/blob/main/LICENSE)                                     |
+| [hrsh7th/cmp-buffer][hrsh7th/cmp-buffer]          | [MIT license](https://github.com/hrsh7th/cmp-buffer/blob/main/LICENSE)                                   |
+| [hrsh7th/cmp-calc][hrsh7th/cmp-calc]              | [N/A][hrsh7th/cmp-calc]                                                                                  |
+| [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]        | [N/A][hrsh7th/cmp-cmdline]                                                                               |
+| [hrsh7th/cmp-nvim-lsp][hrsh7th/cmp-nvim-lsp]      | [MIT license](https://github.com/hrsh7th/cmp-nvim-lsp/blob/main/LICENSE)                                 |
+| [hrsh7th/lsp-signature-help][lsp-signature-help]  | [N/A][lsp-signature-help]                                                                                |
+| [hrsh7th/cmp-nvim-lua][hrsh7th/cmp-nvim-lua]      | [N/A][hrsh7th/cmp-nvim-lua]                                                                              |
+| [hrsh7th/cmp-path][hrsh7th/cmp-path]              | [MIT license](https://github.com/hrsh7th/cmp-path/blob/main/LICENSE)                                     |
+| [lukas-reineke/cmp-rg][lukas-reineke/cmp-rg]      | [MIT license](https://github.com/lukas-reineke/cmp-rg/blob/master/LICENSE.md)                            |
+| [saadparwaiz1/cmp_luasnip][cmp_luasnip]           | [Apache-2.0 license](https://github.com/saadparwaiz1/cmp_luasnip/blob/master/LICENSE)                    |
+| [L3MON4D3/LuaSnip][l3mon4d3/luasnip]              | [Apache-2.0 license](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)                            |
+| [smjonas/inc-rename.nvim][inc-rename.nvim]        | [MIT license](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)                              |
+| [friendly-snippets][friendly-snippets]            | [MIT license](https://github.com/rafamadriz/friendly-snippets/blob/main/LICENSE)                         |
+| [ray-x/go.nvim][ray-x/go.nvim]                    | [MIT license](https://github.com/ray-x/go.nvim/blob/master/LICENSE)                                      |
+| [nanotee/sqls.nvim][nanotee/sqls.nvim]            | [MIT license](https://github.com/nanotee/sqls.nvim/blob/main/LICENSE)                                    |
+| [nvim-treesitter][nvim-treesitter]                | [Apache-2.0 license](https://github.com/nvim-treesitter/nvim-treesitter/blob/master/LICENSE)             |
+| [treesitter-refactor][nvim-treesitter-refactor]   | [Apache-2.0 license](https://github.com/nvim-treesitter/nvim-treesitter-refactor/blob/master/LICENSE)    |
+| [treesitter-textobjects][treesitter-textobjects]  | [Apache-2.0 license](https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/LICENSE) |
+| [nvim-treesitter/playground][playground]          | [Apache-2.0 license](https://github.com/nvim-treesitter/playground/blob/master/LICENSE)                  |
+| [David-Kunz/treesitter-unit][treesitter-unit]     | [Unlicense license](https://github.com/David-Kunz/treesitter-unit/blob/main/LICENSE)                     |
+| [nvim-neorg/neorg][nvim-neorg/neorg]              | [GPL-3.0 license](https://github.com/nvim-neorg/neorg/blob/main/LICENSE)                                 |
+| [mfussenegger/nvim-dap][mfussenegger/nvim-dap]    | [GPL-3.0 license](https://github.com/mfussenegger/nvim-dap/blob/master/LICENSE.txt)                      |
+| [rcarriga/nvim-dap-ui][rcarriga/nvim-dap-ui]      | [N/A][rcarriga/nvim-dap-ui]                                                                              |
+| [nvim-dap-virtual-text][dap-virtual-text]         | [GPL-3.0 license](https://github.com/theHamsta/nvim-dap-virtual-text/blob/master/LICENSE.txt)            |
+| [leoluz/nvim-dap-go][leoluz/nvim-dap-go]          | [N/A][leoluz/nvim-dap-go]                                                                                |
+| [nvim-neotest/neotest][nvim-neotest/neotest]      | [MIT license]()                                                                                          |
+| [nvim-neotest/neotest-go][neotest-go]             | [N/A][neotest-go]                                                                                        |
+| [rouge8/neotest-rust][rouge8/neotest-rust]        | [MIT license](https://github.com/rouge8/neotest-rust/blob/main/LICENSE)                                  |
+| [one-small-step-for-vimkind][vimkind]             | [MIT license](https://github.com/jbyuki/one-small-step-for-vimkind/blob/main/LICENSE)                    |
+| [SmiteshP/nvim-navic][smiteshp/nvim-navic]        | [Apache-2.0 license]()                                                                                   |
+| [lsp_lines.nvim][lsp_lines.nvim]                  | [ISC][lsp_lines.nvim]                                                                                    |
+| [saecki/crates.nvim][saecki/crates.nvim]          | [MIT license](https://github.com/Saecki/crates.nvim/blob/main/LICENSE)                                   |
+| [kyazdani42/nvim-tree.lua][nvim-tree.lua]         | [LICENSE](https://github.com/nvim-tree/nvim-tree.lua/blob/master/LICENSE)                                |
+| [feline-nvim/feline.nvim][feline.nvim]            | [GPL-3.0 license](https://github.com/feline-nvim/feline.nvim/blob/master/LICENSE.md)                     |
+| [gelguy/wilder.nvim][gelguy/wilder.nvim]          | [MIT license](https://github.com/gelguy/wilder.nvim/blob/master/LICENSE)                                 |
+| [stevearc/dressing.nvim][stevearc/dressing.nvim]  | [MIT license](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)                             |
+| [tpope/vim-fugitive][tpope/vim-fugitive]          | [N/A][tpope/vim-fugitive]                                                                                |
+| [tpope/vim-rhubarb][tpope/vim-rhubarb]            | [MIT license](https://github.com/tpope/vim-rhubarb/blob/master/LICENSE)                                  |
+| [mattn/vim-gist][mattn/vim-gist]                  | [N/A][mattn/vim-gist]                                                                                    |
+| [lewis6991/gitsigns.nvim][gitsigns.nvim]          | [MIT license](https://github.com/lewis6991/gitsigns.nvim/blob/main/LICENSE)                              |
+| [ldelossa/gh.nvim][ldelossa/gh.nvim]              | [MIT license](https://github.com/ldelossa/gh.nvim/blob/main/LICENSE)                                     |
+| [ldelossa/litee.nvim][ldelossa/litee.nvim]        | [N/A][ldelossa/litee.nvim]                                                                               |
+| [numToStr/Comment.nvim][numtostr/comment.nvim]    | [MIT license](https://github.com/numToStr/Comment.nvim/blob/master/LICENSE)                              |
+| [ts-context-commentstring][context-commentstring] | [MIT license](https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/main/LICENSE)          |
+| [vim-scripts/visualrepeat][visualrepeat]          | [N/A][visualrepeat]                                                                                      |
+| [arthurxavierx/vim-caser][vim-caser]              | [View license](https://github.com/arthurxavierx/vim-caser/blob/master/LICENSE)                           |
+| [mg979/vim-visual-multi][mg979/vim-visual-multi]  | [MIT license](https://github.com/mg979/vim-visual-multi/blob/master/LICENSE)                             |
+| [gbprod/substitute.nvim][gbprod/substitute.nvim]  | [WTFPL license]()                                                                                        |
+| [windwp/nvim-autopairs][windwp/nvim-autopairs]    | [MIT license](https://github.com/windwp/nvim-autopairs/blob/master/LICENSE)                              |
+| [rcarriga/nvim-notify][rcarriga/nvim-notify]      | [MIT license](https://github.com/rcarriga/nvim-notify/blob/master/LICENSE)                               |
+| [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]      | [MIT license](https://github.com/MunifTanjim/nui.nvim/blob/main/LICENSE)                                 |
+| [folke/noice.nvim][folke/noice.nvim]              | [Apache-2.0 license](https://github.com/folke/noice.nvim/blob/main/LICENSE)                              |
+| [mbbill/undotree][mbbill/undotree]                | [N/A][mbbill/undotree]                                                                                   |
+| [towolf/vim-helm][towolf/vim-helm]                | [View license](https://github.com/towolf/vim-helm/blob/master/LICENSE)                                   |
+| [echasnovski/mini.nvim][echasnovski/mini.nvim]    | [MIT license]()                                                                                          |
+| [glts/vim-textobj-comment][vim-textobj-comment]   | [N/A][vim-textobj-comment]                                                                               |
+| [kana/vim-textobj-user][kana/vim-textobj-user]    | [N/A][kana/vim-textobj-user]                                                                             |
+| [kyazdani42/nvim-web-devicons][nvim-web-devicons] | [N/A][nvim-web-devicons]                                                                                 |
+| [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      | [N/A][dhruvasagar/vim-zoom]                                                                              |
+| [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | [View license](https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE)                         |
+| [ziontee113/color-picker.nvim][color-picker]      | [MIT license](https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE)                       |
+| [iamcco/markdown-preview.nvim][markdown-preview]  | [MIT license](https://github.com/iamcco/markdown-preview.nvim/blob/master/LICENSE)                       |
+| [willchao612/vim-diagon][willchao612/vim-diagon]  | [MIT license](https://github.com/willchao612/vim-diagon/blob/main/LICENSE)                               |
+| [jbyuki/venn.nvim][jbyuki/venn.nvim]              | [MIT license](https://github.com/jbyuki/venn.nvim/blob/main/LICENSE)                                     |
+| [monaqa/dial.nvim][monaqa/dial.nvim]              | [MIT license](https://github.com/monaqa/dial.nvim/blob/master/LICENSE)                                   |
+| [bfredl/nvim-luadev][bfredl/nvim-luadev]          | [MIT license](https://github.com/bfredl/nvim-luadev/blob/master/LICENSE)                                 |
+| [sQVe/sort.nvim][sqve/sort.nvim]                  | [MIT license](https://github.com/sQVe/sort.nvim/blob/main/LICENSE)                                       |
+| [ralismark/opsort.vim][ralismark/opsort.vim]      | [MIT license](https://github.com/ralismark/opsort.vim/blob/main/LICENSE)                                 |
+| [kiran94/s3edit.nvim][kiran94/s3edit.nvim]        | [MIT license](https://github.com/kiran94/s3edit.nvim/blob/main/LICENSE)                                  |
+| [tweekmonster/startuptime.vim][startuptime.vim]   | [MIT license](https://github.com/tweekmonster/startuptime.vim/blob/master/LICENSE)                       |
+| [svban/YankAssassin.vim][svban/yankassassin.vim]  | [N/A][svban/yankassassin.vim]                                                                            |
+| [tmux-plugins/vim-tmux][tmux-plugins/vim-tmux]    | [N/A][tmux-plugins/vim-tmux]                                                                             |
+| [tpope/vim-git][tpope/vim-git]                    | [N/A][tpope/vim-git]                                                                                     |
+| [andymass/vim-matchup][andymass/vim-matchup]      | [MIT license](https://github.com/andymass/vim-matchup/blob/master/LICENSE.md)                            |
+| [folke/neodev.nvim][folke/neodev.nvim]            | [Apache-2.0 license](https://github.com/folke/neodev.nvim/blob/main/LICENSE)                             |
+| [mattn/webapi-vim][mattn/webapi-vim]              | [N/A][mattn/webapi-vim]                                                                                  |
+| [milisims/nvim-luaref][milisims/nvim-luaref]      | [MIT license](https://github.com/milisims/nvim-luaref/blob/main/LICENSE)                                 |
+| [nvim-lua/plenary.nvim][nvim-lua/plenary.nvim]    | [MIT license](https://github.com/nvim-lua/plenary.nvim/blob/master/LICENSE)                              |
+| [samjwill/nvim-unception][nvim-unception]         | [MIT license](https://github.com/samjwill/nvim-unception/blob/main/LICENSE)                              |
+
+</details>
+
+[folke/lazy.nvim]: https://github.com/folke/lazy.nvim
+[arsham/arshlib.nvim]: https://github.com/arsham/arshlib.nvim
+[navigator.nvim]: https://github.com/numToStr/Navigator.nvim
+[tpope/vim-repeat]: https://github.com/tpope/vim-repeat
+[junegunn/fzf]: https://github.com/junegunn/fzf
+[junegunn/fzf.vim]: https://github.com/junegunn/fzf.vim
+[arsham/fzfmania.nvim]: https://github.com/arsham/fzfmania.nvim
+[ibhagwan/fzf-lua]: https://github.com/ibhagwan/fzf-lua
+[arsham/arshamiser.nvim]: https://github.com/arsham/arshamiser.nvim
+[arsham/listish.nvim]: https://github.com/arsham/listish.nvim
+[kevinhwang91/nvim-bqf]: https://github.com/kevinhwang91/nvim-bqf
+[arsham/archer.nvim]: https://github.com/arsham/archer.nvim
+[indent-tools.nvim]: https://github.com/arsham/indent-tools.nvim
+[arsham/matchmaker.nvim]: https://github.com/arsham/matchmaker.nvim
+[arsham/yanker.nvim]: https://github.com/arsham/yanker.nvim
+[neovim/nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
+[mason.nvim]: https://github.com/williamboman/mason.nvim
+[mason-lspconfig.nvim]: https://github.com/williamboman/mason-lspconfig.nvim
+[mason-tool-installer]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+[j-hui/fidget.nvim]: https://github.com/j-hui/fidget.nvim
+[null-ls.nvim]: https://github.com/jose-elias-alvarez/null-ls.nvim
+[hrsh7th/nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
+[hrsh7th/cmp-buffer]: https://github.com/hrsh7th/cmp-buffer
+[hrsh7th/cmp-calc]: https://github.com/hrsh7th/cmp-calc
+[hrsh7th/cmp-cmdline]: https://github.com/hrsh7th/cmp-cmdline
+[hrsh7th/cmp-nvim-lsp]: https://github.com/hrsh7th/cmp-nvim-lsp
+[lsp-signature-help]: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+[hrsh7th/cmp-nvim-lua]: https://github.com/hrsh7th/cmp-nvim-lua
+[hrsh7th/cmp-path]: https://github.com/hrsh7th/cmp-path
+[lukas-reineke/cmp-rg]: https://github.com/lukas-reineke/cmp-rg
+[cmp_luasnip]: https://github.com/saadparwaiz1/cmp_luasnip
+[l3mon4d3/luasnip]: https://github.com/L3MON4D3/LuaSnip
+[inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
+[friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
+[ray-x/go.nvim]: https://github.com/ray-x/go.nvim
+[nanotee/sqls.nvim]: https://github.com/nanotee/sqls.nvim
+[nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
+[nvim-treesitter-refactor]: https://github.com/nvim-treesitter/nvim-treesitter-refactor
+[treesitter-textobjects]: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+[playground]: https://github.com/nvim-treesitter/playground
+[treesitter-unit]: https://github.com/David-Kunz/treesitter-unit
+[nvim-neorg/neorg]: https://github.com/nvim-neorg/neorg
+[mfussenegger/nvim-dap]: https://github.com/mfussenegger/nvim-dap
+[rcarriga/nvim-dap-ui]: https://github.com/rcarriga/nvim-dap-ui
+[dap-virtual-text]: https://github.com/theHamsta/nvim-dap-virtual-text
+[leoluz/nvim-dap-go]: https://github.com/leoluz/nvim-dap-go
+[nvim-neotest/neotest]: https://github.com/nvim-neotest/neotest
+[neotest-go]: https://github.com/nvim-neotest/neotest-go
+[rouge8/neotest-rust]: https://github.com/rouge8/neotest-rust
+[vimkind]: https://github.com/jbyuki/one-small-step-for-vimkind
+[smiteshp/nvim-navic]: https://github.com/SmiteshP/nvim-navic
+[lsp_lines.nvim]: https://git.sr.ht/~whynothugo/lsp_lines.nvim
+[saecki/crates.nvim]: https://github.com/saecki/crates.nvim
+[nvim-tree.lua]: https://github.com/kyazdani42/nvim-tree.lua
+[feline.nvim]: https://github.com/feline-nvim/feline.nvim
+[gelguy/wilder.nvim]: https://github.com/gelguy/wilder.nvim
+[stevearc/dressing.nvim]: https://github.com/stevearc/dressing.nvim
+[tpope/vim-fugitive]: https://github.com/tpope/vim-fugitive
+[tpope/vim-rhubarb]: https://github.com/tpope/vim-rhubarb
+[mattn/vim-gist]: https://github.com/mattn/vim-gist
+[gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
+[ldelossa/gh.nvim]: https://github.com/ldelossa/gh.nvim
+[ldelossa/litee.nvim]: https://github.com/ldelossa/litee.nvim
+[numtostr/comment.nvim]: https://github.com/numToStr/Comment.nvim
+[context-commentstring]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+[visualrepeat]: https://github.com/vim-scripts/visualrepeat
+[vim-caser]: https://github.com/arthurxavierx/vim-caser
+[mg979/vim-visual-multi]: https://github.com/mg979/vim-visual-multi
+[gbprod/substitute.nvim]: https://github.com/gbprod/substitute.nvim
+[windwp/nvim-autopairs]: https://github.com/windwp/nvim-autopairs
+[rcarriga/nvim-notify]: https://github.com/rcarriga/nvim-notify
+[muniftanjim/nui.nvim]: https://github.com/MunifTanjim/nui.nvim
+[folke/noice.nvim]: https://github.com/folke/noice.nvim
+[mbbill/undotree]: https://github.com/mbbill/undotree
+[towolf/vim-helm]: https://github.com/towolf/vim-helm
+[echasnovski/mini.nvim]: https://github.com/echasnovski/mini.nvim
+[vim-textobj-comment]: https://github.com/glts/vim-textobj-comment
+[kana/vim-textobj-user]: https://github.com/kana/vim-textobj-user
+[nvim-web-devicons]: https://github.com/kyazdani42/nvim-web-devicons
+[dhruvasagar/vim-zoom]: https://github.com/dhruvasagar/vim-zoom
+[nvim-colorizer.lua]: https://github.com/NvChad/nvim-colorizer.lua
+[color-picker]: https://github.com/ziontee113/color-picker.nvim
+[markdown-preview]: https://github.com/iamcco/markdown-preview.nvim
+[willchao612/vim-diagon]: https://github.com/willchao612/vim-diagon
+[jbyuki/venn.nvim]: https://github.com/jbyuki/venn.nvim
+[monaqa/dial.nvim]: https://github.com/monaqa/dial.nvim
+[bfredl/nvim-luadev]: https://github.com/bfredl/nvim-luadev
+[sqve/sort.nvim]: https://github.com/sQVe/sort.nvim
+[ralismark/opsort.vim]: https://github.com/ralismark/opsort.vim
+[kiran94/s3edit.nvim]: https://github.com/kiran94/s3edit.nvim
+[startuptime.vim]: https://github.com/tweekmonster/startuptime.vim
+[svban/yankassassin.vim]: https://github.com/svban/YankAssassin.vim
+[tmux-plugins/vim-tmux]: https://github.com/tmux-plugins/vim-tmux
+[tpope/vim-git]: https://github.com/tpope/vim-git
+[andymass/vim-matchup]: https://github.com/andymass/vim-matchup
+[folke/neodev.nvim]: https://github.com/folke/neodev.nvim
+[mattn/webapi-vim]: https://github.com/mattn/webapi-vim
+[milisims/nvim-luaref]: https://github.com/milisims/nvim-luaref
+[nvim-lua/plenary.nvim]: https://github.com/nvim-lua/plenary.nvim
+[nvim-unception]: https://github.com/samjwill/nvim-unception
 
 <!--
 vim: foldlevel=2 conceallevel=0
