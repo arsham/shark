@@ -5,5 +5,5 @@ return {
     "neovim/nvim-lspconfig",
   },
   event = { "LspAttach" },
-  enabled = require("util").full_start_with_lsp,
+  cond = require("util").full_start_with_lsp,
 }

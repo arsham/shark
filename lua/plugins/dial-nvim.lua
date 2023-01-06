@@ -132,5 +132,5 @@ return {
     { "g<C-a>", mode = "v" },
     { "g<C-x>", mode = "v" },
   },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

@@ -66,5 +66,5 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
   },
   event = { "VeryLazy" },
-  enabled = require("util").full_start_with_lsp,
+  cond = require("util").full_start_with_lsp,
 }

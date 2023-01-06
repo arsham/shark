@@ -5,5 +5,5 @@ return {
     require("indent-tools").config({})
   end,
   event = { "VeryLazy" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

@@ -102,7 +102,7 @@ return {
     },
   },
   config = config,
-  enabled = require("util").full_start_with_lsp,
+  cond = require("util").full_start_with_lsp,
   keys = { "<leader>db", "<leader>dB", "<leader>dl" },
 }
 

@@ -105,5 +105,5 @@ return {
   "echasnovski/mini.nvim",
   config = config,
   event = { "VeryLazy" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

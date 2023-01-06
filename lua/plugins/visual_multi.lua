@@ -55,5 +55,5 @@ return {
   end,
   config = config,
   keys = { "<C-n>", "<C-Down>", "<C-Up>", { "<space><space>", mode = { "n", "v" } } },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

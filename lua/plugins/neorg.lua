@@ -80,7 +80,7 @@ return {
   build = ":Neorg sync-parsers",
   cmd = { "NeorgStart" },
   keys = { "<leader>oo" },
-  enabled = require("util").full_start_with_lsp,
+  cond = require("util").full_start_with_lsp,
 }
 
 -- vim: fdm=marker fdl=0

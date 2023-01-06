@@ -9,5 +9,5 @@ return {
     require("matchmaker").config({})
   end,
   keys = { "<leader>me", "<leader>ma", "<leader>ml", "<leader>mp" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

@@ -73,5 +73,5 @@ return {
   dependencies = "nvim-lua/plenary.nvim",
   config = config,
   event = { "VeryLazy" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

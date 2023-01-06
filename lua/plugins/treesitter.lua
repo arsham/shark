@@ -170,13 +170,14 @@ return {
       "nvim-treesitter/playground",
       build = ":TSInstall query",
       cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-      enabled = require("util").full_start,
+      cond = require("util").full_start,
     },
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
   build = ":TSUpdate",
   cmd = "TSUpdate",
   event = { "VeryLazy" },
+  priority = 80,
 }
 
 -- vim: fdm=marker fdl=0

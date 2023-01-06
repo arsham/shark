@@ -8,4 +8,5 @@ return {
     vim.notify = notify
   end,
   event = { "VeryLazy" },
+  priority = 60,
 }

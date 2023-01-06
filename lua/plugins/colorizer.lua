@@ -7,5 +7,5 @@ return {
     })
   end,
   ft = colorizer_ft,
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

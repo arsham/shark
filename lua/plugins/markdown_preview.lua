@@ -10,5 +10,5 @@ return {
     vim.g.mkdp_browser = "firefox"
   end,
   ft = { "markdown" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

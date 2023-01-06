@@ -28,5 +28,5 @@ return {
   "bfredl/nvim-luadev",
   config = config,
   cmd = { "Luadev" },
-  enabled = require("util").full_start_with_lsp,
+  cond = require("util").full_start_with_lsp,
 }

@@ -11,5 +11,5 @@ return {
   end,
   dependencies = { "neovim/nvim-lspconfig" },
   ft = { "lua" },
-  enabled = require("util").full_start_with_lsp,
+  cond = require("util").full_start_with_lsp,
 }

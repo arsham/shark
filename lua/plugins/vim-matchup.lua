@@ -5,5 +5,5 @@ return {
     vim.g.matchup_matchparen_offscreen = {}
   end,
   event = { "BufReadPost", "BufNewFile" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

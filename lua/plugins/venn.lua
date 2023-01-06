@@ -23,5 +23,5 @@ return {
     end, {})
   end,
   keys = { "<leader>v" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

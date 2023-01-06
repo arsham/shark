@@ -22,5 +22,5 @@ return {
     })
   end,
   ft = { "qf" },
-  enabled = require("util").full_start,
+  cond = require("util").full_start,
 }

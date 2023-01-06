@@ -7,6 +7,6 @@ return {
     "vim-scripts/visualrepeat",
     dependencies = { "inkarkat/vim-ingo-library" },
     event = { "BufReadPost", "BufNewFile" },
-    enabled = require("util").full_start,
+    cond = require("util").full_start,
   },
 }
