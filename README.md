@@ -192,6 +192,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | Editing     | [echasnovski/mini.nvim][echasnovski/mini.nvim]    | For surround, trailing spaces and alignments         |
 | Text Object | [glts/vim-textobj-comment][vim-textobj-comment]   |                                                      |
 | Text Object | [kana/vim-textobj-user][kana/vim-textobj-user]    |                                                      |
+| Text Object | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]            | Search and quickly jump                              |
 | Visuals     | [nvim-tree/nvim-web-devicons][nvim-web-devicons]  |                                                      |
 | Tool        | [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      |                                                      |
 | Visuals     | [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | Colourise matched colours in buffer                  |
@@ -831,6 +832,7 @@ none of its associated mappings or commands are loaded.
 | [echasnovski/mini.nvim][echasnovski/mini.nvim]    | [MIT license]()                                                                                          |
 | [glts/vim-textobj-comment][vim-textobj-comment]   | [N/A][vim-textobj-comment]                                                                               |
 | [kana/vim-textobj-user][kana/vim-textobj-user]    | [N/A][kana/vim-textobj-user]                                                                             |
+| [woosaaahh/sj.nvim][woosaaahh/sj.nvim]            | [MIT license](https://github.com/woosaaahh/sj.nvim/blob/main/LICENSE)                                    |
 | [nvim-tree/nvim-web-devicons][nvim-web-devicons]  | [N/A][nvim-web-devicons]                                                                                 |
 | [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      | [N/A][dhruvasagar/vim-zoom]                                                                              |
 | [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | [View license](https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE)                         |
@@ -936,6 +938,7 @@ none of its associated mappings or commands are loaded.
 [echasnovski/mini.nvim]: https://github.com/echasnovski/mini.nvim
 [vim-textobj-comment]: https://github.com/glts/vim-textobj-comment
 [kana/vim-textobj-user]: https://github.com/kana/vim-textobj-user
+[woosaaahh/sj.nvim]: https://github.com/woosaaahh/sj.nvim
 [nvim-web-devicons]: https://github.com/nvim-tree/nvim-web-devicons
 [dhruvasagar/vim-zoom]: https://github.com/dhruvasagar/vim-zoom
 [nvim-colorizer.lua]: https://github.com/NvChad/nvim-colorizer.lua

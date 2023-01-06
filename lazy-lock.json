@@ -70,6 +70,7 @@
   "playground": { "branch": "master", "commit": "8a887bcf66017bd775a0fb19c9d8b7a4d6759c48" },
   "plenary.nvim": { "branch": "master", "commit": "9d81624fbcedd3dd43b38d7e13a1e7b3f873d8cd" },
   "s3edit.nvim": { "branch": "main", "commit": "a7e215e7aa8bc97318d9b11f48d03c866caa4d2a" },
+  "sj.nvim": { "branch": "main", "commit": "2e06233c2076390d6f9dab0f166667e8703a59c6" },
   "sort.nvim": { "branch": "main", "commit": "9e4065625317128f6a1c826f4a36f9b47600417a" },
   "sqls.nvim": { "branch": "main", "commit": "a0048b7018c99b68456f91b4aa42ce288f0c0774" },
   "startuptime.vim": { "branch": "master", "commit": "dfa57f522d6f61793fe5fea65bca7484751b8ca2" },
