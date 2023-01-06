@@ -1,5 +1,6 @@
 local M = {}
 
+---@type Quick
 local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")

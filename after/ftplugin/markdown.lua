@@ -1,3 +1,4 @@
+---@type Quick
 local quick = require("arshlib.quick")
 vim.opt_local.spell = true
 vim.opt_local.softtabstop = 1 -- if I have two spaces in a sentence, delete only one.

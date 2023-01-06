@@ -1,3 +1,6 @@
+---@diagnostic disable: redundant-parameter, undefined-global
+
+---@type Quick
 local quick = require("arshlib.quick")
 
 local M = {}

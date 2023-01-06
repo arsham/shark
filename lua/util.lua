@@ -1,3 +1,20 @@
+---@class HighlightOpt
+---@field style string
+---@field link? string if defined, everything else is ignored
+---@field guifg string
+---@field guibg string
+---@field guisp string
+---@field ctermfg string
+---@field ctermbg string
+
+---@class Quick
+---@field command fun(name: string, command: string|function, opts?: table) Creates a command from provided specifics.
+---@field normal fun(mode: string, motion: string, special: boolean?) Executes a command in normal mode.
+---@field selection_contents fun(): string Returns the contents of the visually selected region.
+---@field buffer_command fun(name: string, command: string|function, opts?: table) Creates a command from provided specifics on current buffer.
+---@field call_and_centre fun(fn: fun()) Pushes the current location to the jumplist and calls the fn callback, then centres the cursor.
+---@field highlight fun(group: string, opt: HighlightOpt) --Create a highlight group.
+
 local M = {}
 
 ---Returns true if the buffer has the name variable. If it does not, it sets

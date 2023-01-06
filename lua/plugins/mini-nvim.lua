@@ -1,4 +1,5 @@
 local function config()
+  ---@type Quick
   local quick = require("arshlib.quick")
   quick.highlight("MiniTrailspace", { link = "ExtraWhitespace" })
   quick.highlight("MiniSurround", { link = "Substitute" })

@@ -1,4 +1,5 @@
 local function config()
+  ---@type Quick
   local quick = require("arshlib.quick")
   local gitsigns = require("gitsigns")
 
