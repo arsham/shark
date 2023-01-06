@@ -167,7 +167,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | LSP         | [SmiteshP/nvim-navic][smiteshp/nvim-navic]        | Current code context with LSP                        |
 | LSP         | [lsp_lines.nvim][lsp_lines.nvim]                  | Show LSP diagnostics in extmarks                     |
 | Tools       | [saecki/crates.nvim][saecki/crates.nvim]          | Crate.toml helper                                    |
-| Tool        | [kyazdani42/nvim-tree.lua][nvim-tree.lua]         | File explorer tree                                   |
+| Tool        | [nvim-neo-tree/neo-tree.nvim][neo-tree.nvim]      | File explorer tree                                   |
 | Visuals     | [feline-nvim/feline.nvim][feline.nvim]            | Statusline (default)                                 |
 | Tool        | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | Fuzzy completion for command mode                    |
 | Visuals     | [stevearc/dressing.nvim][stevearc/dressing.nvim]  |                                                      |
@@ -214,6 +214,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | Core        | [milisims/nvim-luaref][milisims/nvim-luaref]      |                                                      |
 | Core        | [nvim-lua/plenary.nvim][nvim-lua/plenary.nvim]    |                                                      |
 | Core        | [samjwill/nvim-unception][nvim-unception]         | Neovim in Neovim = 1 Neovim                          |
+| Core        | [s1n7ax/nvim-window-picker][nvim-window-picker]   | Window picker                                        |
 
 </details>
 
@@ -804,7 +805,7 @@ none of its associated mappings or commands are loaded.
 | [SmiteshP/nvim-navic][smiteshp/nvim-navic]        | [Apache-2.0 license]()                                                                                   |
 | [lsp_lines.nvim][lsp_lines.nvim]                  | [ISC][lsp_lines.nvim]                                                                                    |
 | [saecki/crates.nvim][saecki/crates.nvim]          | [MIT license](https://github.com/Saecki/crates.nvim/blob/main/LICENSE)                                   |
-| [kyazdani42/nvim-tree.lua][nvim-tree.lua]         | [LICENSE](https://github.com/nvim-tree/nvim-tree.lua/blob/master/LICENSE)                                |
+| [nvim-neo-tree/neo-tree.nvim][neo-tree.nvim]      | [MIT](https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE)                                  |
 | [feline-nvim/feline.nvim][feline.nvim]            | [GPL-3.0 license](https://github.com/feline-nvim/feline.nvim/blob/master/LICENSE.md)                     |
 | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | [MIT license](https://github.com/gelguy/wilder.nvim/blob/master/LICENSE)                                 |
 | [stevearc/dressing.nvim][stevearc/dressing.nvim]  | [MIT license](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)                             |
@@ -851,6 +852,7 @@ none of its associated mappings or commands are loaded.
 | [milisims/nvim-luaref][milisims/nvim-luaref]      | [MIT license](https://github.com/milisims/nvim-luaref/blob/main/LICENSE)                                 |
 | [nvim-lua/plenary.nvim][nvim-lua/plenary.nvim]    | [MIT license](https://github.com/nvim-lua/plenary.nvim/blob/master/LICENSE)                              |
 | [samjwill/nvim-unception][nvim-unception]         | [MIT license](https://github.com/samjwill/nvim-unception/blob/main/LICENSE)                              |
+| [s1n7ax/nvim-window-picker][nvim-window-picker]   | [MIT license](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)                            |
 
 </details>
 
@@ -907,7 +909,7 @@ none of its associated mappings or commands are loaded.
 [smiteshp/nvim-navic]: https://github.com/SmiteshP/nvim-navic
 [lsp_lines.nvim]: https://git.sr.ht/~whynothugo/lsp_lines.nvim
 [saecki/crates.nvim]: https://github.com/saecki/crates.nvim
-[nvim-tree.lua]: https://github.com/kyazdani42/nvim-tree.lua
+[neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [feline.nvim]: https://github.com/feline-nvim/feline.nvim
 [gelguy/wilder.nvim]: https://github.com/gelguy/wilder.nvim
 [stevearc/dressing.nvim]: https://github.com/stevearc/dressing.nvim
@@ -954,6 +956,7 @@ none of its associated mappings or commands are loaded.
 [milisims/nvim-luaref]: https://github.com/milisims/nvim-luaref
 [nvim-lua/plenary.nvim]: https://github.com/nvim-lua/plenary.nvim
 [nvim-unception]: https://github.com/samjwill/nvim-unception
+[nvim-window-picker]: https://github.com/s1n7ax/nvim-window-picker
 
 <!--
 vim: foldlevel=2 conceallevel=0
