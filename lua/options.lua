@@ -13,6 +13,7 @@ vim.opt.cmdheight = 0
 vim.opt.conceallevel = 2
 vim.opt.mouse = nil
 vim.g.ts_highlight_lua = true
+vim.opt.exrc = true
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
