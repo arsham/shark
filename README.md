@@ -833,7 +833,7 @@ none of its associated mappings or commands are loaded.
 | [glts/vim-textobj-comment][vim-textobj-comment]   | [N/A][vim-textobj-comment]                                                                               |
 | [kana/vim-textobj-user][kana/vim-textobj-user]    | [N/A][kana/vim-textobj-user]                                                                             |
 | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]            | [MIT license](https://github.com/woosaaahh/sj.nvim/blob/main/LICENSE)                                    |
-| [nvim-tree/nvim-web-devicons][nvim-web-devicons]  | [N/A][nvim-web-devicons]                                                                                 |
+| [nvim-tree/nvim-web-devicons][nvim-web-devicons]  | [MIT license](https://github.com/nvim-tree/nvim-web-devicons/blob/master/LICENSE)                        |
 | [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      | [N/A][dhruvasagar/vim-zoom]                                                                              |
 | [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | [View license](https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE)                         |
 | [ziontee113/color-picker.nvim][color-picker]      | [MIT license](https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE)                       |
