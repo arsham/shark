@@ -1,8 +1,42 @@
----@diagnostic disable
+local priorities
+---Sets up the priorities variable once when cmp is loaded.
+local function setup_priorities()
+  local kinds = require("cmp.types").lsp.CompletionItemKind
+  priorities = {
+    kinds.Field,
+    kinds.Variable,
+    kinds.Method,
+    kinds.Property,
+    kinds.Function,
+    kinds.Constructor,
+    kinds.Class,
+    kinds.Interface,
+    kinds.Module,
+    kinds.Unit,
+    kinds.Value,
+    kinds.Enum,
+    kinds.Keyword,
+    kinds.Color,
+    kinds.File,
+    kinds.Reference,
+    kinds.Folder,
+    kinds.EnumMember,
+    kinds.Constant,
+    kinds.Struct,
+    kinds.Event,
+    kinds.Operator,
+    kinds.TypeParameter,
+    kinds.Snippet,
+    kinds.Text,
+  }
+end
+
 local function config()
   local cmp = require("cmp")
   local compare = require("cmp.config.compare")
   local ls = require("luasnip")
+  local kinds = require("cmp.types").lsp.CompletionItemKind
+  setup_priorities()
 
   --               ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
   --       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
@@ -150,11 +184,31 @@ local function config()
     }), --}}}
 
     sources = cmp.config.sources({ --{{{
-      { name = "nvim_lsp", priority = 80 },
-      { name = "nvim_lua", priority = 80 },
-      { name = "path", priority = 40, max_item_count = 4 },
-      { name = "luasnip", priority = 10 },
-      { name = "calc" },
+      {
+        name = "nvim_lsp",
+        priority = 80,
+        group_index = 1,
+        entry_filter = function(entry, context)
+          local kind = entry:get_kind()
+          local line = context.cursor_line
+          local col = context.cursor.col
+          local chars_before = line:sub(col - 4, col - 1)
+
+          if chars_before:find("%.") or chars_before:find("%:") then
+            -- If any previous 4 characters contains a "." or ":"
+            return kind == kinds.Method or kind == kinds.Function or kinds.Field
+          elseif line:match("^%s*%w*$") then
+            -- text in the new line
+            return kind == kinds.Function or kind == kinds.Variable
+          end
+
+          return true
+        end,
+      },
+      { name = "nvim_lua", priority = 80, group_index = 1 },
+      { name = "path", priority = 40, max_item_count = 4, group_index = 5 },
+      { name = "luasnip", priority = 10, group_index = 2 },
+      { name = "calc", group_index = 3 },
       { name = "nvim_lsp_signature_help" },
       { name = "dap" },
       { name = "neorg", keyword_length = 1 },
@@ -163,13 +217,14 @@ local function config()
         priority = 5,
         keyword_length = 3,
         max_item_count = 5,
+        group_index = 5,
         option = {
           get_bufnrs = function()
             return vim.api.nvim_list_bufs()
           end,
         },
       },
-      { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1 },
+      { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1, group_index = 5 },
     }), --}}}
 
     formatting = { --{{{
@@ -219,15 +274,29 @@ local function config()
     sorting = { --{{{
       priority_weight = 2,
       comparators = {
-        compare.offset,
-        compare.score,
         compare.exact,
+        compare.offset,
+
+        function(entry1, entry2)
+          local kind1, kind2 = entry1:get_kind(), entry2:get_kind()
+          if kind1 ~= kind2 then
+            for _, kind in ipairs(priorities) do
+              if kind1 == kind then
+                return true
+              end
+              if kind2 == kind then
+                return false
+              end
+            end
+          end
+        end,
+
+        compare.score,
         compare.recently_used,
         compare.locality,
         function(...)
           return require("cmp_buffer"):compare_locality(...)
         end,
-        compare.kind,
         compare.sort_text,
         compare.length,
         compare.order,
