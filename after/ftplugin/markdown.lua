@@ -77,5 +77,8 @@ end, { buffer = true, silent = true, desc = desc })
 vim.keymap.set("n", "[[", function()
   nextHeading(true)
 end, { buffer = true, silent = true, desc = desc })
+
+vim.keymap.set("x", "<C-b>", "s**<Esc>pa**<Esc>", { desc = "Make selection bold", buffer = true })
+
 --}}}
 -- vim: fdm=marker fdl=0
