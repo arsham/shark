@@ -34,5 +34,16 @@ return {
     require("arshlib.quick").command("MarksAnnotate", function()
       marks.annotate()
     end)
+
+    vim.keymap.set(
+      "n",
+      "<leader>mt",
+      marks.toggle_signs,
+      { desc = "Toggle mark sign column", silent = true }
+    )
+
+    -- Disabled by default until you trigger with ":MarksToggleSigns" or
+    -- "<leader>mt"
+    marks.toggle_signs()
   end,
 }
