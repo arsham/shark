@@ -10,7 +10,7 @@ return {
     "arsham/listish.nvim",
     {
       "ibhagwan/fzf-lua",
-      dependencies = { "kyazdani42/nvim-web-devicons" },
+      dependencies = { "nvim-tree/nvim-web-devicons" },
     },
   },
 

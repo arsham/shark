@@ -21,10 +21,10 @@ return {
     })
   end,
   dependencies = {
-    "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
     {
       "feline-nvim/feline.nvim",
-      dependencies = "kyazdani42/nvim-web-devicons",
+      dependencies = "nvim-tree/nvim-web-devicons",
     },
   },
 }
