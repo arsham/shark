@@ -109,6 +109,21 @@ return {
     in_func
   ), --}}}
 
+  -- Defer Recover {{{
+  ls.s(
+    { trig = "refrec", name = "Defer Recover", dscr = "Defer Recover" },
+    fmta(
+      [[
+        defer func() {{
+          if e := recover(); e != nil {{
+            fmt.Printf("Panic: %v\n%v\n", e, string(debug.Stack()))
+          }}
+        }}()
+      ]]
+    , {}),
+    in_func
+  ), --}}}
+
   -- gRPC Error{{{
   ls.s(
     { trig = "gerr", dscr = "Return an instrumented gRPC error" },
