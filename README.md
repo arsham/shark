@@ -196,6 +196,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | Tool        | [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      |                                                      |
 | Visuals     | [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | Colourise matched colours in buffer                  |
 | Visuals     | [ziontee113/color-picker.nvim][color-picker]      | Slider for changing colours in buffer                |
+| Visuals     | [chentoast/marks.nvim][chentoast/marks.nvim]      | Mark and Bookmark viewer                             |
 | Tool        | [iamcco/markdown-preview.nvim][markdown-preview]  |                                                      |
 | Tool        | [willchao612/vim-diagon][willchao612/vim-diagon]  | Make diagrams from text                              |
 | Tool        | [jbyuki/venn.nvim][jbyuki/venn.nvim]              | Create diagrams easier                               |
@@ -834,6 +835,7 @@ none of its associated mappings or commands are loaded.
 | [dhruvasagar/vim-zoom][dhruvasagar/vim-zoom]      | [N/A][dhruvasagar/vim-zoom]                                                                              |
 | [NvChad/nvim-colorizer.lua][nvim-colorizer.lua]   | [View license](https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE)                         |
 | [ziontee113/color-picker.nvim][color-picker]      | [MIT license](https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE)                       |
+| [chentoast/marks.nvim][chentoast/marks.nvim]      | [MIT license](https://github.com/chentoast/marks.nvim/blob/master/LICENSE)                               |
 | [iamcco/markdown-preview.nvim][markdown-preview]  | [MIT license](https://github.com/iamcco/markdown-preview.nvim/blob/master/LICENSE)                       |
 | [willchao612/vim-diagon][willchao612/vim-diagon]  | [MIT license](https://github.com/willchao612/vim-diagon/blob/main/LICENSE)                               |
 | [jbyuki/venn.nvim][jbyuki/venn.nvim]              | [MIT license](https://github.com/jbyuki/venn.nvim/blob/main/LICENSE)                                     |
@@ -938,6 +940,7 @@ none of its associated mappings or commands are loaded.
 [dhruvasagar/vim-zoom]: https://github.com/dhruvasagar/vim-zoom
 [nvim-colorizer.lua]: https://github.com/NvChad/nvim-colorizer.lua
 [color-picker]: https://github.com/ziontee113/color-picker.nvim
+[chentoast/marks.nvim]: https://github.com/chentoast/marks.nvim
 [markdown-preview]: https://github.com/iamcco/markdown-preview.nvim
 [willchao612/vim-diagon]: https://github.com/willchao612/vim-diagon
 [jbyuki/venn.nvim]: https://github.com/jbyuki/venn.nvim
