@@ -1,5 +1,10 @@
-local function config()
-  require("fidget").setup({
+return {
+  "j-hui/fidget.nvim",
+  init = function()
+    vim.api.nvim_create_autocmd("VimLeavePre", { command = ":silent! FidgetClose" })
+  end,
+  event = { "LspAttach" },
+  config = {
     text = {
       spinner = {
         "⊚∙∙∙∙",
@@ -38,13 +43,5 @@ local function config()
         )
       end,
     },
-  })
-
-  vim.api.nvim_create_autocmd("VimLeavePre", { command = "FidgetClose" })
-end
-
-return {
-  "j-hui/fidget.nvim",
-  config = config,
-  event = { "LspAttach" },
+  },
 }
