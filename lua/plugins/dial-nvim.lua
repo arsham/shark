@@ -1,11 +1,7 @@
 local function config()
-  local augend = require("dial.augend")
-  local config = require("dial.config")
-  local common = require("dial.augend.common")
-
   ---Returns a list of all characters in the given string.
-  -- @param str The string to get the characters from.
-  -- @return table
+  ---@param str string The string to get the characters from.
+  ---@return table
   local function generate_list(str)
     local ret = {}
     for i = 1, #str, 1 do
@@ -15,10 +11,10 @@ local function config()
   end
 
   ---Increases the given number by one.
-  -- @param text string The number to increase.
-  -- @param addend string The number to add to the given number.
-  -- @param prefix string|nil prefix of formatting the number
-  -- @return table
+  ---@param text string The number to increase.
+  ---@param addend string The number to add to the given number.
+  ---@param prefix string|nil prefix of formatting the number
+  ---@return table
   local function increase_decimal(text, addend, prefix)
     local len = #text
     local n = tonumber(text)
@@ -35,7 +31,9 @@ local function config()
     return { text = text, cursor = len }
   end
 
-  config.augends:register_group({
+  local augend = require("dial.augend")
+  local common = require("dial.augend.common")
+  require("dial.config").augends:register_group({
     default = {
       augend.constant.alias.bool,
       augend.date.alias["%-m/%-d"],
@@ -123,7 +121,6 @@ end
 
 return {
   "monaqa/dial.nvim",
-  config = config,
   keys = {
     { "<C-a>", mode = "n" },
     { "<C-x>", mode = "n" },
@@ -133,4 +130,5 @@ return {
     { "g<C-x>", mode = "v" },
   },
   cond = require("util").full_start,
+  config = config,
 }
