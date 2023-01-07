@@ -1,7 +1,28 @@
-local config = function()
-  ---@type Quick
-  local quick = require("arshlib.quick")
-  require("neo-tree").setup({
+return {
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v2.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "MunifTanjim/nui.nvim",
+    {
+      import = "plugins.nvim-window-picker",
+    },
+  },
+  keys = {
+    { "<leader>kk", ":Neotree toggle<CR>", { silent = true, desc = "toggle tree view" } },
+    { "<leader>kf", ":Neotree reveal<CR>", { silent = true, desc = "find file in tree view" } },
+  },
+  cmd = { "Neotree", "NeotreeLogs" },
+
+  init = function()
+    vim.g.neo_tree_remove_legacy_commands = 1
+    require("arshlib.quick").command("NeotreeLogs", function()
+      require("neo-tree").show_logs()
+    end)
+  end,
+
+  config = {
     log_level = "error",
     log_to_file = true,
     close_if_last_window = true,
@@ -151,44 +172,7 @@ local config = function()
       follow_current_file = true,
       use_libuv_file_watcher = true,
     }, -- }}}
-  })
-
-  -- Mappings {{{
-  vim.keymap.set(
-    "n",
-    "<leader>kk",
-    ":Neotree toggle<CR>",
-    { silent = true, desc = "toggle tree view" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>kf",
-    ":Neotree reveal<CR>",
-    { silent = true, desc = "find file in tree view" }
-  )
-  -- }}}
-  quick.command("NeotreeLogs", function()
-    require("neo-tree").show_logs()
-  end)
-end
-
-return {
-  "nvim-neo-tree/neo-tree.nvim",
-  branch = "v2.x",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
-    "MunifTanjim/nui.nvim",
-    {
-      import = "plugins.nvim-window-picker",
-    },
   },
-  init = function()
-    vim.g.neo_tree_remove_legacy_commands = 1
-  end,
-  config = config,
-  keys = { "<leader>kk", "<leader>kf" },
-  cmd = { "Neotree", "NeotreeLogs" },
 }
 
 -- vim: fdm=marker fdl=0
