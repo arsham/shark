@@ -1,10 +1,15 @@
-local function config()
-  local cmt_utils = require("Comment.utils")
-  local ts_utils = require("ts_context_commentstring.utils")
-  local internal = require("ts_context_commentstring.internal")
-
-  require("Comment").setup({
+return {
+  "numToStr/Comment.nvim",
+  dependencies = {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  event = { "BufReadPost", "BufNewFile" },
+  config = {
     pre_hook = function(ctx)
+      local cmt_utils = require("Comment.utils")
+      local ts_utils = require("ts_context_commentstring.utils")
+      local internal = require("ts_context_commentstring.internal")
       -- Determine the location where to calculate commentstring from
       local location = nil
       if ctx.ctype == cmt_utils.ctype.block then
@@ -21,15 +26,5 @@ local function config()
         location = location,
       })
     end,
-  })
-end
-
-return {
-  "numToStr/Comment.nvim",
-  dependencies = {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    "nvim-treesitter/nvim-treesitter",
   },
-  config = config,
-  event = { "BufReadPost", "BufNewFile" },
 }
