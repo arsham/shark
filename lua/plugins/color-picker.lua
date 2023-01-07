@@ -1,11 +1,16 @@
 return {
   "ziontee113/color-picker.nvim",
-  config = function()
-    vim.keymap.set("n", "<leader>cp", "<cmd>PickColor<cr>", { noremap = true, silent = true })
-
-    require("color-picker").setup({
-      ["icons"] = { "ﱢ", "" },
-    })
-  end,
-  keys = { "<leader>cp" },
+  keys = {
+    {
+      mode = "n",
+      "<leader>cp",
+      "<cmd>PickColor<cr>",
+      noremap = true,
+      silent = true,
+      desc = "Invoke the colour picker",
+    },
+  },
+  config = {
+    ["icons"] = { "ﱢ", "" },
+  },
 }
