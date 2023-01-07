@@ -4,15 +4,13 @@ return {
     "tpope/vim-git",
     "tpope/vim-rhubarb",
   },
-  config = function()
+  keys = {
+    { mode = "n", "<leader>gg", ":Git<cr>", silent = true, desc = "Open fugitive" },
+    { mode = "n", "<leader>gd", ":Git diff %<cr>", silent = true, desc = "View buffer's diff" },
+  },
+  lazy = false, -- otherwise starting directly into fugitive buffers would be empty.
+  init = function()
     vim.g.fugitive_legacy_commands = 0
-    vim.keymap.set("n", "<leader>gg", ":Git<cr>", { silent = true, desc = "Open fugitive" })
-    vim.keymap.set(
-      "n",
-      "<leader>gd",
-      ":Git diff %<cr>",
-      { silent = true, desc = "View buffer's diff" }
-    )
     local opts = {
       force = true,
       nargs = "*",
