@@ -1,23 +1,41 @@
-local function config()
-  require("arshlib.quick").command("NG", function(args) --{{{
-    require("neorg.modules.core.neorgcmd.module").public.function_callback(unpack(args.fargs))
-  end, { nargs = "*", complete = "customlist,v:lua._neorgcmd_generate_completions" })
-  --}}}
+vim.api.nvim_create_autocmd("FileType", { -- {{{
+  once = true,
+  pattern = { "norg" },
+  callback = function()
+    vim.api.nvim_create_user_command("Journal", ":Neorg journal", {})
+    require("arshlib.quick").command("NG", function(args)
+      require("neorg.modules.core.neorgcmd.module").public.function_callback(unpack(args.fargs))
+    end, { nargs = "*", complete = "customlist,v:lua._neorgcmd_generate_completions" })
 
-  vim.keymap.set("n", "<leader>oo", function() --{{{
-    vim.keymap.set("n", "<leader>oo", ":Neorg workspace home<CR>")
-    vim.api.nvim_command("vert new | Neorg workspace home")
-  end, { desc = "load Neorg" })
-  --}}}
 
-  -- Mappings {{{
-  vim.keymap.set("n", "<leader>oh", ":Neorg workspace home<CR>")
-  vim.keymap.set("n", "<leader>ow", ":Neorg workspace <TAB>")
-  --}}}
+}) -- }}}
 
-  vim.api.nvim_create_user_command("Journal", ":Neorg journal", {})
+return {
+  "nvim-neorg/neorg",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    "neovim/nvim-lspconfig",
+    "hrsh7th/nvim-cmp",
+  },
+  build = ":Neorg sync-parsers",
+  cmd = { "Neorg" },
 
-  require("neorg").setup({
+  keys = {
+    { mode = "n", "<leader>oh", ":Neorg workspace home<CR>" },
+    { mode = "n", "<leader>ow", ":Neorg workspace <TAB>" },
+    {
+      mode = "n",
+      "<leader>oo",
+      function()
+        vim.keymap.set("n", "<leader>oo", ":Neorg workspace home<CR>")
+        vim.api.nvim_command("vert new | Neorg workspace home")
+      end,
+      desc = "load Neorg",
+    },
+  },
+  cond = require("util").full_start_with_lsp,
+
+  config = {
     lazy_loading = false,
     load = {
       ["core.defaults"] = {},
@@ -66,21 +84,7 @@ local function config()
       ["core.export.markdown"] = {},
       ["core.norg.qol.toc"] = {},
     },
-  })
-end
-
-return {
-  "nvim-neorg/neorg",
-  config = config,
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "neovim/nvim-lspconfig",
-    "hrsh7th/nvim-cmp",
   },
-  build = ":Neorg sync-parsers",
-  cmd = { "NeorgStart" },
-  keys = { "<leader>oo" },
-  cond = require("util").full_start_with_lsp,
 }
 
 -- vim: fdm=marker fdl=0
