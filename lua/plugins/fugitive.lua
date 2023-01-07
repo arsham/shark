@@ -20,5 +20,16 @@ return {
     }
     local command = "Git! lg <args>"
     vim.api.nvim_create_user_command("Glg", command, opts)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      once = true,
+      pattern = "fugitive",
+      desc = "Fix fugitive startup empty buffer",
+      callback = function()
+        vim.schedule(function()
+          vim.cmd("silent! e")
+        end)
+      end,
+    })
   end,
 }
