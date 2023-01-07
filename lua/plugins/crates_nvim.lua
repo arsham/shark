@@ -1,11 +1,16 @@
 return {
   "saecki/crates.nvim",
-  config = function()
-    require("crates").setup({
-      popup = {
-        autofocus = true,
-      },
-    })
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "hrsh7th/nvim-cmp",
+  },
+  event = { "BufReadPre Cargo.toml" },
+  config = {
+    popup = {
+      autofocus = true,
+    },
+  },
+  init = function()
     vim.api.nvim_create_autocmd("BufRead", {
       group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
       pattern = "Cargo.toml",
@@ -35,9 +40,4 @@ return {
       end,
     })
   end,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "hrsh7th/nvim-cmp",
-  },
-  event = { "BufReadPre Cargo.toml" },
 }
