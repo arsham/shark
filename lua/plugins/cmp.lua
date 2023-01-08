@@ -40,13 +40,15 @@ local function config()
 
   --               ⌘  ⌂              ﲀ  練  ﴲ    ﰮ    
   --       ﳤ          ƒ          了    ﬌      <    >  ⬤      襁
-  --                                                 
+  --                                               
   -- stylua: ignore
   local kind_icons = { -- {{{
+    Array         = "",
+    Boolean       = " ",
     Buffers       = " ",
-    Class         = " ",
+    Class         = " ",
     Color         = " ",
-    Constant      = " ",
+    Constant      = " ",
     Constructor   = " ",
     Enum          = " ",
     EnumMember    = " ",
@@ -56,19 +58,26 @@ local function config()
     Folder        = " ",
     Function      = "ƒ ",
     Interface     = " ",
+    Key           = " ",
     Keyword       = " ",
     Method        = " ",
     Module        = " ",
+    Namespace     = " ",
+    Null          = "ﳠ ",
+    Number        = " ",
+    Object        = " ",
     Operator      = " ",
+    Package       = " ",
     Property      = " ",
     Reference     = " ",
     Snippet       = " ",
-    Struct        = " ",
-    TypeParameter = " ",
+    String        = " ",
+    Struct        = " ",
+    Text          = " ",
+    TypeParameter = " ",
     Unit          = "塞 ",
     Value         = " ",
     Variable      = " ",
-    Text          = " ",
   } -- }}}
 
   local function has_words_before()
