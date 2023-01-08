@@ -123,6 +123,15 @@ local function config()
       },
     }, --}}}
 
+    refactor = { -- {{{
+      highlight_definitions = {
+        enable = true,
+        disable = function(_, bufnr)
+          return vim.api.nvim_buf_line_count(bufnr) > vim.g.treesitter_refactor_maxlines
+        end,
+      },
+    }, -- }}}
+
     autopairs = { enable = true },
 
     matchup = {
@@ -131,40 +140,20 @@ local function config()
   })
 end
 
-local function refactor_config()
-  require("nvim-treesitter.configs").setup({
-    refactor = {
-      highlight_definitions = {
-        enable = true,
-        disable = function(_, bufnr)
-          return vim.api.nvim_buf_line_count(bufnr) > vim.g.treesitter_refactor_maxlines
-        end,
-      },
-    },
-  })
-end
-
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
-    {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      config = config,
-    },
-    {
-      "nvim-treesitter/nvim-treesitter-refactor",
-      config = refactor_config,
-    },
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "nvim-treesitter/nvim-treesitter-refactor",
     {
       "David-Kunz/treesitter-unit",
-      config = function()
-        -- stylua: ignore start
-        vim.keymap.set("x", "iu", ':lua require"treesitter-unit".select()<CR>', { desc = "select in unit" })
-        vim.keymap.set("x", "au", ':lua require"treesitter-unit".select(true)<CR>', { desc = "select around unit" })
-        vim.keymap.set("o", "iu", ':<c-u>lua require"treesitter-unit".select()<CR>', { desc = "select in unit" })
-        vim.keymap.set("o", "au", ':<c-u>lua require"treesitter-unit".select(true)<CR>', { desc = "select around unit" })
-        -- stylua: ignore end
-      end,
+      -- stylua: ignore
+      keys = {
+        { mode = "x", "iu", ':lua require"treesitter-unit".select()<CR>',          { desc = "select in unit" } },
+        { mode = "x", "au", ':lua require"treesitter-unit".select(true)<CR>',      { desc = "select around unit" } },
+        { mode = "o", "iu", ':<c-u>lua require"treesitter-unit".select()<CR>',     { desc = "select in unit" } },
+        { mode = "o", "au", ':<c-u>lua require"treesitter-unit".select(true)<CR>', { desc = "select around unit" } },
+      },
     },
     {
       "nvim-treesitter/playground",
@@ -178,6 +167,7 @@ return {
   cmd = "TSUpdate",
   event = { "VeryLazy" },
   priority = 80,
+  config = config,
 }
 
 -- vim: fdm=marker fdl=0
