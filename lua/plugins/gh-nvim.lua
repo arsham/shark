@@ -1,7 +1,7 @@
 return {
   {
     "ldelossa/gh.nvim",
-    config = {
+    opts = {
       icon_set = "nerd",
       refresh_interval = 60000, -- one minute
       keymaps = {

@@ -1,6 +1,6 @@
 return {
   "sQVe/sort.nvim",
-  config = {
+  opts = {
     delimiters = { ",", "|", ";", ":", "s", "t" },
   },
   cmd = { "Sort" },

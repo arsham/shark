@@ -22,7 +22,7 @@ return {
     end)
   end,
 
-  config = {
+  opts = {
     log_level = "error",
     log_to_file = true,
     close_if_last_window = true,

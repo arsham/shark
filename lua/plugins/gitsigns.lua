@@ -23,7 +23,7 @@ return {
     { mode = { "o", "x" }, "ah",    function() require("gitsigns.actions").select_hunk() end, { desc = "around hunk" } },
   }, -- }}}
 
-  config = {
+  opts = {
     -- stylua: ignore
     signs = {-- {{{
       add          = { text = "▌", show_count = true },

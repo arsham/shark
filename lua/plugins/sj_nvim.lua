@@ -5,7 +5,7 @@ return {
   keys = {
     { mode = "n", "<leader><leader>", function() require("sj").run() end, { desc = "Initiate SJ" }},
   },
-  config = {
+  opts = {
     pattern_type = "vim", -- lua_plain, lua, vim, vim_very_magic
     prompt_prefix = "🧲 ",
     relative_labels = true,

@@ -10,7 +10,7 @@ return {
       desc = "Invoke the colour picker",
     },
   },
-  config = {
+  opts = {
     ["icons"] = { "ﱢ", "" },
   },
 }

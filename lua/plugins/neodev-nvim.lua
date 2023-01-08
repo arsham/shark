@@ -3,7 +3,7 @@ return {
   dependencies = { "neovim/nvim-lspconfig" },
   ft = { "lua" },
   cond = require("util").full_start_with_lsp,
-  config = {
+  opts = {
     library = {
       plugins = { "arshlib.nvim", "plenary.nvim", "neotest" },
       types = true,

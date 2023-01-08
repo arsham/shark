@@ -6,7 +6,7 @@ return {
   },
   ft = { "qf" },
   cond = require("util").full_start,
-  config = {
+  opts = {
     auto_resize_height = true,
     preview = {
       should_preview_cb = function(bufnr)

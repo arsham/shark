@@ -1,7 +1,7 @@
 return {
   "smjonas/inc-rename.nvim",
   event = { "LspAttach" },
-  config = {
+  opts = {
     cmd_name = "Rename",
   },
 }

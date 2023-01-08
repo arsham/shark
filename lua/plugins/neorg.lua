@@ -35,7 +35,7 @@ return {
   },
   cond = require("util").full_start_with_lsp,
 
-  config = {
+  opts = {
     lazy_loading = false,
     load = {
       ["core.defaults"] = {},

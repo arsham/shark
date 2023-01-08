@@ -2,7 +2,7 @@ return {
   "ray-x/go.nvim",
   ft = { "go" },
   cond = require("util").full_start_with_lsp,
-  config = {
+  opts = {
     gofmt = "gofumpt",
     lsp_codelens = false,
     lsp_diag_hdlr = true,

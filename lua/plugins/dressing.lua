@@ -3,7 +3,7 @@ return {
   event = { "VeryLazy" },
   cond = require("util").full_start,
   priority = 10,
-  config = {
+  opts = {
     input = {
       default_prompt = "➤ ",
       insert_only = false,

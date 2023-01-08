@@ -3,7 +3,7 @@ return {
   "NvChad/nvim-colorizer.lua",
   ft = colorizer_ft,
   cond = require("util").full_start,
-  config = {
+  opts = {
     filetypes = colorizer_ft,
   },
 }

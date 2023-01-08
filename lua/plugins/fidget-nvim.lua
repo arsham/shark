@@ -4,7 +4,7 @@ return {
     vim.api.nvim_create_autocmd("VimLeavePre", { command = ":silent! FidgetClose" })
   end,
   event = { "LspAttach" },
-  config = {
+  opts = {
     text = {
       spinner = {
         "⊚∙∙∙∙",

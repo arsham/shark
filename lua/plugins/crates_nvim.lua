@@ -5,7 +5,7 @@ return {
     "hrsh7th/nvim-cmp",
   },
   event = { "BufReadPre Cargo.toml" },
-  config = {
+  opts = {
     popup = {
       autofocus = true,
     },
