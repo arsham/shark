@@ -334,8 +334,9 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities({
       snippetSupport = true,
     },
   },
-}) --{{{
---}}}
+})
+
+require("neodev").setup({})
 
 local lspconfig = require("lspconfig") -- LSP Config Setup {{{
 for name, server in pairs(servers) do
