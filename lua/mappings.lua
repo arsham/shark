@@ -50,8 +50,7 @@ vim.keymap.set("n", "g,", "m'g,zz", o)
 vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>", opts("clear hlsearch"))
 
 -- Yank related {{{
-vim.keymap.set("n", "<Leader>y", '"+y')
-vim.keymap.set("x", "<Leader>y", '"+y')
+vim.keymap.set({ "n", "x" }, "<Leader>y", '"+y')
 vim.keymap.set("n", "<Leader>p", '"+p')
 vim.keymap.set("n", "<Leader>P", '"+P')
 
@@ -91,6 +90,7 @@ vim.keymap.set("n", "<leader>jq", ":%!gojq '.'<CR>")
 
 vim.keymap.set("n", "<leader>hh", ":h <CR>", opts("show help for work under the cursor"))
 
+-- Buffer Delete/Close {{{
 vim.keymap.set("n", "<C-w>b", ":bd<CR>", opts("delete current buffer"))
 vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", opts("delete current buffer"))
 vim.keymap.set("n", "<C-w><C-t>", ":tabnew %<CR>", opts("open current buffer in new tab"))
@@ -99,6 +99,7 @@ vim.keymap.set("n", "<leader>bd", ":bd<CR>", opts("delete current buffer"))
 vim.keymap.set("n", "<leader>bc", ":close<CR>", opts("close current buffer"))
 vim.keymap.set("n", "<leader>tb", ":windo bd<CR>", opts("delete all buffers of current tab"))
 vim.keymap.set("n", "<leader>tc", ":windo close<CR>", opts("close all buffers of current tab"))
+-- }}}
 
 -- Execute macros over selected range. {{{
 vim.keymap.set("x", "@", function()
@@ -184,6 +185,7 @@ end, opts("yank current window for swapping"))
 vim.keymap.set("n", "[t", "<cmd>tabprev<cr>")
 vim.keymap.set("n", "]t", "<cmd>tabnext<cr>")
 
+-- Toggle cmdheight {{{
 vim.keymap.set("n", "<leader>ch", function()
   local height = vim.opt.cmdheight:get()
   if height == 0 then
@@ -193,8 +195,10 @@ vim.keymap.set("n", "<leader>ch", function()
   end
   vim.opt.cmdheight = height
 end, opts("toggle cmdheight value between 0 and 1"))
+-- }}}
 
 vim.keymap.set("n", "<leader>sb", function()
+  ---@diagnostic disable-next-line: assign-type-mismatch
   vim.opt_local.scrollbind = not vim.opt_local.scrollbind:get()
 end, opts("toggle scroll bind on current buffer"))
 
