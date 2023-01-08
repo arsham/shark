@@ -7,6 +7,6 @@ return {
   end,
   cmd = { "UndotreeShow", "UndotreeToggle" },
   keys = {
-    { mode = "n", "<leader>u", ":UndotreeToggle<CR>", { silent = true } },
+    { mode = "n", "<leader>uu", ":UndotreeToggle<CR>", { silent = true } },
   },
 }
