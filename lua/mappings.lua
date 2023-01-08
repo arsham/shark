@@ -204,4 +204,10 @@ end, { silent = true, remap = false, desc = "don't paste in select mode" })
 
 vim.keymap.set("x", "/", "<Esc>/\\%V", { desc = "Search in visually selected region" })
 
+-- Better n/p for searching. It makes the next item in backwards search to be
+-- the one that comes after.
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true })
+
 -- vim: fdm=marker fdl=0
