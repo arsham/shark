@@ -279,9 +279,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
 })
 
 local misc_commands_group = vim.api.nvim_create_augroup("MISC_COMMANDS_GROUP", { clear = true })
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEnter" }, {
   group = misc_commands_group,
-  pattern = { "*" },
   callback = function()
     pcall(vim.cmd.checktime)
   end,
