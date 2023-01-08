@@ -1,8 +1,6 @@
 return {
   "arsham/yanker.nvim",
-  config = function()
-    require("yanker").config({})
-  end,
+  config = true,
   dependencies = {
     "arsham/arshlib.nvim",
     "junegunn/fzf",
