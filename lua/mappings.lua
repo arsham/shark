@@ -13,6 +13,8 @@ vim.keymap.set({ "n", "i" }, "<Left>", "<Nop>", o)
 vim.keymap.set({ "n", "i" }, "<Right>", "<Nop>", o)
 -- }}}
 
+vim.keymap.set("n", "J", "mzJ`z", opts("Keep cursor while joining lines"))
+
 -- Moving around {{{
 local up = opts("move lines up")
 local down = opts("move lines down")
