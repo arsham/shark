@@ -235,7 +235,11 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     local opts = { buffer = true, silent = true, desc = "close lspinfo popup and help,qf buffers" }
     vim.keymap.set("n", "q", function()
-      vim.cmd.close()
+      local ok = pcall(vim.cmd.close)
+      if not ok then
+        -- This is the last window, let's wipe it out then.
+        vim.cmd.bdelete()
+      end
     end, opts)
   end,
   desc = "close lspinfo popup and help,qf buffers with q",
