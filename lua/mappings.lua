@@ -210,4 +210,6 @@ vim.keymap.set("x", "/", "<Esc>/\\%V", { desc = "Search in visually selected reg
 vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true })
 
+vim.keymap.set("n", "<leader>us", ":UnlinkSnippets<CR>", opts("Unlink all open snippets"))
+
 -- vim: fdm=marker fdl=0
