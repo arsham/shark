@@ -712,7 +712,7 @@ These functions will call your function/command and then centres the buffer:
 
 ```lua
 quick.call_and_centre(function()
-	print("Yolo!")
+  print("Yolo!")
 end)
 quick.cmd_and_centre("SomeCommand")
 ```
@@ -723,10 +723,10 @@ This launches a popup buffer for the input:
 
 ```lua
 require("arshlib.util").user_input({
-	prompt = "Message: ",
-	on_submit = function(value)
-		print("Thank you for your note: " .. value)
-	end,
+  prompt = "Message: ",
+  on_submit = function(value)
+    print("Thank you for your note: " .. value)
+  end,
 })
 ```
 
