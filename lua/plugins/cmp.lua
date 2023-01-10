@@ -1,6 +1,6 @@
 local priorities
 ---Sets up the priorities variable once when cmp is loaded.
-local function setup_priorities()
+local function setup_priorities() -- {{{
   local kinds = require("cmp.types").lsp.CompletionItemKind
   priorities = {
     kinds.Field,
@@ -29,7 +29,7 @@ local function setup_priorities()
     kinds.Snippet,
     kinds.Text,
   }
-end
+end -- }}}
 
 local function config()
   local cmp = require("cmp")
@@ -80,11 +80,11 @@ local function config()
     Variable      = " ",
   } -- }}}
 
-  local function has_words_before()
+  local function has_words_before() -- {{{
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
       and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-  end
+  end -- }}}
 
   local function tab_function(fallback) -- {{{
     if ls.expand_or_locally_jumpable() then
@@ -105,16 +105,16 @@ local function config()
   end -- }}}
 
   cmp.setup({
-    performance = {
+    performance = { -- {{{
       debounce = 50,
       throttle = 10,
-    },
+    }, -- }}}
 
-    snippet = {
+    snippet = { -- {{{
       expand = function(args)
         ls.lsp_expand(args.body)
       end,
-    },
+    }, -- }}}
 
     preselect = cmp.PreselectMode.None,
 
@@ -122,7 +122,7 @@ local function config()
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
 
-      ["<C-Space>"] = cmp.mapping.complete({
+      ["<C-Space>"] = cmp.mapping.complete({ -- {{{
         config = {
           sources = {
             { name = "nvim_lsp", priority = 80 },
@@ -135,8 +135,9 @@ local function config()
             { name = "crates" },
           },
         },
-      }),
-      ["<C-s>"] = cmp.mapping.complete({
+      }), -- }}}
+
+      ["<C-s>"] = cmp.mapping.complete({ -- {{{
         config = {
           sources = {
             { name = "neorg", keyword_length = 1 },
@@ -154,42 +155,44 @@ local function config()
             { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1 },
           },
         },
-      }),
-      ["<C-x><C-o>"] = cmp.mapping.complete({
+      }), -- }}}
+
+      ["<C-x><C-o>"] = cmp.mapping.complete({ -- {{{
         config = {
           sources = {
             { name = "nvim_lsp" },
           },
         },
-      }),
+      }), -- }}}
 
-      ["<C-y>"] = cmp.config.disable,
+      ["<C-y>"] = cmp.config.disable, -- {{{
       ["<C-e>"] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
-      }),
+      }), -- }}}
 
-      ["<CR>"] = cmp.mapping.confirm({
+      ["<CR>"] = cmp.mapping.confirm({ -- {{{
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
-      }),
-      ["<C-j>"] = cmp.mapping.select_next_item({
+      }), -- }}}
+
+      ["<C-j>"] = cmp.mapping.select_next_item({ -- {{{
         behavior = cmp.SelectBehavior.Select,
       }),
       ["<C-k>"] = cmp.mapping.select_prev_item({
         behavior = cmp.SelectBehavior.Select,
-      }),
+      }), -- }}}
 
       -- only use < tab >/<s-tab> for switching between placeholders.
-      ["<Tab>"] = cmp.mapping({
+      ["<Tab>"] = cmp.mapping({ -- {{{
         i = tab_function,
         s = tab_function,
-      }),
+      }), -- }}}
 
-      ["<S-Tab>"] = cmp.mapping({
+      ["<S-Tab>"] = cmp.mapping({ -- {{{
         i = shift_tab_function,
         s = shift_tab_function,
-      }),
+      }), -- }}}
     }), --}}}
 
     sources = cmp.config.sources({ --{{{
@@ -197,7 +200,7 @@ local function config()
         name = "nvim_lsp",
         priority = 80,
         group_index = 1,
-        entry_filter = function(entry, context)
+        entry_filter = function(entry, context) -- {{{
           local kind = entry:get_kind()
           local line = context.cursor_line
           local col = context.cursor.col
@@ -212,7 +215,7 @@ local function config()
           end
 
           return true
-        end,
+        end, -- }}}
       },
       { name = "nvim_lua", priority = 80, group_index = 1 },
       { name = "path", priority = 40, max_item_count = 4, group_index = 5 },
@@ -274,11 +277,11 @@ local function config()
       max_height = 20,
     },
 
-    window = {
+    window = { -- {{{
       completion = cmp.config.window.bordered({
         winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
       }),
-    },
+    }, -- }}}
 
     sorting = { --{{{
       priority_weight = 2,
