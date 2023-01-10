@@ -72,6 +72,7 @@ local function config()
         goto_next_end = {
           ["]F"] = "@function.outer",
           ["]B"] = "@block.outer",
+          ["]A"] = "@parameter.outer",
         },
         goto_previous_start = {
           ["[f"] = "@function.outer",
@@ -82,6 +83,7 @@ local function config()
         goto_previous_end = {
           ["[F"] = "@function.outer",
           ["[B"] = "@block.outer",
+          ["[A"] = "@parameter.outer",
         },
       }, --}}}
 
@@ -133,10 +135,7 @@ local function config()
     }, -- }}}
 
     autopairs = { enable = true },
-
-    matchup = {
-      enable = true,
-    },
+    matchup = { enable = true },
   })
 end
 
