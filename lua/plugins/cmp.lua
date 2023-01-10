@@ -159,8 +159,39 @@ local function config()
 
       ["<C-x><C-o>"] = cmp.mapping.complete({ -- {{{
         config = {
-          sources = {
+          sources = cmp.config.sources({
             { name = "nvim_lsp" },
+          }, {
+            {
+              name = "buffer",
+              priority = 5,
+              keyword_length = 3,
+              max_item_count = 5,
+              group_index = 5,
+              option = {
+                get_bufnrs = function()
+                  return vim.api.nvim_list_bufs()
+                end,
+              },
+            },
+          }, {
+            { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1, group_index = 5 },
+          }),
+        },
+      }), -- }}}
+
+      ["<C-x><C-r>"] = cmp.mapping.complete({ -- {{{
+        config = {
+          sources = {
+            { name = "rg" },
+          },
+        },
+      }), -- }}}
+
+      ["<C-x><C-s>"] = cmp.mapping.complete({ -- {{{
+        config = {
+          sources = {
+            { name = "luasnip" },
           },
         },
       }), -- }}}
