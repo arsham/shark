@@ -1,23 +1,10 @@
 local lsp_util = require("plugins.lsp.util")
 
-vim.api.nvim_create_autocmd("BufRead", {
-  group = vim.api.nvim_create_augroup("ONCE_DO_THIS", { clear = true }),
-  pattern = "*",
-  once = true,
-  callback = function()
-    -- The first time some LSP servers are not attached currectly, therefore we
-    -- force another read just once.
-    vim.cmd("silent! e")
-  end,
-  desc = "just reload once to make lsp happy",
-})
-
 ---@alias lsp_client 'vim.lsp.client'
 
 ---The function to pass to the LSP's on_attach callback.
 ---@param client lsp_client
 ---@param bufnr number
--- stylua: ignore start
 local function on_attach(client, bufnr) --{{{
   -- The first time some LSP servers are not attached currectly, therefore we
   -- force another read just once.
@@ -31,7 +18,8 @@ local function on_attach(client, bufnr) --{{{
     or buf_name:match("^/tmp/.+")
   then
     local old_notify = vim.notify
-    vim.notify = function () end
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.notify = function() end
     vim.lsp.buf_detach_client(bufnr, client.id)
     vim.diagnostic.disable(bufnr)
     vim.notify = old_notify
@@ -98,26 +86,28 @@ local function on_attach(client, bufnr) --{{{
     local workspace_folder_supported = caps.workspace
       and caps.workspace.workspaceFolders
       and caps.workspace.workspaceFolders.supported
-    if workspace_folder_supported           then lsp_util.workspace_folder_properties() end
-    if caps.workspaceSymbolProvider         then lsp_util.workspace_symbol()            end
-    if caps.hoverProvider                   then lsp_util.hover()                       end
-    if caps.renameProvider                  then lsp_util.rename()                      end
-    if caps.codeLensProvider                then lsp_util.code_lens()                   end
-    if caps.definitionProvider              then lsp_util.goto_definition()             end
-    if caps.referencesProvider              then lsp_util.find_references()             end
-    if caps.declarationProvider             then lsp_util.declaration()                 end
-    if caps.signatureHelpProvider           then lsp_util.signature_help()              end
-    if caps.implementationProvider          then lsp_util.implementation()              end
-    if caps.typeDefinitionProvider          then lsp_util.type_definition()             end
-    if caps.documentSymbolProvider          then lsp_util.document_symbol()             end
-    if caps.callHierarchyProvider           then lsp_util.call_hierarchy()              end
-    if caps.semantic_tokens_full            then lsp_util.setup_semantic_tokens(bufnr)  end
+    -- stylua: ignore start
+    if workspace_folder_supported   then lsp_util.workspace_folder_properties() end
+    if caps.workspaceSymbolProvider then lsp_util.workspace_symbol()            end
+    if caps.hoverProvider           then lsp_util.hover()                       end
+    if caps.renameProvider          then lsp_util.rename()                      end
+    if caps.codeLensProvider        then lsp_util.code_lens()                   end
+    if caps.definitionProvider      then lsp_util.goto_definition()             end
+    if caps.referencesProvider      then lsp_util.find_references()             end
+    if caps.declarationProvider     then lsp_util.declaration()                 end
+    if caps.signatureHelpProvider   then lsp_util.signature_help()              end
+    if caps.implementationProvider  then lsp_util.implementation()              end
+    if caps.typeDefinitionProvider  then lsp_util.type_definition()             end
+    if caps.documentSymbolProvider  then lsp_util.document_symbol()             end
+    if caps.callHierarchyProvider   then lsp_util.call_hierarchy()              end
+    if caps.semantic_tokens_full    then lsp_util.setup_semantic_tokens(bufnr)  end
     if caps.completionProvider then
       vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
     end
     if caps.definitionProvider then
       vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
+    -- stylua: ignore end
 
     lsp_util.setup_diagnostics(bufnr)
     lsp_util.setup_completions()
@@ -126,7 +116,6 @@ local function on_attach(client, bufnr) --{{{
     lsp_util.fix_null_ls_errors()
   end) --}}}
 end --}}}
--- stylua: ignore end
 
 local lsp_detach_group = vim.api.nvim_create_augroup("LSP_DETACH_GROUP", { clear = true })
 vim.api.nvim_create_autocmd("LspDetach", {
