@@ -6,6 +6,7 @@ vim.opt_local.formatoptions:remove({ "c", "r", "o", "q" })
 vim.cmd.startinsert()
 
 -- From 50's character of the first line to the end.
+---@diagnostic disable-next-line: param-type-mismatch
 vim.fn.matchaddpos("Error", { { 1, 50, 10000 } })
 
 -- stylua: ignore start

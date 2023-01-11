@@ -1,5 +1,4 @@
 local function config()
-  ---@diagnostic disable: redundant-parameter
   local noice = require("noice")
   local mini = require("noice.config.views").defaults.mini
   mini.timeout = 5000

@@ -1,12 +1,8 @@
----@diagnostic disable: redundant-parameter, undefined-global
-
----@type Quick
 local quick = require("arshlib.quick")
 
 local M = {}
 
 quick.command("Filename", function() --{{{
-  ---@diagnostic disable-next-line: param-type-mismatch
   vim.notify(vim.fn.expand("%:p"), vim.lsp.log_levels.INFO, {
     title = "Filename",
     timeout = 3000,
