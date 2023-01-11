@@ -20,24 +20,22 @@ return {
     },
     dependencies = {
       "ibhagwan/fzf-lua",
-      {
-        "ldelossa/litee.nvim",
-        config = function()
-          require("litee.lib").setup({
-            tree = {
-              icon_set = "nerd",
-            },
-            panel = {
-              orientation = "left",
-              panel_size = 30,
-            },
-            notify = {
-              enabled = false,
-            },
-          })
-        end,
-      },
+      "ldelossa/litee.nvim",
     },
+    config = function()
+      require("litee.lib").setup({
+        tree = {
+          icon_set = "nerd",
+        },
+        panel = {
+          orientation = "left",
+          panel_size = 30,
+        },
+        notify = {
+          enabled = false,
+        },
+      })
+    end,
     cmd = "GH",
   },
 }
