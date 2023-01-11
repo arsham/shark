@@ -4,7 +4,7 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter",
   },
-  event = { "BufReadPost", "BufNewFile" },
+  keys = { "gc" },
   opts = {
     pre_hook = function(ctx)
       local cmt_utils = require("Comment.utils")

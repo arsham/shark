@@ -161,6 +161,7 @@ return {
       cond = require("util").full_start,
     },
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "andymass/vim-matchup",
   },
   build = ":TSUpdate",
   cmd = "TSUpdate",

@@ -120,5 +120,5 @@ return {
     "rouge8/neotest-rust",
   },
   config = config,
-  event = { "VeryLazy" },
+  ft = { "go", "rust", "lua" },
 }
