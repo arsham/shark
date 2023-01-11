@@ -1,6 +1,6 @@
+---@diagnostic disable: duplicate-set-field, param-type-mismatch
 local M = {}
 
----@type Quick
 local quick = require("arshlib.quick")
 local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")
@@ -183,7 +183,7 @@ function M.document_range_formatting(disabled_servers) --{{{
   quick.buffer_command("Format", function(args)
     document_range_formatting(disabled_servers, args)
   end, { range = true })
-  xnoremap("gq", function(args)
+  xnoremap("gq", function()
     local line1, _ = unpack(vim.api.nvim_buf_get_mark(0, "["))
     local line2, _ = unpack(vim.api.nvim_buf_get_mark(0, "]"))
     if line1 > line2 then
@@ -473,7 +473,6 @@ end -- }}}
 local handler = function(err)
   if err then
     local msg = string.format("Error reloading Rust workspace: %v", err)
-    ---@diagnostic disable-next-line: redundant-parameter
     vim.notify(msg, vim.lsp.log_levels.ERROR, {
       title = "Reloading Rust workspace",
       timeout = 3000,

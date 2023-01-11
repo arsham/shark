@@ -1,7 +1,6 @@
 vim.lsp.set_log_level("error")
 
 require("arshlib.tables")
----@type Quick
 local quick = require("arshlib.quick")
 
 local signs = {
@@ -90,10 +89,8 @@ local servers = {
           diagnostics = {
             globals = {
               "vim",
-              "use",
               "require",
               "rocks",
-              "use_rocks",
             },
           },
           workspace = {
@@ -101,6 +98,7 @@ local servers = {
             useGitIgnore = false,
             maxPreload = 100000000,
             preloadFileSize = 500000,
+            checkThirdParty = false,
           },
         },
       },
@@ -282,6 +280,8 @@ local servers = {
     end,
   }, --}}}
 }
+
+local on_attach = require("plugins.lsp.on_attach").on_attach
 
 local null_ls = require("null-ls") -- NULL LS Setup {{{
 
