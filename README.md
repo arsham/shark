@@ -241,7 +241,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **h**           | **H**unk                                                   |
 | **z**           | Folds, language/spelling                                   |
 | **i**           | **I**ndent                                                 |
-| **t**           | **T**ab, **T**est                                          |
+| **t**           | **T**ab, **T**est, **T**erminal                            |
 | **w**           | **W**indow                                                 |
 
 The `leader` key is `space`!
@@ -329,6 +329,8 @@ The `leader` key is `space`!
 | `<localleader>tr`  | **R**e-run last **t**est                                             |
 | `<localleader>to`  | Show **T**est **o**utput window                                      |
 | `<localleader>ts`  | Show **T**est **s**ummary tree                                       |
+| `<leader>ot`       | **O**pen **T**erminal at project root in floating window             |
+| `<leader>oT`       | **O**pen **T**erminal at current file's dir in floating window       |
 
 </details>
 

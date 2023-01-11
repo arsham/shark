@@ -213,6 +213,22 @@ vim.keymap.set("x", "/", "<Esc>/\\%V", { desc = "Search in visually selected reg
 vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true })
 
+-- Floating Terminal {{{
+vim.keymap.set("n", "<leader>ot", function()
+  require("lazy.util").float_term(nil, {
+    size = { width = 0.9, height = 0.9 },
+    cwd = vim.fn.FugitiveCommonDir():gsub("/.git", ""),
+  })
+end, { desc = "Open terminal at project root in floating window" })
+
+vim.keymap.set("n", "<leader>oT", function()
+  require("lazy.util").float_term(nil, {
+    cwd = vim.fn.expand("%:p:h"),
+    size = { width = 0.9, height = 0.9 },
+  })
+end, { desc = "Open terminal at current file's dir in floating window" })
+-- }}}
+
 vim.keymap.set("n", "<leader>us", ":UnlinkSnippets<CR>", opts("Unlink all open snippets"))
 
 -- vim: fdm=marker fdl=0
