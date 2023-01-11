@@ -15,7 +15,7 @@ return {
   },
 
   config = function()
-    table.insert(vim.opt.rtp, "~/.fzf")
+    vim.opt.rtp:append("~/.fzf")
 
     local config = {
       mappings = {
