@@ -78,10 +78,8 @@ $ git clone https://github.com/arsham/shark.git ~/.config/nvim
 Once you start `Neovim`, it will install the package manager and installs the
 listed plugins.
 
-You need to run the `InstallDependencies` command to install some dependencies.
-Run `TSUpdate` to satisfy treesitter dependencies, and finally run
-`LspInstallInfo` and install the LSP servers you need. Some dependencies can't
-be installed with this tool (yet), therefore you need to install them manually.
+Run `TSUpdate` to satisfy treesitter dependencies. Some dependencies can't be
+installed with this tool (yet), therefore you need to install them manually.
 The command will let you know what you need to install in the notification.
 
 You can check the health of your installation by running the `checkhealth`
@@ -257,17 +255,16 @@ The `leader` key is `space`!
 | `<Ctrl-w>x`        | E**x**change current window with previously yanked window            |
 | `<Ctrl-w><Ctrl-e>` | Run **e**dit silently on current window                              |
 | `<leader>e`        | Run edit silently on all windows of the current tab                  |
-| `<leader>kk`       | Toggles Neovim tree                                                  |
-| `<leader><leader>` | Toggles Neovim tree                                                  |
-| `<leader>kf`       | **F**inds current file in the Neovim tree                            |
+| `<leader>kk`       | Toggles file tree                                                    |
+| `<leader>kf`       | **F**inds current file in the file tree                              |
 | `<Alt-j>`          | Shifts line(s) down one line and format                              |
 | [count]`<Alt-k>`   | Shifts line(s) up one line and format                                |
 | `<Alt-,>`          | Adds `,` at the end of current line without moving (repeatable)      |
 | `<S-Alt-,>`        | Removes `,` from the end of current line without moving (repeatable) |
 | `<Alt-.>`          | Adds `.` at the end of current line without moving (repeatable)      |
-| `<S-Alt-,>`        | Removes `.` from the end of current line without moving (repeatable) |
+| `<S-Alt-.>`        | Removes `.` from the end of current line without moving (repeatable) |
 | `<Alt-;>`          | Adds `;` at the end of current line without moving (repeatable)      |
-| `<S-Alt-,>`        | Removes `;` from the end of current line without moving (repeatable) |
+| `<S-Alt-;>`        | Removes `;` from the end of current line without moving (repeatable) |
 | `<Alt-{>`          | Adds curly brackets at the end of line into insert mode (repeatable) |
 | [count]`]<space>`  | Inserts [count] empty lines after (repeatable)                       |
 | [count]`[<space>`  | Inserts [count] empty lines before (repeatable)                      |
@@ -310,7 +307,7 @@ The `leader` key is `space`!
 | `<leader>zm`       | Set folding method to **M**anual                                     |
 | `<leader>ze`       | Set folding method to **E**xpression                                 |
 | `<leader>zi`       | Set folding method to **I**ndent                                     |
-| `<leader>zm`       | Set folding method to Mar**k**er                                     |
+| `<leader>zk`       | Set folding method to Mar**k**er                                     |
 | `<leader>zs`       | Set folding method to **S**yntax                                     |
 | `<leader>db`       | Set **d**ebugger **b**reakpoint                                      |
 | `<localleader>dB`  | **D**ebugger **b**reakpoint condition                                |
@@ -325,7 +322,7 @@ The `leader` key is `space`!
 | `<localleader>ta`  | **A**tach to the nearest **t**est                                    |
 | `<localleader>tU`  | Stop the nearest **T**est **u**nit                                   |
 | `<localleader>tf`  | Run **T**ests for current **f**ile                                   |
-| `<localleader>tf`  | Run **T**ests for entire **F**older                                  |
+| `<localleader>tF`  | Run **T**ests for entire **F**older                                  |
 | `<localleader>tr`  | **R**e-run last **t**est                                             |
 | `<localleader>to`  | Show **T**est **o**utput window                                      |
 | `<localleader>ts`  | Show **T**est **s**ummary tree                                       |
@@ -354,7 +351,6 @@ There are more specialised mappings provided, keep reading please!
 | `al`        | **A**round line                             |
 | `iN`        | **I**n **N**umeric value (can be float too) |
 | `aN`        | **A**round **N**umeric value                |
-| `ih`        | **I**n **H**unk                             |
 | `af`        | **A**round **F**unction                     |
 | `if`        | **I**n **F**unction                         |
 | `am`        | **A**round call                             |
@@ -473,7 +469,7 @@ Most actions can apply to multiple selected items if possible.
 | `<leader>rg`       | Search (**rg**) with current word.                     |
 | `<leader>fG`       | Like `<leader>fG`, but you can filter filenames too    |
 | `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
-| `<leader>fA`       | Like `<leader>fA`, but you can filter filenames too    |
+| `<leader>rA`       | Like `<leader>rA`, but you can filter filenames too    |
 | `<leader>ri`       | **I**ncrementally search (**rg**) with current word.   |
 | `<leader>fh`       | **F**ile **H**istory                                   |
 | `<leader>fl`       | **F**ile **l**ocate (requires mlocate)                 |
@@ -482,14 +478,6 @@ Most actions can apply to multiple selected items if possible.
 | `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
 | `<Ctrl-x><Ctrl-f>` | Search in **f**iles                                    |
 | `<Ctrl-x><Ctrl-l>` | Search in **l**ines                                    |
-
-| Yank Mappings | Description                                       |
-| :------------ | :------------------------------------------------ |
-| `<leader>yh`  | List **Y**ank **H**istory)                        |
-| `<leader>y`   | **Y**ank to the `+` register (external clipboard) |
-| `<leader>p`   | **P**aste from the `+` register                   |
-| `<leader>P`   | **P**aste from the `+` register (before/above)    |
-| (v) `p`       | **P**aste on selected text without changing "reg  |
 
 If you keep hitting `<Ctrl-/>` the preview window will change width. With
 `Shift-/` you can show and hide the preview window.
@@ -535,6 +523,14 @@ There are a few added commands to what fzf provides.
 
 </details>
 
+| Yank Mappings | Description                                       |
+| :------------ | :------------------------------------------------ |
+| `<leader>yh`  | List **Y**ank **H**istory)                        |
+| `<leader>y`   | **Y**ank to the `+` register (external clipboard) |
+| `<leader>p`   | **P**aste from the `+` register                   |
+| `<leader>P`   | **P**aste from the `+` register (before/above)    |
+| (v) `p`       | **P**aste on selected text without changing "reg  |
+
 ### LSP
 
 When a **LSP** server is attached to a buffer, a series of mappings will be
@@ -547,47 +543,45 @@ Please note that I have remapped `<Ctrl-n>` and `<Ctrl-p>` with `<Ctrl-j>` and
 <details>
     <summary>Click to view the mappings</summary>
 
-| Mapping       | Description                                                |
-| :------------ | :--------------------------------------------------------- |
-| `gd`          | **G**o to **D**efinition                                   |
-| `gD`          | **G**o to **D**eclaration                                  |
-| `<leader>df`  | Show function **d**e**f**inition in popup                  |
-| `<leader>gi`  | **G**o to **I**mplementation                               |
-| `gr`          | Show **R**eferences                                        |
-| `<leader>@`   | Document Symbols                                           |
-| `<leader>gc`  | Show **C**allers (incoming calls)                          |
-| `H`           | **H**over popup                                            |
-| `<Alt-h>`     | (insert mode) Show **H**over popup                         |
-| `K`           | Show **S**ignature help                                    |
-| `<Alt-l>`     | (insert mode) Show **S**ignature help                      |
-| `<Ctrl-l>`    | (insert/select mode) next snippet choice                   |
-| `<Ctrl-h>`    | (insert/select mode) previous snippet choice               |
-| `<Tab>`       | (insert mode) Next completion item                         |
-| `<Shift-Tab>` | (insert mode) Previous completion item                     |
-| `<Ctrl-j>`    | (insert mode) Next completion item                         |
-| `<Ctrl-k>`    | (insert mode) Previous completion item                     |
-| `<Alt-n>`     | (insert mode) Next completion source                       |
-| `<Alt-p>`     | (insert mode) Previous completion source                   |
-| `<leader>dd`  | Show line **D**iagnostics                                  |
-| `<leader>dq`  | Fill the **Q**uicklist with **D**iagnostics                |
-| `<leader>dw`  | Fill the local list with **D**iagnostics                   |
-| `]d`          | Go to next **d**iagnostic issue                            |
-| `[d`          | Go to previous **d**iagnostic issue                        |
-| `<leader>i`   | Organise **i**mports                                       |
-| `<leader>gq`  | Format the buffer with LSP                                 |
-| `<leader>dr`  | **R**estart the LSP server (see below)                     |
-| `<leader>ca`  | **C**ode **A**ctions (also in visual mode)                 |
-| `<leader>cr`  | **C**ode lens **R**un                                      |
-| `]f`          | Jumps to the start of next **f**unction                    |
-| `[f`          | Jumps to the start of previous **f**unction                |
-| `]b`          | Jumps to the start of next **b**lock                       |
-| `[b`          | Jumps to the start of previous **b**lock                   |
-| `<leader>.f`  | Swap **f**unction to next                                  |
-| `<leader>,f`  | Swap **f**unction to previous                              |
-| `<Alt-n>`     | Initiate **n**ode selection                                |
-| `<CR>`        | After selection is initiated, increment selection          |
-| `<BS>`        | After selection is initiated, decrease selection           |
-| `<Alt-n>`     | After selection is initiated, increment selection on scope |
+| Mapping       | Description                                       |
+| :------------ | :------------------------------------------------ |
+| `gd`          | **G**o to **D**efinition                          |
+| `gD`          | **G**o to **D**eclaration                         |
+| `<leader>df`  | Show function **d**e**f**inition in popup         |
+| `<leader>gi`  | **G**o to **I**mplementation                      |
+| `gr`          | Show **R**eferences                               |
+| `<leader>@`   | Document Symbols                                  |
+| `<leader>gc`  | Show **C**allers (incoming calls)                 |
+| `H`           | **H**over popup                                   |
+| `<Alt-h>`     | (insert mode) Show **H**over popup                |
+| `K`           | Show **S**ignature help                           |
+| `<Alt-l>`     | (insert mode) Show **S**ignature help             |
+| `<Ctrl-l>`    | (insert/select mode) next snippet choice          |
+| `<Ctrl-h>`    | (insert/select mode) previous snippet choice      |
+| `<Tab>`       | (insert mode) Next completion item                |
+| `<Shift-Tab>` | (insert mode) Previous completion item            |
+| `<Ctrl-j>`    | (insert mode) Next completion item                |
+| `<Ctrl-k>`    | (insert mode) Previous completion item            |
+| `<Alt-n>`     | (insert mode) Next completion source              |
+| `<Alt-p>`     | (insert mode) Previous completion source          |
+| `<leader>dd`  | Show line **D**iagnostics                         |
+| `<leader>dq`  | Fill the **Q**uicklist with **D**iagnostics       |
+| `<leader>dw`  | Fill the local list with **D**iagnostics          |
+| `]d`          | Go to next **d**iagnostic issue                   |
+| `[d`          | Go to previous **d**iagnostic issue               |
+| `<leader>i`   | Organise **i**mports                              |
+| `<leader>gq`  | Format the buffer with LSP                        |
+| `<leader>dr`  | **R**estart the LSP server (see below)            |
+| `<leader>ca`  | **C**ode **A**ctions (also in visual mode)        |
+| `<leader>cr`  | **C**ode lens **R**un                             |
+| `]f`          | Jumps to the start of next **f**unction           |
+| `[f`          | Jumps to the start of previous **f**unction       |
+| `]b`          | Jumps to the start of next **b**lock              |
+| `[b`          | Jumps to the start of previous **b**lock          |
+| `<leader>.f`  | Swap **f**unction to next                         |
+| `<leader>,f`  | Swap **f**unction to previous                     |
+| `<CR>`        | After selection is initiated, increment selection |
+| `<BS>`        | After selection is initiated, decrease selection  |
 
 ### Notes
 
@@ -637,25 +631,21 @@ The following list of commands do not fit into any specific categories.
 <details>
     <summary>Click to view the commands</summary>
 
-| Command               | Description                             |
-| :-------------------- | :-------------------------------------- |
-| `InstallDependencies` | Install required dependencies           |
-| `CC`                  | Close all floating windows              |
-| `Scratch`             | Create a scratch buffer                 |
-| `Filename`            | View the filename                       |
-| `YankFilename`        | Yank the filename to `"` register       |
-| `YankFilenameC`       | Yank the filename to `+` register       |
-| `YankFilepath`        | Yank the file path to `"` register      |
-| `YankFilepathC`       | Yank the file path to `+` register      |
-| `MergeConflict`       | Search for merge conflicts              |
-| `JsonDiff`            | Diff json files after formatting them   |
-| `Tmux`                | Start a tmux project (using tmuxp)      |
-| [count]`Lorem`        | Insert (count) line(s) Lorem Ipsum text |
-| `Faster`              | Disable feature to make Neovim smoother |
-| `Slower`              | Undoes the `Faster` changes             |
-
-After running `InstallDependencies` you will be notified to install some
-programs.
+| Command         | Description                             |
+| :-------------- | :-------------------------------------- |
+| `CC`            | Close all floating windows              |
+| `Scratch`       | Create a scratch buffer                 |
+| `Filename`      | View the filename                       |
+| `YankFilename`  | Yank the filename to `"` register       |
+| `YankFilenameC` | Yank the filename to `+` register       |
+| `YankFilepath`  | Yank the file path to `"` register      |
+| `YankFilepathC` | Yank the file path to `+` register      |
+| `MergeConflict` | Search for merge conflicts              |
+| `JsonDiff`      | Diff json files after formatting them   |
+| `Tmux`          | Start a tmux project (using tmuxp)      |
+| [count]`Lorem`  | Insert (count) line(s) Lorem Ipsum text |
+| `Faster`        | Disable feature to make Neovim smoother |
+| `Slower`        | Undoes the `Faster` changes             |
 
 </details>
 

@@ -1,0 +1,181 @@
+*shark-mappings.txt*                                     Shark's Core Mappings
+
+
+           ...                                                    ..      ~
+       .x888888hx    :   .uef^"                             < .z@8"`      ~
+      d88888888888hxx  :d88E                      .u    .    !@88E        ~
+     8" ... `"*8888%`  `888E             u      .d88B :@8c   '888E   u    ~
+    !  "   ` .xnxx.     888E .z8k     us888u.  ="8888f8888r   888E u@8NL  ~
+    X X   .H8888888%:   888E~?888L .@88 "8888"   4888>'88"    888E`"88*"  ~
+    X 'hn8888888*"   >  888E  888E 9888  9888    4888> '      888E .dN.   ~
+    X: `*88888%`     !  888E  888E 9888  9888    4888>        888E~8888   ~
+    '8h.. ``     ..x8>  888E  888E 9888  9888   .d888L .+     888E '888&  ~
+     `88888888888888f   888E  888E 9888  9888   ^"8888*"      888E  9888. ~
+      '%8888888888*"   m888N= 888> "888*""888"     "Y"      '"888*" 4888" ~
+         ^"****""`      `Y"   888   ^Y"   ^Y'                  ""    ""   ~
+                             J88"                                         ~
+                             @%                                           ~
+                           :"                                             ~
+
+
+Author:   Arsham Shirvani <arsham@duck.com>
+Homepage: <https://github.com/arsham/shark>
+License:  MIT license
+
+==============================================================================
+CORE MAPPINGS                                *mappings*  *shark-core-mappings*
+
+In most mappings we are following this theme, unless there is an uncomfortable
+situation or messes with a community-driven or Vim's very well known mapping:
+
+ Part of mapping  Description                                                ~
+ -----------------------------------------------------------------------------
+ b                Buffer
+ q                Quickfix list mappings
+ w                Local list mappings (because it's beside q)
+ d                LSP Diagnostics or DAP bindings
+ g                Go to, Jump to, run something that goes to or jumps to
+ m                Match highlighting, marks
+ f                File, Find
+ y                Yank
+ a                All, or disabling certain constraints
+ ]                Jumps to the next item
+ [                Jumps to the previous item
+ h                Hunk
+ z                Folds, language/spelling
+ i                Indent
+ t                Tab, Test, Terminal
+ w                Window
+
+*shark-mappings-leader*
+The 'leader' key is 'space'!
+
+*CTRL-SHIFT-p*    Show Control panel (commands)           *shark_CTRL-SHIFT_p*
+*CTRL-wb*         Delete current Buffer                       *shark_CTRL-w_b*
+*CTRL-wy*         Yank current window for exchange            *shark_CTRL-w_y*
+                  (see next mapping)
+*CTRL-wx*         Exchange current window with previously     *shark_CTRL-w_x*
+                  yanked window
+*CTRL-w_CTRL-e*   Run edit silently on current window    *shark_CTRL-W_CTRL-e*
+*LEADER_e*        Run edit silently on all windows of         *shark_LEADER-e*
+                  the current tab
+*LEADER_kk*       Toggles file tree                          *shark_LEADER-kk*
+*LEADER_kf*       Finds current file in the file tree        *shark_LEADER-kf*
+*ALT-j*           Shifts line(s) down one line and format        *shark_ALT-j*
+[count]*ALT-k*    Shifts line(s) up one line and format          *shark_ALT-k*
+*ALT-,*           Adds ',' at the end of current line            *shark_ALT-,*
+                  without moving (repeatable)
+*SHIFT-Alt-,*     Removes ',' from the end of current      *shark_SHIFT-ALT-,*
+                  line without moving (repeatable)
+*ALT-.*           Adds '.' at the end of current line            *shark_ALT-.*
+                  without moving (repeatable)
+*SHIFT-Alt-.*     Removes '.' from the end of current      *shark_SHIFT-ALT-.*
+                  line without moving (repeatable)
+*ALT-;*           Adds ';' at the end of current line            *shark_ALT-;*
+                  without moving (repeatable)
+*SHIFT-Alt-;*     Removes ';' from the end of current      *shark_SHIFT-ALT-;*
+                  line without moving (repeatable)
+*ALT-{*           Adds curly brackets at the end of              *shark_ALT-{*
+                  line into insert mode (repeatable)
+[count]*]SPACE*   Inserts empty lines after (repeatable)       *shark_]-SPACE*
+[count]*[SPACE*   Inserts empty lines before (repeatable)      *shark_[-SPACE*
+*]i*              Jump down along the indents                       *shark_]i*
+*[i*              Jump up along the indents                         *shark_[i*
+*[t*              Move to previous tab                              *shark_[t*
+*]t*              Move to next tab                                  *shark_]t*
+*LEADER-gw*       Greps for current Word in buffer.          *shark_LEADER-gw*
+                  Populates the locallist
+*LEADER-sp*       Toggles Spelling on current buffer         *shark_LEADER-sp*
+*LEADER-sf*       Auto fixes previous misspelled word        *shark_LEADER-sf*
+*cn*              Initiate a 'cgn' on current 'word'                *shark_cn*
+*v_cn*            Initiate a 'cgn' on current visually            *shark_v_cn*
+                  selected string
+*g.*              Use last change (anything) as the                 *shark_g.*
+                  initiate a 'cgn' on current 'word'
+*z=*              Show spell recommendations                        *shark_z=*
+*g=*              Re-indents the hole buffer                        *shark_g=*
+*]c*              (gitsigns) Next hunk                              *shark_]c*
+*[c*              (gitsigns) Previous hunk                          *shark_[c*
+*LEADER-ch*       Command Height toggle (between 0 and 1)    *shark_LEADER-ch*
+*v_LEADER-be*     Base64 encode visually selected text       *shark_LEADER-be*
+*v_LEADER-bd*     Base64 decode visually selected text       *shark_LEADER-bd*
+*LEADER-gg*       Fugitive git buffer                        *shark_LEADER-gg*
+*LEADER-hb*       (gitsigns) Blame line                      *shark_LEADER-hb*
+*LEADER-hs*       (gitsigns) Stage hunk                      *shark_LEADER-hs*
+*LEADER-hl*       (gitsigns) Stage line                      *shark_LEADER-hl*
+*LEADER-hu*       (gitsigns) Unstage hunk                    *shark_LEADER-hu*
+*LEADER-hr*       (gitsigns) Reset hunk                      *shark_LEADER-hr*
+*LEADER-hR*       (gitsigns) Reset buffer                    *shark_LEADER-hR*
+*LEADER-hp*       (gitsigns) Preview hunk                    *shark_LEADER-hp*
+*LEADER-hh*       Opens the help for current word            *shark_LEADER-hh*
+*LEADER-sb*       Toggle scroll bind on current buffer       *shark_LEADER-sb*
+*ALT-LEFT*        Reduce vertical size                        *shark_ALT-LEFT*
+*ALT-RIGHT*       Increase vertical size                     *shark_ALT-RIGHT*
+*ALT-UP*          Reduce horizontal size                        *shark_ALT-UP*
+*ALT-DOWN*        Increase horizontal size                    *shark_ALT-DOWN*
+*ESC-ESC*         Clear hlsearch                               *shark_ESC-ESC*
+*LEADER-1*        Diff get from LOCAL (left)                  *shark_LEADER-1*
+*LEADER-2*        Diff get from BASE (middle)                 *shark_LEADER-2*
+*LEADER-3*        Diff get from REMOTE (right)                *shark_LEADER-3*
+[V]@<reg>         Execute macros over range of lines            *shark_@<reg>*
+*LEADER-zm*       Set folding method to Manual               *shark_LEADER-zm*
+*LEADER-ze*       Set folding method to Expression           *shark_LEADER-ze*
+*LEADER-zi*       Set folding method to Indent               *shark_LEADER-zi*
+*LEADER-zk*       Set folding method to Marker               *shark_LEADER-zk*
+*LEADER-zs*       Set folding method to Syntax               *shark_LEADER-zs*
+*LEADER-db*       Set debugger breakpoint                    *shark_LEADER-db*
+*LOCALLEADER-dB*  Debugger breakpoint condition         *shark_LOCALLEADER-dB*
+*LOCALLEADER-dc*  Debugger continue                     *shark_LOCALLEADER-dc*
+*LOCALLEADER-di*  Debugger step into                    *shark_LOCALLEADER-di*
+*LOCALLEADER-do*  Debugger step over                    *shark_LOCALLEADER-do*
+*LOCALLEADER-dO*  Debugger step out                     *shark_LOCALLEADER-dO*
+*LOCALLEADER-dT*  Debugger termination                  *shark_LOCALLEADER-dT*
+*LOCALLEADER-du*  Toggle debugger UI                    *shark_LOCALLEADER-du*
+*LOCALLEADER-dh*  Debugger hover                        *shark_LOCALLEADER-dh*
+*LOCALLEADER-tu*  Run nearest Test unit                 *shark_LOCALLEADER-tu*
+*LOCALLEADER-ta*  Atach to the nearest test             *shark_LOCALLEADER-ta*
+*LOCALLEADER-tU*  Stop the nearest Test unit            *shark_LOCALLEADER-tU*
+*LOCALLEADER-tf*  Run Tests for current file            *shark_LOCALLEADER-tf*
+*LOCALLEADER-tF*  Run Tests for entire Folder           *shark_LOCALLEADER-tF*
+*LOCALLEADER-tr*  Re-run last test                      *shark_LOCALLEADER-tr*
+*LOCALLEADER-to*  Show Test output window               *shark_LOCALLEADER-to*
+*LOCALLEADER-ts*  Show Test summary tree                *shark_LOCALLEADER-ts*
+*LEADER-ot*       Open Terminal at project root in           *shark_LEADER-ot*
+                  floating window
+*LEADER-oT*       Open Terminal at current file's dir        *shark_LEADER-oT*
+                  in floating window
+
+==============================================================================
+TEXT OBJECTS                               *text-objects* *shark-text-objects*
+
+
+*o_H*              To the beginning of line                  *shark-textobj_H*
+*o_L*              To the end of line                        *shark-textobj_L*
+*o_ii*             In Indentation                            *shark-textobj_i*
+*o_i`*             In backtick pairs (multi-line)           *shark-textobj_i`*
+*o_a`*             Around backtick pairs (multi-line)       *shark-textobj_a`*
+*o_an*             Around Next pairs (current lint)         *shark-textobj_an*
+*o_in*             In Next pairs (current line)             *shark-textobj_in*
+*o_il*             In line                                  *shark-textobj_il*
+*o_al*             Around line                              *shark-textobj_al*
+*o_iN*             In Numeric value (can be float too)      *shark-textobj_iN*
+*o_aN*             Around Numeric value                     *shark-textobj_aN*
+*o_af*             Around Function                          *shark-textobj_af*
+*o_if*             In Function                              *shark-textobj_if*
+*o_am*             Around call                              *shark-textobj_am*
+*o_im*             In call                                  *shark-textobj_im*
+*o_ab*             Around Block                             *shark-textobj_ab*
+*o_ib*             In Block                                 *shark-textobj_ib*
+*o_ah*             Around Hunk (git changes)                *shark-textobj_ah*
+*o_ih*             In Hkunk (git changes)                   *shark-textobj_ih*
+*o_au*             Around Unit                              *shark-textobj_au*
+*o_iu*             In Unit                                  *shark-textobj_iu*
+*o_aa*             Around Argument                          *shark-textobj_aa*
+*o_ia*             In Argument                              *shark-textobj_ia*
+*o_az*             Around folds                             *shark-textobj_az*
+*o_iz*             In folds                                 *shark-textobj_iz*
+
+There are sets of i\* and a\* text objects, where '*' can be any of: \_ . : ,
+; | / \ \* + - #
+
+vim:tw=78:ft=help

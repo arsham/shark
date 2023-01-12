@@ -1,0 +1,458 @@
+*shark.txt*                                       Fast as a shark Neovim setup
+
+
+
+           ...                                                    ..      ~
+       .x888888hx    :   .uef^"                             < .z@8"`      ~
+      d88888888888hxx  :d88E                      .u    .    !@88E        ~
+     8" ... `"*8888%`  `888E             u      .d88B :@8c   '888E   u    ~
+    !  "   ` .xnxx.     888E .z8k     us888u.  ="8888f8888r   888E u@8NL  ~
+    X X   .H8888888%:   888E~?888L .@88 "8888"   4888>'88"    888E`"88*"  ~
+    X 'hn8888888*"   >  888E  888E 9888  9888    4888> '      888E .dN.   ~
+    X: `*88888%`     !  888E  888E 9888  9888    4888>        888E~8888   ~
+    '8h.. ``     ..x8>  888E  888E 9888  9888   .d888L .+     888E '888&  ~
+     `88888888888888f   888E  888E 9888  9888   ^"8888*"      888E  9888. ~
+      '%8888888888*"   m888N= 888> "888*""888"     "Y"      '"888*" 4888" ~
+         ^"****""`      `Y"   888   ^Y"   ^Y'                  ""    ""   ~
+                             J88"                                         ~
+                             @%                                           ~
+                           :"                                             ~
+
+
+Author:   Arsham Shirvani <arsham@duck.com>
+Homepage: <https://github.com/arsham/shark>
+License:  MIT license
+
+==============================================================================
+CONTENTS                                                      *shark-contents*
+
+1. Introduction ......................................... |shark-introduction|
+2. Highlights ............................................. |shark-highlights|
+3. Setup ....................................................... |shark-setup|
+4. Functionality ....................................... |shark-functionality|
+   - Core Mappings ..................................... |shark-core-mappings|
+   - Text Objects ....................................... |shark-text-objects|
+   - Lists ..................................................... |shark-lists|
+   - Highlight Matching ........................... |shark-highlight-matching|
+   - Fzf ......................................................... |shark-fzf|
+   - Yanker Mappings .......................................... |shark-yanker|
+   - LSP ......................................................... |shark-lsp|
+   - Commands ............................................... |shark-commands|
+   - Snippets ............................................... |shark-snippets|
+   - Utilities ............................................. |shark-utilities|
+     - Normal ................................................. |shark-normal|
+     - Highlight ........................................... |shark-highlight|
+     - Call and Centre ............................... |shark-call_and_centre|
+     - User Input ......................................... |shark-user_input|
+     - Dump ..................................................... |shark-dump|
+5. Folder Structure ................................. |shark-folder-structure|
+6. LICENSE ................................................... |shark-license|
+
+==============================================================================
+INTRODUCTION                                              *shark-introduction*
+
+The goal of this project is to have a fast Neovim startup, provide mappings
+that can be easily memorised, interact with the Lua API, and make programming
+fun.
+
+This setup is mostly customised to for Go (Golang) and Rust development. There
+is also a few other LSP servers setup for other LSP servers to work with
+various file types.
+
+This project supports Neovim version '0.8.0' and newer.
+
+==============================================================================
+HIGHLIGHTS                                                  *shark-highlights*
+
+* Besides in a few places that Neovim doesn't provide an API in Lua, most
+  configuration is done in Lua.
+* It loads really fast! With over 100 plugins, it takes 1ms to 10ms on average
+  to load up. This has become possible With the new 'filetype.lua' and heavily
+  lazy-loaded plugins (benchmarked with the 'StartupTime' benchmark tool).
+  Hyperfine benchmarks shows a full startup/shutdow cycle of 70ms on average.
+* LSP, Treesitter, and FZF are setup to work together.
+* Completion with nvim-cmp plugin is setup.
+* It is optimised to handle very large files.
+* There are some handy textobjects such as backticks and indents.
+* You can add the current location of the cursor or make notes on the current
+  location in the quickfix/local lists with repeatable mappings.
+* You can manipulate quickfix/local lists.
+* It comes with integration with git and gist.
+* Has a lot of useful feedback in the gutter.
+* Statusline is configures with feline.
+* It is set to give a lot of useful information about the buffer.
+* Prettier quickfix buffer and quickfix tools.
+* The theme is setup with Lua to take advantage of its performance.
+
+==============================================================================
+SETUP                                                            *shark-setup*
+
+Just clone this project:
+>bash
+  git clone https://github.com/arsham/shark.git ~/.config/nvim
+<
+
+Once you start 'Neovim', it will install the package manager and installs the
+listed plugins.
+
+Run |TSUpdate| to satisfy treesitter dependencies. Some dependencies can't
+be installed with this tool (yet), therefore you need to install them
+manually. The command will let you know what you need to install in the
+notification.
+
+You can check the health of your installation by running the |checkhealth|
+command. To make sure health of all plugins are run invoke |:LazyLoadAll|
+before |checkhealth|.
+
+==============================================================================
+FUNCTIONALITY                                            *shark-functionality*
+
+Some default |mappings|/|commands| are augmented to centre the buffer after
+the execution.
+
+Some |mappings|/|commands| are obvious, but I've left them here as a reminder.
+Some are left out either because they are not used too often, or they are
+defined after writing this document and I've forgot to document.
+
+I would recommend you have a look at the code to see what is available to you.
+
+
+==============================================================================
+LISTS                                                            *shark-lists*
+
+There are a few tools for interacting with quickfix and local lists.
+Following mappings can be used for either cases, all you need to do it to
+substitute 'w' for 'q' or vice versa. Generally q is for quickfix list
+and w is for local list. I chose w because it's beside q and it
+makes it easy to think about these two types of lists.
+
+These mapping: |<leader>qq|, |<leader>ww|, |<leader>qn| and |<leader>wn| are
+repeatable with the |.| dot operator!
+
+After adding an item to the list, an indicator in the statusline will show
+you how many items you have in a list.
+
+*LEADER-cc*  Close both quickfix and local list windows      *shark_LEADER-cc*
+*LEADER-qq*  Add current line and column to the quickfix     *shark_LEADER-qq*
+             list.
+
+*LEADER-qn*  Add current line and column with your note      *shark_LEADER-qn*
+             to the quickfix list.
+
+*LEADER-qo*  Open the quickfix list.                         *shark_LEADER-qo*
+*LEADER-qd*  Drop the quickfix list.                         *shark_LEADER-qd*
+*LEADER-qc*  Close the quickfix list.                        *shark_LEADER-qc*
+*]q*         Go to the next item in the quickfix list and centre.   *shark_]q*
+*[q*         Go to the previous item in the quickfix list           *shark_[q*
+             and centre.
+
+*LEADER-wq*  Add current line and column to the locallist.   *shark_LEADER-wq*
+*LEADER-wn*  Add current line and column with your note      *shark_LEADER-wn*
+             to the locallist.
+
+*LEADER-wo*  Open the locallist.                             *shark_LEADER-wo*
+*LEADER-wd*  Drop the locallist.                             *shark_LEADER-wd*
+*LEADER-wc*  Close the locallist.                            *shark_LEADER-wc*
+*]w*         Go to the next item in the locallist and centre.       *shark_]w*
+*[w*         Go to the previous item in the locallist and centre.   *shark_[w*
+
+*:Clearquickfix*    Clear the quickfix list.
+*:Clearloclist*     Clear the local list of current buffer.
+
+Additional to nvim-bqf <https://github.com/kevinhwang91/nvim-bqf> bindings,
+you can do |<count>dd| in the quickfix/local list buffers to delete '<count>'
+rows from quickfix/local list buffer.
+
+==============================================================================
+HIGHLIGHT MATCHING                                  *shark-highlight-matching*
+
+You can highlight words with random colours. Note that all these mappings are
+bound to the current window. |<leader>ma| and |<leader>me| are repeatable with
+the |.| operator!
+
+*LEADER-ma*  Add current word as a sub-pattern.              *shark_LEADER-ma*
+*LEADER-me*  Add an exact match on current term.             *shark_LEADER-me*
+*LEADER-mp*  Add an match by asking for a pattern.           *shark_LEADER-mp*
+*LEADER-ml*  Add current line.                               *shark_LEADER-ml*
+*LEADER-md*  Delete Matches with fzf search.                 *shark_LEADER-md*
+*LEADER-mc*  Clear all matched patterns on current window.   *shark_LEADER-mc*
+
+==============================================================================
+FZF                                                                *shark-fzf*
+
+Most actions can apply to multiple selected items if possible.
+
+*CTRL-p*         File list in current folder.                   *shark_CTRL-p*
+*ALT-p*          File list in home folder.                       *shark_ALT-p*
+*CTRL-b*         Buffer list.                                   *shark_CTRL-b*
+*ALT-b*          Delete buffers from the buffer list.            *shark_ALT-b*
+*CTRL-/*         Search in lines on current buffer.             *shark_CTRL-/*
+*ALT-/*          Search in lines of all open buffers.            *shark_ALT-/*
+*LEADER-:*       Commands                                    *shark_LEADER-ff*
+*LEADER-ff*      Find in contents of all files in current
+                 folder.
+*LEADER-fF*      Like |<leader>ff|, but you can filter       *shark_LEADER-fF*
+                 filenames too.
+*LEADER-fa*      Find All disabling '.gitignore' handling.   *shark_LEADER-fa*
+*LEADER-fA*      Like |<leader>fA|, but you can filter       *shark_LEADER-fA*
+                 filenames too.
+*LEADER-fi*      Incrementally Find.                         *shark_LEADER-fi*
+*LEADER-rg*      Search (rg) with current word.              *shark_LEADER-rg*
+*LEADER-fG*      Like |<leader>fG|, but you can filter       *shark_LEADER-fG*
+                 filenames too
+*LEADER-ra*      Disable '.gitignore' handling while         *shark_LEADER-ra*
+                 searching in files.
+*LEADER-rA*      Like |<leader>rA|, but you can filter       *shark_LEADER-rA*
+                 filenames too
+*LEADER-ri*      Incrementally search with current word.     *shark_LEADER-ri*
+*LEADER-fh*      File History                                *shark_LEADER-fh*
+*LEADER-fl*      File locate (requires mlocate)              *shark_LEADER-fl*
+*LEADER-gf*      GFiles                                      *shark_LEADER-gf*
+*LEADER-mm*      Marks
+*CTRL-x_CTRL-k*  Search in dictionaries                  *shark_CTRL-x_CTRL-k*
+*CTRL-x_CTRL-f*  Search in files                         *shark_CTRL-x_CTRL-f*
+*CTRL-x_CTRL-l*  Search in lines                         *shark_CTRL-x_CTRL-l*
+
+If you keep hitting |<Ctrl-/>| the preview window will change width. With
+|Shift-/| you can show and hide the preview window.
+
+When you invoke |LEADER-yh| you will be presented with a history of the
+yanked items. Upon choosing one, the item will be set to the unnamed register
+and you use p from there.
+
+When a file is selected, additional to what fzf provides out of the box, you
+can invoke one of these secondary actions:
+
+alt-/              To search in the lines.                   *shark-fzf_ALT-/*
+alt-@              To search in ctags or lsp symbols.        *shark-fzf_ALT-@*
+alt-:              To go to a specific line.                 *shark-fzf_ALT-:*
+alt-q              Add items to the quickfix list.           *shark-fzf_ALT-q*
+
+Note that if a 'LSP' server is not attached to the buffer, it will fall back
+to |ctags|.
+
+Sometimes when you list files and 'sink' with @, the 'LSP' might not be ready
+yet, therefore it falls back to |ctags| immediately. In this case you can
+cancel, which will land you to the file, and you can invoke |LEADER-@| for
+LSP symbols.
+
+There are a few added commands to what fzf provides.
+
+*:ArgAdd*           Select and add files to the args list
+*:ArgDelete*        Select and delete files from the args list
+*:GGrep*            Run git grep
+*:Marks*            Show marks with preview
+*:MarksDelete*      Delete marks
+*:Worktree*         (Also WT) switches between git worktrees
+*:Todo*             List todo/fixme lines
+
+------------------------------------------------------------------------------
+YANKER MAPPINGS                                                 *shark-yanker*
+
+*LEADER-yh*     List Yank History                            *shark_LEADER-yh*
+*LEADER-y*      Yank to the '+' register (external clipboard) *shark_LEADER-y*
+*LEADER-p*      Paste from the '+' register                   *shark_LEADER-p*
+*LEADER-P*      Paste from the '+' register (before/above)    *shark_LEADER-P*
+*v_p*           Paste on selected text without changing "reg       *shark_v_p*
+
+==============================================================================
+LSP                                                          *shark-lsp-setup*
+
+When a |LSP| server is attached to a buffer, a series of mappings will be
+defined for that buffer based on the server's capabilities. When possible, fzf
+will take over the results of the |LSP| mappings results.
+
+Please note that I have remapped 'CTRL-n' and 'CTRL-p' with 'CTRL-j' and
+'CTRL-k' in completion menu in order to move up and down.
+
+*gd*           Go to Definition                                     *shark_gd*
+*gD*           Go to Declaration                                    *shark_gD*
+*LEADER-df*    Show function definition                      *shark_LEADER-df*
+*LEADER-gi*    Go to Implementation                          *shark_LEADER-gi*
+*gr*           Show References                                      *shark_gr*
+*LEADER-@*     Document Symbols                               *shark_LEADER-@*
+*LEADER-gc*    Show Callers (incoming calls)                 *shark_LEADER-gc*
+*H*            Hover popup                                           *shark_H*
+*i_ALT-h*      Show Hover popup                                  *shark_ALT-h*
+*K*            Signature help                                        *shark_K*
+*i_ALT-l*      Show Signature help                               *shark_ALT-l*
+*i_CTRL-l*, *s_CTRL-l*   Next snippet choice                    *shark_CTRL-l*
+*i_CTRL-h*, *s_CTRL-h*   Previous snippet choice                *shark_CTRL-h*
+*i_TAB*        Next completion item                                *shark_TAB*
+*i_SHIFT-TAB*  Previous completion item                      *shark_SHIFT-TAB*
+*i_CTRL-j*     Next completion item                             *shark_CTRL-j*
+*i_CTRL-k*     Previous completion item                         *shark_CTRL-k*
+*i_ALT-n*      Next completion source                        *shark-lsp_ALT-n*
+*i_ALT-p*      Previous completion source                    *shark-lsp_ALT-p*
+*LEADER-dd*    Show line Diagnostics                         *shark_LEADER-dd*
+*LEADER-dq*    Fill the Quicklist with Diagnostics           *shark_LEADER-dq*
+*LEADER-dw*    Fill the local list with Diagnostics          *shark_LEADER-dw*
+*]d*           Go to next diagnostic issue                          *shark_]d*
+*[d*           Go to previous diagnostic issue                      *shark_[d*
+*LEADER-i*     Organise imports                               *shark_LEADER-i*
+*LEADER-gq*    Format the buffer with LSP                    *shark_LEADER-gq*
+*LEADER-dr*    Restart the LSP server                        *shark_LEADER-dr*
+*LEADER-ca*, *v_LEADER-ca* Code Actions                      *shark_LEADER-ca*
+*LEADER-cr*    Code lens Run                                 *shark_LEADER-cr*
+*]f*           Jumps to the start of next function                  *shark_]f*
+*[f*           Jumps to the start of previous function              *shark_[f*
+*]b*           Jumps to the start of next block                     *shark_]b*
+*[b*           Jumps to the start of previous block                 *shark_[b*
+*LEADER-.f*    Swap function to next                         *shark_LEADER-.f*
+*LEADER-,f*    Swap function to previous                     *shark_LEADER-,f*
+
+Notes:
+- The |<leader>@| binding will use the 'LSP' symbols if is attached to the
+  buffer, or |ctags| otherwise.
+- Invoke |<leader>df| twice to enter the flowing window. 'q' exits.
+Please see the code for all available mappings.
+
+|LSP| defines its own set of commands, however I have added a few interesting
+additions.
+
+*:RestartLsp*        Restart |LSP| with a delay.
+*:CodeAction*        Also works on a visually selected text.
+*:WorkspaceSymbols*
+*:DocumentSymbol*
+*:Callees*
+*:Callers*
+*:CodeLensRefresh*
+*:CodeLensRun*
+*:Diagnostics*
+*:DiagnosticsAll*
+*:Definition*
+*:TypeDefinition*
+*:Implementation*
+*:References*
+*:ListWorkspace*
+*:Test*              Find a test with the name of current function
+*:Log*               Show |LSP| logs
+
+The |RestartLsp| fixes an issue when the |LspRestart| does not have any
+effects.
+
+==============================================================================
+COMMANDS                                           *commands* *shark-commands*
+
+The following list of commands do not fit into any specific categories.
+
+*:CC*                    Close all floating windows
+*:Scratch*               Create a scratch buffer
+*:Filename*              View the filename
+*:YankFilename*          Yank the filename to '"' register
+*:YankFilenameC*         Yank the filename to '+' register
+*:YankFilepath*          Yank the file path to '"' register
+*:YankFilepathC*         Yank the file path to '+' register
+*:MergeConflict*         Search for merge conflicts
+*:JsonDiff*              Diff json files after formatting them
+*:Tmux*                  Start a tmux project (using tmuxp)
+*:Lorem*                 Insert (count) line(s) Lorem Ipsum text
+*:Faster*                Disable feature to make Neovim smoother
+*:Slower*                Undoes the 'Faster' changes
+
+==============================================================================
+SNIPPETS                                                      *shark-snippets*
+
+I never was a fan of snippets, until I discovered the LuaSnip
+<https://github.com/L3MON4D3/LuaSnip> plugin and it changed my mind. Please
+see the README.md file on github for demos.
+
+==============================================================================
+UTILITIES                                                    *shark-utilities*
+
+These are commands you can use in Lua land. Assign the required module to a
+variable and re-use.
+>lua
+  local quick = require("arshlib.quick")
+<
+
+------------------------------------------------------------------------------
+NORMAL                                                          *shark-normal*
+
+Executes a normal command. For example:
+>lua
+  quick.normal("n", "y2k")
+<
+
+See |:h feedkeys()| for values of the mode.
+
+------------------------------------------------------------------------------
+HIGHLIGHT                                                    *shark-highlight*
+
+Create |highlight| groups:
+>lua
+  quick.highlight("LspReferenceRead", {
+    ctermbg = 180,
+    guibg = "#43464F",
+    style = "bold",
+  })
+<
+
+------------------------------------------------------------------------------
+CALL AND CENTRE                                        *shark-call_and_centre*
+
+These functions will call your function/command and then centres the buffer:
+>lua
+  quick.call_and_centre(function()
+    print("Yolo!")
+  end)
+  quick.cmd_and_centre("SomeCommand")
+<
+
+------------------------------------------------------------------------------
+USER INPUT                                                  *shark-user_input*
+
+This launches a popup buffer for the input:
+>lua
+  require("arshlib.util").user_input({
+    prompt = "Message: ",
+    on_submit = function(value)
+      print("Thank you for your note: " .. value)
+    end,
+  })
+<
+
+------------------------------------------------------------------------------
+DUMP                                                              *shark-dump*
+
+Unpacks and prints tables. This function is injected into the global scope.
+>lua
+  dump({ name = "Arsham" })
+<
+
+==============================================================================
+FOLDER STRUCTURE                                      *shark-folder-structure*
+
+You will notice not everything is where they should be. For example there is a
+'lua/mappings.lua' file that contains a lot of mappings, but there are a few
+more in plugin settings and lsp folder. The same goes for the commands.
+
+The reason for this is because I wanted to make sure if I disable a plugin,
+none of its associated mappings or commands are loaded.
+
+==============================================================================
+LICENSE                                                        *shark-license*
+
+MIT License                                                                  ~
+                                                                             ~
+Copyright (c) 2023 Arsham Shirvani                                           ~
+                                                                             ~
+Permission is hereby granted, free of charge, to any person obtaining a copy ~
+of this software and associated documentation files (the "Software"), to deal~
+in the Software without restriction, including without limitation the rights ~
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell    ~
+copies of the Software, and to permit persons to whom the Software is        ~
+furnished to do so, subject to the following conditions:                     ~
+                                                                             ~
+The above copyright notice and this permission notice shall be included in   ~
+all copies or substantial portions of the Software.                          ~
+                                                                             ~
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR   ~
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,     ~
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  ~
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER       ~
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,~
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE~
+SOFTWARE.                                                                    ~
+
+vim:tw=78:ft=help
