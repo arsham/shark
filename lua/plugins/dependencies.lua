@@ -16,7 +16,10 @@ return {
   },
   {
     "profan/lua-bk-tree",
-    build = "mkdir -p lua/bk-tree && cp bk-tree.lua lua/bk-tree/init.lua",
+    build = {
+      "mkdir -p lua/bk-tree",
+      "cp bk-tree.lua lua/bk-tree/init.lua",
+    },
     lazy = true,
   },
 }
