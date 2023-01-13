@@ -5,11 +5,11 @@ local function config()
   wilder.setup({ modes = { ":" } })
 
   local function init_wilder()
-      -- stylua: ignore start
-      vim.keymap.set("c", "<TAB>", 'wilder#in_context() ? wilder#next() : "\\<Tab>"', { expr = true })
-      vim.keymap.set("c", "<S-TAB>", 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', { expr = true })
-      vim.keymap.set("c", "<C-j>", 'wilder#in_context() ? wilder#next() : "\\<Tab>"', { expr = true })
-      vim.keymap.set("c", "<C-k>", 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', { expr = true })
+    -- stylua: ignore start
+    vim.keymap.set("c", "<TAB>", 'wilder#in_context() ? wilder#next() : "\\<Tab>"', { expr = true })
+    vim.keymap.set("c", "<S-TAB>", 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', { expr = true })
+    vim.keymap.set("c", "<C-j>", 'wilder#in_context() ? wilder#next() : "\\<Tab>"', { expr = true })
+    vim.keymap.set("c", "<C-k>", 'wilder#in_context() ? wilder#previous() : "\\<S-Tab>"', { expr = true })
     -- stylua: ignore end
 
     wilder.set_option("pipeline", {

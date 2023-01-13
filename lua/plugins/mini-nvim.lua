@@ -1,4 +1,3 @@
----@type Quick
 local quick = require("arshlib.quick")
 
 return {

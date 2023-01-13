@@ -31,23 +31,24 @@ local function config()
       },
     },
   }) --}}}
-
-  vim.keymap.set({ "i", "s" }, "<C-l>", function()
-    if ls.choice_active() then
-      ls.change_choice(1)
-    end
-  end)
-
-  vim.keymap.set({ "i", "s" }, "<C-h>", function()
-    if ls.choice_active() then
-      ls.change_choice(-1)
-    end
-  end)
 end
 
 return {
   "L3MON4D3/LuaSnip",
   dependencies = { "rafamadriz/friendly-snippets" },
+  -- stylua: ignore
+  keys = {
+    { mode = { "i", "s" }, "<C-l>", function()
+        local ls = require("luasnip")
+        if ls.choice_active() then ls.change_choice(1) end
+      end,
+    },
+    { mode = { "i", "s" }, "<C-h>", function()
+        local ls = require("luasnip")
+        if ls.choice_active() then ls.change_choice(-1) end
+      end,
+    },
+  },
   config = config,
   lazy = true,
 }
