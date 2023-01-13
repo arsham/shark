@@ -86,7 +86,6 @@ local function config()
   local compare = require("cmp.config.compare")
   local ls = require("luasnip")
   local kinds = require("cmp.types").lsp.CompletionItemKind
-  local ts_utils = require("nvim-treesitter.ts_utils")
   setup_priorities()
   -- }}}
 
