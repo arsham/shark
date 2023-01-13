@@ -9,8 +9,6 @@ local function config()
     Undo = "<C-u>",
     Redo = "<C-r>",
     ["Select Operator"] = "v",
-    ["Select Cursor Up"] = "<C-K>",
-    ["Select Cursor Down"] = "<C-J>",
     ["Move Left"] = "<C-H>",
     ["Move Right"] = "<C-L>",
     ["Find Under"] = "<C-n>",
@@ -54,6 +52,11 @@ return {
     vim.g.VM_leader = "<space><space>"
   end,
   config = config,
-  keys = { "<C-n>", "<C-Down>", "<C-Up>", { "<space><space>", mode = { "n", "v" } } },
+  keys = {
+    { "<C-n>", mode = { "n", "v" } },
+    { "<space><space>", mode = { "n", "v" } },
+    "<C-Down>",
+    "<C-Up>",
+  },
   cond = require("util").full_start,
 }
