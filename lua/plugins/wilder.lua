@@ -56,6 +56,6 @@ end
 return {
   "gelguy/wilder.nvim",
   config = config,
-  build = ":lua vim.defer_fn(function() vim.cmd.UpdateRemotePlugins() end, 500)",
+  build = ":UpdateRemotePlugins",
   event = { "CmdlineEnter" },
 }
