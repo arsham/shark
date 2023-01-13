@@ -54,62 +54,6 @@ quick.command("ToggleRelativeNumbers", function() --{{{
   vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
 end) --}}}
 
-quick.command("InstallDependencies", function() --{{{
-  local commands = _t({
-    gojq = _t({ "go", "install", "github.com/itchyny/gojq/cmd/gojq@latest" }),
-    neovim = _t({ "npm", "-g", "install", "--prefix", "~/.node_modules", "neovim@latest" }),
-    neovim_pip = _t({ "pip3", "install", "--user", "--upgrade", "neovim" }),
-  })
-
-  local total = commands:map_length()
-  local count = 0
-
-  local job = require("plenary.job")
-  for name, spec in pairs(commands) do --{{{
-    job
-      :new({
-        command = spec[1],
-        args = spec:slice(2, #spec),
-        on_exit = function(j, exit_code)
-          local res = table.concat(j:result(), "\n")
-          local type = vim.lsp.log_levels.INFO
-          local timeout = 2000
-
-          if exit_code ~= 0 then
-            type = vim.lsp.log_levels.ERROR
-            res = table.concat(j:stderr_result(), "\n")
-            timeout = 10000
-          end
-
-          vim.notify(res, type, {
-            title = name:title_case(),
-            timeout = timeout,
-          })
-
-          count = count + 1
-          if count == total then
-            local str =
-              "paru -S ripgrep bat words-insane ctags python-pip the_silver_searcher diagon-git"
-            vim.schedule(function()
-              vim.fn.setreg("+", str)
-            end)
-            local data = table.concat({
-              "Please run:",
-              "    " .. str,
-              "",
-              "The command has been yanked to your clickboard!",
-            }, "\n")
-            vim.notify(data, vim.lsp.log_levels.INFO, {
-              title = "All done!",
-              timeout = 3000,
-            })
-          end
-        end,
-      })
-      :start()
-  end --}}}
-end, { desc = "Install shark's required dependencies" }) --}}}
-
 local project_store = false
 local function running_tmuxp_projects() --{{{
   if project_store then
