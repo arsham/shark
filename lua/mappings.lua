@@ -4,6 +4,9 @@ local function opts(desc)
   return { silent = true, desc = desc }
 end
 
+vim.keymap.set("o", "H", "^", opts("to the beginning of line"))
+vim.keymap.set("o", "L", "$", opts("to the end of line"))
+
 -- Disabling arrows {{{
 local o = opts("disabling arrows")
 vim.keymap.set({ "n", "i" }, "<Up>", "<Nop>", o)
