@@ -14,4 +14,9 @@ return {
     build = "pip3 install --user --upgrade neovim",
     lazy = true,
   },
+  {
+    "profan/lua-bk-tree",
+    build = "mkdir -p lua/bk-tree && cp bk-tree.lua lua/bk-tree/init.lua",
+    lazy = true,
+  },
 }
