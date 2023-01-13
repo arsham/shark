@@ -7,14 +7,6 @@ end
 vim.keymap.set("o", "H", "^", opts("to the beginning of line"))
 vim.keymap.set("o", "L", "$", opts("to the end of line"))
 
--- Disabling arrows {{{
-local o = opts("disabling arrows")
-vim.keymap.set({ "n", "i" }, "<Up>", "<Nop>", o)
-vim.keymap.set({ "n", "i" }, "<Down>", "<Nop>", o)
-vim.keymap.set({ "n", "i" }, "<Left>", "<Nop>", o)
-vim.keymap.set({ "n", "i" }, "<Right>", "<Nop>", o)
--- }}}
-
 vim.keymap.set("n", "J", "mzJ`z", opts("Keep cursor while joining lines"))
 
 -- Moving around {{{
@@ -42,6 +34,10 @@ vim.keymap.set("n", "<M-Left>", ":vert resize -2<CR>", opts("decreases vertical 
 vim.keymap.set("n", "<M-Right>", ":vert resize +2<CR>", opts("increase vertical size"))
 vim.keymap.set("n", "<M-Up>", ":resize +2<CR>", opts("increase horizontal size"))
 vim.keymap.set("n", "<M-Down>", ":resize -2<CR>", opts("decreases horizontal size"))
+vim.keymap.set("n", "<Left>", ":vert resize -2<CR>", opts("decreases vertical size"))
+vim.keymap.set("n", "<Right>", ":vert resize +2<CR>", opts("increase vertical size"))
+vim.keymap.set("n", "<Up>", ":resize +2<CR>", opts("increase horizontal size"))
+vim.keymap.set("n", "<Down>", ":resize -2<CR>", opts("decreases horizontal size"))
 --}}}
 
 o = opts("auto re-centre when moving around")
