@@ -286,6 +286,5 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEn
   end,
 })
 
-vim.api.nvim_create_augroup("RELOAD_CONFIGS", { clear = true })
 
 -- vim: fdm=marker fdl=0
