@@ -326,8 +326,9 @@ The `leader` key is `space`!
 | `<localleader>tr`  | **R**e-run last **t**est                                             |
 | `<localleader>to`  | Show **T**est **o**utput window                                      |
 | `<localleader>ts`  | Show **T**est **s**ummary tree                                       |
-| `<leader>ot`       | **O**pen **T**erminal at project root in floating window             |
-| `<leader>oT`       | **O**pen **T**erminal at current file's dir in floating window       |
+| `<leader>tt`       | **T**oggle **T**erminal horizontally                                 |
+| `<leader>tT`       | **T**oggle **T**erminal vertically                                   |
+| `<leader>tf`       | Open **T**erminal with **F**ile manager (vifm)                       |
 
 </details>
 
@@ -849,6 +850,7 @@ none of its associated mappings or commands are loaded.
 | [nvim-lua/plenary.nvim][nvim-lua/plenary.nvim]    | [MIT license](https://github.com/nvim-lua/plenary.nvim/blob/master/LICENSE)                              |
 | [samjwill/nvim-unception][nvim-unception]         | [MIT license](https://github.com/samjwill/nvim-unception/blob/main/LICENSE)                              |
 | [s1n7ax/nvim-window-picker][nvim-window-picker]   | [MIT license](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)                            |
+| [akinsho/toggleterm.nvim][toggleterm-nvim]        | [GPL-3.0](https://github.com/akinsho/toggleterm.nvim/blob/main/LICENSE)                                  |
 
 </details>
 
@@ -955,6 +957,7 @@ none of its associated mappings or commands are loaded.
 [nvim-lua/plenary.nvim]: https://github.com/nvim-lua/plenary.nvim
 [nvim-unception]: https://github.com/samjwill/nvim-unception
 [nvim-window-picker]: https://github.com/s1n7ax/nvim-window-picker
+[toggleterm-nvim]: https://github.com/akinsho/toggleterm.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

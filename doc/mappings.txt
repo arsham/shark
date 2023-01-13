@@ -140,10 +140,9 @@ The 'leader' key is 'space'!
 *LOCALLEADER-tr*  Re-run last test                      *shark_LOCALLEADER-tr*
 *LOCALLEADER-to*  Show Test output window               *shark_LOCALLEADER-to*
 *LOCALLEADER-ts*  Show Test summary tree                *shark_LOCALLEADER-ts*
-*LEADER-ot*       Open Terminal at project root in           *shark_LEADER-ot*
-                  floating window
-*LEADER-oT*       Open Terminal at current file's dir        *shark_LEADER-oT*
-                  in floating window
+*LEADER-tt*       Toggle Terminal horizontally               *shark_LEADER-tt*
+*LEADER-tT*       Toggle Terminal vertically                 *shark_LEADER-tT*
+*LEADER-tf*       Open Terminal with vifm file manager       *shark_LEADER-tf*
 
 ==============================================================================
 TEXT OBJECTS                               *text-objects* *shark-text-objects*

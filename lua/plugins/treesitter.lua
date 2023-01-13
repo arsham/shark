@@ -164,7 +164,6 @@ return {
     "andymass/vim-matchup",
   },
   build = ":TSUpdate",
-  cmd = "TSUpdate",
   event = { "VeryLazy" },
   priority = 80,
   config = config,

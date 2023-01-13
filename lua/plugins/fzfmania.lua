@@ -19,7 +19,7 @@ return {
 
     local config = {
       mappings = {
-        fzf_builtin = "<leader>tt",
+        fzf_builtin = false,
       },
     }
     if require("util").full_start() then

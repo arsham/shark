@@ -110,8 +110,6 @@ LEADER-me	shark.txt	/*LEADER-me*
 LEADER-ml	shark.txt	/*LEADER-ml*
 LEADER-mm	shark.txt	/*LEADER-mm*
 LEADER-mp	shark.txt	/*LEADER-mp*
-LEADER-oT	mappings.txt	/*LEADER-oT*
-LEADER-ot	mappings.txt	/*LEADER-ot*
 LEADER-p	shark.txt	/*LEADER-p*
 LEADER-qc	shark.txt	/*LEADER-qc*
 LEADER-qd	shark.txt	/*LEADER-qd*
@@ -125,6 +123,9 @@ LEADER-ri	shark.txt	/*LEADER-ri*
 LEADER-sb	mappings.txt	/*LEADER-sb*
 LEADER-sf	mappings.txt	/*LEADER-sf*
 LEADER-sp	mappings.txt	/*LEADER-sp*
+LEADER-tT	mappings.txt	/*LEADER-tT*
+LEADER-tf	mappings.txt	/*LEADER-tf*
+LEADER-tt	mappings.txt	/*LEADER-tt*
 LEADER-wc	shark.txt	/*LEADER-wc*
 LEADER-wd	shark.txt	/*LEADER-wd*
 LEADER-wn	shark.txt	/*LEADER-wn*
@@ -359,8 +360,6 @@ shark_LEADER-md	shark.txt	/*shark_LEADER-md*
 shark_LEADER-me	shark.txt	/*shark_LEADER-me*
 shark_LEADER-ml	shark.txt	/*shark_LEADER-ml*
 shark_LEADER-mp	shark.txt	/*shark_LEADER-mp*
-shark_LEADER-oT	mappings.txt	/*shark_LEADER-oT*
-shark_LEADER-ot	mappings.txt	/*shark_LEADER-ot*
 shark_LEADER-p	shark.txt	/*shark_LEADER-p*
 shark_LEADER-qc	shark.txt	/*shark_LEADER-qc*
 shark_LEADER-qd	shark.txt	/*shark_LEADER-qd*
@@ -374,6 +373,9 @@ shark_LEADER-ri	shark.txt	/*shark_LEADER-ri*
 shark_LEADER-sb	mappings.txt	/*shark_LEADER-sb*
 shark_LEADER-sf	mappings.txt	/*shark_LEADER-sf*
 shark_LEADER-sp	mappings.txt	/*shark_LEADER-sp*
+shark_LEADER-tT	mappings.txt	/*shark_LEADER-tT*
+shark_LEADER-tf	mappings.txt	/*shark_LEADER-tf*
+shark_LEADER-tt	mappings.txt	/*shark_LEADER-tt*
 shark_LEADER-wc	shark.txt	/*shark_LEADER-wc*
 shark_LEADER-wd	shark.txt	/*shark_LEADER-wd*
 shark_LEADER-wn	shark.txt	/*shark_LEADER-wn*
