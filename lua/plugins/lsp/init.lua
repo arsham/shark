@@ -58,6 +58,9 @@ local function config()
       local filename = vim.api.nvim_buf_get_name(0)
       return filename:find("fugitive:///")
     end,
+    function()
+      return vim.bo.filetype == "man"
+    end,
   }
   for _, fn in ipairs(predicates) do
     if fn() then
