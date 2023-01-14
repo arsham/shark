@@ -215,6 +215,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | Core        | [nvim-lua/plenary.nvim][nvim-lua/plenary.nvim]    |                                                      |
 | Core        | [samjwill/nvim-unception][nvim-unception]         | Neovim in Neovim = 1 Neovim                          |
 | Core        | [s1n7ax/nvim-window-picker][nvim-window-picker]   | Window picker                                        |
+| Core        | [RaafatTurki/hex.nvim][hex.nvim]                  | Hex viewer                                           |
 
 </details>
 
@@ -851,6 +852,7 @@ none of its associated mappings or commands are loaded.
 | [samjwill/nvim-unception][nvim-unception]         | [MIT license](https://github.com/samjwill/nvim-unception/blob/main/LICENSE)                              |
 | [s1n7ax/nvim-window-picker][nvim-window-picker]   | [MIT license](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)                            |
 | [akinsho/toggleterm.nvim][toggleterm-nvim]        | [GPL-3.0](https://github.com/akinsho/toggleterm.nvim/blob/main/LICENSE)                                  |
+| [RaafatTurki/hex.nvimw][hex.nvim]                 | [MIT](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)                                       |
 
 </details>
 
@@ -958,6 +960,7 @@ none of its associated mappings or commands are loaded.
 [nvim-unception]: https://github.com/samjwill/nvim-unception
 [nvim-window-picker]: https://github.com/s1n7ax/nvim-window-picker
 [toggleterm-nvim]: https://github.com/akinsho/toggleterm.nvim
+[hex.nvim]: https://github.com/RaafatTurki/hex.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
