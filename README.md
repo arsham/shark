@@ -144,6 +144,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | LSP         | [lukas-reineke/cmp-rg][lukas-reineke/cmp-rg]      | Extension for nvim-cmp                               |
 | LSP         | [saadparwaiz1/cmp_luasnip][cmp_luasnip]           | Extension for nvim-cmp                               |
 | LSP         | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]              | Snippet engine                                       |
+| LSP         | [uga-rosa/cmp-dynamic][cmp-dynamic]               | Extension for nvim-cmp                               |
 | LSP         | [smjonas/inc-rename.nvim][inc-rename.nvim]        | Incremental renaming with inccommand support         |
 | LSP         | [friendly-snippets][friendly-snippets]            |                                                      |
 | LSP         | [ray-x/go.nvim][ray-x/go.nvim]                    | Modern Go Plugin for Neovim                          |
@@ -780,6 +781,7 @@ none of its associated mappings or commands are loaded.
 | [lukas-reineke/cmp-rg][lukas-reineke/cmp-rg]      | [MIT license](https://github.com/lukas-reineke/cmp-rg/blob/master/LICENSE.md)                            |
 | [saadparwaiz1/cmp_luasnip][cmp_luasnip]           | [Apache-2.0 license](https://github.com/saadparwaiz1/cmp_luasnip/blob/master/LICENSE)                    |
 | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]              | [Apache-2.0 license](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)                            |
+| [uga-rosa/cmp-dynamic][cmp-dynamic]               | [MIT](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)                                         |
 | [smjonas/inc-rename.nvim][inc-rename.nvim]        | [MIT license](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)                              |
 | [friendly-snippets][friendly-snippets]            | [MIT license](https://github.com/rafamadriz/friendly-snippets/blob/main/LICENSE)                         |
 | [ray-x/go.nvim][ray-x/go.nvim]                    | [MIT license](https://github.com/ray-x/go.nvim/blob/master/LICENSE)                                      |
@@ -888,6 +890,7 @@ none of its associated mappings or commands are loaded.
 [lukas-reineke/cmp-rg]: https://github.com/lukas-reineke/cmp-rg
 [cmp_luasnip]: https://github.com/saadparwaiz1/cmp_luasnip
 [l3mon4d3/luasnip]: https://github.com/L3MON4D3/LuaSnip
+[cmp-dynamic]: https://github.com/uga-rosa/cmp-dynamic
 [inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
 [friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
 [ray-x/go.nvim]: https://github.com/ray-x/go.nvim

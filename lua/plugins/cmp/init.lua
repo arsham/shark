@@ -86,6 +86,7 @@ local function config()
   local compare = require("cmp.config.compare")
   local ls = require("luasnip")
   local kinds = require("cmp.types").lsp.CompletionItemKind
+  require("cmp_dynamic")
   setup_priorities()
   -- }}}
 
@@ -136,6 +137,8 @@ local function config()
             { name = "calc" },
             { name = "dap" },
             { name = "crates" },
+            { name = "neorg", priority = 5, keyword_length = 1 },
+            { name = "dynamic", priority = 10, keyword_length = 3 },
           },
         },
       }), -- }}}
@@ -270,6 +273,7 @@ local function config()
         },
       },
       { name = "rg", keyword_length = 3, max_item_count = 10, priority = 5, group_index = 5 },
+      { name = "dynamic", keyword_length = 1 },
     }), --}}}
 
     formatting = { --{{{
@@ -364,6 +368,9 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "nvim-treesitter/nvim-treesitter",
+    {
+      import = "plugins.cmp.cmp_dynamic",
+    },
   },
   config = config,
   event = { "InsertEnter" },
