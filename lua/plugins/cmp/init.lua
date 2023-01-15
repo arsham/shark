@@ -247,17 +247,16 @@ local function config()
             -- text in the new line
             return kind == kinds.Function or kind == kinds.Variable
           end
-
           return true
         end, -- }}}
       },
       { name = "nvim_lua", priority = 80, group_index = 1 },
-      { name = "path", priority = 40, max_item_count = 4, group_index = 5 },
+      { name = "path", priority = 40, max_item_count = 10, group_index = 5 },
       { name = "luasnip", priority = 10, group_index = 2 },
       { name = "calc", group_index = 3 },
       { name = "nvim_lsp_signature_help" },
       { name = "dap" },
-      { name = "neorg", keyword_length = 1 },
+      { name = "git" },
       {
         name = "buffer",
         priority = 5,
@@ -270,7 +269,7 @@ local function config()
           end,
         },
       },
-      { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1, group_index = 5 },
+      { name = "rg", keyword_length = 3, max_item_count = 10, priority = 5, group_index = 5 },
     }), --}}}
 
     formatting = { --{{{
