@@ -171,6 +171,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | Tool        | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | Fuzzy completion for command mode                    |
 | Visuals     | [stevearc/dressing.nvim][stevearc/dressing.nvim]  |                                                      |
 | GIT         | [tpope/vim-fugitive][tpope/vim-fugitive]          | git integration                                      |
+| GIT         | [rbong/vim-flog][rbong/vim-flog]                  | git log graph                                        |
 | GIT         | [tpope/vim-rhubarb][tpope/vim-rhubarb]            | Go to code's Github page for selection               |
 | GIT         | [mattn/vim-gist][mattn/vim-gist]                  | gist integration                                     |
 | GIT/Visuals | [lewis6991/gitsigns.nvim][gitsigns.nvim]          | git signs in the gutter                              |
@@ -917,6 +918,7 @@ none of its associated mappings or commands are loaded.
 [gelguy/wilder.nvim]: https://github.com/gelguy/wilder.nvim
 [stevearc/dressing.nvim]: https://github.com/stevearc/dressing.nvim
 [tpope/vim-fugitive]: https://github.com/tpope/vim-fugitive
+[rbong/vim-flog]: https://github.com/rbong/vim-flog
 [tpope/vim-rhubarb]: https://github.com/tpope/vim-rhubarb
 [mattn/vim-gist]: https://github.com/mattn/vim-gist
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
