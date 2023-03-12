@@ -1,7 +1,7 @@
 return {
   "arsham/archer.nvim",
   dependencies = { "arsham/arshlib.nvim" },
-  event = { "VeryLazy" },
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
     textobj = {
       last_changed = { "ix", "ax" },
