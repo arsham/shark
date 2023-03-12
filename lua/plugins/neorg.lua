@@ -8,7 +8,23 @@ vim.api.nvim_create_autocmd("FileType", { -- {{{
       require("neorg.modules.core.neorgcmd.module").public.function_callback(unpack(args.fargs))
     end, { nargs = "*", complete = "customlist,v:lua._neorgcmd_generate_completions" })
 
+    local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_configs.norg_meta = {
+      install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+        files = { "src/parser.c" },
+        branch = "main",
+      },
+    }
 
+    parser_configs.norg_table = {
+      install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+        files = { "src/parser.c" },
+        branch = "main",
+      },
+    }
+  end,
 }) -- }}}
 
 return {
@@ -73,6 +89,7 @@ return {
       ["core.export"] = {},
       ["core.export.markdown"] = {},
       ["core.norg.qol.toc"] = {},
+      ["core.integrations.treesitter"] = {},
     },
   },
 }
