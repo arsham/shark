@@ -145,6 +145,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | LSP         | [saadparwaiz1/cmp_luasnip][cmp_luasnip]           | Extension for nvim-cmp                               |
 | LSP         | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]              | Snippet engine                                       |
 | LSP         | [uga-rosa/cmp-dynamic][cmp-dynamic]               | Extension for nvim-cmp                               |
+| Editing     | [Exafunction/codeium.vim][codeium.vim]            | Free, ultrafast Copilot alternative                  |
 | LSP         | [smjonas/inc-rename.nvim][inc-rename.nvim]        | Incremental renaming with inccommand support         |
 | LSP         | [friendly-snippets][friendly-snippets]            |                                                      |
 | LSP         | [ray-x/go.nvim][ray-x/go.nvim]                    | Modern Go Plugin for Neovim                          |
@@ -783,7 +784,8 @@ none of its associated mappings or commands are loaded.
 | [lukas-reineke/cmp-rg][lukas-reineke/cmp-rg]      | [MIT license](https://github.com/lukas-reineke/cmp-rg/blob/master/LICENSE.md)                            |
 | [saadparwaiz1/cmp_luasnip][cmp_luasnip]           | [Apache-2.0 license](https://github.com/saadparwaiz1/cmp_luasnip/blob/master/LICENSE)                    |
 | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]              | [Apache-2.0 license](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)                            |
-| [uga-rosa/cmp-dynamic][cmp-dynamic]               | [MIT](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)                                         |
+| [uga-rosa/cmp-dynamic][cmp-dynamic]               | [MIT license](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)                                 |
+| [Exafunction/codeium.vim][codeium.vim]            | [MIT license](https://github.com/Exafunction/codeium.vim/blob/main/LICENSE)                              |
 | [smjonas/inc-rename.nvim][inc-rename.nvim]        | [MIT license](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)                              |
 | [friendly-snippets][friendly-snippets]            | [MIT license](https://github.com/rafamadriz/friendly-snippets/blob/main/LICENSE)                         |
 | [ray-x/go.nvim][ray-x/go.nvim]                    | [MIT license](https://github.com/ray-x/go.nvim/blob/master/LICENSE)                                      |
@@ -805,8 +807,8 @@ none of its associated mappings or commands are loaded.
 | [SmiteshP/nvim-navic][smiteshp/nvim-navic]        | [Apache-2.0 license]()                                                                                   |
 | [lsp_lines.nvim][lsp_lines.nvim]                  | [ISC][lsp_lines.nvim]                                                                                    |
 | [saecki/crates.nvim][saecki/crates.nvim]          | [MIT license](https://github.com/Saecki/crates.nvim/blob/main/LICENSE)                                   |
-| [nvim-neo-tree/neo-tree.nvim][neo-tree.nvim]      | [MIT](https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE)                                  |
-| [stevearc/oil.nvim][oil.nvim]                     | [MIT](https://github.com/stevearc/oil.nvim/blob/master/LICENSE)                                          |
+| [nvim-neo-tree/neo-tree.nvim][neo-tree.nvim]      | [MIT license](https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE)                          |
+| [stevearc/oil.nvim][oil.nvim]                     | [MIT license](https://github.com/stevearc/oil.nvim/blob/master/LICENSE)                                  |
 | [feline-nvim/feline.nvim][feline.nvim]            | [GPL-3.0 license](https://github.com/feline-nvim/feline.nvim/blob/master/LICENSE.md)                     |
 | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | [MIT license](https://github.com/gelguy/wilder.nvim/blob/master/LICENSE)                                 |
 | [stevearc/dressing.nvim][stevearc/dressing.nvim]  | [MIT license](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)                             |
@@ -857,7 +859,7 @@ none of its associated mappings or commands are loaded.
 | [samjwill/nvim-unception][nvim-unception]         | [MIT license](https://github.com/samjwill/nvim-unception/blob/main/LICENSE)                              |
 | [s1n7ax/nvim-window-picker][nvim-window-picker]   | [MIT license](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)                            |
 | [akinsho/toggleterm.nvim][toggleterm-nvim]        | [GPL-3.0](https://github.com/akinsho/toggleterm.nvim/blob/main/LICENSE)                                  |
-| [RaafatTurki/hex.nvimw][hex.nvim]                 | [MIT](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)                                       |
+| [RaafatTurki/hex.nvimw][hex.nvim]                 | [MIT license](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)                               |
 
 </details>
 
@@ -894,6 +896,7 @@ none of its associated mappings or commands are loaded.
 [cmp_luasnip]: https://github.com/saadparwaiz1/cmp_luasnip
 [l3mon4d3/luasnip]: https://github.com/L3MON4D3/LuaSnip
 [cmp-dynamic]: https://github.com/uga-rosa/cmp-dynamic
+[codeium.vim]: https://github.com/Exafunction/codeium.vim
 [inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
 [friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
 [ray-x/go.nvim]: https://github.com/ray-x/go.nvim
