@@ -1,10 +1,21 @@
 ;; extends
-(
- (
-  (
-   [
-    (interpreted_string_literal)
-    (raw_string_literal)] @sql
-      (#match? @sql "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by)?"))))
+
+(short_var_declaration
+    left: (expression_list
+            (identifier))
+    right: (expression_list
+             (raw_string_literal) @sql (#offset! @sql 0 1 0 -1)))
+
+(var_declaration
+  (var_spec
+    name: (identifier)
+    value: (expression_list
+             (raw_string_literal) @sql (#offset! @sql 0 1 0 -1))))
+
+(const_declaration
+  (const_spec
+    name: (identifier)
+    value: (expression_list
+             (raw_string_literal) @sql (#offset! @sql 0 1 0 -1))))
 
 ;; vim: formatoptions-=t
