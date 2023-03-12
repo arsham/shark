@@ -167,6 +167,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | LSP         | [lsp_lines.nvim][lsp_lines.nvim]                  | Show LSP diagnostics in extmarks                     |
 | Tools       | [saecki/crates.nvim][saecki/crates.nvim]          | Crate.toml helper                                    |
 | Tool        | [nvim-neo-tree/neo-tree.nvim][neo-tree.nvim]      | File explorer tree                                   |
+| Tool        | [stevearc/oil.nvim][oil.nvim]                     | File explorer                                        |
 | Visuals     | [feline-nvim/feline.nvim][feline.nvim]            | Statusline (default)                                 |
 | Tool        | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | Fuzzy completion for command mode                    |
 | Visuals     | [stevearc/dressing.nvim][stevearc/dressing.nvim]  |                                                      |
@@ -805,6 +806,7 @@ none of its associated mappings or commands are loaded.
 | [lsp_lines.nvim][lsp_lines.nvim]                  | [ISC][lsp_lines.nvim]                                                                                    |
 | [saecki/crates.nvim][saecki/crates.nvim]          | [MIT license](https://github.com/Saecki/crates.nvim/blob/main/LICENSE)                                   |
 | [nvim-neo-tree/neo-tree.nvim][neo-tree.nvim]      | [MIT](https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE)                                  |
+| [stevearc/oil.nvim][oil.nvim]                     | [MIT](https://github.com/stevearc/oil.nvim/blob/master/LICENSE)                                          |
 | [feline-nvim/feline.nvim][feline.nvim]            | [GPL-3.0 license](https://github.com/feline-nvim/feline.nvim/blob/master/LICENSE.md)                     |
 | [gelguy/wilder.nvim][gelguy/wilder.nvim]          | [MIT license](https://github.com/gelguy/wilder.nvim/blob/master/LICENSE)                                 |
 | [stevearc/dressing.nvim][stevearc/dressing.nvim]  | [MIT license](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)                             |
@@ -914,6 +916,7 @@ none of its associated mappings or commands are loaded.
 [lsp_lines.nvim]: https://git.sr.ht/~whynothugo/lsp_lines.nvim
 [saecki/crates.nvim]: https://github.com/saecki/crates.nvim
 [neo-tree.nvim]: https://github.com/nvim-neo-tree/neo-tree.nvim
+[oil.nvim]: https://github.com/stevearc/oil.nvim
 [feline.nvim]: https://github.com/feline-nvim/feline.nvim
 [gelguy/wilder.nvim]: https://github.com/gelguy/wilder.nvim
 [stevearc/dressing.nvim]: https://github.com/stevearc/dressing.nvim
