@@ -75,7 +75,7 @@ local servers = {
     },
   }, --}}}
 
-  sumneko_lua = { --{{{
+  lua_ls = { --{{{
     opts = {
       settings = {
         Lua = {

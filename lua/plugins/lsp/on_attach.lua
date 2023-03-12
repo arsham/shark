@@ -58,7 +58,7 @@ local function on_attach(client, bufnr) --{{{
 
     if caps.documentFormattingProvider then
       local disabled_servers = {
-        "sumneko_lua",
+        "lua_ls",
         "jsonls",
         "sqls",
         "html",
