@@ -3,6 +3,7 @@ vim.api.nvim_create_autocmd("FileType", { -- {{{
   pattern = { "norg" },
   callback = function()
     vim.api.nvim_create_user_command("Journal", ":Neorg journal", {})
+    vim.keymap.set("n", "<localleader>nr", ":Neorg return<CR>", { buffer = true })
     require("arshlib.quick").command("NG", function(args)
       require("neorg.modules.core.neorgcmd.module").public.function_callback(unpack(args.fargs))
     end, { nargs = "*", complete = "customlist,v:lua._neorgcmd_generate_completions" })
@@ -19,19 +20,11 @@ return {
   },
   build = ":Neorg sync-parsers",
   cmd = { "Neorg" },
-
   keys = {
-    { mode = "n", "<leader>oh", ":Neorg workspace home<CR>" },
-    { mode = "n", "<leader>ow", ":Neorg workspace <TAB>" },
-    {
-      mode = "n",
-      "<leader>oo",
-      function()
-        vim.keymap.set("n", "<leader>oo", ":Neorg workspace home<CR>")
-        vim.api.nvim_command("vert new | Neorg workspace home")
-      end,
-      desc = "load Neorg",
-    },
+    { mode = "n", "<leader>nh", ":Neorg workspace home<CR>" },
+    { mode = "n", "<leader>nw", ":Neorg workspace <TAB>" },
+    { mode = "n", "<leader>nj", ":Neorg journal<CR>" },
+    { mode = "n", "<leader>ni", ":Neorg index<CR>" },
   },
   cond = require("util").full_start_with_lsp,
 
@@ -65,9 +58,6 @@ return {
         config = {
           hook = function(keybinds)
             local leader = keybinds.leader
-            keybinds.remap_key("norg", "n", "gtd", "<leader>od")
-            keybinds.remap_key("norg", "n", "gtu", "<leader>ou")
-            keybinds.remap_key("norg", "n", "gtp", "<leader>op")
             keybinds.remap_key("norg", "n", leader .. "tv", "<leader>ov")
             keybinds.remap_event("norg", "n", "]]", "core.integrations.treesitter.next.heading")
             keybinds.remap_event("norg", "n", "[[", "core.integrations.treesitter.previous.heading")
