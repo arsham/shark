@@ -100,14 +100,14 @@ local function on_attach(client, bufnr) --{{{
     if caps.typeDefinitionProvider  then lsp_util.type_definition()             end
     if caps.documentSymbolProvider  then lsp_util.document_symbol()             end
     if caps.callHierarchyProvider   then lsp_util.call_hierarchy()              end
-    if caps.semantic_tokens_full    then lsp_util.setup_semantic_tokens(bufnr)  end
+    -- stylua: ignore end
+
     if caps.completionProvider then
       vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
     end
     if caps.definitionProvider then
       vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
-    -- stylua: ignore end
 
     lsp_util.setup_diagnostics(bufnr)
     lsp_util.setup_completions()

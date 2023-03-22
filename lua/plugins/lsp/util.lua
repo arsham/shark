@@ -463,13 +463,6 @@ function M.setup_diagnostics(bufnr) --{{{
   })
 end --}}}
 
-function M.setup_semantic_tokens(bufnr) -- {{{
-  vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-    buffer = bufnr,
-    callback = vim.lsp.buf.semantic_tokens_full,
-  })
-end -- }}}
-
 local handler = function(err)
   if err then
     local msg = string.format("Error reloading Rust workspace: %v", err)
