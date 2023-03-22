@@ -108,7 +108,12 @@ local function config()
   }
 
   vim.schedule(function()
-    require("feline").winbar.setup({ components = components })
+    require("feline").winbar.setup({
+      components = components,
+      disable = {
+        filetypes = { "neo-tree" },
+      },
+    })
   end)
 
   local ignore_navic = {
@@ -142,6 +147,7 @@ return {
   },
   config = config,
   event = { "LspAttach" },
+  cond = require("util").full_start,
 }
 
 -- vim: fdm=marker fdl=0
