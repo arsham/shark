@@ -30,17 +30,16 @@ local function config()
       vim.keymap.set("n", "<Right>", "<Right>", o)
     end,
   })
+
   vim.api.nvim_create_autocmd("User", {
     group = group,
     pattern = "visual_multi_exit",
     callback = function()
       vim.cmd("silent! Noice enable")
-      vim.opt.cmdheight = vim.g._last_cmdheight
-      local o = { silent = true, desc = "disabling arrows" }
-      vim.keymap.set("n", "<Up>", "<Nop>", o)
-      vim.keymap.set("n", "<Down>", "<Nop>", o)
-      vim.keymap.set("n", "<Left>", "<Nop>", o)
-      vim.keymap.set("n", "<Right>", "<Nop>", o)
+      vim.keymap.del("n", "<Left>", { buffer = 0 })
+      vim.keymap.del("n", "<Right>", { buffer = 0 })
+      vim.keymap.del("n", "<Up>", { buffer = 0 })
+      vim.keymap.del("n", "<Down>", { buffer = 0 })
     end,
   })
 end
