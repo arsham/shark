@@ -23,7 +23,8 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     {
-      "feline-nvim/feline.nvim",
+      "freddiehaddad/feline.nvim",
+      branch = "main",
       dependencies = "nvim-tree/nvim-web-devicons",
     },
   },
