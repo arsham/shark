@@ -438,12 +438,14 @@ function M.setup_diagnostics(bufnr) --{{{
     quick.call_and_centre(vim.diagnostic.goto_prev)
   end, "goto previous diagnostic")
 
-  quick.buffer_command("Diagnostics", function()
-    diagnostics.diagnostics({})
-  end)
-  quick.buffer_command("DiagnosticsAll", function()
-    diagnostics.all({})
-  end)
+  -- stylua: ignore start
+  quick.buffer_command("Diagnostics",    function() diagnostics.diagnostics({}) end)
+  quick.buffer_command("Diag",           function() diagnostics.diagnostics({}) end)
+  quick.buffer_command("DiagnosticsAll", function() diagnostics.all({})         end)
+  quick.buffer_command("DiagAll",        function() diagnostics.all({})         end)
+  quick.buffer_command("DiagLoc",        function() vim.diagnostic.setloclist() end)
+  quick.buffer_command("DiagQf",         function() vim.diagnostic.setqflist()  end)
+  -- stylua: ignore end
   quick.buffer_command("DiagnosticsDisable", function()
     vim.diagnostic.disable(bufnr)
   end)
