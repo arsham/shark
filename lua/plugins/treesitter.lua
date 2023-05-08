@@ -68,6 +68,12 @@ local function config()
           ["]b"] = { query = "@block.outer", desc = "Go to start of the next block" },
           ["]gc"] = { query = "@comment.outer", desc = "Go to start of the next comment" },
           ["]a"] = { query = "@parameter.inner", desc = "Go to start of the next parameter" },
+          ["]o"] = { query = "@loop.*", desc = "Go to the next loop" },
+          ["]s"] = {
+            query = "@scope",
+            query_group = "locals",
+            desc = "Go to the next scope",
+          },
         },
         goto_next_end = {
           ["]F"] = { query = "@function.outer", desc = "Go to end of the next function" },
@@ -79,6 +85,12 @@ local function config()
           ["[b"] = { query = "@block.outer", desc = "Go to start of the previous block" },
           ["[gc"] = { query = "@comment.outer", desc = "Go to start of the previous comment" },
           ["[a"] = { query = "@parameter.inner", desc = "Go to start of the previous parameter" },
+          ["[o"] = { query = "@loop.*", desc = "Go to the previous loop" },
+          ["[s"] = {
+            query = "@scope",
+            query_group = "locals",
+            desc = "Go to the previous scope",
+          },
         },
         goto_previous_end = {
           ["[F"] = { query = "@function.outer", desc = "Go to end of the previous function" },
