@@ -48,15 +48,15 @@ local function config()
       select = {
         enable = true,
         keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["am"] = "@call.outer",
-          ["im"] = "@call.inner",
-          ["ab"] = "@block.outer",
-          ["ib"] = "@block.inner",
-          ["aa"] = "@parameter.outer",
-          ["ia"] = "@parameter.inner",
-          ["as"] = "@statement.outer",
+          ["af"] = { query = "@function.outer", desc = "Select around a function" },
+          ["if"] = { query = "@function.inner", desc = "Select inside a function" },
+          ["am"] = { query = "@call.outer", desc = "Select around a method" },
+          ["im"] = { query = "@call.inner", desc = "Select inside a method" },
+          ["ab"] = { query = "@block.outer", desc = "Select around a block" },
+          ["ib"] = { query = "@block.inner", desc = "Select inside a block" },
+          ["aa"] = { query = "@parameter.outer", desc = "Select around a parameter" },
+          ["ia"] = { query = "@parameter.inner", desc = "Select inside a parameter" },
+          ["as"] = { query = "@statement.outer", desc = "Select around a statement" },
         },
       }, --}}}
 
@@ -64,45 +64,51 @@ local function config()
         enable = true,
         set_jumps = true,
         goto_next_start = {
-          ["]f"] = "@function.outer",
-          ["]b"] = "@block.outer",
-          ["]gc"] = "@comment.outer",
-          ["]a"] = "@parameter.inner",
+          ["]f"] = { query = "@function.outer", desc = "Go to start of the next function" },
+          ["]b"] = { query = "@block.outer", desc = "Go to start of the next block" },
+          ["]gc"] = { query = "@comment.outer", desc = "Go to start of the next comment" },
+          ["]a"] = { query = "@parameter.inner", desc = "Go to start of the next parameter" },
         },
         goto_next_end = {
-          ["]F"] = "@function.outer",
-          ["]B"] = "@block.outer",
-          ["]A"] = "@parameter.outer",
+          ["]F"] = { query = "@function.outer", desc = "Go to end of the next function" },
+          ["]B"] = { query = "@block.outer", desc = "Go to end of the next block" },
+          ["]A"] = { query = "@parameter.outer", desc = "Go to end of the next parameter" },
         },
         goto_previous_start = {
-          ["[f"] = "@function.outer",
-          ["[b"] = "@block.outer",
-          ["[gc"] = "@comment.outer",
-          ["[a"] = "@parameter.inner",
+          ["[f"] = { query = "@function.outer", desc = "Go to start of the previous function" },
+          ["[b"] = { query = "@block.outer", desc = "Go to start of the previous block" },
+          ["[gc"] = { query = "@comment.outer", desc = "Go to start of the previous comment" },
+          ["[a"] = { query = "@parameter.inner", desc = "Go to start of the previous parameter" },
         },
         goto_previous_end = {
-          ["[F"] = "@function.outer",
-          ["[B"] = "@block.outer",
-          ["[A"] = "@parameter.outer",
+          ["[F"] = { query = "@function.outer", desc = "Go to end of the previous function" },
+          ["[B"] = { query = "@block.outer", desc = "Go to end of the previous block" },
+          ["[A"] = { query = "@parameter.outer", desc = "Go to end of the previous parameter" },
         },
       }, --}}}
 
       swap = { --{{{
         enable = true,
         swap_next = {
-          ["<leader>.f"] = "@function.outer",
-          ["<leader>.e"] = "@element",
+          ["<leader>.f"] = {
+            query = "@function.outer",
+            desc = "Swap around with the next function",
+          },
+          ["<leader>.e"] = { query = "@element", desc = "Swap with the next element" },
         },
         swap_previous = {
-          ["<leader>,f"] = "@function.outer",
-          ["<leader>,e"] = "@element",
+          ["<leader>,f"] = {
+            query = "@function.outer",
+            desc = "Swap around with the previous function",
+          },
+          ["<leader>,e"] = { query = "@element", desc = "Swap with the previous element" },
         },
       }, --}}}
 
       lsp_interop = { --{{{
         enable = true,
         peek_definition_code = {
-          ["<leader>df"] = "@function.outer",
+          ["<leader>df"] = { query = "@function.outer", desc = "Peek function definition" },
         },
       }, --}}}
     },
