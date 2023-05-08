@@ -12,6 +12,7 @@ return {
         local path = require("plenary.path")
         local tmp = vim.fn.tempname()
         local floater = term:new({
+          id = 9999,
           cmd = ('env TERM=alacritty-direct vifm  --choose-files "%s"'):format(tmp),
           direction = "float",
           close_on_exit = true,
@@ -54,6 +55,7 @@ return {
         vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<CR>", opt("Switch to the below"))
         vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<CR>", opt("Switch to the above"))
         vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<CR>", opt("Switch to the right"))
+        vim.opt_local.scrollback = 100000
       end,
 
       insert_mappings = false,
@@ -67,12 +69,29 @@ return {
         },
       },
       winbar = {
-        enabled = false,
+        enabled = true,
+        name_formatter = function(term) --  term: Terminal
+          if term.id == 9999 then
+            return "File Manager"
+          end
+          return ("Term:%d"):format(term.id)
+        end,
       },
     })
 
     -- Making the terminal to always open horizontally with this mapping.
     local cmd = '<CMD>execute v:count . "ToggleTerm direction=horizontal"<CR>'
     vim.keymap.set({ "n", "t" }, "<leader>tt", cmd, { silent = true, desc = "Toggle Terminal" })
+
+    for i = 1, 9 do
+      local cmd = string.format('<CMD>execute "%dToggleTerm direction=horizontal"<CR>', i)
+      local key = string.format("<leader>%d", i)
+      vim.keymap.set(
+        { "n", "t" },
+        key,
+        cmd,
+        { silent = true, desc = "Toggle Terminal " .. tostring(i) }
+      )
+    end
   end,
 }
