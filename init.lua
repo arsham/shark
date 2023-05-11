@@ -31,5 +31,4 @@ require("lazy").setup("plugins", {
 require("commands")
 require("autocmd")
 require("mappings")
-require("textobjects")
 require("scratch")
