@@ -6,6 +6,7 @@ local lsp = require("arshlib.lsp")
 local fzf = require("fzf-lua")
 local diagnostics = require("fzf-lua.providers.diagnostic")
 local util = require("util")
+local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
@@ -431,12 +432,13 @@ function M.setup_diagnostics(bufnr) --{{{
   nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
   nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
 
-  nnoremap("]d", function()
+  local next_diagnostic, prev_diagnostic = ts_repeat_move.make_repeatable_move_pair(function()
     quick.call_and_centre(vim.diagnostic.goto_next)
-  end, "goto next diagnostic")
-  nnoremap("[d", function()
+  end, function()
     quick.call_and_centre(vim.diagnostic.goto_prev)
-  end, "goto previous diagnostic")
+  end)
+  nnoremap("]d", next_diagnostic, "goto next diagnostic")
+  nnoremap("[d", prev_diagnostic, "goto previous diagnostic")
 
   -- stylua: ignore start
   quick.buffer_command("Diagnostics",    function() diagnostics.diagnostics({}) end)
