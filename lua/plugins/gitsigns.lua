@@ -6,8 +6,6 @@ return {
   -- stylua: ignore
   keys = {-- {{{
     { mode = { "n" }, "<leader>gs", function() require("gitsigns").toggle_signs() end, { desc = "toggle gitsigns sign column" } },
-    { mode = { "n" }, "]c",         function() require("arshlib.quick").call_and_centre(require("gitsigns").next_hunk) end, { desc = "go to next hunk" } },
-    { mode = { "n" }, "[c",         function() require("arshlib.quick").call_and_centre(require("gitsigns").prev_hunk) end, { desc = "go to previous hunk" } },
     { mode = { "n" }, "<leader>hb", function() require("gitsigns").blame_line({ full = true }) end, { desc = "blame line" } },
     { mode = { "n" }, "<leader>hs", function() require("gitsigns").stage_hunk() end, { desc = "stage hunk" } },
     { mode = { "n" }, "<leader>hu", function() require("gitsigns").undo_stage_hunk() end, { desc = "undo last staged hunk" } },
@@ -23,7 +21,10 @@ return {
     { mode = { "o", "x" }, "ah",    function() require("gitsigns.actions").select_hunk() end, { desc = "around hunk" } },
   }, -- }}}
 
-  opts = {
+  config = function()
+    local gs = require("gitsigns")
+
+    gs.setup({
     -- stylua: ignore
     signs = {-- {{{
       add          = { text = "▌", show_count = true },
@@ -32,41 +33,54 @@ return {
       topdelete    = { text = "▛", show_count = true },
       changedelete = { text = "▚", show_count = true },
     }, -- }}}
-    update_debounce = 500,
-    sign_priority = 10,
-    numhl = true,
-    signcolumn = false,
-    count_chars = { -- {{{
-      [1] = "",
-      [2] = "₂",
-      [3] = "₃",
-      [4] = "₄",
-      [5] = "₅",
-      [6] = "₆",
-      [7] = "₇",
-      [8] = "₈",
-      [9] = "₉",
-      ["+"] = "₊",
-    }, -- }}}
+      update_debounce = 500,
+      sign_priority = 10,
+      numhl = true,
+      signcolumn = false,
+      count_chars = { -- {{{
+        [1] = "",
+        [2] = "₂",
+        [3] = "₃",
+        [4] = "₄",
+        [5] = "₅",
+        [6] = "₆",
+        [7] = "₇",
+        [8] = "₈",
+        [9] = "₉",
+        ["+"] = "₊",
+      }, -- }}}
 
-    diff_opts = { -- {{{
-      internal = true,
-      algorithm = "patience",
-      indent_heuristic = true,
-      linematch = 60,
-    }, -- }}}
+      diff_opts = { -- {{{
+        internal = true,
+        algorithm = "patience",
+        indent_heuristic = true,
+        linematch = 60,
+      }, -- }}}
 
-    on_attach = function(bufnr) -- {{{
-      local name = vim.api.nvim_buf_get_name(bufnr)
-      if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
-        return false
-      end
-      local size = vim.fn.getfsize(name)
-      if size > 1024 * 1024 * 5 then
-        return false
-      end
-    end, -- }}}
-  },
+      on_attach = function(bufnr) -- {{{
+        local name = vim.api.nvim_buf_get_name(bufnr)
+        if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
+          return false
+        end
+        local size = vim.fn.getfsize(name)
+        if size > 1024 * 1024 * 5 then
+          return false
+        end
+      end, -- }}}
+    })
+
+    local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+    local quick = require("arshlib.quick")
+    -- make sure forward function comes first
+    local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(function()
+      quick.call_and_centre(require("gitsigns").next_hunk)
+    end, function()
+      quick.call_and_centre(require("gitsigns").prev_hunk)
+    end)
+
+    vim.keymap.set({ "n", "x", "o" }, "]c", next_hunk_repeat, { desc = "go to next hunk" })
+    vim.keymap.set({ "n", "x", "o" }, "[c", prev_hunk_repeat, { desc = "go to previous hunk" })
+  end,
 }
 
 -- vim: fdm=marker fdl=0
