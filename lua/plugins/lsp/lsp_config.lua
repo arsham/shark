@@ -73,6 +73,20 @@ local servers = {
         },
       },
     },
+    update = function(on_attach, opts)
+      opts.on_attach = function(client, bufnr)
+        local semantic = client.config.capabilities.textDocument.semanticTokens
+        client.server_capabilities.semanticTokensProvider = {
+          full = true,
+          legend = {
+            tokenModifiers = semantic.tokenModifiers,
+            tokenTypes = semantic.tokenTypes,
+          },
+        }
+        on_attach(client, bufnr)
+      end
+      return opts
+    end,
   }, --}}}
 
   lua_ls = { --{{{
