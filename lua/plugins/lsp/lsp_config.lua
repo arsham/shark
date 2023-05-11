@@ -147,7 +147,7 @@ local servers = {
     },
   }, --}}}
 
-  sqls = { --{{{
+  sqlls = { --{{{
     opts = {},
     update = function(on_attach, opts)
       local function code_action(range_given, line1, line2)
