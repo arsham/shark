@@ -188,15 +188,16 @@ local servers = {
     end,
   }, --}}}
 
-  html = {},
   bashls = {},
+  bufls = {},
   dockerls = {},
-  jedi_language_server = {},
+  html = {},
+  pyright = {},
+  marksman = {},
+  taplo = {},
   tsserver = {},
   vimls = {},
-  marksman = {},
-  bufls = {},
-  taplo = {},
+
   clangd = { --{{{
     opts = {
       filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
