@@ -158,7 +158,15 @@ local function config()
                 end,
               },
             },
-            { name = "rg", keyword_length = 3, max_item_count = 10, priority = 1 },
+            {
+              name = "rg",
+              keyword_length = 3,
+              max_item_count = 10,
+              priority = 1,
+              option = {
+                additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
+              },
+            },
           },
         },
       }), -- }}}
@@ -272,7 +280,16 @@ local function config()
           end,
         },
       },
-      { name = "rg", keyword_length = 3, max_item_count = 10, priority = 5, group_index = 5 },
+      {
+        name = "rg",
+        keyword_length = 3,
+        max_item_count = 10,
+        priority = 5,
+        group_index = 5,
+        option = {
+          additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
+        },
+      },
       { name = "dynamic", keyword_length = 1 },
     }), --}}}
 
