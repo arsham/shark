@@ -1,4 +1,6 @@
 local quick = require("arshlib.quick")
+local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
 vim.opt_local.spell = true
 vim.opt_local.softtabstop = 1 -- if I have two spaces in a sentence, delete only one.
 vim.opt_local.tabstop = 2
@@ -70,12 +72,13 @@ local function nextHeading(down)
 end
 
 local desc = "jump to the next heading in markdown document"
-vim.keymap.set("n", "]]", function()
+local next_heading, prev_heading = ts_repeat_move.make_repeatable_move_pair(function()
   nextHeading(false)
-end, { buffer = true, silent = true, desc = desc })
-vim.keymap.set("n", "[[", function()
+end, function()
   nextHeading(true)
-end, { buffer = true, silent = true, desc = desc })
+end)
+vim.keymap.set("n", "]]", next_heading, { buffer = true, silent = true, desc = desc })
+vim.keymap.set("n", "[[", prev_heading, { buffer = true, silent = true, desc = desc })
 
 vim.keymap.set("x", "<C-b>", "s**<Esc>pa**<Esc>", { desc = "Make selection bold", buffer = true })
 
