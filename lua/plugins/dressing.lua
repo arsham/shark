@@ -16,7 +16,7 @@ return {
     },
 
     select = {
-      backend = { "fzf_lua", "fzf", "nui", "builtin" },
+      backend = { "fzf", "nui", "builtin" },
       fzf_lua = {
         winopts = {
           width = 0.5,
