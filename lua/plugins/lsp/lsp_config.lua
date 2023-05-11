@@ -218,15 +218,12 @@ local servers = {
     opts = {
       settings = {
         ["rust-analyzer"] = {
-          ["server.extraEnv"] = { RUSTUP_TOOLCHAIN = "nightly" },
           imports = {
             ["granularity.group"] = "module",
             prefix = "self",
           },
           cargo = {
             ["buildScripts.enable"] = true,
-            extraEnv = { RUSTC_BOOTSTRAP = "1" },
-            features = "all",
           },
           procMacro = {
             enable = true,
@@ -243,6 +240,14 @@ local servers = {
           diagnostics = {
             enable = true,
             enableExperimental = true,
+            experimental = {
+              enable = true,
+            },
+          },
+
+          ["updates.channel"] = "nightly",
+          rustfmt = {
+            extraArgs = { "--all", "--", "--check" },
           },
           checkOnSave = {
             command = "clippy",
@@ -250,7 +255,6 @@ local servers = {
             features = "all",
             overrideCommand = {
               "cargo",
-              "+nightly",
               "clippy",
               "--workspace",
               "--message-format=json",
@@ -289,6 +293,12 @@ local servers = {
             "editor.action.triggerParameterHints",
           },
         }
+        client.server_capabilities.experimental.hoverActions = true
+        client.server_capabilities.experimental.hoverRange = true
+        client.server_capabilities.experimental.serverStatusNotification = true
+        client.server_capabilities.experimental.snippetTextEdit = true
+        client.server_capabilities.experimental.codeActionGroup = true
+        client.server_capabilities.experimental.ssr = true
         on_attach(client, bufnr)
       end
       return opts
@@ -329,6 +339,9 @@ null_ls.setup({
     null_ls.builtins.formatting.buf,
     null_ls.builtins.formatting.shellharden,
     null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.formatting.rustfmt.with({
+      extra_args = { "--edition=2021" },
+    }),
     null_ls.builtins.formatting.uncrustify.with({
       extra_args = function()
         return {

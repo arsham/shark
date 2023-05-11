@@ -30,6 +30,7 @@ local function config()
       "golangci-lint",
       "hadolint",
       "prettier",
+      "rustfmt",
       "selene",
       "shellcheck",
       "shellharden",
@@ -75,7 +76,6 @@ return {
   dependencies = {
     {
       "neovim/nvim-lspconfig",
-      config = config,
       dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "ibhagwan/fzf-lua",
@@ -89,4 +89,5 @@ return {
   },
   event = { "VeryLazy" },
   cond = require("util").full_start_with_lsp,
+  config = config,
 }
