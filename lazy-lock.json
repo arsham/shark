@@ -1,4 +1,5 @@
 {
+  "arshamiser.nvim": { "branch": "master", "commit": "13af62f49e5c906589aba48b338267c9ef6e2a8e" },
   "lazy.nvim": { "branch": "main", "commit": "9223c1aa200a8c329053f9e2ca0980ead56059d6" },
   "plenary.nvim": { "branch": "master", "commit": "499e0743cf5e8075cd32af68baa3946a1c76adf1" }
 }

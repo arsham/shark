@@ -28,5 +28,7 @@ PLUGINS                                                        *shark-plugins*
 Function   Plugin                      Description                     License
 ------------------------------------------------------------------------------
 🔥 Core    folke/lazy.nvim             Package manager              Apache-2.0
+🔥 Visual  arsham/arshamiser.nvim      Status line                         MIT
+                                       Colour scheme and folds
 
 vim:tw=78:ft=help
