@@ -1,0 +1,27 @@
+{
+  "diagnostics.globals": ["vim"],
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua.diagnostics.disable": [
+    "missing-parameter",
+    "param-type-mismatch",
+    "undefined-field",
+    "missing-parameter",
+    "cast-local-type"
+  ],
+  "Lua.diagnostics.globals": ["vim", "_t", "require"],
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.workspace.library": [
+    "runtime/lua",
+    "$HOME/.cache/nvim/lazy/neodev.nvim/types/nightly",
+    "/usr/share/nvim/runtime",
+    "$HOME/.cache/nvim/lazy/lazy.nvim/lua",
+    "$HOME/.cache/nvim/lazy/neotest/lua",
+    "$HOME/.cache/nvim/lazy/plenary.nvim/lua",
+    "$HOME/.cache/nvim/lazy/arshlib.nvim/lua",
+    "$HOME/.cache/nvim/lazy/nvim-cmp/lua",
+    "$HOME/.cache/nvim/lazy/LuaSnip/lua",
+    "$HOME/.cache/nvim/lazy/nvim-treesitter/lua",
+    "$HOME/.cache/nvim/lazy/null-ls.nvim/lua",
+    "${3rd}/luassert/library"
+  ]
+}

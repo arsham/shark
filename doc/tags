@@ -1,6 +1,6 @@
-mappings	mappings.txt	/*mappings*
 shark-contents	shark.txt	/*shark-contents*
-shark-core-mappings	mappings.txt	/*shark-core-mappings*
+shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*
 shark-license	shark.txt	/*shark-license*
-shark-mappings.txt	mappings.txt	/*shark-mappings.txt*
+shark-mappings	shark-mappings.txt	/*shark-mappings*
+shark-mappings.txt	shark-mappings.txt	/*shark-mappings.txt*
 shark.txt	shark.txt	/*shark.txt*
