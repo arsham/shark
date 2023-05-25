@@ -28,7 +28,16 @@ CONTENTS                                                      *shark-contents*
 
 1. Introduction ......................................... |shark-introduction|
 2. PLUGINS ................................................... |shark-plugins|
-3. LICENSE ................................................... |shark-license|
+3. Highlights ............................................. |shark-highlights|
+4. Setup ....................................................... |shark-setup|
+5. Functionality ....................................... |shark-functionality|
+   - Core Mappings ..................................... |shark-core-mappings|
+   - Lists ..................................................... |shark-lists|
+   - Utilities ............................................. |shark-utilities|
+     - Normal ................................................. |shark-normal|
+     - Highlight ........................................... |shark-highlight|
+     - Call and Centre ............................... |shark-call_and_centre|
+6. LICENSE ................................................... |shark-license|
 
 ==============================================================================
 INTRODUCTION                                              *shark-introduction*
@@ -38,6 +47,76 @@ that can be easily memorised, interact with the Lua API, and make programming
 fun.
 
 This project supports Neovim version `0.10.0` and newer.
+
+==============================================================================
+HIGHLIGHTS                                                  *shark-highlights*
+
+* Besides in a few places that Neovim doesn't provide an API in Lua, most
+  configuration is done in Lua.
+* You can add the current location of the cursor or make notes on the current
+  location in the quickfix/local lists with repeatable mappings.
+* You can manipulate quickfix/local lists.
+
+==============================================================================
+SETUP                                                            *shark-setup*
+
+Just clone this project:
+>bash
+  git clone https://github.com/arsham/shark.git ~/.config/nvim
+<
+
+Once you start 'Neovim', it will install the package manager and installs the
+listed plugins.
+
+==============================================================================
+FUNCTIONALITY                                            *shark-functionality*
+
+==============================================================================
+LISTS                                                            *shark-lists*
+
+Please refer to the |listish.txt| documentation for all commands and mappings.
+
+==============================================================================
+UTILITIES                                                    *shark-utilities*
+
+These are commands you can use in Lua land. Assign the required module to a
+variable and re-use.
+>lua
+  local quick = require("arshlib.quick")
+<
+
+------------------------------------------------------------------------------
+NORMAL                                                          *shark-normal*
+
+Executes a normal command. For example:
+>lua
+  quick.normal("n", "y2k")
+<
+
+See |:h feedkeys()| for values of the mode.
+
+------------------------------------------------------------------------------
+HIGHLIGHT                                                    *shark-highlight*
+
+Create `highlight` groups:
+>lua
+  quick.highlight("LspReferenceRead", {
+    ctermbg = 180,
+    guibg = "#43464F",
+    style = "bold",
+  })
+<
+
+------------------------------------------------------------------------------
+CALL AND CENTRE                                        *shark-call_and_centre*
+
+These functions will call your function/command and then centres the buffer:
+>lua
+  quick.call_and_centre(function()
+    print("Yolo!")
+  end)
+  quick.cmd_and_centre("SomeCommand")
+<
 
 ==============================================================================
 LICENSE                                                        *shark-license*

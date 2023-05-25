@@ -30,5 +30,7 @@ Function   Plugin                      Description                     License
 🔥 Core    folke/lazy.nvim             Package manager              Apache-2.0
 🔥 Visual  arsham/arshamiser.nvim      Status line                         MIT
                                        Colour scheme and folds
+🔥 Lists    arsham/listish.nvim        Supporting lists                    MIT
+🧰 Lib      arsham/arshlib.nvim        Common library                      MIT
 
 vim:tw=78:ft=help

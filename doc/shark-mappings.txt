@@ -25,4 +25,17 @@ License:  MIT license
 ==============================================================================
 CORE MAPPINGS                          *shark-mappings*  *shark-core-mappings*
 
+In most mappings we are following this theme, unless there is an uncomfortable
+situation or messes with a community-driven or Vim's very well known mapping:
+
+ Part of mapping  Description                                                ~
+ -----------------------------------------------------------------------------
+ q                |Quickfix| list mappings
+ w                |location-list| mappings (because it's near q)
+ ]                Jumps to the next item
+ [                Jumps to the previous item
+
+*shark-mappings-leader*
+The |<Leader>| key is |<Space>|!
+
 vim:tw=78:ts=8:ft=help:norl:
