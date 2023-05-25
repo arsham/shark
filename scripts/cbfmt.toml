@@ -1,6 +1,0 @@
-[languages]
-rust = ["rustfmt"]
-go = ["gofmt"]
-lua = ["stylua -s --indent-type Spaces --indent-width 2 -"]
-python = ["autopep8"]
-json = ["fixjson"]
