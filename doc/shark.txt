@@ -26,8 +26,18 @@ License:  MIT license
 ==============================================================================
 CONTENTS                                                      *shark-contents*
 
-1. LICENSE ................................................... |shark-license|
+1. Introduction ......................................... |shark-introduction|
+2. PLUGINS ................................................... |shark-plugins|
+3. LICENSE ................................................... |shark-license|
 
+==============================================================================
+INTRODUCTION                                              *shark-introduction*
+
+The goal of this project is to have a fast Neovim startup, provide mappings
+that can be easily memorised, interact with the Lua API, and make programming
+fun.
+
+This project supports Neovim version `0.10.0` and newer.
 
 ==============================================================================
 LICENSE                                                        *shark-license*

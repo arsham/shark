@@ -1,6 +1,9 @@
 shark-contents	shark.txt	/*shark-contents*
 shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*
+shark-introduction	shark.txt	/*shark-introduction*
 shark-license	shark.txt	/*shark-license*
 shark-mappings	shark-mappings.txt	/*shark-mappings*
 shark-mappings.txt	shark-mappings.txt	/*shark-mappings.txt*
+shark-plugins	shark-plugins.txt	/*shark-plugins*
+shark-plugins.txt	shark-plugins.txt	/*shark-plugins.txt*
 shark.txt	shark.txt	/*shark.txt*
