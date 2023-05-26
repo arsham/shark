@@ -33,6 +33,7 @@ CONTENTS                                                      *shark-contents*
 5. Functionality ....................................... |shark-functionality|
    - Core Mappings ..................................... |shark-core-mappings|
    - Lists ..................................................... |shark-lists|
+   - Fzf ......................................................... |shark-fzf|
    - Utilities ............................................. |shark-utilities|
      - Normal ................................................. |shark-normal|
      - Highlight ........................................... |shark-highlight|
@@ -75,6 +76,11 @@ FUNCTIONALITY                                            *shark-functionality*
 LISTS                                                            *shark-lists*
 
 Please refer to the |listish.txt| documentation for all commands and mappings.
+
+==============================================================================
+FZF                                                                *shark-fzf*
+
+Please refer to the |fzfmania.txt| documentation for all commands/mappings.
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

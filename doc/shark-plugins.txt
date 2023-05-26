@@ -32,5 +32,11 @@ Function   Plugin                      Description                     License
                                        Colour scheme and folds
 🔥 Lists    arsham/listish.nvim        Supporting lists                    MIT
 🧰 Lib      arsham/arshlib.nvim        Common library                      MIT
+⚡ Visual   nvim-tree/nvim-web-devicons                                    MIT
+🔍 Finder   junegunn/fzf               Fuzzy finder                        MIT
+🔍 Finder   junegunn/fzf.vim           fzf plugin for vim                  MIT
+🔥 Finder   arsham/fzfmania.nvim       FZF setup in lua                    MIT
+🔥 Finder   ibhagwan/fzf-lua           FZF ❤️  lua                          MIT
+🧰 Core     nvim-lua/plenary.nvim                                     AGPR-3.0
 
 vim:tw=78:ft=help

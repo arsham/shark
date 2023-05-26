@@ -2,6 +2,7 @@ shark-call_and_centre	shark.txt	/*shark-call_and_centre*
 shark-contents	shark.txt	/*shark-contents*
 shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*
 shark-functionality	shark.txt	/*shark-functionality*
+shark-fzf	shark.txt	/*shark-fzf*
 shark-highlight	shark.txt	/*shark-highlight*
 shark-highlights	shark.txt	/*shark-highlights*
 shark-introduction	shark.txt	/*shark-introduction*

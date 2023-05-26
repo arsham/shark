@@ -19,6 +19,7 @@ This project supports Neovim version `0.10.0` and newer.
    - [Plugins](#plugins)
    - [Core Mappings](#core-mappings)
    - [Lists](#lists)
+   - [FZF](#fzf)
    - [Utilities](#utilities)
 3. [Plugin Licence List](#plugin-license-list)
 
@@ -50,12 +51,18 @@ Some plugins are not listed here. You can find the complete list in the
 
 Licenses for plugins can be found [here](#plugin-license-list).
 
-| Function  | Plugin                                    | Description                          |
-| :-------- | :---------------------------------------- | :----------------------------------- |
-| 🔥 Core   | [folke/lazy.nvim][folke/lazy.nvim]        | Package manager                      |
-| 🔥 Visual | [arsham/arshamiser.nvim][arshamiser.nvim] | Status line, colour scheme and folds |
-| 🔥 Lists  | [arsham/listish.nvim][listish.nvim]       | Supporting quickfix and local lists  |
-| 🧰 Lib    | [arsham/arshlib.nvim][arshlib.nvim]       | Library used in various plugins      |
+| Function  | Plugin                                           | Description                          |
+| :-------- | :----------------------------------------------- | :----------------------------------- |
+| 🔥 Core   | [folke/lazy.nvim][folke/lazy.nvim]               | Package manager                      |
+| 🔥 Visual | [arsham/arshamiser.nvim][arshamiser.nvim]        | Status line, colour scheme and folds |
+| 🔥 Lists  | [arsham/listish.nvim][listish.nvim]              | Supporting quickfix and local lists  |
+| 🧰 Lib    | [arsham/arshlib.nvim][arshlib.nvim]              | Library used in various plugins      |
+| ⚡ Visual | [nvim-tree/nvim-web-devicons][nvim-web-devicons] |                                      |
+| 🔍 Finder | [junegunn/fzf][fzf]                              | Fuzzy finder                         |
+| 🔍 Finder | [junegunn/fzf.vim][fzf.vim]                      | fzf plugin for vim                   |
+| 🔥 Finder | [arsham/fzfmania.nvim][fzfmania.nvim]            | Very powerful FZF setup in lua       |
+| 🔥 Finder | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend       |
+| 🧰 Core   | [nvim-lua/plenary.nvim][plenary.nvim]            |                                      |
 
 </details>
 
@@ -70,6 +77,8 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **w**           | **L**ocal list mappings (because it's near **q**) |
 | **]**           | Jumps to the next item                            |
 | **[**           | Jumps to the previous item                        |
+| **b**           | **B**uffer                                        |
+| **f**           | **F**ile, **F**ind                                |
 
 The `leader` key is `space`!
 
@@ -120,6 +129,91 @@ you how many items you have in a list.
 
 </details>
 
+### Fzf
+
+<details>
+    <summary>Click to view the mappings</summary>
+
+Most actions can apply to multiple selected items if possible.
+
+| Mapping            | Description                                            |
+| :----------------- | :----------------------------------------------------- |
+| `<Ctrl-p>`         | File list in current folder.                           |
+| `<Alt-p>`          | File list in home folder.                              |
+| `<Ctrl-b>`         | **B**uffer list.                                       |
+| `<Alt-b>`          | Delete **b**uffers from the buffer list.               |
+| `<Ctrl-/>`         | Search in lines on current buffer.                     |
+| `<Alt-/>`          | Search in lines of **all open buffers**.               |
+| `<leader>@`        | Search in **ctags** or **LSP** symbols (see below).    |
+| `<leader>:`        | Commands                                               |
+| `<leader>ff`       | **F**ind in contents of all files in current folder.   |
+| `<leader>fF`       | Like `<leader>ff`, but you can filter filenames too    |
+| `<leader>fa`       | **F**ind **A**ll disabling `.gitignore` handling.      |
+| `<leader>fA`       | Like `<leader>fA`, but you can filter filenames too    |
+| `<leader>fi`       | **I**ncrementally **F**ind.                            |
+| `<leader>rg`       | Search (**rg**) with current word.                     |
+| `<leader>fG`       | Like `<leader>fG`, but you can filter filenames too    |
+| `<leader>ra`       | Search (**rg**) disabling `.gitignore` handling.       |
+| `<leader>rA`       | Like `<leader>rA`, but you can filter filenames too    |
+| `<leader>ri`       | **I**ncrementally search (**rg**) with current word.   |
+| `<leader>fh`       | **F**ile **H**istory                                   |
+| `<leader>fl`       | **F**ile **l**ocate (requires mlocate)                 |
+| `<leader>gf`       | **GFiles**                                             |
+| `<leader>mm`       | **Marks**                                              |
+| `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
+| `<Ctrl-x><Ctrl-f>` | Search in **f**iles                                    |
+| `<Ctrl-x><Ctrl-l>` | Search in **l**ines                                    |
+
+If you keep hitting `<Ctrl-/>` the preview window will change width. With
+`Shift-/` you can show and hide the preview window.
+
+When a file is selected, additional to what **fzf** provides out of the box,
+you can invoke one of these secondary actions:
+
+| Mapping | Description                        |
+| :------ | :--------------------------------- |
+| `alt-/` | To search in the lines.            |
+| `alt-@` | To search in ctags or lsp symbols. |
+| `alt-:` | To go to a specific line.          |
+| `alt-q` | Add items to the quickfix list.    |
+| `alt-w` | Add items to the local list.       |
+
+Note that if a `LSP` server is not attached to the buffer, it will fall back to
+`ctags`.
+
+Sometimes when you list files and `sink` with **@**, the `LSP` might not be
+ready yet, therefore it falls back to `ctags` immediately. In this case you can
+cancel, which will land you to the file, and you can invoke `<leader>@` for
+**LSP** symbols.
+
+</details>
+
+There are a few added commands to what fzf provides.
+
+<details>
+    <summary>Click to view the commands</summary>
+
+| Command       | Description                                |
+| :------------ | :----------------------------------------- |
+| `GGrep`       | Run **git grep**                           |
+| `GTree`       | Browse **git** commits                     |
+| `Marks`       | Show **marks** with preview                |
+| `MarksDelete` | Delete **marks**                           |
+| `Todo`        | List **todo**/**fixme** lines              |
+| `ArgsAdd`     | Select and add files to the args list      |
+| `ArgsDelete`  | Select and delete files from the args list |
+| `Worktree`    | Switch between git worktrees               |
+| `BLines`      | Search in current buffer                   |
+| `History`     | Show open file history                     |
+| `Checkout`    | Checkout a branch                          |
+| `GitStatus`   | Show git status                            |
+| `Jumps`       | Choose from jump list                      |
+| `Autocmds`    | Show autocmds                              |
+| `Changes`     | Show change list                           |
+| `Registers`   | Show register contents                     |
+
+</details>
+
 ### Utilities
 
 These are commands you can use in **Lua** land. Assign the required module to a
@@ -163,12 +257,18 @@ quick.cmd_and_centre("SomeCommand")
 <details>
     <summary>Click to view the plugin list</summary>
 
-| Plugin                                    | License                                                              |
-| ----------------------------------------- | -------------------------------------------------------------------- |
-| [folke/lazy.nvim][folke/lazy.nvim]        | [Apache-2.0](https://github.com/folke/lazy.nvim/blob/main/LICENSE)   |
-| [arsham/arshamiser.nvim][arshamiser.nvim] | [MIT](https://github.com/arsham/arshamiser.nvim/blob/master/LICENSE) |
-| [arsham/arshlib.nvim][arshlib.nvim]       | [MIT](https://github.com/arsham/arshlib.nvim/blob/master/LICENSE)    |
-| [arsham/listish.nvim][listish.nvim]       | [MIT](https://github.com/arsham/listish.nvim/blob/master/LICENSE)    |
+| Plugin                                    | License                                                                   |
+| ----------------------------------------- | ------------------------------------------------------------------------- |
+| [folke/lazy.nvim][folke/lazy.nvim]        | [Apache-2.0](https://github.com/folke/lazy.nvim/blob/main/LICENSE)        |
+| [arsham/arshamiser.nvim][arshamiser.nvim] | [MIT](https://github.com/arsham/arshamiser.nvim/blob/master/LICENSE)      |
+| [arsham/arshlib.nvim][arshlib.nvim]       | [MIT](https://github.com/arsham/arshlib.nvim/blob/master/LICENSE)         |
+| [arsham/listish.nvim][listish.nvim]       | [MIT](https://github.com/arsham/listish.nvim/blob/master/LICENSE)         |
+| [nvim-web-devicons][nvim-web-devicons]    | [MIT](https://github.com/nvim-tree/nvim-web-devicons/blob/master/LICENSE) |
+| [nvim-lua/plenary.nvim][plenary.nvim]     | [MIT](https://github.com/nvim-lua/plenary.nvim/blob/master/LICENSE)       |
+| [junegunn/fzf][fzf]                       | [MIT](https://github.com/junegunn/fzf/blob/master/LICENSE)                |
+| [junegunn/fzf.vim][fzf.vim]               | [MIT](https://github.com/junegunn/fzf.vim/blob/master/LICENSE)            |
+| [arsham/fzfmania.nvim][fzfmania.nvim]     | [MIT](https://github.com/arsham/fzfmania.nvim/blob/master/LICENSE)        |
+| [ibhagwan/fzf-lua][fzf-lua]               | [AGPL-3.0](https://github.com/ibhagwan/fzf-lua/blob/main/LICENSE)         |
 
 </details>
 
@@ -176,6 +276,12 @@ quick.cmd_and_centre("SomeCommand")
 [arshamiser.nvim]: https://github.com/arsham/arshamiser.nvim
 [arshlib.nvim]: https://github.com/arsham/arshlib.nvim
 [listish.nvim]: https://github.com/arsham/listish.nvim
+[nvim-web-devicons]: https://github.com/nvim-tree/nvim-web-devicons
+[plenary.nvim]: https://github.com/nvim-lua/plenary.nvim
+[fzf]: https://github.com/junegunn/fzf
+[fzf.vim]: https://github.com/junegunn/fzf.vim
+[fzfmania.nvim]: https://github.com/arsham/fzfmania.nvim
+[fzf-lua]: https://github.com/ibhagwan/fzf-lua
 
 <!--
 vim: foldlevel=2 conceallevel=0

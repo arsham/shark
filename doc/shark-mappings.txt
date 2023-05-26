@@ -34,6 +34,8 @@ situation or messes with a community-driven or Vim's very well known mapping:
  w                |location-list| mappings (because it's near q)
  ]                Jumps to the next item
  [                Jumps to the previous item
+ b                Buffer
+ f                File, Find
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!

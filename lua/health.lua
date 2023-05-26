@@ -16,6 +16,11 @@ local file_checks = {
 local executables = {
   ripgrep = { "rg", "paru -S rg" },
   git = { "git", "paru -S git" },
+  bat = { "bat", "paru -S bat" },
+  ctags = { "ctags", "paru -S ctags" },
+  fd = { "fd", "paru -S fd" },
+  fzf = { "fzf", "paru -S fzf" },
+  TheSilverSearcher = { "ag", "paru -S the_silver_searcher" },
 }
 
 M.check = function()
