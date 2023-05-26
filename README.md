@@ -63,6 +63,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔥 Finder | [arsham/fzfmania.nvim][fzfmania.nvim]            | Very powerful FZF setup in lua       |
 | 🔥 Finder | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend       |
 | 🧰 Core   | [nvim-lua/plenary.nvim][plenary.nvim]            |                                      |
+| ⏩ Core   | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                 |
 
 </details>
 
@@ -257,18 +258,19 @@ quick.cmd_and_centre("SomeCommand")
 <details>
     <summary>Click to view the plugin list</summary>
 
-| Plugin                                    | License                                                                   |
-| ----------------------------------------- | ------------------------------------------------------------------------- |
-| [folke/lazy.nvim][folke/lazy.nvim]        | [Apache-2.0](https://github.com/folke/lazy.nvim/blob/main/LICENSE)        |
-| [arsham/arshamiser.nvim][arshamiser.nvim] | [MIT](https://github.com/arsham/arshamiser.nvim/blob/master/LICENSE)      |
-| [arsham/arshlib.nvim][arshlib.nvim]       | [MIT](https://github.com/arsham/arshlib.nvim/blob/master/LICENSE)         |
-| [arsham/listish.nvim][listish.nvim]       | [MIT](https://github.com/arsham/listish.nvim/blob/master/LICENSE)         |
-| [nvim-web-devicons][nvim-web-devicons]    | [MIT](https://github.com/nvim-tree/nvim-web-devicons/blob/master/LICENSE) |
-| [nvim-lua/plenary.nvim][plenary.nvim]     | [MIT](https://github.com/nvim-lua/plenary.nvim/blob/master/LICENSE)       |
-| [junegunn/fzf][fzf]                       | [MIT](https://github.com/junegunn/fzf/blob/master/LICENSE)                |
-| [junegunn/fzf.vim][fzf.vim]               | [MIT](https://github.com/junegunn/fzf.vim/blob/master/LICENSE)            |
-| [arsham/fzfmania.nvim][fzfmania.nvim]     | [MIT](https://github.com/arsham/fzfmania.nvim/blob/master/LICENSE)        |
-| [ibhagwan/fzf-lua][fzf-lua]               | [AGPL-3.0](https://github.com/ibhagwan/fzf-lua/blob/main/LICENSE)         |
+| Plugin                                      | License                                                                    |
+| ------------------------------------------- | -------------------------------------------------------------------------- |
+| [folke/lazy.nvim][folke/lazy.nvim]          | [Apache-2.0](https://github.com/folke/lazy.nvim/blob/main/LICENSE)         |
+| [arsham/arshamiser.nvim][arshamiser.nvim]   | [MIT](https://github.com/arsham/arshamiser.nvim/blob/master/LICENSE)       |
+| [arsham/arshlib.nvim][arshlib.nvim]         | [MIT](https://github.com/arsham/arshlib.nvim/blob/master/LICENSE)          |
+| [arsham/listish.nvim][listish.nvim]         | [MIT](https://github.com/arsham/listish.nvim/blob/master/LICENSE)          |
+| [nvim-web-devicons][nvim-web-devicons]      | [MIT](https://github.com/nvim-tree/nvim-web-devicons/blob/master/LICENSE)  |
+| [nvim-lua/plenary.nvim][plenary.nvim]       | [MIT](https://github.com/nvim-lua/plenary.nvim/blob/master/LICENSE)        |
+| [junegunn/fzf][fzf]                         | [MIT](https://github.com/junegunn/fzf/blob/master/LICENSE)                 |
+| [junegunn/fzf.vim][fzf.vim]                 | [MIT](https://github.com/junegunn/fzf.vim/blob/master/LICENSE)             |
+| [arsham/fzfmania.nvim][fzfmania.nvim]       | [MIT](https://github.com/arsham/fzfmania.nvim/blob/master/LICENSE)         |
+| [ibhagwan/fzf-lua][fzf-lua]                 | [AGPL-3.0](https://github.com/ibhagwan/fzf-lua/blob/main/LICENSE)          |
+| [tweekmonster/startuptime.vim][startuptime] | [MIT](https://github.com/tweekmonster/startuptime.vim/blob/master/LICENSE) |
 
 </details>
 
@@ -282,6 +284,7 @@ quick.cmd_and_centre("SomeCommand")
 [fzf.vim]: https://github.com/junegunn/fzf.vim
 [fzfmania.nvim]: https://github.com/arsham/fzfmania.nvim
 [fzf-lua]: https://github.com/ibhagwan/fzf-lua
+[startuptime]: https://github.com/tweekmonster/startuptime.vim
 
 <!--
 vim: foldlevel=2 conceallevel=0

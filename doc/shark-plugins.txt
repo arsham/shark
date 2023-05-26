@@ -38,5 +38,6 @@ Function   Plugin                      Description                     License
 🔥 Finder   arsham/fzfmania.nvim       FZF setup in lua                    MIT
 🔥 Finder   ibhagwan/fzf-lua           FZF ❤️  lua                          MIT
 🧰 Core     nvim-lua/plenary.nvim                                     AGPR-3.0
+⏩ Core     tweekmonster/startuptime.vim Benchmarking startup              MIT
 
 vim:tw=78:ft=help
