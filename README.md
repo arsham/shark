@@ -64,6 +64,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔥 Finder | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend       |
 | 🧰 Core   | [nvim-lua/plenary.nvim][plenary.nvim]            |                                      |
 | ⏩ Core   | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                 |
+| 🔁 Core   | [tpope/vim-repeat][tpope/vim-repeat]             |                                      |
 
 </details>
 
@@ -271,6 +272,7 @@ quick.cmd_and_centre("SomeCommand")
 | [arsham/fzfmania.nvim][fzfmania.nvim]       | [MIT](https://github.com/arsham/fzfmania.nvim/blob/master/LICENSE)         |
 | [ibhagwan/fzf-lua][fzf-lua]                 | [AGPL-3.0](https://github.com/ibhagwan/fzf-lua/blob/main/LICENSE)          |
 | [tweekmonster/startuptime.vim][startuptime] | [MIT](https://github.com/tweekmonster/startuptime.vim/blob/master/LICENSE) |
+| [tpope/vim-repeat][tpope/vim-repeat]        | [N/A][tpope/vim-repeat]                                                    |
 
 </details>
 
@@ -285,6 +287,7 @@ quick.cmd_and_centre("SomeCommand")
 [fzfmania.nvim]: https://github.com/arsham/fzfmania.nvim
 [fzf-lua]: https://github.com/ibhagwan/fzf-lua
 [startuptime]: https://github.com/tweekmonster/startuptime.vim
+[tpope/vim-repeat]: https://github.com/tpope/vim-repeat
 
 <!--
 vim: foldlevel=2 conceallevel=0

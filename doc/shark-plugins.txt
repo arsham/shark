@@ -39,5 +39,6 @@ Function   Plugin                      Description                     License
 🔥 Finder   ibhagwan/fzf-lua           FZF ❤️  lua                          MIT
 🧰 Core     nvim-lua/plenary.nvim                                     AGPR-3.0
 ⏩ Core     tweekmonster/startuptime.vim Benchmarking startup              MIT
+🔁 Core     tpope/vim-repeat           Add repeat support to other plugins N/A
 
 vim:tw=78:ft=help
