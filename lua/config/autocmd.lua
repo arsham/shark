@@ -101,4 +101,23 @@ vim.api.nvim_create_autocmd("TermClose", {
   desc = "Auto close shell terminals",
 }) --}}}
 
+-- Create Missing Parent Directories {{{
+vim.api.nvim_create_autocmd("BufNewFile", {
+  group = augroup("CREATE_MISSING_PARENT_DIRECTORIES"),
+  callback = function()
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = 0,
+      once = true,
+      callback = function()
+        local path = vim.fn.expand("%:h")
+        local p = require("plenary.path"):new(path)
+        if not p:exists() then
+          p:mkdir({ parents = true })
+        end
+      end,
+      desc = "Create missing parent directories automatically",
+    })
+  end,
+}) --}}}
+
 -- vim: fdm=marker fdl=0
