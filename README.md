@@ -173,6 +173,8 @@ The `leader` key is `space`!
 | `<leader>.a`      | Swap with the next parameter                                         |
 | `<leader>,a`      | Swap with the previous parameter                                     |
 | `<leader>df`      | Peek function definition                                             |
+| [count]`<Alt-j>`  | Shifts line(s) down and format                                       |
+| [count]`<Alt-k>`  | Shifts line(s) up and format                                         |
 
 </details>
 

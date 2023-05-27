@@ -132,6 +132,14 @@ Please refer to the following help files for more mappings and textobjects:
 <Leader>,a              Swap with the previous parameter
                                                                   *<Leader>df*
 <Leader>df              Peek function definition
+                                                               *ALT-j* *<M-j>*
+<Alt-j>                                                    *v_ALT-j* *v_<M-j>*
+{Visual}<Alt-j>         Shift line, [count] line(s)
+                        or {Visual} selection down and format
+                                                               *ALT-k* *<M-k>*
+<Alt-k>                                                    *v_ALT-k* *v_<M-k>*
+{Visual}<Alt-k>         Shift line, [count] line(s)
+                        or {Visual} selection up and format
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*
