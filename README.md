@@ -206,6 +206,7 @@ The `leader` key is `space`!
 | [c]`<Alt-a>`      | Go to begging of the line                                            |
 | [c]`<Alt-e>`      | Go to end of the line                                                |
 | [c]`<C-r><C-l>`   | Copy current line in the buffer                                      |
+| `<Tab><Tab>`      | Switch to the alternative buffer                                     |
 
 </details>
 

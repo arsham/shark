@@ -198,6 +198,8 @@ g.                      Use last change (anything) as the
 <Alt>e                  Go to end of the line
                                               *c_CTRL-r_CTRL-l* *c_<C-r><C-l>*
 <Ctrl>r<Ctrl>l          Copy current line in the buffer
+                                                                  *<Tab><Tab>*
+<Tab><Tab>              Switch to the alternative buffer
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

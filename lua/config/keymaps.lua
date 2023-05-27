@@ -118,4 +118,6 @@ vim.keymap.set("c", "<M-e>", "<end>")
 vim.keymap.set("c", "<C-r><C-l>", "<C-r>=getline('.')<CR>", opts("Copy current line"))
 -- }}}
 
+vim.keymap.set("n", "<Tab><Tab>", "<C-^>", opts("Switch to the alternative buffer"))
+
 -- vim: fdm=marker fdl=0
