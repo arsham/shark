@@ -83,4 +83,22 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave", "InsertEnter"
   desc = "Unset relative number when unfocused",
 }) --}}}
 
+-- Autoclose Shell Terminals {{{
+-- See neovim/neovim#15440
+vim.api.nvim_create_autocmd("TermClose", {
+  group = augroup("AUTOCLOSE_SHELL_TERMINALS"),
+  callback = function()
+    if vim.v.event.status == 0 then
+      local info = vim.api.nvim_get_chan_info(vim.opt.channel._value)
+      if not info or not info.argv then
+        return
+      end
+      if info.argv[1] == vim.env.SHELL then
+        pcall(vim.api.nvim_buf_delete, 0, {})
+      end
+    end
+  end,
+  desc = "Auto close shell terminals",
+}) --}}}
+
 -- vim: fdm=marker fdl=0
