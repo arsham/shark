@@ -153,4 +153,31 @@ vim.api.nvim_create_autocmd("Filetype", {
   end,
 }) --}}}
 
+-- Close Info Popups {{{
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("CLOSE_INFO_POPUPS"),
+  pattern = {
+    "help",
+    "qf",
+    "startuptime",
+    "checkhealth",
+  },
+  callback = function(args)
+    local bufnr = args.buf
+    local opts = {
+      buffer = bufnr or true,
+      silent = true,
+      desc = "close lspinfo popup and help,qf buffers",
+    }
+    vim.keymap.set("n", "q", function()
+      local ok = pcall(vim.cmd.close)
+      if not ok then
+        -- This is the last window, let's wipe it out then.
+        vim.cmd.bdelete(bufnr or 0)
+      end
+    end, opts)
+  end,
+  desc = "Close lspinfo popup and help,qf buffers with q",
+}) --}}}
+
 -- vim: fdm=marker fdl=0
