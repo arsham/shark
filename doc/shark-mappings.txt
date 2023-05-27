@@ -159,6 +159,9 @@ g=                      Re-indents the hole buffer
 <Leader>p               Paste from the + register after cursor
                                                                    *<Leader>P*
 <Leader>P               Paste from the + register before cursor
+                                                                  *<Leader>gw*
+<Leader>gw              Grep current word in buffer.
+                        Populates the locallist
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

@@ -10,6 +10,7 @@
 <Leader>gd	shark-mappings.txt	/*<Leader>gd*
 <Leader>gg	shark-mappings.txt	/*<Leader>gg*
 <Leader>gs	shark-mappings.txt	/*<Leader>gs*
+<Leader>gw	shark-mappings.txt	/*<Leader>gw*
 <Leader>hR	shark-mappings.txt	/*<Leader>hR*
 <Leader>hb	shark-mappings.txt	/*<Leader>hb*
 <Leader>hl	shark-mappings.txt	/*<Leader>hl*

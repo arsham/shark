@@ -182,6 +182,7 @@ The `leader` key is `space`!
 | `<Up>`            | Reduce horizontal size                                               |
 | `<Down>`          | Increase horizontal size                                             |
 | `<Esc><Esc>`      | Clear hlsearch                                                       |
+| `<leader>gw`      | **G**rep current **W**ord in buffer. Populates the locallist.        |
 
 </details>
 

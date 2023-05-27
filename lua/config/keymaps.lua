@@ -49,4 +49,6 @@ vim.keymap.set("n", "<Leader>P", '"+P')
 vim.keymap.set("x", "p", '"_dP', opts('Replace visually selected with the " contents'))
 --}}}
 
+vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>", opts("Grep on local buffer"))
+
 -- vim: fdm=marker fdl=0
