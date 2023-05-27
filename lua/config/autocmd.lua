@@ -194,4 +194,20 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Make quickfix list take the whole horizontal space",
 }) --}}}
 
+-- Trim Whitespaces {{{
+vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "FilterWritePre" }, {
+  group = augroup("TRIM_WHITESPACES"),
+  desc = "trim spaces",
+  callback = function()
+    if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
+      return
+    end
+    local save = vim.fn.winsaveview()
+    vim.api.nvim_command([[keeppatterns %s/\s\+$//e]])
+    vim.api.nvim_command([[silent! %s#\($\n\s*\)\+\%$##]])
+    vim.fn.winrestview(save)
+  end,
+})
+-- }}}
+
 -- vim: fdm=marker fdl=0
