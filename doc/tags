@@ -50,6 +50,8 @@ CTRL-wt	shark-mappings.txt	/*CTRL-wt*
 ]b	shark-mappings.txt	/*]b*
 ]gc	shark-mappings.txt	/*]gc*
 ]o	shark-mappings.txt	/*]o*
+cn	shark-mappings.txt	/*cn*
+g.	shark-mappings.txt	/*g.*
 g=	shark-mappings.txt	/*g=*
 o_H	shark-mappings.txt	/*o_H*
 o_L	shark-mappings.txt	/*o_L*
@@ -99,3 +101,4 @@ v_<M-j>	shark-mappings.txt	/*v_<M-j>*
 v_<M-k>	shark-mappings.txt	/*v_<M-k>*
 v_ALT-j	shark-mappings.txt	/*v_ALT-j*
 v_ALT-k	shark-mappings.txt	/*v_ALT-k*
+v_cn	shark-mappings.txt	/*v_cn*

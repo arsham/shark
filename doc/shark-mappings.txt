@@ -175,6 +175,12 @@ g=                      Re-indents the hole buffer
                                                             *CTRL-wt* *<C-w>t*
 <Ctrl>wt                                          *CTRL-w_CTRL-t* *<C-w><C-t>*
 <Ctrl>w<Ctrl>t          Open current buffer in a new tab
+                                                                   *v_cn* *cn*
+cn {Visual}cn           Initiate a `cgn` on current `word`
+                        or {Visual} selection
+                                                                          *g.*
+g.                      Use last change (anything) as the
+                        initiate a `cgn` on current `word`
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

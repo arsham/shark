@@ -77,4 +77,13 @@ vim.keymap.set("n", "<C-w><C-t>", ":tabnew %<CR>", opts("Open current buffer in 
 vim.keymap.set("n", "<C-w>t", ":tabnew %<CR>", opts("Open current buffer in new tab"))
 -- }}}
 
+-- Easier cgn process by starting with already selected text.
+vim.keymap.set("n", "cn", "*``cgn")
+vim.keymap.set("x", "cn", function()
+  quick.normal("n", 'y/"<CR>Ncgn', true)
+end, { silent = true })
+
+-- Make the last change as an initiation for cgn.
+vim.keymap.set("n", "g.", [[/\V<C-r>"<CR>cgn<C-a><Esc>]])
+
 -- vim: fdm=marker fdl=0

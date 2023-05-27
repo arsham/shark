@@ -191,6 +191,11 @@ The `leader` key is `space`!
 | `<C-w><C-b>`      | Delete current buffer                                                |
 | `<C-w>t`          | Open current buffer in new tab                                       |
 | `<C-w><C-t>`      | Open current buffer in new tab                                       |
+| `cn`              | Initiate a `cgn` on current `word`                                   |
+| [V]`cn`           | Initiate a `cgn` on current visually                                 |
+|                   | selected string                                                      |
+| `g.`              | Use last change (anything) as the                                    |
+|                   | initiate a `cgn` on current `word`                                   |
 
 </details>
 
