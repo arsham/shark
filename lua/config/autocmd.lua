@@ -143,4 +143,14 @@ if vim.fn.exists("$TMUX") == 1 then
   })
 end --}}}
 
+-- Keep Makefile Tabs {{{
+vim.api.nvim_create_autocmd("Filetype", {
+  group = augroup("MAKEFILE_TABS"),
+  pattern = "make,automake",
+  desc = "Keep Makefile tabs",
+  callback = function()
+    vim.bo.expandtab = false
+  end,
+}) --}}}
+
 -- vim: fdm=marker fdl=0
