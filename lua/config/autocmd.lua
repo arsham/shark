@@ -45,4 +45,13 @@ vim.api.nvim_create_autocmd("BufReadPre", {
   end,
 }) --}}}
 
+-- No Undo Files {{{
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("NO_UNDO_FILES"),
+  pattern = { "COMMIT_EDITMSG", "MERGE_MSG", "gitcommit", "*.tmp", "*.log" },
+  callback = function()
+    vim.bo.undofile = false
+  end,
+}) --}}}
+
 -- vim: fdm=marker fdl=0
