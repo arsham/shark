@@ -15,4 +15,28 @@ function M.augroup(name)
   return group
 end
 
+local plugins = require("config.disabled_list")
+
+---Returns true if the plugin is enabled. Disabled plugins are listed in the
+-- plugins table.
+---@param plugin string
+---@return boolean
+function M.is_enabled(plugin)
+  if not plugins[plugin] then
+    return true
+  end
+  return plugins[plugin].enabled
+end
+
+---Returns true if the plugin should be loaded. Disabled plugins are listed in
+-- the plugins table.
+---@param plugin string
+---@return boolean
+function M.should_start(plugin)
+  if not plugins[plugin] then
+    return true
+  end
+  return plugins[plugin].start
+end
+
 return M
