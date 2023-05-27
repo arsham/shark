@@ -54,4 +54,33 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 }) --}}}
 
+-- Relative Number Toggling {{{
+local relative_line_toggle_group = augroup("RELATIVE_NUMBER_TOGGLE")
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeave" }, {
+  group = relative_line_toggle_group,
+  callback = function()
+    if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
+      return
+    end
+
+    local lines = vim.api.nvim_buf_line_count(0)
+    if lines < 20000 then
+      if vim.wo.number and vim.fn.mode() ~= "i" then
+        vim.wo.relativenumber = true
+      end
+    end
+  end,
+  desc = "Set relative number when focused",
+})
+
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave", "InsertEnter" }, {
+  group = relative_line_toggle_group,
+  callback = function()
+    if vim.wo.number then
+      vim.wo.relativenumber = false
+    end
+  end,
+  desc = "Unset relative number when unfocused",
+}) --}}}
+
 -- vim: fdm=marker fdl=0
