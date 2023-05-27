@@ -120,4 +120,8 @@ vim.keymap.set("c", "<C-r><C-l>", "<C-r>=getline('.')<CR>", opts("Copy current l
 
 vim.keymap.set("n", "<Tab><Tab>", "<C-^>", opts("Switch to the alternative buffer"))
 
+vim.keymap.set("s", "p", function()
+  vim.api.nvim_feedkeys("p", "n", false)
+end, { silent = true, remap = false, desc = "don't paste in select mode" })
+
 -- vim: fdm=marker fdl=0
