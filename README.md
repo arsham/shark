@@ -213,6 +213,8 @@ There are more specialised mappings provided, keep reading please!
 | `aa`        | Select around a parameter                   |
 | `ia`        | Select inside a parameter                   |
 | `as`        | Select around a statement                   |
+| `H`         | To the beginning of line                    |
+| `L`         | To the end of line                          |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**

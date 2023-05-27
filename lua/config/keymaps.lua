@@ -2,6 +2,9 @@ local function opts(desc)
   return { silent = true, desc = desc }
 end
 
+vim.keymap.set("o", "H", "^", opts("To the beginning of line"))
+vim.keymap.set("o", "L", "$", opts("To the end of line"))
+
 -- Moving around {{{
 local up = opts("Move lines up")
 local down = opts("Move lines down")
