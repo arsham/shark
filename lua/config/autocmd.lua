@@ -180,4 +180,18 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Close lspinfo popup and help,qf buffers with q",
 }) --}}}
 
+-- Make quickfix list take the whole horizontal space {{{
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("QUICKFIX_LIST_SIZE"),
+  pattern = "qf",
+  callback = function()
+    local win_id = vim.fn.win_getid()
+    local is_loc = vim.fn.getwininfo(win_id)[1].loclist == 1
+    if not is_loc then
+      vim.cmd.wincmd("J")
+    end
+  end,
+  desc = "Make quickfix list take the whole horizontal space",
+}) --}}}
+
 -- vim: fdm=marker fdl=0
