@@ -29,6 +29,8 @@ return {
     vim.cmd.FzfLua("register_ui_select")
   end,
   event = { "VeryLazy" },
+  cond = require("config.util").should_start("arsham/fzfmania.nvim"),
+  enabled = require("config.util").is_enabled("arsham/fzfmania.nvim"),
 }
 
 -- vim: fdm=marker fdl=0

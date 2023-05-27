@@ -1,4 +1,5 @@
 local function config()
+  -- Generate List Function {{{
   ---Returns a list of all characters in the given string.
   ---@param str string The string to get the characters from.
   ---@return table
@@ -8,8 +9,9 @@ local function config()
       table.insert(ret, str:sub(i, i))
     end
     return ret
-  end
+  end -- }}}
 
+  -- Increases Decimals {{{
   ---Increases the given number by one.
   ---@param text string The number to increase.
   ---@param addend string The number to add to the given number.
@@ -29,7 +31,7 @@ local function config()
     local format = "%" .. prefix .. "d"
     text = format:format(n)
     return { text = text, cursor = len }
-  end
+  end -- }}}
 
   local augend = require("dial.augend")
   local common = require("dial.augend.common")
@@ -55,7 +57,7 @@ local function config()
         elements = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" },
       }),
 
-      augend.constant.new({
+      augend.constant.new({ -- Months {{{
         elements = {
           "January",
           "February",
@@ -70,21 +72,21 @@ local function config()
           "November",
           "December",
         },
-      }),
+      }), -- }}}
 
       augend.constant.new({ elements = { "int", "int64", "int32" } }),
       augend.constant.new({ elements = { "float64", "float32" } }),
 
       -- copied from an old commit from the author of the plugin.
-      augend.user.new({
+      augend.user.new({ -- Digits {{{
         desc = "fixed-digit decimal natural number (e.g. 00, 01, 02, ..., 97, 98, 99)",
         find = common.find_pattern("%d+"),
         add = function(text, addend)
           return increase_decimal(text, addend, "0")
         end,
-      }),
+      }), -- }}}
 
-      augend.user.new({
+      augend.user.new({ -- Markdown Header {{{
         desc = "Markdown Header (# Title)",
 
         find = function(line)
@@ -107,7 +109,7 @@ local function config()
           text = ("#"):rep(n)
           return { text = text, cursor = 1 }
         end,
-      }),
+      }), -- }}}
     },
   })
 
@@ -132,3 +134,5 @@ return {
   cond = require("config.util").should_start("monaqa/dial.nvim"),
   enabled = require("config.util").is_enabled("monaqa/dial.nvim"),
 }
+
+-- vim: fdm=marker fdl=0

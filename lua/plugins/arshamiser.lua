@@ -20,4 +20,6 @@ return {
       dependencies = "nvim-tree/nvim-web-devicons",
     },
   },
+  cond = require("config.util").should_start("arsham/arshamiser.nvim"),
+  enabled = require("config.util").is_enabled("arsham/arshamiser.nvim"),
 }

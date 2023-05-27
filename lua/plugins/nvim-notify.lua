@@ -21,4 +21,6 @@ return {
   end,
   event = { "VeryLazy" },
   priority = 60,
+  cond = require("config.util").should_start("rcarriga/nvim-notify"),
+  enabled = require("config.util").is_enabled("rcarriga/nvim-notify"),
 }

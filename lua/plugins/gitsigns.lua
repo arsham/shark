@@ -24,14 +24,14 @@ return {
     local quick = require("arshlib.quick")
 
     gs.setup({
-    -- stylua: ignore
-    signs = {-- {{{
-      add          = { text = "▌", show_count = true },
-      change       = { text = "▌", show_count = true },
-      delete       = { text = "▐", show_count = true },
-      topdelete    = { text = "▛", show_count = true },
-      changedelete = { text = "▚", show_count = true },
-    }, -- }}}
+      -- stylua: ignore
+      signs = { -- {{{
+        add          = { text = "▌", show_count = true },
+        change       = { text = "▌", show_count = true },
+        delete       = { text = "▐", show_count = true },
+        topdelete    = { text = "▛", show_count = true },
+        changedelete = { text = "▚", show_count = true },
+      }, -- }}}
       update_debounce = 500,
       sign_priority = 10,
       numhl = true,
@@ -87,6 +87,8 @@ return {
       end, -- }}}
     })
   end,
+  cond = require("config.util").should_start("lewis6991/gitsigns.nvim"),
+  enabled = require("config.util").is_enabled("lewis6991/gitsigns.nvim"),
 }
 
 -- vim: fdm=marker fdl=0
