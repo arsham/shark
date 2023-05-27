@@ -99,4 +99,15 @@ vim.keymap.set("n", "<leader>zk", foldexpr("marker"), opts("Set local foldmethod
 vim.keymap.set("n", "<leader>zs", foldexpr("syntax"), opts("Set local foldmethod to syntax"))
 --}}}
 
+-- Undoable break points in insert mode {{{
+vim.keymap.set("i", "<C-u>", "<C-g>u<C-u>", opts("Undoable insert edits"))
+vim.keymap.set("i", "<C-w>", "<C-g>u<C-w>", opts("Undoable insert edits"))
+vim.keymap.set("i", "<M-e>", "<C-g>u<C-o>D", opts("Delete to the end of line"))
+vim.keymap.set("i", "<M-a>", "<C-g>u<C-o>de", opts("Delete a word in front"))
+local break_points = { ",", ".", ";", ":", "!" }
+for _, key in ipairs(break_points) do
+  vim.keymap.set("i", key, key .. "<c-g>u", opts("Undoable break point"))
+end
+-- }}}
+
 -- vim: fdm=marker fdl=0
