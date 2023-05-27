@@ -120,4 +120,27 @@ vim.api.nvim_create_autocmd("BufNewFile", {
   end,
 }) --}}}
 
+-- Tmux Automatic Rename {{{
+if vim.fn.exists("$TMUX") == 1 then
+  local tmux_rename_group = augroup("TMUX_RENAME")
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = tmux_rename_group,
+    callback = function()
+      if vim.bo.buftype == "" then
+        local bufname = vim.fn.expand("%:t:S")
+        vim.schedule(function()
+          pcall(vim.fn.system, "tmux rename-window " .. bufname)
+        end)
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = tmux_rename_group,
+    callback = function()
+      pcall(vim.fn.system, "tmux set-window automatic-rename on")
+    end,
+  })
+end --}}}
+
 -- vim: fdm=marker fdl=0
