@@ -210,4 +210,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
 })
 -- }}}
 
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEnter" }, {
+  group = augroup("CHECKTIME"),
+  callback = function()
+    pcall(vim.cmd.checktime)
+  end,
+})
+
 -- vim: fdm=marker fdl=0
