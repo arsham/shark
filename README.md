@@ -175,6 +175,7 @@ The `leader` key is `space`!
 | `<leader>df`      | Peek function definition                                             |
 | [count]`<Alt-j>`  | Shifts line(s) down and format                                       |
 | [count]`<Alt-k>`  | Shifts line(s) up and format                                         |
+| `g=`              | Re-indents the hole buffer                                           |
 
 </details>
 

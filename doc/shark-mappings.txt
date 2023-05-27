@@ -140,6 +140,8 @@ Please refer to the following help files for more mappings and textobjects:
 <Alt-k>                                                    *v_ALT-k* *v_<M-k>*
 {Visual}<Alt-k>         Shift line, [count] line(s)
                         or {Visual} selection up and format
+                                                                          *g=*
+g=                      Re-indents the hole buffer
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*
