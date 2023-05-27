@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-require("options")
+require("config.options")
 
 require("lazy").setup("plugins", {
   root = vim.fn.stdpath("cache") .. "/lazy",
