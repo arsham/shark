@@ -162,6 +162,10 @@ g=                      Re-indents the hole buffer
                                                                   *<Leader>gw*
 <Leader>gw              Grep current word in buffer.
                         Populates the locallist
+                                                                  *<Leader>sp*
+<Leader>sp              Toggles Spelling on current buffer
+                                                                  *<Leader>sf*
+<Leader>sf              Auto fixes previous misspelled word
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

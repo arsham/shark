@@ -20,6 +20,8 @@
 <Leader>hu	shark-mappings.txt	/*<Leader>hu*
 <Leader>oo	shark-mappings.txt	/*<Leader>oo*
 <Leader>p	shark-mappings.txt	/*<Leader>p*
+<Leader>sf	shark-mappings.txt	/*<Leader>sf*
+<Leader>sp	shark-mappings.txt	/*<Leader>sp*
 <Leader>y	shark-mappings.txt	/*<Leader>y*
 <M-j>	shark-mappings.txt	/*<M-j>*
 <M-k>	shark-mappings.txt	/*<M-k>*

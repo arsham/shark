@@ -183,6 +183,8 @@ The `leader` key is `space`!
 | `<Down>`          | Increase horizontal size                                             |
 | `<Esc><Esc>`      | Clear hlsearch                                                       |
 | `<leader>gw`      | **G**rep current **W**ord in buffer. Populates the locallist.        |
+| `<leader>sp`      | Toggle **Sp**elling for buffer                                       |
+| `<leader>sf`      | Auto **f**ixe previous misspelled word                               |
 
 </details>
 

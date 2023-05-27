@@ -1,3 +1,5 @@
+local quick = require("arshlib.quick")
+
 local function opts(desc)
   return { silent = true, desc = desc }
 end
@@ -50,5 +52,20 @@ vim.keymap.set("x", "p", '"_dP', opts('Replace visually selected with the " cont
 --}}}
 
 vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>", opts("Grep on local buffer"))
+
+-- Language support {{{
+-- ]s and [s to jump.
+-- zg to ignore.
+vim.keymap.set("n", "<leader>sp", function()
+  vim.wo.spell = not vim.wo.spell
+end, opts("Toggle spelling"))
+vim.keymap.set("n", "<leader>sf", function()
+  local spell = vim.wo.spell
+  vim.wo.spell = true
+  quick.normal("n", "[s1z=``")
+  vim.schedule(function()
+    vim.wo.spell = spell
+  end)
+end, opts("Auto correct spelling and jump bak.")) --}}}
 
 -- vim: fdm=marker fdl=0
