@@ -217,4 +217,14 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEn
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+  group = augroup("PREVIEW_SET_WRAP"),
+  desc = "Set wrap for preview windows",
+  callback = function()
+    if vim.opt.previewwindow:get() then
+      vim.wo.wrap = true
+    end
+  end,
+})
+
 -- vim: fdm=marker fdl=0
