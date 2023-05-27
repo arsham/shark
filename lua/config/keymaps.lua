@@ -18,6 +18,8 @@ vim.keymap.set("x", "<", "<gv", o)
 vim.keymap.set("x", ">", ">gv", o)
 
 vim.keymap.set("n", "g=", "gg=Gg``", opts("Re-indent the whole buffer"))
+vim.keymap.set("n", "<C-e>", "2<C-e>", opts("Faster scroll up"))
+vim.keymap.set("n", "<C-y>", "2<C-y>", opts("Faster scroll down"))
 --}}}
 
 -- vim: fdm=marker fdl=0
