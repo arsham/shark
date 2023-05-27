@@ -5,6 +5,8 @@ end
 vim.keymap.set("o", "H", "^", opts("To the beginning of line"))
 vim.keymap.set("o", "L", "$", opts("To the end of line"))
 
+vim.keymap.set("n", "J", "mzJ`z", opts("Keep cursor while joining lines"))
+
 -- Moving around {{{
 local up = opts("Move lines up")
 local down = opts("Move lines down")
