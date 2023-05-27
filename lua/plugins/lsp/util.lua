@@ -1,0 +1,46 @@
+---@diagnostic disable: duplicate-set-field, param-type-mismatch
+local M = {}
+
+local quick = require("arshlib.quick")
+
+local function nnoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("n", key, fn, opts)
+end --}}}
+
+function M.setup_diagnostics(bufnr) --{{{
+  nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
+  nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
+  nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
+
+  local next = function()
+    quick.call_and_centre(vim.diagnostic.goto_next)
+  end
+  local prev = function()
+    quick.call_and_centre(vim.diagnostic.goto_prev)
+  end
+  nnoremap("]d", next, "goto next diagnostic")
+  nnoremap("[d", prev, "goto previous diagnostic")
+
+  local ok, diagnostics = pcall(require, "fzf-lua.providers.diagnostic")
+  -- stylua: ignore start
+  quick.buffer_command("DiagLoc", function() vim.diagnostic.setloclist() end)
+  quick.buffer_command("DiagQf",  function() vim.diagnostic.setqflist()  end)
+  if ok then
+    quick.buffer_command("Diagnostics",    function() diagnostics.diagnostics({}) end)
+    quick.buffer_command("Diag",           function() diagnostics.diagnostics({}) end)
+    quick.buffer_command("DiagnosticsAll", function() diagnostics.all({})         end)
+    quick.buffer_command("DiagAll",        function() diagnostics.all({})         end)
+  end
+  -- stylua: ignore end
+  quick.buffer_command("DiagnosticsDisable", function()
+    vim.diagnostic.disable(bufnr)
+  end)
+  quick.buffer_command("DiagnosticsEnable", function()
+    vim.diagnostic.enable(bufnr)
+  end)
+end --}}}
+
+return M
+
+-- vim: fdm=marker fdl=0

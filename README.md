@@ -31,6 +31,7 @@ This project supports Neovim version `0.10.0` and newer.
    - [Lists](#lists)
    - [Highlight Matching](#highlight-matching)
    - [FZF](#fzf)
+   - [LSP](#lsp)
    - [Utilities](#utilities)
 3. [Plugin Licence List](#plugin-license-list)
 
@@ -138,7 +139,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **a**           | **A**rgument (parameter)                          |
 | **i**           | **I**ndent                                        |
 | **m**           | **M**atch highlighting                            |
-| **d**           | **D**iff                                          |
+| **d**           | **D**iff, **D**iagnostics                         |
 | **h**           | **H**unk                                          |
 | **c**           | **C**hange                                        |
 | **s**           | **S**tatement, **S**cope                          |
@@ -441,6 +442,45 @@ There are a few added commands to what fzf provides.
 | `<leader>p`   | **P**aste from the `+` register                   |
 | `<leader>P`   | **P**aste from the `+` register (before/above)    |
 | (v) `p`       | **P**aste on selected text without changing "reg  |
+
+### LSP
+
+When a **LSP** server is attached to a buffer, a series of mappings will be
+defined for that buffer based on the server's capabilities. When possible,
+**fzf** will take over the results of the **LSP** mappings results.
+
+<details>
+    <summary>Click to view the mappings</summary>
+
+| Mapping      | Description                                 |
+| :----------- | :------------------------------------------ |
+| `<leader>dd` | Show line **D**iagnostics                   |
+| `<leader>dq` | Fill the **Q**uicklist with **D**iagnostics |
+| `<leader>dw` | Fill the local list with **D**iagnostics    |
+| `]d`         | Go to next **d**iagnostic issue             |
+| `[d`         | Go to previous **d**iagnostic issue         |
+
+Please see the code for all available mappings.
+
+</details>
+
+**LSP** defines its own set of commands, however I have added a few interesting
+additions.
+
+<details>
+    <summary>Click to view the commands</summary>
+
+| Command              | Description           |
+| :------------------- | :-------------------- |
+| `Diagnostics`        | Alternative `Diag`    |
+| `DiagnosticsAll`     | Alternative `DiagAll` |
+| `DiagnosticsDisable` |                       |
+| `DiagnosticsEnable`  |                       |
+
+</details>
+
+The `RestartLsp` fixes an issue when the `LspRestart` does not have any
+effects.
 
 ### Utilities
 

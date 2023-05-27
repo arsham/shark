@@ -39,7 +39,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  a                All, or disabling certain constraints
  a                Argument (parameter)
  i                Indent
- d                Diff
+ d                Diff, Diagnostics
  h                Hunk
  c                Change
  s                Statement, Scope
@@ -242,8 +242,22 @@ o_H                     To the beginning of line
                                                                          *o_L*
 o_L                     To the end of line
                                                                         *o_au*
-o_au                     Select around a unit
+o_au                    Select around a unit
                                                                         *o_iu*
-o_iu                     Select inside a unit
+o_iu                    Select inside a unit
+
+==============================================================================
+LSP MAPPING                                               *shark-lsp-mappings*
+
+                                                                  *<Leader>dd*
+<Leader>dd              Show line Diagnostics
+                                                                  *<Leader>dq*
+<Leader>dq              Fill the Quicklist with Diagnostics
+                                                                  *<Leader>dw*
+<Leader>dw              Fill the local list with Diagnostics
+                                                                    *shark_]d*
+]d                      Go to next diagnostic issue
+                                                                    *shark_[d*
+[d                      Go to previous diagnostic issue
 
 vim:tw=78:ts=8:ft=help:norl:

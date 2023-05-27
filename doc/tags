@@ -1,3 +1,10 @@
+:CodeAction	shark.txt	/*:CodeAction*
+:Diag	shark.txt	/*:Diag*
+:DiagAll	shark.txt	/*:DiagAll*
+:Diagnostics	shark.txt	/*:Diagnostics*
+:DiagnosticsAll	shark.txt	/*:DiagnosticsAll*
+:DiagnosticsDisable	shark.txt	/*:DiagnosticsDisable*
+:DiagnosticsEnable	shark.txt	/*:DiagnosticsEnable*
 <C-w><C-b>	shark-mappings.txt	/*<C-w><C-b>*
 <C-w><C-t>	shark-mappings.txt	/*<C-w><C-t>*
 <C-w><C-z>	shark-mappings.txt	/*<C-w><C-z>*
@@ -11,7 +18,10 @@
 <Leader>.e	shark-mappings.txt	/*<Leader>.e*
 <Leader>.f	shark-mappings.txt	/*<Leader>.f*
 <Leader>P	shark-mappings.txt	/*<Leader>P*
+<Leader>dd	shark-mappings.txt	/*<Leader>dd*
 <Leader>df	shark-mappings.txt	/*<Leader>df*
+<Leader>dq	shark-mappings.txt	/*<Leader>dq*
+<Leader>dw	shark-mappings.txt	/*<Leader>dw*
 <Leader>gd	shark-mappings.txt	/*<Leader>gd*
 <Leader>gg	shark-mappings.txt	/*<Leader>gg*
 <Leader>gs	shark-mappings.txt	/*<Leader>gs*
@@ -101,6 +111,8 @@ shark-highlights	shark.txt	/*shark-highlights*
 shark-introduction	shark.txt	/*shark-introduction*
 shark-license	shark.txt	/*shark-license*
 shark-lists	shark.txt	/*shark-lists*
+shark-lsp	shark.txt	/*shark-lsp*
+shark-lsp-mappings	shark-mappings.txt	/*shark-lsp-mappings*
 shark-mappings	shark-mappings.txt	/*shark-mappings*
 shark-mappings-leader	shark-mappings.txt	/*shark-mappings-leader*
 shark-mappings.txt	shark-mappings.txt	/*shark-mappings.txt*
@@ -112,9 +124,11 @@ shark-text-objects	shark-mappings.txt	/*shark-text-objects*
 shark-utilities	shark.txt	/*shark-utilities*
 shark.txt	shark.txt	/*shark.txt*
 shark_[c	shark-mappings.txt	/*shark_[c*
+shark_[d	shark-mappings.txt	/*shark_[d*
 shark_[f	shark-mappings.txt	/*shark_[f*
 shark_[s	shark-mappings.txt	/*shark_[s*
 shark_]c	shark-mappings.txt	/*shark_]c*
+shark_]d	shark-mappings.txt	/*shark_]d*
 shark_]f	shark-mappings.txt	/*shark_]f*
 shark_]s	shark-mappings.txt	/*shark_]s*
 v_<M-j>	shark-mappings.txt	/*v_<M-j>*

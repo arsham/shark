@@ -35,6 +35,7 @@ CONTENTS                                                      *shark-contents*
    - Text Objects ....................................... |shark-text-objects|
    - Lists ..................................................... |shark-lists|
    - Fzf ......................................................... |shark-fzf|
+   - LSP ......................................................... |shark-lsp|
    - Highlight Matching ........................... |shark-highlight-matching|
    - Utilities ............................................. |shark-utilities|
      - Normal ................................................. |shark-normal|
@@ -100,6 +101,31 @@ Please refer to the |listish.txt| documentation for all commands and mappings.
 FZF                                                                *shark-fzf*
 
 Please refer to the |fzfmania.txt| documentation for all commands/mappings.
+
+==============================================================================
+LSP                                                                *shark-lsp*
+
+When a |LSP| server is attached to a buffer, a series of mappings will be
+defined for that buffer based on the server's capabilities. When possible, fzf
+will take over the results of the |LSP| mappings results.
+
+See |shark-lsp-mappings| for the defined LSP mappings.
+
+|LSP| defines its own set of commands, however I have added a few interesting
+additions.
+
+                                                                 *:CodeAction*
+:CodeAction             Also works on a visually selected text.
+                                                        *:Diagnostics* *:Diag*
+:Diag
+:Diagnostics            Show diagnostics for current buffer
+                                                  *:DiagnosticsAll* *:DiagAll*
+:Diagnostics
+:DiagnosticsAll         Show diagnostics for workspace
+                                                         *:DiagnosticsDisable*
+:DiagnosticsDisable     Disable diagnostics on current buffer
+                                                          *:DiagnosticsEnable*
+:DiagnosticsEnable      Enable diagnostics on current buffer
 
 ==============================================================================
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*
