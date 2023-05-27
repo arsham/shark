@@ -39,4 +39,6 @@ vim.keymap.set("n", "G", "Gzz", o)
 vim.keymap.set("n", "g;", "m'g;zz", o)
 vim.keymap.set("n", "g,", "m'g,zz", o)
 
+vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>", opts("Clear hlsearch"))
+
 -- vim: fdm=marker fdl=0

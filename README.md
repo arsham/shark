@@ -180,6 +180,7 @@ The `leader` key is `space`!
 | `<Right>`         | Increase vertical size                                               |
 | `<Up>`            | Reduce horizontal size                                               |
 | `<Down>`          | Increase horizontal size                                             |
+| `<Esc><Esc>`      | Clear hlsearch                                                       |
 
 </details>
 

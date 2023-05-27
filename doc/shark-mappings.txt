@@ -150,6 +150,8 @@ g=                      Re-indents the hole buffer
 <Up>                    Reduce horizontal size
                                                                 *shark-<Down>*
 <Down>                  Increase horizontal size
+                                                                  *<Esc><Esc>*
+<Esc><Esc>              Clear hlsearch
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*
