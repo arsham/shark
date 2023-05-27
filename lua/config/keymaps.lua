@@ -29,4 +29,9 @@ vim.keymap.set("n", "<Up>", ":resize +2<CR>", opts("Increase horizontal size"))
 vim.keymap.set("n", "<Down>", ":resize -2<CR>", opts("Decreases horizontal size"))
 --}}}
 
+o = opts("Auto centre when moving around")
+vim.keymap.set("n", "G", "Gzz", o)
+vim.keymap.set("n", "g;", "m'g;zz", o)
+vim.keymap.set("n", "g,", "m'g,zz", o)
+
 -- vim: fdm=marker fdl=0
