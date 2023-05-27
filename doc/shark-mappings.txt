@@ -166,6 +166,8 @@ g=                      Re-indents the hole buffer
 <Leader>sp              Toggles Spelling on current buffer
                                                                   *<Leader>sf*
 <Leader>sf              Auto fixes previous misspelled word
+                                                                  *<Leader>hh*
+<Leader>hh              Opens the help for current word
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

@@ -68,4 +68,6 @@ vim.keymap.set("n", "<leader>sf", function()
   end)
 end, opts("Auto correct spelling and jump bak.")) --}}}
 
+vim.keymap.set("n", "<leader>hh", ":h <CR>", opts("Show help for work under the cursor"))
+
 -- vim: fdm=marker fdl=0

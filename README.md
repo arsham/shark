@@ -185,6 +185,7 @@ The `leader` key is `space`!
 | `<leader>gw`      | **G**rep current **W**ord in buffer. Populates the locallist.        |
 | `<leader>sp`      | Toggle **Sp**elling for buffer                                       |
 | `<leader>sf`      | Auto **f**ixe previous misspelled word                               |
+| `<leader>hh`      | Opens the **help** for current word                                  |
 
 </details>
 
