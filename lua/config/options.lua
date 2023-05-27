@@ -242,4 +242,20 @@ vim.g.loaded_node_provider = 0
 
 vim.g.python3_host_prog = "/usr/bin/python3"
 
+vim.filetype.add({ -- {{{
+  pattern = {
+    [".*aliases"] = "zsh",
+    [".gitignore"] = "conf",
+    ["**/systemd/**/*.service"] = "systemd",
+    [".*[mM]akefile*"] = "make",
+    ["README.(a+)$"] = function(_, _, ext)
+      if ext == "md" then
+        return "markdown"
+      elseif ext == "rst" then
+        return "rst"
+      end
+    end,
+  },
+}) -- }}}
+
 -- vim: fdm=marker fdl=0
