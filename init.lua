@@ -40,4 +40,5 @@ require("lazy").setup("plugins", {
     skip_if_doc_exists = true,
   },
 })
+require("config.autocmd")
 require("config.keymaps")
