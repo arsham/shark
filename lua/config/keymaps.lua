@@ -110,4 +110,12 @@ for _, key in ipairs(break_points) do
 end
 -- }}}
 
+-- Command mode improvements {{{
+-- Beginning and end of line in `:` command mode
+vim.keymap.set("c", "<M-a>", "<home>")
+vim.keymap.set("c", "<M-e>", "<end>")
+
+vim.keymap.set("c", "<C-r><C-l>", "<C-r>=getline('.')<CR>", opts("Copy current line"))
+-- }}}
+
 -- vim: fdm=marker fdl=0

@@ -203,6 +203,9 @@ The `leader` key is `space`!
 | `<leader>zi`      | Set folding method to **I**ndent                                     |
 | `<leader>zk`      | Set folding method to Mar**k**er                                     |
 | `<leader>zs`      | Set folding method to **S**yntax                                     |
+| [c]`<Alt-a>`      | Go to begging of the line                                            |
+| [c]`<Alt-e>`      | Go to end of the line                                                |
+| [c]`<C-r><C-l>`   | Copy current line in the buffer                                      |
 
 </details>
 

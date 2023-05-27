@@ -192,6 +192,12 @@ g.                      Use last change (anything) as the
 <Leader>zk              Set folding method to Marker
                                                                   *<Leader>zs*
 <Leader>zs              Set folding method to Syntax
+                                                           *c_ALT-a* *c_<M-a>*
+<Alt>a                  Go to begging of the line
+                                                           *c_ALT-e* *c_<M-e>*
+<Alt>e                  Go to end of the line
+                                              *c_CTRL-r_CTRL-l* *c_<C-r><C-l>*
+<Ctrl>r<Ctrl>l          Copy current line in the buffer
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*
