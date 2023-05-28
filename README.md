@@ -512,6 +512,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `gq`         | Format operator with LSP                    |
 | `<leader>i`  | Organise imports                            |
 | `<leader>rn` | Incrementally rename symbol                 |
+| `gr`         | Go to references                            |
 
 Please see the code for all available mappings.
 
@@ -553,6 +554,7 @@ additions.
 | `WorkspaceAdd`       |                       |
 | `WorkspaceSymbols`   |                       |
 | `DocumentSymbol`     |                       |
+| `References`         |                       |
 
 </details>
 

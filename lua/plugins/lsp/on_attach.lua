@@ -87,11 +87,13 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.document_symbol)
   end -- }}}
 
-  if client.supports_method("textDocument/rename") then
-    table.insert(callbacks, function()
-      lsp_util.rename()
-    end)
-  end
+  if client.supports_method("textDocument/rename") then -- {{{
+    table.insert(callbacks, lsp_util.rename)
+  end -- }}}
+
+  if client.supports_method("textDocument/references") then -- {{{
+    table.insert(callbacks, lsp_util.find_references)
+  end -- }}}
 
   server_callbacks[name] = callbacks
   return callbacks

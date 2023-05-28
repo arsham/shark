@@ -285,6 +285,8 @@ gq{motion}              Format operator with LSP
 <Leader>i               Organise imports
                                                                   *<Leader>rn*
 <Leader>rn              Incrementally rename symbol
+                                                                    *shark_gr*
+gr                      Go to references
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*
