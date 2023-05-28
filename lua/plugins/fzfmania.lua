@@ -28,7 +28,23 @@ return {
     require("fzfmania").config(config)
     vim.cmd.FzfLua("register_ui_select")
   end,
-  event = { "VeryLazy" },
+  keys = {
+    "<leader>fh",
+    "<leader>ff",
+    "<leader>fF",
+    "<leader>fa",
+    "<leader>fA",
+    "<leader>rg",
+    "<leader>rG",
+    "<leader>ra",
+    "<leader>rA",
+    "<C-p>",
+    "<M-p>",
+    "<C-b>",
+    "<M-b>",
+    "<C-_>",
+  },
+  event = { "InsertEnter" }, -- various actions happen here.
   cond = require("config.util").should_start("arsham/fzfmania.nvim"),
   enabled = require("config.util").is_enabled("arsham/fzfmania.nvim"),
 }
