@@ -181,6 +181,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **y**           | **Y**ank                                          |
 | **t**           | **T**ab                                           |
 | **z**           | Folds, language/spelling                          |
+| **g**           | **G**o/Jump to, run something that goes/jumps to  |
 
 The `leader` key is `space`!
 
@@ -496,6 +497,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `[d`         | Go to previous **d**iagnostic issue         |
 | `H`          | **H**over popup                             |
 | [i]`<Alt-h>` | **H**over popup                             |
+| `gd`         | **G**o to **D**efinition                    |
 
 Please see the code for all available mappings.
 
@@ -531,6 +533,7 @@ additions.
 | `DiagnosticsAll`     | Alternative `DiagAll` |
 | `DiagnosticsDisable` |                       |
 | `DiagnosticsEnable`  |                       |
+| `Definition`         | Go to the definition  |
 
 </details>
 

@@ -2,6 +2,7 @@
 local M = {}
 
 local quick = require("arshlib.quick")
+local fzf = require("fzf-lua")
 
 local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
@@ -48,6 +49,15 @@ end --}}}
 function M.hover() --{{{
   nnoremap("H", vim.lsp.buf.hover, "Show hover")
   inoremap("<M-h>", vim.lsp.buf.hover, "Show hover")
+end --}}}
+
+function M.goto_definition() --{{{
+  local perform = function()
+    fzf.lsp_definitions({ jump_to_single_result = true })
+  end
+  quick.buffer_command("Definition", perform)
+  nnoremap("gd", perform, "Go to definition")
+  vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
 end --}}}
 
 return M

@@ -23,6 +23,10 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.hover)
   end -- }}}
 
+  if client.supports_method("textDocument/definition") then -- {{{
+    table.insert(callbacks, lsp_util.goto_definition)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

@@ -47,6 +47,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  e                Element
  t                Tab
  z                Folds, language/spelling
+ g                Go/Jump to, run something that goes/jumps to
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -267,6 +268,8 @@ LSP MAPPING                                               *shark-lsp-mappings*
 [d                      Go to previous diagnostic issue
                                                            *i_ALT-h* *i_<M-h>*
 H i_<Alt-h>             Hover popup
+                                                                    *shark_gd*
+gd                      Go to definition
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*
