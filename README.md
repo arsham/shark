@@ -37,6 +37,13 @@ This project supports Neovim version `0.10.0` and newer.
 
 ![folds](https://user-images.githubusercontent.com/428611/148667078-25211d3c-116a-4c6f-938a-bb52b8bb1163.png)
 
+<details>
+    <summary>Click to view another image</summary>
+
+![go](https://user-images.githubusercontent.com/428611/148667079-f441fc97-4157-4ed3-b2bb-81a64d358107.png)
+
+</details>
+
 ## Setup
 
 Just clone this project:
