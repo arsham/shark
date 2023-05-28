@@ -79,6 +79,14 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.workspace_folder_properties)
   end -- }}}
 
+  if client.supports_method("workspace/symbol") then -- {{{
+    table.insert(callbacks, lsp_util.workspace_symbol)
+  end -- }}}
+
+  if client.supports_method("textDocument/documentSymbol") then -- {{{
+    table.insert(callbacks, lsp_util.document_symbol)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

@@ -229,6 +229,23 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
+function M.workspace_symbol() --{{{
+  quick.buffer_command("WorkspaceSymbols", fzf.lsp_live_workspace_symbols)
+end --}}}
+
+function M.document_symbol() --{{{
+  local perform = function()
+    fzf.lsp_document_symbols({
+      jump_to_single_result = true,
+      fzf_opts = {
+        ["--with-nth"] = "2..",
+      },
+    })
+  end
+  quick.buffer_command("DocumentSymbol", perform)
+  nnoremap("<localleader>@", perform, "Document symbol")
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0

@@ -5,6 +5,8 @@
 :DiagnosticsAll	shark.txt	/*:DiagnosticsAll*
 :DiagnosticsDisable	shark.txt	/*:DiagnosticsDisable*
 :DiagnosticsEnable	shark.txt	/*:DiagnosticsEnable*
+:DocumentSymbol	shark.txt	/*:DocumentSymbol*
+:WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
 <C-w><C-b>	shark-mappings.txt	/*<C-w><C-b>*
 <C-w><C-t>	shark-mappings.txt	/*<C-w><C-t>*
 <C-w><C-z>	shark-mappings.txt	/*<C-w><C-z>*

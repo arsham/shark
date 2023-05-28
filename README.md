@@ -549,6 +549,8 @@ additions.
 | `WorkspaceList`      |                       |
 | `WorkspaceRemove`    |                       |
 | `WorkspaceAdd`       |                       |
+| `WorkspaceSymbols`   |                       |
+| `DocumentSymbol`     |                       |
 
 </details>
 
