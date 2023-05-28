@@ -52,6 +52,7 @@ return {
           "rust_analyzer@nightly",
           "jsonls",
           "vimls",
+          "yamlls",
         },
         log_level = "error",
         diagnostics = { -- {{{
@@ -105,6 +106,7 @@ return {
           gopls = require("plugins.lsp.config.gopls"),
           rust_analyzer = require("plugins.lsp.config.rust_analyzer"),
           jsonls = require("plugins.lsp.config.jsonls"),
+          yamlls = require("plugins.lsp.config.yamlls"),
         },
       }
       return vim.tbl_deep_extend("force", defaults, opts)
