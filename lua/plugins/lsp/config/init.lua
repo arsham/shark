@@ -1,3 +1,9 @@
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  stylize_markdown = true,
+  syntax = "lsp_markdown",
+  border = "single",
+})
+
 return function(opts)
   if opts.log_level == nil then
     opts.log_level = "error"

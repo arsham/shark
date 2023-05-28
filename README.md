@@ -494,6 +494,8 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>dw` | Fill the local list with **D**iagnostics    |
 | `]d`         | Go to next **d**iagnostic issue             |
 | `[d`         | Go to previous **d**iagnostic issue         |
+| `H`          | **H**over popup                             |
+| [i]`<Alt-h>` | **H**over popup                             |
 
 Please see the code for all available mappings.
 

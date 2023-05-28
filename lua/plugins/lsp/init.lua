@@ -42,6 +42,7 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "arshlib.nvim",
       "fzfmania.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
 
     opts = function(_, opts) -- {{{
@@ -112,11 +113,18 @@ return {
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           local conf = opts.servers[server_name] or {}
-          local caps = opts.capabilities
-          if conf.capabilities then
-            caps = vim.deepcopy(caps)
-            conf.capabilities(caps)
+          if not conf.capabilities then
+            conf.capabilities = function(_) end
           end
+
+          local caps = vim.tbl_deep_extend(
+            "force",
+            {},
+            vim.lsp.protocol.make_client_capabilities(),
+            require("cmp_nvim_lsp").default_capabilities(),
+            opts.capabilities or {}
+          )
+          conf.capabilities(caps)
           conf.capabilities = caps
 
           local on_attach = require("plugins.lsp.on_attach").on_attach

@@ -265,6 +265,8 @@ LSP MAPPING                                               *shark-lsp-mappings*
 ]d                      Go to next diagnostic issue
                                                                     *shark_[d*
 [d                      Go to previous diagnostic issue
+                                                           *i_ALT-h* *i_<M-h>*
+H i_<Alt-h>             Hover popup
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*

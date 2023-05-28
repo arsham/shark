@@ -7,6 +7,10 @@ local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
   vim.keymap.set("n", key, fn, opts)
 end --}}}
+local function inoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("i", key, fn, opts)
+end --}}}
 
 function M.setup_diagnostics(bufnr) --{{{
   nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
@@ -39,6 +43,11 @@ function M.setup_diagnostics(bufnr) --{{{
   quick.buffer_command("DiagnosticsEnable", function()
     vim.diagnostic.enable(bufnr)
   end)
+end --}}}
+
+function M.hover() --{{{
+  nnoremap("H", vim.lsp.buf.hover, "Show hover")
+  inoremap("<M-h>", vim.lsp.buf.hover, "Show hover")
 end --}}}
 
 return M
