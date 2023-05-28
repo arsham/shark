@@ -498,6 +498,9 @@ defined for that buffer based on the server's capabilities. When possible,
 | `H`          | **H**over popup                             |
 | [i]`<Alt-h>` | **H**over popup                             |
 | `gd`         | **G**o to **D**efinition                    |
+| `K`          | Show **S**ignature help                     |
+| [i]`<M-l>`   | Show **S**ignature help                     |
+| [i]`<Alt-l>` | Show **S**ignature help                     |
 
 Please see the code for all available mappings.
 

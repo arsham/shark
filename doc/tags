@@ -96,8 +96,10 @@ i_<C-x><C-o>	shark-mappings.txt	/*i_<C-x><C-o>*
 i_<C-x><C-r>	shark-mappings.txt	/*i_<C-x><C-r>*
 i_<C-x><C-s>	shark-mappings.txt	/*i_<C-x><C-s>*
 i_<M-h>	shark-mappings.txt	/*i_<M-h>*
+i_<M-l>	shark-mappings.txt	/*i_<M-l>*
 i_<S-Tab>	shark-mappings.txt	/*i_<S-Tab>*
 i_ALT-h	shark-mappings.txt	/*i_ALT-h*
+i_ALT-l	shark-mappings.txt	/*i_ALT-l*
 i_C-s>	shark-mappings.txt	/*i_C-s>*
 i_CTRL-SPACE	shark-mappings.txt	/*i_CTRL-SPACE*
 i_CTRL-b	shark-mappings.txt	/*i_CTRL-b*
@@ -165,6 +167,7 @@ shark-setup	shark.txt	/*shark-setup*
 shark-text-objects	shark-mappings.txt	/*shark-text-objects*
 shark-utilities	shark.txt	/*shark-utilities*
 shark.txt	shark.txt	/*shark.txt*
+shark_K	shark-mappings.txt	/*shark_K*
 shark_[c	shark-mappings.txt	/*shark_[c*
 shark_[d	shark-mappings.txt	/*shark_[d*
 shark_[f	shark-mappings.txt	/*shark_[f*

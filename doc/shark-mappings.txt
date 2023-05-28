@@ -270,6 +270,8 @@ LSP MAPPING                                               *shark-lsp-mappings*
 H i_<Alt-h>             Hover popup
                                                                     *shark_gd*
 gd                      Go to definition
+                                                 *i_ALT-l* *i_<M-l>* *shark_K*
+K i_<Alt>l              Show signature help
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*

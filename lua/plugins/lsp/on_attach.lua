@@ -27,6 +27,10 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.goto_definition)
   end -- }}}
 
+  if client.supports_method("textDocument/signatureHelp") then -- {{{
+    table.insert(callbacks, lsp_util.signature_help)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

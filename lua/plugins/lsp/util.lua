@@ -60,6 +60,11 @@ function M.goto_definition() --{{{
   vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
 end --}}}
 
+function M.signature_help() --{{{
+  nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
+  inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0
