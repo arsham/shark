@@ -22,12 +22,14 @@ return {
     "arsham/arshamiser.nvim",
     name = "feliniser.nvim",
     config = function()
-      require("arshamiser.feliniser")
-      vim.api.nvim_set_option_value(
-        "tabline",
-        [[%{%v:lua.require("arshamiser.tabline").draw()%}]],
-        {}
-      )
+      vim.schedule(function()
+        require("arshamiser.feliniser")
+        vim.api.nvim_set_option_value(
+          "tabline",
+          [[%{%v:lua.require("arshamiser.tabline").draw()%}]],
+          {}
+        )
+      end)
     end,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
