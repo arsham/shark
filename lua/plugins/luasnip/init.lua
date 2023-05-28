@@ -5,6 +5,8 @@ local function config()
   ls.add_snippets("all", require("plugins.luasnip.all"))
   ls.add_snippets("go", require("plugins.luasnip.go"))
   ls.add_snippets("lua", require("plugins.luasnip.lua"))
+  ls.add_snippets("gitcommit", require("plugins.luasnip.gitcommit"))
+  ls.add_snippets("markdown", require("plugins.luasnip.markdown"))
 
   ls.config.set_config({ --{{{
     store_selection_keys = "<c-s>",
