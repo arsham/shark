@@ -35,6 +35,17 @@ return {
   capabilities = function(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = false
   end,
+
+  pre_attach = function(client)
+    local semantic = client.config.capabilities.textDocument.semanticTokens
+    client.server_capabilities.semanticTokensProvider = {
+      full = true,
+      legend = {
+        tokenModifiers = semantic.tokenModifiers,
+        tokenTypes = semantic.tokenTypes,
+      },
+    }
+  end,
 }
 
 -- vim: fdm=marker fdl=0
