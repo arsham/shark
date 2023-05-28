@@ -1,4 +1,6 @@
 :CodeAction	shark.txt	/*:CodeAction*
+:CodeLensRefresh	shark.txt	/*:CodeLensRefresh*
+:CodeLensRun	shark.txt	/*:CodeLensRun*
 :Diag	shark.txt	/*:Diag*
 :DiagAll	shark.txt	/*:DiagAll*
 :Diagnostics	shark.txt	/*:Diagnostics*

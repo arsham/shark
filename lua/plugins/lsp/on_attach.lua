@@ -107,6 +107,13 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.declaration)
   end -- }}}
 
+  -- Code lenses {{{
+  if
+    client.supports_method("textDocument/codeLens") or client.supports_method("codeLens/resolve")
+  then
+    table.insert(callbacks, lsp_util.code_lens)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

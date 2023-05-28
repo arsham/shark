@@ -136,6 +136,10 @@ additions.
 :Implementation         Go to implementation
                                                              *:TypeDefinition*
 :TypeDefinition         Go to type definition
+                                                            *:CodeLensRefresh*
+:CodeLensRefresh        Refresh code lenses
+                                                                *:CodeLensRun*
+:CodeLensRun            Run code lenses
 
 ==============================================================================
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*

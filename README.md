@@ -515,6 +515,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `gr`         | Go to references                            |
 | `<leader>gi` | **G**o to **I**mplementation                |
 | `gD`         | **G**o to **D**eclaration                   |
+| `<leader>cr` | **C**ode lens **R**un                       |
 
 Please see the code for all available mappings.
 
@@ -559,6 +560,8 @@ additions.
 | `References`         |                       |
 | `Implementation`     |                       |
 | `TypeDefinition`     |                       |
+| `CodeLensRefresh`    |                       |
+| `CodeLensRun`        |                       |
 
 </details>
 

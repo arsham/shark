@@ -280,6 +280,21 @@ function M.declaration() --{{{
   end, "Go to declaration")
 end --}}}
 
+function M.code_lens() --{{{
+  if util.buffer_has_var("code_lens") then
+    return
+  end
+  quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
+  quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
+  nnoremap("<localleader>cr", vim.lsp.codelens.run, "run code lenses")
+
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "InsertLeave" }, {
+    group = augroup("code_lenses"),
+    callback = vim.lsp.codelens.refresh,
+    buffer = 0,
+  })
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0
