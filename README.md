@@ -46,6 +46,17 @@ This project supports Neovim version `0.10.0` and newer.
 
 </details>
 
+<details>
+    <summary>Click to view advance snippets demo</summary>
+
+See [snippets](#snippets) section for more information.
+
+![queryrows](https://user-images.githubusercontent.com/428611/154764948-b620896d-3303-42db-ad09-dcde94a18764.gif)
+
+![ife](https://user-images.githubusercontent.com/428611/154764941-6398c245-01f8-4c5e-b226-302d10dc1fef.gif)
+
+</details>
+
 ## Setup
 
 Just clone this project:

@@ -3,6 +3,7 @@ local function config()
   local types = require("luasnip.util.types")
 
   ls.add_snippets("all", require("plugins.luasnip.all"))
+  ls.add_snippets("go", require("plugins.luasnip.go"))
 
   ls.config.set_config({ --{{{
     store_selection_keys = "<c-s>",
