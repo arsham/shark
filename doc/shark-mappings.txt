@@ -212,11 +212,11 @@ gso{motion}             Sort [count] objects that {motion} moves over
 gsoo                    Sort [count] lines
                                                   *CTRL-w_CTRL-z* *<C-w><C-z>*
 <Ctrl>w<Ctrl>z          Zoom current window/Unzoom
-                                                          *i_CTRL-l* *s_CTRL-l*
-                                                            *i_<C-l>* *s_<C-l>*
+                                                         *i_CTRL-l* *s_CTRL-l*
+                                                           *i_<C-l>* *s_<C-l>*
 <Ctrl>l                 Next snippet choice
-                                                          *i_CTRL-h* *s_CTRL-h*
-                                                            *i_<C-h>* *s_<C-h>*
+                                                         *i_CTRL-h* *s_CTRL-h*
+                                                           *i_<C-h>* *s_<C-h>*
 <Ctrl>h                 Previous snippet choice
 
 ==============================================================================
@@ -272,6 +272,14 @@ H i_<Alt-h>             Hover popup
 gd                      Go to definition
                                                  *i_ALT-l* *i_<M-l>* *shark_K*
 K i_<Alt>l              Show signature help
+                                                                  *<Leader>gq*
+<Leader>gq              Format the buffer with LSP
+                                                                  *shark_v_gq*
+v_gq                    Format the selection with LSP
+                                                                    *shark_gq*
+gq{motion}              Format operator with LSP
+                                                                   *<Leader>i*
+<Leader>i               Organise imports
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*

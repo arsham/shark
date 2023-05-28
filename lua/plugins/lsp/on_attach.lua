@@ -31,6 +31,47 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.signature_help)
   end -- }}}
 
+  -- Contains functions to be run before writing the buffer. The format
+  -- function will format the while buffer, and the imports function will
+  -- organise imports.
+  local imports_hook = function() end
+  local format_hook = function() end
+  local caps = client.server_capabilities
+  if client.supports_method("textDocument/codeAction") then -- {{{
+    table.insert(callbacks, lsp_util.code_action)
+
+    -- Either is it set to true, or there is a specified set of
+    -- capabilities. Sumneko doesn't support it, but the
+    -- client.supports_method returns true.
+    local can_organise_imports = type(caps.codeActionProvider) == "table"
+      and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
+    if can_organise_imports then
+      table.insert(callbacks, lsp_util.setup_organise_imports)
+      imports_hook = lsp_util.lsp_organise_imports
+    end
+  end -- }}}
+
+  if client.supports_method("textDocument/formatting") then -- {{{
+    table.insert(callbacks, lsp_util.document_formatting)
+    format_hook = function()
+      vim.lsp.buf.format({
+        async = false,
+      })
+    end
+  end -- }}}
+
+  if client.supports_method("textDocument/rangeFormatting") then -- {{{
+    local disabled_servers = {}
+    table.insert(callbacks, function()
+      lsp_util.document_range_formatting(disabled_servers)
+    end)
+  end -- }}}
+
+  -- Setup import format eveents {{{
+  table.insert(callbacks, function(cl, bufnr)
+    lsp_util.setup_events(cl, imports_hook, format_hook, bufnr)
+  end) -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

@@ -19,24 +19,37 @@ local plugins = require("config.disabled_list")
 
 ---Returns true if the plugin is enabled. Disabled plugins are listed in the
 -- plugins table.
----@param plugin string
+---@param name string plugin name
 ---@return boolean
-function M.is_enabled(plugin)
-  if not plugins[plugin] then
-    return true
+function M.is_enabled(name)
+  if plugins[name] and not plugins[name].enabled then
+    return false
   end
-  return plugins[plugin].enabled
+  return true
 end
 
 ---Returns true if the plugin should be loaded. Disabled plugins are listed in
 -- the plugins table.
----@param plugin string
+---@param name string plugin name
 ---@return boolean
-function M.should_start(plugin)
-  if not plugins[plugin] then
+function M.should_start(name)
+  if plugins[name] and not plugins[name].start then
+    return false
+  end
+  return true
+end
+
+---Returns true if the buffer has the name variable. If it does not, it sets
+-- the variable and returns false.
+-- @param name The name of the variable to check.
+-- @return boolean
+function M.buffer_has_var(name) --{{{
+  local ok, _ = pcall(vim.api.nvim_buf_get_var, 0, name)
+  if ok then
     return true
   end
-  return plugins[plugin].start
-end
+  vim.api.nvim_buf_set_var(0, name, true)
+  return false
+end --}}}
 
 return M

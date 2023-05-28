@@ -501,6 +501,10 @@ defined for that buffer based on the server's capabilities. When possible,
 | `K`          | Show **S**ignature help                     |
 | [i]`<M-l>`   | Show **S**ignature help                     |
 | [i]`<Alt-l>` | Show **S**ignature help                     |
+| `<leader>gq` | Format the buffer with LSP                  |
+| [x]`gq`      | Format the selection with LSP               |
+| `gq`         | Format operator with LSP                    |
+| `<leader>i`  | Organise imports                            |
 
 Please see the code for all available mappings.
 
