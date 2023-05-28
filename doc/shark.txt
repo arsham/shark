@@ -134,6 +134,8 @@ additions.
 :DocumentSymbol         List buffer symbols
                                                              *:Implementation*
 :Implementation         Go to implementation
+                                                             *:TypeDefinition*
+:TypeDefinition         Go to type definition
 
 ==============================================================================
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*

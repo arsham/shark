@@ -268,6 +268,12 @@ function M.implementation() --{{{
   nnoremap("<localleader>gi", perform, "Go to implementation")
 end --}}}
 
+function M.type_definition() --{{{
+  quick.buffer_command("TypeDefinition", function()
+    fzf.lsp_typedefs({ jump_to_single_result = true })
+  end)
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0
