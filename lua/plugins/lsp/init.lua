@@ -39,6 +39,9 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "arshlib.nvim",
+      "fzfmania.nvim",
     },
 
     opts = function(_, opts) -- {{{
@@ -115,6 +118,16 @@ return {
             conf.capabilities(caps)
           end
           conf.capabilities = caps
+
+          local on_attach = require("plugins.lsp.on_attach").on_attach
+          if conf.pre_attach then
+            conf.on_attach = function(client, bufnr)
+              conf.pre_attach(client, bufnr)
+              on_attach(client, bufnr)
+            end
+          else
+            conf.on_attach = on_attach
+          end
 
           require("lspconfig")[server_name].setup(conf)
         end,
