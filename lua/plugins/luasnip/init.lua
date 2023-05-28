@@ -4,6 +4,7 @@ local function config()
 
   ls.add_snippets("all", require("plugins.luasnip.all"))
   ls.add_snippets("go", require("plugins.luasnip.go"))
+  ls.add_snippets("lua", require("plugins.luasnip.lua"))
 
   ls.config.set_config({ --{{{
     store_selection_keys = "<c-s>",
