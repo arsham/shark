@@ -1,3 +1,4 @@
+local lsp = require("arshlib.lsp")
 local augroup = require("config.util").augroup
 
 -- Highlight Yanks {{{
@@ -229,6 +230,26 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
       vim.wo.wrap = true
     end
   end,
+})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = augroup("go_mod_wrap"),
+  pattern = "go.mod",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "t" })
+  end,
+  once = true,
+  desc = "don't wrap me",
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("go_mod_tidy"),
+  pattern = "go.mod",
+  callback = function(args)
+    local filename = vim.fn.expand("%:p")
+    lsp.go_mod_tidy(tonumber(args.buf), filename)
+  end,
+  desc = "run go mod tidy on save",
 })
 
 -- vim: fdm=marker fdl=0
