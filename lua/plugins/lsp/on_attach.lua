@@ -95,6 +95,10 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.find_references)
   end -- }}}
 
+  if client.supports_method("textDocument/implementation") then -- {{{
+    table.insert(callbacks, lsp_util.implementation)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

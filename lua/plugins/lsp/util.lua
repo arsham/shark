@@ -260,6 +260,14 @@ function M.find_references() --{{{
   nnoremap("gr", perform, "Go to references")
 end --}}}
 
+function M.implementation() --{{{
+  local perform = function()
+    fzf.lsp_implementations({ jump_to_single_result = true })
+  end
+  quick.buffer_command("Implementation", perform)
+  nnoremap("<localleader>gi", perform, "Go to implementation")
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0

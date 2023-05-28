@@ -513,6 +513,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>i`  | Organise imports                            |
 | `<leader>rn` | Incrementally rename symbol                 |
 | `gr`         | Go to references                            |
+| `<leader>gi` | Go to implementation                        |
 
 Please see the code for all available mappings.
 
@@ -555,6 +556,7 @@ additions.
 | `WorkspaceSymbols`   |                       |
 | `DocumentSymbol`     |                       |
 | `References`         |                       |
+| `Implementation`     |                       |
 
 </details>
 

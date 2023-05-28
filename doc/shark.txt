@@ -132,6 +132,8 @@ additions.
 :WorkspaceSymbols       List workspace symbols
                                                              *:DocumentSymbol*
 :DocumentSymbol         List buffer symbols
+                                                             *:Implementation*
+:Implementation         Go to implementation
 
 ==============================================================================
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*
