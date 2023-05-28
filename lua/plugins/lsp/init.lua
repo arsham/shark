@@ -53,6 +53,7 @@ return {
           "jsonls",
           "vimls",
           "yamlls",
+          "lua_ls",
         },
         log_level = "error",
         diagnostics = { -- {{{
@@ -107,6 +108,7 @@ return {
           rust_analyzer = require("plugins.lsp.config.rust_analyzer"),
           jsonls = require("plugins.lsp.config.jsonls"),
           yamlls = require("plugins.lsp.config.yamlls"),
+          lua_ls = require("plugins.lsp.config.lua_ls"),
         },
       }
       return vim.tbl_deep_extend("force", defaults, opts)
