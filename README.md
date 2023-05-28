@@ -518,6 +518,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>cr` | **C**ode lens **R**un                       |
 | `<leader>ca` | **C**ode **A**ctions (also in visual mode)  |
 | `<leader>gc` | **Go** to **C**aller                        |
+| `<leader>dr` | **R**estart the LSP server (see below)      |
 
 Please see the code for all available mappings.
 
@@ -567,6 +568,7 @@ additions.
 | `CodeAction`         | Also works on a visually selected text. |
 | `Callers`            | Show callers and go to one              |
 | `Callees`            | Show callees and go to one              |
+| `RestartLsp`         |                                         |
 
 </details>
 

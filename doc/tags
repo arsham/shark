@@ -11,6 +11,7 @@
 :DiagnosticsEnable	shark.txt	/*:DiagnosticsEnable*
 :DocumentSymbol	shark.txt	/*:DocumentSymbol*
 :Implementation	shark.txt	/*:Implementation*
+:RestartLsp	shark.txt	/*:RestartLsp*
 :TypeDefinition	shark.txt	/*:TypeDefinition*
 :WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
 <C-w><C-b>	shark-mappings.txt	/*<C-w><C-b>*
@@ -30,6 +31,7 @@
 <Leader>dd	shark-mappings.txt	/*<Leader>dd*
 <Leader>df	shark-mappings.txt	/*<Leader>df*
 <Leader>dq	shark-mappings.txt	/*<Leader>dq*
+<Leader>dr	shark-mappings.txt	/*<Leader>dr*
 <Leader>dw	shark-mappings.txt	/*<Leader>dw*
 <Leader>gc	shark-mappings.txt	/*<Leader>gc*
 <Leader>gd	shark-mappings.txt	/*<Leader>gd*

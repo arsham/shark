@@ -138,6 +138,7 @@ local function on_attach(client, bufnr) --{{{
     end
 
     lsp_util.setup_diagnostics(bufnr)
+    lsp_util.support_commands()
   end)
 end --}}}
 

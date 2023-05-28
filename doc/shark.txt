@@ -144,6 +144,11 @@ additions.
 :Callers                Show callers and go to one
                                                                     *:Callees*
 :Callees                Show callees and go to one
+                                                                 *:RestartLsp*
+:RestartLsp             Restarts the LSP server
+
+The |:RestartLsp| fixes an issue when the `:LspRestart` defined in
+|lspconfig-commands| does not have any effects.
 
 ==============================================================================
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*

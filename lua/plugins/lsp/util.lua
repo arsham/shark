@@ -326,6 +326,19 @@ function M.call_hierarchy() --{{{
   quick.buffer_command("Callees", fzf.lsp_outgoing_calls)
 end --}}}
 
+function M.support_commands() --{{{
+  ---Restats the LSP server. Fixes the problem with the LSP server not
+  -- restarting with LspRestart command.
+  local function restart_lsp()
+    vim.cmd.LspStop()
+    vim.defer_fn(function()
+      vim.cmd.LspStart()
+    end, 1000)
+  end
+  quick.buffer_command("RestartLsp", restart_lsp)
+  nnoremap("<localleader>dr", restart_lsp, "Restart LSP server")
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0
