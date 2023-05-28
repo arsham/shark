@@ -50,6 +50,7 @@ return {
         ensure_installed = {
           "gopls",
           "rust_analyzer@nightly",
+          "jsonls",
         },
         log_level = "error",
         diagnostics = { -- {{{
@@ -102,6 +103,7 @@ return {
         servers = {
           gopls = require("plugins.lsp.config.gopls"),
           rust_analyzer = require("plugins.lsp.config.rust_analyzer"),
+          jsonls = require("plugins.lsp.config.jsonls"),
         },
       }
       return vim.tbl_deep_extend("force", defaults, opts)
