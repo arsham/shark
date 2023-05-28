@@ -546,6 +546,9 @@ additions.
 | `DiagnosticsDisable` |                       |
 | `DiagnosticsEnable`  |                       |
 | `Definition`         | Go to the definition  |
+| `WorkspaceList`      |                       |
+| `WorkspaceRemove`    |                       |
+| `WorkspaceAdd`       |                       |
 
 </details>
 

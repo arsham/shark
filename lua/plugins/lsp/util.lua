@@ -208,6 +208,27 @@ function M.setup_events(client, imports, format, bufnr) --{{{
   end
 end --}}}
 
+function M.workspace_folder_properties() --{{{
+  quick.buffer_command("WorkspaceList", function()
+    vim.notify(vim.lsp.buf.list_workspace_folders() or {}, vim.lsp.log_levels.INFO, {
+      title = "Workspace Folders",
+      timeout = 3000,
+    })
+  end)
+
+  quick.buffer_command("WorkspaceAdd", function(args)
+    vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
+  end, { range = true, nargs = "?", complete = "dir" })
+
+  quick.buffer_command(
+    "WorkspaceRemove",
+    function(args)
+      vim.lsp.buf.remove_workspace_folder(args.args)
+    end,
+    { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
+  )
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0

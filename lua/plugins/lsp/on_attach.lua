@@ -72,6 +72,13 @@ local function capability_callbacks(client)
     lsp_util.setup_events(cl, imports_hook, format_hook, bufnr)
   end) -- }}}
 
+  local workspace_folder_supported = caps.workspace -- {{{
+    and caps.workspace.workspaceFolders
+    and caps.workspace.workspaceFolders.supported
+  if workspace_folder_supported then
+    table.insert(callbacks, lsp_util.workspace_folder_properties)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end
