@@ -51,6 +51,7 @@ return {
           "gopls",
           "rust_analyzer@nightly",
           "jsonls",
+          "vimls",
         },
         log_level = "error",
         diagnostics = { -- {{{
