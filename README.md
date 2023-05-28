@@ -514,6 +514,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>rn` | Incrementally rename symbol                 |
 | `gr`         | Go to references                            |
 | `<leader>gi` | **G**o to **I**mplementation                |
+| `gD`         | **G**o to **D**eclaration                   |
 
 Please see the code for all available mappings.
 

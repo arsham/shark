@@ -274,6 +274,12 @@ function M.type_definition() --{{{
   end)
 end --}}}
 
+function M.declaration() --{{{
+  nnoremap("gD", function()
+    fzf.lsp_declarations({ jump_to_single_result = true })
+  end, "Go to declaration")
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0
