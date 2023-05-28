@@ -516,6 +516,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>gi` | **G**o to **I**mplementation                |
 | `gD`         | **G**o to **D**eclaration                   |
 | `<leader>cr` | **C**ode lens **R**un                       |
+| `<leader>ca` | **C**ode **A**ctions (also in visual mode)  |
 
 Please see the code for all available mappings.
 
@@ -545,23 +546,24 @@ additions.
 <details>
     <summary>Click to view the commands</summary>
 
-| Command              | Description           |
-| :------------------- | :-------------------- |
-| `Diagnostics`        | Alternative `Diag`    |
-| `DiagnosticsAll`     | Alternative `DiagAll` |
-| `DiagnosticsDisable` |                       |
-| `DiagnosticsEnable`  |                       |
-| `Definition`         | Go to the definition  |
-| `WorkspaceList`      |                       |
-| `WorkspaceRemove`    |                       |
-| `WorkspaceAdd`       |                       |
-| `WorkspaceSymbols`   |                       |
-| `DocumentSymbol`     |                       |
-| `References`         |                       |
-| `Implementation`     |                       |
-| `TypeDefinition`     |                       |
-| `CodeLensRefresh`    |                       |
-| `CodeLensRun`        |                       |
+| Command              | Description                             |
+| :------------------- | :-------------------------------------- |
+| `Diagnostics`        | Alternative `Diag`                      |
+| `DiagnosticsAll`     | Alternative `DiagAll`                   |
+| `DiagnosticsDisable` |                                         |
+| `DiagnosticsEnable`  |                                         |
+| `Definition`         | Go to the definition                    |
+| `WorkspaceList`      |                                         |
+| `WorkspaceRemove`    |                                         |
+| `WorkspaceAdd`       |                                         |
+| `WorkspaceSymbols`   |                                         |
+| `DocumentSymbol`     |                                         |
+| `References`         |                                         |
+| `Implementation`     |                                         |
+| `TypeDefinition`     |                                         |
+| `CodeLensRefresh`    |                                         |
+| `CodeLensRun`        |                                         |
+| `CodeAction`         | Also works on a visually selected text. |
 
 </details>
 

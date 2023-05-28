@@ -24,6 +24,7 @@
 <Leader>.e	shark-mappings.txt	/*<Leader>.e*
 <Leader>.f	shark-mappings.txt	/*<Leader>.f*
 <Leader>P	shark-mappings.txt	/*<Leader>P*
+<Leader>ca	shark-mappings.txt	/*<Leader>ca*
 <Leader>dd	shark-mappings.txt	/*<Leader>dd*
 <Leader>df	shark-mappings.txt	/*<Leader>df*
 <Leader>dq	shark-mappings.txt	/*<Leader>dq*
@@ -192,6 +193,7 @@ shark_gr	shark-mappings.txt	/*shark_gr*
 shark_i_<Tab>	shark-mappings.txt	/*shark_i_<Tab>*
 shark_v_gc	shark-mappings.txt	/*shark_v_gc*
 shark_v_gq	shark-mappings.txt	/*shark_v_gq*
+v_<Leader>ca	shark-mappings.txt	/*v_<Leader>ca*
 v_<M-j>	shark-mappings.txt	/*v_<M-j>*
 v_<M-k>	shark-mappings.txt	/*v_<M-k>*
 v_ALT-j	shark-mappings.txt	/*v_ALT-j*

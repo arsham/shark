@@ -289,6 +289,8 @@ gq{motion}              Format operator with LSP
 gr                      Go to references
                                                                   *<Leader>gi*
 <Leader>gi              Go to implementation
+                                                                  *<Leader>ca*
+<Leader>ca              Code actions                            *v_<Leader>ca*
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*
