@@ -177,6 +177,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [kiran94/s3edit.nvim][s3edit.nvim]               | Edit files on S3 bucket               |
 | 🔍 Tool    | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]           | Search and quickly jump               |
 |  Editing  | [mbbill/undotree][mbbill/undotree]               | Undo tree browser                     |
+|  GIT      | [rbong/vim-flog][rbong/vim-flog]                 | git log graph                         |
 
 </details>
 
@@ -857,6 +858,7 @@ quick.cmd_and_centre("SomeCommand")
 [s3edit.nvim]: https://github.com/kiran94/s3edit.nvim
 [woosaaahh/sj.nvim]: https://github.com/woosaaahh/sj.nvim
 [mbbill/undotree]: https://github.com/mbbill/undotree
+[rbong/vim-flog]: https://github.com/rbong/vim-flog
 
 <!--
 vim: foldlevel=2 conceallevel=0

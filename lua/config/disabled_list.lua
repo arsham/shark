@@ -66,4 +66,5 @@ return {
   ["kiran94/s3edit.nvim"] = { enabled = true, start = true },
   ["woosaaahh/sj.nvim"] = { enabled = true, start = true },
   ["mbbill/undotree"] = { enabled = true, start = true },
+  ["rbong/vim-flog"] = { enabled = true, start = true },
 }

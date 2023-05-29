@@ -107,5 +107,6 @@ Function   Plugin                      Description                     License
  Tool      kiran94/s3edit.nvim        Edit files on S3 bucket             MIT
 🔍 Tool     woosaaahh/sj.nvim          Search and quickly jump             MIT
  Editing   mbbill/undotree            Undo tree browser                   MIT
+ GIT       rbong/vim-flog             git log graph                       N/A
 
 vim:tw=78:ft=help
