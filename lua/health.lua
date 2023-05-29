@@ -26,6 +26,7 @@ local executables = {
   TheSilverSearcher = { "ag", "paru -S the_silver_searcher" },
   xxd = { "xxd", "paru -S xxd" },
   uncrustify = { "uncrustify", "paru -S uncrustify" },
+  ["Python-pip"] = { "pip3", "paru -S python-pip" },
 }
 
 M.check = function()
