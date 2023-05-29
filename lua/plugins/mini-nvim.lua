@@ -49,6 +49,17 @@ return {
     cond = require("config.util").should_start("echasnovski/mini.surround"),
     enabled = require("config.util").is_enabled("echasnovski/mini.surround"),
   }, -- }}}
+
+  { -- mini.trailspace {{{
+    "echasnovski/mini.trailspace",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      quick.highlight("MiniTrailspace", { link = "ExtraWhitespace" })
+      require("mini.trailspace").setup({})
+    end,
+    cond = require("config.util").should_start("echasnovski/mini.trailspace"),
+    enabled = require("config.util").is_enabled("echasnovski/mini.trailspace"),
+  }, -- }}}
 }
 
 -- vim: fdm=marker fdl=0
