@@ -33,6 +33,7 @@ This project supports Neovim version `0.10.0` and newer.
    - [Highlight Matching](#highlight-matching)
    - [FZF](#fzf)
    - [LSP](#lsp)
+   - [Snippets](#snippets)
    - [Utilities](#utilities)
 3. [Plugin Licence List](#plugin-license-list)
 
@@ -130,6 +131,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [saadparwaiz1/cmp_luasnip][cmp_luasnip]          | Extension for nvim-cmp                |
 |  LSP      | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]             | Snippet engine                        |
 |  LSP      | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]       | Extension for nvim-cmp                |
+|  LSP      | [friendly-snippets][friendly-snippets]           |                                       |
 
 </details>
 
@@ -249,6 +251,8 @@ The `leader` key is `space`!
 | `<Tab><Tab>`      | Switch to the alternative buffer                                     |
 | `gso`             | Sort objects                                                         |
 | `gsoo`            | Sort lines                                                           |
+| [s][i]`<Ctrl-l>`  | Next snippet choice                                                  |
+| [s][i]`<Ctrl-h>`  | Previous snippet choice                                              |
 
 </details>
 
@@ -510,6 +514,28 @@ additions.
 The `RestartLsp` fixes an issue when the `LspRestart` does not have any
 effects.
 
+### Snippets
+
+I never was a fan of snippets, until I discovered the
+[LuaSnip](https://github.com/L3MON4D3/LuaSnip) plugin and it changed my mind.
+Here is a demo of a couple of snippets shipped with this setup:
+
+<details>
+    <summary>Click to view advance snippets demo</summary>
+
+Queryrows snippet creates a useful code in Go that uses the
+[Retry](https://github.com/arsham/retry) library for querying postgres.
+
+![queryrows](https://user-images.githubusercontent.com/428611/154764948-b620896d-3303-42db-ad09-dcde94a18764.gif)
+
+Ife snippet is an improvement over a snippet by
+[tjdevries](https://github.com/tjdevries/config_manager/blob/6e48802a9c6acc9f8f2c9768fcb57d6ce1f05e00/xdg_config/nvim/lua/tj/snips/ft/go.lua)
+that tries to work better with return values.
+
+![ife](https://user-images.githubusercontent.com/428611/154764941-6398c245-01f8-4c5e-b226-302d10dc1fef.gif)
+
+</details>
+
 ### Utilities
 
 These are commands you can use in **Lua** land. Assign the required module to a
@@ -604,6 +630,7 @@ quick.cmd_and_centre("SomeCommand")
 | [saadparwaiz1/cmp_luasnip][cmp_luasnip]     | [Apache-2.0][cmp_luasnip-license]                                          |
 | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]        | [Apache-2.0](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)      |
 | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]  | [N/A][hrsh7th/cmp-cmdline]                                                 |
+| [friendly-snippets][friendly-snippets]      | [MIT][friendly-snippets-license]                                           |
 
 </details>
 
@@ -668,6 +695,8 @@ quick.cmd_and_centre("SomeCommand")
 [cmp_luasnip-license]: https://github.com/saadparwaiz1/cmp_luasnip/blob/master/LICENSE
 [l3mon4d3/luasnip]: https://github.com/L3MON4D3/LuaSnip
 [hrsh7th/cmp-cmdline]: https://github.com/hrsh7th/cmp-cmdline
+[friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
+[friendly-snippets-license]: https://github.com/rafamadriz/friendly-snippets/blob/main/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0

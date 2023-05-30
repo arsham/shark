@@ -211,6 +211,12 @@ gso{motion}             Sort [count] objects that {motion} moves over
 gsoo                    Sort [count] lines
                                                   *CTRL-w_CTRL-z* *<C-w><C-z>*
 <Ctrl>w<Ctrl>z          Zoom current window/Unzoom
+                                                          *i_CTRL-l* *s_CTRL-l*
+                                                            *i_<C-l>* *s_<C-l>*
+<Ctrl>l                 Next snippet choice
+                                                          *i_CTRL-h* *s_CTRL-h*
+                                                            *i_<C-h>* *s_<C-h>*
+<Ctrl>h                 Previous snippet choice
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

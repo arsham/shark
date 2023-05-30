@@ -76,5 +76,6 @@ Function   Plugin                      Description                     License
  LSP       saadparwaiz1/cmp_luasnip   Extension for nvim-cmp        Apache2.0
  LSP       L3MON4D3/LuaSnip           Snippet engine                Apache2.0
  LSP       hrsh7th/cmp-cmdline        Extension for nvim-cmp              N/A
+ LSP       friendly-snippets                                              MIT
 
 vim:tw=78:ft=help
