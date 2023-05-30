@@ -180,6 +180,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  GIT      | [rbong/vim-flog][rbong/vim-flog]                 | git log graph                         |
 | 🎡 Visual  | [towolf/vim-helm][towolf/vim-helm]               | Helm syntax highlighting              |
 |  Core     | [tmux-plugins/vim-tmux][vim-tmux]                |                                       |
+|  Editing  | [mg979/vim-visual-multi][vim-visual-multi]       | Multiple cursors                      |
 
 </details>
 
@@ -760,6 +761,7 @@ quick.cmd_and_centre("SomeCommand")
 | [mbbill/undotree][mbbill/undotree]          | [N/A][mbbill/undotree]                                                     |
 | [towolf/vim-helm][towolf/vim-helm]          | [View](https://github.com/towolf/vim-helm/blob/master/LICENSE)             |
 | [tmux-plugins/vim-tmux][vim-tmux]           | [N/A][vim-tmux]                                                            |
+| [mg979/vim-visual-multi][vim-visual-multi]  | [MIT](https://github.com/mg979/vim-visual-multi/blob/master/LICENSE)       |
 
 </details>
 
@@ -865,6 +867,7 @@ quick.cmd_and_centre("SomeCommand")
 [rbong/vim-flog]: https://github.com/rbong/vim-flog
 [towolf/vim-helm]: https://github.com/towolf/vim-helm
 [vim-tmux]: https://github.com/tmux-plugins/vim-tmux
+[vim-visual-multi]: https://github.com/mg979/vim-visual-multi
 
 <!--
 vim: foldlevel=2 conceallevel=0

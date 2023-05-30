@@ -110,5 +110,6 @@ Function   Plugin                      Description                     License
  GIT       rbong/vim-flog             git log graph                       N/A
 🎡 Visual   towolf/vim-helm            Helm syntax highlighting            N/A
  Core      tmux-plugins/vim-tmux                                          MIT
+ Editing   mg979/vim-visual-multi     Multiple cursors                    N/A
 
 vim:tw=78:ft=help
