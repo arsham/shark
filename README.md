@@ -108,6 +108,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [iamcco/markdown-preview.nvim][mk-preview]       |                                       |
 | 🧭 Core    | [numToStr/Navigator.nvim][navigator.nvim]        | Seamless navigation with tmux         |
 | 📁 Tool    | [nvim-neo-tree/neo-tree.nvim][neo-tree]          | File explorer tree                    |
+| 🪟 Core    | [s1n7ax/nvim-window-picker][window-picker]       | Window picker                         |
 
 </details>
 
@@ -511,6 +512,7 @@ quick.cmd_and_centre("SomeCommand")
 | [iamcco/markdown-preview.nvim][mk-preview]  | [MIT][mk-preview-license]                                                  |
 | [numToStr/Navigator.nvim][navigator.nvim]   | [MIT](https://github.com/numToStr/Navigator.nvim/blob/master/LICENSE)      |
 | [nvim-neo-tree/neo-tree.nvim][neo-tree]     | [MIT][neo-tree-license]                                                    |
+| [s1n7ax/nvim-window-picker][window-picker]  | [MIT](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)      |
 
 </details>
 
@@ -558,6 +560,7 @@ quick.cmd_and_centre("SomeCommand")
 [navigator.nvim]: https://github.com/numToStr/Navigator.nvim
 [neo-tree]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [neo-tree-license]: https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE
+[window-picker]: https://github.com/s1n7ax/nvim-window-picker
 
 <!--
 vim: foldlevel=2 conceallevel=0

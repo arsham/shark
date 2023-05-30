@@ -6,6 +6,14 @@ return {
     "nvim-tree/nvim-web-devicons",
     "arshlib.nvim",
     "MunifTanjim/nui.nvim",
+    {
+      "s1n7ax/nvim-window-picker",
+      version = "v1.*",
+      lazy = true,
+      config = true,
+      cond = require("config.util").should_start("s1n7ax/nvim-window-picker"),
+      enabled = require("config.util").is_enabled("s1n7ax/nvim-window-picker"),
+    },
   },
   keys = {
     { "<leader>kk", ":Neotree toggle<CR>", { silent = true, desc = "Toggle tree view" } },
