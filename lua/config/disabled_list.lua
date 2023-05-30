@@ -62,4 +62,5 @@ return {
   ["nvim-neorg/neorg"] = { enabled = true, start = true },
   ["kevinhwang91/nvim-bqf"] = { enabled = true, start = true },
   ["bfredl/nvim-luadev"] = { enabled = true, start = true },
+  ["SmiteshP/nvim-navic"] = { enabled = true, start = true },
 }

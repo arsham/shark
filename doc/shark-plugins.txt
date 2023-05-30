@@ -103,5 +103,6 @@ Function   Plugin                      Description                     License
 📆 Tool     nvim-neorg/neorg           Note taking tool                GPL-3.0
  Lists     kevinhwang91/nvim-bqf      Better quickfix list manager      BSD-3
  Tool      bfredl/nvim-luadev         REPL/debug console for lua plugins  MIT
+💡 LSP      SmiteshP/nvim-navic        LSP current code context     Apache-2.0
 
 vim:tw=78:ft=help

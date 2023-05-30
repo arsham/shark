@@ -173,6 +173,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 📆 Tool    | [nvim-neorg/neorg][nvim-neorg/neorg]             | Note taking tool                      |
 |  Lists    | [kevinhwang91/nvim-bqf][nvim-bqf]                | Better quickfix list manager          |
 |  Tool     | [bfredl/nvim-luadev][bfredl/nvim-luadev]         | REPL/debug console for lua plugins    |
+| 💡 LSP     | [SmiteshP/nvim-navic][nvim-navic]                | Current code context with LSP         |
 
 </details>
 
@@ -747,6 +748,7 @@ quick.cmd_and_centre("SomeCommand")
 | [nvim-neorg/neorg][nvim-neorg/neorg]        | [GPL-3.0](https://github.com/nvim-neorg/neorg/blob/main/LICENSE)           |
 | [kevinhwang91/nvim-bqf][nvim-bqf]           | [BSD-3-Clause][nvim-bqf-license]                                           |
 | [bfredl/nvim-luadev][bfredl/nvim-luadev]    | [MIT](https://github.com/bfredl/nvim-luadev/blob/master/LICENSE)           |
+| [SmiteshP/nvim-navic][nvim-navic]           | [Apache-2.0][nvim-navic-license]                                           |
 
 </details>
 
@@ -844,6 +846,8 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-bqf]: https://github.com/kevinhwang91/nvim-bqf
 [nvim-bqf-license]: https://github.com/kevinhwang91/nvim-bqf/blob/main/LICENSE
 [bfredl/nvim-luadev]: https://github.com/bfredl/nvim-luadev
+[nvim-navic]: https://github.com/SmiteshP/nvim-navic
+[nvim-navic-license]: https://github.com/SmiteshP/nvim-navic/blob/master/LICENSE.md
 
 <!--
 vim: foldlevel=2 conceallevel=0
