@@ -95,6 +95,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗒️ Visuals | [nvim-treesitter/playground][playground]         | Treesitter plugin                     |
 | 󰐣 Editing  | [context-commentstring][ctx-commentstring]       |                                       |
 | 🥊 Core    | [andymass/vim-matchup][vim-matchup]              |                                       |
+| 󰘜 Editing  | [monaqa/dial.nvim][monaqa/dial.nvim]             | Enhanced increment/decrement values   |
 
 </details>
 
@@ -489,6 +490,7 @@ quick.cmd_and_centre("SomeCommand")
 | [nvim-treesitter/playground][playground]    | [Apache-2.0][treesitter-playground-license]                                |
 | [context-commentstring][ctx-commentstring]  | [MIT][ctx-commentstring-license]                                           |
 | [andymass/vim-matchup][vim-matchup]         | [MIT](https://github.com/andymass/vim-matchup/blob/master/LICENSE.md)      |
+| [monaqa/dial.nvim][monaqa/dial.nvim]        | [MIT](https://github.com/monaqa/dial.nvim/blob/master/LICENSE)             |
 
 </details>
 
@@ -527,6 +529,7 @@ quick.cmd_and_centre("SomeCommand")
 [ctx-commentstring]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 [ctx-commentstring-license]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/main/LICENSE
 [vim-matchup]: https://github.com/andymass/vim-matchup
+[monaqa/dial.nvim]: https://github.com/monaqa/dial.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

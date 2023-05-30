@@ -57,5 +57,6 @@ Function   Plugin                      Description                     License
 🗒️ Visuals  nvim-treesitter/playground Treesitter plugin            Apache-2.0
 󰐣 Editing   nvim-ts-context-commentstring                                  MIT
 🥊 Core     andymass/vim-matchup                                           MIT
+󰘜 Editing   monaqa/dial.nvim           Enhanced inc/dec values             MIT
 
 vim:tw=78:ft=help

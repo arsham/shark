@@ -23,4 +23,5 @@ return {
   ["nvim-treesitter/playground"] = { enabled = true, start = true },
   ["JoosepAlviste/nvim-ts-context-commentstring"] = { enabled = true, start = true },
   ["andymass/vim-matchup"] = { enabled = true, start = true },
+  ["monaqa/dial.nvim"] = { enabled = true, start = true },
 }
