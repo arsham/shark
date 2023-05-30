@@ -4,6 +4,10 @@ The goal of this project is to have a fast Neovim startup, provide mappings
 that can be easily memorised, interact with the **Lua** API, and make
 programming fun.
 
+This setup is mostly customised to for **Go** (**Golang**) and **Rust**
+development. There is also a few other **LSP** servers setup for other LSP
+servers to work with various file types.
+
 This project supports Neovim version `0.10.0` and newer.
 
 ## Highlights
@@ -159,6 +163,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗒️ Editing | [windwp/nvim-autopairs][nvim-autopairs]          |                                       |
 |  Editing  | [arthurxavierx/vim-caser][vim-caser]             | Case conversion                       |
 | 🖌️ Visuals | [NvChad/nvim-colorizer.lua][nvim-colorizer]      | Colourise matched colours in buffer   |
+| 🦀 Tools   | [saecki/crates.nvim][saecki/crates.nvim]         | Crate.toml helper                     |
 
 </details>
 
@@ -711,6 +716,7 @@ quick.cmd_and_centre("SomeCommand")
 | [windwp/nvim-autopairs][nvim-autopairs]     | [MIT](https://github.com/windwp/nvim-autopairs/blob/master/LICENSE)        |
 | [arthurxavierx/vim-caser][vim-caser]        | [View](https://github.com/arthurxavierx/vim-caser/blob/master/LICENSE)     |
 | [NvChad/nvim-colorizer.lua][nvim-colorizer] | [View][nvim-colorizer-license]                                             |
+| [saecki/crates.nvim][saecki/crates.nvim]    | [MIT](https://github.com/Saecki/crates.nvim/blob/main/LICENSE)             |
 
 </details>
 
@@ -797,6 +803,7 @@ quick.cmd_and_centre("SomeCommand")
 [vim-caser]: https://github.com/arthurxavierx/vim-caser
 [nvim-colorizer]: https://github.com/NvChad/nvim-colorizer.lua
 [nvim-colorizer-license]: https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE
+[saecki/crates.nvim]: https://github.com/saecki/crates.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

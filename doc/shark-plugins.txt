@@ -93,5 +93,6 @@ Function   Plugin                      Description                     License
 🗒️ Editing  windwp/nvim-autopairs                                          MIT
  Editing   arthurxavierx/vim-caser    Case conversion                     N/A
 🖌️ Visuals  NvChad/nvim-colorizer.lua  Colourise matched colours in buffer N/A
+🦀 Tools    saecki/crates.nvim         Crate.toml helper                   MIT
 
 vim:tw=78:ft=help
