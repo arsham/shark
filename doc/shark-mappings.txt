@@ -236,6 +236,26 @@ gc{motion}
 ]]                      Neorg buffer next heading
                                                               *shark_NEORG_[[*
 [[                      Neorg buffer previous heading
+                                                                  *COPILOT_CR*
+<CR>                    Copilot panel: Accept suggestion
+                                                                  *COPILOT_gr*
+gr                      Copilot panel: Refresh
+                                                             *ALT-CR* *<M-CR>*
+<Alt>CR                 Copilot panel: Open
+                                                               *ALT-]* *<M-]>*
+<Alt>]                  Copilot suggestion: Next suggestion
+                                                               *ALT-[* *<M-[>*
+<Alt>[                  Copilot suggestion: Previous suggestion
+                                                  *CTRL-y_CTRL-y* *<C-y><C-y>*
+<Ctrl>y<Ctrl>y          Copilot suggestion: Accept whole suggestion
+                                                  *CTRL-y_CTRL-w* *<C-y><C-w>*
+<Ctrl>y<Ctrl>w          Copilot suggestion: Accept a word of suggestion
+                                                  *CTRL-y_CTRL-l* *<C-y><C-l>*
+<Ctrl>y<Ctrl>l          Copilot suggestion: Accept a line of suggestion
+                                                      *COPILOT_CTRL-]* *<C-]>*
+<Ctrl>]                 Copilot suggestion: Dismiss
+
+Note that if copilot is enabled, codeium will be disabled.
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

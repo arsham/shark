@@ -183,6 +183,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Core     | [tmux-plugins/vim-tmux][vim-tmux]                |                                       |
 |  Editing  | [mg979/vim-visual-multi][vim-visual-multi]       | Multiple cursors                      |
 | 🔫 Core    | [svban/YankAssassin.vim][yankassassin.vim]       | Stay where you are after yanking      |
+|  Editing  | [zbirenbaum/copilot.lua][copilot.lua]            | Copilot                               |
 
 </details>
 
@@ -206,7 +207,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **m**           | **M**atch highlighting                            |
 | **d**           | **D**iff, **D**iagnostics                         |
 | **h**           | **H**unk                                          |
-| **c**           | **C**hange                                        |
+| **c**           | **C**hange, **C**opilot                           |
 | **s**           | **S**tatement, **S**cope                          |
 | **o**           | L**o**op                                          |
 | **e**           | **E**lement                                       |
@@ -315,6 +316,20 @@ The `leader` key is `space`!
 | [Neorg]`]]`       | **N**eorg buffer next heading                                        |
 | [Neorg]`[[`       | **N**eorg buffer previous heading                                    |
 | `<leader>us`      | Unlink all open snippet sessions                                     |
+| `<leader>ce`      | **E**nable **Copilot**                                               |
+| `<leader>cd`      | **D**isable **Copilot**                                              |
+| `<leader>cp`      | **Copilot** **P**anel                                                |
+| `]]`              | (copilot panel) Jump to the next suggestion                          |
+| `[[`              | (copilot panel) Jump to the previous suggestion                      |
+| `<CR>`            | (copilot panel) Accept suggestion                                    |
+| `gr`              | (copilot panel) Refresh                                              |
+| `<Alt-CR>`        | (copilot panel) Open                                                 |
+| `<Alt-]>`         | (copilot suggestion) Next suggestion                                 |
+| `<Alt-[>`         | (copilot suggestion) Previous suggestion                             |
+| `<C-y><C-y>`      | (copilot suggestion) Accept whole suggestion                         |
+| `<C-y><C-w>`      | (copilot suggestion) Accept a word of suggestion                     |
+| `<C-y><C-l>`      | (copilot suggestion) Accept a line of suggestion                     |
+| `<Ctrl-]>`        | (copilot suggestion) Dismiss                                         |
 
 </details>
 
@@ -789,6 +804,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tmux-plugins/vim-tmux][vim-tmux]           | [N/A][vim-tmux]                                                            |
 | [mg979/vim-visual-multi][vim-visual-multi]  | [MIT](https://github.com/mg979/vim-visual-multi/blob/master/LICENSE)       |
 | [svban/YankAssassin.vim][yankassassin.vim]  | [N/A][yankassassin.vim]                                                    |
+| [zbirenbaum/copilot.lua][copilot.lua]       | [MIT](https://github.com/zbirenbaum/copilot.lua/blob/master/LICENSE)       |
 
 </details>
 
@@ -896,6 +912,7 @@ quick.cmd_and_centre("SomeCommand")
 [vim-tmux]: https://github.com/tmux-plugins/vim-tmux
 [vim-visual-multi]: https://github.com/mg979/vim-visual-multi
 [yankassassin.vim]: https://github.com/svban/YankAssassin.vim
+[copilot.lua]: https://github.com/zbirenbaum/copilot.lua
 
 <!--
 vim: foldlevel=2 conceallevel=0
