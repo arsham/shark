@@ -35,4 +35,8 @@ return {
   ["sQVe/sort.nvim"] = { enabled = true, start = true },
   ["dhruvasagar/vim-zoom"] = { enabled = true, start = true },
   ["David-Kunz/treesitter-unit"] = { enabled = true, start = true },
+  ["mason-lspconfig.nvim"] = { enabled = true, start = true },
+  ["neovim/nvim-lspconfig"] = { enabled = true, start = true },
+  ["williamboman/mason-lspconfig.nvim"] = { enabled = true, start = true },
+  ["williamboman/mason.nvim"] = { enabled = true, start = true },
 }

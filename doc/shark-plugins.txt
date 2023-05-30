@@ -69,5 +69,8 @@ Function   Plugin                      Description                     License
  Tool      sQVe/sort.nvim             Line-wise and delimiter sorting     MIT
 🔭 Tool     dhruvasagar/vim-zoom       Zoom windows                        MIT
 🥇 Textobj  David-Kunz/treesitter-unit Treesitter units              Unlicense
+ LSP       neovim/nvim-lspconfig      LSP configuration            Apache-2.0
+ LSP       mason.nvim                 Package manager: LSP, DAP.   Apache-2.0
+ LSP       mason-lspconfig.nvim       LSP config <-> mason.nvim    Apache-2.0
 
 vim:tw=78:ft=help

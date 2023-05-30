@@ -10,6 +10,7 @@ This project supports Neovim version `0.10.0` and newer.
 
 - Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
+- **LSP**, **Treesitter**, and **FZF** are setup to work together.
 - Seamless navigation with **tmux**.
 - There are some handy **textobjects** such as **backticks** and **indents**.
 - You can add the current location of the cursor or make **notes** on the
@@ -113,6 +114,9 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [sQVe/sort.nvim][sqve/sort.nvim]                 | Line-wise and delimiter sorting       |
 | 🔭 Tool    | [dhruvasagar/vim-zoom][vim-zoom]                 | Zoom windows                          |
 | 🥇 Textobj | [David-Kunz/treesitter-unit][ts-unit]            | Treesitter units                      |
+|  LSP      | [neovim/nvim-lspconfig][nvim-lspconfig]          | LSP configuration                     |
+|  LSP      | [mason.nvim][mason.nvim]                         | Package manager for LSP, DAP, etc.    |
+|  LSP      | [mason-lspconfig.nvim][mason-lspconfig]          | LSP config bridge for mason.nvim      |
 
 </details>
 
@@ -525,6 +529,9 @@ quick.cmd_and_centre("SomeCommand")
 | [sQVe/sort.nvim][sqve/sort.nvim]            | [MIT](https://github.com/sQVe/sort.nvim/blob/main/LICENSE)                 |
 | [dhruvasagar/vim-zoom][vim-zoom]            | [N/A][vim-zoom]                                                            |
 | [David-Kunz/treesitter-unit][ts-unit]       | [Unlicense][ts-unit-license]                                               |
+| [neovim/nvim-lspconfig][nvim-lspconfig]     | [Apache-2.0][lspconfig-license]                                            |
+| [mason.nvim][mason.nvim]                    | [Apache-2.0][mason.nvim-license]                                           |
+| [mason-lspconfig.nvim][mason-lspconfig]     | [Apache-2.0][mason-lspconfig-license]                                      |
 
 </details>
 
@@ -578,6 +585,12 @@ quick.cmd_and_centre("SomeCommand")
 [vim-zoom]: https://github.com/dhruvasagar/vim-zoom
 [ts-unit]: https://github.com/David-Kunz/treesitter-unit
 [ts-unit-license]: https://github.com/David-Kunz/treesitter-unit/blob/main/LICENSE
+[nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
+[mason-lspconfig]: https://github.com/williamboman/mason-lspconfig.nvim
+[mason-lspconfig-license]: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/LICENSE
+[mason.nvim]: https://github.com/williamboman/mason.nvim
+[mason.nvim-license]: https://github.com/williamboman/mason.nvim/blob/main/LICENSE
+[lspconfig-license]: https://github.com/neovim/nvim-lspconfig/blob/master/LICENSE.md
 
 <!--
 vim: foldlevel=2 conceallevel=0
