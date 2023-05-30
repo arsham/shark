@@ -9,6 +9,7 @@
   "indent-tools.nvim": { "branch": "master", "commit": "f948f48b04c20f3c94697f90b0178c623c546a38" },
   "lazy.nvim": { "branch": "main", "commit": "bc895023573e76f8567d2375bbd3ea8be4f00ca7" },
   "listish.nvim": { "branch": "master", "commit": "039f6db68f249a23981c1f9cebc6476bbc280319" },
+  "matchmaker.nvim": { "branch": "master", "commit": "b5963e3c3247264c6aacd9a42394d5bff3107af3" },
   "nui.nvim": { "branch": "main", "commit": "d5a82aae64426a805e19d8ef5a379292f9dc55d3" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "23e883b99228f8d438254e5ef8c897e5e60e75d1" },
   "nvim-web-devicons": { "branch": "master", "commit": "2a125024a137677930efcfdf720f205504c97268" },

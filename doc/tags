@@ -4,6 +4,7 @@ shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*
 shark-functionality	shark.txt	/*shark-functionality*
 shark-fzf	shark.txt	/*shark-fzf*
 shark-highlight	shark.txt	/*shark-highlight*
+shark-highlight-matching	shark.txt	/*shark-highlight-matching*
 shark-highlights	shark.txt	/*shark-highlights*
 shark-introduction	shark.txt	/*shark-introduction*
 shark-license	shark.txt	/*shark-license*

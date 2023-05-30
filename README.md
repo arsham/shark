@@ -21,6 +21,7 @@ This project supports Neovim version `0.10.0` and newer.
    - [Core Mappings](#core-mappings)
    - [Text Objects](#text-objects)
    - [Lists](#lists)
+   - [Highlight Matching](#highlight-matching)
    - [FZF](#fzf)
    - [Utilities](#utilities)
 3. [Plugin Licence List](#plugin-license-list)
@@ -70,6 +71,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🥇 Textobj | [arsham/archer.nvim][arsham/archer.nvim]         | Mappings and text objects for archers |
 | 🧰 Visuals | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]     | UI component                          |
 | 🥇 Textobj | [arsham/indent-tools.nvim][indent-tools.nvim]    | Indent mappings and text object       |
+| 🔥 Visuals | [arsham/matchmaker.nvim][matchmaker.nvim]        | Creates highlight for user matches    |
 
 </details>
 
@@ -88,6 +90,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **f**           | **F**ile, **F**ind                                |
 | **a**           | **A**ll, or disabling certain constraints         |
 | **i**           | **I**ndent                                        |
+| **m**           | **M**atch highlighting                            |
 
 The `leader` key is `space`!
 
@@ -177,6 +180,28 @@ you how many items you have in a list.
 | :-------------- | :------------------------------------------ |
 | `Clearquickfix` | **Clear** the quickfix list.                |
 | `Clearloclist`  | **Clear** the local list of current buffer. |
+
+</details>
+
+### Highlight Matching
+
+You can **highlight** words with random colours.
+
+`<leader>ma` and `<leader>me` are repeatable with **.**!
+
+<details>
+    <summary>Click to view the mappings</summary>
+
+Note that all these mappings are bound to the current window.
+
+| Mapping      | Description                                              |
+| :----------- | :------------------------------------------------------- |
+| `<leader>ma` | **A**dd current word as a sub-pattern to the highlights. |
+| `<leader>me` | Add an **e**xact match on current term.                  |
+| `<leader>mp` | Add an match by asking for a **p**attern.                |
+| `<leader>ml` | Add current **l**ine                                     |
+| `<leader>md` | **D**elete **M**atches with fzf search.                  |
+| `<leader>mc` | **C**lear all **m**atched patterns on current window.    |
 
 </details>
 
@@ -325,6 +350,7 @@ quick.cmd_and_centre("SomeCommand")
 | [arsham/archer.nvim][arsham/archer.nvim]    | [MIT](https://github.com/arsham/archer.nvim/blob/master/LICENSE)           |
 | [nui.nvim][muniftanjim/nui.nvim]            | [MIT](https://github.com/MunifTanjim/nui.nvim/blob/main/LICENSE)           |
 | [indent-tools.nvim][indent-tools.nvim]      | [MIT](https://github.com/arsham/indent-tools.nvim/blob/master/LICENSE)     |
+| [matchmaker.nvim][matchmaker.nvim]          | [MIT](https://github.com/arsham/matchmaker.nvim/blob/master/LICENSE)       |
 
 </details>
 
@@ -343,6 +369,7 @@ quick.cmd_and_centre("SomeCommand")
 [arsham/archer.nvim]: https://github.com/arsham/archer.nvim
 [muniftanjim/nui.nvim]: https://github.com/MunifTanjim/nui.nvim
 [indent-tools.nvim]: https://github.com/arsham/indent-tools.nvim
+[matchmaker.nvim]: https://github.com/arsham/matchmaker.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
