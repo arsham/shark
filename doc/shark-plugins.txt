@@ -96,5 +96,6 @@ Function   Plugin                      Description                     License
 🦀 Tools    saecki/crates.nvim         Crate.toml helper                   MIT
 💡 LSP      kosayoda/nvim-lightbulb    Code actions buln                   MIT
  Editing   gbprod/substitute.nvim     Text exchange operator            WTFPL
+💡 LSP      lsp_lines.nvim             Show LSP diagnostics in extmarks    ISC
 
 vim:tw=78:ft=help
