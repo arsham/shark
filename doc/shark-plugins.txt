@@ -109,5 +109,6 @@ Function   Plugin                      Description                     License
  Editing   mbbill/undotree            Undo tree browser                   MIT
  GIT       rbong/vim-flog             git log graph                       N/A
 🎡 Visual   towolf/vim-helm            Helm syntax highlighting            N/A
+ Core      tmux-plugins/vim-tmux                                          MIT
 
 vim:tw=78:ft=help

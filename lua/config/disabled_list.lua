@@ -68,4 +68,5 @@ return {
   ["mbbill/undotree"] = { enabled = true, start = true },
   ["rbong/vim-flog"] = { enabled = true, start = true },
   ["towolf/vim-helm"] = { enabled = true, start = true },
+  ["tmux-plugins/vim-tmux"] = { enabled = true, start = true },
 }

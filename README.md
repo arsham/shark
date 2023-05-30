@@ -179,6 +179,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [mbbill/undotree][mbbill/undotree]               | Undo tree browser                     |
 |  GIT      | [rbong/vim-flog][rbong/vim-flog]                 | git log graph                         |
 | 🎡 Visual  | [towolf/vim-helm][towolf/vim-helm]               | Helm syntax highlighting              |
+|  Core     | [tmux-plugins/vim-tmux][vim-tmux]                |                                       |
 
 </details>
 
@@ -758,6 +759,7 @@ quick.cmd_and_centre("SomeCommand")
 | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]      | [MIT](https://github.com/woosaaahh/sj.nvim/blob/main/LICENSE)              |
 | [mbbill/undotree][mbbill/undotree]          | [N/A][mbbill/undotree]                                                     |
 | [towolf/vim-helm][towolf/vim-helm]          | [View](https://github.com/towolf/vim-helm/blob/master/LICENSE)             |
+| [tmux-plugins/vim-tmux][vim-tmux]           | [N/A][vim-tmux]                                                            |
 
 </details>
 
@@ -862,6 +864,7 @@ quick.cmd_and_centre("SomeCommand")
 [mbbill/undotree]: https://github.com/mbbill/undotree
 [rbong/vim-flog]: https://github.com/rbong/vim-flog
 [towolf/vim-helm]: https://github.com/towolf/vim-helm
+[vim-tmux]: https://github.com/tmux-plugins/vim-tmux
 
 <!--
 vim: foldlevel=2 conceallevel=0
