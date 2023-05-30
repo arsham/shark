@@ -94,6 +94,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🌈 Visuals | [treesitter-refactor][treesitter-refactor]       | Treesitter plugin                     |
 | 🗒️ Visuals | [nvim-treesitter/playground][playground]         | Treesitter plugin                     |
 | 󰐣 Editing  | [context-commentstring][ctx-commentstring]       |                                       |
+| 🥊 Core    | [andymass/vim-matchup][vim-matchup]              |                                       |
 
 </details>
 
@@ -487,6 +488,7 @@ quick.cmd_and_centre("SomeCommand")
 | [treesitter-refactor][treesitter-refactor]  | [Apache-2.0][treesitter-refactor-license]                                  |
 | [nvim-treesitter/playground][playground]    | [Apache-2.0][treesitter-playground-license]                                |
 | [context-commentstring][ctx-commentstring]  | [MIT][ctx-commentstring-license]                                           |
+| [andymass/vim-matchup][vim-matchup]         | [MIT](https://github.com/andymass/vim-matchup/blob/master/LICENSE.md)      |
 
 </details>
 
@@ -524,6 +526,7 @@ quick.cmd_and_centre("SomeCommand")
 [treesitter-playground-license]: https://github.com/nvim-treesitter/playground/blob/master/LICENSE
 [ctx-commentstring]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 [ctx-commentstring-license]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/main/LICENSE
+[vim-matchup]: https://github.com/andymass/vim-matchup
 
 <!--
 vim: foldlevel=2 conceallevel=0

@@ -132,6 +132,8 @@ local function config()
         end,
       },
     }, -- }}}
+
+    matchup = { enable = true },
   })
 end
 
@@ -146,6 +148,7 @@ return {
       cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
     },
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "andymass/vim-matchup",
   },
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },

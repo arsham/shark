@@ -56,5 +56,6 @@ Function   Plugin                      Description                     License
 🌈 Visuals  nvimtreesitter-refactor    Treesitter plugin            Apache-2.0
 🗒️ Visuals  nvim-treesitter/playground Treesitter plugin            Apache-2.0
 󰐣 Editing   nvim-ts-context-commentstring                                  MIT
+🥊 Core     andymass/vim-matchup                                           MIT
 
 vim:tw=78:ft=help
