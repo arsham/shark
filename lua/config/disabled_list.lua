@@ -27,4 +27,5 @@ return {
   ["stevearc/dressing.nvim"] = { enabled = true, start = true },
   ["mattn/vim-gist"] = { enabled = true, start = true },
   ["RaafatTurki/hex.nvim"] = { enabled = true, start = true },
+  ["iamcco/markdown-preview.nvim"] = { enabled = true, start = true },
 }

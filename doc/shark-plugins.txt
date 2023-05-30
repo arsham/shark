@@ -61,5 +61,6 @@ Function   Plugin                      Description                     License
 👗 Visuals  stevearc/dressing.nvim                                         MIT
  GIT       mattn/vim-gist             gist integration                    N/A
 󰛡 Core      RaafatTurki/hex.nvim       Hex viewer                          MIT
+ Tool      iamcco/markdown-preview.nvim                                   MIT
 
 vim:tw=78:ft=help

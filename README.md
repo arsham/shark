@@ -104,6 +104,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 👗 Visuals | [stevearc/dressing.nvim][dressing.nvim]          |                                       |
 |  GIT      | [mattn/vim-gist][mattn/vim-gist]                 | gist integration                      |
 | 󰛡 Core     | [RaafatTurki/hex.nvim][hex.nvim]                 | Hex viewer                            |
+|  Tool     | [iamcco/markdown-preview.nvim][mk-preview]       |                                       |
 
 </details>
 
@@ -502,6 +503,7 @@ quick.cmd_and_centre("SomeCommand")
 | [stevearc/dressing.nvim][dressing.nvim]     | [MIT](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)       |
 | [mattn/vim-gist][mattn/vim-gist]            | [N/A][mattn/vim-gist]                                                      |
 | [RaafatTurki/hex.nvim][hex.nvim]            | [MIT](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)         |
+| [iamcco/markdown-preview.nvim][mk-preview]  | [MIT][mk-preview-license]                                                  |
 
 </details>
 
@@ -544,6 +546,8 @@ quick.cmd_and_centre("SomeCommand")
 [dressing.nvim]: https://github.com/stevearc/dressing.nvim
 [mattn/vim-gist]: https://github.com/mattn/vim-gist
 [hex.nvim]: https://github.com/RaafatTurki/hex.nvim
+[mk-preview]: https://github.com/iamcco/markdown-preview.nvim
+[mk-preview-license]: https://github.com/iamcco/markdown-preview.nvim/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
