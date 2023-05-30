@@ -11,6 +11,18 @@ local function config()
       enable = true,
     }, --}}}
 
+    context_commentstring = { --{{{
+      enable = true,
+      enable_autocmd = false,
+      config = {
+        c = "// %s",
+        go = "// %s",
+        sql = "-- %s",
+        lua = "-- %s",
+        vim = '" %s',
+      },
+    }, --}}}
+
     textobjects = { --{{{
       select = {
         enable = true,
@@ -133,6 +145,7 @@ return {
       build = ":TSInstall query",
       cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
     },
+    "JoosepAlviste/nvim-ts-context-commentstring",
   },
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },

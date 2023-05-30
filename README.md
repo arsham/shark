@@ -93,6 +93,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗨️ Visuals | [rcarriga/nvim-notify][nvim-notify]              | Better notification UI                |
 | 🌈 Visuals | [treesitter-refactor][treesitter-refactor]       | Treesitter plugin                     |
 | 🗒️ Visuals | [nvim-treesitter/playground][playground]         | Treesitter plugin                     |
+| 󰐣 Editing  | [context-commentstring][ctx-commentstring]       |                                       |
 
 </details>
 
@@ -485,6 +486,7 @@ quick.cmd_and_centre("SomeCommand")
 | [rcarriga/nvim-notify][nvim-notify]         | [MIT](https://github.com/rcarriga/nvim-notify/blob/master/LICENSE)         |
 | [treesitter-refactor][treesitter-refactor]  | [Apache-2.0][treesitter-refactor-license]                                  |
 | [nvim-treesitter/playground][playground]    | [Apache-2.0][treesitter-playground-license]                                |
+| [context-commentstring][ctx-commentstring]  | [MIT][ctx-commentstring-license]                                           |
 
 </details>
 
@@ -520,6 +522,8 @@ quick.cmd_and_centre("SomeCommand")
 [treesitter-refactor-license]: https://github.com/nvim-treesitter/nvim-treesitter-refactor/blob/master/LICENSE
 [playground]: https://github.com/nvim-treesitter/playground
 [treesitter-playground-license]: https://github.com/nvim-treesitter/playground/blob/master/LICENSE
+[ctx-commentstring]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+[ctx-commentstring-license]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/main/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
