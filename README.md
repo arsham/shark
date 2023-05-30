@@ -96,6 +96,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 󰐣 Editing  | [context-commentstring][ctx-commentstring]       |                                       |
 | 🥊 Core    | [andymass/vim-matchup][vim-matchup]              |                                       |
 | 󰘜 Editing  | [monaqa/dial.nvim][monaqa/dial.nvim]             | Enhanced increment/decrement values   |
+| 👗 Visuals | [stevearc/dressing.nvim][dressing.nvim]          |                                       |
 
 </details>
 
@@ -491,6 +492,7 @@ quick.cmd_and_centre("SomeCommand")
 | [context-commentstring][ctx-commentstring]  | [MIT][ctx-commentstring-license]                                           |
 | [andymass/vim-matchup][vim-matchup]         | [MIT](https://github.com/andymass/vim-matchup/blob/master/LICENSE.md)      |
 | [monaqa/dial.nvim][monaqa/dial.nvim]        | [MIT](https://github.com/monaqa/dial.nvim/blob/master/LICENSE)             |
+| [stevearc/dressing.nvim][dressing.nvim]     | [MIT](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)       |
 
 </details>
 
@@ -530,6 +532,7 @@ quick.cmd_and_centre("SomeCommand")
 [ctx-commentstring-license]: https://github.com/JoosepAlviste/nvim-ts-context-commentstring/blob/main/LICENSE
 [vim-matchup]: https://github.com/andymass/vim-matchup
 [monaqa/dial.nvim]: https://github.com/monaqa/dial.nvim
+[dressing.nvim]: https://github.com/stevearc/dressing.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

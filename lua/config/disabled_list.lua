@@ -24,4 +24,5 @@ return {
   ["JoosepAlviste/nvim-ts-context-commentstring"] = { enabled = true, start = true },
   ["andymass/vim-matchup"] = { enabled = true, start = true },
   ["monaqa/dial.nvim"] = { enabled = true, start = true },
+  ["stevearc/dressing.nvim"] = { enabled = true, start = true },
 }

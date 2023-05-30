@@ -58,5 +58,6 @@ Function   Plugin                      Description                     License
 󰐣 Editing   nvim-ts-context-commentstring                                  MIT
 🥊 Core     andymass/vim-matchup                                           MIT
 󰘜 Editing   monaqa/dial.nvim           Enhanced inc/dec values             MIT
+👗 Visuals  stevearc/dressing.nvim                                         MIT
 
 vim:tw=78:ft=help
