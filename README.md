@@ -313,6 +313,7 @@ The `leader` key is `space`!
 | `<leader>nj`      | **N**eorg **J**ournal                                                |
 | [Neorg]`]]`       | **N**eorg buffer next heading                                        |
 | [Neorg]`[[`       | **N**eorg buffer previous heading                                    |
+| `<leader>us`      | Unlink all open snippet sessions                                     |
 
 </details>
 
@@ -607,6 +608,8 @@ additions.
 | `Callers`            | Show callers and go to one              |
 | `Callees`            | Show callees and go to one              |
 | `RestartLsp`         |                                         |
+| `UnlinkSnippets`     | Unlink all open snippet sessions        |
+| `ListWorkspace`      | List attached LSP workspace folders     |
 
 </details>
 
@@ -620,15 +623,16 @@ The following list of commands do not fit into any specific categories.
 <details>
     <summary>Click to view the commands</summary>
 
-| Command                 | Description                             |
-| :---------------------- | :-------------------------------------- |
-| `Filename`              | View the filename                       |
-| `YankFilename`          | Yank the filename to `"` register       |
-| `YankFilenameC`         | Yank the filename to `+` register       |
-| `YankFilepath`          | Yank the file path to `"` register      |
-| `YankFilepathC`         | Yank the file path to `+` register      |
-| `Nowrap`                | Stop wrapping current buffer            |
-| `ToggleRelativeNumbers` | Start/Stop relative number switching    |
+| Command                 | Description                          |
+| :---------------------- | :----------------------------------- |
+| `Filename`              | View the filename                    |
+| `YankFilename`          | Yank the filename to `"` register    |
+| `YankFilenameC`         | Yank the filename to `+` register    |
+| `YankFilepath`          | Yank the file path to `"` register   |
+| `YankFilepathC`         | Yank the file path to `+` register   |
+| `Nowrap`                | Stop wrapping current buffer         |
+| `ToggleRelativeNumbers` | Start/Stop relative number switching |
+| `UnlinkSnippets`        | Unlink all open snippet sessions     |
 
 </details>
 

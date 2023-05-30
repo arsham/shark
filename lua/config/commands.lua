@@ -30,3 +30,28 @@ quick.command("ToggleRelativeNumbers", function() --{{{
   vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
 end, { desc = "Stop/Start switching relative numbers" })
 --}}}
+
+quick.command("UnlinkSnippets", function() --{{{
+  local ok, session = pcall(require, "luasnip.session")
+  if not ok then
+    return
+  end
+  local cur_buf = vim.api.nvim_get_current_buf()
+
+  while true do
+    local node = session.current_nodes[cur_buf]
+    if not node then
+      return
+    end
+    local user_expanded_snip = node.parent
+    -- find 'outer' snippet.
+    while user_expanded_snip.parent do
+      user_expanded_snip = user_expanded_snip.parent
+    end
+
+    user_expanded_snip:remove_from_jumplist()
+    -- prefer setting previous/outer insertNode as current node.
+    session.current_nodes[cur_buf] = user_expanded_snip.prev.prev or user_expanded_snip.next.next
+  end
+end, { desc = "Unlink all open snippet sessions" })
+--}}}

@@ -124,4 +124,6 @@ vim.keymap.set("s", "p", function()
   vim.api.nvim_feedkeys("p", "n", false)
 end, { silent = true, remap = false, desc = "don't paste in select mode" })
 
+vim.keymap.set("n", "<leader>us", ":UnlinkSnippets<CR>", opts("Unlink all open snippet sessions"))
+
 -- vim: fdm=marker fdl=0

@@ -151,6 +151,8 @@ additions.
 :Callees                Show callees and go to one
                                                                  *:RestartLsp*
 :RestartLsp             Restarts the LSP server
+                                                             *:UnlinkSnippets*
+:UnlinkSnippets         Unlink all open snippet sessions
 
 The |:RestartLsp| fixes an issue when the `:LspRestart` defined in
 |lspconfig-commands| does not have any effects.

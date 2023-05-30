@@ -16,6 +16,7 @@
 :RestartLsp	shark.txt	/*:RestartLsp*
 :ToggleRelativeNumbers	shark.txt	/*:ToggleRelativeNumbers*
 :TypeDefinition	shark.txt	/*:TypeDefinition*
+:UnlinkSnippets	shark.txt	/*:UnlinkSnippets*
 :WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
 :YankFilename	shark.txt	/*:YankFilename*
 :YankFilenameC	shark.txt	/*:YankFilenameC*
@@ -68,6 +69,7 @@
 <Leader>rn	shark-mappings.txt	/*<Leader>rn*
 <Leader>sf	shark-mappings.txt	/*<Leader>sf*
 <Leader>sp	shark-mappings.txt	/*<Leader>sp*
+<Leader>us	shark-mappings.txt	/*<Leader>us*
 <Leader>y	shark-mappings.txt	/*<Leader>y*
 <Leader>ze	shark-mappings.txt	/*<Leader>ze*
 <Leader>zi	shark-mappings.txt	/*<Leader>zi*

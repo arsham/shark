@@ -310,6 +310,8 @@ gr                      Go to references
 <Leader>gc              Show callers and go to one
                                                                   *<Leader>dr*
 <Leader>dr              Restart LSP server
+                                                                  *<Leader>us*
+<Leader>us              Unlink all open snippet sessions
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*
