@@ -76,6 +76,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  GIT      | [tpope/vim-fugitive][tpope/vim-fugitive]         | git integration                       |
 |  GIT      | [tpope/vim-rhubarb][tpope/vim-rhubarb]           | Go to selection's code Github page    |
 |  Core     | [tpope/vim-git][tpope/vim-git]                   |                                       |
+| 🌲 Visuals | [nvim-treesitter][nvim-treesitter]               | Highlighting engine                   |
 
 </details>
 
@@ -364,6 +365,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tpope/vim-fugitive][tpope/vim-fugitive]    | [N/A][tpope/vim-fugitive]                                                  |
 | [tpope/vim-rhubarb][tpope/vim-rhubarb]      | [MIT](https://github.com/tpope/vim-rhubarb/blob/master/LICENSE)            |
 | [tpope/vim-git][tpope/vim-git]              | [N/A][tpope/vim-git]                                                       |
+| [nvim-treesitter][nvim-treesitter]          | [Apache-2.0][nvim-treesitter-license]                                      |
 
 </details>
 
@@ -387,6 +389,8 @@ quick.cmd_and_centre("SomeCommand")
 [tpope/vim-fugitive]: https://github.com/tpope/vim-fugitive
 [tpope/vim-rhubarb]: https://github.com/tpope/vim-rhubarb
 [tpope/vim-git]: https://github.com/tpope/vim-git
+[nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
+[nvim-treesitter-license]: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
