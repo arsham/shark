@@ -1,4 +1,5 @@
 {
+  "archer.nvim": { "branch": "master", "commit": "dd23964e84e62c5961b3295177868bafacd51247" },
   "arshamiser.nvim": { "branch": "master", "commit": "13af62f49e5c906589aba48b338267c9ef6e2a8e" },
   "arshlib.nvim": { "branch": "master", "commit": "e76e35c927098d07445c72e9416cce243f6aae59" },
   "fzf": { "branch": "master", "commit": "3e9efd1401404da8afdcf9757ac9996f5c48290f" },
@@ -7,6 +8,7 @@
   "fzfmania.nvim": { "branch": "master", "commit": "fd6d478dc5230f37db4acf82ca61f5326cd57c27" },
   "lazy.nvim": { "branch": "main", "commit": "bc895023573e76f8567d2375bbd3ea8be4f00ca7" },
   "listish.nvim": { "branch": "master", "commit": "039f6db68f249a23981c1f9cebc6476bbc280319" },
+  "nui.nvim": { "branch": "main", "commit": "2b2732528e4a79eb8542568bd51d25f710395bd6" },
   "nvim-web-devicons": { "branch": "master", "commit": "2a125024a137677930efcfdf720f205504c97268" },
   "plenary.nvim": { "branch": "master", "commit": "499e0743cf5e8075cd32af68baa3946a1c76adf1" },
   "startuptime.vim": { "branch": "master", "commit": "dfa57f522d6f61793fe5fea65bca7484751b8ca2" },

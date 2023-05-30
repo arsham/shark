@@ -67,6 +67,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | ⏩ Core    | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                  |
 | 🔁 Core    | [tpope/vim-repeat][tpope/vim-repeat]             |                                       |
 | 🥇 Textobj | [arsham/archer.nvim][arsham/archer.nvim]         | Mappings and text objects for archers |
+| 🧰 Visuals | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]     | UI component                          |
 
 </details>
 
@@ -315,6 +316,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tweekmonster/startuptime.vim][startuptime] | [MIT](https://github.com/tweekmonster/startuptime.vim/blob/master/LICENSE) |
 | [tpope/vim-repeat][tpope/vim-repeat]        | [N/A][tpope/vim-repeat]                                                    |
 | [arsham/archer.nvim][arsham/archer.nvim]    | [MIT](https://github.com/arsham/archer.nvim/blob/master/LICENSE)           |
+| [nui.nvim][muniftanjim/nui.nvim]            | [MIT](https://github.com/MunifTanjim/nui.nvim/blob/main/LICENSE)           |
 
 </details>
 
@@ -331,6 +333,7 @@ quick.cmd_and_centre("SomeCommand")
 [startuptime]: https://github.com/tweekmonster/startuptime.vim
 [tpope/vim-repeat]: https://github.com/tpope/vim-repeat
 [arsham/archer.nvim]: https://github.com/arsham/archer.nvim
+[muniftanjim/nui.nvim]: https://github.com/MunifTanjim/nui.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
