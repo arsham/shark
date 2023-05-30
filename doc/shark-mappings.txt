@@ -209,6 +209,8 @@ gso{motion}             Sort [count] objects that {motion} moves over
 {Visual}gso             Sort objects over {Visual} selection
                                                                         *gsoo*
 gsoo                    Sort [count] lines
+                                                  *CTRL-w_CTRL-z* *<C-w><C-z>*
+<Ctrl>w<Ctrl>z          Zoom current window/Unzoom
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

@@ -33,4 +33,5 @@ return {
   ["s1n7ax/nvim-window-picker"] = { enabled = true, start = true },
   ["ralismark/opsort.vim"] = { enabled = true, start = true },
   ["sQVe/sort.nvim"] = { enabled = true, start = true },
+  ["dhruvasagar/vim-zoom"] = { enabled = true, start = true },
 }

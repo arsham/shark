@@ -111,6 +111,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🪟 Core    | [s1n7ax/nvim-window-picker][window-picker]       | Window picker                         |
 |  Tool     | [ralismark/opsort.vim][opsort.vim]               | Sort operator                         |
 |  Tool     | [sQVe/sort.nvim][sqve/sort.nvim]                 | Line-wise and delimiter sorting       |
+| 🔭 Tool    | [dhruvasagar/vim-zoom][vim-zoom]                 | Zoom windows                          |
 
 </details>
 
@@ -519,6 +520,7 @@ quick.cmd_and_centre("SomeCommand")
 | [s1n7ax/nvim-window-picker][window-picker]  | [MIT](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)      |
 | [ralismark/opsort.vim][opsort.vim]          | [MIT](https://github.com/ralismark/opsort.vim/blob/main/LICENSE)           |
 | [sQVe/sort.nvim][sqve/sort.nvim]            | [MIT](https://github.com/sQVe/sort.nvim/blob/main/LICENSE)                 |
+| [dhruvasagar/vim-zoom][vim-zoom]            | [N/A][vim-zoom]                                                            |
 
 </details>
 
@@ -569,6 +571,7 @@ quick.cmd_and_centre("SomeCommand")
 [window-picker]: https://github.com/s1n7ax/nvim-window-picker
 [opsort.vim]: https://github.com/ralismark/opsort.vim
 [sqve/sort.nvim]: https://github.com/sQVe/sort.nvim
+[vim-zoom]: https://github.com/dhruvasagar/vim-zoom
 
 <!--
 vim: foldlevel=2 conceallevel=0
