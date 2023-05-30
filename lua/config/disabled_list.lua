@@ -34,4 +34,5 @@ return {
   ["ralismark/opsort.vim"] = { enabled = true, start = true },
   ["sQVe/sort.nvim"] = { enabled = true, start = true },
   ["dhruvasagar/vim-zoom"] = { enabled = true, start = true },
+  ["David-Kunz/treesitter-unit"] = { enabled = true, start = true },
 }

@@ -241,5 +241,9 @@ o_as                    Select around a statement
 o_H                     To the beginning of line
                                                                          *o_L*
 o_L                     To the end of line
+                                                                        *o_au*
+o_au                     Select around a unit
+                                                                        *o_iu*
+o_iu                     Select inside a unit
 
 vim:tw=78:ts=8:ft=help:norl:

@@ -68,5 +68,6 @@ Function   Plugin                      Description                     License
  Tool      ralismark/opsort.vim       Sort operator                       MIT
  Tool      sQVe/sort.nvim             Line-wise and delimiter sorting     MIT
 🔭 Tool     dhruvasagar/vim-zoom       Zoom windows                        MIT
+🥇 Textobj  David-Kunz/treesitter-unit Treesitter units              Unlicense
 
 vim:tw=78:ft=help

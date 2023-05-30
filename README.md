@@ -112,6 +112,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [ralismark/opsort.vim][opsort.vim]               | Sort operator                         |
 |  Tool     | [sQVe/sort.nvim][sqve/sort.nvim]                 | Line-wise and delimiter sorting       |
 | 🔭 Tool    | [dhruvasagar/vim-zoom][vim-zoom]                 | Zoom windows                          |
+| 🥇 Textobj | [David-Kunz/treesitter-unit][ts-unit]            | Treesitter units                      |
 
 </details>
 
@@ -266,6 +267,8 @@ There are more specialised mappings provided, keep reading please!
 | `as`        | Select around a statement                   |
 | `H`         | To the beginning of line                    |
 | `L`         | To the end of line                          |
+| `au`        | Select around a unit                        |
+| `iu`        | Select inside a unit                        |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**
@@ -521,6 +524,7 @@ quick.cmd_and_centre("SomeCommand")
 | [ralismark/opsort.vim][opsort.vim]          | [MIT](https://github.com/ralismark/opsort.vim/blob/main/LICENSE)           |
 | [sQVe/sort.nvim][sqve/sort.nvim]            | [MIT](https://github.com/sQVe/sort.nvim/blob/main/LICENSE)                 |
 | [dhruvasagar/vim-zoom][vim-zoom]            | [N/A][vim-zoom]                                                            |
+| [David-Kunz/treesitter-unit][ts-unit]       | [Unlicense][ts-unit-license]                                               |
 
 </details>
 
@@ -572,6 +576,8 @@ quick.cmd_and_centre("SomeCommand")
 [opsort.vim]: https://github.com/ralismark/opsort.vim
 [sqve/sort.nvim]: https://github.com/sQVe/sort.nvim
 [vim-zoom]: https://github.com/dhruvasagar/vim-zoom
+[ts-unit]: https://github.com/David-Kunz/treesitter-unit
+[ts-unit-license]: https://github.com/David-Kunz/treesitter-unit/blob/main/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
