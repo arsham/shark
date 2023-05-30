@@ -99,5 +99,6 @@ Function   Plugin                      Description                     License
 💡 LSP      lsp_lines.nvim             Show LSP diagnostics in extmarks    ISC
 👈 Core     milisims/nvim-luaref                                           MIT
 🗒️ Editing  echasnovski/mini.nvim      For surround, alignments, etc.      MIT
+ Core      folke/neodev.nvim                                       Apache-2.0
 
 vim:tw=78:ft=help

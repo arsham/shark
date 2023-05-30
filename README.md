@@ -169,6 +169,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 💡 LSP     | [lsp_lines.nvim][lsp_lines.nvim]                 | Show LSP diagnostics in extmarks      |
 | 👈 Core    | [milisims/nvim-luaref][nvim-luaref]              |                                       |
 | 🗒️ Editing | [echasnovski/mini.nvim][mini.nvim]               | For surround, alignments, etc.        |
+|  Core     | [folke/neodev.nvim][folke/neodev.nvim]           |                                       |
 
 </details>
 
@@ -727,6 +728,7 @@ quick.cmd_and_centre("SomeCommand")
 | [lsp_lines.nvim][lsp_lines.nvim]            | [ISC][lsp_lines.nvim]                                                      |
 | [milisims/nvim-luaref][nvim-luaref]         | [MIT](https://github.com/milisims/nvim-luaref/blob/main/LICENSE)           |
 | [echasnovski/mini.nvim][mini.nvim]          | [MIT](https://github.com/echasnovski/mini.nvim/blob/main/LICENSE)          |
+| [folke/neodev.nvim][folke/neodev.nvim]      | [Apache-2.0](https://github.com/folke/neodev.nvim/blob/main/LICENSE)       |
 
 </details>
 
@@ -819,6 +821,7 @@ quick.cmd_and_centre("SomeCommand")
 [lsp_lines.nvim]: https://git.sr.ht/~whynothugo/lsp_lines.nvim
 [nvim-luaref]: https://github.com/milisims/nvim-luaref
 [mini.nvim]: https://github.com/echasnovski/mini.nvim
+[folke/neodev.nvim]: https://github.com/folke/neodev.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

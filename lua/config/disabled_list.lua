@@ -58,4 +58,5 @@ return {
   ["whynothugo/lsp_lines.nvim"] = { enabled = true, start = true },
   ["milisims/nvim-luaref"] = { enabled = true, start = true },
   ["echasnovski/mini.nvim"] = { enabled = true, start = true },
+  ["folke/neodev.nvim"] = { enabled = true, start = true },
 }

@@ -4,6 +4,8 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "single",
 })
 
+require("neodev").setup({})
+
 return function(opts)
   if opts.log_level == nil then
     opts.log_level = "error"
