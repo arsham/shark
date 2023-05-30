@@ -44,5 +44,6 @@ Function   Plugin                      Description                     License
 🧰 Visuals  MunifTanjim/nui.nvim       UI component                        MIT
 🥇 Textobj  arsham/indent-tools.nvim   Indent mappings and text object     MIT
 🔥 Visuals  arsham/matchmaker.nvim     Creates highlight for user matches  MIT
+🛢️ Tool     stevearc/oil.nvim          File explorer                       MIT
 
 vim:tw=78:ft=help

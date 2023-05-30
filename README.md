@@ -72,6 +72,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🧰 Visuals | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]     | UI component                          |
 | 🥇 Textobj | [arsham/indent-tools.nvim][indent-tools.nvim]    | Indent mappings and text object       |
 | 🔥 Visuals | [arsham/matchmaker.nvim][matchmaker.nvim]        | Creates highlight for user matches    |
+| 🛢️ Tool    | [stevearc/oil.nvim][oil.nvim]                    | File explorer                         |
 
 </details>
 
@@ -110,6 +111,7 @@ The `leader` key is `space`!
 | [count]`[<space>` | Inserts [count] empty lines before (repeatable)                      |
 | `]i`              | Jump down along the **i**ndents                                      |
 | `[i`              | Jump up along the **i**ndents                                        |
+| `<leader>oo`      | **O**pen the **O**il buffer.                                         |
 
 </details>
 
@@ -351,6 +353,7 @@ quick.cmd_and_centre("SomeCommand")
 | [nui.nvim][muniftanjim/nui.nvim]            | [MIT](https://github.com/MunifTanjim/nui.nvim/blob/main/LICENSE)           |
 | [indent-tools.nvim][indent-tools.nvim]      | [MIT](https://github.com/arsham/indent-tools.nvim/blob/master/LICENSE)     |
 | [matchmaker.nvim][matchmaker.nvim]          | [MIT](https://github.com/arsham/matchmaker.nvim/blob/master/LICENSE)       |
+| [stevearc/oil.nvim][oil.nvim]               | [MIT](https://github.com/stevearc/oil.nvim/blob/master/LICENSE)            |
 
 </details>
 
@@ -370,6 +373,7 @@ quick.cmd_and_centre("SomeCommand")
 [muniftanjim/nui.nvim]: https://github.com/MunifTanjim/nui.nvim
 [indent-tools.nvim]: https://github.com/arsham/indent-tools.nvim
 [matchmaker.nvim]: https://github.com/arsham/matchmaker.nvim
+[oil.nvim]: https://github.com/stevearc/oil.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

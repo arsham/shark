@@ -49,4 +49,7 @@ Please refer to the following help files for more mappings and textobjects:
 - |archer.txt|
 - |indent-tools.txt|
 
+                                                                  *<Leader>oo*
+<Leader>oo              Open the Oil buffer
+
 vim:tw=78:ts=8:ft=help:norl:
