@@ -44,3 +44,4 @@ require("lazy").setup("plugins", {
 require("config.commands")
 require("config.autocmd")
 require("config.keymaps")
+require("config.abbreviations")
