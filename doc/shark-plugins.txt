@@ -84,5 +84,6 @@ Function   Plugin                      Description                     License
  LSP       hrsh7th/cmp-nvim-lua       Extension for nvim-cmp              N/A
  LSP       hrsh7th/cmp-path           Extension for nvim-cmp              MIT
  LSP       lukas-reineke/cmp-rg       Extension for nvim-cmp              MIT
+💡 LSP      j-hui/fidget.nvim          Spinner for LSP status              MIT
 
 vim:tw=78:ft=help

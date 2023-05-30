@@ -139,6 +139,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [hrsh7th/cmp-nvim-lua][cmp-nvim-lua]             | Extension for nvim-cmp                |
 |  LSP      | [hrsh7th/cmp-path][cmp-path]                     | Extension for nvim-cmp                |
 |  LSP      | [lukas-reineke/cmp-rg][cmp-rg]                   | Extension for nvim-cmp                |
+| 💡 LSP     | [j-hui/fidget.nvim][j-hui/fidget.nvim]           | Spinner for LSP status                |
 
 </details>
 
@@ -647,6 +648,7 @@ quick.cmd_and_centre("SomeCommand")
 | [hrsh7th/cmp-nvim-lua][cmp-nvim-lua]        | [N/A][cmp-nvim-lua]                                                        |
 | [hrsh7th/cmp-path][cmp-path]                | [MIT](https://github.com/hrsh7th/cmp-path/blob/main/LICENSE)               |
 | [lukas-reineke/cmp-rg][cmp-rg]              | [MIT](https://github.com/lukas-reineke/cmp-rg/blob/master/LICENSE.md)      |
+| [j-hui/fidget.nvim][j-hui/fidget.nvim]      | [MIT](https://github.com/j-hui/fidget.nvim/blob/main/LICENSE)              |
 
 </details>
 
@@ -720,6 +722,7 @@ quick.cmd_and_centre("SomeCommand")
 [cmp-nvim-lua]: https://github.com/hrsh7th/cmp-nvim-lua
 [cmp-path]: https://github.com/hrsh7th/cmp-path
 [cmp-rg]: https://github.com/lukas-reineke/cmp-rg
+[j-hui/fidget.nvim]: https://github.com/j-hui/fidget.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
