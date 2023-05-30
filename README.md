@@ -90,6 +90,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔥 GIT     | [lewis6991/gitsigns.nvim][gitsigns.nvim]         | git signs in the gutter               |
 | 🥇 Textobj | [nvim-treesitter-textobjects][ts-textobjects]    | Treesitter Text Objects               |
 | 🔥 Visuals | [freddiehaddad/feline.nvim][feline.nvim]         | Statusline (default)                  |
+| 🗨️ Visuals | [rcarriga/nvim-notify][nvim-notify]              | Better notification UI                |
 
 </details>
 
@@ -479,6 +480,7 @@ quick.cmd_and_centre("SomeCommand")
 | [lewis6991/gitsigns.nvim][gitsigns.nvim]    | [MIT](https://github.com/lewis6991/gitsigns.nvim/blob/main/LICENSE)        |
 | [treesitter-textobjects][ts-textobjects]    | [Apache-2.0][treesitter-textobjects-license]                               |
 | [freddiehaddad/feline.nvim][feline.nvim]    | [GPL-3.0][feline.nvim-license]                                             |
+| [rcarriga/nvim-notify][nvim-notify]         | [MIT](https://github.com/rcarriga/nvim-notify/blob/master/LICENSE)         |
 
 </details>
 
@@ -509,6 +511,7 @@ quick.cmd_and_centre("SomeCommand")
 [treesitter-textobjects-license]: https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/LICENSE
 [feline.nvim]: https://github.com/freddiehaddad/feline.nvim
 [feline.nvim-license]: https://github.com/freddiehaddad/feline.nvim/blob/master/LICENSE.md
+[nvim-notify]: https://github.com/rcarriga/nvim-notify
 
 <!--
 vim: foldlevel=2 conceallevel=0

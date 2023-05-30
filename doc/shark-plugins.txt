@@ -52,5 +52,6 @@ Function   Plugin                      Description                     License
 🔥 GIT      lewis6991/gitsigns.nvim    git signs in the gutter             MIT
 🥇 Textobj  nvim-treesitter-textobjects Treesitter text objects     Apache-2.0
 🔥 Visuals  freddiehaddad/feline.nvim  Statusline (default)            GPL-3.0
+🗨️ Visuals  rcarriga/nvim-notify       Better notification UI              MIT
 
 vim:tw=78:ft=help
