@@ -77,5 +77,12 @@ Function   Plugin                      Description                     License
  LSP       L3MON4D3/LuaSnip           Snippet engine                Apache2.0
  LSP       hrsh7th/cmp-cmdline        Extension for nvim-cmp              N/A
  LSP       friendly-snippets                                              MIT
+ LSP       hrsh7th/cmp-buffer         Extension for nvim-cmp              MIT
+ LSP       hrsh7th/cmp-calc           Extension for nvim-cmp              N/A
+ LSP       hrsh7th/cmp-nvim-lsp       Extension for nvim-cmp              MIT
+ LSP       hrsh7th/lsp-signature-help Extension for nvim-cmp              N/A
+ LSP       hrsh7th/cmp-nvim-lua       Extension for nvim-cmp              N/A
+ LSP       hrsh7th/cmp-path           Extension for nvim-cmp              MIT
+ LSP       lukas-reineke/cmp-rg       Extension for nvim-cmp              MIT
 
 vim:tw=78:ft=help

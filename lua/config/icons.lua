@@ -62,3 +62,5 @@ return {
     Variable      = " ",
   }, -- }}}
 }
+
+-- vim: fdm=marker fdl=0

@@ -132,6 +132,13 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]             | Snippet engine                        |
 |  LSP      | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]       | Extension for nvim-cmp                |
 |  LSP      | [friendly-snippets][friendly-snippets]           |                                       |
+|  LSP      | [hrsh7th/cmp-buffer][cmp-buffer]                 | Extension for nvim-cmp                |
+|  LSP      | [hrsh7th/cmp-calc][cmp-calc]                     | Extension for nvim-cmp                |
+|  LSP      | [hrsh7th/cmp-nvim-lsp][cmp-nvim-lsp]             | Extension for nvim-cmp                |
+|  LSP      | [hrsh7th/lsp-signature-help][sig-help]           | Extension for nvim-cmp                |
+|  LSP      | [hrsh7th/cmp-nvim-lua][cmp-nvim-lua]             | Extension for nvim-cmp                |
+|  LSP      | [hrsh7th/cmp-path][cmp-path]                     | Extension for nvim-cmp                |
+|  LSP      | [lukas-reineke/cmp-rg][cmp-rg]                   | Extension for nvim-cmp                |
 
 </details>
 
@@ -482,19 +489,21 @@ Please see the code for all available mappings.
 
 #### CMP
 
-| Mapping         | Description                         |
-| :-------------- | :---------------------------------- |
-| [i]`<C-j>`      | Select next item                    |
-| [i]`<C-k>`      | Select previous item                |
-| [i]`<C-b>`      | Scroll documents up                 |
-| [i]`<C-f>`      | Scroll documents down               |
-| [i]`<C-Space>`  | Initiate completion menu (main one) |
-| [i]`<C-x><C-o>` | Initiate completion menu (lsp)      |
-| [i]`<C-x><C-s>` | Initiate completion menu (luasnip)  |
-| [i]`<C-x><C-g>` | Initiate completion menu (git)      |
-| [i,c]`<C-e>`    | Abort completion and close          |
-| [i,s]`<Tab>`    | Next placeholder                    |
-| [i,s]`<S-Tab>`  | Previous placeholder                |
+| Mapping         | Description                                |
+| :-------------- | :----------------------------------------- |
+| [i]`<C-j>`      | Select next item                           |
+| [i]`<C-k>`      | Select previous item                       |
+| [i]`<C-b>`      | Scroll documents up                        |
+| [i]`<C-f>`      | Scroll documents down                      |
+| [i]`<C-Space>`  | Initiate completion menu (main one)        |
+| [i]`<C-s>`      | Initiate completion menu (buffer, rg)      |
+| [i]`<C-x><C-o>` | Initiate completion menu (lsp, buffer, rg) |
+| [i]`<C-x><C-r>` | Initiate completion menu (rg)              |
+| [i]`<C-x><C-s>` | Initiate completion menu (luasnip)         |
+| [i]`<C-x><C-g>` | Initiate completion menu (git)             |
+| [i,c]`<C-e>`    | Abort completion and close                 |
+| [i,s]`<Tab>`    | Next placeholder                           |
+| [i,s]`<S-Tab>`  | Previous placeholder                       |
 
 **LSP** defines its own set of commands, however I have added a few interesting
 additions.
@@ -631,6 +640,13 @@ quick.cmd_and_centre("SomeCommand")
 | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]        | [Apache-2.0](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)      |
 | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]  | [N/A][hrsh7th/cmp-cmdline]                                                 |
 | [friendly-snippets][friendly-snippets]      | [MIT][friendly-snippets-license]                                           |
+| [hrsh7th/cmp-buffer][cmp-buffer]            | [MIT](https://github.com/hrsh7th/cmp-buffer/blob/main/LICENSE)             |
+| [hrsh7th/cmp-calc][cmp-calc]                | [N/A][cmp-calc]                                                            |
+| [hrsh7th/cmp-nvim-lsp][cmp-nvim-lsp]        | [MIT](https://github.com/hrsh7th/cmp-nvim-lsp/blob/main/LICENSE)           |
+| [hrsh7th/lsp-signature-help][sig-help]      | [N/A][sig-help]                                                            |
+| [hrsh7th/cmp-nvim-lua][cmp-nvim-lua]        | [N/A][cmp-nvim-lua]                                                        |
+| [hrsh7th/cmp-path][cmp-path]                | [MIT](https://github.com/hrsh7th/cmp-path/blob/main/LICENSE)               |
+| [lukas-reineke/cmp-rg][cmp-rg]              | [MIT](https://github.com/lukas-reineke/cmp-rg/blob/master/LICENSE.md)      |
 
 </details>
 
@@ -697,6 +713,13 @@ quick.cmd_and_centre("SomeCommand")
 [hrsh7th/cmp-cmdline]: https://github.com/hrsh7th/cmp-cmdline
 [friendly-snippets]: https://github.com/rafamadriz/friendly-snippets
 [friendly-snippets-license]: https://github.com/rafamadriz/friendly-snippets/blob/main/LICENSE
+[cmp-buffer]: https://github.com/hrsh7th/cmp-buffer
+[cmp-calc]: https://github.com/hrsh7th/cmp-calc
+[cmp-nvim-lsp]: https://github.com/hrsh7th/cmp-nvim-lsp
+[sig-help]: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
+[cmp-nvim-lua]: https://github.com/hrsh7th/cmp-nvim-lua
+[cmp-path]: https://github.com/hrsh7th/cmp-path
+[cmp-rg]: https://github.com/lukas-reineke/cmp-rg
 
 <!--
 vim: foldlevel=2 conceallevel=0

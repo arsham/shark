@@ -110,7 +110,8 @@ When a |LSP| server is attached to a buffer, a series of mappings will be
 defined for that buffer based on the server's capabilities. When possible, fzf
 will take over the results of the |LSP| mappings results.
 
-See |shark-lsp-mappings| for the defined LSP mappings.
+See |shark-lsp-mappings| for the defined LSP mappings, and
+[shark-cmp-mappings] for CMP mappings.
 
 |LSP| defines its own set of commands, however I have added a few interesting
 additions.

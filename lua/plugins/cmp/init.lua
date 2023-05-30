@@ -102,7 +102,37 @@ local function config()
         config = {
           sources = {
             { name = "nvim_lsp", priority = 80 },
+            { name = "nvim_lua", priority = 80 },
+            { name = "path", priority = 40 },
             { name = "luasnip", priority = 10 },
+            { name = "nvim_lsp_signature_help" },
+            { name = "calc" },
+            { name = "dap" },
+          },
+        },
+      }), -- }}}
+
+      ["<C-s>"] = cmp.mapping.complete({ -- {{{
+        config = {
+          sources = {
+            {
+              name = "buffer",
+              priority = 5,
+              keyword_length = 3,
+              option = {
+                get_bufnrs = function()
+                  return vim.api.nvim_list_bufs()
+                end,
+              },
+            },
+            {
+              name = "rg",
+              keyword_length = 3,
+              priority = 1,
+              option = {
+                additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
+              },
+            },
           },
         },
       }), -- }}}
@@ -111,7 +141,29 @@ local function config()
         config = {
           sources = cmp.config.sources({
             { name = "nvim_lsp" },
+          }, {
+            {
+              name = "buffer",
+              priority = 5,
+              keyword_length = 3,
+              group_index = 5,
+              option = {
+                get_bufnrs = function()
+                  return vim.api.nvim_list_bufs()
+                end,
+              },
+            },
+          }, {
+            { name = "rg", keyword_length = 3, priority = 1, group_index = 5 },
           }),
+        },
+      }), -- }}}
+
+      ["<C-x><C-r>"] = cmp.mapping.complete({ -- {{{
+        config = {
+          sources = {
+            { name = "rg" },
+          },
         },
       }), -- }}}
 
@@ -119,6 +171,14 @@ local function config()
         config = {
           sources = {
             { name = "luasnip" },
+          },
+        },
+      }), -- }}}
+
+      ["<C-x><C-g>"] = cmp.mapping.complete({ -- GIT {{{
+        config = {
+          sources = {
+            { name = "git" },
           },
         },
       }), -- }}}
@@ -159,6 +219,33 @@ local function config()
         priority = 80,
         group_index = 1,
       },
+      { name = "nvim_lua", priority = 80, group_index = 1 },
+      { name = "path", priority = 40, group_index = 5 },
+      { name = "luasnip", priority = 10, group_index = 2 },
+      { name = "calc", group_index = 3 },
+      { name = "nvim_lsp_signature_help" },
+      {
+        name = "buffer",
+        priority = 5,
+        keyword_length = 3,
+        group_index = 5,
+        option = {
+          get_bufnrs = function()
+            return vim.api.nvim_list_bufs()
+          end,
+        },
+      },
+      {
+        name = "rg",
+        keyword_length = 3,
+        priority = 5,
+        group_index = 5,
+        option = {
+          additional_arguments = "--max-depth 6 --one-file-system --ignore-file ~/.config/nvim/scripts/rgignore",
+        },
+      },
+      { name = "emoji", priority = 2 },
+      { name = "nerdfont", priority = 1 },
     }), --}}}
 
     formatting = { --{{{
@@ -170,12 +257,19 @@ local function config()
         end
 
         vim_item.menu = string.format("[%s%s]", ({
+          buffer = "Buffer",
           nvim_lsp = "LSP",
           luasnip = "LuaSnip",
+          nvim_lua = "Lua",
+          path = "Path",
+          rg = "RG",
+          omni = "Omni",
         })[entry.source.name] or entry.source.name, client_name)
 
         vim_item.kind = string.format("%s %-9s", kind_icons[vim_item.kind], vim_item.kind)
         vim_item.dup = {
+          buffer = 1,
+          path = 1,
           nvim_lsp = 0,
           luasnip = 1,
         }
@@ -219,6 +313,9 @@ local function config()
         end,
 
         compare.score,
+        function(...)
+          return require("cmp_buffer"):compare_locality(...)
+        end,
         compare.locality,
         compare.sort_text,
         compare.length,
@@ -226,6 +323,17 @@ local function config()
       },
     }, --}}}
   })
+
+  cmp.setup.filetype("gitcommit", { -- {{{
+    sources = cmp.config.sources({
+      { name = "git", priority = 100 },
+      { name = "luasnip", priority = 80 },
+      { name = "rg", priority = 50 },
+      { name = "path", priority = 10 },
+      { name = "emoji" },
+      { name = "nerdfont" },
+    }),
+  }) -- }}}
 end
 
 return {
@@ -233,9 +341,23 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-calc",
+      "lukas-reineke/cmp-rg",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "nvim-treesitter/nvim-treesitter",
+      {
+        "petertriho/cmp-git",
+        opts = {
+          filetypes = { "*" },
+        },
+      },
+      "hrsh7th/cmp-emoji",
+      "chrisgrieser/cmp-nerdfont",
     },
     config = config,
     event = { "InsertEnter" },

@@ -7,8 +7,7 @@ local lsp_util = require("plugins.lsp.util")
 ---@param bufnr number
 local function on_attach(client, bufnr) --{{{
   vim.api.nvim_buf_call(bufnr, function()
-    local caps = client.server_capabilities
-    if caps.completionProvider then
+    if client.supports_method("textDocument/completion") then
       vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
     end
 

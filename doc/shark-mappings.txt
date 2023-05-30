@@ -293,6 +293,10 @@ CMP MAPPING                                               *shark-cmp-mappings*
 <Tab>                   Next placeholder
                                                      *i_SHIFT-TAB* *i_<S-Tab>*
                                                      *s_SHIFT-TAB* *s_<S-Tab>*
-i_SHIFT-TAB             Previous placeholder
+<S-Tab>                 Previous placeholder
+                                                           *i_CTRL-s* *i_C-s>*
+<C-s>                   Completion menu (buffer, rg)
+                                              *i_CTRL-x_CTRL-r* *i_<C-x><C-r>*
+<C-x><X-r>              Completion menu (rg)
 
 vim:tw=78:ts=8:ft=help:norl:

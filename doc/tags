@@ -93,8 +93,10 @@ i_<C-k>	shark-mappings.txt	/*i_<C-k>*
 i_<C-l>	shark-mappings.txt	/*i_<C-l>*
 i_<C-x><C-g>	shark-mappings.txt	/*i_<C-x><C-g>*
 i_<C-x><C-o>	shark-mappings.txt	/*i_<C-x><C-o>*
+i_<C-x><C-r>	shark-mappings.txt	/*i_<C-x><C-r>*
 i_<C-x><C-s>	shark-mappings.txt	/*i_<C-x><C-s>*
 i_<S-Tab>	shark-mappings.txt	/*i_<S-Tab>*
+i_C-s>	shark-mappings.txt	/*i_C-s>*
 i_CTRL-SPACE	shark-mappings.txt	/*i_CTRL-SPACE*
 i_CTRL-b	shark-mappings.txt	/*i_CTRL-b*
 i_CTRL-e	shark-mappings.txt	/*i_CTRL-e*
@@ -103,8 +105,10 @@ i_CTRL-h	shark-mappings.txt	/*i_CTRL-h*
 i_CTRL-j	shark-mappings.txt	/*i_CTRL-j*
 i_CTRL-k	shark-mappings.txt	/*i_CTRL-k*
 i_CTRL-l	shark-mappings.txt	/*i_CTRL-l*
+i_CTRL-s	shark-mappings.txt	/*i_CTRL-s*
 i_CTRL-x_CTRL-g	shark-mappings.txt	/*i_CTRL-x_CTRL-g*
 i_CTRL-x_CTRL-o	shark-mappings.txt	/*i_CTRL-x_CTRL-o*
+i_CTRL-x_CTRL-r	shark-mappings.txt	/*i_CTRL-x_CTRL-r*
 i_CTRL-x_CTRL-s	shark-mappings.txt	/*i_CTRL-x_CTRL-s*
 i_SHIFT-TAB	shark-mappings.txt	/*i_SHIFT-TAB*
 i_TAB	shark-mappings.txt	/*i_TAB*
