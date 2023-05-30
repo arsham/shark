@@ -57,4 +57,5 @@ return {
   ["gbprod/substitute.nvim"] = { enabled = true, start = true },
   ["whynothugo/lsp_lines.nvim"] = { enabled = true, start = true },
   ["milisims/nvim-luaref"] = { enabled = true, start = true },
+  ["echasnovski/mini.nvim"] = { enabled = true, start = true },
 }

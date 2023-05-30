@@ -98,5 +98,6 @@ Function   Plugin                      Description                     License
  Editing   gbprod/substitute.nvim     Text exchange operator            WTFPL
 💡 LSP      lsp_lines.nvim             Show LSP diagnostics in extmarks    ISC
 👈 Core     milisims/nvim-luaref                                           MIT
+🗒️ Editing  echasnovski/mini.nvim      For surround, alignments, etc.      MIT
 
 vim:tw=78:ft=help

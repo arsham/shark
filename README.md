@@ -168,6 +168,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [gbprod/substitute.nvim][substitute.nvim]        | Text exchange operator                |
 | 💡 LSP     | [lsp_lines.nvim][lsp_lines.nvim]                 | Show LSP diagnostics in extmarks      |
 | 👈 Core    | [milisims/nvim-luaref][nvim-luaref]              |                                       |
+| 🗒️ Editing | [echasnovski/mini.nvim][mini.nvim]               | For surround, alignments, etc.        |
 
 </details>
 
@@ -725,6 +726,7 @@ quick.cmd_and_centre("SomeCommand")
 | [gbprod/substitute.nvim][substitute.nvim]   | [WTFPL](https://github.com/gbprod/substitute.nvim/blob/main/LICENCE)       |
 | [lsp_lines.nvim][lsp_lines.nvim]            | [ISC][lsp_lines.nvim]                                                      |
 | [milisims/nvim-luaref][nvim-luaref]         | [MIT](https://github.com/milisims/nvim-luaref/blob/main/LICENSE)           |
+| [echasnovski/mini.nvim][mini.nvim]          | [MIT](https://github.com/echasnovski/mini.nvim/blob/main/LICENSE)          |
 
 </details>
 
@@ -816,6 +818,7 @@ quick.cmd_and_centre("SomeCommand")
 [substitute.nvim]: https://github.com/gbprod/substitute.nvim
 [lsp_lines.nvim]: https://git.sr.ht/~whynothugo/lsp_lines.nvim
 [nvim-luaref]: https://github.com/milisims/nvim-luaref
+[mini.nvim]: https://github.com/echasnovski/mini.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
