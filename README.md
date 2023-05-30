@@ -91,6 +91,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🥇 Textobj | [nvim-treesitter-textobjects][ts-textobjects]    | Treesitter Text Objects               |
 | 🔥 Visuals | [freddiehaddad/feline.nvim][feline.nvim]         | Statusline (default)                  |
 | 🗨️ Visuals | [rcarriga/nvim-notify][nvim-notify]              | Better notification UI                |
+| 🌈 Visuals | [treesitter-refactor][treesitter-refactor]       | Treesitter plugin                     |
 
 </details>
 
@@ -481,6 +482,7 @@ quick.cmd_and_centre("SomeCommand")
 | [treesitter-textobjects][ts-textobjects]    | [Apache-2.0][treesitter-textobjects-license]                               |
 | [freddiehaddad/feline.nvim][feline.nvim]    | [GPL-3.0][feline.nvim-license]                                             |
 | [rcarriga/nvim-notify][nvim-notify]         | [MIT](https://github.com/rcarriga/nvim-notify/blob/master/LICENSE)         |
+| [treesitter-refactor][treesitter-refactor]  | [Apache-2.0][treesitter-refactor-license]                                  |
 
 </details>
 
@@ -512,6 +514,8 @@ quick.cmd_and_centre("SomeCommand")
 [feline.nvim]: https://github.com/freddiehaddad/feline.nvim
 [feline.nvim-license]: https://github.com/freddiehaddad/feline.nvim/blob/master/LICENSE.md
 [nvim-notify]: https://github.com/rcarriga/nvim-notify
+[treesitter-refactor]: https://github.com/nvim-treesitter/nvim-treesitter-refactor
+[treesitter-refactor-license]: https://github.com/nvim-treesitter/nvim-treesitter-refactor/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0

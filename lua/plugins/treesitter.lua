@@ -93,6 +93,15 @@ local function config()
         },
       }, --}}}
     },
+
+    refactor = { -- {{{
+      highlight_definitions = {
+        enable = true,
+        disable = function(_, bufnr)
+          return vim.api.nvim_buf_line_count(bufnr) > vim.g.treesitter_refactor_maxlines
+        end,
+      },
+    }, -- }}}
   })
 end
 
@@ -100,6 +109,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    "nvim-treesitter/nvim-treesitter-refactor",
   },
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },
