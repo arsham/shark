@@ -110,6 +110,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 📁 Tool    | [nvim-neo-tree/neo-tree.nvim][neo-tree]          | File explorer tree                    |
 | 🪟 Core    | [s1n7ax/nvim-window-picker][window-picker]       | Window picker                         |
 |  Tool     | [ralismark/opsort.vim][opsort.vim]               | Sort operator                         |
+|  Tool     | [sQVe/sort.nvim][sqve/sort.nvim]                 | Line-wise and delimiter sorting       |
 
 </details>
 
@@ -517,6 +518,7 @@ quick.cmd_and_centre("SomeCommand")
 | [nvim-neo-tree/neo-tree.nvim][neo-tree]     | [MIT][neo-tree-license]                                                    |
 | [s1n7ax/nvim-window-picker][window-picker]  | [MIT](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)      |
 | [ralismark/opsort.vim][opsort.vim]          | [MIT](https://github.com/ralismark/opsort.vim/blob/main/LICENSE)           |
+| [sQVe/sort.nvim][sqve/sort.nvim]            | [MIT](https://github.com/sQVe/sort.nvim/blob/main/LICENSE)                 |
 
 </details>
 
@@ -566,6 +568,7 @@ quick.cmd_and_centre("SomeCommand")
 [neo-tree-license]: https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE
 [window-picker]: https://github.com/s1n7ax/nvim-window-picker
 [opsort.vim]: https://github.com/ralismark/opsort.vim
+[sqve/sort.nvim]: https://github.com/sQVe/sort.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
