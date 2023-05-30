@@ -29,4 +29,5 @@ return {
   ["RaafatTurki/hex.nvim"] = { enabled = true, start = true },
   ["iamcco/markdown-preview.nvim"] = { enabled = true, start = true },
   ["numToStr/Navigator.nvim"] = { enabled = true, start = true },
+  ["nvim-neo-tree/neo-tree.nvim"] = { enabled = true, start = true },
 }

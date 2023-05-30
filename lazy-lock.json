@@ -17,6 +17,7 @@
   "listish.nvim": { "branch": "master", "commit": "039f6db68f249a23981c1f9cebc6476bbc280319" },
   "markdown-preview.nvim": { "branch": "master", "commit": "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96" },
   "matchmaker.nvim": { "branch": "master", "commit": "b5963e3c3247264c6aacd9a42394d5bff3107af3" },
+  "neo-tree.nvim": { "branch": "v2.x", "commit": "8c89efb93b8383666a6f989762c2f610f5f2c930" },
   "nui.nvim": { "branch": "main", "commit": "d5a82aae64426a805e19d8ef5a379292f9dc55d3" },
   "nvim-notify": { "branch": "master", "commit": "ea9c8ce7a37f2238f934e087c255758659948e0f" },
   "nvim-treesitter": { "branch": "master", "commit": "1b5a7334bb9862abafcf6676d2a2a6973d15ae3a" },

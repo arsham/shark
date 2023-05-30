@@ -200,6 +200,10 @@ g.                      Use last change (anything) as the
 <Ctrl>r<Ctrl>l          Copy current line in the buffer
                                                                   *<Tab><Tab>*
 <Tab><Tab>              Switch to the alternative buffer
+                                                                  *<Leader>kk*
+<Leader>kk              Toggles file tree
+                                                                  *<Leader>kf*
+<Leader>kf              Finds current file in the file tree
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

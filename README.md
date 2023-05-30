@@ -107,6 +107,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 󰛡 Core     | [RaafatTurki/hex.nvim][hex.nvim]                 | Hex viewer                            |
 |  Tool     | [iamcco/markdown-preview.nvim][mk-preview]       |                                       |
 | 🧭 Core    | [numToStr/Navigator.nvim][navigator.nvim]        | Seamless navigation with tmux         |
+| 📁 Tool    | [nvim-neo-tree/neo-tree.nvim][neo-tree]          | File explorer tree                    |
 
 </details>
 
@@ -368,6 +369,8 @@ Most actions can apply to multiple selected items if possible.
 | `<Ctrl-x><Ctrl-k>` | Search in **dictionaries** (requires **words-insane**) |
 | `<Ctrl-x><Ctrl-f>` | Search in **f**iles                                    |
 | `<Ctrl-x><Ctrl-l>` | Search in **l**ines                                    |
+| `<leader>kk`       | Toggles file tree                                      |
+| `<leader>kf`       | **F**inds current file in the file tree                |
 
 If you keep hitting `<Ctrl-/>` the preview window will change width. With
 `Shift-/` you can show and hide the preview window.
@@ -507,6 +510,7 @@ quick.cmd_and_centre("SomeCommand")
 | [RaafatTurki/hex.nvim][hex.nvim]            | [MIT](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)         |
 | [iamcco/markdown-preview.nvim][mk-preview]  | [MIT][mk-preview-license]                                                  |
 | [numToStr/Navigator.nvim][navigator.nvim]   | [MIT](https://github.com/numToStr/Navigator.nvim/blob/master/LICENSE)      |
+| [nvim-neo-tree/neo-tree.nvim][neo-tree]     | [MIT][neo-tree-license]                                                    |
 
 </details>
 
@@ -552,6 +556,8 @@ quick.cmd_and_centre("SomeCommand")
 [mk-preview]: https://github.com/iamcco/markdown-preview.nvim
 [mk-preview-license]: https://github.com/iamcco/markdown-preview.nvim/blob/master/LICENSE
 [navigator.nvim]: https://github.com/numToStr/Navigator.nvim
+[neo-tree]: https://github.com/nvim-neo-tree/neo-tree.nvim
+[neo-tree-license]: https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0

@@ -63,5 +63,6 @@ Function   Plugin                      Description                     License
 󰛡 Core      RaafatTurki/hex.nvim       Hex viewer                          MIT
  Tool      iamcco/markdown-preview.nvim                                   MIT
 🧭 Core     numToStr/Navigator.nvim    Seamless navigation with tmux       MIT
+📁 Tool     nvim-neo-tree/neo-tree.nvim File explorer tree                 MIT
 
 vim:tw=78:ft=help
