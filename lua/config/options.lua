@@ -216,8 +216,6 @@ vim.g.netrw_browsex_viewer = "xdg-open"
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noinsert,noselect"
 
-vim.g.treesitter_refactor_maxlines = 10 * 1024
-
 vim.g.markdown_fenced_languages = { -- {{{
   "vim",
   "lua",

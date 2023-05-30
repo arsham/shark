@@ -1,3 +1,5 @@
+local constants = require("config.constants")
+
 return {
   "nvim-treesitter/nvim-treesitter-refactor",
   lazy = true,
@@ -8,7 +10,7 @@ return {
         highlight_definitions = {
           enable = true,
           disable = function(_, bufnr)
-            return vim.api.nvim_buf_line_count(bufnr) > vim.g.treesitter_refactor_maxlines
+            return vim.api.nvim_buf_line_count(bufnr) > constants.treesitter_refactor_maxlines
           end,
         },
       }
