@@ -74,6 +74,14 @@ listed plugins.
 ==============================================================================
 FUNCTIONALITY                                            *shark-functionality*
 
+Some default |mappings|/|commands| are augmented to centre the buffer after
+the execution.
+
+Most of mappings that are enabled an in use are not documented here. You
+should be able to find them by searching the help of the installed plugins.
+
+I would recommend you have a look at the code to see what is available to you.
+
 ==============================================================================
 LISTS                                                            *shark-lists*
 

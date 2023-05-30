@@ -49,5 +49,6 @@ Function   Plugin                      Description                     License
  GIT       tpope/vim-rhubarb          Go to selection's code Github page  MIT
  Core      tpope/vim-git              git integration                     N/A
 🌲 Visuals  nvim-treesitter            Highlighting engine          Apache-2.0
+🔥 GIT      lewis6991/gitsigns.nvim    git signs in the gutter             MIT
 
 vim:tw=78:ft=help

@@ -41,6 +41,15 @@ listed plugins.
 
 ## Functionality
 
+Some default mappings/commands are augmented to **centre the buffer** after the
+execution.
+
+Some mappings/commands are obvious, but I've left them here as a reminder. Some
+are left out either because they are not used too often, or they are defined
+after writing this document and I've forgot to document.
+
+I would recommend you have a look at the code to see what is available to you.
+
 ### Plugins
 
 This list might change at any time depending on if there is a better
@@ -77,6 +86,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  GIT      | [tpope/vim-rhubarb][tpope/vim-rhubarb]           | Go to selection's code Github page    |
 |  Core     | [tpope/vim-git][tpope/vim-git]                   |                                       |
 | 🌲 Visuals | [nvim-treesitter][nvim-treesitter]               | Highlighting engine                   |
+| 🔥 GIT     | [lewis6991/gitsigns.nvim][gitsigns.nvim]         | git signs in the gutter               |
 
 </details>
 
@@ -97,6 +107,8 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **i**           | **I**ndent                                        |
 | **m**           | **M**atch highlighting                            |
 | **d**           | **D**iff                                          |
+| **h**           | **H**unk                                          |
+| **c**           | **C**hange                                        |
 
 The `leader` key is `space`!
 
@@ -119,6 +131,16 @@ The `leader` key is `space`!
 | `<leader>oo`      | **O**pen the **O**il buffer.                                         |
 | `<leader>gg`      | Fu**g**itive git buffer                                              |
 | `<leader>gd`      | Fu**g**itive git **D**iff                                            |
+| `]c`              | Jump to the next **c**hange                                          |
+| `[c`              | Jump to the previous **c**hange                                      |
+| `<leader>gs`      | (gitsigns) Toggle **S**igns                                          |
+| `<leader>hb`      | (gitsigns) **B**lame line                                            |
+| `<leader>hs`      | (gitsigns) **S**tage **h**unk                                        |
+| `<leader>hl`      | (gitsigns) **S**tage **l**ine                                        |
+| `<leader>hu`      | (gitsigns) **U**nstage **h**unk                                      |
+| `<leader>hr`      | (gitsigns) **R**eset **h**unk                                        |
+| `<leader>hR`      | (gitsigns) **R**eset buffer                                          |
+| `<leader>hp`      | (gitsigns) **P**review **h**unk                                      |
 
 </details>
 
@@ -139,6 +161,8 @@ The `leader` key is `space`!
 | `iz`        | **I**n folds                                |
 | `ai`        | **A**round **I**ndentation block            |
 | `ii`        | **I**n **I**ndentation block                |
+| `ah`        | **A**round **H**unk                         |
+| `ih`        | **I**n **H**unk                             |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**
@@ -366,6 +390,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tpope/vim-rhubarb][tpope/vim-rhubarb]      | [MIT](https://github.com/tpope/vim-rhubarb/blob/master/LICENSE)            |
 | [tpope/vim-git][tpope/vim-git]              | [N/A][tpope/vim-git]                                                       |
 | [nvim-treesitter][nvim-treesitter]          | [Apache-2.0][nvim-treesitter-license]                                      |
+| [lewis6991/gitsigns.nvim][gitsigns.nvim]    | [MIT](https://github.com/lewis6991/gitsigns.nvim/blob/main/LICENSE)        |
 
 </details>
 
@@ -391,6 +416,7 @@ quick.cmd_and_centre("SomeCommand")
 [tpope/vim-git]: https://github.com/tpope/vim-git
 [nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [nvim-treesitter-license]: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/LICENSE
+[gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

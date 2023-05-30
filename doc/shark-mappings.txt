@@ -39,6 +39,8 @@ situation or messes with a community-driven or Vim's very well known mapping:
  a                All, or disabling certain constraints
  i                Indent
  d                Diff
+ h                Hunk
+ c                Change
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -56,5 +58,33 @@ Please refer to the following help files for more mappings and textobjects:
 <Leader>gg              Fugitive git buffer
                                                                   *<Leader>gd*
 <Leader>gd              Fugitive git diff
+                                                                    *shark_]c*
+]c                      (gitsigns) Next hunk
+                                                                    *shark_[c*
+[c                      (gitsigns) Previous hunk
+                                                                  *<Leader>gs*
+<Leader>gs              (gitsigns) Toggle Signs
+                                                                  *<Leader>hb*
+<Leader>hb              (gitsigns) Blame line
+                                                                  *<Leader>hs*
+<Leader>hs              (gitsigns) Stage hunk
+                                                                  *<Leader>hl*
+<Leader>hl              (gitsigns) Stage line
+                                                                  *<Leader>hu*
+<Leader>hu              (gitsigns) Unstage hunk
+                                                                  *<Leader>hr*
+<Leader>hr              (gitsigns) Reset hunk
+                                                                  *<Leader>hR*
+<Leader>hR              (gitsigns) Reset buffer
+                                                                  *<Leader>hp*
+<Leader>hp              (gitsigns) Preview hunk
+
+==============================================================================
+TEXT OBJECTS                               |text-objects| *shark-text-objects*
+
+                                                                        *o_ah*
+o_ah                     Around Hunk (git changes)
+                                                                        *o_ih*
+o_ih                     In Hunk (git changes)
 
 vim:tw=78:ts=8:ft=help:norl:

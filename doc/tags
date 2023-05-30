@@ -1,6 +1,16 @@
 <Leader>gd	shark-mappings.txt	/*<Leader>gd*
 <Leader>gg	shark-mappings.txt	/*<Leader>gg*
+<Leader>gs	shark-mappings.txt	/*<Leader>gs*
+<Leader>hR	shark-mappings.txt	/*<Leader>hR*
+<Leader>hb	shark-mappings.txt	/*<Leader>hb*
+<Leader>hl	shark-mappings.txt	/*<Leader>hl*
+<Leader>hp	shark-mappings.txt	/*<Leader>hp*
+<Leader>hr	shark-mappings.txt	/*<Leader>hr*
+<Leader>hs	shark-mappings.txt	/*<Leader>hs*
+<Leader>hu	shark-mappings.txt	/*<Leader>hu*
 <Leader>oo	shark-mappings.txt	/*<Leader>oo*
+o_ah	shark-mappings.txt	/*o_ah*
+o_ih	shark-mappings.txt	/*o_ih*
 shark-call_and_centre	shark.txt	/*shark-call_and_centre*
 shark-contents	shark.txt	/*shark-contents*
 shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*
@@ -19,5 +29,8 @@ shark-normal	shark.txt	/*shark-normal*
 shark-plugins	shark-plugins.txt	/*shark-plugins*
 shark-plugins.txt	shark-plugins.txt	/*shark-plugins.txt*
 shark-setup	shark.txt	/*shark-setup*
+shark-text-objects	shark-mappings.txt	/*shark-text-objects*
 shark-utilities	shark.txt	/*shark-utilities*
 shark.txt	shark.txt	/*shark.txt*
+shark_[c	shark-mappings.txt	/*shark_[c*
+shark_]c	shark-mappings.txt	/*shark_]c*
