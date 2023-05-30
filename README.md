@@ -172,6 +172,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Core     | [folke/neodev.nvim][folke/neodev.nvim]           |                                       |
 | 📆 Tool    | [nvim-neorg/neorg][nvim-neorg/neorg]             | Note taking tool                      |
 |  Lists    | [kevinhwang91/nvim-bqf][nvim-bqf]                | Better quickfix list manager          |
+|  Tool     | [bfredl/nvim-luadev][bfredl/nvim-luadev]         | REPL/debug console for lua plugins    |
 
 </details>
 
@@ -745,6 +746,7 @@ quick.cmd_and_centre("SomeCommand")
 | [folke/neodev.nvim][folke/neodev.nvim]      | [Apache-2.0](https://github.com/folke/neodev.nvim/blob/main/LICENSE)       |
 | [nvim-neorg/neorg][nvim-neorg/neorg]        | [GPL-3.0](https://github.com/nvim-neorg/neorg/blob/main/LICENSE)           |
 | [kevinhwang91/nvim-bqf][nvim-bqf]           | [BSD-3-Clause][nvim-bqf-license]                                           |
+| [bfredl/nvim-luadev][bfredl/nvim-luadev]    | [MIT](https://github.com/bfredl/nvim-luadev/blob/master/LICENSE)           |
 
 </details>
 
@@ -841,6 +843,7 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-neorg/neorg]: https://github.com/nvim-neorg/neorg
 [nvim-bqf]: https://github.com/kevinhwang91/nvim-bqf
 [nvim-bqf-license]: https://github.com/kevinhwang91/nvim-bqf/blob/main/LICENSE
+[bfredl/nvim-luadev]: https://github.com/bfredl/nvim-luadev
 
 <!--
 vim: foldlevel=2 conceallevel=0
