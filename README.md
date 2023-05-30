@@ -186,6 +186,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [zbirenbaum/copilot.lua][copilot.lua]            | Copilot                               |
 |  Editing  | [Exafunction/codeium.vim][codeium.vim]           | Codeium (opensource copilot)          |
 | 💡 LSP     | [utilyre/barbecue.nvim][barbecue.nvim]           | Complementary to navic                |
+|  LSP      | [uga-rosa/cmp-dynamic][cmp-dynamic]              | Extension for nvim-cmp                |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -815,6 +816,7 @@ quick.cmd_and_centre("SomeCommand")
 | [zbirenbaum/copilot.lua][copilot.lua]       | [MIT](https://github.com/zbirenbaum/copilot.lua/blob/master/LICENSE)       |
 | [Exafunction/codeium.vim][codeium.vim]      | [MIT](https://github.com/Exafunction/codeium.vim/blob/main/LICENSE)        |
 | [utilyre/barbecue.nvim][barbecue.nvim]      | [MIT](https://github.com/utilyre/barbecue.nvim/blob/main/LICENSE)          |
+| [uga-rosa/cmp-dynamic][cmp-dynamic]         | [MIT](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)           |
 
 </details>
 
@@ -925,6 +927,7 @@ quick.cmd_and_centre("SomeCommand")
 [copilot.lua]: https://github.com/zbirenbaum/copilot.lua
 [codeium.vim]: https://github.com/Exafunction/codeium.vim
 [barbecue.nvim]: https://github.com/utilyre/barbecue.nvim
+[cmp-dynamic]: https://github.com/uga-rosa/cmp-dynamic
 
 <!--
 vim: foldlevel=2 conceallevel=0

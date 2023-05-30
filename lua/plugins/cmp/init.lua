@@ -46,6 +46,7 @@ local function config()
   local cmp = require("cmp")
   local compare = require("cmp.config.compare")
   local ls = require("luasnip")
+  require("cmp_dynamic")
   setup_priorities()
   -- }}}
 
@@ -110,6 +111,7 @@ local function config()
             { name = "dap" },
             { name = "crates" },
             { name = "neorg", priority = 5, keyword_length = 1 },
+            { name = "dynamic", priority = 10, keyword_length = 3 },
           },
         },
       }), -- }}}
@@ -250,6 +252,7 @@ local function config()
       { name = "emoji", priority = 2 },
       { name = "nerdfont", priority = 1 },
       { name = "neorg", keyword_length = 1 },
+      { name = "dynamic", keyword_length = 1 },
     }), --}}}
 
     formatting = { --{{{
@@ -363,6 +366,9 @@ return {
       },
       "hrsh7th/cmp-emoji",
       "chrisgrieser/cmp-nerdfont",
+      {
+        import = "plugins.cmp.cmp_dynamic",
+      },
     },
     config = config,
     event = { "InsertEnter" },

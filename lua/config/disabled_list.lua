@@ -74,4 +74,5 @@ return {
   ["zbirenbaum/copilot.lua"] = { enabled = true, start = true },
   ["Exafunction/codeium.vim"] = { enabled = true, start = true },
   ["utilyre/barbecue.nvim"] = { enabled = true, start = true },
+  ["uga-rosa/cmp-dynamic"] = { enabled = true, start = true },
 }
