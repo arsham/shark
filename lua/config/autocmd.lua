@@ -158,6 +158,9 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("CLOSE_INFO_POPUPS"),
   pattern = {
     "help",
+    "lsp-installer",
+    "lspinfo",
+    "null-ls-info",
     "qf",
     "startuptime",
     "tsplayground",

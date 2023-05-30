@@ -85,5 +85,8 @@ Function   Plugin                      Description                     License
  LSP       hrsh7th/cmp-path           Extension for nvim-cmp              MIT
  LSP       lukas-reineke/cmp-rg       Extension for nvim-cmp              MIT
 💡 LSP      j-hui/fidget.nvim          Spinner for LSP status              MIT
+📢 LSP      null-ls.nvim               External Tool to LSP bridge         N/A
+📢 LSP      mason-null-ls.nvim         Null LS and Mason bridge       AGPL-3.0
+📢 LSP      mason-tool-installer       LSP server installer                MIT
 
 vim:tw=78:ft=help

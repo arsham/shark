@@ -151,6 +151,9 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [hrsh7th/cmp-path][cmp-path]                     | Extension for nvim-cmp                |
 |  LSP      | [lukas-reineke/cmp-rg][cmp-rg]                   | Extension for nvim-cmp                |
 | 💡 LSP     | [j-hui/fidget.nvim][j-hui/fidget.nvim]           | Spinner for LSP status                |
+| 📢 LSP     | [null-ls.nvim][null-ls.nvim]                     | External Tool to LSP bridge           |
+| 📢 LSP     | [mason-null-ls.nvim][mason-null-ls.nvim]         | Null LS and Mason bridge              |
+| 📢 LSP     | [mason-tool-installer][mason-tool-inst]          | LSP server installer                  |
 
 </details>
 
@@ -672,6 +675,9 @@ quick.cmd_and_centre("SomeCommand")
 | [hrsh7th/cmp-path][cmp-path]                | [MIT](https://github.com/hrsh7th/cmp-path/blob/main/LICENSE)               |
 | [lukas-reineke/cmp-rg][cmp-rg]              | [MIT](https://github.com/lukas-reineke/cmp-rg/blob/master/LICENSE.md)      |
 | [j-hui/fidget.nvim][j-hui/fidget.nvim]      | [MIT](https://github.com/j-hui/fidget.nvim/blob/main/LICENSE)              |
+| [null-ls.nvim][null-ls.nvim]                | [View][null-ls.nvim-license]                                               |
+| [mason-null-ls.nvim][mason-null-ls.nvim]    | [AGPL-3.0][mason-null-ls.nvim-license]                                     |
+| [mason-tool-installer][mason-tool-inst]     | [MIT][mason-tool-inst-license]                                             |
 
 </details>
 
@@ -746,6 +752,12 @@ quick.cmd_and_centre("SomeCommand")
 [cmp-path]: https://github.com/hrsh7th/cmp-path
 [cmp-rg]: https://github.com/lukas-reineke/cmp-rg
 [j-hui/fidget.nvim]: https://github.com/j-hui/fidget.nvim
+[null-ls.nvim]: https://github.com/jose-elias-alvarez/null-ls.nvim
+[null-ls.nvim-license]: https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/LICENSE
+[mason-null-ls.nvim]: https://github.com/jay-babu/mason-null-ls.nvim
+[mason-null-ls.nvim-license]: https://github.com/jay-babu/mason-null-ls.nvim/blob/main/LICENSE
+[mason-tool-inst]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+[mason-tool-inst-license]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/blob/main/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
