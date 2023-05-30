@@ -1,5 +1,6 @@
 local lsp = require("arshlib.lsp")
 local augroup = require("config.util").augroup
+local constants = require("config.constants")
 
 -- Highlight Yanks {{{
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -208,6 +209,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
   desc = "trim spaces",
   callback = function()
     if not vim.bo.modifiable or vim.bo.binary or vim.bo.filetype == "diff" then
+      return
+    end
+    local ok, val = pcall(vim.api.nvim_buf_get_var, 0, constants.trim_whitespace_variable)
+    if ok and val then
       return
     end
     local save = vim.fn.winsaveview()

@@ -1,4 +1,5 @@
 local quick = require("arshlib.quick")
+local constants = require("config.constants")
 
 quick.command("Filename", function() --{{{
   vim.notify(vim.fn.expand("%:p"), vim.lsp.log_levels.INFO, {
@@ -55,3 +56,14 @@ quick.command("UnlinkSnippets", function() --{{{
   end
 end, { desc = "Unlink all open snippet sessions" })
 --}}}
+
+quick.command("ToggleTrimWhitespaces", function() -- {{{
+  local name = constants.disable_trim_whitespace
+  local set_to = true
+  local ok, val = pcall(vim.api.nvim_buf_get_var, 0, name)
+  if ok and val then
+    set_to = false
+  end
+  vim.api.nvim_buf_set_var(0, name, set_to)
+end, { desc = "toggle trimming whitespaces on current buffer" })
+-- }}}

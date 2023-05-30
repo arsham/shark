@@ -623,16 +623,16 @@ The following list of commands do not fit into any specific categories.
 <details>
     <summary>Click to view the commands</summary>
 
-| Command                 | Description                          |
-| :---------------------- | :----------------------------------- |
-| `Filename`              | View the filename                    |
-| `YankFilename`          | Yank the filename to `"` register    |
-| `YankFilenameC`         | Yank the filename to `+` register    |
-| `YankFilepath`          | Yank the file path to `"` register   |
-| `YankFilepathC`         | Yank the file path to `+` register   |
-| `Nowrap`                | Stop wrapping current buffer         |
-| `ToggleRelativeNumbers` | Start/Stop relative number switching |
-| `UnlinkSnippets`        | Unlink all open snippet sessions     |
+| Command                 | Description                            |
+| :---------------------- | :------------------------------------- |
+| `Filename`              | View the filename                      |
+| `YankFilename`          | Yank the filename to `"` register      |
+| `YankFilenameC`         | Yank the filename to `+` register      |
+| `YankFilepath`          | Yank the file path to `"` register     |
+| `YankFilepathC`         | Yank the file path to `+` register     |
+| `Nowrap`                | Stop wrapping current buffer           |
+| `ToggleRelativeNumbers` | Start/Stop relative number switching   |
+| `ToggleTrimWhitespaces` | Toggles trimming whitespaces on buffer |
 
 </details>
 

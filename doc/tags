@@ -15,6 +15,7 @@
 :Nowrap	shark.txt	/*:Nowrap*
 :RestartLsp	shark.txt	/*:RestartLsp*
 :ToggleRelativeNumbers	shark.txt	/*:ToggleRelativeNumbers*
+:ToggleTrimWhitespaces	shark.txt	/*:ToggleTrimWhitespaces*
 :TypeDefinition	shark.txt	/*:TypeDefinition*
 :UnlinkSnippets	shark.txt	/*:UnlinkSnippets*
 :WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
