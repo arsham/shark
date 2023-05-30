@@ -9,6 +9,7 @@
   "archer.nvim": { "branch": "master", "commit": "f85f9dff05345b4d23ab7cd935e108c3e1bb0003" },
   "arshamiser.nvim": { "branch": "master", "commit": "13af62f49e5c906589aba48b338267c9ef6e2a8e" },
   "arshlib.nvim": { "branch": "master", "commit": "e76e35c927098d07445c72e9416cce243f6aae59" },
+  "barbecue.nvim": { "branch": "main", "commit": "cd7e7da622d68136e13721865b4d919efd6325ed" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-calc": { "branch": "main", "commit": "50792f34a628ea6eb31d2c90e8df174671e4e7a0" },
   "cmp-cmdline": { "branch": "main", "commit": "5af1bb7d722ef8a96658f01d6eb219c4cf746b32" },

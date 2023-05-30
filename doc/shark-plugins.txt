@@ -114,6 +114,7 @@ Function   Plugin                      Description                     License
 🔫 Core     svban/YankAssassin.vim     Stay where you are after yanking    N/A
  Editing   zbirenbaum/copilot.lua     Copilot                             MIT
  Editing   Exafunction/codeium.vim    Codeium (opensource copilot)        MIT
+💡 LSP      utilyre/barbecue.nvim      Complementary to navic              MIT
 
 Note that if copilot is enabled, codeium will be disabled.
 

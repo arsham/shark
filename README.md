@@ -185,6 +185,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔫 Core    | [svban/YankAssassin.vim][yankassassin.vim]       | Stay where you are after yanking      |
 |  Editing  | [zbirenbaum/copilot.lua][copilot.lua]            | Copilot                               |
 |  Editing  | [Exafunction/codeium.vim][codeium.vim]           | Codeium (opensource copilot)          |
+| 💡 LSP     | [utilyre/barbecue.nvim][barbecue.nvim]           | Complementary to navic                |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -813,6 +814,7 @@ quick.cmd_and_centre("SomeCommand")
 | [svban/YankAssassin.vim][yankassassin.vim]  | [N/A][yankassassin.vim]                                                    |
 | [zbirenbaum/copilot.lua][copilot.lua]       | [MIT](https://github.com/zbirenbaum/copilot.lua/blob/master/LICENSE)       |
 | [Exafunction/codeium.vim][codeium.vim]      | [MIT](https://github.com/Exafunction/codeium.vim/blob/main/LICENSE)        |
+| [utilyre/barbecue.nvim][barbecue.nvim]      | [MIT](https://github.com/utilyre/barbecue.nvim/blob/main/LICENSE)          |
 
 </details>
 
@@ -922,6 +924,7 @@ quick.cmd_and_centre("SomeCommand")
 [yankassassin.vim]: https://github.com/svban/YankAssassin.vim
 [copilot.lua]: https://github.com/zbirenbaum/copilot.lua
 [codeium.vim]: https://github.com/Exafunction/codeium.vim
+[barbecue.nvim]: https://github.com/utilyre/barbecue.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
