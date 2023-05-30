@@ -94,6 +94,24 @@ local function config()
       }, --}}}
     },
 
+    playground = { --{{{
+      enable = true,
+      updatetime = 25,
+      persist_queries = true,
+      keybindings = {
+        toggle_query_editor = "o",
+        toggle_hl_groups = "i",
+        toggle_injected_languages = "t",
+        toggle_anonymous_nodes = "a",
+        toggle_language_display = "I",
+        focus_language = "f",
+        unfocus_language = "F",
+        update = "R",
+        goto_node = "<cr>",
+        show_help = "?",
+      },
+    }, --}}}
+
     refactor = { -- {{{
       highlight_definitions = {
         enable = true,
@@ -110,6 +128,11 @@ return {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter-refactor",
+    {
+      "nvim-treesitter/playground",
+      build = ":TSInstall query",
+      cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
+    },
   },
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },

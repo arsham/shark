@@ -54,5 +54,6 @@ Function   Plugin                      Description                     License
 🔥 Visuals  freddiehaddad/feline.nvim  Statusline (default)            GPL-3.0
 🗨️ Visuals  rcarriga/nvim-notify       Better notification UI              MIT
 🌈 Visuals  nvimtreesitter-refactor    Treesitter plugin            Apache-2.0
+🗒️ Visuals  nvim-treesitter/playground Treesitter plugin            Apache-2.0
 
 vim:tw=78:ft=help

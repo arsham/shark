@@ -160,6 +160,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "help",
     "qf",
     "startuptime",
+    "tsplayground",
     "checkhealth",
   },
   callback = function(args)

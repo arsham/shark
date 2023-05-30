@@ -92,6 +92,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔥 Visuals | [freddiehaddad/feline.nvim][feline.nvim]         | Statusline (default)                  |
 | 🗨️ Visuals | [rcarriga/nvim-notify][nvim-notify]              | Better notification UI                |
 | 🌈 Visuals | [treesitter-refactor][treesitter-refactor]       | Treesitter plugin                     |
+| 🗒️ Visuals | [nvim-treesitter/playground][playground]         | Treesitter plugin                     |
 
 </details>
 
@@ -483,6 +484,7 @@ quick.cmd_and_centre("SomeCommand")
 | [freddiehaddad/feline.nvim][feline.nvim]    | [GPL-3.0][feline.nvim-license]                                             |
 | [rcarriga/nvim-notify][nvim-notify]         | [MIT](https://github.com/rcarriga/nvim-notify/blob/master/LICENSE)         |
 | [treesitter-refactor][treesitter-refactor]  | [Apache-2.0][treesitter-refactor-license]                                  |
+| [nvim-treesitter/playground][playground]    | [Apache-2.0][treesitter-playground-license]                                |
 
 </details>
 
@@ -516,6 +518,8 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-notify]: https://github.com/rcarriga/nvim-notify
 [treesitter-refactor]: https://github.com/nvim-treesitter/nvim-treesitter-refactor
 [treesitter-refactor-license]: https://github.com/nvim-treesitter/nvim-treesitter-refactor/blob/master/LICENSE
+[playground]: https://github.com/nvim-treesitter/playground
+[treesitter-playground-license]: https://github.com/nvim-treesitter/playground/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
