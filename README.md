@@ -157,6 +157,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗒️ Editing | [numToStr/Comment.nvim][comment.nvim]            | Comment string                        |
 | 🗒️ LSP     | [smjonas/inc-rename.nvim][inc-rename.nvim]       | Incremental renaming                  |
 | 🗒️ Editing | [windwp/nvim-autopairs][nvim-autopairs]          |                                       |
+|  Editing  | [arthurxavierx/vim-caser][vim-caser]             | Case conversion                       |
 
 </details>
 
@@ -707,6 +708,7 @@ quick.cmd_and_centre("SomeCommand")
 | [numToStr/Comment.nvim][comment.nvim]       | [MIT](https://github.com/numToStr/Comment.nvim/blob/master/LICENSE)        |
 | [smjonas/inc-rename.nvim][inc-rename.nvim]  | [MIT](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)        |
 | [windwp/nvim-autopairs][nvim-autopairs]     | [MIT](https://github.com/windwp/nvim-autopairs/blob/master/LICENSE)        |
+| [arthurxavierx/vim-caser][vim-caser]        | [View](https://github.com/arthurxavierx/vim-caser/blob/master/LICENSE)     |
 
 </details>
 
@@ -790,6 +792,7 @@ quick.cmd_and_centre("SomeCommand")
 [comment.nvim]: https://github.com/numToStr/Comment.nvim
 [inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
 [nvim-autopairs]: https://github.com/windwp/nvim-autopairs
+[vim-caser]: https://github.com/arthurxavierx/vim-caser
 
 <!--
 vim: foldlevel=2 conceallevel=0

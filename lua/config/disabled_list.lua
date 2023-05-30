@@ -50,4 +50,5 @@ return {
   ["numToStr/Comment.nvim"] = { enabled = true, start = true },
   ["smjonas/inc-rename.nvim"] = { enabled = true, start = true },
   ["windwp/nvim-autopairs"] = { enabled = true, start = true },
+  ["arthurxavierx/vim-caser"] = { enabled = true, start = true },
 }
