@@ -164,6 +164,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [arthurxavierx/vim-caser][vim-caser]             | Case conversion                       |
 | 🖌️ Visuals | [NvChad/nvim-colorizer.lua][nvim-colorizer]      | Colourise matched colours in buffer   |
 | 🦀 Tools   | [saecki/crates.nvim][saecki/crates.nvim]         | Crate.toml helper                     |
+| 💡 LSP     | [kosayoda/nvim-lightbulb][nvim-lightbulb]        | Code actions buln                     |
 
 </details>
 
@@ -717,6 +718,7 @@ quick.cmd_and_centre("SomeCommand")
 | [arthurxavierx/vim-caser][vim-caser]        | [View](https://github.com/arthurxavierx/vim-caser/blob/master/LICENSE)     |
 | [NvChad/nvim-colorizer.lua][nvim-colorizer] | [View][nvim-colorizer-license]                                             |
 | [saecki/crates.nvim][saecki/crates.nvim]    | [MIT](https://github.com/Saecki/crates.nvim/blob/main/LICENSE)             |
+| [kosayoda/nvim-lightbulb][nvim-lightbulb]   | [MIT](https://github.com/kosayoda/nvim-lightbulb/blob/master/LICENSE)      |
 
 </details>
 
@@ -804,6 +806,7 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-colorizer]: https://github.com/NvChad/nvim-colorizer.lua
 [nvim-colorizer-license]: https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE
 [saecki/crates.nvim]: https://github.com/saecki/crates.nvim
+[nvim-lightbulb]: https://github.com/kosayoda/nvim-lightbulb
 
 <!--
 vim: foldlevel=2 conceallevel=0

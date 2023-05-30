@@ -53,4 +53,5 @@ return {
   ["arthurxavierx/vim-caser"] = { enabled = true, start = true },
   ["NvChad/nvim-colorizer.lua"] = { enabled = true, start = true },
   ["saecki/crates.nvim"] = { enabled = true, start = true },
+  ["kosayoda/nvim-lightbulb"] = { enabled = true, start = true },
 }
