@@ -260,4 +260,33 @@ LSP MAPPING                                               *shark-lsp-mappings*
                                                                     *shark_[d*
 [d                      Go to previous diagnostic issue
 
+==============================================================================
+CMP MAPPING                                               *shark-cmp-mappings*
+
+                                                          *i_CTRL-j* *i_<C-j>*
+<C-j>                   Select next item
+                                                          *i_CTRL-k* *i_<C-k>*
+<C-k>                   Select previous item
+                                                          *i_CTRL-b* *i_<C-b>*
+<C-b>                   Scroll documents up
+                                                          *i_CTRL-f* *i_<C-f>*
+<C-f>                   Scroll documents down
+                                                  *i_CTRL-SPACE* *i_<C-Space>*
+<C-Space>               Completion menu (main one)
+                                              *i_CTRL-x_CTRL-o* *i_<C-x><C-o>*
+<C-x><C-o>              Completion menu (lsp)
+                                              *i_CTRL-x_CTRL-s* *i_<C-x><C-s>*
+<C-x><C-s>              Completion menu (luasnip)
+                                              *i_CTRL-x_CTRL-g* *i_<C-x><C-g>*
+<C-x><C-g>              Completion menu (git)
+                                                          *i_CTRL-e* *i_<C-e>*
+                                                          *c_CTRL-e* *c_<C-e>*
+<C-e>                   Abort completion and close
+                                                       *i_TAB* *shark_i_<Tab>*
+                                                             *s_TAB* *s_<Tab>*
+<Tab>                   Next placeholder
+                                                     *i_SHIFT-TAB* *i_<S-Tab>*
+                                                     *s_SHIFT-TAB* *s_<S-Tab>*
+i_SHIFT-TAB             Previous placeholder
+
 vim:tw=78:ts=8:ft=help:norl:

@@ -12,6 +12,7 @@ This project supports Neovim version `0.10.0` and newer.
   configuration is done in **Lua**.
 - **LSP**, **Treesitter**, and **FZF** are setup to work together.
 - Seamless navigation with **tmux**.
+- Completion with **nvim-cmp** plugin is setup.
 - There are some handy **textobjects** such as **backticks** and **indents**.
 - You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
@@ -125,6 +126,9 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [neovim/nvim-lspconfig][nvim-lspconfig]          | LSP configuration                     |
 |  LSP      | [mason.nvim][mason.nvim]                         | Package manager for LSP, DAP, etc.    |
 |  LSP      | [mason-lspconfig.nvim][mason-lspconfig]          | LSP config bridge for mason.nvim      |
+|  LSP      | [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]             | Completion with LSP                   |
+|  LSP      | [saadparwaiz1/cmp_luasnip][cmp_luasnip]          | Extension for nvim-cmp                |
+|  LSP      | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]             | Snippet engine                        |
 
 </details>
 
@@ -471,6 +475,22 @@ Please see the code for all available mappings.
 
 </details>
 
+#### CMP
+
+| Mapping         | Description                         |
+| :-------------- | :---------------------------------- |
+| [i]`<C-j>`      | Select next item                    |
+| [i]`<C-k>`      | Select previous item                |
+| [i]`<C-b>`      | Scroll documents up                 |
+| [i]`<C-f>`      | Scroll documents down               |
+| [i]`<C-Space>`  | Initiate completion menu (main one) |
+| [i]`<C-x><C-o>` | Initiate completion menu (lsp)      |
+| [i]`<C-x><C-s>` | Initiate completion menu (luasnip)  |
+| [i]`<C-x><C-g>` | Initiate completion menu (git)      |
+| [i,c]`<C-e>`    | Abort completion and close          |
+| [i,s]`<Tab>`    | Next placeholder                    |
+| [i,s]`<S-Tab>`  | Previous placeholder                |
+
 **LSP** defines its own set of commands, however I have added a few interesting
 additions.
 
@@ -579,6 +599,9 @@ quick.cmd_and_centre("SomeCommand")
 | [neovim/nvim-lspconfig][nvim-lspconfig]     | [Apache-2.0][lspconfig-license]                                            |
 | [mason.nvim][mason.nvim]                    | [Apache-2.0][mason.nvim-license]                                           |
 | [mason-lspconfig.nvim][mason-lspconfig]     | [Apache-2.0][mason-lspconfig-license]                                      |
+| [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]        | [MIT](https://github.com/hrsh7th/nvim-cmp/blob/main/LICENSE)               |
+| [saadparwaiz1/cmp_luasnip][cmp_luasnip]     | [Apache-2.0][cmp_luasnip-license]                                          |
+| [L3MON4D3/LuaSnip][l3mon4d3/luasnip]        | [Apache-2.0](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)      |
 
 </details>
 
@@ -638,6 +661,10 @@ quick.cmd_and_centre("SomeCommand")
 [mason.nvim]: https://github.com/williamboman/mason.nvim
 [mason.nvim-license]: https://github.com/williamboman/mason.nvim/blob/main/LICENSE
 [lspconfig-license]: https://github.com/neovim/nvim-lspconfig/blob/master/LICENSE.md
+[hrsh7th/nvim-cmp]: https://github.com/hrsh7th/nvim-cmp
+[cmp_luasnip]: https://github.com/saadparwaiz1/cmp_luasnip
+[cmp_luasnip-license]: https://github.com/saadparwaiz1/cmp_luasnip/blob/master/LICENSE
+[l3mon4d3/luasnip]: https://github.com/L3MON4D3/LuaSnip
 
 <!--
 vim: foldlevel=2 conceallevel=0

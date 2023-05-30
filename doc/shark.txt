@@ -59,6 +59,7 @@ HIGHLIGHTS                                                  *shark-highlights*
   configuration is done in Lua.
 * LSP, Treesitter, and FZF are setup to work together.
 * Seamless navigation with tmux.
+* Completion with nvim-cmp plugin is setup.
 * There are some handy textobjects such as backticks and indents.
 * You can add the current location of the cursor or make notes on the current
   location in the quickfix/local lists with repeatable mappings.
