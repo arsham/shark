@@ -101,5 +101,6 @@ Function   Plugin                      Description                     License
 🗒️ Editing  echasnovski/mini.nvim      For surround, alignments, etc.      MIT
  Core      folke/neodev.nvim                                       Apache-2.0
 📆 Tool     nvim-neorg/neorg           Note taking tool                GPL-3.0
+ Lists     kevinhwang91/nvim-bqf      Better quickfix list manager      BSD-3
 
 vim:tw=78:ft=help

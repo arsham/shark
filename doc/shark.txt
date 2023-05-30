@@ -85,7 +85,7 @@ listed plugins.
 ==============================================================================
 FUNCTIONALITY                                            *shark-functionality*
 
-Some default |mappings|/|commands| are augmented to centre the buffer after
+Some default `mappings`/`commands` are augmented to centre the buffer after
 the execution.
 
 Most of mappings that are enabled an in use are not documented here. You
@@ -95,6 +95,10 @@ I would recommend you have a look at the code to see what is available to you.
 
 ==============================================================================
 LISTS                                                            *shark-lists*
+
+Additional to nvim-bqf <https://github.com/kevinhwang91/nvim-bqf> bindings,
+you can do `<count>dd` in the quickfix/local list buffers to delete '<count>'
+rows from quickfix/local list buffer.
 
 Please refer to the |listish.txt| documentation for all commands and mappings.
 

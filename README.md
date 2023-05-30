@@ -171,6 +171,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗒️ Editing | [echasnovski/mini.nvim][mini.nvim]               | For surround, alignments, etc.        |
 |  Core     | [folke/neodev.nvim][folke/neodev.nvim]           |                                       |
 | 📆 Tool    | [nvim-neorg/neorg][nvim-neorg/neorg]             | Note taking tool                      |
+|  Lists    | [kevinhwang91/nvim-bqf][nvim-bqf]                | Better quickfix list manager          |
 
 </details>
 
@@ -391,6 +392,10 @@ you how many items you have in a list.
 | `Clearloclist`  | **Clear** the local list of current buffer. |
 
 </details>
+
+Additional to [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf) bindings,
+you can do `<count>dd` in the quickfix/local list buffers to delete `<count>`
+rows from quickfix/local list buffer.
 
 ### Highlight Matching
 
@@ -739,6 +744,7 @@ quick.cmd_and_centre("SomeCommand")
 | [echasnovski/mini.nvim][mini.nvim]          | [MIT](https://github.com/echasnovski/mini.nvim/blob/main/LICENSE)          |
 | [folke/neodev.nvim][folke/neodev.nvim]      | [Apache-2.0](https://github.com/folke/neodev.nvim/blob/main/LICENSE)       |
 | [nvim-neorg/neorg][nvim-neorg/neorg]        | [GPL-3.0](https://github.com/nvim-neorg/neorg/blob/main/LICENSE)           |
+| [kevinhwang91/nvim-bqf][nvim-bqf]           | [BSD-3-Clause][nvim-bqf-license]                                           |
 
 </details>
 
@@ -833,6 +839,8 @@ quick.cmd_and_centre("SomeCommand")
 [mini.nvim]: https://github.com/echasnovski/mini.nvim
 [folke/neodev.nvim]: https://github.com/folke/neodev.nvim
 [nvim-neorg/neorg]: https://github.com/nvim-neorg/neorg
+[nvim-bqf]: https://github.com/kevinhwang91/nvim-bqf
+[nvim-bqf-license]: https://github.com/kevinhwang91/nvim-bqf/blob/main/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
