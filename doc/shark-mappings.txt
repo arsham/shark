@@ -46,6 +46,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  o                Loop
  e                Element
  t                Tab
+ z                Folds, language/spelling
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -181,6 +182,16 @@ cn {Visual}cn           Initiate a `cgn` on current `word`
                                                                           *g.*
 g.                      Use last change (anything) as the
                         initiate a `cgn` on current `word`
+                                                                  *<Leader>zm*
+<Leader>zm              Set folding method to Manual
+                                                                  *<Leader>ze*
+<Leader>ze              Set folding method to Expression
+                                                                  *<Leader>zi*
+<Leader>zi              Set folding method to Indent
+                                                                  *<Leader>zk*
+<Leader>zk              Set folding method to Marker
+                                                                  *<Leader>zs*
+<Leader>zs              Set folding method to Syntax
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

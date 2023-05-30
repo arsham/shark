@@ -102,6 +102,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | :-------------- | :------------------------------------------------ |
 | **q**           | **Q**uickfix list mappings                        |
 | **w**           | **L**ocal list mappings (because it's near **q**) |
+| **w**           | **W**indow                                        |
 | **]**           | Jumps to the next item                            |
 | **[**           | Jumps to the previous item                        |
 | **b**           | **B**uffer                                        |
@@ -118,6 +119,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **e**           | **E**lement                                       |
 | **y**           | **Y**ank                                          |
 | **t**           | **T**ab                                           |
+| **z**           | Folds, language/spelling                          |
 
 The `leader` key is `space`!
 
@@ -196,6 +198,11 @@ The `leader` key is `space`!
 |                   | selected string                                                      |
 | `g.`              | Use last change (anything) as the                                    |
 |                   | initiate a `cgn` on current `word`                                   |
+| `<leader>zm`      | Set folding method to **M**anual                                     |
+| `<leader>ze`      | Set folding method to **E**xpression                                 |
+| `<leader>zi`      | Set folding method to **I**ndent                                     |
+| `<leader>zk`      | Set folding method to Mar**k**er                                     |
+| `<leader>zs`      | Set folding method to **S**yntax                                     |
 
 </details>
 

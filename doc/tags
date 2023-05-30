@@ -28,6 +28,11 @@
 <Leader>sf	shark-mappings.txt	/*<Leader>sf*
 <Leader>sp	shark-mappings.txt	/*<Leader>sp*
 <Leader>y	shark-mappings.txt	/*<Leader>y*
+<Leader>ze	shark-mappings.txt	/*<Leader>ze*
+<Leader>zi	shark-mappings.txt	/*<Leader>zi*
+<Leader>zk	shark-mappings.txt	/*<Leader>zk*
+<Leader>zm	shark-mappings.txt	/*<Leader>zm*
+<Leader>zs	shark-mappings.txt	/*<Leader>zs*
 <M-j>	shark-mappings.txt	/*<M-j>*
 <M-k>	shark-mappings.txt	/*<M-k>*
 ALT-j	shark-mappings.txt	/*ALT-j*

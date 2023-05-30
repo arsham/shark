@@ -86,4 +86,17 @@ end, { silent = true })
 -- Make the last change as an initiation for cgn.
 vim.keymap.set("n", "g.", [[/\V<C-r>"<CR>cgn<C-a><Esc>]])
 
+-- Folding support {{{
+local function foldexpr(value)
+  return function()
+    vim.opt_local.foldmethod = value
+  end
+end
+vim.keymap.set("n", "<leader>zm", foldexpr("manual"), opts("Set local foldmethod to manual"))
+vim.keymap.set("n", "<leader>ze", foldexpr("expr"), opts("Set local foldmethod to expr"))
+vim.keymap.set("n", "<leader>zi", foldexpr("indent"), opts("Set local foldmethod to indent"))
+vim.keymap.set("n", "<leader>zk", foldexpr("marker"), opts("Set local foldmethod to marker"))
+vim.keymap.set("n", "<leader>zs", foldexpr("syntax"), opts("Set local foldmethod to syntax"))
+--}}}
+
 -- vim: fdm=marker fdl=0
