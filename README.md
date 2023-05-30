@@ -18,6 +18,7 @@ This project supports Neovim version `0.10.0` and newer.
 2. [Functionality](#functionality)
    - [Plugins](#plugins)
    - [Core Mappings](#core-mappings)
+   - [Text Objects](#text-objects)
    - [Lists](#lists)
    - [FZF](#fzf)
    - [Utilities](#utilities)
@@ -51,20 +52,21 @@ Some plugins are not listed here. You can find the complete list in the
 
 Licenses for plugins can be found [here](#plugin-license-list).
 
-| Function  | Plugin                                           | Description                          |
-| :-------- | :----------------------------------------------- | :----------------------------------- |
-| 🔥 Core   | [folke/lazy.nvim][folke/lazy.nvim]               | Package manager                      |
-| 🔥 Visual | [arsham/arshamiser.nvim][arshamiser.nvim]        | Status line, colour scheme and folds |
-| 🔥 Lists  | [arsham/listish.nvim][listish.nvim]              | Supporting quickfix and local lists  |
-| 🧰 Lib    | [arsham/arshlib.nvim][arshlib.nvim]              | Library used in various plugins      |
-| ⚡ Visual | [nvim-tree/nvim-web-devicons][nvim-web-devicons] |                                      |
-| 🔍 Finder | [junegunn/fzf][fzf]                              | Fuzzy finder                         |
-| 🔍 Finder | [junegunn/fzf.vim][fzf.vim]                      | fzf plugin for vim                   |
-| 🔥 Finder | [arsham/fzfmania.nvim][fzfmania.nvim]            | Very powerful FZF setup in lua       |
-| 🔥 Finder | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend       |
-| 🧰 Core   | [nvim-lua/plenary.nvim][plenary.nvim]            |                                      |
-| ⏩ Core   | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                 |
-| 🔁 Core   | [tpope/vim-repeat][tpope/vim-repeat]             |                                      |
+| Function   | Plugin                                           | Description                           |
+| :--------- | :----------------------------------------------- | :------------------------------------ |
+| 🔥 Core    | [folke/lazy.nvim][folke/lazy.nvim]               | Package manager                       |
+| 🔥 Visual  | [arsham/arshamiser.nvim][arshamiser.nvim]        | Status line, colour scheme and folds  |
+| 🔥 Lists   | [arsham/listish.nvim][listish.nvim]              | Supporting quickfix and local lists   |
+| 🧰 Lib     | [arsham/arshlib.nvim][arshlib.nvim]              | Library used in various plugins       |
+| ⚡ Visual  | [nvim-tree/nvim-web-devicons][nvim-web-devicons] |                                       |
+| 🔍 Finder  | [junegunn/fzf][fzf]                              | Fuzzy finder                          |
+| 🔍 Finder  | [junegunn/fzf.vim][fzf.vim]                      | fzf plugin for vim                    |
+| 🔥 Finder  | [arsham/fzfmania.nvim][fzfmania.nvim]            | Very powerful FZF setup in lua        |
+| 🔥 Finder  | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend        |
+| 🧰 Core    | [nvim-lua/plenary.nvim][plenary.nvim]            |                                       |
+| ⏩ Core    | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                  |
+| 🔁 Core    | [tpope/vim-repeat][tpope/vim-repeat]             |                                       |
+| 🥇 Textobj | [arsham/archer.nvim][arsham/archer.nvim]         | Mappings and text objects for archers |
 
 </details>
 
@@ -81,8 +83,47 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **[**           | Jumps to the previous item                        |
 | **b**           | **B**uffer                                        |
 | **f**           | **F**ile, **F**ind                                |
+| **a**           | **A**ll, or disabling certain constraints         |
 
 The `leader` key is `space`!
+
+<details>
+    <summary>Click to view mappings</summary>
+
+| Mapping           | Description                                                          |
+| :---------------- | :------------------------------------------------------------------- |
+| `<Alt-,>`         | Adds `,` at the end of current line without moving (repeatable)      |
+| `<S-Alt-,>`       | Removes `,` from the end of current line without moving (repeatable) |
+| `<Alt-.>`         | Adds `.` at the end of current line without moving (repeatable)      |
+| `<S-Alt-.>`       | Removes `.` from the end of current line without moving (repeatable) |
+| `<Alt-;>`         | Adds `;` at the end of current line without moving (repeatable)      |
+| `<S-Alt-;>`       | Removes `;` from the end of current line without moving (repeatable) |
+| `<Alt-{>`         | Adds curly brackets at the end of line into insert mode (repeatable) |
+| [count]`]<space>` | Inserts [count] empty lines after (repeatable)                       |
+| [count]`[<space>` | Inserts [count] empty lines before (repeatable)                      |
+
+</details>
+
+### Text Objects
+
+<details>
+    <summary>Click to view the text objects</summary>
+
+| Text Object | Description                                 |
+| :---------- | :------------------------------------------ |
+| `` i` ``    | **I**n backtick pairs (multi-line)          |
+| `` a` ``    | **A**round backtick pairs (multi-line)      |
+| `an`        | **A**round **N**ext pairs (current lint)    |
+| `in`        | **I**n **N**ext pairs (current line)        |
+| `iN`        | **I**n **N**umeric value (can be float too) |
+| `aN`        | **A**round **N**umeric value                |
+| `az`        | **A**round folds                            |
+| `iz`        | **I**n folds                                |
+
+There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
+**\_ . : , ; | / \ \* + - #**
+
+</details>
 
 ### Lists
 
@@ -273,6 +314,7 @@ quick.cmd_and_centre("SomeCommand")
 | [ibhagwan/fzf-lua][fzf-lua]                 | [AGPL-3.0](https://github.com/ibhagwan/fzf-lua/blob/main/LICENSE)          |
 | [tweekmonster/startuptime.vim][startuptime] | [MIT](https://github.com/tweekmonster/startuptime.vim/blob/master/LICENSE) |
 | [tpope/vim-repeat][tpope/vim-repeat]        | [N/A][tpope/vim-repeat]                                                    |
+| [arsham/archer.nvim][arsham/archer.nvim]    | [MIT](https://github.com/arsham/archer.nvim/blob/master/LICENSE)           |
 
 </details>
 
@@ -288,6 +330,7 @@ quick.cmd_and_centre("SomeCommand")
 [fzf-lua]: https://github.com/ibhagwan/fzf-lua
 [startuptime]: https://github.com/tweekmonster/startuptime.vim
 [tpope/vim-repeat]: https://github.com/tpope/vim-repeat
+[arsham/archer.nvim]: https://github.com/arsham/archer.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

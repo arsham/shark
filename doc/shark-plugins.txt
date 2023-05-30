@@ -40,5 +40,6 @@ Function   Plugin                      Description                     License
 🧰 Core     nvim-lua/plenary.nvim                                     AGPR-3.0
 ⏩ Core     tweekmonster/startuptime.vim Benchmarking startup              MIT
 🔁 Core     tpope/vim-repeat           Add repeat support to other plugins N/A
+🥇 Textobj  arsham/archer.nvim         Advanced mappings and text objects  MIT
 
 vim:tw=78:ft=help
