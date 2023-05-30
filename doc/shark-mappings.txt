@@ -204,6 +204,11 @@ g.                      Use last change (anything) as the
 <Leader>kk              Toggles file tree
                                                                   *<Leader>kf*
 <Leader>kf              Finds current file in the file tree
+                                                                         *gso*
+gso{motion}             Sort [count] objects that {motion} moves over
+{Visual}gso             Sort objects over {Visual} selection
+                                                                        *gsoo*
+gsoo                    Sort [count] lines
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

@@ -65,5 +65,6 @@ Function   Plugin                      Description                     License
 🧭 Core     numToStr/Navigator.nvim    Seamless navigation with tmux       MIT
 📁 Tool     nvim-neo-tree/neo-tree.nvim File explorer tree                 MIT
 🪟 Core     s1n7ax/nvim-window-picker  Window picker                       MIT
+ Tool      ralismark/opsort.vim       Sort operator                       MIT
 
 vim:tw=78:ft=help

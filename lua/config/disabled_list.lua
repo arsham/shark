@@ -31,4 +31,5 @@ return {
   ["numToStr/Navigator.nvim"] = { enabled = true, start = true },
   ["nvim-neo-tree/neo-tree.nvim"] = { enabled = true, start = true },
   ["s1n7ax/nvim-window-picker"] = { enabled = true, start = true },
+  ["ralismark/opsort.vim"] = { enabled = true, start = true },
 }

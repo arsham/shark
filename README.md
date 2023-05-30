@@ -109,6 +109,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🧭 Core    | [numToStr/Navigator.nvim][navigator.nvim]        | Seamless navigation with tmux         |
 | 📁 Tool    | [nvim-neo-tree/neo-tree.nvim][neo-tree]          | File explorer tree                    |
 | 🪟 Core    | [s1n7ax/nvim-window-picker][window-picker]       | Window picker                         |
+|  Tool     | [ralismark/opsort.vim][opsort.vim]               | Sort operator                         |
 
 </details>
 
@@ -226,6 +227,8 @@ The `leader` key is `space`!
 | [c]`<Alt-e>`      | Go to end of the line                                                |
 | [c]`<C-r><C-l>`   | Copy current line in the buffer                                      |
 | `<Tab><Tab>`      | Switch to the alternative buffer                                     |
+| `gso`             | Sort objects                                                         |
+| `gsoo`            | Sort lines                                                           |
 
 </details>
 
@@ -513,6 +516,7 @@ quick.cmd_and_centre("SomeCommand")
 | [numToStr/Navigator.nvim][navigator.nvim]   | [MIT](https://github.com/numToStr/Navigator.nvim/blob/master/LICENSE)      |
 | [nvim-neo-tree/neo-tree.nvim][neo-tree]     | [MIT][neo-tree-license]                                                    |
 | [s1n7ax/nvim-window-picker][window-picker]  | [MIT](https://github.com/s1n7ax/nvim-window-picker/blob/main/LICENSE)      |
+| [ralismark/opsort.vim][opsort.vim]          | [MIT](https://github.com/ralismark/opsort.vim/blob/main/LICENSE)           |
 
 </details>
 
@@ -561,6 +565,7 @@ quick.cmd_and_centre("SomeCommand")
 [neo-tree]: https://github.com/nvim-neo-tree/neo-tree.nvim
 [neo-tree-license]: https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/LICENSE
 [window-picker]: https://github.com/s1n7ax/nvim-window-picker
+[opsort.vim]: https://github.com/ralismark/opsort.vim
 
 <!--
 vim: foldlevel=2 conceallevel=0

@@ -67,6 +67,8 @@ c_CTRL-r_CTRL-l	shark-mappings.txt	/*c_CTRL-r_CTRL-l*
 cn	shark-mappings.txt	/*cn*
 g.	shark-mappings.txt	/*g.*
 g=	shark-mappings.txt	/*g=*
+gso	shark-mappings.txt	/*gso*
+gsoo	shark-mappings.txt	/*gsoo*
 o_H	shark-mappings.txt	/*o_H*
 o_L	shark-mappings.txt	/*o_L*
 o_aa	shark-mappings.txt	/*o_aa*
