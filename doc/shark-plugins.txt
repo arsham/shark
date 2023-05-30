@@ -111,5 +111,6 @@ Function   Plugin                      Description                     License
 🎡 Visual   towolf/vim-helm            Helm syntax highlighting            N/A
  Core      tmux-plugins/vim-tmux                                          MIT
  Editing   mg979/vim-visual-multi     Multiple cursors                    N/A
+🔫 Core     svban/YankAssassin.vim     Stay where you are after yanking    N/A
 
 vim:tw=78:ft=help

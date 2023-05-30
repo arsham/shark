@@ -2,6 +2,7 @@
   "Comment.nvim": { "branch": "master", "commit": "c8043290f2d77f61025494d839d88e414608c460" },
   "LuaSnip": { "branch": "master", "commit": "51ebb4b6637290e1b8e0fb0d6f38b605d3c24940" },
   "Navigator.nvim": { "branch": "master", "commit": "91d86506ac2a039504d5205d32a1d4bc7aa57072" },
+  "YankAssassin.vim": { "branch": "main", "commit": "55ce478a08333c086bcccdf087453085f85854d4" },
   "archer.nvim": { "branch": "master", "commit": "f85f9dff05345b4d23ab7cd935e108c3e1bb0003" },
   "arshamiser.nvim": { "branch": "master", "commit": "13af62f49e5c906589aba48b338267c9ef6e2a8e" },
   "arshlib.nvim": { "branch": "master", "commit": "e76e35c927098d07445c72e9416cce243f6aae59" },

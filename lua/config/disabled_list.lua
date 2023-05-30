@@ -70,4 +70,5 @@ return {
   ["towolf/vim-helm"] = { enabled = true, start = true },
   ["tmux-plugins/vim-tmux"] = { enabled = true, start = true },
   ["mg979/vim-visual-multi"] = { enabled = true, start = true },
+  ["svban/YankAssassin.vim"] = { enabled = true, start = true },
 }
