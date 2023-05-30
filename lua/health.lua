@@ -21,6 +21,7 @@ local executables = {
   fd = { "fd", "paru -S fd" },
   fzf = { "fzf", "paru -S fzf" },
   TheSilverSearcher = { "ag", "paru -S the_silver_searcher" },
+  xxd = { "xxd", "paru -S xxd" },
 }
 
 M.check = function()

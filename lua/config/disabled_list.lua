@@ -26,4 +26,5 @@ return {
   ["monaqa/dial.nvim"] = { enabled = true, start = true },
   ["stevearc/dressing.nvim"] = { enabled = true, start = true },
   ["mattn/vim-gist"] = { enabled = true, start = true },
+  ["RaafatTurki/hex.nvim"] = { enabled = true, start = true },
 }

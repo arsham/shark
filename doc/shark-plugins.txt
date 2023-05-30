@@ -60,5 +60,6 @@ Function   Plugin                      Description                     License
 󰘜 Editing   monaqa/dial.nvim           Enhanced inc/dec values             MIT
 👗 Visuals  stevearc/dressing.nvim                                         MIT
  GIT       mattn/vim-gist             gist integration                    N/A
+󰛡 Core      RaafatTurki/hex.nvim       Hex viewer                          MIT
 
 vim:tw=78:ft=help

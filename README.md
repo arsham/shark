@@ -103,6 +103,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 󰘜 Editing  | [monaqa/dial.nvim][monaqa/dial.nvim]             | Enhanced increment/decrement values   |
 | 👗 Visuals | [stevearc/dressing.nvim][dressing.nvim]          |                                       |
 |  GIT      | [mattn/vim-gist][mattn/vim-gist]                 | gist integration                      |
+| 󰛡 Core     | [RaafatTurki/hex.nvim][hex.nvim]                 | Hex viewer                            |
 
 </details>
 
@@ -500,6 +501,7 @@ quick.cmd_and_centre("SomeCommand")
 | [monaqa/dial.nvim][monaqa/dial.nvim]        | [MIT](https://github.com/monaqa/dial.nvim/blob/master/LICENSE)             |
 | [stevearc/dressing.nvim][dressing.nvim]     | [MIT](https://github.com/stevearc/dressing.nvim/blob/master/LICENSE)       |
 | [mattn/vim-gist][mattn/vim-gist]            | [N/A][mattn/vim-gist]                                                      |
+| [RaafatTurki/hex.nvim][hex.nvim]            | [MIT](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)         |
 
 </details>
 
@@ -541,6 +543,7 @@ quick.cmd_and_centre("SomeCommand")
 [monaqa/dial.nvim]: https://github.com/monaqa/dial.nvim
 [dressing.nvim]: https://github.com/stevearc/dressing.nvim
 [mattn/vim-gist]: https://github.com/mattn/vim-gist
+[hex.nvim]: https://github.com/RaafatTurki/hex.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
