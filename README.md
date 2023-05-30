@@ -167,6 +167,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 💡 LSP     | [kosayoda/nvim-lightbulb][nvim-lightbulb]        | Code actions buln                     |
 |  Editing  | [gbprod/substitute.nvim][substitute.nvim]        | Text exchange operator                |
 | 💡 LSP     | [lsp_lines.nvim][lsp_lines.nvim]                 | Show LSP diagnostics in extmarks      |
+| 👈 Core    | [milisims/nvim-luaref][nvim-luaref]              |                                       |
 
 </details>
 
@@ -723,6 +724,7 @@ quick.cmd_and_centre("SomeCommand")
 | [kosayoda/nvim-lightbulb][nvim-lightbulb]   | [MIT](https://github.com/kosayoda/nvim-lightbulb/blob/master/LICENSE)      |
 | [gbprod/substitute.nvim][substitute.nvim]   | [WTFPL](https://github.com/gbprod/substitute.nvim/blob/main/LICENCE)       |
 | [lsp_lines.nvim][lsp_lines.nvim]            | [ISC][lsp_lines.nvim]                                                      |
+| [milisims/nvim-luaref][nvim-luaref]         | [MIT](https://github.com/milisims/nvim-luaref/blob/main/LICENSE)           |
 
 </details>
 
@@ -813,6 +815,7 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-lightbulb]: https://github.com/kosayoda/nvim-lightbulb
 [substitute.nvim]: https://github.com/gbprod/substitute.nvim
 [lsp_lines.nvim]: https://git.sr.ht/~whynothugo/lsp_lines.nvim
+[nvim-luaref]: https://github.com/milisims/nvim-luaref
 
 <!--
 vim: foldlevel=2 conceallevel=0

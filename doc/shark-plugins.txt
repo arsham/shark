@@ -97,5 +97,6 @@ Function   Plugin                      Description                     License
 💡 LSP      kosayoda/nvim-lightbulb    Code actions buln                   MIT
  Editing   gbprod/substitute.nvim     Text exchange operator            WTFPL
 💡 LSP      lsp_lines.nvim             Show LSP diagnostics in extmarks    ISC
+👈 Core     milisims/nvim-luaref                                           MIT
 
 vim:tw=78:ft=help
