@@ -37,6 +37,7 @@ CONTENTS                                                      *shark-contents*
    - Fzf ......................................................... |shark-fzf|
    - LSP ......................................................... |shark-lsp|
    - Highlight Matching ........................... |shark-highlight-matching|
+   - Commands ............................................... |shark-commands|
    - Utilities ............................................. |shark-utilities|
      - Normal ................................................. |shark-normal|
      - Highlight ........................................... |shark-highlight|
@@ -158,6 +159,22 @@ The |:RestartLsp| fixes an issue when the `:LspRestart` defined in
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*
 
 Please refer to the |matchmaker.txt| documentation for all the mappings.
+
+==============================================================================
+COMMANDS                                           *commands* *shark-commands*
+
+The following list of commands do not fit into any specific categories.
+
+                                                                   *:Filename*
+:Filename               View the filename
+                                                               *:YankFilename*
+:YankFilename           Yank the filename to '"' register
+                                                              *:YankFilenameC*
+:YankFilenameC          Yank the filename to '+' register
+                                                               *:YankFilepath*
+:YankFilepath           Yank the file path to '"' register
+                                                              *:YankFilepathC*
+:YankFilepathC          Yank the file path to '+' register
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

@@ -613,6 +613,23 @@ additions.
 The `RestartLsp` fixes an issue when the `LspRestart` does not have any
 effects.
 
+### Commands
+
+The following list of commands do not fit into any specific categories.
+
+<details>
+    <summary>Click to view the commands</summary>
+
+| Command         | Description                             |
+| :-------------- | :-------------------------------------- |
+| `Filename`      | View the filename                       |
+| `YankFilename`  | Yank the filename to `"` register       |
+| `YankFilenameC` | Yank the filename to `+` register       |
+| `YankFilepath`  | Yank the file path to `"` register      |
+| `YankFilepathC` | Yank the file path to `+` register      |
+
+</details>
+
 ### Snippets
 
 I never was a fan of snippets, until I discovered the

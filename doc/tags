@@ -10,10 +10,15 @@
 :DiagnosticsDisable	shark.txt	/*:DiagnosticsDisable*
 :DiagnosticsEnable	shark.txt	/*:DiagnosticsEnable*
 :DocumentSymbol	shark.txt	/*:DocumentSymbol*
+:Filename	shark.txt	/*:Filename*
 :Implementation	shark.txt	/*:Implementation*
 :RestartLsp	shark.txt	/*:RestartLsp*
 :TypeDefinition	shark.txt	/*:TypeDefinition*
 :WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
+:YankFilename	shark.txt	/*:YankFilename*
+:YankFilenameC	shark.txt	/*:YankFilenameC*
+:YankFilepath	shark.txt	/*:YankFilepath*
+:YankFilepathC	shark.txt	/*:YankFilepathC*
 <C-w><C-b>	shark-mappings.txt	/*<C-w><C-b>*
 <C-w><C-t>	shark-mappings.txt	/*<C-w><C-t>*
 <C-w><C-z>	shark-mappings.txt	/*<C-w><C-z>*
@@ -100,6 +105,7 @@ c_ALT-e	shark-mappings.txt	/*c_ALT-e*
 c_CTRL-e	shark-mappings.txt	/*c_CTRL-e*
 c_CTRL-r_CTRL-l	shark-mappings.txt	/*c_CTRL-r_CTRL-l*
 cn	shark-mappings.txt	/*cn*
+commands	shark.txt	/*commands*
 g.	shark-mappings.txt	/*g.*
 g=	shark-mappings.txt	/*g=*
 gso	shark-mappings.txt	/*gso*
@@ -166,6 +172,7 @@ shark-<Right>	shark-mappings.txt	/*shark-<Right>*
 shark-<Up>	shark-mappings.txt	/*shark-<Up>*
 shark-call_and_centre	shark.txt	/*shark-call_and_centre*
 shark-cmp-mappings	shark-mappings.txt	/*shark-cmp-mappings*
+shark-commands	shark.txt	/*shark-commands*
 shark-contents	shark.txt	/*shark-contents*
 shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*
 shark-functionality	shark.txt	/*shark-functionality*
