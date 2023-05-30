@@ -23,3 +23,10 @@ quick.command("Nowrap", function() --{{{
   vim.opt_local.formatoptions:remove({ "t", "c" })
 end, { desc = "Stop wrapping current buffer" })
 --}}}
+
+quick.command("ToggleRelativeNumbers", function() --{{{
+  vim.opt.relativenumber = vim.g.disable_relative_numbers or false
+  vim.opt.number = true
+  vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
+end, { desc = "Stop/Start switching relative numbers" })
+--}}}

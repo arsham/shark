@@ -60,6 +60,9 @@ local relative_line_toggle_group = augroup("RELATIVE_NUMBER_TOGGLE")
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeave" }, {
   group = relative_line_toggle_group,
   callback = function()
+    if vim.g.disable_relative_numbers then
+      return
+    end
     if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
       return
     end

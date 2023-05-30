@@ -14,6 +14,7 @@
 :Implementation	shark.txt	/*:Implementation*
 :Nowrap	shark.txt	/*:Nowrap*
 :RestartLsp	shark.txt	/*:RestartLsp*
+:ToggleRelativeNumbers	shark.txt	/*:ToggleRelativeNumbers*
 :TypeDefinition	shark.txt	/*:TypeDefinition*
 :WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
 :YankFilename	shark.txt	/*:YankFilename*

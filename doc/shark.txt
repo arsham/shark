@@ -177,6 +177,8 @@ The following list of commands do not fit into any specific categories.
 :YankFilepathC          Yank the file path to '+' register
                                                                      *:Nowrap*
 :Nowrap                 Stop wrapping current buffer
+                                                      *:ToggleRelativeNumbers*
+:ToggleRelativeNumbers  Start/Stop relative number switching
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*
