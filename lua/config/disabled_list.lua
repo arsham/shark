@@ -63,4 +63,5 @@ return {
   ["kevinhwang91/nvim-bqf"] = { enabled = true, start = true },
   ["bfredl/nvim-luadev"] = { enabled = true, start = true },
   ["SmiteshP/nvim-navic"] = { enabled = true, start = true },
+  ["kiran94/s3edit.nvim"] = { enabled = true, start = true },
 }

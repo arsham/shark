@@ -104,5 +104,6 @@ Function   Plugin                      Description                     License
  Lists     kevinhwang91/nvim-bqf      Better quickfix list manager      BSD-3
  Tool      bfredl/nvim-luadev         REPL/debug console for lua plugins  MIT
 💡 LSP      SmiteshP/nvim-navic        LSP current code context     Apache-2.0
+ Tool      kiran94/s3edit.nvim        Edit files on S3 bucket             MIT
 
 vim:tw=78:ft=help
