@@ -90,5 +90,6 @@ Function   Plugin                      Description                     License
 📢 LSP      mason-tool-installer       LSP server installer                MIT
 🗒️ Editing  numToStr/Comment.nvim      Comment string                      MIT
 🗒️ LSP      smjonas/inc-rename.nvim    Incremental renaming                MIT
+🗒️ Editing  windwp/nvim-autopairs                                          MIT
 
 vim:tw=78:ft=help

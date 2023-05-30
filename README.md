@@ -156,6 +156,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 📢 LSP     | [mason-tool-installer][mason-tool-inst]          | LSP server installer                  |
 | 🗒️ Editing | [numToStr/Comment.nvim][comment.nvim]            | Comment string                        |
 | 🗒️ LSP     | [smjonas/inc-rename.nvim][inc-rename.nvim]       | Incremental renaming                  |
+| 🗒️ Editing | [windwp/nvim-autopairs][nvim-autopairs]          |                                       |
 
 </details>
 
@@ -705,6 +706,7 @@ quick.cmd_and_centre("SomeCommand")
 | [mason-tool-installer][mason-tool-inst]     | [MIT][mason-tool-inst-license]                                             |
 | [numToStr/Comment.nvim][comment.nvim]       | [MIT](https://github.com/numToStr/Comment.nvim/blob/master/LICENSE)        |
 | [smjonas/inc-rename.nvim][inc-rename.nvim]  | [MIT](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)        |
+| [windwp/nvim-autopairs][nvim-autopairs]     | [MIT](https://github.com/windwp/nvim-autopairs/blob/master/LICENSE)        |
 
 </details>
 
@@ -787,6 +789,7 @@ quick.cmd_and_centre("SomeCommand")
 [mason-tool-inst-license]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/blob/main/LICENSE
 [comment.nvim]: https://github.com/numToStr/Comment.nvim
 [inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
+[nvim-autopairs]: https://github.com/windwp/nvim-autopairs
 
 <!--
 vim: foldlevel=2 conceallevel=0
