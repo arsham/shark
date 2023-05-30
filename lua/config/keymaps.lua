@@ -41,4 +41,12 @@ vim.keymap.set("n", "g,", "m'g,zz", o)
 
 vim.keymap.set("n", "<Esc><Esc>", ":noh<CR>", opts("Clear hlsearch"))
 
+-- Yank related {{{
+vim.keymap.set({ "n", "x" }, "<Leader>y", '"+y')
+vim.keymap.set("n", "<Leader>p", '"+p')
+vim.keymap.set("n", "<Leader>P", '"+P')
+
+vim.keymap.set("x", "p", '"_dP', opts('Replace visually selected with the " contents'))
+--}}}
+
 -- vim: fdm=marker fdl=0

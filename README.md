@@ -116,6 +116,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **s**           | **S**tatement, **S**cope                          |
 | **o**           | L**o**op                                          |
 | **e**           | **E**lement                                       |
+| **y**           | **Y**ank                                          |
 
 The `leader` key is `space`!
 
@@ -375,6 +376,13 @@ There are a few added commands to what fzf provides.
 | `Registers`   | Show register contents                     |
 
 </details>
+
+| Yank Mappings | Description                                       |
+| :------------ | :------------------------------------------------ |
+| `<leader>y`   | **Y**ank to the `+` register (external clipboard) |
+| `<leader>p`   | **P**aste from the `+` register                   |
+| `<leader>P`   | **P**aste from the `+` register (before/above)    |
+| (v) `p`       | **P**aste on selected text without changing "reg  |
 
 ### Utilities
 

@@ -152,6 +152,13 @@ g=                      Re-indents the hole buffer
 <Down>                  Increase horizontal size
                                                                   *<Esc><Esc>*
 <Esc><Esc>              Clear hlsearch
+                                                                   *<Leader>y*
+<Leader>y{motion}
+{Visial}<Leader>y       Yank to the + register
+                                                                   *<Leader>p*
+<Leader>p               Paste from the + register after cursor
+                                                                   *<Leader>P*
+<Leader>P               Paste from the + register before cursor
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*
