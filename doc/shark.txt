@@ -175,6 +175,8 @@ The following list of commands do not fit into any specific categories.
 :YankFilepath           Yank the file path to '"' register
                                                               *:YankFilepathC*
 :YankFilepathC          Yank the file path to '+' register
+                                                                     *:Nowrap*
+:Nowrap                 Stop wrapping current buffer
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

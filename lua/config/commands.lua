@@ -18,3 +18,8 @@ end)
 quick.command("YankFilepathC", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
 end) --}}}
+
+quick.command("Nowrap", function() --{{{
+  vim.opt_local.formatoptions:remove({ "t", "c" })
+end, { desc = "Stop wrapping current buffer" })
+--}}}

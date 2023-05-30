@@ -627,6 +627,7 @@ The following list of commands do not fit into any specific categories.
 | `YankFilenameC` | Yank the filename to `+` register       |
 | `YankFilepath`  | Yank the file path to `"` register      |
 | `YankFilepathC` | Yank the file path to `+` register      |
+| `Nowrap`        | Stop wrapping current buffer            |
 
 </details>
 

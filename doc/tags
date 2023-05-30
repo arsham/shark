@@ -12,6 +12,7 @@
 :DocumentSymbol	shark.txt	/*:DocumentSymbol*
 :Filename	shark.txt	/*:Filename*
 :Implementation	shark.txt	/*:Implementation*
+:Nowrap	shark.txt	/*:Nowrap*
 :RestartLsp	shark.txt	/*:RestartLsp*
 :TypeDefinition	shark.txt	/*:TypeDefinition*
 :WorkspaceSymbols	shark.txt	/*:WorkspaceSymbols*
