@@ -95,5 +95,6 @@ Function   Plugin                      Description                     License
 🖌️ Visuals  NvChad/nvim-colorizer.lua  Colourise matched colours in buffer N/A
 🦀 Tools    saecki/crates.nvim         Crate.toml helper                   MIT
 💡 LSP      kosayoda/nvim-lightbulb    Code actions buln                   MIT
+ Editing   gbprod/substitute.nvim     Text exchange operator            WTFPL
 
 vim:tw=78:ft=help
