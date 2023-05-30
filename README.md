@@ -176,6 +176,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 💡 LSP     | [SmiteshP/nvim-navic][nvim-navic]                | Current code context with LSP         |
 |  Tool     | [kiran94/s3edit.nvim][s3edit.nvim]               | Edit files on S3 bucket               |
 | 🔍 Tool    | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]           | Search and quickly jump               |
+|  Editing  | [mbbill/undotree][mbbill/undotree]               | Undo tree browser                     |
 
 </details>
 
@@ -753,6 +754,7 @@ quick.cmd_and_centre("SomeCommand")
 | [SmiteshP/nvim-navic][nvim-navic]           | [Apache-2.0][nvim-navic-license]                                           |
 | [kiran94/s3edit.nvim][s3edit.nvim]          | [MIT](https://github.com/kiran94/s3edit.nvim/blob/main/LICENSE)            |
 | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]      | [MIT](https://github.com/woosaaahh/sj.nvim/blob/main/LICENSE)              |
+| [mbbill/undotree][mbbill/undotree]          | [N/A][mbbill/undotree]                                                     |
 
 </details>
 
@@ -854,6 +856,7 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-navic-license]: https://github.com/SmiteshP/nvim-navic/blob/master/LICENSE.md
 [s3edit.nvim]: https://github.com/kiran94/s3edit.nvim
 [woosaaahh/sj.nvim]: https://github.com/woosaaahh/sj.nvim
+[mbbill/undotree]: https://github.com/mbbill/undotree
 
 <!--
 vim: foldlevel=2 conceallevel=0

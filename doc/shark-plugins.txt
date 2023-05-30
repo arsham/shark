@@ -106,5 +106,6 @@ Function   Plugin                      Description                     License
 💡 LSP      SmiteshP/nvim-navic        LSP current code context     Apache-2.0
  Tool      kiran94/s3edit.nvim        Edit files on S3 bucket             MIT
 🔍 Tool     woosaaahh/sj.nvim          Search and quickly jump             MIT
+ Editing   mbbill/undotree            Undo tree browser                   MIT
 
 vim:tw=78:ft=help

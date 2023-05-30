@@ -65,4 +65,5 @@ return {
   ["SmiteshP/nvim-navic"] = { enabled = true, start = true },
   ["kiran94/s3edit.nvim"] = { enabled = true, start = true },
   ["woosaaahh/sj.nvim"] = { enabled = true, start = true },
+  ["mbbill/undotree"] = { enabled = true, start = true },
 }
