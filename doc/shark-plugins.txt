@@ -105,5 +105,6 @@ Function   Plugin                      Description                     License
  Tool      bfredl/nvim-luadev         REPL/debug console for lua plugins  MIT
 💡 LSP      SmiteshP/nvim-navic        LSP current code context     Apache-2.0
  Tool      kiran94/s3edit.nvim        Edit files on S3 bucket             MIT
+🔍 Tool     woosaaahh/sj.nvim          Search and quickly jump             MIT
 
 vim:tw=78:ft=help

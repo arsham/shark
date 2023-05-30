@@ -175,6 +175,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [bfredl/nvim-luadev][bfredl/nvim-luadev]         | REPL/debug console for lua plugins    |
 | 💡 LSP     | [SmiteshP/nvim-navic][nvim-navic]                | Current code context with LSP         |
 |  Tool     | [kiran94/s3edit.nvim][s3edit.nvim]               | Edit files on S3 bucket               |
+| 🔍 Tool    | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]           | Search and quickly jump               |
 
 </details>
 
@@ -751,6 +752,7 @@ quick.cmd_and_centre("SomeCommand")
 | [bfredl/nvim-luadev][bfredl/nvim-luadev]    | [MIT](https://github.com/bfredl/nvim-luadev/blob/master/LICENSE)           |
 | [SmiteshP/nvim-navic][nvim-navic]           | [Apache-2.0][nvim-navic-license]                                           |
 | [kiran94/s3edit.nvim][s3edit.nvim]          | [MIT](https://github.com/kiran94/s3edit.nvim/blob/main/LICENSE)            |
+| [woosaaahh/sj.nvim][woosaaahh/sj.nvim]      | [MIT](https://github.com/woosaaahh/sj.nvim/blob/main/LICENSE)              |
 
 </details>
 
@@ -851,6 +853,7 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-navic]: https://github.com/SmiteshP/nvim-navic
 [nvim-navic-license]: https://github.com/SmiteshP/nvim-navic/blob/master/LICENSE.md
 [s3edit.nvim]: https://github.com/kiran94/s3edit.nvim
+[woosaaahh/sj.nvim]: https://github.com/woosaaahh/sj.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
