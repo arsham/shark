@@ -129,6 +129,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]             | Completion with LSP                   |
 |  LSP      | [saadparwaiz1/cmp_luasnip][cmp_luasnip]          | Extension for nvim-cmp                |
 |  LSP      | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]             | Snippet engine                        |
+|  LSP      | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]       | Extension for nvim-cmp                |
 
 </details>
 
@@ -602,6 +603,7 @@ quick.cmd_and_centre("SomeCommand")
 | [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]        | [MIT](https://github.com/hrsh7th/nvim-cmp/blob/main/LICENSE)               |
 | [saadparwaiz1/cmp_luasnip][cmp_luasnip]     | [Apache-2.0][cmp_luasnip-license]                                          |
 | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]        | [Apache-2.0](https://github.com/L3MON4D3/LuaSnip/blob/master/LICENSE)      |
+| [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]  | [N/A][hrsh7th/cmp-cmdline]                                                 |
 
 </details>
 
@@ -665,6 +667,7 @@ quick.cmd_and_centre("SomeCommand")
 [cmp_luasnip]: https://github.com/saadparwaiz1/cmp_luasnip
 [cmp_luasnip-license]: https://github.com/saadparwaiz1/cmp_luasnip/blob/master/LICENSE
 [l3mon4d3/luasnip]: https://github.com/L3MON4D3/LuaSnip
+[hrsh7th/cmp-cmdline]: https://github.com/hrsh7th/cmp-cmdline
 
 <!--
 vim: foldlevel=2 conceallevel=0

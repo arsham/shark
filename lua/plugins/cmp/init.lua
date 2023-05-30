@@ -229,17 +229,47 @@ local function config()
 end
 
 return {
-  "hrsh7th/nvim-cmp",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    "nvim-treesitter/nvim-treesitter",
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = config,
+    event = { "InsertEnter" },
+    cond = require("config.util").should_start("hrsh7th/nvim-cmp"),
+    enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
   },
-  config = config,
-  event = { "InsertEnter" },
-  cond = require("config.util").should_start("hrsh7th/nvim-cmp"),
-  enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
+  {
+    "hrsh7th/nvim-cmp",
+    name = "nvim-cmp.commandline",
+    dependencies = {
+      "hrsh7th/cmp-cmdline",
+    },
+    event = { "CmdlineEnter" },
+    config = function()
+      local cmp = require("cmp")
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "cmdline" },
+        }, {
+          { name = "path" },
+        }),
+      })
+    end,
+    cond = require("config.util").should_start("hrsh7th/nvim-cmp"),
+    enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
+  },
 }
 
 -- vim: fdm=marker fdl=0

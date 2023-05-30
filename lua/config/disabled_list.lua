@@ -43,4 +43,5 @@ return {
   ["saadparwaiz1/cmp_luasnip"] = { enabled = true, start = true },
   ["saadparwaiz1/cmp_luasnip/blob/master/LICENSE"] = { enabled = true, start = true },
   ["L3MON4D3/LuaSnip"] = { enabled = true, start = true },
+  ["hrsh7th/cmp-cmdline"] = { enabled = true, start = true },
 }
