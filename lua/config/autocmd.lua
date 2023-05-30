@@ -47,6 +47,43 @@ vim.api.nvim_create_autocmd("BufReadPre", {
   end,
 }) --}}}
 
+-- Large File Enhancements {{{
+vim.api.nvim_create_autocmd("BufRead", {
+  group = augroup("LARGE_FILE_ENHANCEMENTS"),
+  desc = "Large file enhancements.",
+  callback = function(args)
+    if vim.fn.expand("%:t") == "lsp.log" or vim.bo.filetype == "help" then
+      return
+    end
+
+    local size = vim.fn.getfsize(vim.fn.expand("%"))
+    if size > constants.large_file_size then
+      local hlsearch = vim.opt.hlsearch
+      local lazyredraw = vim.opt.lazyredraw
+      local showmatch = vim.opt.showmatch
+
+      vim.bo.undofile = false
+      vim.wo.colorcolumn = ""
+      vim.wo.relativenumber = false
+      vim.wo.foldmethod = "manual"
+      vim.wo.spell = false
+      vim.opt.hlsearch = false
+      vim.opt.lazyredraw = true
+      vim.opt.showmatch = false
+
+      vim.api.nvim_create_autocmd("BufDelete", {
+        buffer = args.buf,
+        callback = function()
+          vim.opt.hlsearch = hlsearch
+          vim.opt.lazyredraw = lazyredraw
+          vim.opt.showmatch = showmatch
+        end,
+        desc = "Set the global settings back to what they were before",
+      })
+    end
+  end,
+}) --}}}
+
 -- No Undo Files {{{
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("NO_UNDO_FILES"),

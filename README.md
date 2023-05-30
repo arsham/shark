@@ -17,6 +17,7 @@ This project supports Neovim version `0.10.0` and newer.
 - **LSP**, **Treesitter**, and **FZF** are setup to work together.
 - Seamless navigation with **tmux**.
 - Completion with **nvim-cmp** plugin is setup.
+- It is optimised to handle very **large** files.
 - There are some handy **textobjects** such as **backticks** and **indents**.
 - You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
