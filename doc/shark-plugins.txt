@@ -108,5 +108,6 @@ Function   Plugin                      Description                     License
 🔍 Tool     woosaaahh/sj.nvim          Search and quickly jump             MIT
  Editing   mbbill/undotree            Undo tree browser                   MIT
  GIT       rbong/vim-flog             git log graph                       N/A
+🎡 Visual   towolf/vim-helm            Helm syntax highlighting            N/A
 
 vim:tw=78:ft=help

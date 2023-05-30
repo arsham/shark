@@ -67,4 +67,5 @@ return {
   ["woosaaahh/sj.nvim"] = { enabled = true, start = true },
   ["mbbill/undotree"] = { enabled = true, start = true },
   ["rbong/vim-flog"] = { enabled = true, start = true },
+  ["towolf/vim-helm"] = { enabled = true, start = true },
 }

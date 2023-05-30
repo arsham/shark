@@ -83,6 +83,7 @@
   "vim-gist": { "branch": "master", "commit": "5bfbb5450d9eff248f6c074de0b7800392439304" },
   "vim-git": { "branch": "master", "commit": "105fd5559bd9df3f1204ecdcac2a587614e1a4be" },
   "vim-go-impl": { "branch": "master", "commit": "74988dc3958f68355b9d4a3ffaa97a74d0006248" },
+  "vim-helm": { "branch": "master", "commit": "c2e7b85711d410e1d73e64eb5df7b70b1c4c10eb" },
   "vim-matchup": { "branch": "master", "commit": "3625e099b09bff2db5f04082cb09ba679525980c" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },

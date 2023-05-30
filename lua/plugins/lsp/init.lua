@@ -54,6 +54,7 @@ return {
           "vimls",
           "yamlls",
           "lua_ls",
+          "helm_ls",
         },
         log_level = "error",
         diagnostics = { -- {{{

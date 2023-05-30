@@ -178,6 +178,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔍 Tool    | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]           | Search and quickly jump               |
 |  Editing  | [mbbill/undotree][mbbill/undotree]               | Undo tree browser                     |
 |  GIT      | [rbong/vim-flog][rbong/vim-flog]                 | git log graph                         |
+| 🎡 Visual  | [towolf/vim-helm][towolf/vim-helm]               | Helm syntax highlighting              |
 
 </details>
 
@@ -756,6 +757,7 @@ quick.cmd_and_centre("SomeCommand")
 | [kiran94/s3edit.nvim][s3edit.nvim]          | [MIT](https://github.com/kiran94/s3edit.nvim/blob/main/LICENSE)            |
 | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]      | [MIT](https://github.com/woosaaahh/sj.nvim/blob/main/LICENSE)              |
 | [mbbill/undotree][mbbill/undotree]          | [N/A][mbbill/undotree]                                                     |
+| [towolf/vim-helm][towolf/vim-helm]          | [View](https://github.com/towolf/vim-helm/blob/master/LICENSE)             |
 
 </details>
 
@@ -859,6 +861,7 @@ quick.cmd_and_centre("SomeCommand")
 [woosaaahh/sj.nvim]: https://github.com/woosaaahh/sj.nvim
 [mbbill/undotree]: https://github.com/mbbill/undotree
 [rbong/vim-flog]: https://github.com/rbong/vim-flog
+[towolf/vim-helm]: https://github.com/towolf/vim-helm
 
 <!--
 vim: foldlevel=2 conceallevel=0
