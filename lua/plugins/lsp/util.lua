@@ -246,6 +246,12 @@ function M.document_symbol() --{{{
   nnoremap("<localleader>@", perform, "Document symbol")
 end --}}}
 
+function M.rename() --{{{
+  vim.keymap.set("n", "<localleader>rn", function()
+    return ":Rename " .. vim.fn.expand("<cword>")
+  end, { expr = true })
+end --}}}
+
 return M
 
 -- vim: fdm=marker fdl=0

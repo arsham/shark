@@ -155,6 +155,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 📢 LSP     | [mason-null-ls.nvim][mason-null-ls.nvim]         | Null LS and Mason bridge              |
 | 📢 LSP     | [mason-tool-installer][mason-tool-inst]          | LSP server installer                  |
 | 🗒️ Editing | [numToStr/Comment.nvim][comment.nvim]            | Comment string                        |
+| 🗒️ LSP     | [smjonas/inc-rename.nvim][inc-rename.nvim]       | Incremental renaming                  |
 
 </details>
 
@@ -510,6 +511,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | [x]`gq`      | Format the selection with LSP               |
 | `gq`         | Format operator with LSP                    |
 | `<leader>i`  | Organise imports                            |
+| `<leader>rn` | Incrementally rename symbol                 |
 
 Please see the code for all available mappings.
 
@@ -686,6 +688,7 @@ quick.cmd_and_centre("SomeCommand")
 | [mason-null-ls.nvim][mason-null-ls.nvim]    | [AGPL-3.0][mason-null-ls.nvim-license]                                     |
 | [mason-tool-installer][mason-tool-inst]     | [MIT][mason-tool-inst-license]                                             |
 | [numToStr/Comment.nvim][comment.nvim]       | [MIT](https://github.com/numToStr/Comment.nvim/blob/master/LICENSE)        |
+| [smjonas/inc-rename.nvim][inc-rename.nvim]  | [MIT](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)        |
 
 </details>
 
@@ -767,6 +770,7 @@ quick.cmd_and_centre("SomeCommand")
 [mason-tool-inst]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 [mason-tool-inst-license]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim/blob/main/LICENSE
 [comment.nvim]: https://github.com/numToStr/Comment.nvim
+[inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

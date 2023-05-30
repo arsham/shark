@@ -48,4 +48,5 @@ return {
   ["jay-babu/mason-null-ls.nvim"] = { enabled = true, start = true },
   ["WhoIsSethDaniel/mason-tool-installer.nvim"] = { enabled = true, start = true },
   ["numToStr/Comment.nvim"] = { enabled = true, start = true },
+  ["smjonas/inc-rename.nvim"] = { enabled = true, start = true },
 }

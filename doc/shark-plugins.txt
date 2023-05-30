@@ -89,5 +89,6 @@ Function   Plugin                      Description                     License
 📢 LSP      mason-null-ls.nvim         Null LS and Mason bridge       AGPL-3.0
 📢 LSP      mason-tool-installer       LSP server installer                MIT
 🗒️ Editing  numToStr/Comment.nvim      Comment string                      MIT
+🗒️ LSP      smjonas/inc-rename.nvim    Incremental renaming                MIT
 
 vim:tw=78:ft=help

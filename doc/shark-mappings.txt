@@ -283,6 +283,8 @@ v_gq                    Format the selection with LSP
 gq{motion}              Format operator with LSP
                                                                    *<Leader>i*
 <Leader>i               Organise imports
+                                                                  *<Leader>rn*
+<Leader>rn              Incrementally rename symbol
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*
