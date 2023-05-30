@@ -10,6 +10,7 @@ This project supports Neovim version `0.10.0` and newer.
 
 - Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
+- Seamless navigation with **tmux**.
 - There are some handy **textobjects** such as **backticks** and **indents**.
 - You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
@@ -105,6 +106,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  GIT      | [mattn/vim-gist][mattn/vim-gist]                 | gist integration                      |
 | 󰛡 Core     | [RaafatTurki/hex.nvim][hex.nvim]                 | Hex viewer                            |
 |  Tool     | [iamcco/markdown-preview.nvim][mk-preview]       |                                       |
+| 🧭 Core    | [numToStr/Navigator.nvim][navigator.nvim]        | Seamless navigation with tmux         |
 
 </details>
 
@@ -504,6 +506,7 @@ quick.cmd_and_centre("SomeCommand")
 | [mattn/vim-gist][mattn/vim-gist]            | [N/A][mattn/vim-gist]                                                      |
 | [RaafatTurki/hex.nvim][hex.nvim]            | [MIT](https://github.com/RaafatTurki/hex.nvim/blob/master/LICENSE)         |
 | [iamcco/markdown-preview.nvim][mk-preview]  | [MIT][mk-preview-license]                                                  |
+| [numToStr/Navigator.nvim][navigator.nvim]   | [MIT](https://github.com/numToStr/Navigator.nvim/blob/master/LICENSE)      |
 
 </details>
 
@@ -548,6 +551,7 @@ quick.cmd_and_centre("SomeCommand")
 [hex.nvim]: https://github.com/RaafatTurki/hex.nvim
 [mk-preview]: https://github.com/iamcco/markdown-preview.nvim
 [mk-preview-license]: https://github.com/iamcco/markdown-preview.nvim/blob/master/LICENSE
+[navigator.nvim]: https://github.com/numToStr/Navigator.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

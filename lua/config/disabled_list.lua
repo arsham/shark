@@ -28,4 +28,5 @@ return {
   ["mattn/vim-gist"] = { enabled = true, start = true },
   ["RaafatTurki/hex.nvim"] = { enabled = true, start = true },
   ["iamcco/markdown-preview.nvim"] = { enabled = true, start = true },
+  ["numToStr/Navigator.nvim"] = { enabled = true, start = true },
 }
