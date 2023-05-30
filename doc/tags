@@ -46,6 +46,10 @@ o_ib	shark-mappings.txt	/*o_ib*
 o_if	shark-mappings.txt	/*o_if*
 o_ih	shark-mappings.txt	/*o_ih*
 o_im	shark-mappings.txt	/*o_im*
+shark-<Down>	shark-mappings.txt	/*shark-<Down>*
+shark-<Left>	shark-mappings.txt	/*shark-<Left>*
+shark-<Right>	shark-mappings.txt	/*shark-<Right>*
+shark-<Up>	shark-mappings.txt	/*shark-<Up>*
 shark-call_and_centre	shark.txt	/*shark-call_and_centre*
 shark-contents	shark.txt	/*shark-contents*
 shark-core-mappings	shark-mappings.txt	/*shark-core-mappings*

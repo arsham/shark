@@ -22,4 +22,11 @@ vim.keymap.set("n", "<C-e>", "2<C-e>", opts("Faster scroll up"))
 vim.keymap.set("n", "<C-y>", "2<C-y>", opts("Faster scroll down"))
 --}}}
 
+-- Resizing windows {{{
+vim.keymap.set("n", "<Left>", ":vert resize -2<CR>", opts("Decreases vertical size"))
+vim.keymap.set("n", "<Right>", ":vert resize +2<CR>", opts("Increase vertical size"))
+vim.keymap.set("n", "<Up>", ":resize +2<CR>", opts("Increase horizontal size"))
+vim.keymap.set("n", "<Down>", ":resize -2<CR>", opts("Decreases horizontal size"))
+--}}}
+
 -- vim: fdm=marker fdl=0

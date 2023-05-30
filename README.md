@@ -176,6 +176,10 @@ The `leader` key is `space`!
 | [count]`<Alt-j>`  | Shifts line(s) down and format                                       |
 | [count]`<Alt-k>`  | Shifts line(s) up and format                                         |
 | `g=`              | Re-indents the hole buffer                                           |
+| `<Left>`          | Reduce vertical size                                                 |
+| `<Right>`         | Increase vertical size                                               |
+| `<Up>`            | Reduce horizontal size                                               |
+| `<Down>`          | Increase horizontal size                                             |
 
 </details>
 
