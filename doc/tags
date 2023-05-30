@@ -181,6 +181,7 @@ shark_]s	shark-mappings.txt	/*shark_]s*
 shark_gd	shark-mappings.txt	/*shark_gd*
 shark_gq	shark-mappings.txt	/*shark_gq*
 shark_i_<Tab>	shark-mappings.txt	/*shark_i_<Tab>*
+shark_v_gc	shark-mappings.txt	/*shark_v_gc*
 shark_v_gq	shark-mappings.txt	/*shark_v_gq*
 v_<M-j>	shark-mappings.txt	/*v_<M-j>*
 v_<M-k>	shark-mappings.txt	/*v_<M-k>*

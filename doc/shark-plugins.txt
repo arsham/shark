@@ -88,5 +88,6 @@ Function   Plugin                      Description                     License
 📢 LSP      null-ls.nvim               External Tool to LSP bridge         N/A
 📢 LSP      mason-null-ls.nvim         Null LS and Mason bridge       AGPL-3.0
 📢 LSP      mason-tool-installer       LSP server installer                MIT
+🗒️ Editing  numToStr/Comment.nvim      Comment string                      MIT
 
 vim:tw=78:ft=help

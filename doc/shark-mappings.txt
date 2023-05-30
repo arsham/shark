@@ -218,6 +218,9 @@ gsoo                    Sort [count] lines
                                                          *i_CTRL-h* *s_CTRL-h*
                                                            *i_<C-h>* *s_<C-h>*
 <Ctrl>h                 Previous snippet choice
+                                                      *shark_gc*, *shark_v_gc*
+gc{motion}
+{Visual}gc              Comment [count] lines or {Visual} selection
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

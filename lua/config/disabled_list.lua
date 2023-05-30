@@ -44,4 +44,8 @@ return {
   ["L3MON4D3/LuaSnip"] = { enabled = true, start = true },
   ["hrsh7th/cmp-cmdline"] = { enabled = true, start = true },
   ["j-hui/fidget.nvim"] = { enabled = true, start = true },
+  ["jose-elias-alvarez/null-ls.nvim"] = { enabled = true, start = true },
+  ["jay-babu/mason-null-ls.nvim"] = { enabled = true, start = true },
+  ["WhoIsSethDaniel/mason-tool-installer.nvim"] = { enabled = true, start = true },
+  ["numToStr/Comment.nvim"] = { enabled = true, start = true },
 }
