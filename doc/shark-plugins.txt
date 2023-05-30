@@ -92,5 +92,6 @@ Function   Plugin                      Description                     License
 🗒️ LSP      smjonas/inc-rename.nvim    Incremental renaming                MIT
 🗒️ Editing  windwp/nvim-autopairs                                          MIT
  Editing   arthurxavierx/vim-caser    Case conversion                     N/A
+🖌️ Visuals  NvChad/nvim-colorizer.lua  Colourise matched colours in buffer N/A
 
 vim:tw=78:ft=help

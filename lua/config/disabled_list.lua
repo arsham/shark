@@ -51,4 +51,5 @@ return {
   ["smjonas/inc-rename.nvim"] = { enabled = true, start = true },
   ["windwp/nvim-autopairs"] = { enabled = true, start = true },
   ["arthurxavierx/vim-caser"] = { enabled = true, start = true },
+  ["NvChad/nvim-colorizer.lua"] = { enabled = true, start = true },
 }

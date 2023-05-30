@@ -158,6 +158,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗒️ LSP     | [smjonas/inc-rename.nvim][inc-rename.nvim]       | Incremental renaming                  |
 | 🗒️ Editing | [windwp/nvim-autopairs][nvim-autopairs]          |                                       |
 |  Editing  | [arthurxavierx/vim-caser][vim-caser]             | Case conversion                       |
+| 🖌️ Visuals | [NvChad/nvim-colorizer.lua][nvim-colorizer]      | Colourise matched colours in buffer   |
 
 </details>
 
@@ -709,6 +710,7 @@ quick.cmd_and_centre("SomeCommand")
 | [smjonas/inc-rename.nvim][inc-rename.nvim]  | [MIT](https://github.com/smjonas/inc-rename.nvim/blob/main/LICENSE)        |
 | [windwp/nvim-autopairs][nvim-autopairs]     | [MIT](https://github.com/windwp/nvim-autopairs/blob/master/LICENSE)        |
 | [arthurxavierx/vim-caser][vim-caser]        | [View](https://github.com/arthurxavierx/vim-caser/blob/master/LICENSE)     |
+| [NvChad/nvim-colorizer.lua][nvim-colorizer] | [View][nvim-colorizer-license]                                             |
 
 </details>
 
@@ -793,6 +795,8 @@ quick.cmd_and_centre("SomeCommand")
 [inc-rename.nvim]: https://github.com/smjonas/inc-rename.nvim
 [nvim-autopairs]: https://github.com/windwp/nvim-autopairs
 [vim-caser]: https://github.com/arthurxavierx/vim-caser
+[nvim-colorizer]: https://github.com/NvChad/nvim-colorizer.lua
+[nvim-colorizer-license]: https://github.com/NvChad/nvim-colorizer.lua/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
