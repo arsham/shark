@@ -60,7 +60,12 @@ HIGHLIGHTS                                                  *shark-highlights*
 * You can add the current location of the cursor or make notes on the current
   location in the quickfix/local lists with repeatable mappings.
 * You can manipulate quickfix/local lists.
+* It comes with integration with git and gist.
+* Has a lot of useful feedback in the gutter.
 * Statusline is configures with feline.
+* It is set to give a lot of useful information about the buffer.
+* Prettier quickfix buffer and quickfix tools.
+* The theme is setup with Lua to take advantage of its performance.
 
 ==============================================================================
 SETUP                                                            *shark-setup*

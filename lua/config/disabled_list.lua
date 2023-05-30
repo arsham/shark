@@ -25,4 +25,5 @@ return {
   ["andymass/vim-matchup"] = { enabled = true, start = true },
   ["monaqa/dial.nvim"] = { enabled = true, start = true },
   ["stevearc/dressing.nvim"] = { enabled = true, start = true },
+  ["mattn/vim-gist"] = { enabled = true, start = true },
 }

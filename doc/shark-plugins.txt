@@ -59,5 +59,6 @@ Function   Plugin                      Description                     License
 🥊 Core     andymass/vim-matchup                                           MIT
 󰘜 Editing   monaqa/dial.nvim           Enhanced inc/dec values             MIT
 👗 Visuals  stevearc/dressing.nvim                                         MIT
+ GIT       mattn/vim-gist             gist integration                    N/A
 
 vim:tw=78:ft=help
