@@ -87,6 +87,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Core     | [tpope/vim-git][tpope/vim-git]                   |                                       |
 | 🌲 Visuals | [nvim-treesitter][nvim-treesitter]               | Highlighting engine                   |
 | 🔥 GIT     | [lewis6991/gitsigns.nvim][gitsigns.nvim]         | git signs in the gutter               |
+| 🥇 Textobj | [nvim-treesitter-textobjects][ts-textobjects]    | Treesitter Text Objects               |
 
 </details>
 
@@ -104,11 +105,15 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **b**           | **B**uffer                                        |
 | **f**           | **F**ile, **F**ind                                |
 | **a**           | **A**ll, or disabling certain constraints         |
+| **a**           | **A**rgument (parameter)                          |
 | **i**           | **I**ndent                                        |
 | **m**           | **M**atch highlighting                            |
 | **d**           | **D**iff                                          |
 | **h**           | **H**unk                                          |
 | **c**           | **C**hange                                        |
+| **s**           | **S**tatement, **S**cope                          |
+| **o**           | L**o**op                                          |
+| **e**           | **E**lement                                       |
 
 The `leader` key is `space`!
 
@@ -141,8 +146,35 @@ The `leader` key is `space`!
 | `<leader>hr`      | (gitsigns) **R**eset **h**unk                                        |
 | `<leader>hR`      | (gitsigns) **R**eset buffer                                          |
 | `<leader>hp`      | (gitsigns) **P**review **h**unk                                      |
+| `]f`              | Go to start of the next function                                     |
+| `[f`              | Go to start of the previous function                                 |
+| `]F`              | Go to end of the next function                                       |
+| `[F`              | Go to end of the previous function                                   |
+| `]b`              | Go to start of the next block                                        |
+| `[b`              | Go to start of the previous block                                    |
+| `]B`              | Go to end of the next block                                          |
+| `[B`              | Go to end of the previous block                                      |
+| `]gc`             | Go to start of the next comment                                      |
+| `[gc`             | Go to start of the previous comment                                  |
+| `]a`              | Go to start of the next parameter                                    |
+| `[a`              | Go to start of the previous parameter                                |
+| `]A`              | Go to end of the next parameter                                      |
+| `[A`              | Go to end of the previous parameter                                  |
+| `]o`              | Go to the next loop                                                  |
+| `[o`              | Go to the previous loop                                              |
+| `]s`              | Go to the next scope                                                 |
+| `[s`              | Go to the previous scope                                             |
+| `<leader>.f`      | Swap around with the next function                                   |
+| `<leader>,f`      | Swap around with the previous function                               |
+| `<leader>.e`      | Swap with the next element                                           |
+| `<leader>,e`      | Swap with the previous element                                       |
+| `<leader>.a`      | Swap with the next parameter                                         |
+| `<leader>,a`      | Swap with the previous parameter                                     |
+| `<leader>df`      | Peek function definition                                             |
 
 </details>
+
+There are more specialised mappings provided, keep reading please!
 
 ### Text Objects
 
@@ -163,6 +195,15 @@ The `leader` key is `space`!
 | `ii`        | **I**n **I**ndentation block                |
 | `ah`        | **A**round **H**unk                         |
 | `ih`        | **I**n **H**unk                             |
+| `af`        | Select around a function                    |
+| `if`        | Select inside a function                    |
+| `am`        | Select around a method                      |
+| `im`        | Select inside a method                      |
+| `ab`        | Select around a block                       |
+| `ib`        | Select inside a block                       |
+| `aa`        | Select around a parameter                   |
+| `ia`        | Select inside a parameter                   |
+| `as`        | Select around a statement                   |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**
@@ -391,6 +432,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tpope/vim-git][tpope/vim-git]              | [N/A][tpope/vim-git]                                                       |
 | [nvim-treesitter][nvim-treesitter]          | [Apache-2.0][nvim-treesitter-license]                                      |
 | [lewis6991/gitsigns.nvim][gitsigns.nvim]    | [MIT](https://github.com/lewis6991/gitsigns.nvim/blob/main/LICENSE)        |
+| [treesitter-textobjects][ts-textobjects]    | [Apache-2.0][treesitter-textobjects-license]                               |
 
 </details>
 
@@ -417,6 +459,8 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
 [nvim-treesitter-license]: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/LICENSE
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
+[ts-textobjects]: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+[treesitter-textobjects-license]: https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0

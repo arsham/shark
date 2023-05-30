@@ -34,13 +34,17 @@ situation or messes with a community-driven or Vim's very well known mapping:
  w                |location-list| mappings (because it's near q)
  ]                Jumps to the next item
  [                Jumps to the previous item
- b                Buffer
- f                File, Find
+ b                Buffer, Block
+ f                File, Find, Function
  a                All, or disabling certain constraints
+ a                Argument (parameter)
  i                Indent
  d                Diff
  h                Hunk
  c                Change
+ s                Statement, Scope
+ o                Loop
+ e                Element
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -78,13 +82,81 @@ Please refer to the following help files for more mappings and textobjects:
 <Leader>hR              (gitsigns) Reset buffer
                                                                   *<Leader>hp*
 <Leader>hp              (gitsigns) Preview hunk
+                                                                    *shark_]f*
+]f                      Go to start of the next function
+                                                                    *shark_[f*
+[f                      Go to start of the previous function
+                                                                          *]F*
+]F                      Go to end of the next function
+                                                                          *[F*
+[F                      Go to end of the previous function
+                                                                          *]b*
+]b                      Go to start of the next block
+                                                                          *[b*
+[b                      Go to start of the previous block
+                                                                          *]B*
+]B                      Go to end of the next block
+                                                                          *[B*
+[B                      Go to end of the previous block
+                                                                         *]gc*
+]gc                     Go to start of the next comment
+                                                                         *[gc*
+[gc                     Go to start of the previous comment
+                                                                          *]a*
+]a                      Go to start of the next parameter
+                                                                          *[a*
+[a                      Go to start of the previous parameter
+                                                                          *]A*
+]A                      Go to end of the next parameter
+                                                                          *[A*
+[A                      Go to end of the previous parameter
+                                                                          *]o*
+]o                      Go to the next loop
+                                                                          *[o*
+[o                      Go to the previous loop
+                                                                    *shark_]s*
+]s                      Go to the next scope
+                                                                    *shark_[s*
+[s                      Go to the previous scope
+                                                                  *<Leader>.f*
+<Leader>.f              Swap around with the next function
+                                                                  *<Leader>,f*
+<Leader>,f              Swap around with the previous function
+                                                                  *<Leader>.e*
+<Leader>.e              Swap with the next element
+                                                                  *<Leader>,e*
+<Leader>,e              Swap with the previous element
+                                                                  *<Leader>.a*
+<Leader>.a              Swap with the next parameter
+                                                                  *<Leader>,a*
+<Leader>,a              Swap with the previous parameter
+                                                                  *<Leader>df*
+<Leader>df              Peek function definition
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*
 
                                                                         *o_ah*
-o_ah                     Around Hunk (git changes)
+o_ah                    Around Hunk (git changes)
                                                                         *o_ih*
-o_ih                     In Hunk (git changes)
+o_ih                    In Hunk (git changes)
+                                                                        *o_af*
+o_af                    Select around a function
+                                                                        *o_if*
+o_if                    Select inside a function
+                                                                        *o_am*
+o_am                    Select around a method
+                                                                        *o_im*
+o_im                    Select inside a method
+                                                                        *o_ab*
+o_ab                    Select around a block
+                                                                        *o_ib*
+o_ib                    Select inside a block
+                                                                        *o_aa*
+o_aa                    Select around a parameter
+                                                                        *o_ia*
+o_ia                    Select inside a parameter
+                                                                        *o_as*
+o_as                    Select around a statement
 
 vim:tw=78:ts=8:ft=help:norl:

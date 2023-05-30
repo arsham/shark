@@ -6,6 +6,7 @@
   "fzf-lua": { "branch": "main", "commit": "8d6b6388f40a5c5ddadb32601238944f0b0fc233" },
   "fzf.vim": { "branch": "master", "commit": "5d87ac1fe8d729f116bda2f90a7211ad309ddf5a" },
   "fzfmania.nvim": { "branch": "master", "commit": "fd6d478dc5230f37db4acf82ca61f5326cd57c27" },
+  "gitsigns.nvim": { "branch": "main", "commit": "f868d82a36f7f7f5e110eb0a9659993984f59875" },
   "indent-tools.nvim": { "branch": "master", "commit": "f948f48b04c20f3c94697f90b0178c623c546a38" },
   "lazy.nvim": { "branch": "main", "commit": "bc895023573e76f8567d2375bbd3ea8be4f00ca7" },
   "listish.nvim": { "branch": "master", "commit": "039f6db68f249a23981c1f9cebc6476bbc280319" },
