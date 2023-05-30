@@ -46,6 +46,7 @@
   "mini.trailspace": { "branch": "main", "commit": "c41ab1035d184ff20c1aebd76639320c055afebe" },
   "neo-tree.nvim": { "branch": "v2.x", "commit": "8c89efb93b8383666a6f989762c2f610f5f2c930" },
   "neodev.nvim": { "branch": "main", "commit": "1dffaffd6eadd39daba4a102d1ead42dd198e2c2" },
+  "neorg": { "branch": "main", "commit": "45efa0e606cd403fead47dd7b199f6b5c9a0a68b" },
   "nui.nvim": { "branch": "main", "commit": "d5a82aae64426a805e19d8ef5a379292f9dc55d3" },
   "null-ls.nvim": { "branch": "main", "commit": "61164453d2c50045fc36becb50f85d4982efaea0" },
   "nvim-autopairs": { "branch": "master", "commit": "59df87a84c80a357ca8d8fe86e451b93ac476ccc" },

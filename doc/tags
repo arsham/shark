@@ -51,6 +51,11 @@
 <Leader>i	shark-mappings.txt	/*<Leader>i*
 <Leader>kf	shark-mappings.txt	/*<Leader>kf*
 <Leader>kk	shark-mappings.txt	/*<Leader>kk*
+<Leader>nh	shark-mappings.txt	/*<Leader>nh*
+<Leader>nj	shark-mappings.txt	/*<Leader>nj*
+<Leader>nm	shark-mappings.txt	/*<Leader>nm*
+<Leader>nr	shark-mappings.txt	/*<Leader>nr*
+<Leader>nw	shark-mappings.txt	/*<Leader>nw*
 <Leader>oo	shark-mappings.txt	/*<Leader>oo*
 <Leader>p	shark-mappings.txt	/*<Leader>p*
 <Leader>rn	shark-mappings.txt	/*<Leader>rn*
@@ -184,6 +189,8 @@ shark-text-objects	shark-mappings.txt	/*shark-text-objects*
 shark-utilities	shark.txt	/*shark-utilities*
 shark.txt	shark.txt	/*shark.txt*
 shark_K	shark-mappings.txt	/*shark_K*
+shark_NEORG_[[	shark-mappings.txt	/*shark_NEORG_[[*
+shark_NEORG_]]	shark-mappings.txt	/*shark_NEORG_]]*
 shark_[c	shark-mappings.txt	/*shark_[c*
 shark_[d	shark-mappings.txt	/*shark_[d*
 shark_[f	shark-mappings.txt	/*shark_[f*

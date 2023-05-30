@@ -59,4 +59,5 @@ return {
   ["milisims/nvim-luaref"] = { enabled = true, start = true },
   ["echasnovski/mini.nvim"] = { enabled = true, start = true },
   ["folke/neodev.nvim"] = { enabled = true, start = true },
+  ["nvim-neorg/neorg"] = { enabled = true, start = true },
 }

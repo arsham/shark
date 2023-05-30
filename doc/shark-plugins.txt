@@ -100,5 +100,6 @@ Function   Plugin                      Description                     License
 👈 Core     milisims/nvim-luaref                                           MIT
 🗒️ Editing  echasnovski/mini.nvim      For surround, alignments, etc.      MIT
  Core      folke/neodev.nvim                                       Apache-2.0
+📆 Tool     nvim-neorg/neorg           Note taking tool                GPL-3.0
 
 vim:tw=78:ft=help

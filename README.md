@@ -170,6 +170,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 👈 Core    | [milisims/nvim-luaref][nvim-luaref]              |                                       |
 | 🗒️ Editing | [echasnovski/mini.nvim][mini.nvim]               | For surround, alignments, etc.        |
 |  Core     | [folke/neodev.nvim][folke/neodev.nvim]           |                                       |
+| 📆 Tool    | [nvim-neorg/neorg][nvim-neorg/neorg]             | Note taking tool                      |
 
 </details>
 
@@ -201,6 +202,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **t**           | **T**ab                                           |
 | **z**           | Folds, language/spelling                          |
 | **g**           | **G**o/Jump to, run something that goes/jumps to  |
+| **n**           | **N**eorg related                                 |
 
 The `leader` key is `space`!
 
@@ -293,6 +295,13 @@ The `leader` key is `space`!
 | [s][i]`<Ctrl-l>`  | Next snippet choice                                                  |
 | [s][i]`<Ctrl-h>`  | Previous snippet choice                                              |
 | [n,v]`gc`         | Comment operator                                                     |
+| `<leader>nr`      | **R**eturn from **N**eorg buffer                                     |
+| `<leader>nm`      | **M**odify code block with **N**eorg looking-glass                   |
+| `<leader>nh`      | **N**eorg workspace **H**me                                          |
+| `<leader>nw`      | **N**eorg **W**orkspace                                              |
+| `<leader>nj`      | **N**eorg **J**ournal                                                |
+| [Neorg]`]]`       | **N**eorg buffer next heading                                        |
+| [Neorg]`[[`       | **N**eorg buffer previous heading                                    |
 
 </details>
 
@@ -729,6 +738,7 @@ quick.cmd_and_centre("SomeCommand")
 | [milisims/nvim-luaref][nvim-luaref]         | [MIT](https://github.com/milisims/nvim-luaref/blob/main/LICENSE)           |
 | [echasnovski/mini.nvim][mini.nvim]          | [MIT](https://github.com/echasnovski/mini.nvim/blob/main/LICENSE)          |
 | [folke/neodev.nvim][folke/neodev.nvim]      | [Apache-2.0](https://github.com/folke/neodev.nvim/blob/main/LICENSE)       |
+| [nvim-neorg/neorg][nvim-neorg/neorg]        | [GPL-3.0](https://github.com/nvim-neorg/neorg/blob/main/LICENSE)           |
 
 </details>
 
@@ -822,6 +832,7 @@ quick.cmd_and_centre("SomeCommand")
 [nvim-luaref]: https://github.com/milisims/nvim-luaref
 [mini.nvim]: https://github.com/echasnovski/mini.nvim
 [folke/neodev.nvim]: https://github.com/folke/neodev.nvim
+[nvim-neorg/neorg]: https://github.com/nvim-neorg/neorg
 
 <!--
 vim: foldlevel=2 conceallevel=0

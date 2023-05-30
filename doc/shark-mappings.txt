@@ -48,6 +48,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  t                Tab
  z                Folds, language/spelling
  g                Go/Jump to, run something that goes/jumps to
+ n                Neorg related
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -221,6 +222,20 @@ gsoo                    Sort [count] lines
                                                       *shark_gc*, *shark_v_gc*
 gc{motion}
 {Visual}gc              Comment [count] lines or {Visual} selection
+                                                                  *<Leader>nr*
+<Leader>nr              Return from Neorg buffer
+                                                                  *<Leader>nm*
+<Leader>nm              Modify code block with Neorg looking-glass
+                                                                  *<Leader>nh*
+<Leader>nh              Neorg workspace Hme
+                                                                  *<Leader>nw*
+<Leader>nw              Neorg Workspace
+                                                                  *<Leader>nj*
+<Leader>nj              Neorg Journal
+                                                              *shark_NEORG_]]*
+]]                      Neorg buffer next heading
+                                                              *shark_NEORG_[[*
+[[                      Neorg buffer previous heading
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

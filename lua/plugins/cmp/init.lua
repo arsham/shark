@@ -109,6 +109,7 @@ local function config()
             { name = "calc" },
             { name = "dap" },
             { name = "crates" },
+            { name = "neorg", priority = 5, keyword_length = 1 },
           },
         },
       }), -- }}}
@@ -116,6 +117,7 @@ local function config()
       ["<C-s>"] = cmp.mapping.complete({ -- {{{
         config = {
           sources = {
+            { name = "neorg", keyword_length = 1 },
             {
               name = "buffer",
               priority = 5,
@@ -247,6 +249,7 @@ local function config()
       },
       { name = "emoji", priority = 2 },
       { name = "nerdfont", priority = 1 },
+      { name = "neorg", keyword_length = 1 },
     }), --}}}
 
     formatting = { --{{{
@@ -265,6 +268,7 @@ local function config()
           path = "Path",
           rg = "RG",
           omni = "Omni",
+          neorg = "ORG",
         })[entry.source.name] or entry.source.name, client_name)
 
         vim_item.kind = string.format("%s %-9s", kind_icons[vim_item.kind], vim_item.kind)
