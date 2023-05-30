@@ -38,6 +38,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  f                File, Find
  a                All, or disabling certain constraints
  i                Indent
+ d                Diff
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -51,5 +52,9 @@ Please refer to the following help files for more mappings and textobjects:
 
                                                                   *<Leader>oo*
 <Leader>oo              Open the Oil buffer
+                                                                  *<Leader>gg*
+<Leader>gg              Fugitive git buffer
+                                                                  *<Leader>gd*
+<Leader>gd              Fugitive git diff
 
 vim:tw=78:ts=8:ft=help:norl:

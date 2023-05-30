@@ -45,5 +45,8 @@ Function   Plugin                      Description                     License
 🥇 Textobj  arsham/indent-tools.nvim   Indent mappings and text object     MIT
 🔥 Visuals  arsham/matchmaker.nvim     Creates highlight for user matches  MIT
 🛢️ Tool     stevearc/oil.nvim          File explorer                       MIT
+ GIT       tpope/vim-fugitive         git integration                     N/A
+ GIT       tpope/vim-rhubarb          Go to selection's code Github page  MIT
+ Core      tpope/vim-git              git integration                     N/A
 
 vim:tw=78:ft=help

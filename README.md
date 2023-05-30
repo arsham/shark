@@ -73,6 +73,9 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🥇 Textobj | [arsham/indent-tools.nvim][indent-tools.nvim]    | Indent mappings and text object       |
 | 🔥 Visuals | [arsham/matchmaker.nvim][matchmaker.nvim]        | Creates highlight for user matches    |
 | 🛢️ Tool    | [stevearc/oil.nvim][oil.nvim]                    | File explorer                         |
+|  GIT      | [tpope/vim-fugitive][tpope/vim-fugitive]         | git integration                       |
+|  GIT      | [tpope/vim-rhubarb][tpope/vim-rhubarb]           | Go to selection's code Github page    |
+|  Core     | [tpope/vim-git][tpope/vim-git]                   |                                       |
 
 </details>
 
@@ -92,6 +95,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **a**           | **A**ll, or disabling certain constraints         |
 | **i**           | **I**ndent                                        |
 | **m**           | **M**atch highlighting                            |
+| **d**           | **D**iff                                          |
 
 The `leader` key is `space`!
 
@@ -112,6 +116,8 @@ The `leader` key is `space`!
 | `]i`              | Jump down along the **i**ndents                                      |
 | `[i`              | Jump up along the **i**ndents                                        |
 | `<leader>oo`      | **O**pen the **O**il buffer.                                         |
+| `<leader>gg`      | Fu**g**itive git buffer                                              |
+| `<leader>gd`      | Fu**g**itive git **D**iff                                            |
 
 </details>
 
@@ -354,6 +360,10 @@ quick.cmd_and_centre("SomeCommand")
 | [indent-tools.nvim][indent-tools.nvim]      | [MIT](https://github.com/arsham/indent-tools.nvim/blob/master/LICENSE)     |
 | [matchmaker.nvim][matchmaker.nvim]          | [MIT](https://github.com/arsham/matchmaker.nvim/blob/master/LICENSE)       |
 | [stevearc/oil.nvim][oil.nvim]               | [MIT](https://github.com/stevearc/oil.nvim/blob/master/LICENSE)            |
+| [stevearc/oil.nvim][oil.nvim]               | [MIT](https://github.com/stevearc/oil.nvim/blob/master/LICENSE)            |
+| [tpope/vim-fugitive][tpope/vim-fugitive]    | [N/A][tpope/vim-fugitive]                                                  |
+| [tpope/vim-rhubarb][tpope/vim-rhubarb]      | [MIT](https://github.com/tpope/vim-rhubarb/blob/master/LICENSE)            |
+| [tpope/vim-git][tpope/vim-git]              | [N/A][tpope/vim-git]                                                       |
 
 </details>
 
@@ -374,6 +384,9 @@ quick.cmd_and_centre("SomeCommand")
 [indent-tools.nvim]: https://github.com/arsham/indent-tools.nvim
 [matchmaker.nvim]: https://github.com/arsham/matchmaker.nvim
 [oil.nvim]: https://github.com/stevearc/oil.nvim
+[tpope/vim-fugitive]: https://github.com/tpope/vim-fugitive
+[tpope/vim-rhubarb]: https://github.com/tpope/vim-rhubarb
+[tpope/vim-git]: https://github.com/tpope/vim-git
 
 <!--
 vim: foldlevel=2 conceallevel=0

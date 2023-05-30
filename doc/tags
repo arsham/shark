@@ -1,3 +1,5 @@
+<Leader>gd	shark-mappings.txt	/*<Leader>gd*
+<Leader>gg	shark-mappings.txt	/*<Leader>gg*
 <Leader>oo	shark-mappings.txt	/*<Leader>oo*
 shark-call_and_centre	shark.txt	/*shark-call_and_centre*
 shark-contents	shark.txt	/*shark-contents*
