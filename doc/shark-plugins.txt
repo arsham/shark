@@ -42,5 +42,6 @@ Function   Plugin                      Description                     License
 🔁 Core     tpope/vim-repeat           Add repeat support to other plugins N/A
 🥇 Textobj  arsham/archer.nvim         Advanced mappings and text objects  MIT
 🧰 Visuals  MunifTanjim/nui.nvim       UI component                        MIT
+🥇 Textobj  arsham/indent-tools.nvim   Indent mappings and text object     MIT
 
 vim:tw=78:ft=help

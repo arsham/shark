@@ -54,6 +54,7 @@ HIGHLIGHTS                                                  *shark-highlights*
 
 * Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in Lua.
+* There are some handy textobjects such as backticks and indents.
 * You can add the current location of the cursor or make notes on the current
   location in the quickfix/local lists with repeatable mappings.
 * You can manipulate quickfix/local lists.

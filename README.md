@@ -10,6 +10,7 @@ This project supports Neovim version `0.10.0` and newer.
 
 - Besides in a few places that Neovim doesn't provide an API in Lua, most
   configuration is done in **Lua**.
+- There are some handy **textobjects** such as **backticks** and **indents**.
 - You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
 - You can **manipulate** quickfix/local lists.
@@ -68,6 +69,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🔁 Core    | [tpope/vim-repeat][tpope/vim-repeat]             |                                       |
 | 🥇 Textobj | [arsham/archer.nvim][arsham/archer.nvim]         | Mappings and text objects for archers |
 | 🧰 Visuals | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]     | UI component                          |
+| 🥇 Textobj | [arsham/indent-tools.nvim][indent-tools.nvim]    | Indent mappings and text object       |
 
 </details>
 
@@ -85,6 +87,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **b**           | **B**uffer                                        |
 | **f**           | **F**ile, **F**ind                                |
 | **a**           | **A**ll, or disabling certain constraints         |
+| **i**           | **I**ndent                                        |
 
 The `leader` key is `space`!
 
@@ -102,6 +105,8 @@ The `leader` key is `space`!
 | `<Alt-{>`         | Adds curly brackets at the end of line into insert mode (repeatable) |
 | [count]`]<space>` | Inserts [count] empty lines after (repeatable)                       |
 | [count]`[<space>` | Inserts [count] empty lines before (repeatable)                      |
+| `]i`              | Jump down along the **i**ndents                                      |
+| `[i`              | Jump up along the **i**ndents                                        |
 
 </details>
 
@@ -120,6 +125,8 @@ The `leader` key is `space`!
 | `aN`        | **A**round **N**umeric value                |
 | `az`        | **A**round folds                            |
 | `iz`        | **I**n folds                                |
+| `ai`        | **A**round **I**ndentation block            |
+| `ii`        | **I**n **I**ndentation block                |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**
@@ -317,6 +324,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tpope/vim-repeat][tpope/vim-repeat]        | [N/A][tpope/vim-repeat]                                                    |
 | [arsham/archer.nvim][arsham/archer.nvim]    | [MIT](https://github.com/arsham/archer.nvim/blob/master/LICENSE)           |
 | [nui.nvim][muniftanjim/nui.nvim]            | [MIT](https://github.com/MunifTanjim/nui.nvim/blob/main/LICENSE)           |
+| [indent-tools.nvim][indent-tools.nvim]      | [MIT](https://github.com/arsham/indent-tools.nvim/blob/master/LICENSE)     |
 
 </details>
 
@@ -334,6 +342,7 @@ quick.cmd_and_centre("SomeCommand")
 [tpope/vim-repeat]: https://github.com/tpope/vim-repeat
 [arsham/archer.nvim]: https://github.com/arsham/archer.nvim
 [muniftanjim/nui.nvim]: https://github.com/MunifTanjim/nui.nvim
+[indent-tools.nvim]: https://github.com/arsham/indent-tools.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

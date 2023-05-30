@@ -37,6 +37,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  b                Buffer
  f                File, Find
  a                All, or disabling certain constraints
+ i                Indent
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -46,5 +47,6 @@ Please refer to the following help files for more mappings and textobjects:
 - |listish.txt|
 - |fzfmania.txt|
 - |archer.txt|
+- |indent-tools.txt|
 
 vim:tw=78:ts=8:ft=help:norl:
