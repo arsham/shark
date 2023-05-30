@@ -14,6 +14,7 @@ This project supports Neovim version `0.10.0` and newer.
 - You can add the current location of the cursor or make **notes** on the
   current location in the **quickfix/local** lists with repeatable mappings.
 - You can **manipulate** quickfix/local lists.
+- Statusline is configures with **feline**.
 
 1. [Setup](#setup)
 2. [Functionality](#functionality)
@@ -88,6 +89,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🌲 Visuals | [nvim-treesitter][nvim-treesitter]               | Highlighting engine                   |
 | 🔥 GIT     | [lewis6991/gitsigns.nvim][gitsigns.nvim]         | git signs in the gutter               |
 | 🥇 Textobj | [nvim-treesitter-textobjects][ts-textobjects]    | Treesitter Text Objects               |
+| 🔥 Visuals | [freddiehaddad/feline.nvim][feline.nvim]         | Statusline (default)                  |
 
 </details>
 
@@ -433,6 +435,7 @@ quick.cmd_and_centre("SomeCommand")
 | [nvim-treesitter][nvim-treesitter]          | [Apache-2.0][nvim-treesitter-license]                                      |
 | [lewis6991/gitsigns.nvim][gitsigns.nvim]    | [MIT](https://github.com/lewis6991/gitsigns.nvim/blob/main/LICENSE)        |
 | [treesitter-textobjects][ts-textobjects]    | [Apache-2.0][treesitter-textobjects-license]                               |
+| [freddiehaddad/feline.nvim][feline.nvim]    | [GPL-3.0][feline.nvim-license]                                             |
 
 </details>
 
@@ -461,6 +464,8 @@ quick.cmd_and_centre("SomeCommand")
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
 [ts-textobjects]: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 [treesitter-textobjects-license]: https://github.com/nvim-treesitter/nvim-treesitter-textobjects/blob/master/LICENSE
+[feline.nvim]: https://github.com/freddiehaddad/feline.nvim
+[feline.nvim-license]: https://github.com/freddiehaddad/feline.nvim/blob/master/LICENSE.md
 
 <!--
 vim: foldlevel=2 conceallevel=0

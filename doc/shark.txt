@@ -32,6 +32,7 @@ CONTENTS                                                      *shark-contents*
 4. Setup ....................................................... |shark-setup|
 5. Functionality ....................................... |shark-functionality|
    - Core Mappings ..................................... |shark-core-mappings|
+   - Text Objects ....................................... |shark-text-objects|
    - Lists ..................................................... |shark-lists|
    - Fzf ......................................................... |shark-fzf|
    - Highlight Matching ........................... |shark-highlight-matching|
@@ -59,6 +60,7 @@ HIGHLIGHTS                                                  *shark-highlights*
 * You can add the current location of the cursor or make notes on the current
   location in the quickfix/local lists with repeatable mappings.
 * You can manipulate quickfix/local lists.
+* Statusline is configures with feline.
 
 ==============================================================================
 SETUP                                                            *shark-setup*
