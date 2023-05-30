@@ -634,6 +634,7 @@ The following list of commands do not fit into any specific categories.
 | `Nowrap`                | Stop wrapping current buffer           |
 | `ToggleRelativeNumbers` | Start/Stop relative number switching   |
 | `ToggleTrimWhitespaces` | Toggles trimming whitespaces on buffer |
+| `Scratch`               | Create a scratch buffer                |
 
 </details>
 

@@ -184,6 +184,8 @@ The following list of commands do not fit into any specific categories.
 :ToggleRelativeNumbers  Start/Stop relative number switching
                                                       *:ToggleTrimWhitespaces*
 :ToggleTrimWhitespaces  Toggles trimming whitespaces on buffer
+                                                                    *:Scratch*
+:Scratch                Create a scratch buffer
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

@@ -67,3 +67,13 @@ quick.command("ToggleTrimWhitespaces", function() -- {{{
   vim.api.nvim_buf_set_var(0, name, set_to)
 end, { desc = "toggle trimming whitespaces on current buffer" })
 -- }}}
+
+quick.command("Scratch", function(args)
+  local ft = args.args
+  if ft == "" then
+    ft = "text"
+  end
+  require("config.scratch").new(ft)
+end, { nargs = "?" })
+
+-- vim: fdm=marker fdl=0
