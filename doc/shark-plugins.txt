@@ -116,6 +116,7 @@ Function   Plugin                      Description                     License
  Editing   Exafunction/codeium.vim    Codeium (opensource copilot)        MIT
 💡 LSP      utilyre/barbecue.nvim      Complementary to navic              MIT
  LSP       uga-rosa/cmp-dynamic       Extension for nvim-cmp              MIT
+ Tool      stevearc/overseer.nvim     Task runner                         MIT
 
 Note that if copilot is enabled, codeium will be disabled.
 

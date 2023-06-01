@@ -258,6 +258,10 @@ gr                      Copilot panel: Refresh
 <Leader>ce              Enable Codeium
                                                                   *<Leader>cd*
 <Leader>cd              Disable Codeium
+                                                                  *<Leader>or*
+<Leader>or              Run overseer task
+                                                                  *<Leader>ot*
+<Leader>ot              Toggle overseer tasks panel
 
 Note that if copilot is enabled, codeium will be disabled.
 

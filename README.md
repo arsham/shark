@@ -187,6 +187,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [Exafunction/codeium.vim][codeium.vim]           | Codeium (opensource copilot)          |
 | 💡 LSP     | [utilyre/barbecue.nvim][barbecue.nvim]           | Complementary to navic                |
 |  LSP      | [uga-rosa/cmp-dynamic][cmp-dynamic]              | Extension for nvim-cmp                |
+|  Tool     | [stevearc/overseer.nvim][overseer.nvim]          | Task runner                           |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -337,6 +338,8 @@ The `leader` key is `space`!
 | `<Ctrl-]>`        | (copilot suggestion) Dismiss                                         |
 | `<Leader>ce`      | **E**nable **C**odeium                                               |
 | `<Leader>cd`      | **D**isable **C**odeium                                              |
+| `<Leader>or`      | Run overseer task                                                    |
+| `<Leader>ot`      | Toggle overseer tasks panel                                          |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -817,6 +820,7 @@ quick.cmd_and_centre("SomeCommand")
 | [Exafunction/codeium.vim][codeium.vim]      | [MIT](https://github.com/Exafunction/codeium.vim/blob/main/LICENSE)        |
 | [utilyre/barbecue.nvim][barbecue.nvim]      | [MIT](https://github.com/utilyre/barbecue.nvim/blob/main/LICENSE)          |
 | [uga-rosa/cmp-dynamic][cmp-dynamic]         | [MIT](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)           |
+| [stevearc/overseer.nvim][overseer.nvim]     | [MIT](https://github.com/stevearc/overseer.nvim/blob/master/LICENSE)       |
 
 </details>
 
@@ -928,6 +932,7 @@ quick.cmd_and_centre("SomeCommand")
 [codeium.vim]: https://github.com/Exafunction/codeium.vim
 [barbecue.nvim]: https://github.com/utilyre/barbecue.nvim
 [cmp-dynamic]: https://github.com/uga-rosa/cmp-dynamic
+[overseer.nvim]: https://github.com/stevearc/overseer.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

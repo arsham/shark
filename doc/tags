@@ -73,6 +73,8 @@
 <Leader>nr	shark-mappings.txt	/*<Leader>nr*
 <Leader>nw	shark-mappings.txt	/*<Leader>nw*
 <Leader>oo	shark-mappings.txt	/*<Leader>oo*
+<Leader>or	shark-mappings.txt	/*<Leader>or*
+<Leader>ot	shark-mappings.txt	/*<Leader>ot*
 <Leader>p	shark-mappings.txt	/*<Leader>p*
 <Leader>rn	shark-mappings.txt	/*<Leader>rn*
 <Leader>sf	shark-mappings.txt	/*<Leader>sf*

@@ -75,4 +75,5 @@ return {
   ["Exafunction/codeium.vim"] = { enabled = true, start = true },
   ["utilyre/barbecue.nvim"] = { enabled = true, start = true },
   ["uga-rosa/cmp-dynamic"] = { enabled = true, start = true },
+  ["stevearc/overseer.nvim"] = { enabled = true, start = true },
 }
