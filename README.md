@@ -186,6 +186,8 @@ The `leader` key is `space`!
 | `<leader>sp`      | Toggle **Sp**elling for buffer                                       |
 | `<leader>sf`      | Auto **f**ixe previous misspelled word                               |
 | `<leader>hh`      | Opens the **help** for current word                                  |
+| `<C-w>b`          | Delete current buffer                                                |
+| `<C-w><C-b>`      | Delete current buffer                                                |
 
 </details>
 

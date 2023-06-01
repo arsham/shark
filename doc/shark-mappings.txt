@@ -168,6 +168,10 @@ g=                      Re-indents the hole buffer
 <Leader>sf              Auto fixes previous misspelled word
                                                                   *<Leader>hh*
 <Leader>hh              Opens the help for current word
+                                                            *CTRL-wb* *<C-w>b*
+<Ctrl>wb                Delete current buffer
+                                                  *CTRL-w_Ctrl-b* *<C-w><C-b>*
+<Ctrl>w<Ctrl>b          Delete current buffer
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

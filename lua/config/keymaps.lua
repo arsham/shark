@@ -70,4 +70,9 @@ end, opts("Auto correct spelling and jump bak.")) --}}}
 
 vim.keymap.set("n", "<leader>hh", ":h <CR>", opts("Show help for work under the cursor"))
 
+-- Buffer Operations {{{
+vim.keymap.set("n", "<C-w>b", ":bd<CR>", opts("Delete current buffer"))
+vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", opts("Delete current buffer"))
+-- }}}
+
 -- vim: fdm=marker fdl=0
