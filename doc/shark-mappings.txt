@@ -45,6 +45,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  s                Statement, Scope
  o                Loop
  e                Element
+ t                Tab
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -169,9 +170,11 @@ g=                      Re-indents the hole buffer
                                                                   *<Leader>hh*
 <Leader>hh              Opens the help for current word
                                                             *CTRL-wb* *<C-w>b*
-<Ctrl>wb                Delete current buffer
-                                                  *CTRL-w_Ctrl-b* *<C-w><C-b>*
+<Ctrl>wb                                          *CTRL-w_CTRL-b* *<C-w><C-b>*
 <Ctrl>w<Ctrl>b          Delete current buffer
+                                                            *CTRL-wt* *<C-w>t*
+<Ctrl>wt                                          *CTRL-w_CTRL-t* *<C-w><C-t>*
+<Ctrl>w<Ctrl>t          Open current buffer in a new tab
 
 ==============================================================================
 TEXT OBJECTS                               |text-objects| *shark-text-objects*

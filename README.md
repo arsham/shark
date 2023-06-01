@@ -117,6 +117,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **o**           | L**o**op                                          |
 | **e**           | **E**lement                                       |
 | **y**           | **Y**ank                                          |
+| **t**           | **T**ab                                           |
 
 The `leader` key is `space`!
 
@@ -188,6 +189,8 @@ The `leader` key is `space`!
 | `<leader>hh`      | Opens the **help** for current word                                  |
 | `<C-w>b`          | Delete current buffer                                                |
 | `<C-w><C-b>`      | Delete current buffer                                                |
+| `<C-w>t`          | Open current buffer in new tab                                       |
+| `<C-w><C-t>`      | Open current buffer in new tab                                       |
 
 </details>
 

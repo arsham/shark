@@ -73,6 +73,8 @@ vim.keymap.set("n", "<leader>hh", ":h <CR>", opts("Show help for work under th
 -- Buffer Operations {{{
 vim.keymap.set("n", "<C-w>b", ":bd<CR>", opts("Delete current buffer"))
 vim.keymap.set("n", "<C-w><C-b>", ":bd<CR>", opts("Delete current buffer"))
+vim.keymap.set("n", "<C-w><C-t>", ":tabnew %<CR>", opts("Open current buffer in new tab"))
+vim.keymap.set("n", "<C-w>t", ":tabnew %<CR>", opts("Open current buffer in new tab"))
 -- }}}
 
 -- vim: fdm=marker fdl=0

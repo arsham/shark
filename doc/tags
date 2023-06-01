@@ -1,5 +1,7 @@
 <C-w><C-b>	shark-mappings.txt	/*<C-w><C-b>*
+<C-w><C-t>	shark-mappings.txt	/*<C-w><C-t>*
 <C-w>b	shark-mappings.txt	/*<C-w>b*
+<C-w>t	shark-mappings.txt	/*<C-w>t*
 <Esc><Esc>	shark-mappings.txt	/*<Esc><Esc>*
 <Leader>,a	shark-mappings.txt	/*<Leader>,a*
 <Leader>,e	shark-mappings.txt	/*<Leader>,e*
@@ -30,8 +32,10 @@
 <M-k>	shark-mappings.txt	/*<M-k>*
 ALT-j	shark-mappings.txt	/*ALT-j*
 ALT-k	shark-mappings.txt	/*ALT-k*
-CTRL-w_Ctrl-b	shark-mappings.txt	/*CTRL-w_Ctrl-b*
+CTRL-w_CTRL-b	shark-mappings.txt	/*CTRL-w_CTRL-b*
+CTRL-w_CTRL-t	shark-mappings.txt	/*CTRL-w_CTRL-t*
 CTRL-wb	shark-mappings.txt	/*CTRL-wb*
+CTRL-wt	shark-mappings.txt	/*CTRL-wt*
 [A	shark-mappings.txt	/*[A*
 [B	shark-mappings.txt	/*[B*
 [F	shark-mappings.txt	/*[F*
