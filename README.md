@@ -517,6 +517,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `gD`         | **G**o to **D**eclaration                   |
 | `<leader>cr` | **C**ode lens **R**un                       |
 | `<leader>ca` | **C**ode **A**ctions (also in visual mode)  |
+| `<leader>gc` | **Go** to **C**aller                        |
 
 Please see the code for all available mappings.
 
@@ -564,6 +565,8 @@ additions.
 | `CodeLensRefresh`    |                                         |
 | `CodeLensRun`        |                                         |
 | `CodeAction`         | Also works on a visually selected text. |
+| `Callers`            | Show callers and go to one              |
+| `Callees`            | Show callees and go to one              |
 
 </details>
 

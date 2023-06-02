@@ -114,6 +114,15 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.code_lens)
   end -- }}}
 
+  -- Code hierarchy {{{
+  if
+    client.supports_method("textDocument/prepareCallHierarchy")
+    or client.supports_method("callHierarchy/incomingCalls")
+    or client.supports_method("callHierarchy/outgoingCalls")
+  then
+    table.insert(callbacks, lsp_util.call_hierarchy)
+  end -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end

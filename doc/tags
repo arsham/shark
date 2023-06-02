@@ -1,3 +1,5 @@
+:Callees	shark.txt	/*:Callees*
+:Callers	shark.txt	/*:Callers*
 :CodeAction	shark.txt	/*:CodeAction*
 :CodeLensRefresh	shark.txt	/*:CodeLensRefresh*
 :CodeLensRun	shark.txt	/*:CodeLensRun*
@@ -29,6 +31,7 @@
 <Leader>df	shark-mappings.txt	/*<Leader>df*
 <Leader>dq	shark-mappings.txt	/*<Leader>dq*
 <Leader>dw	shark-mappings.txt	/*<Leader>dw*
+<Leader>gc	shark-mappings.txt	/*<Leader>gc*
 <Leader>gd	shark-mappings.txt	/*<Leader>gd*
 <Leader>gg	shark-mappings.txt	/*<Leader>gg*
 <Leader>gi	shark-mappings.txt	/*<Leader>gi*

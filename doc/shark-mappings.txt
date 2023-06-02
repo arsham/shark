@@ -291,6 +291,8 @@ gr                      Go to references
 <Leader>gi              Go to implementation
                                                                   *<Leader>ca*
 <Leader>ca              Code actions                            *v_<Leader>ca*
+                                                                  *<Leader>gc*
+<Leader>gc              Show callers and go to one
 
 ==============================================================================
 CMP MAPPING                                               *shark-cmp-mappings*

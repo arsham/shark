@@ -140,6 +140,10 @@ additions.
 :CodeLensRefresh        Refresh code lenses
                                                                 *:CodeLensRun*
 :CodeLensRun            Run code lenses
+                                                                    *:Callers*
+:Callers                Show callers and go to one
+                                                                    *:Callees*
+:Callees                Show callees and go to one
 
 ==============================================================================
 HIGHLIGHT MATCHING                                  *shark-highlight-matching*
