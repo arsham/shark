@@ -12,6 +12,7 @@
 :DiagnosticsEnable	shark.txt	/*:DiagnosticsEnable*
 :DocumentSymbol	shark.txt	/*:DocumentSymbol*
 :Duck	shark.txt	/*:Duck*
+:EditConfig	shark.txt	/*:EditConfig*
 :Filename	shark.txt	/*:Filename*
 :FoldComments	shark.txt	/*:FoldComments*
 :Implementation	shark.txt	/*:Implementation*

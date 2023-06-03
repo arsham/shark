@@ -193,6 +193,8 @@ The following list of commands do not fit into any specific categories.
 :{range}Cook            Cook some ducks
                                                                *:FoldComments*
 :FoldComments           Fold comments (sets folding to expr)
+                                                                 *:EditConfig*
+:EditConfig             Edit configuration files in a new tab
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

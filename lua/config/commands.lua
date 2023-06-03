@@ -73,6 +73,37 @@ quick.command("ToggleTrimWhitespaces", function() -- {{{
 end, { desc = "toggle trimming whitespaces on current buffer" })
 -- }}}
 
+vim.api.nvim_create_user_command("EditConfig", function(opts)
+  if opts.args == "" then
+    vim.cmd("edit $MYVIMRC")
+    return
+  end
+
+  local config_path = vim.fn.stdpath("config")
+  local path = vim.fs.find({ opts.args .. ".lua" }, { path = config_path .. "/lua" })[1]
+  if not path then
+    vim.api.nvim_err_writeln(string.format("File %s.lua not found.", opts.args))
+    return
+  end
+
+  vim.cmd("tabedit " .. path)
+  vim.cmd("tcd " .. config_path)
+end, {
+  nargs = "?",
+  complete = function(line)
+    local paths = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua", "**/*.lua")
+    local files = {}
+    for file in paths:gmatch("([^\n]+)") do
+      table.insert(files, file:match("^.+/(.+)%."))
+    end
+
+    return vim.tbl_filter(function(value)
+      return vim.startswith(value, line)
+    end, files)
+  end,
+  desc = "Edit configuration files in a new tab",
+})
+
 quick.command("Scratch", function(args)
   local ft = args.args
   if ft == "" then

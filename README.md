@@ -675,6 +675,7 @@ The following list of commands do not fit into any specific categories.
 |                         | Give an icon for something else        |
 | {range}`Cook`           | Cook some ducks                        |
 | `FoldComments`          | Fold comments (sets folding to expr)   |
+| `EditConfig`            | Edit configuration files in a new tab  |
 
 </details>
 
