@@ -186,6 +186,11 @@ The following list of commands do not fit into any specific categories.
 :ToggleTrimWhitespaces  Toggles trimming whitespaces on buffer
                                                                     *:Scratch*
 :Scratch                Create a scratch buffer
+                                                                       *:Duck*
+:{range}Duck [args]      Show some ducks
+                         Give an icon for something else
+                                                                       *:Cook*
+:{range}Cook             Cook some ducks
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

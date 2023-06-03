@@ -190,6 +190,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [stevearc/overseer.nvim][overseer.nvim]          | Task runner                           |
 | 🌈 Tool    | [ziontee113/color-picker.nvim][colorpicker]      | Colour picker and updater             |
 |  Editing  | [aduros/ai.vim][aduros/ai.vim]                   | OpenAI plugin                         |
+|  Tool     | [tamton-aquib/duck.nvim][duck.nvim]              | Fun little ducks                      |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -665,6 +666,9 @@ The following list of commands do not fit into any specific categories.
 | `ToggleRelativeNumbers` | Start/Stop relative number switching   |
 | `ToggleTrimWhitespaces` | Toggles trimming whitespaces on buffer |
 | `Scratch`               | Create a scratch buffer                |
+| {range}`Duck` [args]    | Show some ducks                        |
+|                         | Give an icon for something else        |
+| {range}`Cook`           | Cook some ducks                        |
 
 </details>
 
@@ -826,6 +830,7 @@ quick.cmd_and_centre("SomeCommand")
 | [stevearc/overseer.nvim][overseer.nvim]     | [MIT](https://github.com/stevearc/overseer.nvim/blob/master/LICENSE)       |
 | [ziontee113/color-picker.nvim][colorpicker] | [MIT][colorpicker-license]                                                 |
 | [aduros/ai.vim][aduros/ai.vim]              | [ISC](https://github.com/aduros/ai.vim/blob/main/LICENSE.txt)              |
+| [tamton-aquib/duck.nvim][duck.nvim]         | [MIT](https://github.com/tamton-aquib/duck.nvim/blob/main/LICENSE)         |
 
 </details>
 
@@ -941,6 +946,7 @@ quick.cmd_and_centre("SomeCommand")
 [colorpicker]: https://github.com/ziontee113/color-picker.nvim
 [colorpicker-license]: https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE
 [aduros/ai.vim]: https://github.com/aduros/ai.vim
+[duck.nvim]: https://github.com/tamton-aquib/duck.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

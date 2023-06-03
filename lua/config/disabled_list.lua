@@ -78,4 +78,5 @@ return {
   ["stevearc/overseer.nvim"] = { enabled = true, start = true },
   ["ziontee113/color-picker.nvim"] = { enabled = true, start = true },
   ["aduros/ai.vim"] = { enabled = true, start = true },
+  ["tamton-aquib/duck.nvim"] = { enabled = true, start = true },
 }

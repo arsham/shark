@@ -3,6 +3,7 @@
 :CodeAction	shark.txt	/*:CodeAction*
 :CodeLensRefresh	shark.txt	/*:CodeLensRefresh*
 :CodeLensRun	shark.txt	/*:CodeLensRun*
+:Cook	shark.txt	/*:Cook*
 :Diag	shark.txt	/*:Diag*
 :DiagAll	shark.txt	/*:DiagAll*
 :Diagnostics	shark.txt	/*:Diagnostics*
@@ -10,6 +11,7 @@
 :DiagnosticsDisable	shark.txt	/*:DiagnosticsDisable*
 :DiagnosticsEnable	shark.txt	/*:DiagnosticsEnable*
 :DocumentSymbol	shark.txt	/*:DocumentSymbol*
+:Duck	shark.txt	/*:Duck*
 :Filename	shark.txt	/*:Filename*
 :Implementation	shark.txt	/*:Implementation*
 :Nowrap	shark.txt	/*:Nowrap*

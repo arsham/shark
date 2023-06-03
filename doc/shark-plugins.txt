@@ -119,6 +119,7 @@ Function   Plugin                      Description                     License
  Tool      stevearc/overseer.nvim     Task runner                         MIT
 🌈 Tool     ziontee113/color-picker    Colour picker and updater           MIT
  Editing   aduros/ai.vim              OpenAI plugin                       ISC
+ Tool      tamton-aquib/duck.nvim     Fun little ducks                    MIT
 
 Note that if copilot is enabled, codeium will be disabled.
 
