@@ -125,6 +125,21 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave", "InsertEnter"
   desc = "Unset relative number when unfocused",
 }) --}}}
 
+-- Terminal Start Insert Mode {{{
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = augroup("TERMINAL_START_INSERT_MODE"),
+  pattern = "term:\\/\\/*",
+  callback = function(args)
+    vim.wo.statusline = "%{b:term_title}"
+    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = true, desc = "enter normal mode" })
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+    -- The overseer has problem with going into insert mode in a normal buffer.
+    vim.cmd(("%dbufdo startinsert").format(args.buf))
+  end,
+  desc = "start in insert mode and set the status line",
+}) --}}}
+
 -- Autoclose Shell Terminals {{{
 -- See neovim/neovim#15440
 vim.api.nvim_create_autocmd("TermClose", {
