@@ -199,6 +199,8 @@ The following list of commands do not fit into any specific categories.
 :LspCaps                Show short LSP capabilities
                                                                 *:LspCapsFull*
 :LspCapsFull            Show sull LSP capabilities
+                                                                  *:GoModTidy*
+:GoModTidy              Run go mod tidy on go and mod files
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

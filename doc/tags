@@ -15,6 +15,7 @@
 :EditConfig	shark.txt	/*:EditConfig*
 :Filename	shark.txt	/*:Filename*
 :FoldComments	shark.txt	/*:FoldComments*
+:GoModTidy	shark.txt	/*:GoModTidy*
 :Implementation	shark.txt	/*:Implementation*
 :LspCaps	shark.txt	/*:LspCaps*
 :LspCapsFull	shark.txt	/*:LspCapsFull*

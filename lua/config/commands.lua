@@ -1,5 +1,6 @@
 local quick = require("arshlib.quick")
 local constants = require("config.constants")
+local augroup = require("config.util").augroup
 
 quick.command("Filename", function() --{{{
   vim.notify(vim.fn.expand("%:p"), vim.lsp.log_levels.INFO, {
@@ -161,5 +162,18 @@ quick.command("Scratch", function(args)
   end
   require("config.scratch").new(ft)
 end, { nargs = "?" })
+
+vim.api.nvim_create_autocmd("Filetype", {
+  group = augroup("go_mod_tidy.command"),
+  pattern = "go,gomod",
+  callback = function(args)
+    local lsp = require("arshlib.lsp")
+    quick.buffer_command("GoModTidy", function()
+      local filename = vim.fn.expand("%:p")
+      lsp.go_mod_tidy(tonumber(args.buf), filename)
+    end, { desc = "Run go mod tidy on save" })
+  end,
+  desc = "Setup go mod tidy on go and go.mod files",
+})
 
 -- vim: fdm=marker fdl=0

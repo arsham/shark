@@ -678,6 +678,7 @@ The following list of commands do not fit into any specific categories.
 | `EditConfig`            | Edit configuration files in a new tab  |
 | `LspCaps`               | Show short LSP capabilities            |
 | `LspCapsFull`           | Show sull LSP capabilities             |
+| `GoModTidy`             | Run go mod tidy on go and mod files    |
 
 </details>
 
