@@ -76,4 +76,5 @@ return {
   ["utilyre/barbecue.nvim"] = { enabled = true, start = true },
   ["uga-rosa/cmp-dynamic"] = { enabled = true, start = true },
   ["stevearc/overseer.nvim"] = { enabled = true, start = true },
+  ["ziontee113/color-picker.nvim"] = { enabled = true, start = true },
 }

@@ -188,6 +188,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 💡 LSP     | [utilyre/barbecue.nvim][barbecue.nvim]           | Complementary to navic                |
 |  LSP      | [uga-rosa/cmp-dynamic][cmp-dynamic]              | Extension for nvim-cmp                |
 |  Tool     | [stevearc/overseer.nvim][overseer.nvim]          | Task runner                           |
+| 🌈 Tool    | [ziontee113/color-picker.nvim][colorpicker]      | Colour picker and updater             |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -821,6 +822,7 @@ quick.cmd_and_centre("SomeCommand")
 | [utilyre/barbecue.nvim][barbecue.nvim]      | [MIT](https://github.com/utilyre/barbecue.nvim/blob/main/LICENSE)          |
 | [uga-rosa/cmp-dynamic][cmp-dynamic]         | [MIT](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)           |
 | [stevearc/overseer.nvim][overseer.nvim]     | [MIT](https://github.com/stevearc/overseer.nvim/blob/master/LICENSE)       |
+| [ziontee113/color-picker.nvim][colorpicker] | [MIT][colorpicker-license]                                                 |
 
 </details>
 
@@ -933,6 +935,8 @@ quick.cmd_and_centre("SomeCommand")
 [barbecue.nvim]: https://github.com/utilyre/barbecue.nvim
 [cmp-dynamic]: https://github.com/uga-rosa/cmp-dynamic
 [overseer.nvim]: https://github.com/stevearc/overseer.nvim
+[colorpicker]: https://github.com/ziontee113/color-picker.nvim
+[colorpicker-license]: https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
