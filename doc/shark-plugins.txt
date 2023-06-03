@@ -118,6 +118,7 @@ Function   Plugin                      Description                     License
  LSP       uga-rosa/cmp-dynamic       Extension for nvim-cmp              MIT
  Tool      stevearc/overseer.nvim     Task runner                         MIT
 🌈 Tool     ziontee113/color-picker    Colour picker and updater           MIT
+ Editing   aduros/ai.vim              OpenAI plugin                       ISC
 
 Note that if copilot is enabled, codeium will be disabled.
 

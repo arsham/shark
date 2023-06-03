@@ -189,6 +189,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  LSP      | [uga-rosa/cmp-dynamic][cmp-dynamic]              | Extension for nvim-cmp                |
 |  Tool     | [stevearc/overseer.nvim][overseer.nvim]          | Task runner                           |
 | 🌈 Tool    | [ziontee113/color-picker.nvim][colorpicker]      | Colour picker and updater             |
+|  Editing  | [aduros/ai.vim][aduros/ai.vim]                   | OpenAI plugin                         |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -823,6 +824,7 @@ quick.cmd_and_centre("SomeCommand")
 | [uga-rosa/cmp-dynamic][cmp-dynamic]         | [MIT](https://github.com/uga-rosa/cmp-dynamic/blob/main/LICENSE)           |
 | [stevearc/overseer.nvim][overseer.nvim]     | [MIT](https://github.com/stevearc/overseer.nvim/blob/master/LICENSE)       |
 | [ziontee113/color-picker.nvim][colorpicker] | [MIT][colorpicker-license]                                                 |
+| [aduros/ai.vim][aduros/ai.vim]              | [ISC](https://github.com/aduros/ai.vim/blob/main/LICENSE.txt)              |
 
 </details>
 
@@ -937,6 +939,7 @@ quick.cmd_and_centre("SomeCommand")
 [overseer.nvim]: https://github.com/stevearc/overseer.nvim
 [colorpicker]: https://github.com/ziontee113/color-picker.nvim
 [colorpicker-license]: https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE
+[aduros/ai.vim]: https://github.com/aduros/ai.vim
 
 <!--
 vim: foldlevel=2 conceallevel=0
