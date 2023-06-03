@@ -112,5 +112,9 @@ Function   Plugin                      Description                     License
  Core      tmux-plugins/vim-tmux                                          MIT
  Editing   mg979/vim-visual-multi     Multiple cursors                    N/A
 🔫 Core     svban/YankAssassin.vim     Stay where you are after yanking    N/A
+ Editing   zbirenbaum/copilot.lua     Copilot                             MIT
+ Editing   Exafunction/codeium.vim    Codeium (opensource copilot)        MIT
+
+Note that if copilot is enabled, codeium will be disabled.
 
 vim:tw=78:ft=help

@@ -41,7 +41,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  i                Indent
  d                Diff, Diagnostics
  h                Hunk
- c                Change
+ c                Change, Copilot, Codeium
  s                Statement, Scope
  o                Loop
  e                Element
@@ -254,6 +254,10 @@ gr                      Copilot panel: Refresh
 <Ctrl>y<Ctrl>l          Copilot suggestion: Accept a line of suggestion
                                                       *COPILOT_CTRL-]* *<C-]>*
 <Ctrl>]                 Copilot suggestion: Dismiss
+                                                                  *<Leader>ce*
+<Leader>ce              Enable Codeium
+                                                                  *<Leader>cd*
+<Leader>cd              Disable Codeium
 
 Note that if copilot is enabled, codeium will be disabled.
 

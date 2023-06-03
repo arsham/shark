@@ -184,6 +184,9 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [mg979/vim-visual-multi][vim-visual-multi]       | Multiple cursors                      |
 | 🔫 Core    | [svban/YankAssassin.vim][yankassassin.vim]       | Stay where you are after yanking      |
 |  Editing  | [zbirenbaum/copilot.lua][copilot.lua]            | Copilot                               |
+|  Editing  | [Exafunction/codeium.vim][codeium.vim]           | Codeium (opensource copilot)          |
+
+Note that if copilot is enabled, codeium will be disabled.
 
 </details>
 
@@ -207,7 +210,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **m**           | **M**atch highlighting                            |
 | **d**           | **D**iff, **D**iagnostics                         |
 | **h**           | **H**unk                                          |
-| **c**           | **C**hange, **C**opilot                           |
+| **c**           | **C**hange, **C**opilot, **C**odium               |
 | **s**           | **S**tatement, **S**cope                          |
 | **o**           | L**o**op                                          |
 | **e**           | **E**lement                                       |
@@ -330,6 +333,10 @@ The `leader` key is `space`!
 | `<C-y><C-w>`      | (copilot suggestion) Accept a word of suggestion                     |
 | `<C-y><C-l>`      | (copilot suggestion) Accept a line of suggestion                     |
 | `<Ctrl-]>`        | (copilot suggestion) Dismiss                                         |
+| `<Leader>ce`      | **E**nable **C**odeium                                               |
+| `<Leader>cd`      | **D**isable **C**odeium                                              |
+
+Note that if copilot is enabled, codeium will be disabled.
 
 </details>
 
@@ -805,6 +812,7 @@ quick.cmd_and_centre("SomeCommand")
 | [mg979/vim-visual-multi][vim-visual-multi]  | [MIT](https://github.com/mg979/vim-visual-multi/blob/master/LICENSE)       |
 | [svban/YankAssassin.vim][yankassassin.vim]  | [N/A][yankassassin.vim]                                                    |
 | [zbirenbaum/copilot.lua][copilot.lua]       | [MIT](https://github.com/zbirenbaum/copilot.lua/blob/master/LICENSE)       |
+| [Exafunction/codeium.vim][codeium.vim]      | [MIT](https://github.com/Exafunction/codeium.vim/blob/main/LICENSE)        |
 
 </details>
 
@@ -913,6 +921,7 @@ quick.cmd_and_centre("SomeCommand")
 [vim-visual-multi]: https://github.com/mg979/vim-visual-multi
 [yankassassin.vim]: https://github.com/svban/YankAssassin.vim
 [copilot.lua]: https://github.com/zbirenbaum/copilot.lua
+[codeium.vim]: https://github.com/Exafunction/codeium.vim
 
 <!--
 vim: foldlevel=2 conceallevel=0

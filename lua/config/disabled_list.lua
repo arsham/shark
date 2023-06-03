@@ -72,4 +72,5 @@ return {
   ["mg979/vim-visual-multi"] = { enabled = true, start = true },
   ["svban/YankAssassin.vim"] = { enabled = true, start = true },
   ["zbirenbaum/copilot.lua"] = { enabled = true, start = true },
+  ["Exafunction/codeium.vim"] = { enabled = true, start = true },
 }

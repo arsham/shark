@@ -42,6 +42,8 @@
 <Leader>.f	shark-mappings.txt	/*<Leader>.f*
 <Leader>P	shark-mappings.txt	/*<Leader>P*
 <Leader>ca	shark-mappings.txt	/*<Leader>ca*
+<Leader>cd	shark-mappings.txt	/*<Leader>cd*
+<Leader>ce	shark-mappings.txt	/*<Leader>ce*
 <Leader>dd	shark-mappings.txt	/*<Leader>dd*
 <Leader>df	shark-mappings.txt	/*<Leader>df*
 <Leader>dq	shark-mappings.txt	/*<Leader>dq*
