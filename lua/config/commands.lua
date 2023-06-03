@@ -20,6 +20,11 @@ quick.command("YankFilepathC", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
 end) --}}}
 
+quick.command("FoldComments", function() --{{{
+  vim.wo.foldexpr = "getline(v:lnum)=~'^\\s*'.&commentstring[0]"
+  vim.wo.foldmethod = "expr"
+end, { desc = "Fold comments by setting folf expr" }) --}}}
+
 quick.command("Nowrap", function() --{{{
   vim.opt_local.formatoptions:remove({ "t", "c" })
 end, { desc = "Stop wrapping current buffer" })

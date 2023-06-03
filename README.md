@@ -674,6 +674,7 @@ The following list of commands do not fit into any specific categories.
 | {range}`Duck` [args]    | Show some ducks                        |
 |                         | Give an icon for something else        |
 | {range}`Cook`           | Cook some ducks                        |
+| `FoldComments`          | Fold comments (sets folding to expr)   |
 
 </details>
 

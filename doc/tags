@@ -13,6 +13,7 @@
 :DocumentSymbol	shark.txt	/*:DocumentSymbol*
 :Duck	shark.txt	/*:Duck*
 :Filename	shark.txt	/*:Filename*
+:FoldComments	shark.txt	/*:FoldComments*
 :Implementation	shark.txt	/*:Implementation*
 :Nowrap	shark.txt	/*:Nowrap*
 :RestartLsp	shark.txt	/*:RestartLsp*

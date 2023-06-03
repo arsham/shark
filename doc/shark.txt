@@ -187,10 +187,12 @@ The following list of commands do not fit into any specific categories.
                                                                     *:Scratch*
 :Scratch                Create a scratch buffer
                                                                        *:Duck*
-:{range}Duck [args]      Show some ducks
-                         Give an icon for something else
+:{range}Duck [args]     Show some ducks
+                        Give an icon for something else
                                                                        *:Cook*
-:{range}Cook             Cook some ducks
+:{range}Cook            Cook some ducks
+                                                               *:FoldComments*
+:FoldComments           Fold comments (sets folding to expr)
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*
