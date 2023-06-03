@@ -191,6 +191,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🌈 Tool    | [ziontee113/color-picker.nvim][colorpicker]      | Colour picker and updater             |
 |  Editing  | [aduros/ai.vim][aduros/ai.vim]                   | OpenAI plugin                         |
 |  Tool     | [tamton-aquib/duck.nvim][duck.nvim]              | Fun little ducks                      |
+| 🕸️ Tool    | [rest-nvim/rest.nvim][rest.nvim]                 | Fast http client in lua               |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -225,6 +226,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
 | **z**           | Folds, language/spelling                          |
 | **g**           | **G**o/Jump to, run something that goes/jumps to  |
 | **n**           | **N**eorg related                                 |
+| **r**           | **R**est                                          |
 
 The `leader` key is `space`!
 
@@ -344,6 +346,9 @@ The `leader` key is `space`!
 | `<Leader>or`      | Run overseer task                                                    |
 | `<Leader>ot`      | Toggle overseer tasks panel                                          |
 | `<Leader>fl`      | **L**ocate **F**iles (neess mlocate)                                 |
+| `<Leader>rr`      | **R**un **R**est **R**equest under cursor                            |
+| `<Leader>rp`      | **P**review **R**est **R**equest under cursor in cURL command        |
+| `<Leader>R`       | **R**review the last **R**est **R**equest                            |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -831,6 +836,7 @@ quick.cmd_and_centre("SomeCommand")
 | [ziontee113/color-picker.nvim][colorpicker] | [MIT][colorpicker-license]                                                 |
 | [aduros/ai.vim][aduros/ai.vim]              | [ISC](https://github.com/aduros/ai.vim/blob/main/LICENSE.txt)              |
 | [tamton-aquib/duck.nvim][duck.nvim]         | [MIT](https://github.com/tamton-aquib/duck.nvim/blob/main/LICENSE)         |
+| [nvim-rest/rest.nvim][rest.nvim]            | [MIT](https://github.com/rest-nvim/rest.nvim/blob/main/LICENSE)            |
 
 </details>
 
@@ -947,6 +953,7 @@ quick.cmd_and_centre("SomeCommand")
 [colorpicker-license]: https://github.com/ziontee113/color-picker.nvim/blob/master/LICENSE
 [aduros/ai.vim]: https://github.com/aduros/ai.vim
 [duck.nvim]: https://github.com/tamton-aquib/duck.nvim
+[rest.nvim]: https://github.com/rest-nvim/rest.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

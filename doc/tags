@@ -43,6 +43,7 @@
 <Leader>.e	shark-mappings.txt	/*<Leader>.e*
 <Leader>.f	shark-mappings.txt	/*<Leader>.f*
 <Leader>P	shark-mappings.txt	/*<Leader>P*
+<Leader>R	shark-mappings.txt	/*<Leader>R*
 <Leader>ca	shark-mappings.txt	/*<Leader>ca*
 <Leader>cd	shark-mappings.txt	/*<Leader>cd*
 <Leader>ce	shark-mappings.txt	/*<Leader>ce*
@@ -80,6 +81,8 @@
 <Leader>ot	shark-mappings.txt	/*<Leader>ot*
 <Leader>p	shark-mappings.txt	/*<Leader>p*
 <Leader>rn	shark-mappings.txt	/*<Leader>rn*
+<Leader>rp	shark-mappings.txt	/*<Leader>rp*
+<Leader>rr	shark-mappings.txt	/*<Leader>rr*
 <Leader>sf	shark-mappings.txt	/*<Leader>sf*
 <Leader>sp	shark-mappings.txt	/*<Leader>sp*
 <Leader>us	shark-mappings.txt	/*<Leader>us*

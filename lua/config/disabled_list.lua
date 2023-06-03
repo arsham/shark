@@ -79,4 +79,5 @@ return {
   ["ziontee113/color-picker.nvim"] = { enabled = true, start = true },
   ["aduros/ai.vim"] = { enabled = true, start = true },
   ["tamton-aquib/duck.nvim"] = { enabled = true, start = true },
+  ["rest-nvim/rest.nvim"] = { enabled = true, start = true },
 }

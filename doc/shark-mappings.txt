@@ -49,6 +49,7 @@ situation or messes with a community-driven or Vim's very well known mapping:
  z                Folds, language/spelling
  g                Go/Jump to, run something that goes/jumps to
  n                Neorg related
+ r                Rest
 
 *shark-mappings-leader*
 The |<Leader>| key is |<Space>|!
@@ -264,6 +265,12 @@ gr                      Copilot panel: Refresh
 <Leader>ot              Toggle overseer tasks panel
                                                                   *<Leader>fl*
 <Leader>fl              Locate files (neess mlocate)
+                                                                  *<Leader>rr*
+<Leader>rr              Run Rest Request under cursor
+                                                                  *<Leader>rp*
+<Leader>rp              Preview Rest Request in cURL command
+                                                                   *<Leader>R*
+<Leader>R               Rreview the last Rest Request
 
 Note that if copilot is enabled, codeium will be disabled.
 

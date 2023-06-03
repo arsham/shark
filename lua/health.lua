@@ -27,6 +27,8 @@ local executables = {
   xxd = { "xxd", "paru -S xxd" },
   uncrustify = { "uncrustify", "paru -S uncrustify" },
   ["Python-pip"] = { "pip3", "paru -S python-pip" },
+  jq = { "jq", "paru -S jq" },
+  tidy = { "tidy", "paru -S tidy" },
 }
 
 M.check = function()
