@@ -342,6 +342,7 @@ The `leader` key is `space`!
 | `<Leader>cd`      | **D**isable **C**odeium                                              |
 | `<Leader>or`      | Run overseer task                                                    |
 | `<Leader>ot`      | Toggle overseer tasks panel                                          |
+| `<Leader>fl`      | **L**ocate **F**iles (neess mlocate)                                 |
 
 Note that if copilot is enabled, codeium will be disabled.
 

@@ -26,6 +26,20 @@ return {
     }
 
     require("fzfmania").config(config)
+
+    vim.keymap.set("n", "<leader>fl", function()
+      vim.ui.input({
+        prompt = "Term: ",
+      }, function(term)
+        if term then
+          vim.schedule(function()
+            local preview = vim.fn["fzf#vim#with_preview"]()
+            vim.fn["fzf#vim#locate"](term, preview)
+          end)
+        end
+      end)
+    end, { silent = true, desc = "run locate" })
+
     vim.cmd.FzfLua("register_ui_select")
   end,
   keys = {

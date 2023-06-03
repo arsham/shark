@@ -262,6 +262,8 @@ gr                      Copilot panel: Refresh
 <Leader>or              Run overseer task
                                                                   *<Leader>ot*
 <Leader>ot              Toggle overseer tasks panel
+                                                                  *<Leader>fl*
+<Leader>fl              Locate files (neess mlocate)
 
 Note that if copilot is enabled, codeium will be disabled.
 

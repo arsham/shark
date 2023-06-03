@@ -49,6 +49,7 @@
 <Leader>dq	shark-mappings.txt	/*<Leader>dq*
 <Leader>dr	shark-mappings.txt	/*<Leader>dr*
 <Leader>dw	shark-mappings.txt	/*<Leader>dw*
+<Leader>fl	shark-mappings.txt	/*<Leader>fl*
 <Leader>gc	shark-mappings.txt	/*<Leader>gc*
 <Leader>gd	shark-mappings.txt	/*<Leader>gd*
 <Leader>gg	shark-mappings.txt	/*<Leader>gg*
