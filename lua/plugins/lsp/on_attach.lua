@@ -1,10 +1,8 @@
 local lsp_util = require("plugins.lsp.util")
 
----@alias client 'vim.lsp.client'
-
 local server_callbacks = {}
 
----@param client client
+---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
   local callbacks = server_callbacks[name]
@@ -128,7 +126,7 @@ local function capability_callbacks(client)
 end
 
 ---The function to pass to the LSP's on_attach callback.
----@param client client
+---@param client lspclient
 ---@param bufnr number
 local function on_attach(client, bufnr) --{{{
   vim.api.nvim_buf_call(bufnr, function()

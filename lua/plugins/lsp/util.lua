@@ -190,7 +190,7 @@ end --}}}
 
 local lsp_formatting_imports = augroup("lsp_formatting_imports")
 ---Setup events for formatting and imports.
----@param client client
+---@param client lspclient
 ---@param imports function
 ---@param format function
 ---@param bufnr number?
