@@ -12,6 +12,8 @@ return {
     {
       "ibhagwan/fzf-lua",
       dependencies = { "nvim-tree/nvim-web-devicons" },
+      cond = require("config.util").should_start("ibhagwan/fzf-lua"),
+      enabled = require("config.util").is_enabled("ibhagwan/fzf-lua"),
     },
   },
 
@@ -22,8 +24,11 @@ return {
       mappings = {
         fzf_builtin = false,
       },
-      frontend = "fzf-lua",
     }
+
+    if require("config.util").should_start("ibhagwan/fzf-lua") then
+      config.frontend = "fzf-lua"
+    end
 
     require("fzfmania").config(config)
 
