@@ -104,6 +104,56 @@ end, {
   desc = "Edit configuration files in a new tab",
 })
 
+---Creates a new scratch buffer and puts the return value of the given fn in
+---it.
+---@param fn function(client: lspclient):string[]
+local function show_lsp_caps(fn)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+
+  local lines = {}
+  for _, client in pairs(clients) do
+    vim.list_extend(lines, fn(client))
+  end
+
+  require("config.scratch").new("markdown")
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+  quick.normal("x", "gg")
+end
+
+vim.api.nvim_create_user_command("LspCaps", function()
+  show_lsp_caps(function(client)
+    ---@cast client lspclient
+    local lines = {}
+    table.insert(lines, "# " .. client.name:upper())
+    for key, value in pairs(client.server_capabilities) do
+      if value and key:find("Provider") then
+        local capability = key:gsub("Provider$", "")
+        table.insert(lines, "- " .. capability)
+      end
+    end
+    table.insert(lines, "")
+    return lines
+  end)
+end, { desc = "Show short LSP servers capabilities in a scratch buffer" })
+
+vim.api.nvim_create_user_command("LspCapsFull", function()
+  show_lsp_caps(function(client)
+    ---@cast client lspclient
+    local lines = {}
+    table.insert(lines, "# " .. client.name:upper())
+    table.insert(lines, "```lua")
+    local cap_lines = vim.inspect(client.server_capabilities)
+    for s in cap_lines:gmatch("[^\r\n]+") do
+      table.insert(lines, s)
+    end
+    table.insert(lines, "```")
+    table.insert(lines, "")
+    table.insert(lines, "")
+    return lines
+  end)
+end, { desc = "Show full LSP servers capabilities in a scratch buffer" })
+
 quick.command("Scratch", function(args)
   local ft = args.args
   if ft == "" then

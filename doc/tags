@@ -16,6 +16,8 @@
 :Filename	shark.txt	/*:Filename*
 :FoldComments	shark.txt	/*:FoldComments*
 :Implementation	shark.txt	/*:Implementation*
+:LspCaps	shark.txt	/*:LspCaps*
+:LspCapsFull	shark.txt	/*:LspCapsFull*
 :Nowrap	shark.txt	/*:Nowrap*
 :RestartLsp	shark.txt	/*:RestartLsp*
 :Scratch	shark.txt	/*:Scratch*

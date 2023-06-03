@@ -1,0 +1,1 @@
+---@alias lspclient 'vim.lsp.client'

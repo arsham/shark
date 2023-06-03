@@ -676,6 +676,8 @@ The following list of commands do not fit into any specific categories.
 | {range}`Cook`           | Cook some ducks                        |
 | `FoldComments`          | Fold comments (sets folding to expr)   |
 | `EditConfig`            | Edit configuration files in a new tab  |
+| `LspCaps`               | Show short LSP capabilities            |
+| `LspCapsFull`           | Show sull LSP capabilities             |
 
 </details>
 
