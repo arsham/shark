@@ -29,6 +29,8 @@ local executables = {
   ["Python-pip"] = { "pip3", "paru -S python-pip" },
   jq = { "jq", "paru -S jq" },
   tidy = { "tidy", "paru -S tidy" },
+  tmux = { "tmux", "paru -S tmux" },
+  tmuxp = { "tmuxp", "paru -S tmuxp" },
 }
 
 M.check = function()

@@ -45,6 +45,7 @@
   "lazy.nvim": { "branch": "main", "commit": "27c12ff0a980e5bab982a730158b4220148a54b0" },
   "listish.nvim": { "branch": "master", "commit": "039f6db68f249a23981c1f9cebc6476bbc280319" },
   "lsp_lines.nvim": { "branch": "main", "commit": "f53af96d4789eef39a082dbcce078d2bfc384ece" },
+  "lua-bk-tree": { "branch": "master", "commit": "727f9132ed976052825bd6352dbaf62028d01890" },
   "markdown-preview.nvim": { "branch": "master", "commit": "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "5230617372e656d4a2e1e236e03bf7e7b4b97273" },
   "mason-null-ls.nvim": { "branch": "main", "commit": "54d702020bf94e4eefd357f0b738317af30217eb" },

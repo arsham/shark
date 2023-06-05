@@ -176,4 +176,46 @@ vim.api.nvim_create_autocmd("Filetype", {
   desc = "Setup go mod tidy on go and go.mod files",
 })
 
+local tmuxp_store = false
+local function start_completion(arg) --{{{
+  local bktree = require("bk-tree")
+  if not tmuxp_store then
+    local projects = vim.fn.systemlist("tmuxp ls")
+    tmuxp_store = bktree:new()
+    for _, p in ipairs(projects) do
+      tmuxp_store:insert(p)
+    end
+  end
+
+  local ret = {}
+  local max = 15
+  if arg == "" then
+    max = 100
+  end
+  local result = tmuxp_store:query(arg, max)
+  for _, v in pairs(result) do
+    table.insert(ret, v.str)
+  end
+  return ret
+end --}}}
+
+quick.command("Tmux", function(args) --{{{
+  tmuxp_store = false
+  require("plenary.job")
+    :new({
+      command = "tmuxp",
+      args = { "load", "-y", args.args },
+      on_exit = function(j, exit_code)
+        if exit_code ~= 0 then
+          local res = table.concat(j:stderr_result(), "\n")
+          vim.notify(res, vim.lsp.log_levels.ERROR, {
+            title = "Loading project: " .. args.args,
+            timeout = 5000,
+          })
+        end
+      end,
+    })
+    :start()
+end, { nargs = "+", complete = start_completion, desc = "load a tmuxp project" }) --}}}
+
 -- vim: fdm=marker fdl=0

@@ -681,6 +681,7 @@ The following list of commands do not fit into any specific categories.
 | `LspCaps`               | Show short LSP capabilities            |
 | `LspCapsFull`           | Show sull LSP capabilities             |
 | `GoModTidy`             | Run go mod tidy on go and mod files    |
+| `Tmux`                  | Start a tmux project (using tmuxp)     |
 
 </details>
 

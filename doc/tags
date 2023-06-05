@@ -23,6 +23,7 @@
 :Nowrap	shark.txt	/*:Nowrap*
 :RestartLsp	shark.txt	/*:RestartLsp*
 :Scratch	shark.txt	/*:Scratch*
+:Tmux	shark.txt	/*:Tmux*
 :ToggleRelativeNumbers	shark.txt	/*:ToggleRelativeNumbers*
 :ToggleTrimWhitespaces	shark.txt	/*:ToggleTrimWhitespaces*
 :TypeDefinition	shark.txt	/*:TypeDefinition*

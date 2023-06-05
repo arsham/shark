@@ -5,6 +5,15 @@ return {
     lazy = true,
   },
 
+  {
+    "profan/lua-bk-tree",
+    build = {
+      "mkdir -p lua/bk-tree",
+      "cp bk-tree.lua lua/bk-tree/init.lua",
+    },
+    lazy = true,
+  },
+
   { import = "plugins.dependencies.go" },
   { import = "plugins.dependencies.python" },
 }
