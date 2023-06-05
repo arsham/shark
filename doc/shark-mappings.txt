@@ -271,6 +271,8 @@ gr                      Copilot panel: Refresh
 <Leader>rp              Preview Rest Request in cURL command
                                                                    *<Leader>R*
 <Leader>R               Rreview the last Rest Request
+                                                                   *<Leader>v*
+<Leader>v               Enable/Disable Venn
 
 Note that if copilot is enabled, codeium will be disabled.
 

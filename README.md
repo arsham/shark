@@ -193,6 +193,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Tool     | [tamton-aquib/duck.nvim][duck.nvim]              | Fun little ducks                      |
 | 🕸️ Tool    | [rest-nvim/rest.nvim][rest.nvim]                 | Fast http client in lua               |
 | 🔍 Tool    | [arsham/yanker.nvim][yanker.nvim]                | Yank history helper                   |
+| 🗒️ Editing | [jbyuki/venn.nvim][jbyuki/venn.nvim]             | Draw ASCII diagrams                   |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -350,6 +351,7 @@ The `leader` key is `space`!
 | `<Leader>rr`      | **R**un **R**est **R**equest under cursor                            |
 | `<Leader>rp`      | **P**review **R**est **R**equest under cursor in cURL command        |
 | `<Leader>R`       | **R**review the last **R**est **R**equest                            |
+| `<Leader>v`       | Enable/Disable **V**enn                                              |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -846,6 +848,7 @@ quick.cmd_and_centre("SomeCommand")
 | [tamton-aquib/duck.nvim][duck.nvim]         | [MIT](https://github.com/tamton-aquib/duck.nvim/blob/main/LICENSE)         |
 | [nvim-rest/rest.nvim][rest.nvim]            | [MIT](https://github.com/rest-nvim/rest.nvim/blob/main/LICENSE)            |
 | [arsham/yanker.nvim][yanker.nvim]           | [MIT](https://github.com/arsham/yanker.nvim/blob/master/LICENSE)           |
+| [jbyuki/venn.nvim][jbyuki/venn.nvim]        | [MIT](https://github.com/jbyuki/venn.nvim/blob/master/LICENSE)             |
 
 </details>
 
@@ -964,6 +967,7 @@ quick.cmd_and_centre("SomeCommand")
 [duck.nvim]: https://github.com/tamton-aquib/duck.nvim
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [yanker.nvim]: https://github.com/arsham/yanker.nvim
+[jbyuki/venn.nvim]: https://github.com/jbyuki/venn.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0
