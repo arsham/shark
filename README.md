@@ -192,6 +192,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 |  Editing  | [aduros/ai.vim][aduros/ai.vim]                   | OpenAI plugin                         |
 |  Tool     | [tamton-aquib/duck.nvim][duck.nvim]              | Fun little ducks                      |
 | 🕸️ Tool    | [rest-nvim/rest.nvim][rest.nvim]                 | Fast http client in lua               |
+| 🔍 Tool    | [arsham/yanker.nvim][yanker.nvim]                | Yank history helper                   |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -556,6 +557,7 @@ There are a few added commands to what fzf provides.
 
 | Yank Mappings | Description                                       |
 | :------------ | :------------------------------------------------ |
+| `<leader>yh`  | List **Y**ank **H**istory)                        |
 | `<leader>y`   | **Y**ank to the `+` register (external clipboard) |
 | `<leader>p`   | **P**aste from the `+` register                   |
 | `<leader>P`   | **P**aste from the `+` register (before/above)    |
@@ -842,6 +844,7 @@ quick.cmd_and_centre("SomeCommand")
 | [aduros/ai.vim][aduros/ai.vim]              | [ISC](https://github.com/aduros/ai.vim/blob/main/LICENSE.txt)              |
 | [tamton-aquib/duck.nvim][duck.nvim]         | [MIT](https://github.com/tamton-aquib/duck.nvim/blob/main/LICENSE)         |
 | [nvim-rest/rest.nvim][rest.nvim]            | [MIT](https://github.com/rest-nvim/rest.nvim/blob/main/LICENSE)            |
+| [arsham/yanker.nvim][yanker.nvim]           | [MIT](https://github.com/arsham/yanker.nvim/blob/master/LICENSE)           |
 
 </details>
 
@@ -959,6 +962,7 @@ quick.cmd_and_centre("SomeCommand")
 [aduros/ai.vim]: https://github.com/aduros/ai.vim
 [duck.nvim]: https://github.com/tamton-aquib/duck.nvim
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
+[yanker.nvim]: https://github.com/arsham/yanker.nvim
 
 <!--
 vim: foldlevel=2 conceallevel=0

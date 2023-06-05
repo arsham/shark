@@ -121,6 +121,7 @@ Function   Plugin                      Description                     License
  Editing   aduros/ai.vim              OpenAI plugin                       ISC
  Tool      tamton-aquib/duck.nvim     Fun little ducks                    MIT
 🕸️ Tool     rest-nvim/rest.nvim        Fast http client in lua             MIT
+🔍 Tool     arsham/yanker.nvim         Yank history helper                 MIT
 
 Note that if copilot is enabled, codeium will be disabled.
 
