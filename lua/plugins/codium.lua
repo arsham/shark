@@ -30,15 +30,10 @@ return {
   -- Their mappings are overlapping therefore if copilot is active, codeium is
   -- not.
   cond = function()
-    if require("config.util").should_start("zbirenbaum/copilot.lua") then
+    if require("config.util").should_start("zbirenbaum/copilot.lua")() then
       return false
     end
-    return require("config.util").should_start("Exafunction/codeium.vim")
+    return require("config.util").should_start()
   end,
-  enabled = function()
-    if require("config.util").is_enabled("zbirenbaum/copilot.lua") then
-      return false
-    end
-    return require("config.util").is_enabled("Exafunction/codeium.vim")
-  end,
+  enabled = require("config.util").is_enabled("Exafunction/codeium.vim"),
 }

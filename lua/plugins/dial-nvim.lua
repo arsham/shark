@@ -131,7 +131,6 @@ return {
     { "g<C-x>", mode = "v" },
   },
   config = config,
-  cond = require("config.util").should_start("monaqa/dial.nvim"),
   enabled = require("config.util").is_enabled("monaqa/dial.nvim"),
 }
 

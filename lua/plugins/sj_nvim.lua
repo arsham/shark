@@ -20,6 +20,5 @@ return {
       send_to_qflist = "<A-q>",
     },
   },
-  cond = require("config.util").should_start("woosaaahh/sj.nvim"),
   enabled = require("config.util").is_enabled("wooosaaahh/sj.nvim"),
 }

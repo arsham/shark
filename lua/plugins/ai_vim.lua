@@ -16,6 +16,5 @@ return {
     },
   },
   cmd = { "AI" },
-  cond = require("config.util").should_start("aduros/ai.vim"),
   enabled = require("config.util").is_enabled("aduros/ai.vim"),
 }

@@ -39,6 +39,7 @@ return {
           require("luasnip.loaders.from_vscode").load()
         end)
       end,
+      enabled = require("config.util").is_enabled("rafamadriz/friendly-snippets"),
     },
   },
   -- stylua: ignore
@@ -56,6 +57,7 @@ return {
   },
   config = config,
   lazy = true,
+  enabled = require("config.util").is_enabled("L3MON4D3/LuaSnip"),
 }
 
 -- vim: fdm=marker fdl=0

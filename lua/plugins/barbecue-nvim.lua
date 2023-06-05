@@ -43,6 +43,5 @@ return {
     })
   end,
   event = { "LspAttach" },
-  cond = require("config.util").should_start("utilyre/barbecue.nvim"),
   enabled = require("config.util").is_enabled("utilyre/barbecue.nvim"),
 }

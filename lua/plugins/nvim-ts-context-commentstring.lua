@@ -17,6 +17,5 @@ return {
       }
     end,
   },
-  cond = require("config.util").should_start("JoosepAlviste/nvim-ts-context-commentstring"),
   enabled = require("config.util").is_enabled("JoosepAlviste/nvim-ts-context-commentstring"),
 }

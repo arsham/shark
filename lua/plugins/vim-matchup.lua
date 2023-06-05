@@ -13,6 +13,5 @@ return {
       }
     end,
   },
-  cond = require("config.util").should_start("andymass/vim-matchup"),
   enabled = require("config.util").is_enabled("andymass/vim-matchup"),
 }

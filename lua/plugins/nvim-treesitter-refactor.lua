@@ -16,6 +16,5 @@ return {
       }
     end,
   },
-  cond = require("config.util").should_start("nvim-treesitter/nvim-treesitter-refactor"),
   enabled = require("config.util").is_enabled("nvim-treesitter/nvim-treesitter-refactor"),
 }

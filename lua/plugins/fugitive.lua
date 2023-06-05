@@ -24,17 +24,14 @@ return {
         end,
       })
     end,
-    cond = require("config.util").should_start("tpope/vim-fugitive"),
     enabled = require("config.util").is_enabled("tpope/vim-fugitive"),
   },
   {
     "tpope/vim-git",
-    cond = require("config.util").should_start("tpope/vim-git"),
     enabled = require("config.util").is_enabled("tpope/vim-git"),
   },
   {
     "tpope/vim-rhubarb",
-    cond = require("config.util").should_start("tpope/vim-rhubarb"),
     enabled = require("config.util").is_enabled("tpope/vim-rhubarb"),
   },
 }

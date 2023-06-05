@@ -6,7 +6,6 @@ return {
       "williamboman/mason.nvim",
     },
 
-    cond = require("config.util").should_start("neovim/nvim-lspconfig"),
     enabled = require("config.util").is_enabled("neovim/nvim-lspconfig"),
   },
 
@@ -29,7 +28,6 @@ return {
       })
     end, -- }}}
     lazy = true,
-    cond = require("config.util").should_start("williamboman/mason.nvim"),
     enabled = require("config.util").is_enabled("williamboman/mason.nvim"),
   },
 
@@ -152,7 +150,6 @@ return {
       })
       require("plugins.lsp.config")(opts)
     end, -- }}}
-    cond = require("config.util").should_start("williamboman/mason-lspconfig.nvim"),
     enabled = require("config.util").is_enabled("williamboman/mason-lspconfig.nvim"),
   },
 
@@ -167,7 +164,6 @@ return {
       automatic_installation = true,
       automatic_setup = false,
     },
-    cond = require("config.util").should_start("jay-babu/mason-null-ls.nvim"),
     enabled = require("config.util").is_enabled("jay-babu/mason-null-ls.nvim"),
   },
 
@@ -227,7 +223,6 @@ return {
       }
     end,
 
-    cond = require("config.util").should_start("jose-elias-alvarez/null-ls.nvim"),
     enabled = require("config.util").is_enabled("jose-elias-alvarez/null-ls.nvim"),
   },
 
@@ -250,6 +245,7 @@ return {
         auto_update = false,
       }) -- }}}
     end,
+    enabled = require("config.util").is_enabled("WhoIsSethDaniel/mason-tool-installer.nvim"),
   },
 }
 

@@ -9,6 +9,5 @@ return {
   keys = {
     { mode = "n", "<leader>uu", ":UndotreeToggle<CR>", { silent = true } },
   },
-  cond = require("config.util").should_start("mbbill/undotree"),
   enabled = require("config.util").is_enabled("mbbill/undotree"),
 }

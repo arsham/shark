@@ -29,7 +29,6 @@ return {
     },
   },
   event = { "VeryLazy" },
-  cond = require("config.util").should_start("monaqa/dial.nvim"),
   enabled = require("config.util").is_enabled("monaqa/dial.nvim"),
   priority = 10,
 }

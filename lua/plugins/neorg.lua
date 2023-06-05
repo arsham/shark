@@ -102,7 +102,6 @@ return {
     },
   },
 
-  cond = require("config.util").should_start("nvim-neorg/neorg"),
   enabled = require("config.util").is_enabled("nvim-neorg/neorg"),
 }
 

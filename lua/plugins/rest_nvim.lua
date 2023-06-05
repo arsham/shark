@@ -49,6 +49,5 @@ return {
     })
   end,
 
-  cond = require("config.util").should_start("rest-nvim/rest.nvim"),
   enabled = require("config.util").is_enabled("rest-nvim/rest.nvim"),
 }

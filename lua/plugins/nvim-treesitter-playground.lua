@@ -24,6 +24,5 @@ return {
     end,
   },
   cmd = { "TSPlaygroundToggle" },
-  cond = require("config.util").should_start("nvim-treesitter/playground"),
   enabled = require("config.util").is_enabled("nvim-treesitter/playground"),
 }

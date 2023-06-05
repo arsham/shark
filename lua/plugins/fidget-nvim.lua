@@ -41,6 +41,5 @@ return {
       end,
     },
   },
-  cond = require("config.util").should_start("j-hui/fidget.nvim"),
   enabled = require("config.util").is_enabled("j-hui/fidget.nvim"),
 }

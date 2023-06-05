@@ -28,6 +28,5 @@ return {
       end,
     })
   end,
-  cond = require("config.util").should_start("lsp_lines.nvim"),
   enabled = require("config.util").is_enabled("lsp_lines.nvim"),
 }

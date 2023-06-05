@@ -12,6 +12,5 @@ return {
     { mode = "n", "cxc", function() exchange().cancel() end,   { noremap = true, desc = "cancel exchange" }},
   },
   config = true,
-  cond = require("config.util").should_start("gbprod/substitute.nvim"),
   enabled = require("config.util").is_enabled("gbprod/substitute.nvim"),
 }

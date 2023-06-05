@@ -1,3 +1,4 @@
+---@type table<string, table<string, boolean>>
 return {
   ["arsham/listish.nvim"] = { enabled = true, start = true },
   ["nvim-tree/nvim-web-devicons"] = { enabled = true, start = true },

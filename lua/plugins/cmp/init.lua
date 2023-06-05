@@ -366,13 +366,13 @@ return {
       },
       "hrsh7th/cmp-emoji",
       "chrisgrieser/cmp-nerdfont",
+      "uga-rosa/cmp-dynamic",
       {
         import = "plugins.cmp.cmp_dynamic",
       },
     },
     config = config,
     event = { "InsertEnter" },
-    cond = require("config.util").should_start("hrsh7th/nvim-cmp"),
     enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
   },
   {
@@ -400,7 +400,6 @@ return {
         }),
       })
     end,
-    cond = require("config.util").should_start("hrsh7th/nvim-cmp"),
     enabled = require("config.util").is_enabled("hrsh7th/nvim-cmp"),
   },
 }

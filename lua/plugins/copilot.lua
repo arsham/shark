@@ -58,6 +58,5 @@ return {
     },
   },
 
-  cond = require("config.util").should_start("zbirenbaum/copilot.lua"),
   enabled = require("config.util").is_enabled("zbirenbaum/copilot.lua"),
 }

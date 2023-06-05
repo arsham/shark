@@ -15,6 +15,9 @@ require("config.options")
 
 require("lazy").setup("plugins", {
   root = vim.fn.stdpath("cache") .. "/lazy",
+  defaults = {
+    cond = require("config.util").should_start(),
+  },
   dev = {
     path = "~/Projects/arsham",
   },

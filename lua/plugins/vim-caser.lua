@@ -11,6 +11,5 @@
 return {
   "arthurxavierx/vim-caser",
   keys = { "gs" },
-  cond = require("config.util").should_start("arthurxavierx/vim-caser"),
   enabled = require("config.util").is_enabled("arthurxavierx/vim-caser"),
 }

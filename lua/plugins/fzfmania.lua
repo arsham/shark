@@ -4,7 +4,11 @@ return {
   dependencies = {
     {
       "junegunn/fzf.vim",
-      dependencies = "junegunn/fzf",
+      dependencies = {
+        "junegunn/fzf",
+        enabled = require("config.util").is_enabled("junegunn/fzf"),
+      },
+      enabled = require("config.util").is_enabled("junegunn/fzf.vim"),
     },
     "nvim-lua/plenary.nvim",
     "arshlib.nvim",
@@ -12,7 +16,6 @@ return {
     {
       "ibhagwan/fzf-lua",
       dependencies = { "nvim-tree/nvim-web-devicons" },
-      cond = require("config.util").should_start("ibhagwan/fzf-lua"),
       enabled = require("config.util").is_enabled("ibhagwan/fzf-lua"),
     },
   },
@@ -64,7 +67,6 @@ return {
     "<C-_>",
   },
   event = { "InsertEnter" }, -- various actions happen here.
-  cond = require("config.util").should_start("arsham/fzfmania.nvim"),
   enabled = require("config.util").is_enabled("arsham/fzfmania.nvim"),
 }
 

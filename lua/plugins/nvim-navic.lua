@@ -82,7 +82,6 @@ return {
   end,
   config = config,
   event = { "LspAttach" },
-  cond = require("config.util").should_start("SmitechP/nvim-navic"),
   enabled = require("config.util").is_enabled("SmitechP/nvim-navic"),
 }
 

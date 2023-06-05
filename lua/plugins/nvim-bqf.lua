@@ -20,6 +20,5 @@ return {
       end,
     },
   },
-  cond = require("config.util").should_start("kevinhwang91/nvim-bqf"),
   enabled = require("config.util").is_enabled("kevinhwang91/nvim-bqf"),
 }

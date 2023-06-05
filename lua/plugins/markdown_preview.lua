@@ -13,6 +13,5 @@ return {
     vim.g.mkdp_browser = opts.browser
   end,
   cmd = { "MarkdownPreview" },
-  cond = require("config.util").should_start("iamcco/markdown-preview.nvim"),
   enabled = require("config.util").is_enabled("iamcco/markdown-preview.nvim"),
 }

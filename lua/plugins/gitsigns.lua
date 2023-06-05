@@ -87,7 +87,6 @@ return {
       end, -- }}}
     })
   end,
-  cond = require("config.util").should_start("lewis6991/gitsigns.nvim"),
   enabled = require("config.util").is_enabled("lewis6991/gitsigns.nvim"),
 }
 

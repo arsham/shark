@@ -7,6 +7,5 @@ return {
     { mode = "n", "<leader>la", "<Plug>(Luadev-Run)",         { silent = true, desc = "Operator to execute lua code over a movement or text object." }, },
     { mode = "n", "<leader>le", "<Plug>(Luadev-RunWord)",     { silent = true, desc = "Eval identifier under cursor, including table.attr" }, },
   },
-  cond = require("config.util").should_start("bfredl/nvim-luadev"),
   enabled = require("config.util").is_enabled("bfredl/nvim-luadev"),
 }

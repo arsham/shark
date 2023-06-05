@@ -19,4 +19,5 @@ return {
       },
     })
   end,
+  enabled = require("config.util").is_enabled("uga-rosa/cmp-dynamic"),
 }

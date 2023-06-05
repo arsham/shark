@@ -46,7 +46,6 @@ return {
         },
       })
     end,
-    cond = require("config.util").should_start("echasnovski/mini.surround"),
     enabled = require("config.util").is_enabled("echasnovski/mini.surround"),
   }, -- }}}
 
@@ -57,7 +56,6 @@ return {
       quick.highlight("MiniTrailspace", { link = "ExtraWhitespace" })
       require("mini.trailspace").setup({})
     end,
-    cond = require("config.util").should_start("echasnovski/mini.trailspace"),
     enabled = require("config.util").is_enabled("echasnovski/mini.trailspace"),
   }, -- }}}
 
@@ -89,7 +87,6 @@ return {
         },
       })
     end,
-    cond = require("config.util").should_start("echasnovski/mini.align"),
     enabled = require("config.util").is_enabled("echasnovski/mini.align"),
   }, -- }}}
 }

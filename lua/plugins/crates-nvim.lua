@@ -41,6 +41,5 @@ return {
     })
   end,
 
-  cond = require("config.util").should_start("saecki/crates.nvim"),
   enabled = require("config.util").is_enabled("saecki/crates.nvim"),
 }

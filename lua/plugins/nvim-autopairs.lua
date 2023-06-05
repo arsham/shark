@@ -51,6 +51,5 @@ return {
   },
   config = config,
   event = { "InsertEnter" },
-  cond = require("config.util").should_start("windwp/nvim-autopairs"),
   enabled = require("config.util").is_enabled("windwp/nvim-autopairs"),
 }

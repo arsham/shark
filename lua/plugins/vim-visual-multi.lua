@@ -70,6 +70,5 @@ return {
     "<C-Down>",
     "<C-Up>",
   },
-  cond = require("config.util").should_start("mg979/vim-visual-multi"),
   enabled = require("config.util").is_enabled("mg979/vim-visual-multi"),
 }

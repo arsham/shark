@@ -9,6 +9,5 @@ return {
     },
     runtime_path = true,
   },
-  cond = require("config.util").should_start("folke/neodev.nvim"),
   enabled = require("config.util").is_enabled("folke/neodev.nvim"),
 }

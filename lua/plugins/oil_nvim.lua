@@ -18,6 +18,5 @@ return {
       oil.open()
     end)
   end,
-  cond = require("config.util").should_start("stevearc/oil.nvim"),
   enabled = require("config.util").is_enabled("stevearc/oil.nvim"),
 }

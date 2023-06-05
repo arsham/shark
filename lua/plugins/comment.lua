@@ -26,7 +26,6 @@ return {
         location = location,
       })
     end,
-    cond = require("config.util").should_start("numToStr/Comment.nvim"),
     enabled = require("config.util").is_enabled("numToStr/Comment.nvim"),
   },
 }

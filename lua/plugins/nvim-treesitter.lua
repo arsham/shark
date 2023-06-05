@@ -59,7 +59,6 @@ return {
 
     require("nvim-treesitter.configs").setup(opts)
   end,
-  cond = require("config.util").should_start("nvim-treesitter/nvim-treesitter"),
   enabled = require("config.util").is_enabled("nvim-treesitter/nvim-treesitter"),
 }
 

@@ -5,6 +5,5 @@ return {
   opts = {
     filetypes = colorizer_ft,
   },
-  cond = require("config.util").should_start("NvChad/nvim-colorizer.lua"),
   enabled = require("config.util").is_enabled("NvChad/nvim-colorizer.lua"),
 }

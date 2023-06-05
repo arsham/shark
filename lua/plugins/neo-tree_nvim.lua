@@ -11,7 +11,6 @@ return {
       version = "v1.*",
       lazy = true,
       config = true,
-      cond = require("config.util").should_start("s1n7ax/nvim-window-picker"),
       enabled = require("config.util").is_enabled("s1n7ax/nvim-window-picker"),
     },
   },
@@ -209,7 +208,6 @@ return {
       use_libuv_file_watcher = true,
     }, -- }}}
   },
-  cond = require("config.util").should_start("nvim-neo-tree/neo-tree.nvim"),
   enabled = require("config.util").is_enabled("nvim-neo-tree/neo-tree.nvim"),
 }
 

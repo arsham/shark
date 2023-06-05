@@ -17,6 +17,5 @@ return {
   },
 
   event = { "LspAttach" },
-  cond = require("config.util").should_start("kosayoda/nvim-lightbulb"),
   enabled = require("config.util").is_enabled("kosayoda/nvim-lightbulb"),
 }

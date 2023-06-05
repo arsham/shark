@@ -35,6 +35,5 @@ return {
     end, { count = true })
   end,
 
-  cond = require("config.util").should_start("tamton-aquib/duck.nvim"),
   enabled = require("config.util").is_enabled("tamton-aquib/duck.nvim"),
 }

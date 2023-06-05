@@ -15,7 +15,6 @@ return {
         end,
       })
     end,
-    cond = require("config.util").should_start("arsham/arshamiser.nvim"),
     enabled = require("config.util").is_enabled("arsham/arshamiser.nvim"),
   },
   {
@@ -38,10 +37,10 @@ return {
         "freddiehaddad/feline.nvim",
         branch = "main",
         dependencies = "nvim-tree/nvim-web-devicons",
+        enabled = require("config.util").is_enabled("freddiehaddad/feline.nvim"),
       },
     },
     event = { "VeryLazy" },
-    cond = require("config.util").should_start("arsham/feliniser.nvim"),
     enabled = require("config.util").is_enabled("arsham/feliniser.nvim"),
   },
 }
