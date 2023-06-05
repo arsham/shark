@@ -154,6 +154,8 @@ additions.
 :RestartLsp             Restarts the LSP server
                                                              *:UnlinkSnippets*
 :UnlinkSnippets         Unlink all open snippet sessions
+                                                              *:ListWorkspace*
+:ListWorkspace          List attached LSP workspace folders
 
 The |:RestartLsp| fixes an issue when the `:LspRestart` defined in
 |lspconfig-commands| does not have any effects.

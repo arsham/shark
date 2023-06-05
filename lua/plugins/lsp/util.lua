@@ -337,6 +337,13 @@ function M.support_commands() --{{{
   end
   quick.buffer_command("RestartLsp", restart_lsp)
   nnoremap("<localleader>dr", restart_lsp, "Restart LSP server")
+
+  quick.buffer_command("ListWorkspace", function()
+    vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
+      title = "Workspace Folders",
+      timeout = 3000,
+    })
+  end)
 end --}}}
 
 local handler = function(err)
