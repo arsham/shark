@@ -40,6 +40,7 @@ return {
     ensure_installed = "all",
 
     fold = { enable = true },
+    indent = { enable = true },
     highlight = {
       enable = true,
       disable = function(_, bufnr)
@@ -55,7 +56,6 @@ return {
   config = function(_, opts)
     vim.opt.foldmethod = "expr"
     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.opt.indentexpr = "nvim_treesitter#indent()"
 
     require("nvim-treesitter.configs").setup(opts)
   end,
