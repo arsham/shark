@@ -1,6 +1,9 @@
 return {
   "lewis6991/gitsigns.nvim",
-  dependencies = "nvim-lua/plenary.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
   event = { "BufReadPost", "BufNewFile" },
   keys = { -- {{{
     { mode = { "n" }, "<leader>gs" },
@@ -81,8 +84,14 @@ return {
         vim.keymap.set({ "o", "x" }, "ih", function() require("gitsigns.actions").select_hunk() end, { desc = "in hunk" })
         vim.keymap.set({ "o", "x" }, "ah", function() require("gitsigns.actions").select_hunk() end, { desc = "around hunk" })
 
-        vim.keymap.set({ "n", "x", "o" }, "]c", function() quick.call_and_centre(gs.next_hunk) end, { desc = "go to next change" })
-        vim.keymap.set({ "n", "x", "o" }, "[c", function() quick.call_and_centre(gs.prev_hunk) end, { desc = "go to previous change" })
+        local next_hunk = gs.next_hunk
+        local prev_hunk = gs.prev_hunk
+        local ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
+        if ok then
+          next_hunk, prev_hunk = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+        end
+        vim.keymap.set({ "n", "x", "o" }, "]c", function() quick.call_and_centre(next_hunk) end, { desc = "go to next change" })
+        vim.keymap.set({ "n", "x", "o" }, "[c", function() quick.call_and_centre(prev_hunk) end, { desc = "go to previous change" })
         -- stylua: ignore end
       end, -- }}}
     })
