@@ -58,6 +58,21 @@ return {
     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
     require("nvim-treesitter.configs").setup(opts)
+
+    local ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
+    if not ok then
+      return
+    end
+
+    -- Repeat movement with ; and ,
+    vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+    vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+    -- Make builtin f, F, t, T also repeatable with ; and ,
+    vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
+    vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
+    vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
+    vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
   end,
   enabled = require("config.util").is_enabled("nvim-treesitter/nvim-treesitter"),
 }
