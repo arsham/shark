@@ -25,6 +25,7 @@ return {
   config = function()
     local gs = require("gitsigns")
     local quick = require("arshlib.quick")
+    local constants = require("config.constants")
 
     gs.setup({
       -- stylua: ignore
@@ -65,7 +66,7 @@ return {
           return false
         end
         local size = vim.fn.getfsize(name)
-        if size > 1024 * 1024 * 5 then
+        if size > constants.large_file_size then
           return false
         end
         -- stylua: ignore start
