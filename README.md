@@ -579,8 +579,8 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>dd` | Show line **D**iagnostics                   |
 | `<leader>dq` | Fill the **Q**uicklist with **D**iagnostics |
 | `<leader>dw` | Fill the local list with **D**iagnostics    |
-| `]d`         | Go to next **d**iagnostic issue             |
-| `[d`         | Go to previous **d**iagnostic issue         |
+| `]d`         | Go to next **d**iagnostic issue **(R)**     |
+| `[d`         | Go to previous **d**iagnostic issue **(R)** |
 | `H`          | **H**over popup                             |
 | [i]`<Alt-h>` | **H**over popup                             |
 | `gd`         | **G**o to **D**efinition                    |
@@ -600,6 +600,9 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>gc` | **Go** to **C**aller                        |
 | `<leader>dr` | **R**estart the LSP server (see below)      |
 
+### Notes
+
+- Mappings marked with `(R)` are repeatable with `;` and `,`.
 Please see the code for all available mappings.
 
 </details>

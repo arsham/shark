@@ -24,19 +24,21 @@ function M.setup_diagnostics(bufnr) --{{{
   nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
   nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
 
-  local next = function()
-    quick.call_and_centre(vim.diagnostic.goto_next)
-  end
-  local prev = function()
-    quick.call_and_centre(vim.diagnostic.goto_prev)
-  end
-  nnoremap("]d", next, "goto next diagnostic")
-  nnoremap("[d", prev, "goto previous diagnostic")
-
-  local ok, diagnostics = pcall(require, "fzf-lua.providers.diagnostic")
   -- stylua: ignore start
+  local next = vim.diagnostic.goto_next
+  local prev = vim.diagnostic.goto_prev
+  local repeat_ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
+  if repeat_ok then
+    next, prev= ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
+  end
+
+  nnoremap("]d", function() quick.call_and_centre(next) end, "goto next diagnostic")
+  nnoremap("[d", function() quick.call_and_centre(prev) end, "goto previous diagnostic")
+
   quick.buffer_command("DiagLoc", function() vim.diagnostic.setloclist() end)
   quick.buffer_command("DiagQf",  function() vim.diagnostic.setqflist()  end)
+
+  local ok, diagnostics = pcall(require, "fzf-lua.providers.diagnostic")
   if ok then
     quick.buffer_command("Diagnostics",    function() diagnostics.diagnostics({}) end)
     quick.buffer_command("Diag",           function() diagnostics.diagnostics({}) end)

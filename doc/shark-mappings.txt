@@ -320,9 +320,11 @@ LSP MAPPING                                               *shark-lsp-mappings*
                                                                   *<Leader>dw*
 <Leader>dw              Fill the local list with Diagnostics
                                                                     *shark_]d*
-]d                      Go to next diagnostic issue
+]d                      Go to next diagnostic issue.
+                        Repeatable with |;| and |,|.
                                                                     *shark_[d*
-[d                      Go to previous diagnostic issue
+[d                      Go to previous diagnostic issue.
+                        Repeatable with |;| and |,|.
                                                            *i_ALT-h* *i_<M-h>*
 H i_<Alt-h>             Hover popup
                                                                     *shark_gd*
