@@ -121,6 +121,12 @@ local function capability_callbacks(client)
     table.insert(callbacks, lsp_util.call_hierarchy)
   end -- }}}
 
+  -- Semantic Tokens {{{
+  if client.supports_method("textDocument/semanticTokens") and vim.lsp.semantic_tokens then
+    table.insert(callbacks, lsp_util.semantic_tokens)
+  end
+  -- }}}
+
   server_callbacks[name] = callbacks
   return callbacks
 end
