@@ -37,8 +37,8 @@ return {
     },
   },
 
-  pre_attach = function(client)
-    client.server_capabilities.definition = true
-    client.server_capabilities.typeDefinition = true
-  end,
+  server_capabilities = {
+    definition = true,
+    typeDefinition = true,
+  },
 }

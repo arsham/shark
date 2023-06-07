@@ -1,5 +1,6 @@
 return {
   settings = {
+    -- more settings: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
     gopls = {
       analyses = {
         unusedparams = true,
@@ -29,23 +30,28 @@ return {
       deepCompletion = true,
       semanticTokens = true,
       verboseOutput = false, -- useful for debugging when true.
+      matcher = "Fuzzy", -- default
+      diagnosticsDelay = "500ms",
+      symbolMatcher = "Fuzzy", -- default is FastFuzzy
     },
   },
 
-  capabilities = function(capabilities)
-    capabilities.textDocument.completion.completionItem.snippetSupport = false
-  end,
-
-  pre_attach = function(client)
-    local semantic = client.config.capabilities.textDocument.semanticTokens
-    client.server_capabilities.semanticTokensProvider = {
-      full = true,
-      legend = {
-        tokenModifiers = semantic.tokenModifiers,
-        tokenTypes = semantic.tokenTypes,
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+        },
+        contextSupport = true,
+        dynamicRegistration = true,
       },
-    }
-  end,
+    },
+  },
+
+  server_capabilities = {
+    semanticTokensProvider = {
+      range = true,
+    },
+  },
 }
 
 -- vim: fdm=marker fdl=0

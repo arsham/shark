@@ -1,5 +1,5 @@
 return {
-  {
+  { -- LSPConfig {{{
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -7,9 +7,9 @@ return {
     },
 
     enabled = require("config.util").is_enabled("neovim/nvim-lspconfig"),
-  },
+  }, -- }}}
 
-  {
+  { -- Mason {{{
     "williamboman/mason.nvim",
     cmd = {
       "Mason",
@@ -20,32 +20,32 @@ return {
       "MasonUpdate",
     },
     build = ":MasonUpdate",
-    config = function() -- {{{
+    config = function()
       local path = require("mason-core.path")
       require("mason").setup({
         install_root_dir = path.concat({ vim.fn.stdpath("cache"), "mason" }),
         max_concurrent_installers = 4,
       })
-    end, -- }}}
+    end,
     lazy = true,
     enabled = require("config.util").is_enabled("williamboman/mason.nvim"),
-  },
+  }, -- }}}
 
   {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
+    dependencies = { -- {{{
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "arshlib.nvim",
       "fzfmania.nvim",
       "hrsh7th/cmp-nvim-lsp",
-    },
+    }, -- }}}
 
-    opts = function(_, opts) -- {{{
+    opts = function(_, opts)
       local defaults = {
-        ensure_installed = {
+        ensure_installed = { -- {{{
           "gopls",
           "rust_analyzer@nightly",
           "jsonls",
@@ -53,7 +53,7 @@ return {
           "yamlls",
           "lua_ls",
           "helm_ls",
-        },
+        }, -- }}}
         log_level = "error",
         diagnostics = { -- {{{
           signs = false,
@@ -79,6 +79,7 @@ return {
         }, -- }}}
 
         capabilities = { -- {{{
+          dynamicRegistration = true,
           textDocument = {
             completion = {
               completionItem = {
@@ -98,20 +99,39 @@ return {
                   },
                 },
               },
+              dynamicRegistration = true,
+            },
+            callHierarchy = {
+              dynamicRegistration = true,
+            },
+            documentSymbol = {
+              dynamicRegistration = true,
             },
           },
         }, -- }}}
 
-        servers = {
+        server_capabilities = { -- {{{
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+            symbol = {
+              dynamicRegistration = true,
+            },
+          },
+          workspaceSymbolProvider = true,
+        }, -- }}}
+
+        servers = { -- {{{
           gopls = require("plugins.lsp.config.gopls"),
           rust_analyzer = require("plugins.lsp.config.rust_analyzer"),
           jsonls = require("plugins.lsp.config.jsonls"),
           yamlls = require("plugins.lsp.config.yamlls"),
           lua_ls = require("plugins.lsp.config.lua_ls"),
-        },
+        }, -- }}}
       }
       return vim.tbl_deep_extend("force", defaults, opts)
-    end, -- }}}
+    end,
 
     config = function(_, opts) -- {{{
       require("mason-lspconfig").setup({
@@ -121,28 +141,28 @@ return {
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           local conf = opts.servers[server_name] or {}
-          if not conf.capabilities then
-            conf.capabilities = function(_) end
-          end
 
+          local ok, cmp_caps = pcall(require, "cmp_nvim_lsp")
+          if ok then
+            cmp_caps = cmp_caps.default_capabilities()
+          end
           local caps = vim.tbl_deep_extend(
             "force",
-            {},
             vim.lsp.protocol.make_client_capabilities(),
-            require("cmp_nvim_lsp").default_capabilities(),
-            opts.capabilities or {}
+            cmp_caps or {},
+            opts.capabilities or {},
+            conf.capabilities or {}
           )
-          conf.capabilities(caps)
           conf.capabilities = caps
 
-          local on_attach = require("plugins.lsp.on_attach").on_attach
-          if conf.pre_attach then
-            conf.on_attach = function(client, bufnr)
-              conf.pre_attach(client, bufnr)
-              on_attach(client, bufnr)
-            end
-          else
-            conf.on_attach = on_attach
+          conf.on_attach = function(client, bufnr)
+            client.server_capabilities = vim.tbl_deep_extend(
+              "force",
+              client.server_capabilities,
+              opts.server_capabilities or {},
+              conf.server_capabilities or {}
+            )
+            require("plugins.lsp.on_attach").on_attach(client, bufnr)
           end
 
           require("lspconfig")[server_name].setup(conf)
@@ -153,7 +173,7 @@ return {
     enabled = require("config.util").is_enabled("williamboman/mason-lspconfig.nvim"),
   },
 
-  {
+  { -- Mason Null LS {{{
     "jay-babu/mason-null-ls.nvim",
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
@@ -165,9 +185,9 @@ return {
       automatic_setup = false,
     },
     enabled = require("config.util").is_enabled("jay-babu/mason-null-ls.nvim"),
-  },
+  }, -- }}}
 
-  {
+  { -- Null LS {{{
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -224,29 +244,28 @@ return {
     end,
 
     enabled = require("config.util").is_enabled("jose-elias-alvarez/null-ls.nvim"),
-  },
+  }, -- }}}
 
-  {
+  { -- Mason Tool Installer {{{
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = {
       "williamboman/mason.nvim",
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("mason-tool-installer").setup({ -- {{{
+      require("mason-tool-installer").setup({
         ensure_installed = {
           "delve",
           "impl",
           "rustfmt",
           "shellcheck",
-          "shellharden",
         },
 
         auto_update = false,
-      }) -- }}}
+      })
     end,
     enabled = require("config.util").is_enabled("WhoIsSethDaniel/mason-tool-installer.nvim"),
-  },
+  }, -- }}}
 }
 
 -- vim: fdm=marker fdl=0

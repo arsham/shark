@@ -63,28 +63,36 @@ return {
     },
   },
 
-  pre_attach = function(client, bufnr)
-    -- enable auto-import
-    client.server_capabilities["textDocument.completion.completionItem.resolveSupport"] = {
-      properties = { "documentation", "detail", "additionalTextEdits" },
-    }
-    client.server_capabilities.experimental.commands = {
-      commands = {
-        "rust-analyzer.runSingle",
-        "rust-analyzer.debugSingle",
-        "rust-analyzer.showReferences",
-        "rust-analyzer.gotoLocation",
-        "editor.action.triggerParameterHints",
+  server_capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          -- enable auto-import
+          resolveSupport = {
+            properties = { "documentation", "detail", "additionalTextEdits" },
+          },
+          snippetSupport = true,
+        },
       },
-    }
-    client.server_capabilities.experimental.hoverActions = true
-    client.server_capabilities.experimental.hoverRange = true
-    client.server_capabilities.experimental.serverStatusNotification = true
-    client.server_capabilities.experimental.snippetTextEdit = true
-    client.server_capabilities.experimental.codeActionGroup = true
-    client.server_capabilities.experimental.ssr = true
-    require("plugins.lsp.on_attach").on_attach(client, bufnr)
-  end,
+    },
+    experimental = {
+      commands = {
+        commands = {
+          "rust-analyzer.runSingle",
+          "rust-analyzer.debugSingle",
+          "rust-analyzer.showReferences",
+          "rust-analyzer.gotoLocation",
+          "editor.action.triggerParameterHints",
+        },
+      },
+      hoverActions = true,
+      hoverRange = true,
+      serverStatusNotification = true,
+      snippetTextEdit = true,
+      codeActionGroup = true,
+      ssr = true,
+    },
+  },
 }
 
 -- vim: fdm=marker fdl=0
