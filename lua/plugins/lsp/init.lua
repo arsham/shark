@@ -263,6 +263,10 @@ return {
 
         auto_update = false,
       })
+
+      vim.defer_fn(function()
+        require("mason-tool-installer").run_on_start()
+      end, 2000)
     end,
     enabled = require("config.util").is_enabled("WhoIsSethDaniel/mason-tool-installer.nvim"),
   }, -- }}}
