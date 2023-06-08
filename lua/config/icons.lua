@@ -96,6 +96,19 @@ return {
     Variable      = " ",
     Watch         = " ",
   }, --}}}
+
+  border_fn = function(hl)
+    return {
+      { "╭", hl },
+      { "─", hl },
+      { "╮", hl },
+      { "│", hl },
+      { "╯", hl },
+      { "─", hl },
+      { "╰", hl },
+      { "│", hl },
+    }
+  end,
 }
 
 -- vim: fdm=marker fdl=0

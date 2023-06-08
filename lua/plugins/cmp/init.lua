@@ -68,19 +68,6 @@ local function config()
     end
   end -- }}}
 
-  local border = function(hl)
-    return {
-      { "╭", hl },
-      { "─", hl },
-      { "╮", hl },
-      { "│", hl },
-      { "╯", hl },
-      { "─", hl },
-      { "╰", hl },
-      { "│", hl },
-    }
-  end
-
   cmp.setup({
     performance = { -- {{{
       debounce = 50,
@@ -291,11 +278,11 @@ local function config()
 
     window = { -- {{{
       completion = cmp.config.window.bordered({
-        border = border("CmpBorder"),
+        border = require("config.icons").border_fn("CmpBorder"),
         winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
       }),
       documentation = {
-        border = border("CmpDocBorder"),
+        border = require("config.icons").border_fn("CmpDocBorder"),
       },
     }, -- }}}
 
