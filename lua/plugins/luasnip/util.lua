@@ -98,7 +98,7 @@ local function transform(text, info) --{{{
   return ls.t(text)
 end --}}}
 
-local get_node_text = vim.treesitter.query.get_node_text
+local get_node_text = vim.treesitter.get_node_text
 local handlers = { --{{{
   parameter_list = function(node, info)
     local result = {}
@@ -140,7 +140,7 @@ local function return_value_nodes(info) --{{{
     return
   end
 
-  local query = vim.treesitter.get_query("go", "luasnip")
+  local query = vim.treesitter.query.get("go", "luasnip")
   for _, node in query:iter_captures(function_node, 0) do
     if handlers[node:type()] then
       return handlers[node:type()](node, info)
