@@ -53,6 +53,16 @@ return {
           "yamlls",
           "lua_ls",
           "helm_ls",
+          "bashls",
+          "bufls",
+          "clangd",
+          "dockerls",
+          "html",
+          "jedi_language_server",
+          "pyright",
+          "sqlls",
+          "taplo",
+          "tsserver",
         }, -- }}}
         log_level = "error",
         diagnostics = { -- {{{
