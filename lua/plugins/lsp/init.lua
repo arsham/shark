@@ -138,6 +138,7 @@ return {
           jsonls = require("plugins.lsp.config.jsonls"),
           yamlls = require("plugins.lsp.config.yamlls"),
           lua_ls = require("plugins.lsp.config.lua_ls"),
+          clangd = require("plugins.lsp.config.clangd"),
         }, -- }}}
       }
       return vim.tbl_deep_extend("force", defaults, opts)
