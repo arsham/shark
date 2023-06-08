@@ -120,6 +120,22 @@ vim.keymap.set("c", "<C-r><C-l>", "<C-r>=getline('.')<CR>", opts("Copy current l
 
 vim.keymap.set("n", "<Tab><Tab>", "<C-^>", opts("Switch to the alternative buffer"))
 
+-- Base64 Encode/Decode {{{
+vim.keymap.set("x", "<leader>be", function()
+  local contents = quick.selection_contents()
+  local got = vim.fn.system("base64 --wrap=0", { contents })
+  got = got:gsub("\n$", "")
+  quick.normal("n", "s" .. got .. "")
+end, opts("Base64 encode selection"))
+
+vim.keymap.set("x", "<leader>bd", function()
+  local contents = quick.selection_contents()
+  local got = vim.fn.system("base64 --wrap=0 --ignore-garbage --decode", { contents })
+  got = got:gsub("\n$", "")
+  quick.normal("n", "s" .. got .. "")
+end, opts("Base64 decode selection"))
+--}}}
+
 vim.keymap.set("s", "p", function()
   vim.api.nvim_feedkeys("p", "n", false)
 end, { silent = true, remap = false, desc = "don't paste in select mode" })

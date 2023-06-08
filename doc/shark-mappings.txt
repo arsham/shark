@@ -273,6 +273,12 @@ gr                      Copilot panel: Refresh
 <Leader>R               Rreview the last Rest Request
                                                                    *<Leader>v*
 <Leader>v               Enable/Disable Venn
+                                                                  *<Leader>bd*
+                                                                *v_<Leader>bd*
+{Visual}<Leader>bd      Base64 decode {Visual} selection
+                                                                  *<Leader>be*
+                                                                *v_<Leader>be*
+{Visual}<Leader>be      Base64 encode {Visual} selection
 
 Note that if copilot is enabled, codeium will be disabled.
 

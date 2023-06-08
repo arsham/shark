@@ -352,6 +352,8 @@ The `leader` key is `space`!
 | `<Leader>rp`      | **P**review **R**est **R**equest under cursor in cURL command        |
 | `<Leader>R`       | **R**review the last **R**est **R**equest                            |
 | `<Leader>v`       | Enable/Disable **V**enn                                              |
+| [v]`<leader>bd`   | **B**ase64 **d**ecode visually selected text                         |
+| [v]`<leader>be`   | **B**ase64 **e**ncode visually selected text                         |
 
 Note that if copilot is enabled, codeium will be disabled.
 
