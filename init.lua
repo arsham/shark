@@ -48,3 +48,10 @@ require("config.commands")
 require("config.autocmd")
 require("config.keymaps")
 require("config.abbreviations")
+
+vim.api.nvim_create_autocmd({ "VimLeave" }, {
+  callback = function()
+    -- fix for libuv exit error
+    vim.cmd("sleep 10m")
+  end,
+})
