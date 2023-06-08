@@ -207,6 +207,8 @@ The following list of commands do not fit into any specific categories.
 :Tmux                   Start a tmux project (using tmuxp)
                                                                 *:LazyLoadAll*
 :LazyLoadAll            Load all lazy-loaded plugins
+                                                                         *:CC*
+:CC                     Close all floating windows
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

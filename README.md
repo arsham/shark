@@ -688,6 +688,7 @@ The following list of commands do not fit into any specific categories.
 | `GoModTidy`             | Run go mod tidy on go and mod files    |
 | `Tmux`                  | Start a tmux project (using tmuxp)     |
 | `LazyLoadAll`           | Load all lazy-loaded plugins           |
+| `CC`                    | Close all floating windows             |
 
 </details>
 

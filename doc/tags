@@ -1,3 +1,4 @@
+:CC	shark.txt	/*:CC*
 :Callees	shark.txt	/*:Callees*
 :Callers	shark.txt	/*:Callers*
 :CodeAction	shark.txt	/*:CodeAction*
