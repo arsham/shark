@@ -218,4 +218,13 @@ quick.command("Tmux", function(args) --{{{
     :start()
 end, { nargs = "+", complete = start_completion, desc = "load a tmuxp project" }) --}}}
 
+quick.command("LazyLoadAll", function() --{{{
+  local loader = require("lazy.core.loader")
+  for _, plugin in pairs(require("lazy.core.config").plugins) do
+    if not plugin._.loaded then
+      loader.load(plugin, { start = "start" })
+    end
+  end
+end, { desc = "Load all unloaded plugins. Only invoke for health checks" }) --}}}
+
 -- vim: fdm=marker fdl=0

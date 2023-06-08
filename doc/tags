@@ -17,6 +17,7 @@
 :FoldComments	shark.txt	/*:FoldComments*
 :GoModTidy	shark.txt	/*:GoModTidy*
 :Implementation	shark.txt	/*:Implementation*
+:LazyLoadAll	shark.txt	/*:LazyLoadAll*
 :ListWorkspace	shark.txt	/*:ListWorkspace*
 :LspCaps	shark.txt	/*:LspCaps*
 :LspCapsFull	shark.txt	/*:LspCapsFull*
