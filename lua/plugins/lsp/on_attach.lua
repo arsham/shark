@@ -51,9 +51,18 @@ local function capability_callbacks(client)
 
   if client.supports_method("textDocument/formatting") then -- {{{
     table.insert(callbacks, lsp_util.document_formatting)
+    local disabled_servers = {
+      "lua_ls",
+      "jsonls",
+      "sqls",
+      "html",
+    }
     format_hook = function()
       vim.lsp.buf.format({
         async = false,
+        filter = function(server)
+          return not vim.tbl_contains(disabled_servers, server.name)
+        end,
       })
     end
   end -- }}}
