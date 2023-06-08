@@ -309,6 +309,10 @@ o_L                     To the end of line
 o_au                    Select around a unit
                                                                         *o_iu*
 o_iu                    Select inside a unit
+                                                                        *o_al*
+o_al                    Select around a line
+                                                                        *o_il*
+o_il                    Select inside a line
 
 ==============================================================================
 LSP MAPPING                                               *shark-lsp-mappings*

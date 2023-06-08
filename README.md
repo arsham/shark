@@ -391,6 +391,8 @@ There are more specialised mappings provided, keep reading please!
 | `L`         | To the end of line                          |
 | `au`        | Select around a unit                        |
 | `iu`        | Select inside a unit                        |
+| `il`        | **I**n line                                 |
+| `al`        | **A**round line                             |
 
 There are sets of **i\*** and **a\*** text objects, where `*` can be any of:
 **\_ . : , ; | / \ \* + - #**
