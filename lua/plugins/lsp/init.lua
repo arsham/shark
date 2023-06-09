@@ -166,6 +166,10 @@ return {
           )
           conf.capabilities = caps
 
+          local pre_attach = function(_, _) end
+          if conf.on_attach ~= nil then
+            pre_attach = conf.on_attach or function() end
+          end
           conf.on_attach = function(client, bufnr)
             client.server_capabilities = vim.tbl_deep_extend(
               "force",
@@ -173,6 +177,7 @@ return {
               opts.server_capabilities or {},
               conf.server_capabilities or {}
             )
+            pre_attach(client, bufnr)
             require("plugins.lsp.on_attach").on_attach(client, bufnr)
           end
 
