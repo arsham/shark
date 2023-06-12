@@ -1,3 +1,28 @@
+local function silent_reload() -- {{{
+  -- If nvim is started with a file, because this is lazy loaded the server
+  -- would not attach. We force read the file to kick-start the server. If all
+  -- predicates are negative, then we can safely reload.
+  local predicates = {
+    function()
+      return vim.bo.filetype == ""
+    end,
+    function()
+      local filename = vim.api.nvim_buf_get_name(0)
+      return filename:find("fugitive:///")
+    end,
+    function()
+      return vim.bo.filetype == "man"
+    end,
+  }
+  for _, fn in ipairs(predicates) do
+    if fn() then
+      return
+    end
+  end
+  vim.cmd("silent! e")
+end
+silent_reload() -- }}}
+
 local popup_window = {
   stylize_markdown = true,
   syntax = "lsp_markdown",
