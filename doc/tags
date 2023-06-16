@@ -1,6 +1,8 @@
 :CC	shark.txt	/*:CC*
 :Callees	shark.txt	/*:Callees*
 :Callers	shark.txt	/*:Callers*
+:ChatGPT	shark.txt	/*:ChatGPT*
+:ChatGPTActAs	shark.txt	/*:ChatGPTActAs*
 :CodeAction	shark.txt	/*:CodeAction*
 :CodeLensRefresh	shark.txt	/*:CodeLensRefresh*
 :CodeLensRun	shark.txt	/*:CodeLensRun*

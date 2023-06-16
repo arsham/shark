@@ -209,6 +209,10 @@ The following list of commands do not fit into any specific categories.
 :LazyLoadAll            Load all lazy-loaded plugins
                                                                          *:CC*
 :CC                     Close all floating windows
+                                                                    *:ChatGPT*
+:ChatGPT                Open interactive window
+                                                               *:ChatGPTActAs*
+:ChatGPTActAs           Suggest an actor
 
 ==============================================================================
 UTILITIES                                                    *shark-utilities*

@@ -123,6 +123,8 @@ Function   Plugin                      Description                     License
 🕸️ Tool     rest-nvim/rest.nvim        Fast http client in lua             MIT
 🔍 Tool     arsham/yanker.nvim         Yank history helper                 MIT
 🗒️ Editing  jbyuki/venn.nvim           Draw ASCII diagrams                 MIT
+ Editing   jackMort/ChatGPT.nvim      ChatGPT                      Apache-2.0
+🔍 Finder   telescope.nvim             Fuzzy finder/picker                 MIT
 
 Note that if copilot is enabled, codeium will be disabled.
 

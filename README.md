@@ -194,6 +194,8 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🕸️ Tool    | [rest-nvim/rest.nvim][rest.nvim]                 | Fast http client in lua               |
 | 🔍 Tool    | [arsham/yanker.nvim][yanker.nvim]                | Yank history helper                   |
 | 🗒️ Editing | [jbyuki/venn.nvim][jbyuki/venn.nvim]             | Draw ASCII diagrams                   |
+|  Editing  | [jackMort/ChatGPT.nvim][ChatGPT.nvim]            | ChatGPT                               |
+| 🔍 Finder  | [nvim-telescope/telescope.nvim][telescope.nvim]  | Fuzzy finder/picker                   |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -693,6 +695,8 @@ The following list of commands do not fit into any specific categories.
 | `Tmux`                  | Start a tmux project (using tmuxp)     |
 | `LazyLoadAll`           | Load all lazy-loaded plugins           |
 | `CC`                    | Close all floating windows             |
+| `ChatGPT`               | Open interactive window                |
+| `ChatGPTActAs`          | Suggest an actor                       |
 
 </details>
 
@@ -858,6 +862,8 @@ quick.cmd_and_centre("SomeCommand")
 | [nvim-rest/rest.nvim][rest.nvim]            | [MIT](https://github.com/rest-nvim/rest.nvim/blob/main/LICENSE)            |
 | [arsham/yanker.nvim][yanker.nvim]           | [MIT](https://github.com/arsham/yanker.nvim/blob/master/LICENSE)           |
 | [jbyuki/venn.nvim][jbyuki/venn.nvim]        | [MIT](https://github.com/jbyuki/venn.nvim/blob/master/LICENSE)             |
+| [jackMort/ChatGPT.nvim][ChatGPT.nvim]       | [Apache-2.0](https://github.com/jackMort/ChatGPT.nvim/blob/main/LICENSE)   |
+| [telescope.nvim][telescope.nvim]            | [MIT][telescope.nvim-license]                                              |
 
 </details>
 
@@ -977,6 +983,9 @@ quick.cmd_and_centre("SomeCommand")
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
 [yanker.nvim]: https://github.com/arsham/yanker.nvim
 [jbyuki/venn.nvim]: https://github.com/jbyuki/venn.nvim
+[ChatGPT.nvim]: https://github.com/jackMort/ChatGPT.nvim
+[telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
+[telescope.nvim-license]: https://github.com/nvim-telescope/telescope.nvim/blob/master/LICENSE
 
 <!--
 vim: foldlevel=2 conceallevel=0
