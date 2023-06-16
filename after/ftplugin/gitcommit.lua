@@ -1,7 +1,7 @@
 vim.opt_local.textwidth = 72
 vim.opt_local.colorcolumn = "50,72"
 vim.opt_local.spell = true
-vim.wo.cursorline = true
+vim.api.nvim_set_option_value("cursorline", true, { scope = "local", win = 0 })
 vim.opt_local.formatoptions:remove({ "c", "r", "o", "q" })
 vim.cmd.startinsert()
 
