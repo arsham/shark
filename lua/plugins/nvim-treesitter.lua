@@ -54,8 +54,20 @@ return {
   },
 
   config = function(_, opts)
+    local parsers = require("nvim-treesitter.parsers")
+    local parser_config = parsers.get_parser_configs()
+
     vim.opt.foldmethod = "expr"
     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+    parser_config.gotmpl = { --{{{
+      install_info = {
+        url = "https://github.com/ngalaiko/tree-sitter-go-template",
+        files = { "src/parser.c" },
+      },
+      filetype = "gotmpl",
+      used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl" },
+    } --}}}
 
     require("nvim-treesitter.configs").setup(opts)
 
