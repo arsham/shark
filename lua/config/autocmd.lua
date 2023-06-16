@@ -63,10 +63,10 @@ vim.api.nvim_create_autocmd("BufRead", {
       local showmatch = vim.opt.showmatch
 
       vim.bo.undofile = false
-      vim.wo.colorcolumn = ""
-      vim.wo.relativenumber = false
-      vim.wo.foldmethod = "manual"
-      vim.wo.spell = false
+      vim.api.nvim_set_option_value("colorcolumn", "", { scope = "local", win = 0 })
+      vim.api.nvim_set_option_value("relativenumber", false, { scope = "local", win = 0 })
+      vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local", win = 0 })
+      vim.api.nvim_set_option_value("spell", false, { scope = "local", win = 0 })
       vim.opt.hlsearch = false
       vim.opt.lazyredraw = true
       vim.opt.showmatch = false
@@ -107,8 +107,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeav
 
     local lines = vim.api.nvim_buf_line_count(0)
     if lines < 20000 then
-      if vim.wo.number and vim.fn.mode() ~= "i" then
-        vim.wo.relativenumber = true
+      local nu = vim.api.nvim_get_option_value("number", { scope = "local", win = 0 })
+      if nu and vim.fn.mode() ~= "i" then
+        vim.api.nvim_set_option_value("relativenumber", true, { scope = "local", win = 0 })
       end
     end
   end,
@@ -118,8 +119,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "WinEnter", "InsertLeav
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave", "InsertEnter" }, {
   group = relative_line_toggle_group,
   callback = function()
-    if vim.wo.number then
-      vim.wo.relativenumber = false
+    local nu = vim.api.nvim_get_option_value("number", { scope = "local", win = 0 })
+    if nu and vim.fn.mode() ~= "i" then
+      vim.api.nvim_set_option_value("relativenumber", false, { scope = "local", win = 0 })
     end
   end,
   desc = "Unset relative number when unfocused",
@@ -287,7 +289,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
   desc = "Set wrap for preview windows",
   callback = function()
     if vim.opt.previewwindow:get() then
-      vim.wo.wrap = true
+      vim.api.nvim_set_option_value("wrap", true, { scope = "local", win = 0 })
     end
   end,
 })
