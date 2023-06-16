@@ -22,8 +22,12 @@ quick.command("YankFilepathC", function()
 end) --}}}
 
 quick.command("FoldComments", function() --{{{
-  vim.wo.foldexpr = "getline(v:lnum)=~'^\\s*'.&commentstring[0]"
-  vim.wo.foldmethod = "expr"
+  vim.api.nvim_set_option_value(
+    "foldexp",
+    "getline(v:lnum)=~'^\\s*'.&commentstring[0]",
+    { scope = "local", win = 0 }
+  )
+  vim.api.nvim_set_option_value("foldmethod", "expr", { scope = "local", win = 0 })
 end, { desc = "Fold comments by setting folf expr" }) --}}}
 
 quick.command("Nowrap", function() --{{{
