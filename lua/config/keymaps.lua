@@ -57,14 +57,15 @@ vim.keymap.set("n", "<leader>gw", ":silent lgrep <cword> % <CR>", opts("Grep on 
 -- ]s and [s to jump.
 -- zg to ignore.
 vim.keymap.set("n", "<leader>sp", function()
-  vim.wo.spell = not vim.wo.spell
+  local v = vim.api.nvim_get_option_value("spell", { scope = "local", win = 0 })
+  vim.api.nvim_set_option_value("spell", not v, { scope = "local", win = 0 })
 end, opts("Toggle spelling"))
 vim.keymap.set("n", "<leader>sf", function()
-  local spell = vim.wo.spell
-  vim.wo.spell = true
+  local spell = vim.api.nvim_get_option_value("spell", { scope = "local", win = 0 })
+  vim.api.nvim_set_option_value("spell", true, { scope = "local", win = 0 })
   quick.normal("n", "[s1z=``")
   vim.schedule(function()
-    vim.wo.spell = spell
+    vim.api.nvim_set_option_value("spell", spell, { scope = "local", win = 0 })
   end)
 end, opts("Auto correct spelling and jump bak.")) --}}}
 
