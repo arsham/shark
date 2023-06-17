@@ -82,4 +82,6 @@ return {
   ["tamton-aquib/duck.nvim"] = { enabled = true, start = true },
   ["rest-nvim/rest.nvim"] = { enabled = true, start = true },
   ["jbyuki/venn.nvim"] = { enabled = true, start = true },
+  ["jackMort/ChatGPT.nvim"] = { enabled = true, start = true },
+  ["nvim-telescope/telescope.nvim"] = { enabled = true, start = true },
 }
