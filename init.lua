@@ -9,6 +9,17 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+if not vim.loop.fs_stat(lazypath) then
+  -- The system has no setup for git protocol.
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
+end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("config.options")
@@ -24,7 +35,6 @@ require("lazy").setup("plugins", {
   performance = {
     rtp = {
       disabled_plugins = {
-        "gzip",
         "tohtml",
         "tutor",
       },
