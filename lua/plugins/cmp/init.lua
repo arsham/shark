@@ -99,14 +99,6 @@ local function config()
             { name = "crates" },
             { name = "neorg", priority = 5, keyword_length = 1 },
             { name = "dynamic", priority = 10, keyword_length = 3 },
-          },
-        },
-      }), -- }}}
-
-      ["<C-s>"] = cmp.mapping.complete({ -- {{{
-        config = {
-          sources = {
-            { name = "neorg", keyword_length = 1 },
             {
               name = "buffer",
               priority = 5,

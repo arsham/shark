@@ -143,4 +143,15 @@ end, { silent = true, remap = false, desc = "don't paste in select mode" })
 
 vim.keymap.set("n", "<leader>us", ":UnlinkSnippets<CR>", opts("Unlink all open snippet sessions"))
 
+vim.keymap.set("i", "<C-s>", function()
+  vim.cmd.stopinsert()
+  local spell = vim.opt.spell:get()
+  vim.schedule(function()
+    vim.opt.spell = true
+    quick.normal("n", "[s1z=``")
+    vim.opt_local.spell = spell
+    quick.normal("n", "a")
+  end)
+end, { desc = "Fix spelling mistake and come back" })
+
 -- vim: fdm=marker fdl=0

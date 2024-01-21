@@ -314,4 +314,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "run go mod tidy on save",
 })
 
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = augroup("INSERT_AUTO_SPELL_CHECK"),
+  callback = function()
+    if vim.opt.spell:get() then
+      return
+    end
+    vim.opt.spell = true
+    vim.api.nvim_create_autocmd("InsertLeave", {
+      buffer = 0,
+      once = true,
+      callback = function()
+        vim.opt.spell = false
+      end,
+    })
+  end,
+  desc = "Spell check enable/disable for insert enter/leave mode",
+})
+
 -- vim: fdm=marker fdl=0

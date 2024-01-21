@@ -169,6 +169,8 @@ g=                      Re-indents the hole buffer
                         Populates the locallist
                                                                   *<Leader>sp*
 <Leader>sp              Toggles Spelling on current buffer
+                                                          *i_CTRL-s* *i_<C-s>*
+<C-s>                   Toggles Spelling on current buffer
                                                                   *<Leader>sf*
 <Leader>sf              Auto fixes previous misspelled word
                                                                   *<Leader>hh*
@@ -392,8 +394,6 @@ CMP MAPPING                                               *shark-cmp-mappings*
                                                      *i_SHIFT-TAB* *i_<S-Tab>*
                                                      *s_SHIFT-TAB* *s_<S-Tab>*
 <S-Tab>                 Previous placeholder
-                                                           *i_CTRL-s* *i_C-s>*
-<C-s>                   Completion menu (buffer, rg)
                                               *i_CTRL-x_CTRL-r* *i_<C-x><C-r>*
 <C-x><X-r>              Completion menu (rg)
 

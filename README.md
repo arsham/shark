@@ -298,7 +298,8 @@ The `leader` key is `space`!
 | `<Esc><Esc>`      | Clear hlsearch                                                       |
 | `<leader>gw`      | **G**rep current **W**ord in buffer. Populates the locallist.        |
 | `<leader>sp`      | Toggle **Sp**elling for buffer                                       |
-| `<leader>sf`      | Auto **f**ixe previous misspelled word                               |
+| `<leader>sf`      | Auto **f**ixes previous misspelled word                              |
+| [i]`<C-s>`        | Auto **f**ixes previous misspelled word                              |
 | `<leader>hh`      | Opens the **help** for current word                                  |
 | `<C-w>b`          | Delete current buffer                                                |
 | `<C-w><C-b>`      | Delete current buffer                                                |
@@ -622,7 +623,6 @@ Please see the code for all available mappings.
 | [i]`<C-b>`      | Scroll documents up                        |
 | [i]`<C-f>`      | Scroll documents down                      |
 | [i]`<C-Space>`  | Initiate completion menu (main one)        |
-| [i]`<C-s>`      | Initiate completion menu (buffer, rg)      |
 | [i]`<C-x><C-o>` | Initiate completion menu (lsp, buffer, rg) |
 | [i]`<C-x><C-r>` | Initiate completion menu (rg)              |
 | [i]`<C-x><C-s>` | Initiate completion menu (luasnip)         |
