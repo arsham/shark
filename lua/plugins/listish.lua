@@ -3,7 +3,6 @@ return {
   name = "listish.nvim",
   dependencies = {
     "arshlib.nvim",
-    "nvim-treesitter/nvim-treesitter-textobjects",
   },
   event = { "BufReadPre", "BufNewFile" },
   config = true,
