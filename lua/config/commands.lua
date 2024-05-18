@@ -109,12 +109,17 @@ end, {
   desc = "Edit configuration files in a new tab",
 })
 
+local get_clients = (
+  vim.lsp.get_clients ~= nil and vim.lsp.get_clients -- nvim 0.10+
+  or vim.lsp.get_active_clients
+)
+
 ---Creates a new scratch buffer and puts the return value of the given fn in
 ---it.
 ---@param fn function(client: lspclient):string[]
 local function show_lsp_caps(fn)
   local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+  local clients = get_clients({ bufnr = bufnr })
 
   local lines = {}
   for _, client in pairs(clients) do

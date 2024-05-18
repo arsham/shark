@@ -73,6 +73,11 @@ function M.signature_help() --{{{
   inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")
 end --}}}
 
+local get_clients = (
+  vim.lsp.get_clients ~= nil and vim.lsp.get_clients -- nvim 0.10+
+  or vim.lsp.get_active_clients
+)
+
 function M.lsp_organise_imports() --{{{
   local context = { source = { organizeImports = true } }
   vim.validate({ context = { context, "table", true } })
@@ -88,7 +93,7 @@ function M.lsp_organise_imports() --{{{
     return
   end
 
-  for _, client in ipairs(vim.lsp.get_active_clients()) do
+  for _, client in ipairs(get_clients()) do
     local offset_encoding = client.offset_encoding or "utf-16"
     if client.id and resp[client.id] then
       local result = resp[client.id].result
@@ -361,8 +366,7 @@ local handler = function(err)
 end
 
 local function reload_rust_workspace()
-  local clients = vim.lsp.get_active_clients()
-  for _, client in ipairs(clients) do
+  for _, client in ipairs(get_clients()) do
     if client.name == "rust_analyzer" then
       client.request("rust-analyzer/reloadWorkspace", nil, handler, 0)
     end
@@ -387,7 +391,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 function M.semantic_tokens(_, bufnr)
   vim.keymap.set("n", "<leader>st", function()
     vim.b.semantic_tokens_enabled = vim.b.semantic_tokens_enabled == false
-    for _, client in ipairs(vim.lsp.get_active_clients()) do
+    for _, client in ipairs(get_clients()) do
       if client.server_capabilities.semanticTokensProvider then
         vim.lsp.semantic_tokens[vim.b.semantic_tokens_enabled and "start" or "stop"](
           bufnr or 0,
