@@ -29,6 +29,8 @@ local popup_window = {
   border = require("config.icons").border_fn("FloatBorder"),
   width = 100,
   height = 10,
+  max_height = 20,
+  max_width = 140,
 }
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, popup_window)
