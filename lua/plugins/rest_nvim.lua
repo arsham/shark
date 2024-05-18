@@ -3,33 +3,33 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "luarocks.nvim",
   },
   ft = { "http" },
 
   opts = {
-    result_split_horizontal = false,
-    result_split_in_place = false,
     skip_ssl_verification = true,
     encode_url = true,
     highlight = {
-      enabled = true,
+      enable = true,
       timeout = 150,
     },
     result = {
-      show_url = true,
-      show_http_info = true,
-      show_headers = true,
-      formatters = {
-        json = "jq",
-        html = function(body)
-          return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
-        end,
+      split = {
+        horizontal = false,
+        in_place = false,
+      },
+      behavior = {
+        formatters = {
+          json = "jq",
+          html = function(body)
+            return vim.fn.system({ "tidy", "-i", "-q", "-" }, body)
+          end,
+        },
       },
     },
-    jump_to_request = false,
     env_file = ".env",
     custom_dynamic_variables = {},
-    yank_dry_run = true,
   },
 
   config = function(_, opts)
@@ -42,9 +42,9 @@ return {
       pattern = "http",
       -- stylua: ignore
       callback = function()
-        vim.keymap.set("n", "<localleader>rr", "<Plug>RestNvim", o("Run the request under cursor"))
+        vim.keymap.set("n", "<localleader>rr", "<cmd>Rest run<CR>", o("Run the request under cursor"))
         vim.keymap.set("n", "<localleader>rp", "<Plug>RestNvimPreview", o("Preview the request cURL command"))
-        vim.keymap.set("n", "<localleader>R", "<Plug>RestNvimLast", o("Run the last request"))
+        vim.keymap.set("n", "<localleader>R", "<cmd>Rest last<CR>", o("Run the last request"))
       end,
     })
   end,
