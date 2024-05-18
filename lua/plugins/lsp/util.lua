@@ -19,6 +19,8 @@ local function inoremap(key, fn, desc, opts) --{{{
   vim.keymap.set("i", key, fn, opts)
 end --}}}
 
+local diagnostics_group = vim.api.nvim_create_augroup("LspDiagnosticsGroup", { clear = true })
+
 function M.setup_diagnostics(bufnr) --{{{
   nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
   nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
@@ -47,11 +49,20 @@ function M.setup_diagnostics(bufnr) --{{{
   end
   -- stylua: ignore end
   quick.buffer_command("DiagnosticsDisable", function()
-    vim.diagnostic.disable(bufnr)
+    vim.diagnostic.enable(false, { bufnr = bufnr })
   end)
   quick.buffer_command("DiagnosticsEnable", function()
-    vim.diagnostic.enable(bufnr)
+    vim.diagnostic.enable(true, { bufnr = bufnr })
   end)
+
+  -- Populate loclist with the current buffer diagnostics.
+  vim.api.nvim_create_autocmd("DiagnosticChanged", {
+    group = diagnostics_group,
+    buffer = bufnr,
+    callback = function()
+      vim.diagnostic.setloclist({ open = false })
+    end,
+  })
 end --}}}
 
 function M.hover() --{{{
