@@ -1,3 +1,5 @@
+;; extends
+
 ;; Add _ to constant
 ((identifier) @constant
  (#lua-match? @constant "^[_A-Z][A-Z_0-9]*$"))

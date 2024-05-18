@@ -1,4 +1,5 @@
 ;; extends
+
 (
     (line_comment) @_first
     (_) @rust

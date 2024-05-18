@@ -1,5 +1,3 @@
-;; extends
-
 (var_spec) @scope
 
 (field_declaration
