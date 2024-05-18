@@ -297,7 +297,9 @@ function M.code_lens() --{{{
 
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "InsertLeave" }, {
     group = augroup("code_lenses"),
-    callback = vim.lsp.codelens.refresh,
+    callback = function()
+      pcall(vim.lsp.codelens.refresh)
+    end,
     buffer = 0,
   })
 end --}}}
