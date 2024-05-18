@@ -2,43 +2,30 @@ return {
   "j-hui/fidget.nvim",
   event = { "LspAttach" },
   opts = {
-    text = {
-      spinner = {
-        "⊚∙∙∙∙",
-        "∙⊚∙∙∙",
-        "∙∙⊚∙∙",
-        "∙∙∙⊚∙",
-        "∙∙∙∙⊚",
-        "∙∙∙⊚∙",
-        "∙∙⊚∙∙",
-        "∙⊚∙∙∙",
+    progress = {
+      display = {
+        format_message = function(msg)
+          if string.find(msg.title, "Indexing") then
+            return nil -- Ignore "Indexing..." progress messages
+          end
+          if msg.message then
+            return msg.message
+          else
+            return msg.done and "Completed" or "In progress..."
+          end
+        end,
       },
-      done = "✔",
-      commenced = "Started",
-      completed = "Completed",
     },
-    window = {
-      relative = "editor",
-      blend = 0,
-    },
-    fmt = {
-      stack_upwards = false,
-      fidget = function(fidget_name, spinner)
-        return string.format("%s %s", spinner, fidget_name)
-      end,
-      -- function to format each task line
-      task = function(task_name, message, percentage)
-        if task_name and task_name:find("cargo.+clippy") then
-          -- checkOnSave shows a very long text each time.
-          task_name = "Clippy"
-        end
-        return string.format(
-          "%s%s [%s]",
-          message,
-          percentage and string.format(" (%s%%)", percentage) or "",
-          task_name
-        )
-      end,
+
+    notification = {
+      view = {
+        stack_upwards = false, -- Display notification items from bottom to top
+      },
+
+      window = {
+        relative = "editor",
+        winblend = 0,
+      },
     },
   },
   enabled = require("config.util").is_enabled("j-hui/fidget.nvim"),
