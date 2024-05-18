@@ -12,6 +12,12 @@ return {
       view_options = {
         show_hidden = true,
       },
+      keymaps = {
+        ["<C-h>"] = false,
+        ["<C-j>"] = false,
+        ["<C-k>"] = false,
+        ["<C-l>"] = false,
+      },
     })
     local quick = require("arshlib.quick")
     quick.command("Oil", function()
