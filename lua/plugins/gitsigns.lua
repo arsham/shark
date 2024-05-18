@@ -91,8 +91,8 @@ return {
         if ok then
           next_hunk, prev_hunk = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
         end
-        vim.keymap.set({ "n", "x", "o" }, "]c", function() quick.call_and_centre(next_hunk) end, { desc = "go to next change" })
-        vim.keymap.set({ "n", "x", "o" }, "[c", function() quick.call_and_centre(prev_hunk) end, { desc = "go to previous change" })
+        vim.keymap.set({ "n", "x" }, "]c", function() quick.call_and_centre(next_hunk) end, { desc = "go to next change" })
+        vim.keymap.set({ "n", "x" }, "[c", function() quick.call_and_centre(prev_hunk) end, { desc = "go to previous change" })
         -- stylua: ignore end
       end, -- }}}
     })
