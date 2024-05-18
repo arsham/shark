@@ -314,6 +314,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "run go mod tidy on save",
 })
 
+vim.api.nvim_create_autocmd("StdinReadPost", {
+  group = augroup("STDIN_READ_POST"),
+  callback = function()
+    vim.bo.buftype = "nofile"
+  end,
+  desc = "Set buftype to nofile when reading from stdin",
+})
+
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = augroup("INSERT_AUTO_SPELL_CHECK"),
   callback = function()
