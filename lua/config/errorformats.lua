@@ -11,4 +11,6 @@ return {
     .. [[%E%f:%l:\ %m,]] -- Stand alone errors.
     .. [[%Z,]]
     .. [[%-G%.%#]], -- Ignoring everything else.
+
+  golangci = [[%A%f:%l:%c:\ %m,%-G%.%#]],
 }
