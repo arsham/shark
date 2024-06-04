@@ -125,6 +125,7 @@ Function   Plugin                      Description                     License
 🗒️ Editing  jbyuki/venn.nvim           Draw ASCII diagrams                 MIT
  Editing   jackMort/ChatGPT.nvim      ChatGPT                      Apache-2.0
 🔍 Finder   telescope.nvim             Fuzzy finder/picker                 MIT
+ Tool      tpope/vim-dadbod           Database connection and query       VIM
 
 Note that if copilot is enabled, codeium will be disabled.
 

@@ -196,6 +196,7 @@ Licenses for plugins can be found [here](#plugin-license-list).
 | 🗒️ Editing | [jbyuki/venn.nvim][jbyuki/venn.nvim]             | Draw ASCII diagrams                   |
 |  Editing  | [jackMort/ChatGPT.nvim][ChatGPT.nvim]            | ChatGPT                               |
 | 🔍 Finder  | [nvim-telescope/telescope.nvim][telescope.nvim]  | Fuzzy finder/picker                   |
+|  Tool     | [tpope/vim-dadbod][vim-dadbod]                   | Database connection and query manager |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -864,6 +865,7 @@ quick.cmd_and_centre("SomeCommand")
 | [jbyuki/venn.nvim][jbyuki/venn.nvim]        | [MIT](https://github.com/jbyuki/venn.nvim/blob/master/LICENSE)             |
 | [jackMort/ChatGPT.nvim][ChatGPT.nvim]       | [Apache-2.0](https://github.com/jackMort/ChatGPT.nvim/blob/main/LICENSE)   |
 | [telescope.nvim][telescope.nvim]            | [MIT][telescope.nvim-license]                                              |
+| [tpope/vim-dadbod][vim-dadbod]              | [VIM](https://github.com/tpope/vim-dadbod?tab=readme-ov-file#license)      |
 
 </details>
 
@@ -986,6 +988,7 @@ quick.cmd_and_centre("SomeCommand")
 [ChatGPT.nvim]: https://github.com/jackMort/ChatGPT.nvim
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
 [telescope.nvim-license]: https://github.com/nvim-telescope/telescope.nvim/blob/master/LICENSE
+[vim-dadbod]: https://github.com/tpope/vim-dadbod
 
 <!--
 vim: foldlevel=2 conceallevel=0
