@@ -11,6 +11,15 @@ return {
       },
       task_list = { direction = "right" },
       templates = { "builtin", "global" },
+      component_aliases = {
+        default = {
+          { "display_duration", detail_level = 2 },
+          "on_output_summarize",
+          "on_exit_set_status",
+          { "on_complete_notify", system = "unfocused" },
+          "on_complete_dispose",
+        },
+      },
     },
     config = function(_, opts)
       vim.g.overseer_started = true
@@ -21,6 +30,7 @@ return {
     cmd = {
       "OverseerRun",
       "OverseerToggle",
+      "OverseerRunCmd",
     },
     keys = {
       { "<leader>or", "<cmd>OverseerRun<cr>", desc = "Run task" },
