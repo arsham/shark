@@ -26,6 +26,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Completion {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/completion") then
+      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -35,11 +49,6 @@ local function capability_callbacks(client)
   end
 
   callbacks = {}
-  if client.supports_method("textDocument/completion") then -- {{{
-    table.insert(callbacks, function(_, buf)
-      vim.bo[buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-    end)
-  end -- }}}
 
   if client.supports_method("textDocument/hover") then -- {{{
     table.insert(callbacks, lsp_util.hover)
