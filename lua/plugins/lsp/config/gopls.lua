@@ -11,20 +11,30 @@ return {
       },
       completeUnimported = true,
       staticcheck = true,
-      buildFlags = { "-tags=integration,e2e" },
+      buildFlags = { "-tags=integration,e2e,mage" },
       linksInHover = true,
       codelenses = {
         generate = true,
         gc_details = true,
         test = true,
         tidy = true,
-        run_vulncheck_exp = true,
+        run_govulncheck = true,
         upgrade_dependency = true,
+      },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
       },
       usePlaceholders = true,
       directoryFilters = {
         "-**/node_modules",
         "-/tmp",
+        "-.git",
       },
       completionDocumentation = true,
       deepCompletion = true,
@@ -39,8 +49,7 @@ return {
   capabilities = {
     textDocument = {
       completion = {
-        completionItem = {
-        },
+        completionItem = {},
         contextSupport = true,
         dynamicRegistration = true,
       },
