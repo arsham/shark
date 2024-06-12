@@ -137,6 +137,36 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Implementation {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/implementation") then
+      local perform = function()
+        local check = "_mock.go"
+        local filter = function(items)
+          local ret = {}
+          for _, item in ipairs(items) do
+            if item.filename:sub(-#check) ~= check then
+              table.insert(ret, item)
+            end
+          end
+          return ret
+        end
+        fzf.lsp_implementations({
+          jump_to_single_result = true,
+          filter = filter,
+        })
+      end
+      quick.buffer_command("Implementation", perform)
+      nnoremap("<localleader>gi", perform, "Go to implementation")
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -202,10 +232,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  if client.supports_method("textDocument/implementation") then -- {{{
-    table.insert(callbacks, lsp_util.implementation)
   end -- }}}
 
   if client.supports_method("textDocument/typeDefinition") then -- {{{

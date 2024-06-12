@@ -224,27 +224,6 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-function M.implementation() --{{{
-  local perform = function()
-    local check = "_mock.go"
-    local filter = function(items)
-      local ret = {}
-      for _, item in ipairs(items) do
-        if item.filename:sub(-#check) ~= check then
-          table.insert(ret, item)
-        end
-      end
-      return ret
-    end
-    fzf.lsp_implementations({
-      jump_to_single_result = true,
-      filter = filter,
-    })
-  end
-  quick.buffer_command("Implementation", perform)
-  nnoremap("<localleader>gi", perform, "Go to implementation")
-end --}}}
-
 function M.type_definition() --{{{
   quick.buffer_command("TypeDefinition", function()
     fzf.lsp_typedefs({ jump_to_single_result = true })
