@@ -93,7 +93,6 @@
 <Leader>or	shark-mappings.txt	/*<Leader>or*
 <Leader>ot	shark-mappings.txt	/*<Leader>ot*
 <Leader>p	shark-mappings.txt	/*<Leader>p*
-<Leader>rn	shark-mappings.txt	/*<Leader>rn*
 <Leader>rp	shark-mappings.txt	/*<Leader>rp*
 <Leader>rr	shark-mappings.txt	/*<Leader>rr*
 <Leader>sf	shark-mappings.txt	/*<Leader>sf*
@@ -154,6 +153,7 @@ cn	shark-mappings.txt	/*cn*
 commands	shark.txt	/*commands*
 g.	shark-mappings.txt	/*g.*
 g=	shark-mappings.txt	/*g=*
+grn	shark-mappings.txt	/*grn*
 gso	shark-mappings.txt	/*gso*
 gsoo	shark-mappings.txt	/*gsoo*
 i_<C-Space>	shark-mappings.txt	/*i_<C-Space>*

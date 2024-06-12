@@ -599,8 +599,8 @@ defined for that buffer based on the server's capabilities. When possible,
 | [x]`gq`      | Format the selection with LSP               |
 | `gq`         | Format operator with LSP                    |
 | `<leader>i`  | Organise imports                            |
-| `<leader>rn` | Incrementally rename symbol                 |
-| `grr`         | Go to references                            |
+| `grn`        | Incrementally rename symbol                 |
+| `grr`        | Go to references                            |
 | `<leader>gi` | **G**o to **I**mplementation                |
 | `gD`         | **G**o to **D**eclaration                   |
 | `<leader>cr` | **C**ode lens **R**un                       |

@@ -224,12 +224,6 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-function M.rename() --{{{
-  vim.keymap.set("n", "<localleader>rn", function()
-    return ":Rename " .. vim.fn.expand("<cword>")
-  end, { expr = true })
-end --}}}
-
 function M.implementation() --{{{
   local perform = function()
     local check = "_mock.go"

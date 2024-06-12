@@ -351,8 +351,8 @@ v_gq                    Format the selection with LSP
 gq{motion}              Format operator with LSP
                                                                    *<Leader>i*
 <Leader>i               Organise imports
-                                                                  *<Leader>rn*
-<Leader>rn              Incrementally rename symbol
+                                                                         *grn*
+grn                     Incrementally rename symbol
                                                                    *shark_grr*
 grr                     Go to references
                                                                   *<Leader>gi*
