@@ -103,6 +103,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Document symbol {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/documentSymbol") then
+      local perform = function()
+        fzf.lsp_document_symbols({
+          jump_to_single_result = true,
+        })
+      end
+      quick.buffer_command("DocumentSymbol", perform)
+      nnoremap("<localleader>@", perform, "Document symbol")
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -168,10 +187,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  if client.supports_method("textDocument/documentSymbol") then -- {{{
-    table.insert(callbacks, lsp_util.document_symbol)
   end -- }}}
 
   if client.supports_method("textDocument/rename") then -- {{{

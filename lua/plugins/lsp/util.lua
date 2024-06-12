@@ -224,19 +224,6 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-function M.document_symbol() --{{{
-  local perform = function()
-    fzf.lsp_document_symbols({
-      jump_to_single_result = true,
-      -- fzf_opts = {
-      --   ["--with-nth"] = "2..",
-      -- },
-    })
-  end
-  quick.buffer_command("DocumentSymbol", perform)
-  nnoremap("<localleader>@", perform, "Document symbol")
-end --}}}
-
 function M.rename() --{{{
   vim.keymap.set("n", "<localleader>rn", function()
     return ":Rename " .. vim.fn.expand("<cword>")
