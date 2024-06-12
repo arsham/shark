@@ -224,12 +224,6 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-function M.type_definition() --{{{
-  quick.buffer_command("TypeDefinition", function()
-    fzf.lsp_typedefs({ jump_to_single_result = true })
-  end)
-end --}}}
-
 function M.declaration() --{{{
   nnoremap("gD", function()
     fzf.lsp_declarations({ jump_to_single_result = true })

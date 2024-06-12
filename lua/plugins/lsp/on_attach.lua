@@ -167,6 +167,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Type definition {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/typeDefinition") then
+      quick.buffer_command("TypeDefinition", function()
+        fzf.lsp_typedefs({ jump_to_single_result = true })
+      end)
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -232,10 +247,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  if client.supports_method("textDocument/typeDefinition") then -- {{{
-    table.insert(callbacks, lsp_util.type_definition)
   end -- }}}
 
   if client.supports_method("textDocument/declaration") then -- {{{
