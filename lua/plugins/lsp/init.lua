@@ -192,7 +192,7 @@ return {
   { -- Mason Null LS {{{
     "jay-babu/mason-null-ls.nvim",
     dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
     },
     event = { "BufRead", "BufNewFile" },
     opts = {
@@ -204,7 +204,7 @@ return {
   }, -- }}}
 
   { -- Null LS {{{
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
