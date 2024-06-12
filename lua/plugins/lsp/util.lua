@@ -65,11 +65,6 @@ function M.setup_diagnostics(bufnr) --{{{
   })
 end --}}}
 
-function M.hover() --{{{
-  nnoremap("H", vim.lsp.buf.hover, "Show hover")
-  inoremap("<M-h>", vim.lsp.buf.hover, "Show hover")
-end --}}}
-
 function M.goto_definition() --{{{
   local perform = function()
     fzf.lsp_definitions({ jump_to_single_result = true })

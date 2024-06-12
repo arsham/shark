@@ -8,6 +8,10 @@ local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
   vim.keymap.set("n", key, fn, opts)
 end --}}}
+local function inoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("i", key, fn, opts)
+end --}}}
 
 -- Go to reference {{{
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -40,6 +44,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Hover {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/hover") then
+      nnoremap("H", vim.lsp.buf.hover, "Show hover")
+      inoremap("<M-h>", vim.lsp.buf.hover, "Show hover")
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -49,10 +67,6 @@ local function capability_callbacks(client)
   end
 
   callbacks = {}
-
-  if client.supports_method("textDocument/hover") then -- {{{
-    table.insert(callbacks, lsp_util.hover)
-  end -- }}}
 
   if client.supports_method("textDocument/definition") then -- {{{
     table.insert(callbacks, lsp_util.goto_definition)
