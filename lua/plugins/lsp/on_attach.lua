@@ -405,6 +405,47 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Workspace folder properties {{{
+local function workspace_folder_properties() --{{{
+  quick.buffer_command("WorkspaceList", function()
+    vim.notify(vim.lsp.buf.list_workspace_folders() or {}, vim.lsp.log_levels.INFO, {
+      title = "Workspace Folders",
+      timeout = 3000,
+    })
+  end)
+
+  quick.buffer_command("WorkspaceAdd", function(args)
+    vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
+  end, { range = true, nargs = "?", complete = "dir" })
+
+  quick.buffer_command(
+    "WorkspaceRemove",
+    function(args)
+      vim.lsp.buf.remove_workspace_folder(args.args)
+    end,
+    { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
+  )
+end --}}}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    local caps = client.server_capabilities
+    if not caps then
+      return
+    end
+    local workspace_folder_supported = caps.workspace
+      and caps.workspace.workspaceFolders
+      and caps.workspace.workspaceFolders.supported
+    if workspace_folder_supported then
+      workspace_folder_properties()
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
