@@ -224,12 +224,6 @@ function M.workspace_folder_properties() --{{{
   )
 end --}}}
 
-function M.declaration() --{{{
-  nnoremap("gD", function()
-    fzf.lsp_declarations({ jump_to_single_result = true })
-  end, "Go to declaration")
-end --}}}
-
 function M.code_lens() --{{{
   if util.buffer_has_var("code_lens") then
     return

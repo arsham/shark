@@ -182,6 +182,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Declaration {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/declaration") then
+      nnoremap("gD", function()
+        fzf.lsp_declarations({ jump_to_single_result = true })
+      end, "Go to declaration")
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -247,10 +262,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  if client.supports_method("textDocument/declaration") then -- {{{
-    table.insert(callbacks, lsp_util.declaration)
   end -- }}}
 
   -- Code lenses {{{
