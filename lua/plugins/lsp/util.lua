@@ -270,14 +270,6 @@ function M.rename() --{{{
   end, { expr = true })
 end --}}}
 
-function M.find_references() --{{{
-  local perform = function()
-    fzf.lsp_references({ jump_to_single_result = true })
-  end
-  quick.buffer_command("References", perform)
-  nnoremap("gr", perform, "Go to references")
-end --}}}
-
 function M.implementation() --{{{
   local perform = function()
     local check = "_mock.go"

@@ -1,6 +1,30 @@
 local lsp_util = require("plugins.lsp.util")
+local quick = require("arshlib.quick")
+local fzf = require("fzf-lua")
 
 local server_callbacks = {}
+
+local function nnoremap(key, fn, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set("n", key, fn, opts)
+end --}}}
+
+-- Go to reference {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/references") then
+      local perform = function()
+        fzf.lsp_references({ jump_to_single_result = true })
+      end
+      quick.buffer_command("References", perform)
+      nnoremap("grr", perform, "Go to references")
+    end
+  end,
+}) -- }}}
 
 ---@param client lspclient
 local function capability_callbacks(client)
@@ -96,10 +120,6 @@ local function capability_callbacks(client)
 
   if client.supports_method("textDocument/rename") then -- {{{
     table.insert(callbacks, lsp_util.rename)
-  end -- }}}
-
-  if client.supports_method("textDocument/references") then -- {{{
-    table.insert(callbacks, lsp_util.find_references)
   end -- }}}
 
   if client.supports_method("textDocument/implementation") then -- {{{

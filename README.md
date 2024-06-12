@@ -600,7 +600,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `gq`         | Format operator with LSP                    |
 | `<leader>i`  | Organise imports                            |
 | `<leader>rn` | Incrementally rename symbol                 |
-| `gr`         | Go to references                            |
+| `grr`         | Go to references                            |
 | `<leader>gi` | **G**o to **I**mplementation                |
 | `gD`         | **G**o to **D**eclaration                   |
 | `<leader>cr` | **C**ode lens **R**un                       |

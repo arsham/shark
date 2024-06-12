@@ -353,8 +353,8 @@ gq{motion}              Format operator with LSP
 <Leader>i               Organise imports
                                                                   *<Leader>rn*
 <Leader>rn              Incrementally rename symbol
-                                                                    *shark_gr*
-gr                      Go to references
+                                                                   *shark_grr*
+grr                     Go to references
                                                                   *<Leader>gi*
 <Leader>gi              Go to implementation
                                                                   *<Leader>ca*
