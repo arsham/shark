@@ -9,52 +9,6 @@ local function nnoremap(key, fn, desc, opts) --{{{
   vim.keymap.set("n", key, fn, opts)
 end --}}}
 
-local diagnostics_group = vim.api.nvim_create_augroup("LspDiagnosticsGroup", { clear = true })
-
-function M.setup_diagnostics(bufnr) --{{{
-  nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
-  nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
-  nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
-
-  -- stylua: ignore start
-  local next = vim.diagnostic.goto_next
-  local prev = vim.diagnostic.goto_prev
-  local repeat_ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
-  if repeat_ok then
-    next, prev= ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
-  end
-
-  nnoremap("]d", function() quick.call_and_centre(next) end, "goto next diagnostic")
-  nnoremap("[d", function() quick.call_and_centre(prev) end, "goto previous diagnostic")
-
-  quick.buffer_command("DiagLoc", function() vim.diagnostic.setloclist() end)
-  quick.buffer_command("DiagQf",  function() vim.diagnostic.setqflist()  end)
-
-  local ok, diagnostics = pcall(require, "fzf-lua.providers.diagnostic")
-  if ok then
-    quick.buffer_command("Diagnostics",    function() diagnostics.diagnostics({}) end)
-    quick.buffer_command("Diag",           function() diagnostics.diagnostics({}) end)
-    quick.buffer_command("DiagnosticsAll", function() diagnostics.all({})         end)
-    quick.buffer_command("DiagAll",        function() diagnostics.all({})         end)
-  end
-  -- stylua: ignore end
-  quick.buffer_command("DiagnosticsDisable", function()
-    vim.diagnostic.enable(false, { bufnr = bufnr })
-  end)
-  quick.buffer_command("DiagnosticsEnable", function()
-    vim.diagnostic.enable(true, { bufnr = bufnr })
-  end)
-
-  -- Populate loclist with the current buffer diagnostics.
-  vim.api.nvim_create_autocmd("DiagnosticChanged", {
-    group = diagnostics_group,
-    buffer = bufnr,
-    callback = function()
-      vim.diagnostic.setloclist({ open = false })
-    end,
-  })
-end --}}}
-
 local get_clients = (
   vim.lsp.get_clients ~= nil and vim.lsp.get_clients -- nvim 0.10+
   or vim.lsp.get_active_clients

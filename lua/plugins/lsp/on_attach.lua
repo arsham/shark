@@ -608,12 +608,78 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- }}}
 -- }}}
 
+-- Diagnostics {{{
+-- Diagnostics bindings {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
+    nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
+    nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
+
+    local jump = function(fn, severity)
+      return function()
+        fn({ severity = severity and vim.diagnostic.severity[severity] or nil })
+      end
+    end
+
+    local dNext = jump(vim.diagnostic.goto_next)
+    local dPrev = jump(vim.diagnostic.goto_prev)
+    local eNext = jump(vim.diagnostic.goto_next, "ERROR")
+    local ePrev = jump(vim.diagnostic.goto_prev, "ERROR")
+    local wNext = jump(vim.diagnostic.goto_next, "WARN")
+    local wPrev = jump(vim.diagnostic.goto_prev, "WARN")
+    local repeat_ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
+    if repeat_ok then
+      dNext, dPrev = ts_repeat_move.make_repeatable_move_pair(dNext, dPrev)
+      eNext, ePrev = ts_repeat_move.make_repeatable_move_pair(eNext, ePrev)
+      wNext, wPrev = ts_repeat_move.make_repeatable_move_pair(wNext, wPrev)
+    end
+
+    -- stylua: ignore start
+    nnoremap("]d", function() quick.call_and_centre(dNext) end, "goto next diagnostic")
+    nnoremap("[d", function() quick.call_and_centre(dPrev) end, "goto previous diagnostic")
+    nnoremap("]e", function() quick.call_and_centre(eNext) end, "goto next error")
+    nnoremap("[e", function() quick.call_and_centre(ePrev) end, "goto previous error")
+    nnoremap("]W", function() quick.call_and_centre(wNext) end, "goto next warning")
+    nnoremap("[W", function() quick.call_and_centre(wPrev) end, "goto previous warning")
+    -- stylua: ignore end
+  end,
+})
+-- }}}
+
+-- Diagnostics commands {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  -- stylua: ignore
+  callback = function(args)
+    quick.buffer_command("DiagLoc", function() vim.diagnostic.setloclist() end)
+    quick.buffer_command("DiagQf", function() vim.diagnostic.setqflist() end)
+    quick.buffer_command("DiagFloat", function() vim.diagnostic.open_float() end)
+
+    local ok, diagnostics = pcall(require, "fzf-lua.providers.diagnostic")
+    if ok then
+      quick.buffer_command("Diagnostics", function() diagnostics.diagnostics({}) end)
+      quick.buffer_command("Diag", function() diagnostics.diagnostics({}) end)
+      quick.buffer_command("DiagnosticsAll", function() diagnostics.all({}) end)
+      quick.buffer_command("DiagAll", function() diagnostics.all({}) end)
+    end
+
+    local bufnr = args.buf
+    quick.buffer_command("DiagnosticsDisable", function()
+      vim.diagnostic.enable(false, { bufnr = bufnr })
+    end)
+    quick.buffer_command("DiagnosticsEnable", function()
+      vim.diagnostic.enable(true, { bufnr = bufnr })
+    end)
+  end,
+})
+-- }}}
+-- }}}
+
 ---The function to pass to the LSP's on_attach callback.
 ---@param client lspclient
 ---@param bufnr number
 local function on_attach(client, bufnr) --{{{
   vim.api.nvim_buf_call(bufnr, function()
-    lsp_util.setup_diagnostics(bufnr)
     lsp_util.support_commands()
   end)
 end --}}}
