@@ -1,6 +1,7 @@
 local lsp_util = require("plugins.lsp.util")
 local quick = require("arshlib.quick")
 local fzf = require("fzf-lua")
+local util = require("config.util")
 
 local server_callbacks = {}
 
@@ -197,6 +198,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Code lenses {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if
+      client.supports_method("textDocument/codeLens") or client.supports_method("codeLens/resolve")
+    then
+      if util.buffer_has_var("code_lens") then
+        return
+      end
+      quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
+      quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
+      nnoremap("<localleader>cr", vim.lsp.codelens.run, "run code lenses")
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -262,13 +283,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  -- Code lenses {{{
-  if
-    client.supports_method("textDocument/codeLens") or client.supports_method("codeLens/resolve")
-  then
-    table.insert(callbacks, lsp_util.code_lens)
   end -- }}}
 
   -- Code hierarchy {{{
