@@ -14,10 +14,6 @@ local function xnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
   vim.keymap.set("x", key, fn, opts)
 end --}}}
-local function inoremap(key, fn, desc, opts) --{{{
-  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
-  vim.keymap.set("i", key, fn, opts)
-end --}}}
 
 local diagnostics_group = vim.api.nvim_create_augroup("LspDiagnosticsGroup", { clear = true })
 
@@ -63,11 +59,6 @@ function M.setup_diagnostics(bufnr) --{{{
       vim.diagnostic.setloclist({ open = false })
     end,
   })
-end --}}}
-
-function M.signature_help() --{{{
-  nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
-  inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")
 end --}}}
 
 local get_clients = (
@@ -231,10 +222,6 @@ function M.workspace_folder_properties() --{{{
     end,
     { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
   )
-end --}}}
-
-function M.workspace_symbol() --{{{
-  quick.buffer_command("WorkspaceSymbols", fzf.lsp_live_workspace_symbols)
 end --}}}
 
 function M.document_symbol() --{{{

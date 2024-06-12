@@ -76,6 +76,33 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Signature help {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/signatureHelp") then
+      nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
+      inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")
+    end
+  end,
+}) -- }}}
+
+-- Workspace symbol {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("workspace/symbol") then
+      quick.buffer_command("WorkspaceSymbols", fzf.lsp_live_workspace_symbols)
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -85,10 +112,6 @@ local function capability_callbacks(client)
   end
 
   callbacks = {}
-
-  if client.supports_method("textDocument/signatureHelp") then -- {{{
-    table.insert(callbacks, lsp_util.signature_help)
-  end -- }}}
 
   -- Contains functions to be run before writing the buffer. The format
   -- function will format the while buffer, and the imports function will
@@ -145,10 +168,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  if client.supports_method("workspace/symbol") then -- {{{
-    table.insert(callbacks, lsp_util.workspace_symbol)
   end -- }}}
 
   if client.supports_method("textDocument/documentSymbol") then -- {{{
