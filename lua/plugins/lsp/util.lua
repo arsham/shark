@@ -2,7 +2,6 @@
 local M = {}
 
 local quick = require("arshlib.quick")
-local util = require("config.util")
 local augroup = require("config.util").augroup
 
 local function nnoremap(key, fn, desc, opts) --{{{
@@ -60,85 +59,6 @@ local get_clients = (
   vim.lsp.get_clients ~= nil and vim.lsp.get_clients -- nvim 0.10+
   or vim.lsp.get_active_clients
 )
-
-function M.lsp_organise_imports() --{{{
-  local context = { source = { organizeImports = true } }
-  vim.validate({ context = { context, "table", true } })
-
-  local params = vim.lsp.util.make_range_params()
-  params.context = context
-
-  local method = "textDocument/codeAction"
-  local timeout = 1000 -- ms
-
-  local ok, resp = pcall(vim.lsp.buf_request_sync, 0, method, params, timeout)
-  if not ok or not resp then
-    return
-  end
-
-  for _, client in ipairs(get_clients()) do
-    local offset_encoding = client.offset_encoding or "utf-16"
-    if client.id and resp[client.id] then
-      local result = resp[client.id].result
-      if result and result[1] and result[1].edit then
-        local edit = result[1].edit
-        if edit then
-          vim.lsp.util.apply_workspace_edit(result[1].edit, offset_encoding)
-        end
-      end
-    end
-  end
-end --}}}
-
-
-function M.setup_organise_imports() --{{{
-  nnoremap("<localleader>i", M.lsp_organise_imports, "Organise imports")
-end --}}}
-
-function M.document_formatting() --{{{
-  nnoremap("<localleader>gq", vim.lsp.buf.format, "Format buffer")
-end --}}}
-
-local lsp_formatting_imports = augroup("lsp_formatting_imports")
----Setup events for formatting and imports.
----@param client lspclient
----@param imports function
----@param format function
----@param bufnr number?
-function M.setup_events(client, imports, format, bufnr) --{{{
-  if not util.buffer_has_var("lsp_formatting_imports_" .. client.name) then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = lsp_formatting_imports,
-      buffer = bufnr or 0,
-      callback = function()
-        imports()
-        format()
-      end,
-      desc = "format and imports",
-    })
-  end
-end --}}}
-
-function M.workspace_folder_properties() --{{{
-  quick.buffer_command("WorkspaceList", function()
-    vim.notify(vim.lsp.buf.list_workspace_folders() or {}, vim.lsp.log_levels.INFO, {
-      title = "Workspace Folders",
-      timeout = 3000,
-    })
-  end)
-
-  quick.buffer_command("WorkspaceAdd", function(args)
-    vim.lsp.buf.add_workspace_folder(args.args and vim.fn.fnamemodify(args.args, ":p"))
-  end, { range = true, nargs = "?", complete = "dir" })
-
-  quick.buffer_command(
-    "WorkspaceRemove",
-    function(args)
-      vim.lsp.buf.remove_workspace_folder(args.args)
-    end,
-    { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
-  )
-end --}}}
 
 
 function M.support_commands() --{{{

@@ -3,8 +3,6 @@ local quick = require("arshlib.quick")
 local fzf = require("fzf-lua")
 local util = require("config.util")
 
-local server_callbacks = {}
-
 local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
   vim.keymap.set("n", key, fn, opts)
@@ -446,78 +444,175 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
----@param client lspclient
-local function capability_callbacks(client)
-  local name = client.name
-  local callbacks = server_callbacks[name]
-  if callbacks then
-    return callbacks
+-- Formatting and imports {{{
+local function lsp_organise_imports() --{{{
+  local context = { source = { organizeImports = true } }
+  vim.validate({ context = { context, "table", true } })
+
+  local params = vim.lsp.util.make_range_params()
+  params.context = context
+
+  local method = "textDocument/codeAction"
+  local timeout = 1000 -- ms
+
+  local ok, resp = pcall(vim.lsp.buf_request_sync, 0, method, params, timeout)
+  if not ok or not resp then
+    return
   end
 
-  callbacks = {}
+  for _, client in ipairs(get_clients()) do
+    local offset_encoding = client.offset_encoding or "utf-16"
+    if client.id and resp[client.id] then
+      local result = resp[client.id].result
+      if result and result[1] and result[1].edit then
+        local edit = result[1].edit
+        if edit then
+          vim.lsp.util.apply_workspace_edit(result[1].edit, offset_encoding)
+        end
+      end
+    end
+  end
+end --}}}
 
-  -- Contains functions to be run before writing the buffer. The format
-  -- function will format the while buffer, and the imports function will
-  -- organise imports.
-  local imports_hook = function() end
-  local format_hook = function() end
-  local caps = client.server_capabilities
-  if client.supports_method("textDocument/codeAction") then -- {{{
-    -- Either is it set to true, or there is a specified set of
-    -- capabilities. Sumneko doesn't support it, but the
-    -- client.supports_method returns true.
+local function setup_organise_imports() --{{{
+  quick.buffer_command("Imports", lsp_organise_imports, { desc = "Organise imports" })
+  nnoremap("<localleader>i", lsp_organise_imports, "Organise imports")
+end --}}}
+
+-- Blanket formatting {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/formatting") then
+      nnoremap("<localleader>gq", vim.lsp.buf.format, "Format buffer")
+    end
+  end,
+}) -- }}}
+
+local disabled_servers = {
+  "lua_ls",
+  "jsonls",
+  "sqls",
+  "html",
+}
+
+-- Both formatting and imports {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    local caps = client.server_capabilities
+    if not caps then
+      return
+    end
     local can_organise_imports = type(caps.codeActionProvider) == "table"
       and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
-    if can_organise_imports then
-      table.insert(callbacks, lsp_util.setup_organise_imports)
-      imports_hook = lsp_util.lsp_organise_imports
+    if not client.supports_method("textDocument/formatting") or not can_organise_imports then
+      return
     end
-  end -- }}}
 
-  if client.supports_method("textDocument/formatting") then -- {{{
-    table.insert(callbacks, lsp_util.document_formatting)
-    local disabled_servers = {
-      "lua_ls",
-      "jsonls",
-      "sqls",
-      "html",
-    }
-    format_hook = function()
-      vim.lsp.buf.format({
-        async = false,
-        filter = function(server)
-          return not vim.tbl_contains(disabled_servers, server.name)
+    setup_organise_imports()
+
+    if not util.buffer_has_var("lsp_formatting_imports_" .. client.name) then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = lsp_util.lsp_formatting_imports,
+        callback = function()
+          lsp_organise_imports()
+          if not require("config.constants").disable_formatting then
+            vim.lsp.buf.format({
+              async = false,
+              filter = function(server)
+                return not vim.tbl_contains(disabled_servers, server.name)
+              end,
+            })
+          end
         end,
+        desc = "formatting and imports",
       })
     end
-  end -- }}}
+  end,
+})
+-- }}}
 
-  -- Setup import format eveents {{{
-  table.insert(callbacks, function(cl, bufnr)
-    lsp_util.setup_events(cl, imports_hook, format_hook, bufnr)
-  end) -- }}}
+-- Formatting only {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    local caps = client.server_capabilities
+    if not caps then
+      return
+    end
+    local can_organise_imports = type(caps.codeActionProvider) == "table"
+      and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
+    if not client.supports_method("textDocument/formatting") or can_organise_imports then
+      return
+    end
 
-  local workspace_folder_supported = caps.workspace -- {{{
-    and caps.workspace.workspaceFolders
-    and caps.workspace.workspaceFolders.supported
-  if workspace_folder_supported then
-    table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
+    if not util.buffer_has_var("lsp_imports_" .. client.name) then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = lsp_util.lsp_formatting_imports,
+        callback = function()
+          if not require("config.constants").disable_formatting then
+            vim.lsp.buf.format({
+              async = false,
+              filter = function(server)
+                return not vim.tbl_contains(disabled_servers, server.name)
+              end,
+            })
+          end
+        end,
+        desc = "formatting only",
+      })
+    end
+  end,
+})
+-- }}}
 
-  server_callbacks[name] = callbacks
-  return callbacks
-end
+-- Importing only {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    local caps = client.server_capabilities
+    if not caps then
+      return
+    end
+    local can_organise_imports = type(caps.codeActionProvider) == "table"
+      and _t(caps.codeActionProvider.codeActionKinds):contains("source.organizeImports")
+    if client.supports_method("textDocument/formatting") or not can_organise_imports then
+      return
+    end
+
+    setup_organise_imports()
+    if not util.buffer_has_var("lsp_formatting_" .. client.name) then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = lsp_util.lsp_formatting_imports,
+        callback = function()
+          lsp_organise_imports()
+        end,
+        desc = "imports only",
+      })
+    end
+  end,
+})
+-- }}}
+-- }}}
 
 ---The function to pass to the LSP's on_attach callback.
 ---@param client lspclient
 ---@param bufnr number
 local function on_attach(client, bufnr) --{{{
   vim.api.nvim_buf_call(bufnr, function()
-    local callbacks = capability_callbacks(client)
-    for _, callback in ipairs(callbacks) do
-      callback(client, bufnr)
-    end
-
     lsp_util.setup_diagnostics(bufnr)
     lsp_util.support_commands()
   end)
