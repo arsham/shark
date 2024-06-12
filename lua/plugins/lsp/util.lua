@@ -65,15 +65,6 @@ function M.setup_diagnostics(bufnr) --{{{
   })
 end --}}}
 
-function M.goto_definition() --{{{
-  local perform = function()
-    fzf.lsp_definitions({ jump_to_single_result = true })
-  end
-  quick.buffer_command("Definition", perform)
-  nnoremap("gd", perform, "Go to definition")
-  vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
-end --}}}
-
 function M.signature_help() --{{{
   nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
   inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")

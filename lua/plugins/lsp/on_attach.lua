@@ -58,6 +58,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Go to definition {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/definition") then
+      local perform = function()
+        fzf.lsp_definitions({ jump_to_single_result = true })
+      end
+      quick.buffer_command("Definition", perform)
+      nnoremap("gd", perform, "Go to definition")
+      vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -67,10 +85,6 @@ local function capability_callbacks(client)
   end
 
   callbacks = {}
-
-  if client.supports_method("textDocument/definition") then -- {{{
-    table.insert(callbacks, lsp_util.goto_definition)
-  end -- }}}
 
   if client.supports_method("textDocument/signatureHelp") then -- {{{
     table.insert(callbacks, lsp_util.signature_help)
