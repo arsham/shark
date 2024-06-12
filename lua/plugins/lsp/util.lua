@@ -2,7 +2,6 @@
 local M = {}
 
 local quick = require("arshlib.quick")
-local fzf = require("fzf-lua")
 local util = require("config.util")
 local augroup = require("config.util").augroup
 
@@ -95,39 +94,6 @@ function M.lsp_organise_imports() --{{{
   end
 end --}}}
 
----Formats a range if given.
----@param disabled_servers table
----@param range_given boolean
----@param line1 number
----@param line2 number
----@param bang boolean
-local function format_command(disabled_servers, range_given, line1, line2, bang) --{{{
-  if range_given then
-    vim.lsp.buf.format({
-      range = {
-        start = { line1, 0 },
-        ["end"] = { line2, 99999999 },
-      },
-      filter = function(server)
-        return not vim.tbl_contains(disabled_servers, server.name)
-      end,
-    })
-  elseif bang then
-    vim.lsp.buf.format({
-      async = false,
-      filter = function(server)
-        return not vim.tbl_contains(disabled_servers, server.name)
-      end,
-    })
-  else
-    vim.lsp.buf.format({
-      async = true,
-      filter = function(server)
-        return not vim.tbl_contains(disabled_servers, server.name)
-      end,
-    })
-  end
-end --}}}
 
 function M.setup_organise_imports() --{{{
   nnoremap("<localleader>i", M.lsp_organise_imports, "Organise imports")
@@ -135,52 +101,6 @@ end --}}}
 
 function M.document_formatting() --{{{
   nnoremap("<localleader>gq", vim.lsp.buf.format, "Format buffer")
-end --}}}
-
-local function document_range_formatting(disabled_servers, args) --{{{
-  format_command(disabled_servers, args.range ~= 0, args.line1, args.line2, args.bang)
-end --}}}
-
--- selene: allow(global_usage)
-local function format_range_operator(disabled_servers) --{{{
-  local old_func = vim.go.operatorfunc
-  _G.op_func_formatting = function()
-    local start = vim.api.nvim_buf_get_mark(0, "[")
-    local finish = vim.api.nvim_buf_get_mark(0, "]")
-    finish[2] = 99999999
-    vim.lsp.buf.format({
-      range = {
-        start = start,
-        ["end"] = finish,
-      },
-      async = false,
-      filter = function(server)
-        return not vim.tbl_contains(disabled_servers, server.name)
-      end,
-    })
-    vim.go.operatorfunc = old_func
-  end
-  vim.go.operatorfunc = "v:lua.op_func_formatting"
-  vim.api.nvim_feedkeys("g@", "n", false)
-end --}}}
-
-function M.document_range_formatting(disabled_servers) --{{{
-  quick.buffer_command("Format", function(args)
-    document_range_formatting(disabled_servers, args)
-  end, { range = true })
-  xnoremap("gq", function()
-    local line1, _ = unpack(vim.api.nvim_buf_get_mark(0, "["))
-    local line2, _ = unpack(vim.api.nvim_buf_get_mark(0, "]"))
-    if line1 > line2 then
-      line1, line2 = line2, line1
-    end
-    document_range_formatting(disabled_servers, { range = 1, line1 = line1, line2 = line2 })
-  end, "Format range")
-  nnoremap("gq", function()
-    format_range_operator(disabled_servers)
-  end, "Format range")
-
-  vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:3000})"
 end --}}}
 
 local lsp_formatting_imports = augroup("lsp_formatting_imports")
