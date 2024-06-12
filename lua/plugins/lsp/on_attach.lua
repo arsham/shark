@@ -237,6 +237,45 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Semantic tokens {{{
+
+---@param method string
+---@return vim.lsp.Client[]
+local function get_clients(method)
+  if vim.fn.has("nvim-0.10") == 1 then
+    return vim.lsp.get_clients({ method = method })
+  else
+    ---@diagnostic disable-next-line: deprecated
+    local clients = vim.lsp.get_active_clients()
+    return vim.tbl_filter(function(client)
+      return client.supports_method(method)
+    end, clients)
+  end
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    local bufnr = args.buf
+    if client.supports_method("textDocument/semanticTokens") and vim.lsp.semantic_tokens then
+      vim.keymap.set("n", "<localleader>st", function()
+        vim.b.semantic_tokens_enabled = vim.b.semantic_tokens_enabled == false
+        for _, cl in ipairs(get_clients()) do
+          if cl.server_capabilities.semanticTokensProvider then
+            vim.lsp.semantic_tokens[vim.b.semantic_tokens_enabled and "start" or "stop"](
+              bufnr or 0,
+              cl.id
+            )
+          end
+        end
+      end, { desc = "Toggle semantic tokens on buffer", buffer = bufnr or 0 })
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -303,12 +342,6 @@ local function capability_callbacks(client)
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
   end -- }}}
-
-  -- Semantic Tokens {{{
-  if client.supports_method("textDocument/semanticTokens") and vim.lsp.semantic_tokens then
-    table.insert(callbacks, lsp_util.semantic_tokens)
-  end
-  -- }}}
 
   server_callbacks[name] = callbacks
   return callbacks

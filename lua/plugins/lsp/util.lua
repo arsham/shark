@@ -305,19 +305,6 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = reload_rust_workspace,
 })
 
-function M.semantic_tokens(_, bufnr)
-  vim.keymap.set("n", "<leader>st", function()
-    vim.b.semantic_tokens_enabled = vim.b.semantic_tokens_enabled == false
-    for _, client in ipairs(get_clients()) do
-      if client.server_capabilities.semanticTokensProvider then
-        vim.lsp.semantic_tokens[vim.b.semantic_tokens_enabled and "start" or "stop"](
-          bufnr or 0,
-          client.id
-        )
-      end
-    end
-  end, { desc = "Toggle semantic tokens on buffer", buffer = bufnr or 0 })
-end
 
 return M
 
