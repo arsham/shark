@@ -249,11 +249,6 @@ function M.code_action() --{{{
   xnoremap("<localleader>ca", ":'<,'>CodeAction<CR>", "Code action")
 end --}}}
 
-function M.call_hierarchy() --{{{
-  quick.buffer_command("Callers", fzf.lsp_incoming_calls)
-  nnoremap("<localleader>gc", fzf.lsp_incoming_calls, "show incoming calls")
-  quick.buffer_command("Callees", fzf.lsp_outgoing_calls)
-end --}}}
 
 function M.support_commands() --{{{
   ---Restats the LSP server. Fixes the problem with the LSP server not

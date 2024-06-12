@@ -218,6 +218,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Call hierarchy {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if
+      client.supports_method("textDocument/prepareCallHierarchy")
+      or client.supports_method("callHierarchy/incomingCalls")
+      or client.supports_method("callHierarchy/outgoingCalls")
+    then
+      quick.buffer_command("Callers", fzf.lsp_incoming_calls)
+      nnoremap("<localleader>gc", fzf.lsp_incoming_calls, "show incoming calls")
+      quick.buffer_command("Callees", fzf.lsp_outgoing_calls)
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -283,15 +302,6 @@ local function capability_callbacks(client)
     and caps.workspace.workspaceFolders.supported
   if workspace_folder_supported then
     table.insert(callbacks, lsp_util.workspace_folder_properties)
-  end -- }}}
-
-  -- Code hierarchy {{{
-  if
-    client.supports_method("textDocument/prepareCallHierarchy")
-    or client.supports_method("callHierarchy/incomingCalls")
-    or client.supports_method("callHierarchy/outgoingCalls")
-  then
-    table.insert(callbacks, lsp_util.call_hierarchy)
   end -- }}}
 
   -- Semantic Tokens {{{
