@@ -1,7 +1,7 @@
-local lsp_util = require("plugins.lsp.util")
 local quick = require("arshlib.quick")
 local fzf = require("fzf-lua")
 local util = require("config.util")
+local augroup = require("config.util").augroup
 
 local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
@@ -500,6 +500,9 @@ local disabled_servers = {
 }
 
 -- Both formatting and imports {{{
+
+local lsp_formatting_imports = augroup("lsp_formatting_imports")
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -520,7 +523,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     if not util.buffer_has_var("lsp_formatting_imports_" .. client.name) then
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = lsp_util.lsp_formatting_imports,
+        group = lsp_formatting_imports,
         callback = function()
           lsp_organise_imports()
           if not require("config.constants").disable_formatting then
@@ -558,7 +561,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     if not util.buffer_has_var("lsp_imports_" .. client.name) then
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = lsp_util.lsp_formatting_imports,
+        group = lsp_formatting_imports,
         callback = function()
           if not require("config.constants").disable_formatting then
             vim.lsp.buf.format({
@@ -596,7 +599,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     setup_organise_imports()
     if not util.buffer_has_var("lsp_formatting_" .. client.name) then
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = lsp_util.lsp_formatting_imports,
+        group = lsp_formatting_imports,
         callback = function()
           lsp_organise_imports()
         end,
@@ -675,17 +678,80 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- }}}
 -- }}}
 
----The function to pass to the LSP's on_attach callback.
----@param client lspclient
----@param bufnr number
-local function on_attach(client, bufnr) --{{{
-  vim.api.nvim_buf_call(bufnr, function()
-    lsp_util.support_commands()
-  end)
-end --}}}
+-- List workspace command {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    quick.buffer_command("ListWorkspace", function()
+      vim.notify(vim.lsp.buf.list_workspace_folders(), vim.lsp.log_levels.INFO, {
+        title = "Workspace Folders",
+        timeout = 3000,
+      })
+    end)
+  end,
+}) -- }}}
 
-return {
-  on_attach = on_attach,
-}
+-- Detach command {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    quick.buffer_command("Detach", function()
+      for _, client in pairs(get_clients()) do
+        vim.lsp.buf_detach_client(client.bufnr or 0, client.id)
+      end
+    end, { desc = "Detach the LSP server from the current buffer" })
+  end,
+}) -- }}}
+
+-- Restart lsp command {{{
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    ---Restats the LSP server. Fixes the problem with the LSP server not
+    -- restarting with LspRestart command.
+    local function restart_lsp()
+      vim.cmd.LspStop()
+      vim.defer_fn(function()
+        vim.cmd.LspStart()
+      end, 1000)
+    end
+    quick.buffer_command("RestartLsp", restart_lsp)
+    nnoremap("<localleader>dr", restart_lsp, "Restart LSP server")
+  end,
+}) -- }}}
+
+-- Reload workspace {{{
+local handler = function(err)
+  if err then
+    local msg = string.format("Error reloading Rust workspace: %v", err)
+    vim.notify(msg, vim.lsp.log_levels.ERROR, {
+      title = "Reloading Rust workspace",
+      timeout = 3000,
+    })
+  else
+    vim.notify("Workspace has been reloaded")
+  end
+end
+
+local function reload_rust_workspace()
+  for _, client in ipairs(get_clients()) do
+    if client.name == "rust_analyzer" then
+      client.request("rust-analyzer/reloadWorkspace", nil, handler, 0)
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  pattern = "*.rs",
+  callback = function()
+    quick.buffer_command("ReloadWorkspace", function()
+      vim.lsp.buf_request(0, "rust-analyzer/reloadWorkspace", nil, handler)
+    end, { range = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = augroup("reload_rust_workspace"),
+  pattern = "*/Cargo.toml",
+  callback = reload_rust_workspace,
+})
+-- }}}
 
 -- vim: fdm=marker fdl=0

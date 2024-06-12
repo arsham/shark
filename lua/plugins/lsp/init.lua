@@ -178,10 +178,10 @@ return {
               conf.server_capabilities or {}
             )
             pre_attach(client, bufnr)
-            require("plugins.lsp.on_attach").on_attach(client, bufnr)
           end
 
           require("lspconfig")[server_name].setup(conf)
+          require("plugins.lsp.on_attach")
         end,
       })
       require("plugins.lsp.config")(opts)
@@ -255,7 +255,6 @@ return {
           "Makefile",
           ".git"
         ),
-        on_attach = require("plugins.lsp.on_attach").on_attach,
       }
     end,
 
