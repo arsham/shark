@@ -85,7 +85,7 @@ Function   Plugin                      Description                     License
  LSP       hrsh7th/cmp-path           Extension for nvim-cmp              MIT
  LSP       lukas-reineke/cmp-rg       Extension for nvim-cmp              MIT
 💡 LSP      j-hui/fidget.nvim          Spinner for LSP status              MIT
-📢 LSP      none-ls.nvim               External Tool to LSP bridge         N/A
+📢 LSP      none-ls.nvim               External Tool to LSP bridge   Unlicense
 📢 LSP      mason-null-ls.nvim         Null LS and Mason bridge       AGPL-3.0
 📢 LSP      mason-tool-installer       LSP server installer                MIT
 🗒️ Editing  numToStr/Comment.nvim      Comment string                      MIT
@@ -121,6 +121,7 @@ Function   Plugin                      Description                     License
  Editing   aduros/ai.vim              OpenAI plugin                       ISC
  Tool      tamton-aquib/duck.nvim     Fun little ducks                    MIT
 🕸️ Tool     rest-nvim/rest.nvim        Fast http client in lua             MIT
+🧰 Lib      vhyrro/luarocks.nvim       Install luarocks              Unlicense
 🔍 Tool     arsham/yanker.nvim         Yank history helper                 MIT
 🗒️ Editing  jbyuki/venn.nvim           Draw ASCII diagrams                 MIT
  Editing   jackMort/ChatGPT.nvim      ChatGPT                      Apache-2.0

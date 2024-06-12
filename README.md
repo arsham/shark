@@ -97,106 +97,107 @@ Some plugins are not listed here. You can find the complete list in the
 
 Licenses for plugins can be found [here](#plugin-license-list).
 
-| Function   | Plugin                                           | Description                           |
-| :--------- | :----------------------------------------------- | :------------------------------------ |
-| 🔥 Core    | [folke/lazy.nvim][folke/lazy.nvim]               | Package manager                       |
-| 🔥 Visual  | [arsham/arshamiser.nvim][arshamiser.nvim]        | Status line, colour scheme and folds  |
-| 🔥 Lists   | [arsham/listish.nvim][listish.nvim]              | Supporting quickfix and local lists   |
-| 🧰 Lib     | [arsham/arshlib.nvim][arshlib.nvim]              | Library used in various plugins       |
-| ⚡ Visual  | [nvim-tree/nvim-web-devicons][nvim-web-devicons] |                                       |
-| 🔍 Finder  | [junegunn/fzf][fzf]                              | Fuzzy finder                          |
-| 🔍 Finder  | [junegunn/fzf.vim][fzf.vim]                      | fzf plugin for vim                    |
-| 🔥 Finder  | [arsham/fzfmania.nvim][fzfmania.nvim]            | Very powerful FZF setup in lua        |
-| 🔥 Finder  | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend        |
-| 🧰 Core    | [nvim-lua/plenary.nvim][plenary.nvim]            |                                       |
-| ⏩ Core    | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                  |
-| 🔁 Core    | [tpope/vim-repeat][tpope/vim-repeat]             |                                       |
-| 🥇 Textobj | [arsham/archer.nvim][arsham/archer.nvim]         | Mappings and text objects for archers |
-| 🧰 Visuals | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]     | UI component                          |
-| 🥇 Textobj | [arsham/indent-tools.nvim][indent-tools.nvim]    | Indent mappings and text object       |
-| 🔥 Visuals | [arsham/matchmaker.nvim][matchmaker.nvim]        | Creates highlight for user matches    |
-| 🛢️ Tool    | [stevearc/oil.nvim][oil.nvim]                    | File explorer                         |
-|  GIT      | [tpope/vim-fugitive][tpope/vim-fugitive]         | git integration                       |
-|  GIT      | [tpope/vim-rhubarb][tpope/vim-rhubarb]           | Go to selection's code Github page    |
-|  Core     | [tpope/vim-git][tpope/vim-git]                   |                                       |
-| 🌲 Visuals | [nvim-treesitter][nvim-treesitter]               | Highlighting engine                   |
-| 🔥 GIT     | [lewis6991/gitsigns.nvim][gitsigns.nvim]         | git signs in the gutter               |
-| 🥇 Textobj | [nvim-treesitter-textobjects][ts-textobjects]    | Treesitter Text Objects               |
-| 🔥 Visuals | [freddiehaddad/feline.nvim][feline.nvim]         | Statusline (default)                  |
-| 🗨️ Visuals | [rcarriga/nvim-notify][nvim-notify]              | Better notification UI                |
-| 🌈 Visuals | [treesitter-refactor][treesitter-refactor]       | Treesitter plugin                     |
-| 🗒️ Visuals | [nvim-treesitter/playground][playground]         | Treesitter plugin                     |
-| 󰐣 Editing  | [context-commentstring][ctx-commentstring]       |                                       |
-| 🥊 Core    | [andymass/vim-matchup][vim-matchup]              |                                       |
-| 󰘜 Editing  | [monaqa/dial.nvim][monaqa/dial.nvim]             | Enhanced increment/decrement values   |
-| 👗 Visuals | [stevearc/dressing.nvim][dressing.nvim]          |                                       |
-|  GIT      | [mattn/vim-gist][mattn/vim-gist]                 | gist integration                      |
-| 󰛡 Core     | [RaafatTurki/hex.nvim][hex.nvim]                 | Hex viewer                            |
-|  Tool     | [iamcco/markdown-preview.nvim][mk-preview]       |                                       |
-| 🧭 Core    | [numToStr/Navigator.nvim][navigator.nvim]        | Seamless navigation with tmux         |
-| 📁 Tool    | [nvim-neo-tree/neo-tree.nvim][neo-tree]          | File explorer tree                    |
-| 🪟 Core    | [s1n7ax/nvim-window-picker][window-picker]       | Window picker                         |
-|  Tool     | [ralismark/opsort.vim][opsort.vim]               | Sort operator                         |
-|  Tool     | [sQVe/sort.nvim][sqve/sort.nvim]                 | Line-wise and delimiter sorting       |
-| 🔭 Tool    | [dhruvasagar/vim-zoom][vim-zoom]                 | Zoom windows                          |
-| 🥇 Textobj | [David-Kunz/treesitter-unit][ts-unit]            | Treesitter units                      |
-|  LSP      | [neovim/nvim-lspconfig][nvim-lspconfig]          | LSP configuration                     |
-|  LSP      | [mason.nvim][mason.nvim]                         | Package manager for LSP, DAP, etc.    |
-|  LSP      | [mason-lspconfig.nvim][mason-lspconfig]          | LSP config bridge for mason.nvim      |
-|  LSP      | [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]             | Completion with LSP                   |
-|  LSP      | [saadparwaiz1/cmp_luasnip][cmp_luasnip]          | Extension for nvim-cmp                |
-|  LSP      | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]             | Snippet engine                        |
-|  LSP      | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]       | Extension for nvim-cmp                |
-|  LSP      | [friendly-snippets][friendly-snippets]           |                                       |
-|  LSP      | [hrsh7th/cmp-buffer][cmp-buffer]                 | Extension for nvim-cmp                |
-|  LSP      | [hrsh7th/cmp-calc][cmp-calc]                     | Extension for nvim-cmp                |
-|  LSP      | [hrsh7th/cmp-nvim-lsp][cmp-nvim-lsp]             | Extension for nvim-cmp                |
-|  LSP      | [hrsh7th/lsp-signature-help][sig-help]           | Extension for nvim-cmp                |
-|  LSP      | [hrsh7th/cmp-nvim-lua][cmp-nvim-lua]             | Extension for nvim-cmp                |
-|  LSP      | [hrsh7th/cmp-path][cmp-path]                     | Extension for nvim-cmp                |
-|  LSP      | [lukas-reineke/cmp-rg][cmp-rg]                   | Extension for nvim-cmp                |
-| 💡 LSP     | [j-hui/fidget.nvim][j-hui/fidget.nvim]           | Spinner for LSP status                |
-| 📢 LSP     | [none-ls.nvim][none-ls.nvim]                     | External Tool to LSP bridge           |
-| 📢 LSP     | [mason-null-ls.nvim][mason-null-ls.nvim]         | Null LS and Mason bridge              |
-| 📢 LSP     | [mason-tool-installer][mason-tool-inst]          | LSP server installer                  |
-| 🗒️ Editing | [numToStr/Comment.nvim][comment.nvim]            | Comment string                        |
-| 🗒️ LSP     | [smjonas/inc-rename.nvim][inc-rename.nvim]       | Incremental renaming                  |
-| 🗒️ Editing | [windwp/nvim-autopairs][nvim-autopairs]          |                                       |
-|  Editing  | [arthurxavierx/vim-caser][vim-caser]             | Case conversion                       |
-| 🖌️ Visuals | [NvChad/nvim-colorizer.lua][nvim-colorizer]      | Colourise matched colours in buffer   |
-| 🦀 Tools   | [saecki/crates.nvim][saecki/crates.nvim]         | Crate.toml helper                     |
-| 💡 LSP     | [kosayoda/nvim-lightbulb][nvim-lightbulb]        | Code actions buln                     |
-|  Editing  | [gbprod/substitute.nvim][substitute.nvim]        | Text exchange operator                |
-| 💡 LSP     | [lsp_lines.nvim][lsp_lines.nvim]                 | Show LSP diagnostics in extmarks      |
-| 👈 Core    | [milisims/nvim-luaref][nvim-luaref]              |                                       |
-| 🗒️ Editing | [echasnovski/mini.nvim][mini.nvim]               | For surround, alignments, etc.        |
-|  Core     | [folke/neodev.nvim][folke/neodev.nvim]           |                                       |
-| 📆 Tool    | [nvim-neorg/neorg][nvim-neorg/neorg]             | Note taking tool                      |
-|  Lists    | [kevinhwang91/nvim-bqf][nvim-bqf]                | Better quickfix list manager          |
-|  Tool     | [bfredl/nvim-luadev][bfredl/nvim-luadev]         | REPL/debug console for lua plugins    |
-| 💡 LSP     | [SmiteshP/nvim-navic][nvim-navic]                | Current code context with LSP         |
-|  Tool     | [kiran94/s3edit.nvim][s3edit.nvim]               | Edit files on S3 bucket               |
-| 🔍 Tool    | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]           | Search and quickly jump               |
-|  Editing  | [mbbill/undotree][mbbill/undotree]               | Undo tree browser                     |
-|  GIT      | [rbong/vim-flog][rbong/vim-flog]                 | git log graph                         |
-| 🎡 Visual  | [towolf/vim-helm][towolf/vim-helm]               | Helm syntax highlighting              |
-|  Core     | [tmux-plugins/vim-tmux][vim-tmux]                |                                       |
-|  Editing  | [mg979/vim-visual-multi][vim-visual-multi]       | Multiple cursors                      |
-| 🔫 Core    | [svban/YankAssassin.vim][yankassassin.vim]       | Stay where you are after yanking      |
-|  Editing  | [zbirenbaum/copilot.lua][copilot.lua]            | Copilot                               |
-|  Editing  | [Exafunction/codeium.vim][codeium.vim]           | Codeium (opensource copilot)          |
-| 💡 LSP     | [utilyre/barbecue.nvim][barbecue.nvim]           | Complementary to navic                |
-|  LSP      | [uga-rosa/cmp-dynamic][cmp-dynamic]              | Extension for nvim-cmp                |
-|  Tool     | [stevearc/overseer.nvim][overseer.nvim]          | Task runner                           |
-| 🌈 Tool    | [ziontee113/color-picker.nvim][colorpicker]      | Colour picker and updater             |
-|  Editing  | [aduros/ai.vim][aduros/ai.vim]                   | OpenAI plugin                         |
-|  Tool     | [tamton-aquib/duck.nvim][duck.nvim]              | Fun little ducks                      |
-| 🕸️ Tool    | [rest-nvim/rest.nvim][rest.nvim]                 | Fast http client in lua               |
-| 🔍 Tool    | [arsham/yanker.nvim][yanker.nvim]                | Yank history helper                   |
-| 🗒️ Editing | [jbyuki/venn.nvim][jbyuki/venn.nvim]             | Draw ASCII diagrams                   |
-|  Editing  | [jackMort/ChatGPT.nvim][ChatGPT.nvim]            | ChatGPT                               |
-| 🔍 Finder  | [nvim-telescope/telescope.nvim][telescope.nvim]  | Fuzzy finder/picker                   |
-|  Tool     | [tpope/vim-dadbod][vim-dadbod]                   | Database connection and query manager |
+| Function   | Plugin                                           | Description                            |
+| :--------- | :----------------------------------------------- | :------------------------------------- |
+| 🔥 Core    | [folke/lazy.nvim][folke/lazy.nvim]               | Package manager                        |
+| 🔥 Visual  | [arsham/arshamiser.nvim][arshamiser.nvim]        | Status line, colour scheme and folds   |
+| 🔥 Lists   | [arsham/listish.nvim][listish.nvim]              | Supporting quickfix and local lists    |
+| 🧰 Lib     | [arsham/arshlib.nvim][arshlib.nvim]              | Library used in various plugins        |
+| ⚡ Visual  | [nvim-tree/nvim-web-devicons][nvim-web-devicons] |                                        |
+| 🔍 Finder  | [junegunn/fzf][fzf]                              | Fuzzy finder                           |
+| 🔍 Finder  | [junegunn/fzf.vim][fzf.vim]                      | fzf plugin for vim                     |
+| 🔥 Finder  | [arsham/fzfmania.nvim][fzfmania.nvim]            | Very powerful FZF setup in lua         |
+| 🔥 Finder  | [ibhagwan/fzf-lua][fzf-lua]                      | fzf :heart: lua - fzf frontend         |
+| 🧰 Core    | [nvim-lua/plenary.nvim][plenary.nvim]            |                                        |
+| ⏩ Core    | [tweekmonster/startuptime.vim][startuptime]      | Benchmarking startup                   |
+| 🔁 Core    | [tpope/vim-repeat][tpope/vim-repeat]             |                                        |
+| 🥇 Textobj | [arsham/archer.nvim][arsham/archer.nvim]         | Mappings and text objects for archers  |
+| 🧰 Visuals | [MunifTanjim/nui.nvim][muniftanjim/nui.nvim]     | UI component                           |
+| 🥇 Textobj | [arsham/indent-tools.nvim][indent-tools.nvim]    | Indent mappings and text object        |
+| 🔥 Visuals | [arsham/matchmaker.nvim][matchmaker.nvim]        | Creates highlight for user matches     |
+| 🛢️ Tool    | [stevearc/oil.nvim][oil.nvim]                    | File explorer                          |
+|  GIT      | [tpope/vim-fugitive][tpope/vim-fugitive]         | git integration                        |
+|  GIT      | [tpope/vim-rhubarb][tpope/vim-rhubarb]           | Go to selection's code Github page     |
+|  Core     | [tpope/vim-git][tpope/vim-git]                   |                                        |
+| 🌲 Visuals | [nvim-treesitter][nvim-treesitter]               | Highlighting engine                    |
+| 🔥 GIT     | [lewis6991/gitsigns.nvim][gitsigns.nvim]         | git signs in the gutter                |
+| 🥇 Textobj | [nvim-treesitter-textobjects][ts-textobjects]    | Treesitter Text Objects                |
+| 🔥 Visuals | [freddiehaddad/feline.nvim][feline.nvim]         | Statusline (default)                   |
+| 🗨️ Visuals | [rcarriga/nvim-notify][nvim-notify]              | Better notification UI                 |
+| 🌈 Visuals | [treesitter-refactor][treesitter-refactor]       | Treesitter plugin                      |
+| 🗒️ Visuals | [nvim-treesitter/playground][playground]         | Treesitter plugin                      |
+| 󰐣 Editing  | [context-commentstring][ctx-commentstring]       |                                        |
+| 🥊 Core    | [andymass/vim-matchup][vim-matchup]              |                                        |
+| 󰘜 Editing  | [monaqa/dial.nvim][monaqa/dial.nvim]             | Enhanced increment/decrement values    |
+| 👗 Visuals | [stevearc/dressing.nvim][dressing.nvim]          |                                        |
+|  GIT      | [mattn/vim-gist][mattn/vim-gist]                 | gist integration                       |
+| 󰛡 Core     | [RaafatTurki/hex.nvim][hex.nvim]                 | Hex viewer                             |
+|  Tool     | [iamcco/markdown-preview.nvim][mk-preview]       |                                        |
+| 🧭 Core    | [numToStr/Navigator.nvim][navigator.nvim]        | Seamless navigation with tmux          |
+| 📁 Tool    | [nvim-neo-tree/neo-tree.nvim][neo-tree]          | File explorer tree                     |
+| 🪟 Core    | [s1n7ax/nvim-window-picker][window-picker]       | Window picker                          |
+|  Tool     | [ralismark/opsort.vim][opsort.vim]               | Sort operator                          |
+|  Tool     | [sQVe/sort.nvim][sqve/sort.nvim]                 | Line-wise and delimiter sorting        |
+| 🔭 Tool    | [dhruvasagar/vim-zoom][vim-zoom]                 | Zoom windows                           |
+| 🥇 Textobj | [David-Kunz/treesitter-unit][ts-unit]            | Treesitter units                       |
+|  LSP      | [neovim/nvim-lspconfig][nvim-lspconfig]          | LSP configuration                      |
+|  LSP      | [mason.nvim][mason.nvim]                         | Package manager for LSP, DAP, etc.     |
+|  LSP      | [mason-lspconfig.nvim][mason-lspconfig]          | LSP config bridge for mason.nvim       |
+|  LSP      | [hrsh7th/nvim-cmp][hrsh7th/nvim-cmp]             | Completion with LSP                    |
+|  LSP      | [saadparwaiz1/cmp_luasnip][cmp_luasnip]          | Extension for nvim-cmp                 |
+|  LSP      | [L3MON4D3/LuaSnip][l3mon4d3/luasnip]             | Snippet engine                         |
+|  LSP      | [hrsh7th/cmp-cmdline][hrsh7th/cmp-cmdline]       | Extension for nvim-cmp                 |
+|  LSP      | [friendly-snippets][friendly-snippets]           |                                        |
+|  LSP      | [hrsh7th/cmp-buffer][cmp-buffer]                 | Extension for nvim-cmp                 |
+|  LSP      | [hrsh7th/cmp-calc][cmp-calc]                     | Extension for nvim-cmp                 |
+|  LSP      | [hrsh7th/cmp-nvim-lsp][cmp-nvim-lsp]             | Extension for nvim-cmp                 |
+|  LSP      | [hrsh7th/lsp-signature-help][sig-help]           | Extension for nvim-cmp                 |
+|  LSP      | [hrsh7th/cmp-nvim-lua][cmp-nvim-lua]             | Extension for nvim-cmp                 |
+|  LSP      | [hrsh7th/cmp-path][cmp-path]                     | Extension for nvim-cmp                 |
+|  LSP      | [lukas-reineke/cmp-rg][cmp-rg]                   | Extension for nvim-cmp                 |
+| 💡 LSP     | [j-hui/fidget.nvim][j-hui/fidget.nvim]           | Spinner for LSP status                 |
+| 📢 LSP     | [none-ls.nvim][none-ls.nvim]                     | External Tool to LSP bridge            |
+| 📢 LSP     | [mason-null-ls.nvim][mason-null-ls.nvim]         | Null LS and Mason bridge               |
+| 📢 LSP     | [mason-tool-installer][mason-tool-inst]          | LSP server installer                   |
+| 🗒️ Editing | [numToStr/Comment.nvim][comment.nvim]            | Comment string                         |
+| 🗒️ LSP     | [smjonas/inc-rename.nvim][inc-rename.nvim]       | Incremental renaming                   |
+| 🗒️ Editing | [windwp/nvim-autopairs][nvim-autopairs]          |                                        |
+|  Editing  | [arthurxavierx/vim-caser][vim-caser]             | Case conversion                        |
+| 🖌️ Visuals | [NvChad/nvim-colorizer.lua][nvim-colorizer]      | Colourise matched colours in buffer    |
+| 🦀 Tools   | [saecki/crates.nvim][saecki/crates.nvim]         | Crate.toml helper                      |
+| 💡 LSP     | [kosayoda/nvim-lightbulb][nvim-lightbulb]        | Code actions buln                      |
+|  Editing  | [gbprod/substitute.nvim][substitute.nvim]        | Text exchange operator                 |
+| 💡 LSP     | [lsp_lines.nvim][lsp_lines.nvim]                 | Show LSP diagnostics in extmarks       |
+| 👈 Core    | [milisims/nvim-luaref][nvim-luaref]              |                                        |
+| 🗒️ Editing | [echasnovski/mini.nvim][mini.nvim]               | For surround, alignments, etc.         |
+|  Core     | [folke/neodev.nvim][folke/neodev.nvim]           |                                        |
+| 📆 Tool    | [nvim-neorg/neorg][nvim-neorg/neorg]             | Note taking tool                       |
+|  Lists    | [kevinhwang91/nvim-bqf][nvim-bqf]                | Better quickfix list manager           |
+|  Tool     | [bfredl/nvim-luadev][bfredl/nvim-luadev]         | REPL/debug console for lua plugins     |
+| 💡 LSP     | [SmiteshP/nvim-navic][nvim-navic]                | Current code context with LSP          |
+|  Tool     | [kiran94/s3edit.nvim][s3edit.nvim]               | Edit files on S3 bucket                |
+| 🔍 Tool    | [woosaaahh/sj.nvim][woosaaahh/sj.nvim]           | Search and quickly jump                |
+|  Editing  | [mbbill/undotree][mbbill/undotree]               | Undo tree browser                      |
+|  GIT      | [rbong/vim-flog][rbong/vim-flog]                 | git log graph                          |
+| 🎡 Visual  | [towolf/vim-helm][towolf/vim-helm]               | Helm syntax highlighting               |
+|  Core     | [tmux-plugins/vim-tmux][vim-tmux]                |                                        |
+|  Editing  | [mg979/vim-visual-multi][vim-visual-multi]       | Multiple cursors                       |
+| 🔫 Core    | [svban/YankAssassin.vim][yankassassin.vim]       | Stay where you are after yanking       |
+|  Editing  | [zbirenbaum/copilot.lua][copilot.lua]            | Copilot                                |
+|  Editing  | [Exafunction/codeium.vim][codeium.vim]           | Codeium (opensource copilot)           |
+| 💡 LSP     | [utilyre/barbecue.nvim][barbecue.nvim]           | Complementary to navic                 |
+|  LSP      | [uga-rosa/cmp-dynamic][cmp-dynamic]              | Extension for nvim-cmp                 |
+|  Tool     | [stevearc/overseer.nvim][overseer.nvim]          | Task runner                            |
+| 🌈 Tool    | [ziontee113/color-picker.nvim][colorpicker]      | Colour picker and updater              |
+|  Editing  | [aduros/ai.vim][aduros/ai.vim]                   | OpenAI plugin                          |
+|  Tool     | [tamton-aquib/duck.nvim][duck.nvim]              | Fun little ducks                       |
+| 🕸️ Tool    | [rest-nvim/rest.nvim][rest.nvim]                 | Fast http client in lua                |
+| 🧰 Lib     | [vhyrro/luarocks.nvim][luarocks.nvim]            | Easily install luarocks with lazy.nvim |
+| 🔍 Tool    | [arsham/yanker.nvim][yanker.nvim]                | Yank history helper                    |
+| 🗒️ Editing | [jbyuki/venn.nvim][jbyuki/venn.nvim]             | Draw ASCII diagrams                    |
+|  Editing  | [jackMort/ChatGPT.nvim][ChatGPT.nvim]            | ChatGPT                                |
+| 🔍 Finder  | [nvim-telescope/telescope.nvim][telescope.nvim]  | Fuzzy finder/picker                    |
+|  Tool     | [tpope/vim-dadbod][vim-dadbod]                   | Database connection and query manager  |
 
 Note that if copilot is enabled, codeium will be disabled.
 
@@ -861,6 +862,7 @@ quick.cmd_and_centre("SomeCommand")
 | [aduros/ai.vim][aduros/ai.vim]              | [ISC](https://github.com/aduros/ai.vim/blob/main/LICENSE.txt)              |
 | [tamton-aquib/duck.nvim][duck.nvim]         | [MIT](https://github.com/tamton-aquib/duck.nvim/blob/main/LICENSE)         |
 | [nvim-rest/rest.nvim][rest.nvim]            | [MIT](https://github.com/rest-nvim/rest.nvim/blob/main/LICENSE)            |
+| [vhyrro/luarocks.nvim][luarocks.nvim]       | [Unlicense](https://github.com/vhyrro/luarocks.nvim/blob/main/UNLICENSE)   |
 | [arsham/yanker.nvim][yanker.nvim]           | [MIT](https://github.com/arsham/yanker.nvim/blob/master/LICENSE)           |
 | [jbyuki/venn.nvim][jbyuki/venn.nvim]        | [MIT](https://github.com/jbyuki/venn.nvim/blob/master/LICENSE)             |
 | [jackMort/ChatGPT.nvim][ChatGPT.nvim]       | [Apache-2.0](https://github.com/jackMort/ChatGPT.nvim/blob/main/LICENSE)   |
@@ -983,6 +985,7 @@ quick.cmd_and_centre("SomeCommand")
 [aduros/ai.vim]: https://github.com/aduros/ai.vim
 [duck.nvim]: https://github.com/tamton-aquib/duck.nvim
 [rest.nvim]: https://github.com/rest-nvim/rest.nvim
+[luarocks.nvim]: https://github.com/vhyrro/luarocks.nvim
 [yanker.nvim]: https://github.com/arsham/yanker.nvim
 [jbyuki/venn.nvim]: https://github.com/jbyuki/venn.nvim
 [ChatGPT.nvim]: https://github.com/jackMort/ChatGPT.nvim
