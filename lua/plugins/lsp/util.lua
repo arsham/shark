@@ -9,10 +9,6 @@ local function nnoremap(key, fn, desc, opts) --{{{
   opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
   vim.keymap.set("n", key, fn, opts)
 end --}}}
-local function xnoremap(key, fn, desc, opts) --{{{
-  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
-  vim.keymap.set("x", key, fn, opts)
-end --}}}
 
 local diagnostics_group = vim.api.nvim_create_augroup("LspDiagnosticsGroup", { clear = true })
 
@@ -142,31 +138,6 @@ function M.workspace_folder_properties() --{{{
     end,
     { range = true, nargs = "?", complete = "customlist,v:lua.vim.lsp.buf.list_workspace_folders" }
   )
-end --}}}
-
----Runs code actions on a given range.
----@param range_given boolean
----@param line1 number
----@param line2 number
-local function code_action(range_given, line1, line2) --{{{
-  if range_given then
-    vim.lsp.buf.code_action({
-      range = {
-        start = { line1, 0 },
-        ["end"] = { line2, 99999999 },
-      },
-    })
-  else
-    vim.lsp.buf.code_action()
-  end
-end --}}}
-
-function M.code_action() --{{{
-  quick.buffer_command("CodeAction", function(args)
-    code_action(args.range ~= 0, args.line1, args.line2)
-  end, { range = true })
-  nnoremap("<localleader>ca", code_action, "Code action")
-  xnoremap("<localleader>ca", ":'<,'>CodeAction<CR>", "Code action")
 end --}}}
 
 

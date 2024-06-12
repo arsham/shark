@@ -604,7 +604,7 @@ defined for that buffer based on the server's capabilities. When possible,
 | `<leader>gi` | **G**o to **I**mplementation                |
 | `gD`         | **G**o to **D**eclaration                   |
 | `<leader>cr` | **C**ode lens **R**un                       |
-| `<leader>ca` | **C**ode **A**ctions (also in visual mode)  |
+| `gra`        | **C**ode **A**ctions (also in visual mode)  |
 | `<leader>gc` | **Go** to **C**aller                        |
 | `<leader>dr` | **R**estart the LSP server (see below)      |
 

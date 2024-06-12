@@ -370,6 +370,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 }) -- }}}
 
+-- Code action {{{
+
+---Runs code actions on a given range.
+---@param range_given boolean
+---@param line1 number
+---@param line2 number
+local function code_action(range_given, line1, line2) --{{{
+  if range_given then
+    vim.lsp.buf.code_action({
+      range = {
+        start = { line1, 0 },
+        ["end"] = { line2, 99999999 },
+      },
+    })
+  else
+    vim.lsp.buf.code_action()
+  end
+end --}}}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    if client.supports_method("textDocument/codeAction") then
+      quick.buffer_command("CodeAction", function(c_args)
+        code_action(c_args.range ~= 0, c_args.line1, c_args.line2)
+      end, { range = true })
+      nnoremap("gra", code_action, "Code action")
+      xnoremap("gra", ":'<,'>CodeAction<CR>", "Code action")
+    end
+  end,
+}) -- }}}
+
 ---@param client lspclient
 local function capability_callbacks(client)
   local name = client.name
@@ -387,8 +422,6 @@ local function capability_callbacks(client)
   local format_hook = function() end
   local caps = client.server_capabilities
   if client.supports_method("textDocument/codeAction") then -- {{{
-    table.insert(callbacks, lsp_util.code_action)
-
     -- Either is it set to true, or there is a specified set of
     -- capabilities. Sumneko doesn't support it, but the
     -- client.supports_method returns true.

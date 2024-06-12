@@ -357,8 +357,8 @@ grn                     Incrementally rename symbol
 grr                     Go to references
                                                                   *<Leader>gi*
 <Leader>gi              Go to implementation
-                                                                  *<Leader>ca*
-<Leader>ca              Code actions                            *v_<Leader>ca*
+                                                                         *gra*
+gra                     Code actions                                   *v_gra*
                                                                   *<Leader>gc*
 <Leader>gc              Show callers and go to one
                                                                   *<Leader>dr*
