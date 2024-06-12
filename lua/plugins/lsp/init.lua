@@ -230,6 +230,7 @@ return {
             extra_args = { "--config", vim.fn.stdpath("config") .. "/scripts/cbfmt.toml" },
           }),
           null_ls.builtins.formatting.fixjson,
+          null_ls.builtins.formatting.gofumpt,
           null_ls.builtins.formatting.prettier.with({
             disabled_filetypes = { "html" },
             extra_args = function(params)
