@@ -27,7 +27,7 @@ vim.opt.smartindent = true
 vim.opt.expandtab = true
 -- }}}
 
-vim.opt.mouse = nil
+vim.opt.mouse = ""
 vim.g.ts_highlight_lua = true
 vim.opt.exrc = true
 
