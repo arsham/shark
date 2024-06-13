@@ -85,6 +85,22 @@ return {
 
     require("nvim-treesitter.configs").setup(opts)
 
+    vim.api.nvim_create_autocmd("BufEnter", {
+      pattern = { "*" },
+      callback = function()
+        local ft = vim.bo.filetype
+        if not ft then
+          return
+        end
+        local lang = parsers.get_buf_lang()
+        if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) then
+          vim.schedule_wrap(function()
+            vim.cmd("TSInstall " .. lang)
+          end)()
+        end
+      end,
+    })
+
     local ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
     if not ok then
       return
