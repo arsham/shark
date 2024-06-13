@@ -12,6 +12,7 @@ vim.opt_local.breakindent = true
 vim.opt_local.breakindentopt = "min:50,shift:2"
 vim.opt_local.commentstring = "<!--%s-->"
 vim.opt_local.conceallevel = 2
+vim.opt_local.iskeyword = "@,48-57,_,192-255,-"
 
 -- Formating support {{{
 -- stylua: ignore start
@@ -87,8 +88,8 @@ if ok then
   end)
 end
 local desc = "jump to the next heading in markdown document"
-vim.keymap.set("n", "]]", next_heading, { buffer = true, silent = true, desc = desc })
-vim.keymap.set("n", "[[", prev_heading, { buffer = true, silent = true, desc = desc })
+vim.keymap.set({ "n", "x" }, "]]", next_heading, { buffer = true, silent = true, desc = desc })
+vim.keymap.set({ "n", "x" }, "[[", prev_heading, { buffer = true, silent = true, desc = desc })
 
 vim.keymap.set("x", "<C-b>", "s**<Esc>pa**<Esc>", { desc = "Make selection bold", buffer = true })
 
