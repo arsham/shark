@@ -1,5 +1,8 @@
 return {
   "Exafunction/codeium.vim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
   init = function()
     vim.g.codeium_disable_bindings = 1
     vim.g.codeium_filetypes = {
@@ -14,17 +17,27 @@ return {
       js = true,
     }
   end,
+  cmd = { "Codeium" },
+  -- stylua: ignore
   keys = {
-    { mode = { "n" }, "<leader>ce", ":Codeium Enable<CR>", { silent = true } },
-    { mode = { "n" }, "<leader>cd", ":Codeium Disable<CR>", { silent = true } },
+    { mode = { "n" }, "<leader>ce", function()
+      vim.cmd.Codeium("Enable")
+      vim.keymap.set("i", "<C-y><c-y>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
+      vim.keymap.set("i", "<M-]>",      function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
+      vim.keymap.set("i", "<M-[>",      function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
+      vim.keymap.set("i", "<C-e>",      function() return vim.fn["codeium#Clear"]() end, { expr = true })
+
+      vim.keymap.set("n", "<leader>cd", function()
+        vim.keymap.del("i", "<C-y><c-y>")
+        vim.keymap.del("i", "<M-]>")
+        vim.keymap.del("i", "<M-[>")
+        vim.keymap.del("i", "<C-e>")
+        vim.cmd.Codeium("Disable")
+        vim.keymap.del("n", "<leader>cd")
+      end, { silent = true })
+    end, { silent = true } },
   },
   config = function()
-    -- stylua: ignore start
-    vim.keymap.set("i", "<C-y>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
-    vim.keymap.set("i", "<M-]>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
-    vim.keymap.set("i", "<M-[>", function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
-    vim.keymap.set("i", "<C-e>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
-    -- stylua: ignore end
   end,
 
   -- Their mappings are overlapping therefore if copilot is active, codeium is
