@@ -40,7 +40,16 @@ return {
     ensure_installed = "all",
 
     fold = { enable = true },
-    indent = { enable = true },
+    indent = {
+      enable = true,
+      disable = function(_, bufnr)
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+        if ok and stats and stats.size < constants.treesitter_indent_max_filesize then
+          return false
+        end
+        return true
+      end,
+    },
     highlight = {
       enable = true,
       disable = function(_, bufnr)
