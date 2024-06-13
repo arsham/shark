@@ -59,6 +59,11 @@ return {
         end
         return vim.api.nvim_buf_line_count(bufnr or 0) > constants.treesitter_highlight_maxlines
       end,
+      custom_captures = {
+        ["function.call"] = "TSFunction",
+        ["function.bracket"] = "Type",
+        ["namespace.type"] = "Namespace",
+      },
     },
   },
 
