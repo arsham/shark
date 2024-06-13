@@ -58,6 +58,9 @@ require("config.commands")
 require("config.autocmd")
 require("config.keymaps")
 require("config.abbreviations")
+vim.schedule(function()
+  vim.cmd.packadd("cfilter")
+end)
 
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function()
