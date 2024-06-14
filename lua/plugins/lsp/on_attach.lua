@@ -71,10 +71,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
     if client.supports_method("textDocument/definition") then
       local perform = function()
-        fzf.lsp_definitions({ jump_to_single_result = true })
+        local opts = { jump_to_single_result = true }
+        if vim.v.count == 2 then
+          opts.jump_to_single_result_action = require("fzf-lua.actions").file_vsplit
+        elseif vim.v.count == 3 then
+          opts.jump_to_single_result_action = require("fzf-lua.actions").file_split
+        elseif vim.v.count == 4 then
+          opts.jump_to_single_result_action = require("fzf-lua.actions").file_tabedit
+        end
+        fzf.lsp_definitions(opts)
       end
       quick.buffer_command("Definition", perform)
-      nnoremap("gd", perform, args.buf, "Go to definition")
+      nnoremap("gd", perform, args.buf, "Go to definition (2gd vsplit, 3gd split, 4gd new tab)")
       vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
   end,

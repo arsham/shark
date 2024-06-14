@@ -583,31 +583,34 @@ defined for that buffer based on the server's capabilities. When possible,
 <details>
     <summary>Click to view the mappings</summary>
 
-| Mapping      | Description                                 |
-| :----------- | :------------------------------------------ |
-| `<leader>dd` | Show line **D**iagnostics                   |
-| `<leader>dq` | Fill the **Q**uicklist with **D**iagnostics |
-| `<leader>dw` | Fill the local list with **D**iagnostics    |
-| `]d`         | Go to next **d**iagnostic issue **(R)**     |
-| `[d`         | Go to previous **d**iagnostic issue **(R)** |
-| `H`          | **H**over popup                             |
-| [i]`<Alt-h>` | **H**over popup                             |
-| `gd`         | **G**o to **D**efinition                    |
-| `K`          | Show **S**ignature help                     |
-| [i]`<M-l>`   | Show **S**ignature help                     |
-| [i]`<Alt-l>` | Show **S**ignature help                     |
-| `<leader>gq` | Format the buffer with LSP                  |
-| [x]`gq`      | Format the selection with LSP               |
-| `gq`         | Format operator with LSP                    |
-| `<leader>i`  | Organise imports                            |
-| `grn`        | Incrementally rename symbol                 |
-| `grr`        | Go to references                            |
-| `<leader>gi` | **G**o to **I**mplementation                |
-| `gD`         | **G**o to **D**eclaration                   |
-| `<leader>cr` | **C**ode lens **R**un                       |
-| `gra`        | **C**ode **A**ctions (also in visual mode)  |
-| `<leader>gc` | **Go** to **C**aller                        |
-| `<leader>dr` | **R**estart the LSP server (see below)      |
+| Mapping      | Description                                  |
+| :----------- | :------------------------------------------- |
+| `<leader>dd` | Show line **D**iagnostics                    |
+| `<leader>dq` | Fill the **Q**uicklist with **D**iagnostics  |
+| `<leader>dw` | Fill the local list with **D**iagnostics     |
+| `]d`         | Go to next **d**iagnostic issue **(R)**      |
+| `[d`         | Go to previous **d**iagnostic issue **(R)**  |
+| `H`          | **H**over popup                              |
+| [i]`<Alt-h>` | **H**over popup                              |
+| `gd`         | **G**o to **D**efinition                     |
+| `2gd`        | **G**o to **D**efinition in vertical split   |
+| `3gd`        | **G**o to **D**efinition in horizontal split |
+| `4gd`        | **G**o to **D**efinition in new tab          |
+| `K`          | Show **S**ignature help                      |
+| [i]`<M-l>`   | Show **S**ignature help                      |
+| [i]`<Alt-l>` | Show **S**ignature help                      |
+| `<leader>gq` | Format the buffer with LSP                   |
+| [x]`gq`      | Format the selection with LSP                |
+| `gq`         | Format operator with LSP                     |
+| `<leader>i`  | Organise imports                             |
+| `grn`        | Incrementally rename symbol                  |
+| `grr`        | Go to references                             |
+| `<leader>gi` | **G**o to **I**mplementation                 |
+| `gD`         | **G**o to **D**eclaration                    |
+| `<leader>cr` | **C**ode lens **R**un                        |
+| `gra`        | **C**ode **A**ctions (also in visual mode)   |
+| `<leader>gc` | **Go** to **C**aller                         |
+| `<leader>dr` | **R**estart the LSP server (see below)       |
 
 ### Notes
 
