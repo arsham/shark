@@ -2,17 +2,18 @@ local quick = require("arshlib.quick")
 local fzf = require("fzf-lua")
 local util = require("config.util")
 local augroup = require("config.util").augroup
+local get_clients = require("config.util").get_clients
 
-local function nnoremap(key, fn, desc, opts) --{{{
-  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+local function nnoremap(key, fn, bufnr, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = bufnr, silent = true, desc = desc }, opts or {})
   vim.keymap.set("n", key, fn, opts)
 end --}}}
-local function inoremap(key, fn, desc, opts) --{{{
-  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+local function inoremap(key, fn, bufnr, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = bufnr, silent = true, desc = desc }, opts or {})
   vim.keymap.set("i", key, fn, opts)
 end --}}}
-local function xnoremap(key, fn, desc, opts) --{{{
-  opts = vim.tbl_extend("force", { buffer = true, silent = true, desc = desc }, opts or {})
+local function xnoremap(key, fn, bufnr, desc, opts) --{{{
+  opts = vim.tbl_extend("force", { buffer = bufnr, silent = true, desc = desc }, opts or {})
   vim.keymap.set("x", key, fn, opts)
 end --}}}
 
@@ -28,7 +29,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         fzf.lsp_references({ jump_to_single_result = true })
       end
       quick.buffer_command("References", perform)
-      nnoremap("grr", perform, "Go to references")
+      nnoremap("grr", perform, args.buf, "Go to references")
     end
   end,
 }) -- }}}
@@ -55,8 +56,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     if client.supports_method("textDocument/hover") then
-      nnoremap("H", vim.lsp.buf.hover, "Show hover")
-      inoremap("<M-h>", vim.lsp.buf.hover, "Show hover")
+      nnoremap("H", vim.lsp.buf.hover, args.buf, "Show hover")
+      inoremap("<M-h>", vim.lsp.buf.hover, args.buf, "Show hover")
     end
   end,
 }) -- }}}
@@ -73,7 +74,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         fzf.lsp_definitions({ jump_to_single_result = true })
       end
       quick.buffer_command("Definition", perform)
-      nnoremap("gd", perform, "Go to definition")
+      nnoremap("gd", perform, args.buf, "Go to definition")
       vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
   end,
@@ -87,8 +88,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     if client.supports_method("textDocument/signatureHelp") then
-      nnoremap("K", vim.lsp.buf.signature_help, "show signature help")
-      inoremap("<M-l>", vim.lsp.buf.signature_help, "show signature help")
+      nnoremap("K", vim.lsp.buf.signature_help, args.buf, "show signature help")
+      inoremap("<M-l>", vim.lsp.buf.signature_help, args.buf, "show signature help")
     end
   end,
 }) -- }}}
@@ -120,7 +121,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         })
       end
       quick.buffer_command("DocumentSymbol", perform)
-      nnoremap("<localleader>@", perform, "Document symbol")
+      nnoremap("<localleader>@", perform, args.buf, "Document symbol")
     end
   end,
 }) -- }}}
@@ -133,9 +134,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     if client.supports_method("textDocument/rename") then
-      vim.keymap.set("n", "grn", function()
+      nnoremap("grn", function()
         return ":Rename " .. vim.fn.expand("<cword>")
-      end, { expr = true })
+      end, args.buf, "Incrementally rename symbol", { expr = true })
     end
   end,
 }) -- }}}
@@ -165,7 +166,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         })
       end
       quick.buffer_command("Implementation", perform)
-      nnoremap("<localleader>gi", perform, "Go to implementation")
+      nnoremap("<localleader>gi", perform, args.buf, "Go to implementation")
     end
   end,
 }) -- }}}
@@ -195,7 +196,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.supports_method("textDocument/declaration") then
       nnoremap("gD", function()
         fzf.lsp_declarations({ jump_to_single_result = true })
-      end, "Go to declaration")
+      end, args.buf, "Go to declaration")
     end
   end,
 }) -- }}}
@@ -213,9 +214,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       if util.buffer_has_var("code_lens") then
         return
       end
-      quick.buffer_command("CodeLensRefresh", vim.lsp.codelens.refresh)
+      quick.buffer_command("CodeLensRefresh", function()
+        vim.lsp.codelens.refresh({ bufnr = args.buf })
+      end)
       quick.buffer_command("CodeLensRun", vim.lsp.codelens.run)
-      nnoremap("<localleader>cr", vim.lsp.codelens.run, "run code lenses")
+      nnoremap("<localleader>cr", vim.lsp.codelens.run, args.buf, "run code lenses")
     end
   end,
 }) -- }}}
@@ -233,47 +236,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
       or client.supports_method("callHierarchy/outgoingCalls")
     then
       quick.buffer_command("Callers", fzf.lsp_incoming_calls)
-      nnoremap("<localleader>gc", fzf.lsp_incoming_calls, "show incoming calls")
+      nnoremap("<localleader>gc", fzf.lsp_incoming_calls, args.buf, "show incoming calls")
       quick.buffer_command("Callees", fzf.lsp_outgoing_calls)
     end
   end,
 }) -- }}}
 
 -- Semantic tokens {{{
-
----@param method string
----@return vim.lsp.Client[]
-local function get_clients(method)
-  if vim.fn.has("nvim-0.10") == 1 then
-    return vim.lsp.get_clients({ method = method })
-  else
-    ---@diagnostic disable-next-line: deprecated
-    local clients = vim.lsp.get_active_clients()
-    return vim.tbl_filter(function(client)
-      return client.supports_method(method)
-    end, clients)
-  end
-end
-
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then
       return
     end
-    local bufnr = args.buf
     if client.supports_method("textDocument/semanticTokens") and vim.lsp.semantic_tokens then
-      vim.keymap.set("n", "<localleader>st", function()
+      nnoremap("<localleader>st", function()
         vim.b.semantic_tokens_enabled = vim.b.semantic_tokens_enabled == false
         for _, cl in ipairs(get_clients()) do
           if cl.server_capabilities.semanticTokensProvider then
             vim.lsp.semantic_tokens[vim.b.semantic_tokens_enabled and "start" or "stop"](
-              bufnr or 0,
+              args.buf,
               cl.id
             )
           end
         end
-      end, { desc = "Toggle semantic tokens on buffer", buffer = bufnr or 0 })
+      end, args.buf, "Toggle semantic tokens on buffer")
     end
   end,
 }) -- }}}
@@ -337,7 +324,7 @@ local function format_range_operator(disabled_servers) --{{{
   vim.api.nvim_feedkeys("g@", "n", false)
 end --}}}
 
-local function document_range_formatting(disabled_servers) --{{{
+local function document_range_formatting(bufnr, disabled_servers) --{{{
   quick.buffer_command("Format", function(args)
     format_command(disabled_servers, args.range ~= 0, args.line1, args.line2, args.bang)
   end, { range = true })
@@ -348,10 +335,10 @@ local function document_range_formatting(disabled_servers) --{{{
       line1, line2 = line2, line1
     end
     format_command(disabled_servers, true, line1, line2, false)
-  end, "Format range")
+  end, bufnr, "Format range")
   nnoremap("gq", function()
     format_range_operator(disabled_servers)
-  end, "Format range")
+  end, bufnr, "Format range")
 
   vim.bo.formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:3000})"
 end --}}}
@@ -363,7 +350,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     if client.supports_method("textDocument/rangeFormatting") then
-      document_range_formatting({})
+      document_range_formatting(args.buf, {})
     end
   end,
 }) -- }}}
@@ -397,8 +384,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
       quick.buffer_command("CodeAction", function(c_args)
         code_action(c_args.range ~= 0, c_args.line1, c_args.line2)
       end, { range = true })
-      nnoremap("gra", code_action, "Code action")
-      xnoremap("gra", ":'<,'>CodeAction<CR>", "Code action")
+      nnoremap("gra", code_action, args.buf, "Code action")
+      xnoremap("gra", ":'<,'>CodeAction<CR>", args.buf, "Code action")
     end
   end,
 }) -- }}}
@@ -474,9 +461,9 @@ local function lsp_organise_imports() --{{{
   end
 end --}}}
 
-local function setup_organise_imports() --{{{
+local function setup_organise_imports(bufnr) --{{{
   quick.buffer_command("Imports", lsp_organise_imports, { desc = "Organise imports" })
-  nnoremap("<localleader>i", lsp_organise_imports, "Organise imports")
+  nnoremap("<localleader>i", lsp_organise_imports, bufnr, "Organise imports")
 end --}}}
 
 -- Blanket formatting {{{
@@ -487,7 +474,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     if client.supports_method("textDocument/formatting") then
-      nnoremap("<localleader>gq", vim.lsp.buf.format, "Format buffer")
+      nnoremap("<localleader>gq", vim.lsp.buf.format, args.buf, "Format buffer")
     end
   end,
 }) -- }}}
@@ -519,11 +506,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
 
-    setup_organise_imports()
+    setup_organise_imports(args.buf)
 
     if not util.buffer_has_var("lsp_formatting_imports_" .. client.name) then
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = lsp_formatting_imports,
+        buffer = args.buf,
         callback = function()
           lsp_organise_imports()
           if not require("config.constants").disable_formatting then
@@ -559,9 +547,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
 
-    if not util.buffer_has_var("lsp_imports_" .. client.name) then
+    if not util.buffer_has_var("lsp_formatting_" .. client.name) then
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = lsp_formatting_imports,
+        buffer = args.buf,
         callback = function()
           if not require("config.constants").disable_formatting then
             vim.lsp.buf.format({
@@ -597,9 +586,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     setup_organise_imports()
-    if not util.buffer_has_var("lsp_formatting_" .. client.name) then
+    if not util.buffer_has_var("lsp_imports_" .. client.name) then
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = lsp_formatting_imports,
+        buffer = args.buf,
         callback = function()
           lsp_organise_imports()
         end,
@@ -614,10 +604,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Diagnostics {{{
 -- Diagnostics bindings {{{
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function()
-    nnoremap("<localleader>dd", vim.diagnostic.open_float, "show diagnostics")
-    nnoremap("<localleader>dq", vim.diagnostic.setqflist, "populate quickfix")
-    nnoremap("<localleader>dw", vim.diagnostic.setloclist, "populate local list")
+  callback = function(args)
+    nnoremap("<localleader>dd", vim.diagnostic.open_float, args.buf, "show diagnostics")
+    nnoremap("<localleader>dq", vim.diagnostic.setqflist, args.buf, "populate quickfix")
+    nnoremap("<localleader>dw", vim.diagnostic.setloclist, args.buf, "populate local list")
 
     local jump = function(fn, severity)
       return function()
@@ -639,12 +629,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- stylua: ignore start
-    nnoremap("]d", function() quick.call_and_centre(dNext) end, "goto next diagnostic")
-    nnoremap("[d", function() quick.call_and_centre(dPrev) end, "goto previous diagnostic")
-    nnoremap("]e", function() quick.call_and_centre(eNext) end, "goto next error")
-    nnoremap("[e", function() quick.call_and_centre(ePrev) end, "goto previous error")
-    nnoremap("]W", function() quick.call_and_centre(wNext) end, "goto next warning")
-    nnoremap("[W", function() quick.call_and_centre(wPrev) end, "goto previous warning")
+    nnoremap("]d", function() quick.call_and_centre(dNext) end, args.buf, "goto next diagnostic")
+    nnoremap("[d", function() quick.call_and_centre(dPrev) end, args.buf, "goto previous diagnostic")
+    nnoremap("]e", function() quick.call_and_centre(eNext) end, args.buf, "goto next error")
+    nnoremap("[e", function() quick.call_and_centre(ePrev) end, args.buf, "goto previous error")
+    nnoremap("]W", function() quick.call_and_centre(wNext) end, args.buf, "goto next warning")
+    nnoremap("[W", function() quick.call_and_centre(wPrev) end, args.buf, "goto previous warning")
     -- stylua: ignore end
   end,
 })
@@ -703,7 +693,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Restart lsp command {{{
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function()
+  callback = function(args)
     ---Restats the LSP server. Fixes the problem with the LSP server not
     -- restarting with LspRestart command.
     local function restart_lsp()
@@ -713,7 +703,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end, 1000)
     end
     quick.buffer_command("RestartLsp", restart_lsp)
-    nnoremap("<localleader>dr", restart_lsp, "Restart LSP server")
+    nnoremap("<localleader>dr", restart_lsp, args.buf, "Restart LSP server")
   end,
 }) -- }}}
 
