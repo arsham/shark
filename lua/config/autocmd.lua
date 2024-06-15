@@ -295,6 +295,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEn
 })
 -- }}}
 
+-- Set wrap for preview windows {{{
 vim.api.nvim_create_autocmd({ "BufRead" }, {
   group = augroup("PREVIEW_SET_WRAP"),
   desc = "Set wrap for preview windows",
@@ -304,7 +305,9 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
     end
   end,
 })
+-- }}}
 
+-- Don't wrap go.mod {{{
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = augroup("go_mod_wrap"),
   pattern = "go.mod",
@@ -314,7 +317,9 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   once = true,
   desc = "don't wrap me",
 })
+-- }}}
 
+-- Run go mod tidy on save {{{
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("go_mod_tidy"),
   pattern = "go.mod",
@@ -324,7 +329,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
   desc = "run go mod tidy on save",
 })
+-- }}}
 
+-- Set buftype to nofile when reading from stdin {{{
 vim.api.nvim_create_autocmd("StdinReadPost", {
   group = augroup("STDIN_READ_POST"),
   callback = function()
@@ -332,7 +339,9 @@ vim.api.nvim_create_autocmd("StdinReadPost", {
   end,
   desc = "Set buftype to nofile when reading from stdin",
 })
+-- }}}
 
+-- Spell check enable/disable for insert enter/leave mode {{{
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = augroup("INSERT_AUTO_SPELL_CHECK"),
   callback = function()
@@ -350,5 +359,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   end,
   desc = "Spell check enable/disable for insert enter/leave mode",
 })
+-- }}}
 
 -- vim: fdm=marker fdl=0
