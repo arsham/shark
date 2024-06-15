@@ -36,9 +36,10 @@ end, { desc = "Stop wrapping current buffer" })
 --}}}
 
 quick.command("ToggleRelativeNumbers", function() --{{{
-  vim.opt.relativenumber = vim.g.disable_relative_numbers or false
+  local const = require("config.constants")
+  vim.opt.relativenumber = const.disable_relative_numbers or false
   vim.opt.number = true
-  vim.g.disable_relative_numbers = not vim.g.disable_relative_numbers
+  const.disable_relative_numbers = not const.disable_relative_numbers
 end, { desc = "Stop/Start switching relative numbers" })
 --}}}
 
