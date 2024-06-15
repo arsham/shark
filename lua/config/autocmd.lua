@@ -284,12 +284,16 @@ vim.api.nvim_create_autocmd({ "BufWritePre", "FileWritePre", "FileAppendPre", "F
 })
 -- }}}
 
+-- Checktime {{{
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufWinEnter" }, {
   group = augroup("CHECKTIME"),
   callback = function()
-    pcall(vim.cmd.checktime)
+    if vim.o.buftype ~= "nofile" then
+      pcall(vim.cmd.checktime)
+    end
   end,
 })
+-- }}}
 
 vim.api.nvim_create_autocmd({ "BufRead" }, {
   group = augroup("PREVIEW_SET_WRAP"),
