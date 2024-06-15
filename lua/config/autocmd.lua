@@ -15,9 +15,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("BufReadPre", {
   group = augroup("LINE_RETURN"),
   desc = "Auto line return",
-  callback = function()
+  callback = function(ev)
     vim.api.nvim_create_autocmd("FileType", {
-      buffer = 0,
+      buffer = ev.buf,
       once = true,
       callback = function()
         local types = {
@@ -37,10 +37,12 @@ vim.api.nvim_create_autocmd("BufReadPre", {
             return
           end
         end
-        local line = vim.fn.line
+        local buf = ev.buf
 
-        if line([['"]]) > 0 and line([['"]]) <= line("$") then
-          pcall(vim.cmd.normal, { [[g`"zv']], bang = true })
+        local last_line = vim.api.nvim_buf_get_mark(buf, '"')
+        local total_lines = vim.api.nvim_buf_line_count(buf)
+        if last_line[1] > 0 and last_line[1] <= total_lines then
+          pcall(vim.api.nvim_win_set_cursor, 0, last_line)
         end
       end,
     })
