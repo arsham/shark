@@ -218,14 +218,19 @@ vim.api.nvim_create_autocmd("Filetype", {
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("CLOSE_INFO_POPUPS"),
   pattern = {
+    "checkhealth",
     "help",
     "lsp-installer",
     "lspinfo",
+    "neotest-output",
+    "neotest-output-panel",
+    "neotest-summary",
+    "notify",
     "null-ls-info",
     "qf",
     "startuptime",
+    "startuptime",
     "tsplayground",
-    "checkhealth",
   },
   callback = function(args)
     local bufnr = args.buf
